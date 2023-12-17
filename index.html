@@ -3,29 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
+    <title>Aurash AK Website</title>
+    <link rel="stylesheet" href="main.css">
     <style>
-        /* Add your CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        /* Additional styles for the drop-down menu */
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f8f8f8;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
 
-        h1 {
-            color: #333;
+        nav ul li:hover > ul {
+            display: inherit;
+        }
+
+        nav ul ul li {
+            float: none;
+            width: 200px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>AurashAK</h1>
-        <!-- Add navigation or other header content here -->
+        <h1>Aurash AK Website</h1>
+        
+        <!-- Navigation bar with drop-down menus -->
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li>
+                    <a href="#">Services</a>
+                    <ul>
+                        <li><a href="#">Service 1</a></li>
+                        <li><a href="#">Service 2</a></li>
+                        <!-- Add more services as needed -->
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                    <ul>
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Phone</a></li>
+                        <!-- Add more contact options as needed -->
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main>
         <section>
-            <h2>Welcome to Your Website!</h2>
+            <h2>Welcome to Aurash AK Website!</h2>
             <p>This is a basic HTML template for your index page.</p>
         </section>
 
@@ -34,9 +68,10 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 Your Website Name. All rights reserved.</p>
+        <p>&copy; 2023 Aurash AK Website. All rights reserved.</p>
         <!-- Add footer content or links here -->
     </footer>
 
+    <script src="main.js" defer></script>
 </body>
 </html>
