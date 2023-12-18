@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,36 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
-
 <body>
-    <nav>
-    <header>
-        <a href="http://www.aurashkhawarzad.com"><h1>Aurash Khawarzad</h1></a> 
-        <h2>Cartography</h2>
-        <img src="your-image.jpg" width="0" height="00"  alt="">
-    </header>
+<nav>
+<header>
+    <a href="http://www.aurashkhawarzad.com"><h1>Aurash Khawarzad</h1></a> 
+    <h2>Cartography</h2>
+    <img src="your-image.jpg" width="0" height="00"  alt="">
+</header>
     
-    <menu>
-        <h3><a href="#" class="button">About</a></h3>
-        <h3><a href="#" class="button">Web</a></h3>
-        <h3><a href="#" class="button">Maps</a></h3>
-        <h3><a href="#" class="button">Sculpture</a></h3>
-        <h3><a href="#" class="button">Writing</a></h3>
+<menu>
+    <h3><a href="#" class="button">About</a></h3>
+    <h3><a href="#" class="button">Web</a></h3>
+    <h3><a href="#" class="button">Maps</a></h3>
+    <h3><a href="#" class="button">Sculpture</a></h3>
+    <h3><a href="#" class="button">Writing</a></h3>
     </menu>
     
     <br><br><br>
     
-    <footer>
-        &copy; 2023 
-    </footer>
-    </nav>
+<footer>
+    &copy; 2023 
+</footer>
+</nav>
         
-    <main>
-
+<main>
+    <img src="" style="width:100%;  alt="Central Image">
 </main>
-    <
-    /body>
-    </html>
+</body>
+</html>
     
 
