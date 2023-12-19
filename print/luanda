@@ -43,7 +43,7 @@
 </nav>
 
 <main>
-    <img src="https://live.staticflickr.com/65535/52622422508_4e079a23a9_h.jpg" alt="Luanda"> 
+    <img src="https://live.staticflickr.com/65535/52622422508_4e079a23a9_h.jpg" width="100%" height="auto" alt="Luanda"> 
 </main>
 </body>
 </html>
