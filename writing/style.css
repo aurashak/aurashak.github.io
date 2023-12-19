@@ -205,7 +205,7 @@ nav .button.active {
     color:#000000;
     font-size: 15px;
     background: #b5b5b5;
-    font-weight: 800;
+    font-weight: 400;
 }
 
 nav .subbutton.active {
@@ -222,7 +222,7 @@ nav .subbutton.active {
     color:#000000;
     font-size: 15px;
     background: #b5b5b5;
-    font-weight: 800;
+    font-weight: 400;
 }
 
 nav .subbutton {
@@ -242,7 +242,7 @@ nav .subbutton {
     font-weight: 400;
 }
 nav .button:hover {
-    background-color: yellow;
+    background-color: rgb(255, 199, 33);
 }
 
 main {
