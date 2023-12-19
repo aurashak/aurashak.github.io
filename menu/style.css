@@ -152,6 +152,7 @@ nav {
 nav menu {
     margin: 0; 
     padding: 0px;
+    font-size: 20px;
     font-weight: 800;
     border-bottom: solid 1px #000;
 }
@@ -187,7 +188,7 @@ nav .button {
     font-family: Arial, Helvetica, sans-serif;
     color:#000000;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 800;
 }
 
 nav .button.active {
