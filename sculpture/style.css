@@ -1,4 +1,3 @@
-
 p, ul {}
 
 body {
@@ -243,7 +242,7 @@ nav .subbutton {
     font-weight: 400;
 }
 nav .button:hover {
-
+    background-color: yellow;
 }
 
 main {
