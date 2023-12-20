@@ -7,6 +7,7 @@ body {
     font-weight: 400;
     margin: 0;
     padding: 0;
+    padding: inherit;
 }
 
 a {
@@ -95,6 +96,15 @@ h3 {
     line-height: 1;
 }
 
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    color:#000000;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 0;
+    margin: 0;
+}
+
 h4 {
     font-family: Arial, Helvetica, sans-serif ;
     color:#000000;
@@ -135,19 +145,6 @@ nav {
     border-right: 1px #000 solid;
 }
 
-.navtext {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin: 0px;
-    text-align: Left;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-    color:#790000;
-    font-size: 45px;
-    font-weight: 800;
-}
 
 nav menu {
     margin: 0; 
@@ -203,7 +200,7 @@ nav .button.active {
     color:#000000;
     font-size: 15px;
     background: #b5b5b5;
-    font-weight: 400;
+    font-weight: 800;
 
 }
 
@@ -246,7 +243,7 @@ nav .button:hover {
     background-color: rgb(255, 199, 33);
 }
 
-main.home {
+main {
     padding: 20px;
     margin: 0px;
     background-color: #000000;
@@ -255,33 +252,67 @@ main.home {
     min-height: 100vh;
     justify-content: center;
     align-items: center; 
-  }
-  
-  main.home img {
-    display: ;
-     margin: auto;
-     width: 48%;
-     height: auto;
+}
+
+main img {
+  display: ;
+   margin: auto;
+   width: 48%;
+   height: auto;
+ }
+ .row {
+     display: flex;
+     flex-wrap: wrap;
+     padding: 0px;
    }
-  
-  .print {
-    padding: 20px;
-    margin: 0px;
-    background-color: #000000;
-    margin-left: 150px;
-    display: block;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center; 
-  }
-  
-  .print img {
-    display: ;
-     margin: auto;
-     width: 48%;
-     height: auto;
-   }
-  
+   
+main home {
+  padding: 20px;
+  margin: 0px;
+  background-color: #000000;
+  margin-left: 150px;
+  display: block;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center; 
+}
+
+main home img {
+  display: ;
+   margin: auto;
+   width: 48%;
+   height: auto;
+ }
+
+main print {
+  padding: 20px;
+  margin: 0px;
+  background-color: #000000;
+  margin-left: 150px;
+  display: block;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center; 
+}
+
+main print img {
+  display: ;
+   margin: auto;
+   width: 48%;
+   height: auto;
+ }
+svg path {
+    fill: #fff;
+    stroke-width: .50;
+    stroke: #000;
+    
+}
+
+svg path:hover {
+    fill:#006284;
+    transition: 0.6s;
+    cursor: pointer;
+}
 
 .row {
     display: flex;
@@ -299,8 +330,14 @@ main.home {
     margin-top: 0px;
     vertical-align: middle;
   }
+.content {
+    padding: 10px;
+    padding-left: 15px;
+    margin: 0px;
+    background-color: #ffffff;
+    font-size: 15px;
 
-
+}
 
 
 footer {
@@ -315,7 +352,6 @@ footer {
     bottom: 0;
     position: absolute;
 }
-
 
 
 
