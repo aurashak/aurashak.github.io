@@ -144,11 +144,10 @@ nav {
     overflow-y: auto;
     box-shadow: none;
     border-right: 1px #000 solid;
-
 }
 
 .navtext {
-    padding-top: 5px;
+    padding-top: 5px;w
     padding-bottom: 5px;
     margin: 0px;
     text-align: Left;
@@ -167,16 +166,12 @@ nav menu {
     font-size: 20px;
     font-weight: 800;
     border-bottom: solid 1px #000;
-    border-top: solid 1px #000;
-
 }
 
 nav submenu {
     margin: 0; 
     padding: 0px;
     border-bottom: solid 1px #000;
-    border-top: solid 1px #000;
-
 }
 
 nav a {
