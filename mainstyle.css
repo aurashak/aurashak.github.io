@@ -209,13 +209,14 @@ nav .button.active {
     margin: 0px;
     text-align: Left;
     text-decoration: none;
-    border: none;
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
     color:#000000;
     font-size: 15px;
     background: #b5b5b5;
     font-weight: 400;
+    border-top:1px solid black;
+    border-bottom: 1px solid black;
 }
 
 nav .subbutton.active {
@@ -231,6 +232,8 @@ nav .subbutton.active {
     font-family: Arial, Helvetica, sans-serif;
     color:#000000;
     font-size: 15px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     background: #b5b5b5;
     font-weight: 400;
 }
