@@ -31,7 +31,19 @@ header {
     margin: 0;
     height: 105.2px;
     border-bottom: solid 1px #000; 
+
 }
+
+header name {
+    background-color: #ffffff;
+    color: #1d1d1d;
+    text-align: left;
+    padding: 0px;
+    margin: 0;
+    height: 105.2px;
+    border-bottom: solid 1px #000; 
+}
+
 
 .headertitle {
     font-family: Arial, Helvetica, sans-serif;
@@ -155,12 +167,16 @@ nav menu {
     font-size: 20px;
     font-weight: 800;
     border-bottom: solid 1px #000;
+    border-top: solid 1px #000;
+
 }
 
 nav submenu {
     margin: 0; 
     padding: 0px;
     border-bottom: solid 1px #000;
+    border-top: solid 1px #000;
+
 }
 
 nav a {
