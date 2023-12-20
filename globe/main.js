@@ -7,39 +7,22 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Create a plane (representing the map)
-const geometry = new THREE.PlaneGeometry(10, 5); // Adjust the width and height as needed
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-const map = new THREE.Mesh(geometry, material);
-scene.add(map);
-
-// Load GeoJSON data for country outlines
-const loader = new THREE.GeoJsonLoader();
-loader.load('path/to/countries.geojson', function (geojson) {
-  const countries = new THREE.Mesh(
-    new THREE.Geometry().fromBufferGeometry(new THREE.BufferGeometry().fromGeometry(geojson)),
-    new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true })
-  );
-  scene.add(countries);
-});
+// Create a colored cube
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green color
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
 
 // Position the camera
-camera.position.z = 10;
-
-// Add lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight.position.set(1, 1, 1).normalize();
-scene.add(directionalLight);
+camera.position.z = 5;
 
 // Animation function
 function animate() {
   requestAnimationFrame(animate);
 
-  // Rotate the map slowly
-  map.rotation.y += 0.005;
+  // Rotate the cube slowly
+  cube.rotation.x += 0.005;
+  cube.rotation.y += 0.005;
 
   // Render the scene
   renderer.render(scene, camera);
