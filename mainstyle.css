@@ -215,8 +215,7 @@ nav .button.active {
     font-size: 15px;
     background: #b5b5b5;
     font-weight: 400;
-    border-top:1px solid black;
-    border-bottom: 1px solid black;
+
 }
 
 nav .subbutton.active {
