@@ -318,7 +318,7 @@ main.home {
 }
 
 #menu-web a.active {
-    background-color: yellow;
+    background-color: red;
     color: #000000;
 }
 
