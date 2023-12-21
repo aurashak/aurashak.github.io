@@ -329,7 +329,6 @@ main.home {
     display: none; /* Hide all sub-menus by default */
     padding-left: 15px; /* Add padding for better indentation */
     border-bottom: 1px solid black;
-
 }
 
 /* Show the active sub-menu */
@@ -349,6 +348,12 @@ main.home {
 /* Hover effect for sub-menu items */
 .sub-menu a:hover {
     background-color: #c8c8c8;
+}
+
+/* Style for active state of sub-menu items */
+.sub-menu a.active {
+    background-color: blue;
+    color: #000000;
 }
 
 

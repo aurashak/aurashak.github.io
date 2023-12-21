@@ -14,20 +14,19 @@
     var currentPath = window.location.pathname;
 
     // Reset all menu items to their default state
-    $('.menu, .sub-menu').hide();
-    $('.menu, .sub-menu a').removeClass('active');
+    $('.menu a, .sub-menu a').removeClass('active');
 
     // Extract the section identifier from the current path
-    var sectionIdentifier = currentPath.split('/')[3]; // Assumes the structure is consistent
+    var sectionIdentifier = currentPath.split('/')[2]; // Update index based on your path structure
 
     // Show the main menu for the current section
-    $('#menu-' + sectionIdentifier).show();
+    $('#menu-' + sectionIdentifier).addClass('active');
 
     // Show the sub-menu for the current section (if any)
-    $('#menu-' + sectionIdentifier + ' .sub-menu').show();
+    $('#menu-' + sectionIdentifier + ' .sub-menu').addClass('active');
 
     // Highlight the active menu item based on the current page
-    $('#menu-' + sectionIdentifier + ' a').addClass('active');
+    $('.menu.active a[href="' + currentPath + '"]').addClass('active');
 }
 
 
