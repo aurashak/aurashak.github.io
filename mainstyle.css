@@ -226,6 +226,17 @@ av {
     padding: 0px;
 }
 
+.menu a.active,
+.sub-menu a.active {
+    background-color: grey;
+    color: white; /* Change the text color as needed */
+}
+
+#menu-print a.button.active-print {
+    background-color: grey;
+    color: white; /* Change the text color as needed */
+}
+
 a {
     color: blue;
     text-decoration: none;
@@ -466,7 +477,7 @@ footer {
     padding: 10px;
     padding-top: 20px; 
     bottom: 0;
-    position: absolute;
+    position: fixed;
 }
 
 
