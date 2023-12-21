@@ -11,21 +11,25 @@
     <script>
         // Function to update navigation based on the current page
         function updateNavigation() {
-            var currentPath = window.location.pathname;
+    var currentPath = window.location.pathname;
 
-            // Reset all menu items to their default state
-            $('.menu, .sub-menu').hide();
-            $('.menu a').removeClass('active');
+    // Reset all menu items to their default state
+    $('.menu, .sub-menu').hide();
+    $('.menu, .sub-menu a').removeClass('active');
 
-            // Extract the section identifier from the current path
-            var sectionIdentifier = currentPath.split('/')[3]; // Assumes the structure is consistent
+    // Extract the section identifier from the current path
+    var sectionIdentifier = currentPath.split('/')[3]; // Assumes the structure is consistent
 
-            // Show the main menu for the current section
-            $('#menu-' + sectionIdentifier).show();
+    // Show the main menu for the current section
+    $('#menu-' + sectionIdentifier).show();
 
-            // Highlight the active menu item based on the current page
-            $('.menu a[href="' + currentPath + '"]').addClass('active');
-        }
+    // Show the sub-menu for the current section (if any)
+    $('#menu-' + sectionIdentifier + ' .sub-menu').show();
+
+    // Highlight the active menu item based on the current page
+    $('#menu-' + sectionIdentifier + ' a').addClass('active');
+}
+
 
         // Run the updateNavigation function when the document is ready
         $(document).ready(function () {
