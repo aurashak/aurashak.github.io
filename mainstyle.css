@@ -286,11 +286,11 @@ main.home {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    background-color: #000000;
-    margin-left: 150px;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    gap: 0px;
+    padding: 0px;
+    background-color: #fff;
+    margin-left: 0px;
     justify-content: center;
     align-items: center;
 }
