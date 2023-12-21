@@ -295,12 +295,12 @@ main.home {
     align-items: center;
 }
 
-.gridbig {
+.gbig {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
     gap: 0px;
     padding: 0px;
-    background-color: #fff;
+    background-color: #0a0808;
     margin-left: 0px;
     justify-content: center;
     align-items: center;
