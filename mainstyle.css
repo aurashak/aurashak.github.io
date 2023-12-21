@@ -320,12 +320,15 @@ main.home {
 #menu-web a.active {
     background-color: red;
     color: #000000;
+    border-bottom: 1 px solid black;
 }
 
 /* Add this style for all sub-menus */
 .sub-menu {
     display: none; /* Hide all sub-menus by default */
     padding-left: 15px; /* Add padding for better indentation */
+    border-bottom: 1 px solid black;
+
 }
 
 /* Show the active sub-menu */
