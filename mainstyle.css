@@ -178,6 +178,7 @@ nav .button {
     display: block;
     padding-left: 10px;
     padding-top: 10px;
+    padding-right: 10px;
     padding-bottom: 10px;
     margin: 0px;
     text-align: Left;
@@ -246,6 +247,24 @@ nav .button:hover {
     background-color: rgb(255, 199, 33);
 }
 
+main {
+    padding: 20px;
+    margin: 0px;
+    background-color: #000000;
+    margin-left: 150px;
+    display: block;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center; 
+}
+
+main img {
+  display: block;
+   margin: auto;
+   width: 48%;
+   height: auto;
+ }
+
 main.home {
     padding: 20px;
     margin: 0px;
@@ -257,17 +276,17 @@ main.home {
     align-items: center; 
   }
   
-  main.home img {
-    display: ;
+  .home img {
+    display: block;
      margin: auto;
      width: 48%;
      height: auto;
    }
   
-  .print {
-    padding: 20px;
+   .print {
+    padding: 10px;
     margin: 0px;
-    background-color: #000000;
+    background-color: #fff;
     margin-left: 150px;
     display: block;
     min-height: 100vh;
@@ -276,12 +295,20 @@ main.home {
   }
   
   .print img {
-    display: ;
+    display: block;
      margin: auto;
-     width: 48%;
+     width: 100%;
      height: auto;
    }
-  
+
+   .content {
+    padding: 10px;
+    padding-left: 15px;
+    margin: 0px;
+    background-color: #ffffff;
+    font-size: 15px;
+
+}
 
 .row {
     display: flex;
