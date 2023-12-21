@@ -254,7 +254,7 @@ main.home {
     background-color: #fff;
     margin-left: 0px;
     display: block;
-    min-height: 100vh;
+    text-align: center;
     justify-content: center;
     align-items: center; 
   }
@@ -272,6 +272,16 @@ main.home {
     margin: 0px;
     background-color: #ffffff;
     font-size: 15px;
+
+}
+
+.center {
+    padding: 10px;
+    padding-left: 15px;
+    margin: 0px;
+    background-color: #100c0c;
+    font-size: 15px;
+    text-align: center;
 
 }
 
