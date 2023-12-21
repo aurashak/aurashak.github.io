@@ -286,8 +286,8 @@ main.home {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-    gap: 0px;
+    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr));
+    gap: 10px;
     padding: 0px;
     background-color: #fff;
     margin-left: 0px;
@@ -298,7 +298,7 @@ main.home {
 .gbig {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-    gap: 0px;
+    gap: 10px;
     padding: 0px;
     background-color: #0a0808;
     margin-left: 0px;
