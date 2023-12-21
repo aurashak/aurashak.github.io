@@ -237,6 +237,34 @@ av {
     color: white; /* Change the text color as needed */
 }
 
+/* Style for active button in the main menu */
+.menu a.button.active {
+    background-color: grey;
+    color: white;
+}
+
+/* Style for active button in the sub-menu */
+.sub-menu a.button.active {
+    background-color: grey;
+    color: white;
+}
+
+/* Style for the "Print" button in the main menu */
+#menu-print a.button.active-print {
+    background-color: grey;
+    color: white;
+}
+
+/* Add this if you want to style the hover state as well */
+.menu a.button.active:hover,
+.sub-menu a.button.active:hover,
+#menu-print a.button.active-print:hover {
+    background-color: /* your desired color */;
+    color: /* your desired text color */;
+}
+
+
+
 a {
     color: blue;
     text-decoration: none;
