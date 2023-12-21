@@ -319,6 +319,13 @@ main.home {
 
 }
 
+/* Add this style to highlight the active "Print" button */
+#menu-print a.button.active-print {
+    background-color: grey;
+    color: white; /* Adjust text color if needed */
+}
+
+
 #menu-web a.active {
     background-color: blue;
     color: #000000;
