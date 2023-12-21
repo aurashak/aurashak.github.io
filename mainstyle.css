@@ -322,10 +322,15 @@ main.home {
     color: #000000;
 }
 
-/* Add this style for the sub-menu */
+/* Add this style for all sub-menus */
 .sub-menu {
-    display: none; /* Hide the sub-menu by default */
+    display: none; /* Hide all sub-menus by default */
     padding-left: 15px; /* Add padding for better indentation */
+}
+
+/* Show the active sub-menu */
+.menu.active .sub-menu {
+    display: block;
 }
 
 /* Style for sub-menu items */
@@ -341,6 +346,7 @@ main.home {
 .sub-menu a:hover {
     background-color: #c8c8c8;
 }
+
 
 
 footer {
