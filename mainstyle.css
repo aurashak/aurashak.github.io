@@ -311,57 +311,7 @@ main.home {
     height: auto;
 }
 
-#menu-web {
-    /* Your styling rules for the menu with the ID "menu-web" */
-    background-color: none;
-    padding: 0px;
-    border-bottom: 1px solid black;
 
-}
-
-/* Add this style to highlight the active "Print" button */
-#menu-print a.button.active-print {
-    background-color: grey;
-    color: white; /* Adjust text color if needed */
-}
-
-
-#menu-web a.active {
-    background-color: blue;
-    color: #000000;
-}
-
-/* Add this style for all sub-menus */
-.sub-menu {
-    display: none; /* Hide all sub-menus by default */
-    padding-left: 15px; /* Add padding for better indentation */
-    border-bottom: 1px solid black;
-}
-
-/* Show the active sub-menu */
-.menu.active .sub-menu {
-    display: block;
-}
-
-/* Style for sub-menu items */
-.sub-menu a {
-    color: #000000;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    margin-bottom: 0px;
-}
-
-/* Hover effect for sub-menu items */
-.sub-menu a:hover {
-    background-color: #c8c8c8;
-}
-
-/* Style for active state of sub-menu items */
-.sub-menu a.active {
-    background-color: blue;
-    color: #000000;
-}
 
 
 
