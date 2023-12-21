@@ -8,21 +8,22 @@
     <link rel="stylesheet" href="https://aurashak.github.io/mainstyle.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        // Function to update navigation based on the current page
-        function updateNavigation() {
-            var currentPath = window.location.pathname;
+// Function to update navigation based on the current page
+function updateNavigation() {
+    var currentPath = window.location.pathname;
 
-            // Reset all menu items to their default state
-            $('.menu a').removeClass('active');
+    // Reset all menu items to their default state
+    $('.menu a').removeClass('active');
 
-            // Highlight the active menu item based on the current page
-            $('.menu a[href="' + currentPath + '"]').addClass('active');
-        }
+    // Highlight the active menu item based on the current page
+    $('.menu a[href="' + currentPath + '"]').addClass('active');
+}
 
-        // Run the updateNavigation function when the document is ready
-        $(document).ready(function () {
-            updateNavigation();
-        });
+// Run the updateNavigation function when the document is ready
+$(document).ready(function () {
+    updateNavigation();
+});
+
     </script>
 </head>
 <body>
