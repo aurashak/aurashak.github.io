@@ -8,22 +8,28 @@
     <link rel="stylesheet" href="https://aurashak.github.io/mainstyle.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-// Function to update navigation based on the current page
-function updateNavigation() {
-    var currentPath = window.location.pathname;
+        // Function to update navigation based on the current page
+        function updateNavigation() {
+            var currentPath = window.location.pathname;
 
-    // Reset all menu items to their default state
-    $('.menu a').removeClass('active');
+            // Reset all menu items to their default state
+            $('.menu, .sub-menu').hide();
+            $('.menu a').removeClass('active');
 
-    // Highlight the active menu item based on the current page
-    $('.menu a[href="' + currentPath + '"]').addClass('active');
-}
+            // Extract the section identifier from the current path
+            var sectionIdentifier = currentPath.split('/')[3]; // Assumes the structure is consistent
 
-// Run the updateNavigation function when the document is ready
-$(document).ready(function () {
-    updateNavigation();
-});
+            // Show the main menu for the current section
+            $('#menu-' + sectionIdentifier).show();
 
+            // Highlight the active menu item based on the current page
+            $('.menu a[href="' + currentPath + '"]').addClass('active');
+        }
+
+        // Run the updateNavigation function when the document is ready
+        $(document).ready(function () {
+            updateNavigation();
+        });
     </script>
 </head>
 <body>
@@ -36,25 +42,22 @@ $(document).ready(function () {
         </a>
     </header>
 
-    <menu class="menu">
+    <menu id="menu-about" class="menu">
         <a href="https://aurashak.github.io/menu/about.html" class="button">About</a>
     </menu>
 
-    <menu class="menu">
+    <menu id="menu-web" class="menu">
         <a href="https://aurashak.github.io/menu/web.html" class="button">Web</a>
         <a href="https://aurashak.github.io/menu/print.html" class="button">Print</a>
         <a href="https://aurashak.github.io/menu/sculpture.html" class="button">Sculpture</a>
         <a href="https://aurashak.github.io/menu/writing.html" class="button">Writing</a>
     </menu>
 
-    <menu class="menu">
-        <!-- ... (other top-level menu items) -->
-    </menu>
 
-    <menu class="sub-menu">
+    <menu id="sub-menu-print" class="sub-menu">
         <!-- Sub-menu items for the "Print" section -->
         <a href="https://aurashak.github.io/print/luanda.html" class="button">P Luanda, Angola</a>
-        <a href="https://aurashak.github.io/print/brasilia.html" class="button">Brasilia, Brazil</a>
+        <a href="https://aurashak.github.io/print/brasilia.html" class="button">P Brasilia, Brazil</a>
         <a href="https://aurashak.github.io/print/gaza.html" class="button">Gaza, Palestine</a>
 
         <a href="https://aurashak.github.io/print/stockholm.html" class="button">Stockholm, Sweden</a>
@@ -63,25 +66,25 @@ $(document).ready(function () {
         <a href="https://aurashak.github.io/print/sanjuan.html" class="button">San Juan, Puerto Rico</a>
         <a href="https://aurashak.github.io/print/moscow.html" class="button">Moscow, Russia</a>
         <a href="https://aurashak.github.io/print/istanbul.html" class="button">Istanbul, Turkey</a>
-        <a href="https://aurashak.github.io/print/kabul.html" class="button active">Kabul, Afghanistan</a>
+        <a href="https://aurashak.github.io/print/kabul.html" class="button">Kabul, Afghanistan</a>
         <a href="https://aurashak.github.io/print/nsworldmap.html" class="button">World Map</a>
-        <!-- ... (other sub-menu items for "Print") -->
     </menu>
 
-    <menu class="sub-menu">
+
+    <menu id="sub-menu-sculpture" class="sub-menu">
         <!-- Sub-menu items for the "Sculpture" section -->
         <a href="https://aurashak.github.io/sculpture/thelong20thcentury" class="button">The Long 20th Century</a>
         <a href="https://aurashak.github.io/sculpture/standingrock" class="button">Standing Rock</a>
         <!-- ... (other sub-menu items for "Sculpture") -->
     </menu>
 
-    <menu class="sub-menu">
+    <menu id="sub-menu-web" class="sub-menu">
         <!-- Sub-menu items for the "Web" section -->
         <a href="https://aurashak.github.io/web/climatemap" class="button">Climate Change Displacement Map of New York</a>
         <!-- ... (other sub-menu items for "Web") -->
     </menu>
 
-    <menu class="sub-menu">
+    <menu id="sub-menu-writing" class="sub-menu">
         <!-- Sub-menu items for the "Writing" section -->
         <a href="https://aurashak.github.io/writing/climateactionplanny.html" class="button">W Climate Action Plan for New York</a>
         <!-- ... (other sub-menu items for "Writing") -->
@@ -94,3 +97,9 @@ $(document).ready(function () {
 
 </body>
 </html>
+
+
+
+
+
+
