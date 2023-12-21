@@ -313,14 +313,16 @@ main.home {
 
 #menu-web {
     /* Your styling rules for the menu with the ID "menu-web" */
-    background-color: #f70e0e;
+    background-color: none;
     padding: 10px;
 }
 
 #menu-web a.active {
-    background-color: #b5b5b5; /* Your desired background color for the active state */
-    color: #000000; /* Your desired text color for the active state */
+    background-color: yellow;
+    color: #000000;
 }
+
+
 
 footer {
     background-color: transparent;
