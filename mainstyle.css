@@ -295,6 +295,17 @@ main.home {
     align-items: center;
 }
 
+.gridbig {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 0px;
+    padding: 0px;
+    background-color: #fff;
+    margin-left: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
 .grid img {
     width: 100%;
     height: auto;
