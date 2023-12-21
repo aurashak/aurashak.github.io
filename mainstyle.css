@@ -314,7 +314,7 @@ main.home {
 #menu-web {
     /* Your styling rules for the menu with the ID "menu-web" */
     background-color: none;
-    padding: 10px;
+    padding: 0px;
 }
 
 #menu-web a.active {
@@ -322,6 +322,25 @@ main.home {
     color: #000000;
 }
 
+/* Add this style for the sub-menu */
+.sub-menu {
+    display: none; /* Hide the sub-menu by default */
+    padding-left: 15px; /* Add padding for better indentation */
+}
+
+/* Style for sub-menu items */
+.sub-menu a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+/* Hover effect for sub-menu items */
+.sub-menu a:hover {
+    background-color: #c8c8c8;
+}
 
 
 footer {
