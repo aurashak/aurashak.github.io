@@ -320,7 +320,7 @@ main.home {
 }
 
 #menu-web a.active {
-    background-color: blue
+    background-color: blue;
     color: #000000;
 }
 
