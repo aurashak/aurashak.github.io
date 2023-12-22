@@ -80,34 +80,19 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
       let isDragging = false;
       let previousMousePosition = { x: 0, y: 0 };
 
-// Set up animation
+      // Set up animation
+      const animate = function () {
+        requestAnimationFrame(animate);
 
-  const animate = function () {
-  requestAnimationFrame(animate);
+        // Rotate the sphere during animation
+        if (!isDragging) {
+          sphere.rotation.y += 0.005;
+        }
 
-  // Rotate the sphere during animation
-  if (!isDragging) {
-    sphere.rotation.y += 0.005;
-  }
+        renderer.render(scene, camera);
+      };
 
-  // Update country outline positions
-  countries.forEach((country, index) => {
-    try {
-      // ... your existing code ...
-
-      // Get the corresponding line object and update its geometry
-      const line = scene.children.find(obj => obj.isLine && obj.userData.index === index);
-      line.geometry = geometry;
-    } catch (error) {
-      console.error(`Error updating country ${index}:`, error);
-    }
-  });
-
-  renderer.render(scene, camera);
-};
-
-animate();
-
+      animate();
 
       // Add event listeners for click and drag
       renderer.domElement.addEventListener('mousedown', (event) => {
