@@ -20,8 +20,14 @@
 
 
 
-    <img src="https://live.staticflickr.com/65535/52621448077_4aae7b5cc8_h.jpg"  alt="Istanbul"> 
-         <br>Scale: 1:10,000<br>Buy print<br>
+    
+    <br><a href="https://rosalux.nyc/wp-content/uploads/2020/11/RLS-NYC_NYC_Displacement_Map_forweb.pdf">Link to PDF</a>
+
+    <div class="print">
+    <img src="https://live.staticflickr.com/65535/52134160713_edd4c41f3c_3k.jpg"   alt="Displacement Map"><br>
+    <img src="https://live.staticflickr.com/65535/52133118947_579c5160ab_3k.jpg"   alt="Displacement Map"><br>
+    
+
 </main>
 <!-- Include common footer -->
 <div id="footer-placeholder"></div>
@@ -30,7 +36,3 @@
 
  </body>
  </html>
-
-
-
-
