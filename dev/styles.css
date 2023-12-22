@@ -126,14 +126,15 @@ header h2
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
-  }
-  
-  .image-grid img {
-    width: 40%;
+}
+
+.image-grid img {
+    width: 100%; /* Change to 100% for proper grid layout */
+    max-width: 100%; /* Ensure images don't exceed grid cell size */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+}
   
   
   /* Main text */
