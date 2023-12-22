@@ -20,6 +20,7 @@
   <div id="navigation-placeholder"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
   <main>
     <script>
       // Set up Three.js
@@ -38,26 +39,32 @@
       const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
       scene.add(sphere);
 
-      // Create the equator line (cylinder)
-      const equatorGeometry = new THREE.CylinderGeometry(5, 5, 0.1, 32);
+      // Create the equator line (torus)
+      const equatorGeometry = new THREE.TorusGeometry(5, 0.1, 16, 100);
       const equatorMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
       const equator = new THREE.Mesh(equatorGeometry, equatorMaterial);
       scene.add(equator);
 
-      // Position the equator line
-      equator.rotation.x = Math.PI / 2; // Rotate the cylinder to align with the equator
-      equator.position.y = 0; // Set the equator at the center of the sphere
-
       // Set camera position
       camera.position.z = 15;
+
+      // Create OrbitControls
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+      controls.dampingFactor = 0.25;
+      controls.screenSpacePanning = false;
+      controls.maxPolarAngle = Math.PI / 2;
 
       // Set up animation
       const animate = function () {
         requestAnimationFrame(animate);
 
-        // Rotate the sphere
-        sphere.rotation.x += 0.005;
-        sphere.rotation.y += 0.005;
+        // Update controls
+        controls.update();
+
+        // Rotate the equator (torus) to follow the sphere's rotation
+        equator.rotation.x = sphere.rotation.x;
+        equator.rotation.y = sphere.rotation.y;
 
         renderer.render(scene, camera);
       };
