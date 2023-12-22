@@ -32,11 +32,14 @@
       // Set the clear color of the renderer to white
       renderer.setClearColor(0xffffff);
 
+      // Create a group
+      const group = new THREE.Group();
+
       // Create a sphere with fewer wireframes
       const geometry = new THREE.SphereGeometry(5, 16, 16); // Adjust the radius and segments as needed
       const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
       const sphere = new THREE.Mesh(geometry, material);
-      scene.add(sphere);
+      group.add(sphere);
 
       // Add a line representing the north/south axis
       const lineGeometry = new THREE.BufferGeometry();
@@ -46,87 +49,11 @@
       linePoints.push(new THREE.Vector3(0, -5, 0)); // Bottom point of the sphere
       lineGeometry.setFromPoints(linePoints);
       const northSouthAxis = new THREE.Line(lineGeometry, lineMaterial);
-      scene.add(northSouthAxis);
+      group.add(northSouthAxis);
+
+      scene.add(group);
 
       // Set camera position
-      camera.position.z = 10;
+      camera.position.z = 15;
 
       // Variables for click and drag
-      let isDragging = false;
-      let previousMousePosition = {
-        x: 0,
-        y: 0
-      };
-
-      // Set up animation
-      const animate = function () {
-        requestAnimationFrame(animate);
-
-        // Rotate the sphere during animation
-        if (!isDragging) {
-          sphere.rotation.x += 0.005;
-          sphere.rotation.y += 0.005;
-        }
-
-        renderer.render(scene, camera);
-      };
-
-      animate();
-
-      // Add event listeners for click and drag
-      renderer.domElement.addEventListener('mousedown', (event) => {
-        isDragging = true;
-        previousMousePosition = {
-          x: event.clientX,
-          y: event.clientY
-        };
-      });
-
-      renderer.domElement.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      renderer.domElement.addEventListener('mousemove', (event) => {
-        if (isDragging) {
-          const deltaMove = {
-            x: event.clientX - previousMousePosition.x,
-            y: event.clientY - previousMousePosition.y
-          };
-
-          const rotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-              toRadians(deltaMove.y * 0.5),
-              toRadians(deltaMove.x * 0.5),
-              0,
-              'XYZ'
-            ));
-
-          sphere.quaternion.multiplyQuaternions(rotationQuaternion, sphere.quaternion);
-
-          previousMousePosition = {
-            x: event.clientX,
-            y: event.clientY
-          };
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        // Update camera aspect ratio and renderer size on window resize
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      function toRadians(degrees) {
-        return degrees * (Math.PI / 180);
-      }
-    </script>
-  </main>
-
-  <!-- Include common footer -->
-  <div id="footer-placeholder"></div>
-
-  <script src="https://aurashak.github.io/common.js"></script>
-
-</body>
-</html>
