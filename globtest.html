@@ -41,12 +41,15 @@
       const sphere = new THREE.Mesh(geometry, material);
       group.add(sphere);
 
-      // Add a line representing the north/south axis
+      // Add a line representing the north/south axis with extrusion
       const lineGeometry = new THREE.BufferGeometry();
       const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
       const linePoints = [];
+      const extrusionAmount = 0.5; // Adjust the extrusion amount as needed
+      linePoints.push(new THREE.Vector3(0, 5 + extrusionAmount, 0)); // Top point of the extruded line
       linePoints.push(new THREE.Vector3(0, 5, 0)); // Top point of the sphere
       linePoints.push(new THREE.Vector3(0, -5, 0)); // Bottom point of the sphere
+      linePoints.push(new THREE.Vector3(0, -5 - extrusionAmount, 0)); // Bottom point of the extruded line
       lineGeometry.setFromPoints(linePoints);
       const northSouthAxis = new THREE.Line(lineGeometry, lineMaterial);
       group.add(northSouthAxis);
