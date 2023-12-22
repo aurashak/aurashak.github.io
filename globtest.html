@@ -21,48 +21,45 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <main>
-  <script>
-// Set up Three.js
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+    <script>
+      // Set up Three.js
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
 
-// Set the clear color of the renderer to match your desired background color
-renderer.setClearColor(0xffffff);
+      // Set the clear color of the renderer to white
+      renderer.setClearColor(0xffffff);
 
-// Create a cube
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+      // Create a sphere
+      const geometry = new THREE.SphereGeometry(5, 32, 32); // Adjust the radius and segments as needed
+      const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
+      const sphere = new THREE.Mesh(geometry, material);
+      scene.add(sphere);
 
-// Set camera position
-camera.position.z = 5;
+      // Set camera position
+      camera.position.z = 10;
 
-// Set up animation
-const animate = function () {
-  requestAnimationFrame(animate);
+      // Set up animation
+      const animate = function () {
+        requestAnimationFrame(animate);
 
-  // Rotate the cube
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+        // Rotate the sphere
+        sphere.rotation.x += 0.005;
+        sphere.rotation.y += 0.005;
 
-  renderer.render(scene, camera);
-};
+        renderer.render(scene, camera);
+      };
 
-animate();
-  </script>
+      animate();
+    </script>
+  </main>
 
+  <!-- Include common footer -->
+  <div id="footer-placeholder"></div>
 
-       
-    </main>
+  <script src="https://aurashak.github.io/common.js"></script>
 
- <!-- Include common footer -->
- <div id="footer-placeholder"></div>
-
- <script src="https://aurashak.github.io/common.js"></script>
- 
-  </body>
-  </html>
+</body>
+</html>
