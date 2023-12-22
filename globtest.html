@@ -54,11 +54,7 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
     return response.json();
   })
   .then(world => {
-    if (!world.objects || !world.objects.ne_110m_admin_0_countries) {
-      throw new Error('Invalid country data format');
-    }
-
-    const countries = topojson.feature(world, world.objects.ne_110m_admin_0_countries).features;
+    const countries = topojson.feature(world, world.objects.countries).features;
 
     // Draw country outlines
     const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
@@ -76,9 +72,6 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
     });
   })
   .catch(error => console.error('Error loading country data:', error.message));
-
-
-
 
 
 
