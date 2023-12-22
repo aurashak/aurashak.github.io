@@ -10,11 +10,19 @@ document.addEventListener('DOMContentLoaded', function () {
   
     // Create a cube with a solid gray material
     var geometry = new THREE.BoxGeometry();
-    var material = new THREE.MeshBasicMaterial({ color: 0x888888 }); // Set the color to gray
+    var material = new THREE.MeshPhongMaterial({ color: 0x888888 }); // Phong material for better lighting
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
   
-    // Position the camera
+    // Position the cube
+    cube.position.set(0, 0, 0);
+  
+    // Add a directional light
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+  
+    // Set up the camera position
     camera.position.z = 5;
   
     // Define an animation function
