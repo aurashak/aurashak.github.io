@@ -38,9 +38,9 @@
       const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
       const sphere = new THREE.Mesh(geometry, material);
 
-      // Apply initial rotation to the sphere
-      sphere.rotation.x = toRadians(23); // Tilted 23 degrees along the x-axis
-      sphere.rotation.z = toRadians(23); // Tilted 23 degrees along the z-axis
+      // Set the initial position and rotation (23-degree tilt) of the sphere
+      sphere.position.copy(new THREE.Vector3(0, sphereRadius, 0));
+      sphere.rotation.x = -Math.PI / 8; // 23-degree tilt
 
       scene.add(sphere);
 
@@ -55,11 +55,6 @@
       axisGeometry.setFromPoints(points);
 
       const axis = new THREE.Line(axisGeometry, axisMaterial);
-
-      // Apply initial rotation to the axis
-      axis.rotation.x = toRadians(23); // Tilted 23 degrees along the x-axis
-      axis.rotation.z = toRadians(23); // Tilted 23 degrees along the z-axis
-
       scene.add(axis);
 
       // Set camera position
@@ -136,10 +131,14 @@
         geometry.verticesNeedUpdate = true;
         geometry.elementsNeedUpdate = true;
 
-        // Adjust the position of the axis
+        // Adjust the position of the sphere along the axis
         points[0].set(0, sphereRadius, 0);
         points[1].set(0, -sphereRadius, 0);
         axisGeometry.setFromPoints(points);
+
+        // Set the initial position and rotation (23-degree tilt) of the sphere
+        sphere.position.copy(new THREE.Vector3(0, sphereRadius, 0));
+        sphere.rotation.x = -Math.PI / 8; // 23-degree tilt
       });
 
       function toRadians(degrees) {
