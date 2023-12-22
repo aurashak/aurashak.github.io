@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
   <link rel="stylesheet" href="https://aurashak.github.io/styles.css">
-  <title>Print</title>
+  <title>Rotating Earth</title>
   <style>
     body { margin: 0; }
     canvas { display: block; }
@@ -32,14 +32,23 @@
       // Set the clear color of the renderer to white
       renderer.setClearColor(0xffffff);
 
-      // Create a sphere
-      const geometry = new THREE.SphereGeometry(5, 32, 32); // Adjust the radius and segments as needed
-      const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
-      const sphere = new THREE.Mesh(geometry, material);
-      scene.add(sphere);
+      // Create a sphere with Earth texture
+      const textureLoader = new THREE.TextureLoader();
+      const earthTexture = textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg');
+      const geometry = new THREE.SphereGeometry(5, 32, 32);
+      const material = new THREE.MeshPhongMaterial({ map: earthTexture });
+      const earth = new THREE.Mesh(geometry, material);
+      scene.add(earth);
 
       // Set camera position
-      camera.position.z = 10;
+      camera.position.z = 15;
+
+      // Set up lighting
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(5, 3, 5).normalize();
+      scene.add(ambientLight);
+      scene.add(directionalLight);
 
       // Variables for click and drag
       let isDragging = false;
@@ -52,10 +61,9 @@
       const animate = function () {
         requestAnimationFrame(animate);
 
-        // Rotate the sphere during animation
+        // Rotate the Earth during animation
         if (!isDragging) {
-          sphere.rotation.x += 0.005;
-          sphere.rotation.y += 0.005;
+          earth.rotation.y += 0.005;
         }
 
         renderer.render(scene, camera);
@@ -91,7 +99,7 @@
               'XYZ'
             ));
 
-          sphere.quaternion.multiplyQuaternions(rotationQuaternion, sphere.quaternion);
+          earth.quaternion.multiplyQuaternions(rotationQuaternion, earth.quaternion);
 
           previousMousePosition = {
             x: event.clientX,
