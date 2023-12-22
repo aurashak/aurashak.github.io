@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
   <title>Index</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Include Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
 
@@ -20,10 +23,13 @@
     <!-- Main Area -->
     <main>
       <h1>Title here</h1>
-      <img src="https://live.staticflickr.com/65535/52622371450_fdc259ddf8_h.jpg"   alt="Brasilia"> 
+      <img src="https://live.staticflickr.com/65535/52622371450_fdc259ddf8_h.jpg" alt="Brasilia"> 
 
       <h2>subtitle here</h2>
       <p>Your placeholder text goes here. Replace it with your actual content.</p>
+
+      <!-- Map Container -->
+      <div id="map" style="height: 300px;"></div>
     </main>
 
     <!-- Include common footer -->
@@ -31,6 +37,21 @@
 
   </div>
 
+  <!-- Include Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <script src="common.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Initialize the map
+      var map = L.map("map").setView([0, 0], 2);
+
+      // Add OpenStreetMap tile layer
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+    });
+  </script>
 </body>
 </html>
