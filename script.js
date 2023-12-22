@@ -2,15 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set up the scene, camera, and renderer
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true for a transparent background
     renderer.setSize(window.innerWidth, window.innerHeight);
   
-    // Corrected ID here: 'cube-container'
+    // Append renderer's dom element to cube-container
     document.getElementById('cube-container').appendChild(renderer.domElement);
   
-    // Create a cube
+    // Create a cube with a solid gray material
     var geometry = new THREE.BoxGeometry();
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var material = new THREE.MeshBasicMaterial({ color: 0x888888 }); // Set the color to gray
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
   
