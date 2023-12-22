@@ -36,7 +36,7 @@ header img {
 /* Header text */
 header h1 {
   font-size: 23px;
-  margin-bottom: 0px;
+  margin: 0px;
   letter-spacing: 1px;
 }
 
@@ -50,7 +50,7 @@ header h2 {
 }
 
 header button {
-  padding: 10px 20px;
+  padding: 10px;
   font-size: 16px;
   background-color: #d3d3d3;
   color: #000;
