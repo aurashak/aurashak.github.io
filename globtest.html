@@ -11,7 +11,7 @@
     canvas { display: block; }
   </style>
 </head>
-<body>
+<body style="background-color: white;">
 
   <!-- Include common header -->
   <div id="header-placeholder"></div>
@@ -31,7 +31,7 @@
 
     // Create a cube
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, wireframeLinewidth: 2 }); // White color and black wireframe
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
