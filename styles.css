@@ -1,8 +1,10 @@
 /* Reset some default styles to ensure consistency across browsers */
+/*
 body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
 }
+*/
 
 /* Apply a basic styling to the body */
 body {
