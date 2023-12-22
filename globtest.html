@@ -36,42 +36,46 @@
       // Set the clear color of the renderer to white
       renderer.setClearColor(0xffffff);
 
+      // Create a group to hold both the sphere and country outlines
+      const group = new THREE.Group();
+      scene.add(group);
+
       // Create a sphere
       const geometry = new THREE.SphereGeometry(5, 32, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
       const sphere = new THREE.Mesh(geometry, material);
-      scene.add(sphere);
+      group.add(sphere);
 
       // Set camera position
       camera.position.z = 10;
 
-// Load country border data
-fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Failed to fetch country data (HTTP ${response.status})`);
-    }
-    return response.json();
-  })
-  .then(world => {
-    const countries = world.features;
-
-    // Draw country outlines
-    const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-    countries.forEach(country => {
-      const geometry = new THREE.BufferGeometry().setFromPoints(
-        country.geometry.coordinates[0].map(coords => {
-          const lon = coords[0];
-          const lat = coords[1];
-          return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
+      // Load country border data
+      fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to fetch country data (HTTP ${response.status})`);
+          }
+          return response.json();
         })
-      );
+        .then(world => {
+          const countries = world.features;
 
-      const line = new THREE.Line(geometry, outlineMaterial);
-      scene.add(line);
-    });
-  })
-  .catch(error => console.error('Error loading country data:', error.message));
+          // Draw country outlines
+          const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+          countries.forEach(country => {
+            const geometry = new THREE.BufferGeometry().setFromPoints(
+              country.geometry.coordinates[0].map(coords => {
+                const lon = coords[0];
+                const lat = coords[1];
+                return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
+              })
+            );
+
+            const line = new THREE.Line(geometry, outlineMaterial);
+            group.add(line);
+          });
+        })
+        .catch(error => console.error('Error loading country data:', error.message));
 
 
       // Variables for click and drag
@@ -82,9 +86,9 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
       const animate = function () {
         requestAnimationFrame(animate);
 
-        // Rotate the sphere during animation
+        // Rotate the group during animation
         if (!isDragging) {
-          sphere.rotation.y += 0.005;
+          group.rotation.y += 0.005;
         }
 
         renderer.render(scene, camera);
@@ -114,7 +118,7 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
               'XYZ'
             ));
 
-          sphere.quaternion.multiplyQuaternions(rotationQuaternion, sphere.quaternion);
+          group.quaternion.multiplyQuaternions(rotationQuaternion, group.quaternion);
 
           previousMousePosition = { x: event.clientX, y: event.clientY };
         }
