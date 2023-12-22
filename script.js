@@ -1,6 +1,3 @@
-// Import required Three.js modules
-import * as THREE from 'https://threejs.org/build/three.module.js';
-
 // Create a scene
 const scene = new THREE.Scene();
 
