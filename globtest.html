@@ -46,7 +46,7 @@
       camera.position.z = 10;
 
 // Load country border data
-fetch('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
+fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
   .then(response => {
     if (!response.ok) {
       throw new Error(`Failed to fetch country data (HTTP ${response.status})`);
@@ -54,15 +54,15 @@ fetch('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
     return response.json();
   })
   .then(world => {
-    const countries = topojson.feature(world, world.objects.countries).features;
+    const countries = world.features;
 
     // Draw country outlines
     const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
     countries.forEach(country => {
       const geometry = new THREE.BufferGeometry().setFromPoints(
         country.geometry.coordinates[0].map(coords => {
-          const lat = coords[1];
           const lon = coords[0];
+          const lat = coords[1];
           return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
         })
       );
