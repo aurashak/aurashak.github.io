@@ -39,7 +39,7 @@
       const sphere = new THREE.Mesh(geometry, material);
 
       // Set the initial position and rotation (23-degree tilt) of the sphere
-      sphere.position.copy(new THREE.Vector3(0, sphereRadius, 0));
+      sphere.position.copy(new THREE.Vector3(0, 0, 0)); // Adjusted position
       sphere.rotation.x = -Math.PI / 8; // 23-degree tilt
 
       scene.add(sphere);
@@ -137,7 +137,7 @@
         axisGeometry.setFromPoints(points);
 
         // Set the initial position and rotation (23-degree tilt) of the sphere
-        sphere.position.copy(new THREE.Vector3(0, sphereRadius, 0));
+        sphere.position.copy(new THREE.Vector3(0, 0, 0));
         sphere.rotation.x = -Math.PI / 8; // 23-degree tilt
       });
 
