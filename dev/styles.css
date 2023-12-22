@@ -62,6 +62,20 @@ header h2
     margin-bottom: 25px;
   }
   
+  header button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff9900;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  header button:hover {
+    background-color: #333;
+  }
+  
   nav li {
     display: inline-block;
     margin: 0px;
