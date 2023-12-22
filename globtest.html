@@ -24,7 +24,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
 
-  <main>
+<!-- ... (previous HTML code) ... -->
+
+<main>
     <script>
       // Set up Three.js
       const scene = new THREE.Scene();
@@ -32,23 +34,23 @@
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
-
+  
       // Set the clear color of the renderer to white
       renderer.setClearColor(0xffffff);
-
+  
       // Create a group to hold both the sphere and country outlines
       const group = new THREE.Group();
       scene.add(group);
-
-   // Create a sphere
-const geometry = new THREE.SphereGeometry(5, 32, 32);
-const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, wireframe: true, wireframeLinewidth: 2, transparent: false, opacity: 1 });
-const sphere = new THREE.Mesh(geometry, sphereMaterial);
-group.add(sphere);
-
+  
+      // Create a sphere
+      const geometry = new THREE.SphereGeometry(5, 32, 32);
+      const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, wireframe: true, wireframeLinewidth: 2, transparent: false, opacity: 1 });
+      const sphere = new THREE.Mesh(geometry, sphereMaterial);
+      group.add(sphere);
+  
       // Set camera position
       camera.position.z = 10;
-
+  
       // Load country border data
       fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
         .then(response => {
@@ -59,7 +61,7 @@ group.add(sphere);
         })
         .then(world => {
           const countries = world.features;
-
+  
           // Draw country outlines
           const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
           countries.forEach(country => {
@@ -67,78 +69,26 @@ group.add(sphere);
               country.geometry.coordinates[0].map(coords => {
                 const lon = coords[0];
                 const lat = coords[1];
+  
+                // Debugging: Log latitude and longitude
+                console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+  
                 return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
               })
             );
-
+  
             const line = new THREE.Line(geometry, outlineMaterial);
             group.add(line);
           });
         })
         .catch(error => console.error('Error loading country data:', error.message));
-
-
-      // Variables for click and drag
-      let isDragging = false;
-      let previousMousePosition = { x: 0, y: 0 };
-
-      // Set up animation
-      const animate = function () {
-        requestAnimationFrame(animate);
-
-        // Rotate the group during animation
-        if (!isDragging) {
-          group.rotation.y += 0.005;
-        }
-
-        renderer.render(scene, camera);
-      };
-
-      animate();
-
-      // Add event listeners for click and drag
-      renderer.domElement.addEventListener('mousedown', (event) => {
-        isDragging = true;
-        previousMousePosition = { x: event.clientX, y: event.clientY };
-      });
-
-      renderer.domElement.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      renderer.domElement.addEventListener('mousemove', (event) => {
-        if (isDragging) {
-          const deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y };
-
-          const rotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-              toRadians(deltaMove.y * 0.5),
-              toRadians(deltaMove.x * 0.5),
-              0,
-              'XYZ'
-            ));
-
-          group.quaternion.multiplyQuaternions(rotationQuaternion, group.quaternion);
-
-          previousMousePosition = { x: event.clientX, y: event.clientY };
-        }
-      });
-
-      function toRadians(degrees) {
-        return degrees * (Math.PI / 180);
-      }
-
-      // Helper function to convert latitude and longitude to sphere coordinates
-      function convertToSphereCoords(lat, lon, radius) {
-        const phi = toRadians(90 - lat);
-        const theta = toRadians(lon + 180);
-        const x = radius * Math.sin(phi) * Math.cos(theta);
-        const y = radius * Math.cos(phi);
-        const z = radius * Math.sin(phi) * Math.sin(theta);
-        return new THREE.Vector3(x, y, z);
-      }
+  
+      // ... (rest of your code) ...
     </script>
   </main>
+  
+  <!-- ... (remaining HTML code) ... -->
+  
 
   <!-- Include common footer -->
   <div id="footer-placeholder"></div>
