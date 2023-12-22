@@ -108,7 +108,7 @@ nav a {
   color: #000;
   letter-spacing: .8px;
   font-family: "Roboto Mono", sans-serif;
-  font-weight: bold;
+  font-weight: 400;
   font-size: 16px;
   transition: none;
   padding: 10px;
@@ -148,6 +148,19 @@ width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 10px;
+
+  .image-gridlarge {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
+    gap: 10px;
+  }
+}
+
+.image-gridlarge img {
+  width: 100%; /* Change to 100% for proper grid layout */
+  max-width: 100%; /* Ensure images don't exceed grid cell size */
+  height: auto;
+  border-radius: 0px;
 }
 
 .image-grid img {
