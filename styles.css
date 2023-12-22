@@ -42,7 +42,7 @@ header h1 {
 header h2 
 {
   font-size: 20px;
-color: gray;
+color: black;
 padding: 5px;
   margin-bottom: 0px;
 letter-spacing: 2px;
@@ -66,14 +66,14 @@ header button {
   padding: 10px 20px;
   font-size: 16px;
   background-color: #d3d3d3;
-  color: #fff;
+  color: #000;
   border: none;
   border-radius: 1px;
   cursor: pointer;
 }
 
 header button:hover {
-  background-color: red;
+  background-color: #ff9900;
 }
 
 nav li {
@@ -124,8 +124,8 @@ main img {
 /* Additional styles for the grid */
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 10px;
 }
 
 .image-grid img {
@@ -133,7 +133,6 @@ main img {
   max-width: 100%; /* Ensure images don't exceed grid cell size */
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 
