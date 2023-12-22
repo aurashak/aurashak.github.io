@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
   <link rel="stylesheet" href="https://aurashak.github.io/styles.css">
-  <title>Print</title>
+  <title>World Sphere</title>
   <style>
     body { margin: 0; }
     canvas { display: block; }
@@ -20,6 +19,8 @@
   <div id="navigation-placeholder"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
   <main>
     <script>
       // Set up Three.js
@@ -33,22 +34,37 @@
       renderer.setClearColor(0xffffff);
 
       // Create a sphere
-      let sphereRadius = 5;
-      const geometry = new THREE.SphereGeometry(sphereRadius, 32, 32); // Adjust the radius and segments as needed
+      const geometry = new THREE.SphereGeometry(5, 32, 32);
       const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
       const sphere = new THREE.Mesh(geometry, material);
-
       scene.add(sphere);
 
       // Set camera position
       camera.position.z = 10;
 
+      // Load country border data
+      d3.json('https://unpkg.com/world-atlas/world/110m.json').then((world) => {
+        const countries = topojson.feature(world, world.objects.countries).features;
+
+        // Draw country outlines
+        const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+        countries.forEach((country) => {
+          const geometry = new THREE.BufferGeometry().setFromPoints(
+            country.geometry.coordinates[0].map((coords) => {
+              const lat = coords[1];
+              const lon = coords[0];
+              return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
+            })
+          );
+
+          const line = new THREE.Line(geometry, outlineMaterial);
+          scene.add(line);
+        });
+      });
+
       // Variables for click and drag
       let isDragging = false;
-      let previousMousePosition = {
-        x: 0,
-        y: 0
-      };
+      let previousMousePosition = { x: 0, y: 0 };
 
       // Set up animation
       const animate = function () {
@@ -67,10 +83,7 @@
       // Add event listeners for click and drag
       renderer.domElement.addEventListener('mousedown', (event) => {
         isDragging = true;
-        previousMousePosition = {
-          x: event.clientX,
-          y: event.clientY
-        };
+        previousMousePosition = { x: event.clientX, y: event.clientY };
       });
 
       renderer.domElement.addEventListener('mouseup', () => {
@@ -79,10 +92,7 @@
 
       renderer.domElement.addEventListener('mousemove', (event) => {
         if (isDragging) {
-          const deltaMove = {
-            x: event.clientX - previousMousePosition.x,
-            y: event.clientY - previousMousePosition.y
-          };
+          const deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y };
 
           const rotationQuaternion = new THREE.Quaternion()
             .setFromEuler(new THREE.Euler(
@@ -94,32 +104,22 @@
 
           sphere.quaternion.multiplyQuaternions(rotationQuaternion, sphere.quaternion);
 
-          previousMousePosition = {
-            x: event.clientX,
-            y: event.clientY
-          };
+          previousMousePosition = { x: event.clientX, y: event.clientY };
         }
-      });
-
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        // Adjust the sphere radius based on the new window size
-        sphereRadius = 5 * (window.innerWidth / 800); // You can adjust the factor as needed
-        geometry.parameters.radius = sphereRadius;
-        geometry.verticesNeedUpdate = true;
-        geometry.elementsNeedUpdate = true;
-
-        // Set the initial position and rotation of the sphere
-        sphere.position.copy(new THREE.Vector3(0, 0, 0));
-        sphere.rotation.set(0, 0, 0);
       });
 
       function toRadians(degrees) {
         return degrees * (Math.PI / 180);
+      }
+
+      // Helper function to convert latitude and longitude to sphere coordinates
+      function convertToSphereCoords(lat, lon, radius) {
+        const phi = toRadians(90 - lat);
+        const theta = toRadians(lon + 180);
+        const x = radius * Math.sin(phi) * Math.cos(theta);
+        const y = radius * Math.cos(phi);
+        const z = radius * Math.sin(phi) * Math.sin(theta);
+        return new THREE.Vector3(x, y, z);
       }
     </script>
   </main>
