@@ -38,6 +38,16 @@
       const sphere = new THREE.Mesh(geometry, material);
       scene.add(sphere);
 
+      // Add a line representing the north/south axis
+      const lineGeometry = new THREE.BufferGeometry();
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+      const linePoints = [];
+      linePoints.push(new THREE.Vector3(0, 5, 0)); // Top point of the sphere
+      linePoints.push(new THREE.Vector3(0, -5, 0)); // Bottom point of the sphere
+      lineGeometry.setFromPoints(linePoints);
+      const northSouthAxis = new THREE.Line(lineGeometry, lineMaterial);
+      scene.add(northSouthAxis);
+
       // Set camera position
       camera.position.z = 10;
 
