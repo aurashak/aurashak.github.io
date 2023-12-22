@@ -66,9 +66,9 @@
       const animate = function () {
         requestAnimationFrame(animate);
 
-        // Rotate the sphere during animation (only on the X-axis)
+        // Rotate the sphere during animation (only on the Y-axis)
         if (!isDragging) {
-          sphere.rotation.x += 0.005;
+          sphere.rotation.y += 0.005;
         }
 
         renderer.render(scene, camera);
@@ -96,11 +96,11 @@
             y: event.clientY - previousMousePosition.y
           };
 
-          // Only rotate on the X-axis
+          // Only rotate on the Y-axis
           const rotationQuaternion = new THREE.Quaternion()
             .setFromEuler(new THREE.Euler(
-              toRadians(deltaMove.y * 0.5),
               0,
+              toRadians(deltaMove.x * 0.5),
               0,
               'XYZ'
             ));
@@ -139,9 +139,3 @@
   </main>
 
   <!-- Include common footer -->
-  <div id="footer-placeholder"></div>
-
-  <script src="https://aurashak.github.io/common.js"></script>
-
-</body>
-</html>
