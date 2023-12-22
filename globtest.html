@@ -50,12 +50,17 @@ d3.json('https://unpkg.com/world-atlas/world/110m.json').then((world) => {
   // Log the structure of the loaded data to the console
   console.log(world);
 
-  // Check the actual object names in the loaded data
-  const objectNames = Object.keys(world.objects);
-  console.log('Object names:', objectNames);
+  // Find the object with country borders
+  const countryObjectName = Object.keys(world.objects).find((key) =>
+    key.includes('countries') || key.includes('admin_0')
+  );
 
-  // Use the correct object name based on your data structure
-  const countries = topojson.feature(world, world.objects.ne_110m_admin_0_countries).features;
+  if (!countryObjectName) {
+    console.error('Country borders object not found in the loaded data.');
+    return;
+  }
+
+  const countries = topojson.feature(world, world.objects[countryObjectName]).features;
 
   // Draw country outlines
   const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
@@ -74,6 +79,7 @@ d3.json('https://unpkg.com/world-atlas/world/110m.json').then((world) => {
 }).catch((error) => {
   console.error('Error loading country data:', error);
 });
+
 
 
 
