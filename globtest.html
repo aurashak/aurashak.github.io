@@ -38,24 +38,7 @@
       const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
       const sphere = new THREE.Mesh(geometry, material);
 
-      // Set the initial position and rotation (23-degree tilt) of the sphere
-      sphere.position.copy(new THREE.Vector3(0, 0, 0)); // Adjusted position
-      sphere.rotation.x = -Math.PI / 8; // 23-degree tilt
-
       scene.add(sphere);
-
-      // Create a red line (axis) going through the top and bottom of the sphere
-      const axisGeometry = new THREE.BufferGeometry();
-      const axisMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-
-      const points = [];
-      points.push(new THREE.Vector3(0, sphereRadius, 0)); // Top point
-      points.push(new THREE.Vector3(0, -sphereRadius, 0)); // Bottom point
-
-      axisGeometry.setFromPoints(points);
-
-      const axis = new THREE.Line(axisGeometry, axisMaterial);
-      scene.add(axis);
 
       // Set camera position
       camera.position.z = 10;
@@ -71,7 +54,7 @@
       const animate = function () {
         requestAnimationFrame(animate);
 
-        // Rotate the sphere during animation (only on the Y-axis)
+        // Rotate the sphere during animation
         if (!isDragging) {
           sphere.rotation.y += 0.005;
         }
@@ -101,10 +84,9 @@
             y: event.clientY - previousMousePosition.y
           };
 
-          // Only rotate on the Y-axis
           const rotationQuaternion = new THREE.Quaternion()
             .setFromEuler(new THREE.Euler(
-              0,
+              toRadians(deltaMove.y * 0.5),
               toRadians(deltaMove.x * 0.5),
               0,
               'XYZ'
@@ -131,14 +113,9 @@
         geometry.verticesNeedUpdate = true;
         geometry.elementsNeedUpdate = true;
 
-        // Adjust the position of the sphere along the axis
-        points[0].set(0, sphereRadius, 0);
-        points[1].set(0, -sphereRadius, 0);
-        axisGeometry.setFromPoints(points);
-
-        // Set the initial position and rotation (23-degree tilt) of the sphere
+        // Set the initial position and rotation of the sphere
         sphere.position.copy(new THREE.Vector3(0, 0, 0));
-        sphere.rotation.x = -Math.PI / 8; // 23-degree tilt
+        sphere.rotation.set(0, 0, 0);
       });
 
       function toRadians(degrees) {
