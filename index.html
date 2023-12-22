@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
-  <title>Index</title>
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Include Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <title>Rotatable Globe</title>
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+  </style>
 </head>
 <body>
 
@@ -23,11 +23,13 @@
     <!-- Main Area -->
     <main>
       <h1>Title here</h1>
+      <img src="https://live.staticflickr.com/65535/52622371450_fdc259ddf8_h.jpg" alt="Brasilia"> 
 
+      <h2>subtitle here</h2>
       <p>Your placeholder text goes here. Replace it with your actual content.</p>
 
-      <!-- Map Container -->
-      <div id="map" style="height: 500px;"></div>
+      <!-- 3D Globe Container -->
+      <div id="globe-container"></div>
     </main>
 
     <!-- Include common footer -->
@@ -35,20 +37,56 @@
 
   </div>
 
-  <!-- Include Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Include Three.js -->
+  <script type="module">
+    import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/build/three.module.js';
 
-  <script src="common.js"></script>
-
-  <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Initialize the map
-      var map = L.map("map").setView([0, 0], 2);
+      // Initialize the scene
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('globe-container').appendChild(renderer.domElement);
 
-      // Add OpenStreetMap tile layer
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+      // Load country outlines
+      fetch('countries.geojson')
+        .then(response => response.json())
+        .then(data => {
+          var geometry = new THREE.BufferGeometry().setFromPoints(
+            data.features.map(feature => {
+              var coords = feature.geometry.coordinates[0].map(coord => {
+                return new THREE.Vector3().fromSphericalCoords(
+                  1,
+                  (coord[0] + 180) * Math.PI / 180, // longitude
+                  (90 - coord[1]) * Math.PI / 180  // latitude
+                );
+              });
+              coords.push(coords[0]); // Close the loop
+              return coords;
+            }).flat()
+          );
+
+          var material = new THREE.LineBasicMaterial({ color: 0xffffff });
+          var line = new THREE.Line(geometry, material);
+          scene.add(line);
+
+          // Set camera position
+          camera.position.z = 5;
+
+          // Add animation
+          function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate the globe
+            line.rotation.x += 0.005;
+            line.rotation.y += 0.005;
+
+            renderer.render(scene, camera);
+          }
+
+          animate();
+        });
     });
   </script>
 </body>

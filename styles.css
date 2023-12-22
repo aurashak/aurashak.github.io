@@ -41,7 +41,7 @@ header h1 {
 header h2 {
   font-size: 20px;
   color: black;
-  padding: 20px 15px 15px 15px;
+  padding: 18px 14px 14px 14px;
   margin-bottom: 0px;
   letter-spacing: 2px;
   font-weight: 400;
@@ -154,7 +154,7 @@ width: 100%;
   width: 100%; /* Change to 100% for proper grid layout */
   max-width: 100%; /* Ensure images don't exceed grid cell size */
   height: auto;
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 /* Main text */
