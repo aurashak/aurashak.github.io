@@ -201,8 +201,8 @@ main h2 {
 
 /* Footer styles */
 footer {
-  background-color: #c17725; /* Dark gray background for the footer */
-  color: #000;
+  background-color: #fff; /* Dark gray background for the footer */
+  color: #161616;
   padding: 10px 0;
   text-align: center;
 }

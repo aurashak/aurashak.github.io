@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://aurashak.github.io/styles.css">
   <title>Print</title>
   <style>
-    body { margin: 0; }
+    body { margin: 0; overflow: hidden; }
     canvas { display: block; }
   </style>
 </head>
@@ -38,28 +38,20 @@
       const sphere = new THREE.Mesh(geometry, material);
       scene.add(sphere);
 
-      // Create a red line (axis) going through the top and bottom of the sphere
-      const axisGeometry = new THREE.BufferGeometry();
+      // Create a red line (axis) through the top and bottom of the sphere
+      const axisGeometry = new THREE.Geometry();
+      axisGeometry.vertices.push(new THREE.Vector3(0, 5, 0)); // Top point
+      axisGeometry.vertices.push(new THREE.Vector3(0, -5, 0)); // Bottom point
       const axisMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-
-      const points = [];
-      points.push(new THREE.Vector3(0, 5, 0)); // Top point
-      points.push(new THREE.Vector3(0, -5, 0)); // Bottom point
-
-      axisGeometry.setFromPoints(points);
-
       const axis = new THREE.Line(axisGeometry, axisMaterial);
       scene.add(axis);
 
       // Set camera position
-      camera.position.z = 10;
+      camera.position.z = 15;
 
       // Variables for click and drag
       let isDragging = false;
-      let previousMousePosition = {
-        x: 0,
-        y: 0
-      };
+      let previousMousePosition = { x: 0, y: 0 };
 
       // Set up animation
       const animate = function () {
@@ -67,7 +59,7 @@
 
         // Rotate the sphere during animation
         if (!isDragging) {
-          sphere.rotation.y += 0.005;
+          sphere.rotation.x += 0.005;
         }
 
         renderer.render(scene, camera);
@@ -78,10 +70,7 @@
       // Add event listeners for click and drag
       renderer.domElement.addEventListener('mousedown', (event) => {
         isDragging = true;
-        previousMousePosition = {
-          x: event.clientX,
-          y: event.clientY
-        };
+        previousMousePosition = { x: event.clientX, y: event.clientY };
       });
 
       renderer.domElement.addEventListener('mouseup', () => {
@@ -90,31 +79,27 @@
 
       renderer.domElement.addEventListener('mousemove', (event) => {
         if (isDragging) {
-          const deltaMove = {
-            x: event.clientX - previousMousePosition.x,
-            y: event.clientY - previousMousePosition.y
-          };
+          const deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y };
 
           const rotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-              toRadians(deltaMove.y * 0.5),
-              toRadians(deltaMove.x * 0.5),
-              0,
-              'XYZ'
-            ));
+            .setFromEuler(new THREE.Euler(toRadians(deltaMove.y * 0.5), toRadians(deltaMove.x * 0.5), 0, 'XYZ'));
 
           sphere.quaternion.multiplyQuaternions(rotationQuaternion, sphere.quaternion);
 
-          previousMousePosition = {
-            x: event.clientX,
-            y: event.clientY
-          };
+          previousMousePosition = { x: event.clientX, y: event.clientY };
         }
       });
 
       function toRadians(degrees) {
         return degrees * (Math.PI / 180);
       }
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
     </script>
   </main>
 
