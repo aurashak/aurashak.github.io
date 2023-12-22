@@ -80,19 +80,35 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
       let isDragging = false;
       let previousMousePosition = { x: 0, y: 0 };
 
-      // Set up animation
-      const animate = function () {
-        requestAnimationFrame(animate);
+// Set up animation
+const animate = function () {
+  requestAnimationFrame(animate);
 
-        // Rotate the sphere during animation
-        if (!isDragging) {
-          sphere.rotation.y += 0.005;
-        }
+  // Rotate the sphere during animation
+  if (!isDragging) {
+    sphere.rotation.y += 0.005;
+  }
 
-        renderer.render(scene, camera);
-      };
+  // Update country outline positions
+  countries.forEach((country, index) => {
+    const geometry = new THREE.BufferGeometry().setFromPoints(
+      country.geometry.coordinates[0].map(coords => {
+        const lon = coords[0];
+        const lat = coords[1];
+        return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
+      })
+    );
 
-      animate();
+    // Get the corresponding line object and update its geometry
+    const line = scene.children.find(obj => obj.isLine && obj.userData.index === index);
+    line.geometry = geometry;
+  });
+
+  renderer.render(scene, camera);
+};
+
+animate();
+
 
       // Add event listeners for click and drag
       renderer.domElement.addEventListener('mousedown', (event) => {
