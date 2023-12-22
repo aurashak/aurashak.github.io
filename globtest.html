@@ -41,18 +41,29 @@
       // Set camera position
       camera.position.z = 10;
 
+      let isRotating = true;
+
       // Set up animation
       const animate = function () {
         requestAnimationFrame(animate);
 
-        // Rotate the sphere
-        sphere.rotation.x += 0.005;
-        sphere.rotation.y += 0.005;
+        // Rotate the sphere if isRotating is true
+        if (isRotating) {
+          sphere.rotation.x += 0.005;
+          sphere.rotation.y += 0.005;
+        }
 
         renderer.render(scene, camera);
       };
 
       animate();
+
+      // Pause and rotate on left-click
+      renderer.domElement.addEventListener('mousedown', (event) => {
+        if (event.button === 0) { // Check if left mouse button is clicked
+          isRotating = !isRotating; // Toggle rotation on left-click
+        }
+      });
     </script>
   </main>
 
