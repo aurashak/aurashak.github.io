@@ -81,7 +81,8 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
       let previousMousePosition = { x: 0, y: 0 };
 
 // Set up animation
-const animate = function () {
+
+  const animate = function () {
   requestAnimationFrame(animate);
 
   // Rotate the sphere during animation
@@ -91,17 +92,15 @@ const animate = function () {
 
   // Update country outline positions
   countries.forEach((country, index) => {
-    const geometry = new THREE.BufferGeometry().setFromPoints(
-      country.geometry.coordinates[0].map(coords => {
-        const lon = coords[0];
-        const lat = coords[1];
-        return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
-      })
-    );
+    try {
+      // ... your existing code ...
 
-    // Get the corresponding line object and update its geometry
-    const line = scene.children.find(obj => obj.isLine && obj.userData.index === index);
-    line.geometry = geometry;
+      // Get the corresponding line object and update its geometry
+      const line = scene.children.find(obj => obj.isLine && obj.userData.index === index);
+      line.geometry = geometry;
+    } catch (error) {
+      console.error(`Error updating country ${index}:`, error);
+    }
   });
 
   renderer.render(scene, camera);
