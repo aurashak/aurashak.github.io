@@ -43,24 +43,29 @@
       camera.position.z = 10;
 
       // Load country border data
-      d3.json('https://unpkg.com/world-atlas/world/110m.json').then((world) => {
-        const countries = topojson.feature(world, world.objects.countries).features;
+d3.json('https://unpkg.com/world-atlas/world/110m.json')
+  .then((world) => {
+    const countries = topojson.feature(world, world.objects.countries).features;
 
-        // Draw country outlines
-        const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-        countries.forEach((country) => {
-          const geometry = new THREE.BufferGeometry().setFromPoints(
-            country.geometry.coordinates[0].map((coords) => {
-              const lat = coords[1];
-              const lon = coords[0];
-              return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
-            })
-          );
+    // Draw country outlines
+    const outlineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    countries.forEach((country) => {
+      const geometry = new THREE.BufferGeometry().setFromPoints(
+        country.geometry.coordinates[0].map((coords) => {
+          const lat = coords[1];
+          const lon = coords[0];
+          return convertToSphereCoords(lat, lon, 5); // Convert to sphere coordinates
+        })
+      );
 
-          const line = new THREE.Line(geometry, outlineMaterial);
-          scene.add(line);
-        });
-      });
+      const line = new THREE.Line(geometry, outlineMaterial);
+      scene.add(line);
+    });
+  })
+  .catch((error) => {
+    console.error('Error loading country data:', error);
+  });
+
 
       // Variables for click and drag
       let isDragging = false;
