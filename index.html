@@ -37,27 +37,28 @@
   </div>
 
   <!-- Include Three.js and three-globe -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script type="module" src="https://unpkg.com/three-globe@2.3.0/build/three-globe.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="three-globe.js"></script>
 
+  <!-- Your Three.js code -->
   <script type="module">
     document.addEventListener("DOMContentLoaded", function () {
       // Create a scene
       const scene = new THREE.Scene();
-
+  
       // Create a camera
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.z = 3;
-
+  
       // Create a WebGLRenderer
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.getElementById('globe-container').appendChild(renderer.domElement);
-
+  
       // Create a Globe instance
       const globe = new THREE.Globe();
       scene.add(globe);
-
+  
       // Create an animation loop
       function animate() {
         requestAnimationFrame(animate);
@@ -65,11 +66,10 @@
         globe.rotation.y += 0.005;
         renderer.render(scene, camera);
       }
-
+  
       // Start the animation loop
       animate();
     });
   </script>
-
 </body>
 </html>
