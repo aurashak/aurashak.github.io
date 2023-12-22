@@ -47,8 +47,17 @@
 
 // Load country border data
 fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Failed to fetch country data (HTTP ${response.status})`);
+    }
+    return response.json();
+  })
   .then(world => {
+    if (!world.objects || !world.objects.ne_110m_admin_0_countries) {
+      throw new Error('Invalid country data format');
+    }
+
     const countries = topojson.feature(world, world.objects.ne_110m_admin_0_countries).features;
 
     // Draw country outlines
@@ -66,7 +75,7 @@ fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geo
       scene.add(line);
     });
   })
-  .catch(error => console.error('Error loading country data:', error));
+  .catch(error => console.error('Error loading country data:', error.message));
 
 
 
