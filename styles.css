@@ -178,7 +178,7 @@ main h2 {
 
 .image-gridlarge {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
   gap: 10px;
 }
 
