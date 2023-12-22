@@ -22,34 +22,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <main>
   <script>
-    // Set up Three.js
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+// Set up Three.js
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-    // Create a cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, wireframeLinewidth: 2 }); // White color and black wireframe
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+// Set the clear color of the renderer to match your desired background color
+renderer.setClearColor(0x00ff00); // Replace 0x00ff00 with the desired background color
 
-    // Set camera position
-    camera.position.z = 5;
+// Create a cube
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, wireframeLinewidth: 2 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
 
-    // Set up animation
-    const animate = function () {
-      requestAnimationFrame(animate);
+// Set camera position
+camera.position.z = 5;
 
-      // Rotate the cube
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+// Set up animation
+const animate = function () {
+  requestAnimationFrame(animate);
 
-      renderer.render(scene, camera);
-    };
+  // Rotate the cube
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
 
-    animate();
+  renderer.render(scene, camera);
+};
+
+animate();
   </script>
 
 
