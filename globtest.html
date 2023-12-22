@@ -40,14 +40,14 @@
       const group = new THREE.Group();
       scene.add(group);
 
-      // Create a sphere
+      // Create a solid sphere
       const geometry = new THREE.SphereGeometry(5, 32, 32);
-      const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
+      const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const sphere = new THREE.Mesh(geometry, material);
       group.add(sphere);
 
       // Set camera position
-      camera.position.z = 10;
+      camera.position.z = 15;
 
       // Load country border data
       fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
@@ -78,50 +78,24 @@
         .catch(error => console.error('Error loading country data:', error.message));
 
 
-      // Variables for click and drag
-      let isDragging = false;
-      let previousMousePosition = { x: 0, y: 0 };
-
       // Set up animation
       const animate = function () {
         requestAnimationFrame(animate);
 
         // Rotate the group during animation
-        if (!isDragging) {
-          group.rotation.y += 0.005;
-        }
+        group.rotation.y += 0.005;
 
         renderer.render(scene, camera);
       };
 
       animate();
 
-      // Add event listeners for click and drag
-      renderer.domElement.addEventListener('mousedown', (event) => {
-        isDragging = true;
-        previousMousePosition = { x: event.clientX, y: event.clientY };
-      });
-
-      renderer.domElement.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      renderer.domElement.addEventListener('mousemove', (event) => {
-        if (isDragging) {
-          const deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y };
-
-          const rotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-              toRadians(deltaMove.y * 0.5),
-              toRadians(deltaMove.x * 0.5),
-              0,
-              'XYZ'
-            ));
-
-          group.quaternion.multiplyQuaternions(rotationQuaternion, group.quaternion);
-
-          previousMousePosition = { x: event.clientX, y: event.clientY };
-        }
+      // Add event listeners for window resize
+      window.addEventListener('resize', () => {
+        const newAspect = window.innerWidth / window.innerHeight;
+        camera.aspect = newAspect;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
       function toRadians(degrees) {
