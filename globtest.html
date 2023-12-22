@@ -37,6 +37,10 @@
       const geometry = new THREE.SphereGeometry(sphereRadius, 32, 32); // Adjust the radius and segments as needed
       const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, wireframeLinewidth: 2 });
       const sphere = new THREE.Mesh(geometry, material);
+
+      // Apply initial rotation to the sphere
+      sphere.rotation.y = toRadians(-23); // Tilted 23 degrees to the right
+
       scene.add(sphere);
 
       // Create a red line (axis) going through the top and bottom of the sphere
@@ -50,6 +54,10 @@
       axisGeometry.setFromPoints(points);
 
       const axis = new THREE.Line(axisGeometry, axisMaterial);
+
+      // Apply initial rotation to the axis
+      axis.rotation.y = toRadians(-23); // Tilted 23 degrees to the right
+
       scene.add(axis);
 
       // Set camera position
@@ -139,3 +147,9 @@
   </main>
 
   <!-- Include common footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="https://aurashak.github.io/common.js"></script>
+
+</body>
+</html>
