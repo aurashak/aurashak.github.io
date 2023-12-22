@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://aurashak.github.io/styles.css">
   <title>Print</title>
   <style>
-    body { margin: 0; }
+    body { margin: 0; background-color: white; }
     canvas { display: block; }
   </style>
 </head>
@@ -31,7 +31,7 @@
 
     // Create a cube
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
