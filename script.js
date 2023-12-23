@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var deltaX = event.clientX - mouseX;
             var deltaY = event.clientY - mouseY;
 
-            sphere.rotation.y += deltaX * 0.01;
-            sphere.rotation.x += deltaY * 0.01;
+            sphere.rotation.y += deltaX * 0.005;
+            sphere.rotation.x += deltaY * 0.005;
 
             mouseX = event.clientX;
             mouseY = event.clientY;
@@ -79,12 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var animate = function () {
         requestAnimationFrame(animate);
-
-        // Only rotate the sphere when not clicked and dragged
-        if (!mouseDown) {
-            sphere.rotation.x += 0.005;
-            sphere.rotation.y += 0.005;
-        }
 
         renderer.render(scene, camera);
     };
