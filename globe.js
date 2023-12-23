@@ -20,7 +20,7 @@ svg.append("path")
     .attr("d", path);
 
 // Load world data and draw country borders
-d3.json("https://raw.githubusercontent.com/aurashak/aurashak.github.io/main/globe.json")
+d3.json("https://aurashak.github.io/main/globe.json")
     .then(data => {
         const countries = topojson.feature(data, data.objects.countries);
 
