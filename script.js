@@ -28,28 +28,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var graticuleGeometry = new THREE.BufferGeometry();
     var graticulePoints = [];
   
-    // Longitude lines
-    for (let i = 0; i <= 180; i += 10) {
-      var phi = (i / 180) * Math.PI;
-      for (let j = 0; j <= 360; j += 10) {
-        var theta = (j / 180) * Math.PI;
-        var x = Math.sin(phi) * Math.cos(theta);
-        var y = Math.cos(phi);
-        var z = Math.sin(phi) * Math.sin(theta);
-        graticulePoints.push(new THREE.Vector3(x, y, z));
-      }
+    // Vertical lines
+    for (let i = -180; i <= 180; i += 10) {
+      var x = i / 180;
+      graticulePoints.push(new THREE.Vector3(x, -1, 0));
+      graticulePoints.push(new THREE.Vector3(x, 1, 0));
     }
   
-    // Latitude lines
-    for (let i = 0; i <= 360; i += 10) {
-      var theta = (i / 180) * Math.PI;
-      for (let j = 0; j <= 180; j += 10) {
-        var phi = (j / 180) * Math.PI;
-        var x = Math.sin(phi) * Math.cos(theta);
-        var y = Math.cos(phi);
-        var z = Math.sin(phi) * Math.sin(theta);
-        graticulePoints.push(new THREE.Vector3(x, y, z));
-      }
+    // Horizontal lines
+    for (let i = -90; i <= 90; i += 10) {
+      var y = i / 90;
+      graticulePoints.push(new THREE.Vector3(-1, y, 0));
+      graticulePoints.push(new THREE.Vector3(1, y, 0));
     }
   
     graticuleGeometry.setFromPoints(graticulePoints);
@@ -77,11 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
-  
-      // Adjust camera position to keep the sphere in the same scale
-      var distance = camera.position.z;
-      var scale = distance / initialSphereSize;
-      sphere.scale.set(scale, scale, scale);
     });
   
     // Start the animation
