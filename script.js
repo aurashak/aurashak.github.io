@@ -23,29 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set up the camera position
     camera.position.z = 3;
   
-    // Create graticule lines
-    var graticuleMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-    var graticuleGeometry = new THREE.BufferGeometry();
-    var graticulePoints = [];
-  
-    // Vertical lines
-    for (let i = -180; i <= 180; i += 10) {
-      var x = i / 180;
-      graticulePoints.push(new THREE.Vector3(x, -1, 0));
-      graticulePoints.push(new THREE.Vector3(x, 1, 0));
-    }
-  
-    // Horizontal lines
-    for (let i = -90; i <= 90; i += 10) {
-      var y = i / 90;
-      graticulePoints.push(new THREE.Vector3(-1, y, 0));
-      graticulePoints.push(new THREE.Vector3(1, y, 0));
-    }
-  
-    graticuleGeometry.setFromPoints(graticulePoints);
-    var graticule = new THREE.LineSegments(graticuleGeometry, graticuleMaterial);
-    scene.add(graticule);
-  
     // Define an animation function
     var animate = function () {
       requestAnimationFrame(animate);
@@ -67,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
+  
+      // Scale the sphere to be 40 percent smaller
+      var scaleFactor = 0.6;
+      var newSphereSize = initialSphereSize * scaleFactor;
+      sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
     });
   
     // Start the animation
