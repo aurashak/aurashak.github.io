@@ -21,26 +21,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Latitude lines
     for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-        // Exclude the equator and poles
-        if (lat !== -90 && lat !== 0 && lat !== 90) {
-            const geometry = new THREE.BufferGeometry();
-            const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-            geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
-            const latLine = new THREE.Line(geometry, material);
-            graticule.add(latLine);
-        }
+        const geometry = new THREE.BufferGeometry();
+        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
+        const latLine = new THREE.Line(geometry, material);
+        graticule.add(latLine);
     }
 
     // Longitude lines
     for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
-        // Exclude the prime meridian
-        if (lon !== 0 && lon !== 180 && lon !== -180) {
-            const geometry = new THREE.BufferGeometry();
-            const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-            geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
-            const lonLine = new THREE.Line(geometry, material);
-            graticule.add(lonLine);
-        }
+        const geometry = new THREE.BufferGeometry();
+        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
+        const lonLine = new THREE.Line(geometry, material);
+        graticule.add(lonLine);
     }
 
     scene.add(graticule);
@@ -65,15 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (mouseDown) {
             var deltaX = event.clientX - mouseX;
             var deltaY = event.clientY - mouseY;
-    
-            sphere.rotation.y += deltaX * 0.005;
-            sphere.rotation.x += deltaY * 0.005;
-    
+
+            sphere.rotation.y += deltaX * 0.01;
+            sphere.rotation.x += deltaY * 0.01;
+
             mouseX = event.clientX;
             mouseY = event.clientY;
         }
     });
-    
+
     window.addEventListener('resize', function () {
         var newWidth = window.innerWidth;
         var newHeight = window.innerHeight;
@@ -83,16 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
         renderer.setSize(newWidth, newHeight);
     });
 
-    // Regular slow rotation
-    var rotationSpeed = 0.005;
-
     var animate = function () {
         requestAnimationFrame(animate);
 
         // Only rotate the sphere when not clicked and dragged
         if (!mouseDown) {
-            sphere.rotation.x += rotationSpeed;
-            sphere.rotation.y += rotationSpeed;
+            sphere.rotation.x += 0.005;
+            sphere.rotation.y += 0.005;
         }
 
         renderer.render(scene, camera);
