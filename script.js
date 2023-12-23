@@ -35,6 +35,21 @@ document.addEventListener('DOMContentLoaded', function () {
       renderer.render(scene, camera);
     };
   
+    // Handle window resize
+    window.addEventListener('resize', function () {
+      var newWidth = window.innerWidth;
+      var newHeight = window.innerHeight;
+  
+      // Update camera aspect ratio and renderer size
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
+  
+      // Adjust the camera position to keep the sphere in the center
+      var sphereDistance = 5; // Adjust the distance as needed
+      camera.position.z = sphereDistance;
+    });
+  
     // Start the animation
     animate();
   });
