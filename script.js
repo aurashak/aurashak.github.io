@@ -20,6 +20,30 @@ document.addEventListener('DOMContentLoaded', function () {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
   
+    // Create graticule lines
+    var graticule = new THREE.Object3D();
+    var graticuleSpacing = 0.1; // Adjust spacing as needed
+  
+    // Vertical lines
+    for (let i = -1; i <= 1; i += graticuleSpacing) {
+      var verticalGeometry = new THREE.BufferGeometry();
+      var verticalMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+      verticalGeometry.setAttribute('position', new THREE.Float32BufferAttribute([i, -1, 0, i, 1, 0], 3));
+      var verticalLine = new THREE.Line(verticalGeometry, verticalMaterial);
+      graticule.add(verticalLine);
+    }
+  
+    // Horizontal lines
+    for (let i = -1; i <= 1; i += graticuleSpacing) {
+      var horizontalGeometry = new THREE.BufferGeometry();
+      var horizontalMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+      horizontalGeometry.setAttribute('position', new THREE.Float32BufferAttribute([-1, i, 0, 1, i, 0], 3));
+      var horizontalLine = new THREE.Line(horizontalGeometry, horizontalMaterial);
+      graticule.add(horizontalLine);
+    }
+  
+    scene.add(graticule);
+  
     // Set up the camera position
     camera.position.z = 5;
   
@@ -44,10 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
-  
-      // Adjust the camera position to keep the sphere in the center
-      var sphereDistance = 5; // Adjust the distance as needed
-      camera.position.z = sphereDistance;
     });
   
     // Start the animation
