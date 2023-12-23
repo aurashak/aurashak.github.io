@@ -7,61 +7,56 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('cube-container').appendChild(renderer.domElement);
 
     var initialSphereSize = 2;
-    var geometry = new THREE.SphereGeometry(initialSphereSize, 32, 32);
-    var material = new THREE.MeshPhongMaterial({ color: 0x888888, wireframe: true });
+    var geometry = new THREE.SphereGeometry(initialSphereSize, 16, 16);
+
+    // Solid blue sphere
+    var material = new THREE.MeshPhongMaterial({ color: 0x57A0D2, wireframe: false });
     var sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+
+    // Wireframe sphere with only vertical and horizontal lines
+    var wireframeGeometry = new THREE.EdgesGeometry(geometry);
+    var wireframeMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    var wireframeSphere = new THREE.LineSegments(wireframeGeometry, wireframeMaterial);
+
+    // Slightly larger than the solid sphere
+    wireframeSphere.scale.multiplyScalar(1.01);
+
+    // Grouping the solid sphere and wireframe sphere
+    var sphereGroup = new THREE.Group();
+    sphereGroup.add(sphere);
+    sphereGroup.add(wireframeSphere);
+
+    scene.add(sphereGroup);
 
     var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
-    var graticule = new THREE.Object3D();
-    var graticuleSpacing = 10;
-
-    // Latitude lines
-    for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-        const geometry = new THREE.BufferGeometry();
-        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
-        const latLine = new THREE.Line(geometry, material);
-        graticule.add(latLine);
-    }
-
-    // Longitude lines
-    for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
-        const geometry = new THREE.BufferGeometry();
-        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
-        const lonLine = new THREE.Line(geometry, material);
-        graticule.add(lonLine);
-    }
-
-    scene.add(graticule);
-
     camera.position.z = 5;
 
-    var mouseDown = false;
+    var isRotationPaused = false;
     var mouseX = 0;
     var mouseY = 0;
 
     document.addEventListener('mousedown', function (event) {
-        mouseDown = true;
-        mouseX = event.clientX;
-        mouseY = event.clientY;
+        if (event.button === 0) {
+            isRotationPaused = true;
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
     });
 
     document.addEventListener('mouseup', function () {
-        mouseDown = false;
+        isRotationPaused = false;
     });
 
     document.addEventListener('mousemove', function (event) {
-        if (mouseDown) {
+        if (isRotationPaused) {
             var deltaX = event.clientX - mouseX;
             var deltaY = event.clientY - mouseY;
 
-            sphere.rotation.y += deltaX * 0.005;
-            sphere.rotation.x += deltaY * 0.005;
+            sphereGroup.rotation.y += deltaX * 0.005;
+            sphereGroup.rotation.x += deltaY * 0.005;
 
             mouseX = event.clientX;
             mouseY = event.clientY;
@@ -77,14 +72,16 @@ document.addEventListener('DOMContentLoaded', function () {
         renderer.setSize(newWidth, newHeight);
     });
 
-    // Regular slow rotation
     var rotationSpeed = 0.005;
 
     var animate = function () {
         requestAnimationFrame(animate);
 
-        sphere.rotation.x += rotationSpeed;
-        sphere.rotation.y += rotationSpeed;
+        if (!isRotationPaused) {
+            sphereGroup.rotation.x += rotationSpeed;
+            sphereGroup.rotation.y += rotationSpeed;
+            sphereGroup.rotation.z += rotationSpeed;
+        }
 
         renderer.render(scene, camera);
     };
