@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
   
-      // Update the sphere size based on the window width
-      var scaleFactor = 0.3; 
+      // Update the sphere size based on the window width and height
+      var scaleFactor = 0.3; // Adjust the scale factor as needed
       var newSphereSize = initialSphereSize * scaleFactor;
       sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
     });
