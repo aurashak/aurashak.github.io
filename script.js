@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
 
-    // Replace 'countries.geojson' with the actual name of your GeoJSON file
-    var geoJsonUrl = 'countries.geojson';
+    // Replace 'https://aurashak.github.io/countries.geojson' with the raw content link of your GeoJSON file on GitHub
+    var geoJsonUrl = 'https://aurashak.github.io/countries.geojson';
 
     // Fetch GeoJSON data
     fetch(geoJsonUrl)
