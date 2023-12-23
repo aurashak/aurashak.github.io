@@ -77,8 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
         renderer.setSize(newWidth, newHeight);
     });
 
+    // Regular slow rotation
+    var rotationSpeed = 0.005;
+
     var animate = function () {
         requestAnimationFrame(animate);
+
+        sphere.rotation.x += rotationSpeed;
+        sphere.rotation.y += rotationSpeed;
 
         renderer.render(scene, camera);
     };
