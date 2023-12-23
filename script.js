@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
+  
+      // Scale the sphere proportionally based on the original aspect ratio
+      var scaleFactor = (newWidth / window.innerWidth);
+      var newSphereSize = initialSphereSize * scaleFactor;
+      sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
     });
   
     // Start the animation
