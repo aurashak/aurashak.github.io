@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
       renderer.setSize(newWidth, newHeight);
   
       // Update the sphere size based on the window width
-      var scaleFactor = 0.6; // 40% smaller
+      var scaleFactor = 0.3; 
       var newSphereSize = initialSphereSize * scaleFactor;
       sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
     });
