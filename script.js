@@ -17,35 +17,28 @@ document.addEventListener('DOMContentLoaded', function () {
     scene.add(directionalLight);
 
     var graticule = new THREE.Object3D();
-    var graticuleSpacing = 0.1;
-
+    var graticuleSpacing = 10;
+    
+    // Latitude lines
     for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-        var latLineGeometry = new THREE.BufferGeometry();
-        var latLineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-        var vertices = [];
-        for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
-            vertices.push(
-                Math.sin(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
-                Math.cos(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
-                Math.cos(THREE.Math.degToRad(lat))
-            );
-        }
-        latLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        var latLine = new THREE.Line(latLineGeometry, latLineMaterial);
+        const geometry = new THREE.EdgesGeometry(new THREE.PlaneGeometry(360, 1, 360, 1));
+        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+        const latLine = new THREE.LineSegments(geometry, material);
+        latLine.rotation.x = THREE.Math.degToRad(lat);
         graticule.add(latLine);
     }
     
+    // Longitude lines
     for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
-        var lonLineGeometry = new THREE.BufferGeometry();
-        var lonLineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-        var vertices = [];
-        for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-            vertices.push(
-                Math.sin(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
-                Math.cos(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
-                Math.cos(THREE.Math.degToRad(lat))
-            );
-        }
+        const geometry = new THREE.EdgesGeometry(new THREE.PlaneGeometry(1, 180, 1, 180));
+        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+        const lonLine = new THREE.LineSegments(geometry, material);
+        lonLine.rotation.z = THREE.Math.degToRad(lon);
+        graticule.add(lonLine);
+    }
+    
+    scene.add(graticule);
+    
         lonLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
         var lonLine = new THREE.Line(lonLineGeometry, lonLineMaterial);
         graticule.add(lonLine);
