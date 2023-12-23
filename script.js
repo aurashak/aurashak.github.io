@@ -23,6 +23,39 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set up the camera position
     camera.position.z = 3;
   
+    // Create graticule lines
+    var graticuleMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    var graticuleGeometry = new THREE.BufferGeometry();
+    var graticulePoints = [];
+  
+    // Longitude lines
+    for (let i = 0; i <= 180; i += 10) {
+      var phi = (i / 180) * Math.PI;
+      for (let j = 0; j <= 360; j += 10) {
+        var theta = (j / 180) * Math.PI;
+        var x = Math.sin(phi) * Math.cos(theta);
+        var y = Math.cos(phi);
+        var z = Math.sin(phi) * Math.sin(theta);
+        graticulePoints.push(new THREE.Vector3(x, y, z));
+      }
+    }
+  
+    // Latitude lines
+    for (let i = 0; i <= 360; i += 10) {
+      var theta = (i / 180) * Math.PI;
+      for (let j = 0; j <= 180; j += 10) {
+        var phi = (j / 180) * Math.PI;
+        var x = Math.sin(phi) * Math.cos(theta);
+        var y = Math.cos(phi);
+        var z = Math.sin(phi) * Math.sin(theta);
+        graticulePoints.push(new THREE.Vector3(x, y, z));
+      }
+    }
+  
+    graticuleGeometry.setFromPoints(graticulePoints);
+    var graticule = new THREE.LineSegments(graticuleGeometry, graticuleMaterial);
+    scene.add(graticule);
+  
     // Define an animation function
     var animate = function () {
       requestAnimationFrame(animate);
@@ -45,10 +78,10 @@ document.addEventListener('DOMContentLoaded', function () {
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
   
-      // Update the sphere size based on the window width and height
-      var scaleFactor = 0.3; // Adjust the scale factor as needed
-      var newSphereSize = initialSphereSize * scaleFactor;
-      sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
+      // Adjust camera position to keep the sphere in the same scale
+      var distance = camera.position.z;
+      var scale = distance / initialSphereSize;
+      sphere.scale.set(scale, scale, scale);
     });
   
     // Start the animation
