@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var deltaX = event.clientX - mouseX;
             var deltaY = event.clientY - mouseY;
 
-            sphere.rotation.y += deltaX * 0.01;
-            sphere.rotation.x += deltaY * 0.01;
+            sphere.rotation.y += deltaX * 0.005;
+            sphere.rotation.x += deltaY * 0.005;
 
             mouseX = event.clientX;
             mouseY = event.clientY;
