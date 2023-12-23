@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Append renderer's dom element to cube-container
     document.getElementById('cube-container').appendChild(renderer.domElement);
   
-    // Create a sphere with a solid gray material
-    var initialSphereSize = 2; // Initial sphere size
+    // Create a slightly smaller sphere with a solid gray material
+    var initialSphereSize = 1.5; // Adjust the size as needed
     var geometry = new THREE.SphereGeometry(initialSphereSize, 32, 32);
     var material = new THREE.MeshPhongMaterial({ color: 0x888888 });
     var sphere = new THREE.Mesh(geometry, material);
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
       renderer.setSize(newWidth, newHeight);
   
       // Scale the sphere proportionally based on the original aspect ratio
-      var scaleFactor = (newWidth / window.innerWidth);
+      var scaleFactor = newWidth / window.innerWidth;
       var newSphereSize = initialSphereSize * scaleFactor;
       sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
     });
