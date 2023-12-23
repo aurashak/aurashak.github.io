@@ -21,20 +21,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Latitude lines
     for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-        const geometry = new THREE.BufferGeometry();
-        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
-        const latLine = new THREE.Line(geometry, material);
-        graticule.add(latLine);
+        // Exclude the poles
+        if (lat !== -90 && lat !== 90) {
+            const geometry = new THREE.BufferGeometry();
+            const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
+            const latLine = new THREE.Line(geometry, material);
+            graticule.add(latLine);
+        }
     }
 
     // Longitude lines
     for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
-        const geometry = new THREE.BufferGeometry();
-        const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
-        const lonLine = new THREE.Line(geometry, material);
-        graticule.add(lonLine);
+        // Exclude the prime meridian
+        if (lon !== 0 && lon !== 180 && lon !== -180) {
+            const geometry = new THREE.BufferGeometry();
+            const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
+            const lonLine = new THREE.Line(geometry, material);
+            graticule.add(lonLine);
+        }
     }
 
     scene.add(graticule);
