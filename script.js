@@ -37,12 +37,24 @@ document.addEventListener('DOMContentLoaded', function () {
         scene.add(lonLine);
     }
 
-    // Remove the static lines along the x and y axes
-    graticule.children.forEach(line => {
-        if (line.type === "Line") {
-            graticule.remove(line);
-        }
-    });
+    // Create a separate object for static lines
+    var staticLines = new THREE.Object3D();
+    
+    // Add static lines along the x and y axes
+    var xAxisGeometry = new THREE.BufferGeometry();
+    var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    xAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([-1, 0, 0, 1, 0, 0], 3));
+    var xAxisLine = new THREE.Line(xAxisGeometry, xAxisMaterial);
+    staticLines.add(xAxisLine);
+
+    var yAxisGeometry = new THREE.BufferGeometry();
+    var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    yAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([0, -1, 0, 0, 1, 0], 3));
+    var yAxisLine = new THREE.Line(yAxisGeometry, yAxisMaterial);
+    staticLines.add(yAxisLine);
+
+    // Add staticLines to the graticule
+    graticule.add(staticLines);
 
     scene.add(graticule);
 
