@@ -65,15 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (mouseDown) {
             var deltaX = event.clientX - mouseX;
             var deltaY = event.clientY - mouseY;
-
+    
             sphere.rotation.y += deltaX * 0.005;
             sphere.rotation.x += deltaY * 0.005;
-
+    
             mouseX = event.clientX;
             mouseY = event.clientY;
         }
     });
-
+    
     window.addEventListener('resize', function () {
         var newWidth = window.innerWidth;
         var newHeight = window.innerHeight;
