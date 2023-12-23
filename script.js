@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var initialSphereSize = 2;
     var geometry = new THREE.SphereGeometry(initialSphereSize, 32, 32);
-    var material = new THREE.MeshPhongMaterial({ color: 0x888888, wireframe: true }); // Add wireframe: true
+    var material = new THREE.MeshPhongMaterial({ color: 0x888888, wireframe: true });
     var sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Latitude lines
     for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-        // Exclude the poles
-        if (lat !== -90 && lat !== 90) {
+        // Exclude the equator and poles
+        if (lat !== -90 && lat !== 0 && lat !== 90) {
             const geometry = new THREE.BufferGeometry();
             const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
             geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
