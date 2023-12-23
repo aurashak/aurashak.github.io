@@ -18,32 +18,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var graticule = new THREE.Object3D();
     var graticuleSpacing = 10;
-    
+
     // Latitude lines
     for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
-        const geometry = new THREE.EdgesGeometry(new THREE.PlaneGeometry(360, 1, 360, 1));
+        const geometry = new THREE.BufferGeometry();
         const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-        const latLine = new THREE.LineSegments(geometry, material);
-        latLine.rotation.x = THREE.Math.degToRad(lat);
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
+        const latLine = new THREE.Line(geometry, material);
         graticule.add(latLine);
     }
-    
+
     // Longitude lines
     for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
-        const geometry = new THREE.EdgesGeometry(new THREE.PlaneGeometry(1, 180, 1, 180));
+        const geometry = new THREE.BufferGeometry();
         const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
-        const lonLine = new THREE.LineSegments(geometry, material);
-        lonLine.rotation.z = THREE.Math.degToRad(lon);
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
+        const lonLine = new THREE.Line(geometry, material);
         graticule.add(lonLine);
     }
-    
-    scene.add(graticule);
-    
-        lonLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        var lonLine = new THREE.Line(lonLineGeometry, lonLineMaterial);
-        graticule.add(lonLine);
-    }
-    
 
     // Add black lines along the x and y axes
     var xAxisGeometry = new THREE.BufferGeometry();
@@ -66,52 +58,4 @@ document.addEventListener('DOMContentLoaded', function () {
     var mouseX = 0;
     var mouseY = 0;
 
-    document.addEventListener('mousedown', function (event) {
-        mouseDown = true;
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-    });
-
-    document.addEventListener('mouseup', function () {
-        mouseDown = false;
-    });
-
-    document.addEventListener('mousemove', function (event) {
-        if (mouseDown) {
-            var deltaX = event.clientX - mouseX;
-            var deltaY = event.clientY - mouseY;
-
-            sphere.rotation.y += deltaX * 0.01;
-            sphere.rotation.x += deltaY * 0.01;
-
-            mouseX = event.clientX;
-            mouseY = event.clientY;
-        }
-    });
-
-    window.addEventListener('resize', function () {
-        var newWidth = window.innerWidth;
-        var newHeight = window.innerHeight;
-
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(newWidth, newHeight);
-    });
-
-    // Regular slow rotation
-    var rotationSpeed = 0.005;
-
-    var animate = function () {
-        requestAnimationFrame(animate);
-
-        // Only rotate the sphere when not clicked and dragged
-        if (!mouseDown) {
-            sphere.rotation.x += rotationSpeed;
-            sphere.rotation.y += rotationSpeed;
-        }
-
-        renderer.render(scene, camera);
-    };
-
-    animate();
-});
+    document.addEventListener('
