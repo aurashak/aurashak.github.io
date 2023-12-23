@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var initialSphereSize = 2;
     var geometry = new THREE.SphereGeometry(initialSphereSize, 32, 32);
-    var material = new THREE.MeshPhongMaterial({ color: 0x888888, wireframe: true });
+    var material = new THREE.MeshPhongMaterial({ color: 0x888888, wireframe: true }); // Add wireframe: true
     var sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
+    var graticule = new THREE.Object3D();
     var graticuleSpacing = 10;
 
     // Latitude lines
@@ -35,6 +36,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const lonLine = new THREE.Line(geometry, material);
         scene.add(lonLine);
     }
+
+    // Add black lines along the x and y axes - Commented out to remove them
+    /*
+    var xAxisGeometry = new THREE.BufferGeometry();
+    var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    xAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([-1, 0, 0, 1, 0, 0], 3));
+    var xAxisLine = new THREE.Line(xAxisGeometry, xAxisMaterial);
+    graticule.add(xAxisLine);
+
+    var yAxisGeometry = new THREE.BufferGeometry();
+    var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    yAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([0, -1, 0, 0, 1, 0], 3));
+    var yAxisLine = new THREE.Line(yAxisGeometry, yAxisMaterial);
+    graticule.add(yAxisLine);
+    */
+
+    scene.add(graticule);
 
     camera.position.z = 5;
 
