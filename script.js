@@ -22,24 +22,35 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
         var latLineGeometry = new THREE.BufferGeometry();
         var latLineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-        latLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute([
-            -1, Math.sin(THREE.Math.degToRad(lat)), Math.cos(THREE.Math.degToRad(lat)),
-            1, Math.sin(THREE.Math.degToRad(lat)), Math.cos(THREE.Math.degToRad(lat))
-        ], 3));
+        var vertices = [];
+        for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
+            vertices.push(
+                Math.sin(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
+                Math.cos(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
+                Math.cos(THREE.Math.degToRad(lat))
+            );
+        }
+        latLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
         var latLine = new THREE.Line(latLineGeometry, latLineMaterial);
         graticule.add(latLine);
     }
-
+    
     for (let lon = -180; lon <= 180; lon += graticuleSpacing) {
         var lonLineGeometry = new THREE.BufferGeometry();
         var lonLineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-        lonLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute([
-            Math.sin(THREE.Math.degToRad(lon)), -1, Math.cos(THREE.Math.degToRad(lon)),
-            Math.sin(THREE.Math.degToRad(lon)), 1, Math.cos(THREE.Math.degToRad(lon))
-        ], 3));
+        var vertices = [];
+        for (let lat = -90; lat <= 90; lat += graticuleSpacing) {
+            vertices.push(
+                Math.sin(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
+                Math.cos(THREE.Math.degToRad(lon)) * Math.sin(THREE.Math.degToRad(lat)),
+                Math.cos(THREE.Math.degToRad(lat))
+            );
+        }
+        lonLineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
         var lonLine = new THREE.Line(lonLineGeometry, lonLineMaterial);
         graticule.add(lonLine);
     }
+    
 
     // Add black lines along the x and y axes
     var xAxisGeometry = new THREE.BufferGeometry();
