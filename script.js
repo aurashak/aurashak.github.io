@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
         geometry.setAttribute('position', new THREE.Float32BufferAttribute([-180, lat, 0, 180, lat, 0], 3));
         const latLine = new THREE.Line(geometry, material);
-        scene.add(latLine);
+        graticule.add(latLine);
     }
 
     // Longitude lines
@@ -34,27 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const material = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
         geometry.setAttribute('position', new THREE.Float32BufferAttribute([lon, -90, 0, lon, 90, 0], 3));
         const lonLine = new THREE.Line(geometry, material);
-        scene.add(lonLine);
+        graticule.add(lonLine);
     }
-
-    // Create a separate object for static lines
-    var staticLines = new THREE.Object3D();
-    
-    // Add static lines along the x and y axes
-    var xAxisGeometry = new THREE.BufferGeometry();
-    var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-    xAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([-1, 0, 0, 1, 0, 0], 3));
-    var xAxisLine = new THREE.Line(xAxisGeometry, xAxisMaterial);
-    staticLines.add(xAxisLine);
-
-    var yAxisGeometry = new THREE.BufferGeometry();
-    var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-    yAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([0, -1, 0, 0, 1, 0], 3));
-    var yAxisLine = new THREE.Line(yAxisGeometry, yAxisMaterial);
-    staticLines.add(yAxisLine);
-
-    // Add staticLines to the graticule
-    graticule.add(staticLines);
 
     scene.add(graticule);
 
