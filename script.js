@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Append renderer's dom element to cube-container
     document.getElementById('cube-container').appendChild(renderer.domElement);
   
-    // Create a cube with a solid gray material
-    var geometry = new THREE.BoxGeometry();
-    var material = new THREE.MeshPhongMaterial({ color: 0x888888 }); // Phong material for better lighting
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Create a sphere with a solid gray material
+    var geometry = new THREE.SphereGeometry(1, 32, 32); // Adjust the sphere size and segments
+    var material = new THREE.MeshPhongMaterial({ color: 0x888888 });
+    var sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
   
-    // Position the cube
-    cube.position.set(0, 0, 0);
+    // Position the sphere
+    sphere.position.set(0, 0, 0);
   
     // Add a directional light
     var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var animate = function () {
       requestAnimationFrame(animate);
   
-      // Rotate the cube
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+      // Rotate the sphere
+      sphere.rotation.x += 0.01;
+      sphere.rotation.y += 0.01;
   
       // Render the scene
       renderer.render(scene, camera);
