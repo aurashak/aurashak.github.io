@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('cube-container').appendChild(renderer.domElement);
   
     // Create a sphere with a solid gray material
-    var geometry = new THREE.SphereGeometry(1, 32, 32); // Adjust the sphere size and segments
+    var geometry = new THREE.SphereGeometry(1, 32, 32);
     var material = new THREE.MeshPhongMaterial({ color: 0x888888 });
     var sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     scene.add(directionalLight);
   
     // Set up the camera position
-    camera.position.z = 5;
+    camera.position.z = 3; // Adjusted the camera position
   
     // Define an animation function
     var animate = function () {
