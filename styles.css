@@ -196,6 +196,13 @@ main h2 {
   border-radius: 0px;
 }
 
+/* Add these styles for cube-container */
+#cube-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Adjust the height as needed */
+  overflow: hidden;
+}
 
 
 
