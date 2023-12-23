@@ -58,4 +58,52 @@ document.addEventListener('DOMContentLoaded', function () {
     var mouseX = 0;
     var mouseY = 0;
 
-    document.addEventListener('
+    document.addEventListener('mousedown', function (event) {
+        mouseDown = true;
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
+
+    document.addEventListener('mouseup', function () {
+        mouseDown = false;
+    });
+
+    document.addEventListener('mousemove', function (event) {
+        if (mouseDown) {
+            var deltaX = event.clientX - mouseX;
+            var deltaY = event.clientY - mouseY;
+
+            sphere.rotation.y += deltaX * 0.01;
+            sphere.rotation.x += deltaY * 0.01;
+
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+    });
+
+    window.addEventListener('resize', function () {
+        var newWidth = window.innerWidth;
+        var newHeight = window.innerHeight;
+
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newWidth, newHeight);
+    });
+
+    // Regular slow rotation
+    var rotationSpeed = 0.005;
+
+    var animate = function () {
+        requestAnimationFrame(animate);
+
+        // Only rotate the sphere when not clicked and dragged
+        if (!mouseDown) {
+            sphere.rotation.x += rotationSpeed;
+            sphere.rotation.y += rotationSpeed;
+        }
+
+        renderer.render(scene, camera);
+    };
+
+    animate();
+});
