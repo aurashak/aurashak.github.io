@@ -2,18 +2,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set up the scene, camera, and renderer
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer({ alpha: true });
+    var renderer = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true for a transparent background
     renderer.setSize(window.innerWidth, window.innerHeight);
   
     // Append renderer's dom element to cube-container
     document.getElementById('cube-container').appendChild(renderer.domElement);
   
-    // Create a slightly smaller sphere with a solid gray material
-    var initialSphereSize = 1.5; // Adjust the size as needed
-    var geometry = new THREE.SphereGeometry(initialSphereSize, 32, 32);
-    var material = new THREE.MeshPhongMaterial({ color: 0x888888 });
-    var sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
+    // Create a cube with a solid gray material
+    var geometry = new THREE.BoxGeometry();
+    var material = new THREE.MeshPhongMaterial({ color: 0x888888 }); // Phong material for better lighting
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+  
+    // Position the cube
+    cube.position.set(0, 0, 0);
   
     // Add a directional light
     var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -21,35 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
     scene.add(directionalLight);
   
     // Set up the camera position
-    camera.position.z = 3;
+    camera.position.z = 5;
   
     // Define an animation function
     var animate = function () {
       requestAnimationFrame(animate);
   
-      // Rotate the sphere
-      sphere.rotation.x += 0.01;
-      sphere.rotation.y += 0.01;
+      // Rotate the cube
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
   
       // Render the scene
       renderer.render(scene, camera);
     };
-  
-    // Handle window resize
-    window.addEventListener('resize', function () {
-      var newWidth = window.innerWidth;
-      var newHeight = window.innerHeight;
-  
-      // Update camera aspect ratio and renderer size
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(newWidth, newHeight);
-  
-      // Scale the sphere proportionally based on the original aspect ratio
-      var scaleFactor = newWidth / window.innerWidth;
-      var newSphereSize = initialSphereSize * scaleFactor;
-      sphere.scale.set(newSphereSize, newSphereSize, newSphereSize);
-    });
   
     // Start the animation
     animate();
