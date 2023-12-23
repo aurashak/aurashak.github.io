@@ -41,6 +41,19 @@ document.addEventListener('DOMContentLoaded', function () {
         graticule.add(lonLine);
     }
 
+    // Add black lines along the x and y axes
+    var xAxisGeometry = new THREE.BufferGeometry();
+    var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    xAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([-1, 0, 0, 1, 0, 0], 3));
+    var xAxisLine = new THREE.Line(xAxisGeometry, xAxisMaterial);
+    graticule.add(xAxisLine);
+
+    var yAxisGeometry = new THREE.BufferGeometry();
+    var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+    yAxisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([0, -1, 0, 0, 1, 0], 3));
+    var yAxisLine = new THREE.Line(yAxisGeometry, yAxisMaterial);
+    graticule.add(yAxisLine);
+
     scene.add(graticule);
 
     camera.position.z = 5;
