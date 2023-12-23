@@ -1,90 +1,83 @@
 document.addEventListener('DOMContentLoaded', function () {
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
     var renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     document.getElementById('cube-container').appendChild(renderer.domElement);
 
-    var initialSphereSize = 2;
-    var geometry = new THREE.SphereGeometry(initialSphereSize, 16, 16);
+    camera.position.z = 20;
 
-    // Solid blue sphere
-    var material = new THREE.MeshPhongMaterial({ color: 0x57A0D2, wireframe: false });
-    var sphere = new THREE.Mesh(geometry, material);
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = false;
 
-    // Wireframe sphere with only vertical and horizontal lines
-    var wireframeGeometry = new THREE.EdgesGeometry(geometry);
-    var wireframeMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-    var wireframeSphere = new THREE.LineSegments(wireframeGeometry, wireframeMaterial);
+    // Replace 'countries.geojson' with the actual name of your GeoJSON file
+    var geoJsonUrl = 'countries.geojson';
 
-    // Slightly larger than the solid sphere
-    wireframeSphere.scale.multiplyScalar(1.01);
+    // Fetch GeoJSON data
+    fetch(geoJsonUrl)
+        .then(response => response.json())
+        .then(data => handleGeoJsonData(data))
+        .catch(error => console.error('Error fetching GeoJSON data:', error));
 
-    // Grouping the solid sphere and wireframe sphere
-    var sphereGroup = new THREE.Group();
-    sphereGroup.add(sphere);
-    sphereGroup.add(wireframeSphere);
+    function handleGeoJsonData(geoJsonData) {
+        var countriesGroup = new THREE.Group();
 
-    scene.add(sphereGroup);
+        geoJsonData.features.forEach(function (feature) {
+            var geometry = new THREE.ExtrudeGeometry(new THREE.Shape(feature.geometry.coordinates[0]), {
+                depth: 1,
+                bevelEnabled: false,
+            });
 
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
+            var material = new THREE.MeshBasicMaterial({ color: 0x57A0D2, transparent: true, opacity: 0.7 });
 
-    camera.position.z = 5;
+            var countryMesh = new THREE.Mesh(geometry, material);
+            countryMesh.name = feature.properties.name;
 
-    var isRotationPaused = false;
-    var mouseX = 0;
-    var mouseY = 0;
+            countryMesh.onClick = function () {
+                console.log('Clicked on ' + feature.properties.name);
+                // Add your hyperlink logic here
+            };
 
-    document.addEventListener('mousedown', function (event) {
-        if (event.button === 0) {
-            isRotationPaused = true;
-            mouseX = event.clientX;
-            mouseY = event.clientY;
-        }
-    });
+            countriesGroup.add(countryMesh);
+        });
 
-    document.addEventListener('mouseup', function () {
-        isRotationPaused = false;
-    });
+        scene.add(countriesGroup);
 
-    document.addEventListener('mousemove', function (event) {
-        if (isRotationPaused) {
-            var deltaX = event.clientX - mouseX;
-            var deltaY = event.clientY - mouseY;
+        scene.background = new THREE.Color(0xf0f0f0);
 
-            sphereGroup.rotation.y += deltaX * 0.005;
-            sphereGroup.rotation.x += deltaY * 0.005;
+        document.addEventListener('mousedown', function (event) {
+            var mouse = new THREE.Vector2();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-            mouseX = event.clientX;
-            mouseY = event.clientY;
-        }
-    });
+            var raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
 
-    window.addEventListener('resize', function () {
-        var newWidth = window.innerWidth;
-        var newHeight = window.innerHeight;
+            var intersects = raycaster.intersectObjects(countriesGroup.children);
 
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(newWidth, newHeight);
-    });
+            if (intersects.length > 0) {
+                intersects[0].object.onClick();
+            }
+        });
 
-    var rotationSpeed = 0.005;
+        window.addEventListener('resize', function () {
+            var newWidth = window.innerWidth;
+            var newHeight = window.innerHeight;
 
-    var animate = function () {
-        requestAnimationFrame(animate);
+            camera.aspect = newWidth / newHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(newWidth, newHeight);
+        });
 
-        if (!isRotationPaused) {
-            sphereGroup.rotation.x += rotationSpeed;
-            sphereGroup.rotation.y += rotationSpeed;
-            sphereGroup.rotation.z += rotationSpeed;
-        }
+        var animate = function () {
+            requestAnimationFrame(animate);
 
-        renderer.render(scene, camera);
-    };
+            controls.update();
 
-    animate();
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    }
 });
