@@ -3,11 +3,12 @@
 /* General Body Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    : #f8f9fa;
     color: #212529;
     margin: 0;
     padding: 0;
     font-size: 15px;
+  background-color: #fff;
 }
 
 /* Header Styles */
@@ -33,28 +34,9 @@ body {
 
 /* Navigation Bar Styles */
 .UnderlineNav {
-    background-color: white; /* Changed background color to white */
+    background-color: white; /* Background color set to white */
     overflow: hidden;
 }
-
-.UnderlineNav-item {
-    display: block;
-    padding: 10px 15px;
-    color: grey; /* Color set to grey */
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    font-size: 15px;
-    font-family: 'Consolas', monospace;
-    font-weight: normal;
-    margin-right: 10px; /* 10px spacing between buttons */
-}
-
-.UnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
-}
-
-
-
 
 .UnderlineNav-body {
     display: flex;
@@ -65,16 +47,22 @@ body {
 .UnderlineNav-item {
     display: block;
     padding: 10px 15px;
-    color: black; /* Changed color to black */
+    color: black; /* Text color set to black */
+    background-color: grey; /* Background color set to grey */
     text-decoration: none;
-    transition: background-color 0.1s;
-    font-size: 15px; /* Changed font size to 15px */
-    font-family: 'Consolas', monospace; /* Changed font to Consolas */
-    font-weight: normal; /* Set font weight to normal */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    font-size: 15px; /* Font size set to 15px */
+    font-family: 'Consolas', monospace; /* Font set to Consolas */
+    font-weight: normal; /* Font weight set to normal */
+    margin-right: 10px; /* 10px spacing between buttons */
+}
+
+.UnderlineNav-item:last-child {
+    margin-right: 0; /* No margin for the last item */
 }
 
 .UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: #778899;
+    background-color: #778899; /* Background color changes to #778899 on hover */
 }
 
 /* Main Content Styles */
@@ -83,7 +71,6 @@ body {
     max-width: 800px;
     margin: auto;
     background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .container-lg h1 {
@@ -100,8 +87,8 @@ body {
 
 /* Footer Styles */
 .footer {
-    background-color: #24292e;
-    color: white;
+    background-color: #fff;
+    color: black;
     text-align: center;
     padding: 10px;
     position: relative;
