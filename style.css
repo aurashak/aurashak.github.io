@@ -3,41 +3,37 @@
 /* General Body Styles */
 body {
     font-family: 'Arial', sans-serif;
-    : #f8f9fa;
+    background-color: #f8f9fa;
     color: #212529;
     margin: 0;
     padding: 0;
     font-size: 15px;
-  background-color: #fff;
+    background-color: #fff;
 }
 
 /* Header Styles */
 .Header {
     background-color: white;
-    color: #333;
     padding: 10px 20px;
-    text-align: center;
-}
-
-.Header h1 {
-    margin: 0;
-    font-size: 30px;
-    font-family: 'Consolas', monospace;
-    font-weight: bold;
-}
-
-.Header h2 {
-    font-size: 25px;
-    font-family: 'Consolas', monospace;
-    font-weight: normal;
+    text-align: center; /* Center align content */
 }
 
 /* Title Button Styles */
 .title-button {
-    /* Add any additional customizations here if needed */
-    font-size: 30px; /* Example: Larger font size */
+    background-color: transparent; /* Or any desired background */
+    border: none; /* Remove border for button styling */
+    color: #333; /* Text color */
+    font-family: 'Consolas', monospace; /* Consolas font */
+    font-weight: bold; /* Bold font weight */
+    font-size: 30px; /* Size similar to h1 */
+    cursor: pointer; /* Cursor changes to pointer on hover */
+    padding: 10px 20px; /* Padding for the button */
+    margin: 0; /* Remove default margin */
 }
 
+.title-button:hover {
+    /* Styles for hover state, if needed */
+}
 
 /* Navigation Bar Styles */
 .UnderlineNav {
