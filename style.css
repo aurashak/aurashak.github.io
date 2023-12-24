@@ -34,21 +34,10 @@ body {
 
 /* Title Button Styles */
 .title-button {
-    background-color: grey; /* Background color set to grey */
-    color: black; /* Text color set to black */
-    border: none; /* Remove default border */
-    padding: 10px 20px; /* Padding for the button */
-    font-size: 30px; /* Font size similar to h1 */
-    font-family: 'Consolas', monospace; /* Font set to Consolas */
-    font-weight: bold; /* Font weight set to bold */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center align the text */
+    /* Add any additional customizations here if needed */
+    font-size: 30px; /* Example: Larger font size */
 }
 
-.title-button:hover {
-    background-color: #778899; /* Change background on hover */
-}
 
 /* Navigation Bar Styles */
 .UnderlineNav {
