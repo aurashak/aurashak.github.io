@@ -3,7 +3,7 @@
 /* General Body Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background-color: rgb(198, 24, 24);
     color: #212529;
     margin: 0;
     padding: 0;
@@ -20,10 +20,11 @@ body {
 
 /* Title Button Styles */
 .title-button {
-    background-color: transparent; /* Or any desired background */
-    border: none; /* Remove border for button styling */
-    color: #333; /* Text color */
-    font-family: 'Consolas', monospace; /* Consolas font */
+    background-color: grey; 
+    border: none;
+    color: #333; 
+    border-radius: 2px;
+    font-family: 'arial', monospace; /* Consolas font */
     font-weight: bold; /* Bold font weight */
     font-size: 30px; /* Size similar to h1 */
     cursor: pointer; /* Cursor changes to pointer on hover */
@@ -51,11 +52,12 @@ body {
     display: block;
     padding: 10px 15px;
     color: black; /* Text color set to black */
+        border-radius: 2px;
     background-color: grey; /* Background color set to grey */
     text-decoration: none;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     font-size: 15px; /* Font size set to 15px */
-    font-family: 'Consolas', monospace; /* Font set to Consolas */
+    font-family: 'arial', monospace; /* Font set to Consolas */
     font-weight: normal; /* Font weight set to normal */
     margin-right: 10px; /* 10px spacing between buttons */
 }
@@ -71,7 +73,7 @@ body {
 /* Main Content Styles */
 .container-lg {
     padding: 20px;
-    max-width: 800px;
+    max-width: 90%;
     margin: auto;
     background-color: white;
 }
