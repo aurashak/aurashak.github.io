@@ -1,0 +1,114 @@
+/* Custom Stylesheet for HTML Page with GitHub Primer CSS */
+
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+
+/* Header Styles */
+.Header {
+    background-color: white;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.Header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-family: 'Consolas', monospace;
+    font-weight: bold;
+}
+
+.Header h2 {
+    font-size: 25px;
+    font-family: 'Consolas', monospace;
+    font-weight: normal;
+}
+
+/* Navigation Bar Styles */
+.UnderlineNav {
+    background-color: white; /* Changed background color to white */
+    overflow: hidden;
+}
+
+.UnderlineNav-item {
+    display: block;
+    padding: 10px 15px;
+    color: grey; /* Color set to grey */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+    font-family: 'Consolas', monospace;
+    font-weight: normal;
+    margin-right: 10px; /* 10px spacing between buttons */
+}
+
+.UnderlineNav-item:last-child {
+    margin-right: 0; /* No margin for the last item */
+}
+
+
+
+
+.UnderlineNav-body {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.UnderlineNav-item {
+    display: block;
+    padding: 10px 15px;
+    color: black; /* Changed color to black */
+    text-decoration: none;
+    transition: background-color 0.1s;
+    font-size: 15px; /* Changed font size to 15px */
+    font-family: 'Consolas', monospace; /* Changed font to Consolas */
+    font-weight: normal; /* Set font weight to normal */
+}
+
+.UnderlineNav-item:hover, .UnderlineNav-item.selected {
+    background-color: #778899;
+}
+
+/* Main Content Styles */
+.container-lg {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container-lg h1 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.container-lg h2 {
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #24292e;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    margin: 0;
+}
