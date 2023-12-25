@@ -11,7 +11,6 @@ function loadElement(elementId, filePath) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    loadElement("header", "header.html");
     loadElement("navigation", "navigation.html");
     loadElement("footer", "footer.html");
 });
