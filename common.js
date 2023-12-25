@@ -2,8 +2,8 @@ function loadElement(elementId, filePath) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4) {
-            if (this.status === 200) {document.getElementById(elementId).innerHTML = this.responseText;}
-            if (this.status === 404) {document.getElementById(elementId).innerHTML = "Page not found.";}
+            if (this.status === 200) { document.getElementById(elementId).innerHTML = this.responseText; }
+            if (this.status === 404) { document.getElementById(elementId).innerHTML = "Page not found."; }
         }
     }
     xhttp.open("GET", filePath, true);
@@ -11,11 +11,7 @@ function loadElement(elementId, filePath) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    loadElement("navigation", "navigation.html");
-    loadElement("worksubnav", "worksubnav.html");
-    loadElement("printsubnav", "/nav/printsubnav.html"); // Ensure this file exists
-    loadElement("footer", "footer.html");
-});
-
-    loadElement("footer", "footer.html");
+    loadElement("navigation", "https://aurashak.github.io/nav/navigation.html");
+    loadElement("printsubnav", "https://aurashak.github.io/nav/printsubnav.html");
+    loadElement("footer", "https://aurashak.github.io/nav/footer.html");
 });
