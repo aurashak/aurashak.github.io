@@ -99,6 +99,17 @@ h2 {
         background-color: blue; /* Background color for active item */
     }
 
+    /* Style for active navigation item on About page */
+.UnderlineNav-item.about-active {
+    background-color: blue; /* Background color for About page active item */
+}
+
+/* Style for active navigation item on Work page */
+.UnderlineNav-item.work-active {
+    background-color: blue; /* Background color for Work page active item */
+}
+
+
 /* Main Content Styles */
 .container-lg {
     padding: 20px 10px 20px 10px;

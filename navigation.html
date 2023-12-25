@@ -25,18 +25,22 @@
     xhttp.send();
   }
 
-  function setActiveNavItem() {
-    // Get the current URL
+/* ... (existing JavaScript code) ... */
+
+function setActiveNavItem() {
     var currentUrl = window.location.href;
 
-    // Check if the URL contains 'about' or 'work' and add 'active' class accordingly
     if(currentUrl.includes('about')) {
-        document.getElementById('nav-about').classList.add('active');
+        document.getElementById('nav-about').classList.add('about-active');
+        document.getElementById('nav-work').classList.remove('work-active');
     } else if(currentUrl.includes('work')) {
-        document.getElementById('nav-work').classList.add('active');
+        document.getElementById('nav-work').classList.add('work-active');
+        document.getElementById('nav-about').classList.remove('about-active');
     }
-    // Add similar conditions for other navigation items if needed
-  }
+}
+
+/* ... (remaining JavaScript code) ... */
+
 
   document.addEventListener("DOMContentLoaded", function() {
     loadElement("header", "header.html");
