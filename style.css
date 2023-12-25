@@ -31,13 +31,13 @@ h2 {
 
 /* Header h1 and h2 Styles */
 .Header h1 {
-    font-size: 30px; /* Example size, adjust as needed */
+    font-size: 25px; /* Example size, adjust as needed */
     font-weight: bold;
     color: #333; /* Example color, adjust as needed */
 }
 
 .Header h2 {
-    font-size: 25px; /* Example size, adjust as needed */
+    font-size: 20px; /* Example size, adjust as needed */
     font-weight: normal;
     color: #666; /* Example color, adjust as needed */
 }
