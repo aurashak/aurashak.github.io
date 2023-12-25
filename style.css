@@ -13,8 +13,20 @@ body {
 /* Header Styles */
 .Header {
     background-color: white;
-    padding: 10px 20px;
-    text-align: center; /* Center align content */
+    padding: 0px;
+    text-align: center;
+    margin: 0px;
+
+}
+
+/* General h1 and h2 Styles */
+h1 {
+
+    margin: 0; /* Margin for h1 */
+}
+
+h2 {
+    margin: 0; /* Margin for h2 */
 }
 
 /* Header h1 and h2 Styles */
