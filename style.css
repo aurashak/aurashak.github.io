@@ -9,6 +9,19 @@ body {
     font-size: 0px;
 }
 
+a {
+    color: #000; /* Standard link color - change as needed */
+    text-decoration: none; /* Removes underline from links */
+    transition: none; /* Smooth color transition for hover */
+}
+
+a:hover,
+
+a:focus {
+    color: #000; /* Color change on hover/focus - change as needed */
+    text-decoration: none; /* Underline on hover/focus for clarity */
+}
+
 /* Header Styles */
 .Header {
     background-color: white;
@@ -51,8 +64,8 @@ h2 {
     font-weight: bold; /* Bold font weight */
     font-size: 28px; /* Font size similar to h1 */
     cursor: pointer; /* Cursor changes to pointer on hover */
-    padding: 0px; /* Padding for the button */
-    margin: 0;
+    padding: 15px 8px 9px 12px; /* Padding for the button */
+    margin: 0px;
 }
 
 .title-button:hover {
@@ -76,7 +89,7 @@ h2 {
 
 .UnderlineNav-item {
     display: block;
-    padding: 0px; /* Padding for the button */
+    padding: 15px; /* Padding for the button */
     color: black; /* Text color set to black */
     border-radius: 2.5px;
     background-color: #fff; /* Background color set to grey */
@@ -85,7 +98,7 @@ h2 {
     font-size: 19px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: bold; /* Font weight set to normal */
-    margin-right: 0px; /* 10px spacing between buttons */
+    margin: 0px; /* 10px spacing between buttons */
 }
 
 .UnderlineNav-item:last-child {
@@ -173,7 +186,7 @@ h2 {
     background-color: #fff;
     color: black;
     text-align: left;
-    padding: 10px;
+    padding: 0px;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -181,4 +194,8 @@ h2 {
 
 .footer p {
     margin: 0;
+  font-size: 12px;
+  font-family: arial; 
+  
 }
+
