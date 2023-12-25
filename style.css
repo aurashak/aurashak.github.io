@@ -22,13 +22,19 @@ a:focus {
     text-decoration: none; /* Underline on hover/focus for clarity */
 }
 
-/* Header Styles */
-.Header {
-    background-color: white;
-    margin: 10px;
-    padding: 10px;
-    text-align: left;
+/* Header Content Styles */
+.header-content {
+    margin: 15px; /* Add 15px margin to the header content */
+    display: flex; /* Use flexbox to align items in a row */
+    align-items: center; /* Align items vertically in the center */
 }
+
+.header-content h1, 
+.header-content h2 {
+    margin: 0; /* Remove default margin from h1 and h2 */
+    padding: 0; /* Remove default padding from h1 and h2 */
+}
+
 
 /* General h1 and h2 Styles */
 h1 {
