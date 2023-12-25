@@ -11,12 +11,11 @@ function loadElement(elementId, filePath) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    loadElement("header", "header.html");
     loadElement("navigation", "navigation.html");
     loadElement("worksubnav", "worksubnav.html");
-    loadElement("printsubnav", "https://aurashak.github.io/nav/printsubnav.html");
-    loadElement("web", "https://aurashak.github.io/nav/websubnav.html");
-    loadElement("sculpture", "https://aurashak.github.io/nav/sculpturesubnav.html");
+    loadElement("printsubnav", "printsubnav.html"); // Ensure this file exists
+    loadElement("footer", "footer.html");
+});
 
     loadElement("footer", "footer.html");
 });
