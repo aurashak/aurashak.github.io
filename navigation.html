@@ -1,50 +1,10 @@
 <nav class="UnderlineNav">
   <div class="UnderlineNav-body">
-      <a href="https://aurashak.github.io/about.html" class="UnderlineNav-item" id="nav-about">About</a>
-      <a href="https://aurashak.github.io/work.html" class="UnderlineNav-item" id="nav-work">Work</a>
-      <!-- Other navigation items -->
+      <!-- Removed "Home" button -->
+      <a href="https://aurashak.github.io/about.html" class="UnderlineNav-item">Print</a>
+      <a href="https://aurashak.github.io/about.work" class="UnderlineNav-item">Web</a>
+      <a href="https://aurashak.github.io/about.html" class="UnderlineNav-item">Sculpture</a>
+      <a href="https://aurashak.github.io/about.html" class="UnderlineNav-item">Writing</a>
+
   </div>
 </nav>
-
-<!-- Updated script -->
-<script>
-  function loadElement(elementId, filePath, callback) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState === 4) {
-            if (this.status === 200) {
-                document.getElementById(elementId).innerHTML = this.responseText;
-                if (callback) callback(); // Call the callback function if provided
-            }
-            if (this.status === 404) {
-                document.getElementById(elementId).innerHTML = "Page not found.";
-            }
-        }
-    }
-    xhttp.open("GET", filePath, true);
-    xhttp.send();
-  }
-
-/* ... (existing JavaScript code) ... */
-
-function setActiveNavItem() {
-    var currentUrl = window.location.href;
-
-    if(currentUrl.includes('about')) {
-        document.getElementById('nav-about').classList.add('about-active');
-        document.getElementById('nav-work').classList.remove('work-active');
-    } else if(currentUrl.includes('work')) {
-        document.getElementById('nav-work').classList.add('work-active');
-        document.getElementById('nav-about').classList.remove('about-active');
-    }
-}
-
-/* ... (remaining JavaScript code) ... */
-
-
-  document.addEventListener("DOMContentLoaded", function() {
-    loadElement("header", "header.html");
-    loadElement("navigation", "navigation.html", setActiveNavItem); // Add callback to set active nav item
-    loadElement("footer", "footer.html");
-  });
-</script>
