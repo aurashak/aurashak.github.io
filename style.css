@@ -144,7 +144,7 @@ h2 a:hover {
 }
 
 .subUnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: red; /* Changed background color to gold on hover */
+    background-color: gold; /* Changed background color to gold on hover */
     }
 
     /* subsubNavigation Bar Styles */
@@ -179,7 +179,7 @@ h2 a:hover {
     }
     
     .subsubUnderlineNav-item:hover, .UnderlineNav-item.selected {
-        background-color: blue; /* Changed background color to gold on hover */
+        background-color: gold; /* Changed background color to gold on hover */
         }
 
 /* Main Content Styles */
