@@ -95,9 +95,9 @@ h2 {
     background-color: #fff; /* Background color set to grey */
     text-decoration: none;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    font-size: 19px; /* Font size set to 15px */
+    font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
-    font-weight: bold; /* Font weight set to normal */
+    font-weight: normal; /* Font weight set to normal */
     margin: 0px; /* 10px spacing between buttons */
 }
 
