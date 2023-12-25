@@ -15,7 +15,10 @@ a {
     transition: none; /* Smooth color transition for hover */
 }
 
-a:hover,
+a:hover {
+    
+    background-color: gold;
+}
 
 a:focus {
     color: #000; /* Color change on hover/focus - change as needed */
@@ -40,14 +43,28 @@ a:focus {
 h1 {
     margin: 0; /* Margin for h1 */
   font-size: 20px;
+    font-family: arial;
 }
 
 h2 {
     margin: 0px; /* Margin for h2 */
     font-size: 20px;
   font-family: arial;
+    font-weight: normal;
+    color: gray;
 
 }
+
+h1 a:hover {
+    
+    background-color: gold;
+}
+
+h2 a:hover {
+    
+    background-color: gold;
+}
+
 
 
 /* Navigation Bar Styles */
@@ -112,7 +129,7 @@ h2 {
 .container-lg {
     padding: 0px 0px 0px 0px;
     max-width: 100%;
-    margin: auto;
+    margin: 15px;
     background-color: white;
 }
 
@@ -165,6 +182,7 @@ h2 {
     position: relative;
     bottom: 0;
     width: 100%;
+    margin: 15px;
 }
 
 .footer p {
