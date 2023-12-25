@@ -1,11 +1,9 @@
 /* Custom Stylesheet for HTML Page with GitHub Primer CSS */
 
-/* General Body Styles/* Custom Stylesheet for HTML Page with GitHub Primer CSS */
-
 /* General Body Styles */
 body {
-    background-color: #fff; /* White background for the body */
-    color: #212529; /* Default text color */
+    background-color: #fff;
+    color: #212529;
     margin: 0;
     padding: 0px;
     font-size: 10px;
@@ -14,90 +12,88 @@ body {
 a {
     color: #000; /* Standard link color */
     text-decoration: none; /* Removes underline from links */
-    transition: none; /* Smooth color transition for hover */
+    transition: color 0.3s ease; /* Smooth color transition for hover */
 }
 
 a:hover, a:focus {
-    background-color: gold; /* Color change on hover/focus */
+    color: #000; /* Color change on hover/focus */
+    text-decoration: underline; /* Underline on hover/focus for clarity */
 }
 
-/* Header Styles */
-.Header {
-    background-color: white;
-    margin: 0px;
-    padding: 0px;
-    text-align: left;
+/* Main Header Styles */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
 }
 
-/* Header h1 and h2 Styles */
-.Header h1, .Header h2 {
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-content h1, .header-content h2 {
     margin: 0; /* Remove default margin */
-    font-family: arial;
+    padding: 0; /* Remove default padding */
+}
+
+.header-content h1 {
+    font-size: 21px;
+    font-family: Arial;
+    color: #333;
+    font-weight: bold;
+}
+
+.header-content h2 {
+    font-size: 21px;
+    font-family: Arial;
     color: gray;
-    font-weight: normal;
-}
-
-.Header h1 {
-    font-size: 21px; /* Font size for h1 */
-}
-
-.Header h2 {
-    font-size: 21px; /* Font size for h2 */
+    margin-left: 10px; /* Space between h1 and h2 */
 }
 
 /* Navigation Bar Styles */
 .UnderlineNav {
-    background-color: white; /* Background color set to white */
-    overflow: hidden;
-    padding: 0px;
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
 }
 
 .UnderlineNav-body {
     display: flex;
-    flex-direction: column; /* Align items vertically */
-    align-items: flex-start; /* Align items to the start */
-    padding: 0;
+    align-items: center; /* Align vertically */
 }
 
 .UnderlineNav-item {
     display: block;
     padding: 10px 15px;
-    color: black; /* Text color set to black */
-    background-color: #fff; /* Background color */
+    color: black;
     text-decoration: none;
-    width: 100%; /* Full width */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    font-size: 15px; /* Font size */
-    font-family: arial; /* Font family */
-    margin-bottom: 15px; /* Space between items */
-}
-
-.UnderlineNav-item:last-child {
-    margin-bottom: 0; /* No bottom margin for the last item */
+    margin-left: 15px; /* Space between navigation items */
+    font-size: 15px;
+    font-family: Arial;
 }
 
 .UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: gold; /* Background color on hover */
+    background-color: gold;
 }
 
 /* Grid Styles */
 .grid-four-columns {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
-    grid-gap: 20px; /* Space between grid items */
-    height: 100px; /* Fixed height for the grid */
-    width: 100%; /* Grid spans entire width */
-    border: 1px solid black; /* Solid black outline around the grid */
-    margin: 15px; /* Space below the grid */
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    height: 100px;
+    width: 100%;
+    border: 1px solid black;
+    margin: 15px;
 }
 
 .grid-four-columns > div {
-    border-right: 1px solid black; /* Right border for each column */
-    height: 100%; /* Full height */
+    border-right: 1px solid black;
 }
 
 .grid-four-columns > div:last-child {
-    border-right: none; /* No right border for the last column */
+    border-right: none;
 }
 
 /* Main Content Styles */
@@ -111,20 +107,18 @@ a:hover, a:focus {
 .container-lg h1, .container-lg h2 {
     font-size: 20px;
     font-weight: bold;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 /* Image Grid Styles */
 .image-grid, .image-gridlarge {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); /* Adjust grid columns */
-    grid-gap: 20px; /* Space between grid items */
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+    grid-gap: 20px;
     padding: 0px;
 }
 
 .image-grid a, .image-grid img, .image-gridlarge a, .image-gridlarge img {
-    display: block;
-    overflow: hidden; /* Image cropping or zooming effects */
     width: 100%;
     height: auto;
 }
@@ -144,200 +138,5 @@ a:hover, a:focus {
 .footer p {
     margin: 0;
     font-size: 12px;
-    font-family: arial; 
+    font-family: Arial;
 }
- */
-body {
-    background-color: #fff; /* White background for the body */
-    color: #212529; /* Default text color */
-    margin: 0;
-    padding: 0px;
-    font-size: 10px;
-}
-
-a {
-    color: #000; /* Standard link color - change as needed */
-    text-decoration: none; /* Removes underline from links */
-    transition: none; /* Smooth color transition for hover */
-}
-
-a:hover {
-    
-    background-color: gold;
-}
-
-a:focus {
-    color: #000; /* Color change on hover/focus - change as needed */
-    text-decoration: none; /* Underline on hover/focus for clarity */
-}
-
-/* Header Content Styles */
-.header-content {
-    margin: 15px; /* Add 15px margin to the header content */
-    display: flex; /* Use flexbox to align items in a row */
-    align-items: center; /* Align items vertically in the center */
-}
-
-.header-content h1, 
-.header-content h2 {
-    margin: 0; /* Remove default margin from h1 and h2 */
-    padding: 0; /* Remove default padding from h1 and h2 */
-}
-
-
-/* General h1 and h2 Styles */
-h1 {
-    margin: 0; /* Margin for h1 */
-  font-size: 21px;
-    font-family: arial;
-}
-
-h2 {
-    margin: 0px; /* Margin for h2 */
-    font-size: 21px;
-  font-family: arial;
-    font-weight: normal;
-    color: gray;
-
-}
-
-h3 {
-    margin: 0px; /* Margin for h2 */
-    font-size: 18px;
-  font-family: arial;
-    font-weight: normal;
-    color: gray;
-
-}
-
-h1 a:hover {
-    background-color: gold;
-}
-
-h2 a:hover {
-    background-color: gold;
-}
-
-h3 a:hover {
-    background-color: gold;
-}
-
-
-/* Navigation Bar Styles */
-.UnderlineNav {
-    background-color: white; /* Background color set to white */
-    overflow: hidden;
-    padding: 0px;
-}
-
-.UnderlineNav-body {
-    display: flex;
-    justify-content: left;
-    padding: 0;
-}
-
-.UnderlineNav-item {
-    display: block;
-    padding: 10px 15px;
-    color: black;
-    text-decoration: none;
-    margin-bottom: 15px; /* Add space below each item */
-    /* ... other styles ... */
-}
-
-
-
-.UnderlineNav-item {
-    display: block;
-    padding: 10px 15px; /* Padding for the button */
-    color: black; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #fff; /* Background color set to grey */
-    text-decoration: none;
-    width: 100%;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    font-size: 15px; /* Font size set to 15px */
-    font-family: arial; /* Font family */
-    font-weight: normal; /* Font weight set to normal */
-    margin: 0px; /* 10px spacing between buttons */
-}
-
-.UnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
-}
-
-.UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: gold; /* Changed background color to gold on hover */
-    }
-
-
-
-
-
-/* Main Content Styles */
-.container-lg {
-    padding: 0px 0px 0px 0px;
-    max-width: 100%;
-    margin: 15px;
-    background-color: white;
-}
-
-.container-lg h1 {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Arial', sans-serif;
-}
-
-.container-lg h2 {
-    font-size: 20px;
-    font-weight: normal;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Image Grid Styles */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); /* Adjust '250px' to your preferred minimum width */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
-}
-
-.image-gridlarge {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(1300px, 1fr)); /* Adjust '250px' to your preferred minimum width */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
-}
-
-.image-grid a {
-    display: block;
-    overflow: hidden; /* In case you want to apply any image cropping or zooming effects */
-}
-
-.image-grid img {
-    width: 100%;
-    height: auto;
-    display: block; /* Remove any extra space below the image */
-    transition: none; /* Optional: for zoom effect on hover */
-}
-
-
-/* Footer Styles */
-.footer {
-    background-color: #fff;
-    color: black;
-    text-align: left;
-    padding: 0px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin: 15px;
-}
-
-.footer p {
-    margin: 0;
-  font-size: 12px;
-  font-family: arial; 
-  
-}
-
