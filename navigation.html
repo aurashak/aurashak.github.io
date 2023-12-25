@@ -1,7 +1,22 @@
 <nav class="UnderlineNav">
   <div class="UnderlineNav-body">
-      <!-- Removed "Home" button -->
-      <a href="https://aurashak.github.io/about.html" class="UnderlineNav-item">About</a>
-      <a href="https://aurashak.github.io/work.html" class="UnderlineNav-item">Work</a>
+      <a href="https://aurashak.github.io/about.html" class="UnderlineNav-item" id="nav-about">About</a>
+      <a href="https://aurashak.github.io/work.html" class="UnderlineNav-item" id="nav-work">Work</a>
+      <!-- Other navigation items -->
   </div>
 </nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL
+    var currentUrl = window.location.href;
+
+    // Check if the URL contains 'about' or 'work' and add 'active' class accordingly
+    if(currentUrl.includes('about')) {
+      document.getElementById('nav-about').classList.add('active');
+    } else if(currentUrl.includes('work')) {
+      document.getElementById('nav-work').classList.add('active');
+    }
+    // Add similar conditions for other navigation items if needed
+  });
+</script>
