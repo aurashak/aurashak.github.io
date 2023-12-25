@@ -32,11 +32,6 @@ a:focus {
     align-items: center; /* Align items vertically in the center */
 }
 
-.header-content h1, 
-.header-content h2 {
-    margin: 0; /* Remove default margin from h1 and h2 */
-    padding: 0; /* Remove default padding from h1 and h2 */
-}
 
 
 /* General h1 and h2 Styles */
@@ -90,7 +85,7 @@ h2 a:hover {
 
 .UnderlineNav-item {
     display: block;
-    padding: 15px; /* Padding for the button */
+    padding: 15px 20px; /* Padding for the button */
     color: black; /* Text color set to black */
     border-radius: 0px;
     background-color: #fff; /* Background color set to grey */
@@ -111,33 +106,11 @@ h2 a:hover {
     }
 
 
-/* Grid Styles */
-.grid-four-columns {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
-    grid-gap: 20px; /* Space between grid items */
-    height: 150px; /* Fixed height for the grid */
-    width: 100%; /* Grid spans entire width */
-    border: 1px solid black; /* Solid black outline around the entire grid */
-    margin: 15px; /* Space below the grid */
-}
-
-.grid-four-columns > div {
-    border-right: 1px solid black; /* Right border for each column */
-    height: 100%; /* Ensure each column fills the height of the grid */
-}
-
-.grid-four-columns > div:last-child {
-    border-right: none; /* Remove right border for the last column */
-}
-
-
-
 /* Main Content Styles */
 .container-lg {
     padding: 0px 0px 0px 0px;
     max-width: 100%;
-    margin: 15px;
+    margin: 40px 20px;
     background-color: white;
 }
 
@@ -194,7 +167,7 @@ h2 a:hover {
 }
 
 .footer p {
-    margin: 0;
+    margin: 20px;
   font-size: 12px;
   font-family: arial; 
   
