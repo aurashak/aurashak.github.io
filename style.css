@@ -68,7 +68,13 @@ h2 a:hover {
     background-color: gold;
 }
 
+.bold-text {
+    font-weight: bold; /* Makes text bold */
+}
 
+.light-text {
+    font-weight: 300; /* Makes text lighter */
+}
 
 /* Navigation Bar Styles */
 .UnderlineNav {
