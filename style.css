@@ -144,7 +144,7 @@ h2 a:hover {
 }
 
 .subUnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: gold; /* Changed background color to gold on hover */
+    background-color: red; /* Changed background color to gold on hover */
     }
 
     /* subsubNavigation Bar Styles */
@@ -179,7 +179,7 @@ h2 a:hover {
     }
     
     .subsubUnderlineNav-item:hover, .UnderlineNav-item.selected {
-        background-color: gold; /* Changed background color to gold on hover */
+        background-color: blue; /* Changed background color to gold on hover */
         }
 
 /* Main Content Styles */
@@ -205,7 +205,7 @@ h2 a:hover {
 /* Image Grid Styles */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); /* Adjust '250px' to your preferred minimum width */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
 }
