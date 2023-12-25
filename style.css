@@ -96,7 +96,7 @@ h2 a:hover {
     border-radius: 0px;
     background-color: #fff; /* Background color set to grey */
     text-decoration: none;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: normal; /* Font weight set to normal */
@@ -132,7 +132,7 @@ h2 a:hover {
     border-radius: 0px;
     background-color: #fff; /* Background color set to grey */
     text-decoration: none;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: light; /* Font weight set to normal */
@@ -146,6 +146,41 @@ h2 a:hover {
 .subUnderlineNav-item:hover, .UnderlineNav-item.selected {
     background-color: red; /* Changed background color to gold on hover */
     }
+
+    /* subsubNavigation Bar Styles */
+    .subsubUnderlineNav {
+        background-color: white; /* Background color set to white */
+        overflow: hidden;
+        padding: 0px;
+    }
+    
+    .subsubUnderlineNav-body {
+        display: flex;
+        justify-content: left;
+        padding: 0;
+    }
+    
+    .subsubUnderlineNav-item {
+        display: block;
+        padding: 15px 20px; /* Padding for the button */
+        color: black; /* Text color set to black */
+        border-radius: 0px;
+        background-color: #fff; /* Background color set to grey */
+        text-decoration: none;
+        transition: background-color 0.2s ease; /* Smooth transition for hover effect */
+        font-size: 15px; /* Font size set to 15px */
+        font-family: 'Consolas', monospace; /* Font family */
+        font-weight: light; /* Font weight set to normal */
+        margin: 0px; /* 10px spacing between buttons */
+    }
+    
+    .subsubUnderlineNav-item:last-child {
+        margin-right: 0; /* No margin for the last item */
+    }
+    
+    .subsubUnderlineNav-item:hover, .UnderlineNav-item.selected {
+        background-color: blue; /* Changed background color to gold on hover */
+        }
 
 /* Main Content Styles */
 .container-lg {
