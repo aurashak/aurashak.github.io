@@ -212,7 +212,7 @@ h2 a:hover {
 
 .image-gridlarge {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(1300px, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr)); /* Adjust '250px' to your preferred minimum width */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
 }
