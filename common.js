@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
     loadElement("header", "header.html");
     loadElement("navigation", "navigation.html");
     loadElement("worksubnav", "worksubnav.html");
-    loadElement("printsubnav", "nav/printsubnav.html");
-    loadElement("web", "nav/websubnav.html");
-    loadElement("sculpture", "nav/sculpturesubnav.html");
+    loadElement("printsubnav", "https://aurashak.github.io/nav/printsubnav.html");
+    loadElement("web", "https://aurashak.github.io/nav/websubnav.html");
+    loadElement("sculpture", "https://aurashak.github.io/nav/sculpturesubnav.html");
 
     loadElement("footer", "footer.html");
 });
