@@ -106,6 +106,41 @@ h2 a:hover {
     }
 
 
+    /* subNavigation Bar Styles */
+.subUnderlineNav {
+    background-color: white; /* Background color set to white */
+    overflow: hidden;
+    padding: 0px;
+}
+
+.subUnderlineNav-body {
+    display: flex;
+    justify-content: left;
+    padding: 0;
+}
+
+.subUnderlineNav-item {
+    display: block;
+    padding: 15px 20px; /* Padding for the button */
+    color: black; /* Text color set to black */
+    border-radius: 0px;
+    background-color: #fff; /* Background color set to grey */
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    font-size: 15px; /* Font size set to 15px */
+    font-family: 'Consolas', monospace; /* Font family */
+    font-weight: light; /* Font weight set to normal */
+    margin: 0px; /* 10px spacing between buttons */
+}
+
+.subUnderlineNav-item:last-child {
+    margin-right: 0; /* No margin for the last item */
+}
+
+.subUnderlineNav-item:hover, .UnderlineNav-item.selected {
+    background-color: red; /* Changed background color to gold on hover */
+    }
+
 /* Main Content Styles */
 .container-lg {
     padding: 0px 0px 0px 0px;
