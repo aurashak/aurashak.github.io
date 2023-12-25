@@ -6,17 +6,41 @@
   </div>
 </nav>
 
+<!-- Updated script -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  function loadElement(elementId, filePath, callback) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4) {
+            if (this.status === 200) {
+                document.getElementById(elementId).innerHTML = this.responseText;
+                if (callback) callback(); // Call the callback function if provided
+            }
+            if (this.status === 404) {
+                document.getElementById(elementId).innerHTML = "Page not found.";
+            }
+        }
+    }
+    xhttp.open("GET", filePath, true);
+    xhttp.send();
+  }
+
+  function setActiveNavItem() {
     // Get the current URL
     var currentUrl = window.location.href;
 
     // Check if the URL contains 'about' or 'work' and add 'active' class accordingly
     if(currentUrl.includes('about')) {
-      document.getElementById('nav-about').classList.add('active');
+        document.getElementById('nav-about').classList.add('active');
     } else if(currentUrl.includes('work')) {
-      document.getElementById('nav-work').classList.add('active');
+        document.getElementById('nav-work').classList.add('active');
     }
     // Add similar conditions for other navigation items if needed
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    loadElement("header", "header.html");
+    loadElement("navigation", "navigation.html", setActiveNavItem); // Add callback to set active nav item
+    loadElement("footer", "footer.html");
   });
 </script>

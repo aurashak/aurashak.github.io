@@ -95,11 +95,9 @@ h2 {
     
     }
     
-    /* Add active link style */
-.UnderlineNav-item:active {
-    background-color: blue; /* Background color changes to red when active */
-
-}
+    .UnderlineNav-item.active {
+        background-color: blue; /* Background color for active item */
+    }
 
 /* Main Content Styles */
 .container-lg {
