@@ -5,34 +5,8 @@ body {
     background-color: #fff; /* White background for the body */
     color: #212529; /* Default text color */
     margin: 0;
-    padding: 20px;
-    font-size: 15px;
-}
-
-/* Header Content Styles */
-.header-content {
-    display: flex; /* Enables flexbox */
-    align-items: center; /* Vertically centers the items in the container */
-    justify-content: start; /* Aligns items to the start of the container */
-    gap: 10px; /* Optional: adds space between elements */
-}
-
-/* Title Button (styled as h1) Styles */
-.title-button {
-    background-color: #BFBFBF; /* Example background color */
-    border: none;
-    color: #333;
-    text-decoration: none; /* Removes underline from link */
-    padding: 10px 20px;
-    border-radius: 3px;
-    font-weight: bold;
-    /* Other button styles */
-}
-
-/* h2 Styles */
-h2 {
-    margin: 0; /* Removes default margin */
-    /* Additional h2 styles, if needed */
+    padding: 0px;
+    font-size: 0px;
 }
 
 /* Header Styles */
@@ -40,34 +14,78 @@ h2 {
     background-color: white;
     margin: 0px;
     padding: 0px;
-    text-align: center;
+    text-align: left;
 }
+
+/* General h1 and h2 Styles */
+h1 {
+    margin: 0; /* Margin for h1 */
+}
+
+h2 {
+    margin: 0px; /* Margin for h2 */
+}
+
+/* Header h1 and h2 Styles */
+.Header h1 {
+    font-size: 25px; /* Example size, adjust as needed */
+    font-weight: bold;
+    color: #333; /* Example color, adjust as needed */
+}
+
+.Header h2 {
+    font-size: 23px; /* Example size, adjust as needed */
+    font-family: 'Consolas', monospace; /* Font family */
+    font-weight: normal;
+    padding: 20px 0 9px 0;
+    color: #666; /* Example color, adjust as needed */
+}
+
+/* Title Button Styles */
+.title-button {
+    background-color: #fff; /* Background color */
+    border: none;
+    color: #333; /* Text color */
+    border-radius: 3px;
+    font-family: 'Consolas', monospace; /* Font family */
+    font-weight: bold; /* Bold font weight */
+    font-size: 28px; /* Font size similar to h1 */
+    cursor: pointer; /* Cursor changes to pointer on hover */
+    padding: 0px; /* Padding for the button */
+    margin: 0;
+}
+
+.title-button:hover {
+   background-color: gold;
+}
+
+
 
 /* Navigation Bar Styles */
 .UnderlineNav {
     background-color: white; /* Background color set to white */
     overflow: hidden;
-    padding: 10px;
+    padding: 0px;
 }
 
 .UnderlineNav-body {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     padding: 0;
 }
 
 .UnderlineNav-item {
     display: block;
-    padding: 5px 10px;
+    padding: 0px; /* Padding for the button */
     color: black; /* Text color set to black */
     border-radius: 2.5px;
-    background-color: #BFBFBF; /* Background color set to grey */
+    background-color: #fff; /* Background color set to grey */
     text-decoration: none;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     font-size: 19px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: bold; /* Font weight set to normal */
-    margin-right: 20px; /* 10px spacing between buttons */
+    margin-right: 0px; /* 10px spacing between buttons */
 }
 
 .UnderlineNav-item:last-child {
@@ -76,12 +94,36 @@ h2 {
 
 .UnderlineNav-item:hover, .UnderlineNav-item.selected {
     background-color: gold; /* Changed background color to gold on hover */
+    
+    }
+
+
+/* Grid Styles */
+.grid-four-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
+    grid-gap: 20px; /* Space between grid items */
+    height: 150px; /* Fixed height for the grid */
+    width: 100%; /* Grid spans entire width */
+    border: 1px solid black; /* Solid black outline around the entire grid */
+    margin-bottom: 20px; /* Space below the grid */
 }
+
+.grid-four-columns > div {
+    border-right: 1px solid black; /* Right border for each column */
+    height: 100%; /* Ensure each column fills the height of the grid */
+}
+
+.grid-four-columns > div:last-child {
+    border-right: none; /* Remove right border for the last column */
+}
+
+
 
 /* Main Content Styles */
 .container-lg {
-    padding: 20px 10px 20px 10px;
-    max-width: 90%;
+    padding: 0px 0px 0px 0px;
+    max-width: 100%;
     margin: auto;
     background-color: white;
 }
@@ -99,13 +141,38 @@ h2 {
 }
 
 /* Image Grid Styles */
-/* ... (Your existing image grid styles) ... */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-gap: 20px; /* Space between grid items */
+    padding: 0px;
+}
+
+.image-gridlarge {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1300px, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-gap: 20px; /* Space between grid items */
+    padding: 0px;
+}
+
+.image-grid a {
+    display: block;
+    overflow: hidden; /* In case you want to apply any image cropping or zooming effects */
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto;
+    display: block; /* Remove any extra space below the image */
+    transition: none; /* Optional: for zoom effect on hover */
+}
+
 
 /* Footer Styles */
 .footer {
     background-color: #fff;
     color: black;
-    text-align: center;
+    text-align: left;
     padding: 10px;
     position: relative;
     bottom: 0;
