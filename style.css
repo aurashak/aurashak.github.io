@@ -16,12 +16,10 @@ body {
     margin: 0px;
     padding: 0px;
     text-align: center;
-
 }
 
 /* General h1 and h2 Styles */
 h1 {
-
     margin: 0; /* Margin for h1 */
 }
 
@@ -37,8 +35,9 @@ h2 {
 }
 
 .Header h2 {
-    font-size: 20px; /* Example size, adjust as needed */
+    font-size: 23px; /* Example size, adjust as needed */
     font-weight: normal;
+    padding: 20px 0 9px 0;
     color: #666; /* Example color, adjust as needed */
 }
 
@@ -50,14 +49,14 @@ h2 {
     border-radius: 3px;
     font-family: 'Arial', monospace; /* Font family */
     font-weight: bold; /* Bold font weight */
-    font-size: 30px; /* Font size similar to h1 */
+    font-size: 28px; /* Font size similar to h1 */
     cursor: pointer; /* Cursor changes to pointer on hover */
     padding: 10px 20px; /* Padding for the button */
     margin: 0;
 }
 
 .title-button:hover {
-    /* Styles for hover state, if needed */
+   background-color: gold;
 }
 
 /* Navigation Bar Styles */
@@ -81,10 +80,10 @@ h2 {
     background-color: #BFBFBF; /* Background color set to grey */
     text-decoration: none;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    font-size: 15px; /* Font size set to 15px */
+    font-size: 19px; /* Font size set to 15px */
     font-family: 'Arial', monospace; /* Font family */
-    font-weight: normal; /* Font weight set to normal */
-    margin-right: 10px; /* 10px spacing between buttons */
+    font-weight: bold; /* Font weight set to normal */
+    margin-right: 20px; /* 10px spacing between buttons */
 }
 
 .UnderlineNav-item:last-child {
@@ -92,16 +91,15 @@ h2 {
 }
 
 .UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: #778899; /* Background color changes on hover */
+    background-color: gold; /* Changed background color to gold on hover */
 }
 
 /* Main Content Styles */
 .container-lg {
-    padding: 10px;
+    padding: 20px 10px 20px 10px;
     max-width: 90%;
     margin: auto;
     background-color: white;
-
 }
 
 .container-lg h1 {
