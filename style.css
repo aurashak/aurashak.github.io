@@ -6,7 +6,7 @@ body {
     color: #212529; /* Default text color */
     margin: 0;
     padding: 0px;
-    font-size: 0px;
+    font-size: 10px;
 }
 
 a {
@@ -33,31 +33,15 @@ a:focus {
 /* General h1 and h2 Styles */
 h1 {
     margin: 0; /* Margin for h1 */
+  font-size: 20px;
 }
 
 h2 {
     margin: 0px; /* Margin for h2 */
+    font-size: 20px;
+  font-family: arial;
+
 }
-
-
-/* Title Button Styles */
-.title-button {
-    background-color: #fff; /* Background color */
-    border: none;
-    color: #333; /* Text color */
-    border-radius: 0px;
-    font-family: 'Consolas', monospace; /* Font family */
-    font-weight: bold; /* Bold font weight */
-    font-size: 28px; /* Font size similar to h1 */
-    cursor: pointer; /* Cursor changes to pointer on hover */
-    padding: 0px; /* Padding for the button */
-    margin-top: 0px;
-}
-
-.title-button:hover {
-   background-color: gold;
-}
-
 
 
 /* Navigation Bar Styles */
