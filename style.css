@@ -65,7 +65,7 @@ h2 {
 .UnderlineNav {
     background-color: white; /* Background color set to white */
     overflow: hidden;
-    padding: 10px;
+    padding: 0px;
 }
 
 .UnderlineNav-body {
@@ -85,7 +85,7 @@ h2 {
     font-size: 19px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: bold; /* Font weight set to normal */
-    margin-right: 20px; /* 10px spacing between buttons */
+    margin-right: 0px; /* 10px spacing between buttons */
 }
 
 .UnderlineNav-item:last-child {
