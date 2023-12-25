@@ -3,12 +3,11 @@
 /* General Body Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: rgb(198, 24, 24);
-    color: #212529;
+    background-color: #fff; /* White background for the body */
+    color: #212529; /* Default text color */
     margin: 0;
     padding: 0;
     font-size: 15px;
-    background-color: #fff;
 }
 
 /* Header Styles */
@@ -18,18 +17,31 @@ body {
     text-align: center; /* Center align content */
 }
 
+/* Header h1 and h2 Styles */
+.Header h1 {
+    font-size: 30px; /* Example size, adjust as needed */
+    font-weight: bold;
+    color: #333; /* Example color, adjust as needed */
+}
+
+.Header h2 {
+    font-size: 25px; /* Example size, adjust as needed */
+    font-weight: normal;
+    color: #666; /* Example color, adjust as needed */
+}
+
 /* Title Button Styles */
 .title-button {
-    background-color: grey; 
+    background-color: #BFBFBF; /* Background color */
     border: none;
-    color: #333; 
-    border-radius: 2px;
-    font-family: 'arial', monospace; /* Consolas font */
+    color: #333; /* Text color */
+    border-radius: 3px;
+    font-family: 'Arial', monospace; /* Font family */
     font-weight: bold; /* Bold font weight */
-    font-size: 30px; /* Size similar to h1 */
+    font-size: 30px; /* Font size similar to h1 */
     cursor: pointer; /* Cursor changes to pointer on hover */
     padding: 10px 20px; /* Padding for the button */
-    margin: 0; /* Remove default margin */
+    margin: 0;
 }
 
 .title-button:hover {
@@ -52,12 +64,12 @@ body {
     display: block;
     padding: 10px 15px;
     color: black; /* Text color set to black */
-        border-radius: 2px;
-    background-color: grey; /* Background color set to grey */
+    border-radius: 2.5px;
+    background-color: #BFBFBF; /* Background color set to grey */
     text-decoration: none;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     font-size: 15px; /* Font size set to 15px */
-    font-family: 'arial', monospace; /* Font set to Consolas */
+    font-family: 'Arial', monospace; /* Font family */
     font-weight: normal; /* Font weight set to normal */
     margin-right: 10px; /* 10px spacing between buttons */
 }
@@ -67,7 +79,7 @@ body {
 }
 
 .UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: #778899; /* Background color changes to #778899 on hover */
+    background-color: #778899; /* Background color changes on hover */
 }
 
 /* Main Content Styles */
