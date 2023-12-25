@@ -92,6 +92,13 @@ h2 {
 
 .UnderlineNav-item:hover, .UnderlineNav-item.selected {
     background-color: gold; /* Changed background color to gold on hover */
+    
+    }
+    
+    /* Add active link style */
+.UnderlineNav-item:active {
+    background-color: red; /* Background color changes to red when active */
+
 }
 
 /* Main Content Styles */
