@@ -12,6 +12,8 @@ function loadElement(elementId, filePath) {
 
 document.addEventListener("DOMContentLoaded", function() {
     loadElement("navigation", "https://aurashak.github.io/navigation.html");
+    loadElement("worksubnav", "https://aurashak.github.io/worksubnav.html");
+
     loadElement("printsubnav", "https://aurashak.github.io/nav/printsubnav.html");
     loadElement("footer", "https://aurashak.github.io/footer.html");
 });
