@@ -5,156 +5,96 @@ body {
     background-color: #fff; /* White background for the body */
     color: #212529; /* Default text color */
     margin: 0;
-    padding: 20px;
+    padding: 0;
     font-size: 15px;
+    display: flex; /* Enable flex layout */
+}
+
+/* Side Navigation Styles */
+.side-nav {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the left */
+    position: fixed; /* Fix position to the left */
+    width: 200px; /* Set a fixed width for the sidebar */
+    height: 100vh; /* Full viewport height */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
 
 /* Header Styles */
 .Header {
-    background-color: white;
-    margin: 0px;
-    padding: 0px;
-    text-align: center;
+    text-align: left;
+    width: 100%; /* Full width of side-nav */
+    /* Other styling as needed */
 }
 
 /* General h1 and h2 Styles */
-h1 {
-    margin: 0; /* Margin for h1 */
-}
-
-h2 {
-    margin: 0px; /* Margin for h2 */
+h1, h2 {
+    margin: 0; /* Reset margin */
 }
 
 /* Header h1 and h2 Styles */
 .Header h1 {
-    font-size: 25px; /* Example size, adjust as needed */
+    font-size: 25px;
     font-weight: bold;
-    color: #333; /* Example color, adjust as needed */
+    color: #333;
 }
 
 .Header h2 {
-    font-size: 23px; /* Example size, adjust as needed */
-    font-family: 'Consolas', monospace; /* Font family */
+    font-size: 23px;
     font-weight: normal;
-    padding: 20px 0 9px 0;
-    color: #666; /* Example color, adjust as needed */
+    color: #666;
+    font-family: 'Consolas', monospace;
 }
 
 /* Title Button Styles */
 .title-button {
-    background-color: #BFBFBF; /* Background color */
-    border: none;
-    color: #333; /* Text color */
-    border-radius: 3px;
-    font-family: 'Consolas', monospace; /* Font family */
-    font-weight: bold; /* Bold font weight */
-    font-size: 28px; /* Font size similar to h1 */
-    cursor: pointer; /* Cursor changes to pointer on hover */
-    padding: 5px 10px; /* Padding for the button */
-    margin: 0;
-}
-
-.title-button:hover {
-   background-color: gold;
+    /* Title button styles */
 }
 
 /* Navigation Bar Styles */
 .UnderlineNav {
-    background-color: white; /* Background color set to white */
-    overflow: hidden;
-    padding: 10px;
-}
-
-.UnderlineNav-body {
-    display: flex;
-    justify-content: center;
+    width: 100%; /* Full width of side-nav */
     padding: 0;
+    /* Other styling as needed */
 }
 
 .UnderlineNav-item {
-    display: block;
-    padding: 5px 10px;
-    color: black; /* Text color set to black */
-    border-radius: 2.5px;
-    background-color: #BFBFBF; /* Background color set to grey */
-    text-decoration: none;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    font-size: 19px; /* Font size set to 15px */
-    font-family: 'Consolas', monospace; /* Font family */
-    font-weight: bold; /* Font weight set to normal */
-    margin-right: 20px; /* 10px spacing between buttons */
+    /* Navigation item styles */
 }
-
-.UnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
-}
-
-.UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: gold; /* Changed background color to gold on hover */
-    
-    }
-
 
 /* Main Content Styles */
 .container-lg {
-    padding: 20px 10px 20px 10px;
+    margin-left: 220px; /* Adjust based on the width of .side-nav */
+    padding: 20px;
     max-width: 90%;
-    margin: auto;
     background-color: white;
-}
-
-.container-lg h1 {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Arial', sans-serif;
-}
-
-.container-lg h2 {
-    font-size: 20px;
-    font-weight: normal;
-    font-family: 'Arial', sans-serif;
+    flex-grow: 1; /* Allow the container to fill the remaining space */
 }
 
 /* Image Grid Styles */
-.image-grid {
+.image-grid, .image-gridlarge {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); /* Adjust '250px' to your preferred minimum width */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    padding: 20px 0;
 }
 
-.image-gridlarge {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(1300px, 1fr)); /* Adjust '250px' to your preferred minimum width */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
-}
-
-.image-grid a {
+.image-grid a, .image-gridlarge a {
     display: block;
-    overflow: hidden; /* In case you want to apply any image cropping or zooming effects */
+    overflow: hidden;
 }
 
-.image-grid img {
+.image-grid img, .image-gridlarge img {
     width: 100%;
     height: auto;
-    display: block; /* Remove any extra space below the image */
-    transition: none; /* Optional: for zoom effect on hover */
+    display: block;
 }
-
 
 /* Footer Styles */
 .footer {
-    background-color: #fff;
-    color: black;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-.footer p {
-    margin: 0;
+    width: 100%; /* Full width of side-nav */
+    text-align: left;
+    /* Other styling as needed */
 }
