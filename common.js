@@ -13,7 +13,7 @@ function loadElement(elementId, filePath) {
 document.addEventListener("DOMContentLoaded", function() {
     loadElement("navigation", "navigation.html");
     loadElement("worksubnav", "worksubnav.html");
-    loadElement("printsubnav", "printsubnav.html"); // Ensure this file exists
+    loadElement("printsubnav", "/nav/printsubnav.html"); // Ensure this file exists
     loadElement("footer", "footer.html");
 });
 
