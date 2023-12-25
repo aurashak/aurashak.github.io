@@ -91,7 +91,7 @@ h2 a:hover {
 
 .UnderlineNav-item {
     display: block;
-    padding: 15px 20px; /* Padding for the button */
+    padding: 0px; /* Padding for the button */
     color: black; /* Text color set to black */
     border-radius: 0px;
     background-color: #fff; /* Background color set to grey */
@@ -99,8 +99,8 @@ h2 a:hover {
     transition: background-color 0.2s ease; /* Smooth transition for hover effect */
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
-    font-weight: normal; /* Font weight set to normal */
-    margin: 0px; /* 10px spacing between buttons */
+    font-weight: bold; /* Font weight set to normal */
+    margin: 10px 20px; /* 10px spacing between buttons */
 }
 
 .UnderlineNav-item:last-child {
@@ -127,7 +127,7 @@ h2 a:hover {
 
 .subUnderlineNav-item {
     display: block;
-    padding: 15px 20px; /* Padding for the button */
+    padding: 0px; /* Padding for the button */
     color: black; /* Text color set to black */
     border-radius: 0px;
     background-color: #fff; /* Background color set to grey */
@@ -136,7 +136,7 @@ h2 a:hover {
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: light; /* Font weight set to normal */
-    margin: 0px; /* 10px spacing between buttons */
+    margin: 20px; /* 10px spacing between buttons */
 }
 
 .subUnderlineNav-item:last-child {
@@ -162,7 +162,7 @@ h2 a:hover {
     
     .subsubUnderlineNav-item {
         display: block;
-        padding: 15px 20px; /* Padding for the button */
+        padding: 0px; /* Padding for the button */
         color: black; /* Text color set to black */
         border-radius: 0px;
         background-color: #fff; /* Background color set to grey */
@@ -171,7 +171,7 @@ h2 a:hover {
         font-size: 15px; /* Font size set to 15px */
         font-family: 'Consolas', monospace; /* Font family */
         font-weight: light; /* Font weight set to normal */
-        margin: 0px; /* 10px spacing between buttons */
+        margin: 20px; /* 10px spacing between buttons */
     }
     
     .subsubUnderlineNav-item:last-child {
