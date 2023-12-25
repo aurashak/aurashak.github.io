@@ -42,13 +42,22 @@ a:focus {
 /* General h1 and h2 Styles */
 h1 {
     margin: 0; /* Margin for h1 */
-  font-size: 20px;
+  font-size: 21px;
     font-family: arial;
 }
 
 h2 {
     margin: 0px; /* Margin for h2 */
-    font-size: 20px;
+    font-size: 21px;
+  font-family: arial;
+    font-weight: normal;
+    color: gray;
+
+}
+
+h3 {
+    margin: 0px; /* Margin for h2 */
+    font-size: 18px;
   font-family: arial;
     font-weight: normal;
     color: gray;
@@ -56,15 +65,16 @@ h2 {
 }
 
 h1 a:hover {
-    
     background-color: gold;
 }
 
 h2 a:hover {
-    
     background-color: gold;
 }
 
+h3 a:hover {
+    background-color: gold;
+}
 
 
 /* Navigation Bar Styles */
