@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
     loadElement("header", "header.html");
     loadElement("navigation", "navigation.html");
     loadElement("worksubnav", "worksubnav.html");
-    loadElement("printsubnav", "printsubnav.html");
+    loadElement("printsubnav", "nav/printsubnav.html");
+    loadElement("web", "nav/websubnav.html");
+    loadElement("sculpture", "nav/sculpturesubnav.html");
+
     loadElement("footer", "footer.html");
 });
