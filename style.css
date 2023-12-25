@@ -27,7 +27,7 @@ a:focus {
 
 /* Header Content Styles */
 .header-content {
-    margin: 15px; /* Add 15px margin to the header content */
+    margin: 10px 20px; /* Add 15px margin to the header content */
     display: flex; /* Use flexbox to align items in a row */
     align-items: center; /* Align items vertically in the center */
 }
@@ -100,7 +100,7 @@ h2 a:hover {
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: bold; /* Font weight set to normal */
-    margin: 10px 20px; /* 10px spacing between buttons */
+    margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
 }
 
 .UnderlineNav-item:last-child {
@@ -136,7 +136,7 @@ h2 a:hover {
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: light; /* Font weight set to normal */
-    margin: 20px; /* 10px spacing between buttons */
+    margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
 }
 
 .subUnderlineNav-item:last-child {
@@ -171,7 +171,7 @@ h2 a:hover {
         font-size: 15px; /* Font size set to 15px */
         font-family: 'Consolas', monospace; /* Font family */
         font-weight: light; /* Font weight set to normal */
-        margin: 20px; /* 10px spacing between buttons */
+    margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
     }
     
     .subsubUnderlineNav-item:last-child {
