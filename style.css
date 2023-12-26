@@ -111,6 +111,11 @@ h2 a:hover {
     background-color: gold; /* Changed background color to gold on hover */
     }
 
+    .UnderlineNav-item.active-page {
+        background-color: gold;
+    }
+    
+
     .UnderlineNav-item.cartography {
         color: gray; /* Gray text color */
         font-weight: lighter; /* Lighter font weight */
@@ -216,14 +221,14 @@ h2 a:hover {
 /* Image Grid Styles */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr)); /* Adjust '250px' to your preferred minimum width */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
 }
 
 .image-gridlarge {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(900px, 1fr)); /* Adjust min width to ensure more fluid resizing */
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Adjust min width to ensure more fluid resizing */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
 }
