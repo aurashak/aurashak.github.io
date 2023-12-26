@@ -112,6 +112,12 @@ h2 a:hover {
     }
 
 
+    .UnderlineNav-item.cartography {
+        color: gray; /* Change text color to gray */
+        font-weight: 300; /* Lighter font weight */
+        /* Keep other inherited styles from UnderlineNav-item */
+    }
+
     /* subNavigation Bar Styles */
 .subUnderlineNav {
     background-color: white; /* Background color set to white */
