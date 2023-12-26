@@ -8,7 +8,7 @@ var projection = d3.geoOrthographic()
 var pathGenerator = d3.geoPath().projection(projection);
 
 // Load and process the GeoJSON data
-d3.json("https://aurashak.github.io/countries.geojson").then(function(worldData) {
+d3.json("https://aurashak.github.io/geojson/countries.geojson").then(function(worldData) {
     // Select the SVG container
     var svg = d3.select(".globe-container");
 
