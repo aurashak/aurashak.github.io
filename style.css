@@ -229,6 +229,26 @@ h2 a:hover {
     transition: none; /* Optional: for zoom effect on hover */
 }
 
+.imagetitle {
+    font-family: arial; 
+    font-size: 15px;
+}
+
+.imagetitle {
+    font-family: arial; 
+    font-size: 15px;
+}
+
+.imagetitle a {
+    font-family: arial; 
+    font-size: 15px;
+}
+
+.imagetitle a:hover {
+    background-color: black;
+    
+}
+
 
 /* Footer Styles */
 .footer {
