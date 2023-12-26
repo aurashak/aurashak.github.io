@@ -223,8 +223,11 @@ h2 a:hover {
 
 .containertext-lg {
     padding: 0px 0px 0px 0px;
-    max-width: 100%;
+    max-width: 60%;
     margin: 40px 20px;
+    font-size: 15px;
+    font-family: arial;
+    text-align: center;
     background-color: white;
 }
 
@@ -251,7 +254,7 @@ h2 a:hover {
 
 .image-column {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-template-columns: repeat(auto-fill, minmax(80%, 1fr)); /* Adjust '250px' to your preferred minimum width */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
 }
