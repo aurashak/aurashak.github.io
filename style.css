@@ -111,13 +111,18 @@ h2 a:hover {
     background-color: gold; /* Changed background color to gold on hover */
     }
 
-
     .UnderlineNav-item.cartography {
-        color: gray; /* Change text color to gray */
-        font-weight: 300; /* Lighter font weight */
-        /* Keep other inherited styles from UnderlineNav-item */
+        color: gray; /* Gray text color */
+        font-weight: lighter; /* Lighter font weight */
+        pointer-events: none; /* Makes the link non-clickable */
+        cursor: default; /* Default cursor to indicate non-clickable */
     }
-
+    
+    /* Remove hover effect for Cartography */
+    .UnderlineNav-item.cartography:hover {
+        background-color: transparent; /* No background change on hover */
+    }
+    
     /* subNavigation Bar Styles */
 .subUnderlineNav {
     background-color: white; /* Background color set to white */
@@ -218,7 +223,7 @@ h2 a:hover {
 
 .image-gridlarge {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr)); /* Adjust '250px' to your preferred minimum width */
+    grid-template-columns: repeat(auto-fill, minmax(900px, 1fr)); /* Adjust min width to ensure more fluid resizing */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
 }
