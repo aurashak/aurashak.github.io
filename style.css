@@ -127,12 +127,25 @@ h2 a:hover {
     .UnderlineNav-item.cartography:hover {
         background-color: transparent; /* No background change on hover */
     }
+
+    .UnderlineNav-item.worknav {
+        color: gray; /* Gray text color */
+        font-weight: lighter; /* Lighter font weight */
+        pointer-events: none; /* Makes the link non-clickable */
+        cursor: default; /* Default cursor to indicate non-clickable */
+    }
+    
+    /* Remove hover effect for Cartography */
+    .UnderlineNav-item.worknav {
+        background-color: transparent; /* No background change on hover */
+    }
     
     /* subNavigation Bar Styles */
 .subUnderlineNav {
     background-color: white; /* Background color set to white */
     overflow: hidden;
     padding: 0px;
+    margin-left: 20px;
 }
 
 .subUnderlineNav-body {
