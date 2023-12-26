@@ -263,6 +263,20 @@ h2 a:hover {
 }
 
 
+.globe-container {
+    width: 800px;
+    height: 600px;
+    /* Additional styling as needed */
+}
+
+.country {
+    fill: #ccc;
+    stroke: #fff;
+    stroke-width: 0.5;
+}
+
+
+
 /* Footer Styles */
 .footer {
     background-color: #fff;
