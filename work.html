@@ -20,5 +20,18 @@
 
     <!-- Load the common elements -->
     <script src="common.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navItems = document.querySelectorAll('.UnderlineNav-item');
+            navItems.forEach(function(navItem) {
+                if (navItem.href === window.location.href) {
+                    navItem.classList.add('active-page');
+                }
+            });
+        });
+    </script>
+
+
 </body>
 </html>
