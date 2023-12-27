@@ -18,12 +18,8 @@ a {
 }
 
 a:hover {
-    background-color: #bfbfbf;
+    background-color: none;
     text-decoration: none;
-}
-
-.active-link {
-    text-decoration: underline;
 }
 
 /* Header Content Styles */
@@ -95,6 +91,13 @@ h3 {
     margin-right: 0; /* No margin for the last item */
 }
 
+.UnderlineNav a {
+    background-color: none;
+}
+.UnderlineNav a:hover {
+    background-color: gold;
+}
+
 
     
 /* Main Content Styles */
@@ -104,6 +107,7 @@ h3 {
     margin: 40px 20px;
     background-color: white;
 }
+
 
 .containertext-lg {
     padding: 0px 0px 0px 0px;
@@ -121,6 +125,13 @@ h3 {
     font-weight: bold;
     font-family: 'Arial', sans-serif;
     text-align: center;
+}
+
+.containertext-lg a {
+}
+
+.containertext-lg a:hover {
+  background-color: black;
 }
 
 .containertext-lg h2 {
