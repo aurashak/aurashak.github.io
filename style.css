@@ -19,7 +19,7 @@ a {
 
 a:hover {
     
-    background-color: gold;
+    background-color: none;
 }
 
 a:focus {
@@ -223,12 +223,17 @@ h2 a:hover {
 
 .containertext-lg {
     padding: 0px 0px 0px 0px;
-    max-width: 60%;
-    margin: 40px 20px;
+    max-width: 60%; /* Adjust as needed */
+    margin: 40px auto; /* Top and bottom margin 40px, left and right auto */
     font-size: 15px;
     font-family: arial;
-    text-align: center;
+    text-align: left; /* Center align the text */
     background-color: white;
+}
+
+
+.containertext-lg a:hover {
+    text-decoration: underline;
 }
 
 
@@ -236,12 +241,15 @@ h2 a:hover {
     font-size: 20px;
     font-weight: bold;
     font-family: 'Arial', sans-serif;
+    text-align: center;
 }
 
 .containertext-lg h2 {
     font-size: 20px;
     font-weight: normal;
     font-family: 'Arial', sans-serif;
+    text-align: center;
+
 }
 
 /* Image Grid Styles */
