@@ -216,33 +216,25 @@ h3 {
 
 }
 
-/* Image Grid Styles */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(49%, 1fr)); /* Adjust '250px' to your preferred minimum width */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
+    grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
+    gap: 10px; /* Space between grid items */
 }
 
-.image-column {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80%, 1fr)); /* Adjust '250px' to your preferred minimum width */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
+.image-container {
+    width: 200px;
+    height: 200px;
+    overflow: hidden; /* Ensures the image does not exceed the container */
+    display: flex;
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
 }
 
-.image-gridlarge {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Adjust min width to ensure more fluid resizing */
-    grid-gap: 20px; /* Space between grid items */
-    padding: 0px;
-}
-
-.image-grid img {
-    width: 100%;
-    height: auto;
-    display: block; /* Remove any extra space below the image */
-    transition: none; /* Optional: for zoom effect on hover */
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
 }
 
 .imagetitle {
