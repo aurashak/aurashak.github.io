@@ -8,6 +8,7 @@ body {
     font-family: arial;
     padding: 0px;
     font-size: 14px;
+    padding-bottom: 20px;
 }
 
 a {
@@ -261,12 +262,12 @@ h3 {
     color: black;
     text-align: center;
     padding: 0px;
-    position: relative;
-    bottom: 0;
+    padding: 20px 0px 10px 0px;
     width: 100%;
-    margin: 20px;
+    margin: 0; /* Removed the margin */
     font-size: 12px;
 }
+
 
 .footer p {
     margin: 20px;
