@@ -24,14 +24,10 @@ function highlightActiveLink() {
     });
 }
 
-window.onload = function() {
-    if (document.getElementById("navigation")) {
-        loadElement("navigation", "https://aurashak.github.io/navigation.html", highlightActiveLink);
-    }
-    if (document.getElementById("worknav")) {
-        loadElement("worknav", "https://aurashak.github.io/worknav.html", highlightActiveLink);
-    }
-    if (document.getElementById("footer")) {
-        loadElement("footer", "https://aurashak.github.io/footer.html");
-    }
-};
+document.addEventListener("DOMContentLoaded", function() {
+    loadElement("navigation", "https://aurashak.github.io/navigation.html", highlightActiveLink);
+    loadElement("worknav", "https://aurashak.github.io/worknav.html", highlightActiveLink);
+
+    // Load other elements if needed
+    loadElement("footer", "https://aurashak.github.io/footer.html");
+});
