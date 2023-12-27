@@ -11,6 +11,13 @@ body {
     padding-bottom: 20px;
 }
 
+p {
+    color: #000; /* Default text color */
+    font-family: arial;
+    font-size: 14px;
+  text-align: center;
+}
+
 a {
     color: #000; /* Standard link color - change as needed */
     text-decoration: none; /* Removes underline from links */
