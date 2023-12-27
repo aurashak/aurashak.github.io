@@ -195,6 +195,7 @@ h3 {
     max-width: 60%; /* Adjust as needed */
     margin: 40px auto; /* Top and bottom margin 40px, left and right auto */
     font-size: 15px;
+    line-height: 1.4;
     font-family: arial;
     text-align: left; /* Center align the text */
     background-color: white;
