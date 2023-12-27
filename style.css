@@ -20,11 +20,6 @@ a:hover {
     background-color: none;
 }
 
-a:focus {
-    color: #000; /* Color change on hover/focus - change as needed */
-    text-decoration: none; /* Underline on hover/focus for clarity */
-}
-
 /* Header Content Styles */
 .header-content {
     margin: 10px 20px; /* Add 15px margin to the header content */
