@@ -18,8 +18,8 @@ a {
 }
 
 a:hover {
-    background-color: none;
-    text-decoration: underline;
+    background-color: #bfbfbf;
+    text-decoration: none;
 }
 
 .active-link {
@@ -31,6 +31,7 @@ a:hover {
     margin: 10px 20px; /* Add 15px margin to the header content */
     display: flex; /* Use flexbox to align items in a row */
     align-items: center; /* Align items vertically in the center */
+
 }
 
 /* General h1 and h2 Styles */
@@ -68,12 +69,12 @@ h3 {
 .UnderlineNav {
     background-color: white; /* Background color set to white */
     overflow: hidden;
-    padding: 0px;
+    padding: 20px;
 }
 
 .UnderlineNav-body {
     display: flex;
-    justify-content: left;
+    justify-content: center; /* Center the navigation items */
     padding: 0;
 }
 
@@ -84,28 +85,17 @@ h3 {
     border-radius: 0px;
     background-color: #fff; /* Background color set to grey */
     text-decoration: none;
-    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
     font-size: 15px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: bold; /* Font weight set to normal */
-    margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
+    margin: 10px; /* Adjust margins as needed */
 }
 
 .UnderlineNav-item:last-child {
     margin-right: 0; /* No margin for the last item */
 }
 
-.UnderlineNav-item.worknav {
-    color: gray; /* Gray text color */
-    font-weight: lighter; /* Lighter font weight */
-    pointer-events: none; /* Makes the link non-clickable */
-    cursor: default; /* Default cursor to indicate non-clickable */
-}
-    
-/* Remove hover effect for Cartography */
-.UnderlineNav-item.worknav {
-    background-color: transparent; /* No background change on hover */
-}
+
     
 /* Main Content Styles */
 .container-lg {
