@@ -10,7 +10,6 @@ body {
     font-size: 14px;
 }
 
-
 a {
     color: #000; /* Standard link color - change as needed */
     text-decoration: none; /* Removes underline from links */
@@ -18,7 +17,6 @@ a {
 }
 
 a:hover {
-    
     background-color: none;
 }
 
@@ -34,40 +32,27 @@ a:focus {
     align-items: center; /* Align items vertically in the center */
 }
 
-
-
 /* General h1 and h2 Styles */
 h1 {
     margin: 0; /* Margin for h1 */
-  font-size: 21px;
+    font-size: 21px;
     font-family: arial;
 }
 
 h2 {
     margin: 0px; /* Margin for h2 */
     font-size: 21px;
-  font-family: arial;
+    font-family: arial;
     font-weight: normal;
     color: gray;
-
 }
 
 h3 {
     margin: 0px; /* Margin for h2 */
     font-size: 18px;
-  font-family: arial;
+    font-family: arial;
     font-weight: normal;
     color: gray;
-
-}
-
-h1 a:hover {
-    
-    background-color: gold;
-}
-
-h2 a:hover {
-    background-color: gold;
 }
 
 .bold-text {
@@ -109,40 +94,31 @@ h2 a:hover {
     margin-right: 0; /* No margin for the last item */
 }
 
-.UnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: gold; /* Changed background color to gold on hover */
-    }
+.UnderlineNav-item.cartography {
+    color: gray; /* Gray text color */
+    font-weight: lighter; /* Lighter font weight */
+    pointer-events: none; /* Makes the link non-clickable */
+    cursor: default; /* Default cursor to indicate non-clickable */
+ }
+    
+/* Remove hover effect for Cartography */
+.UnderlineNav-item.cartography:hover {
+    background-color: transparent; /* No background change on hover */
+}
 
-    .UnderlineNav-item.active-page {
-        background-color: gold;
-    }
+.UnderlineNav-item.worknav {
+    color: gray; /* Gray text color */
+    font-weight: lighter; /* Lighter font weight */
+    pointer-events: none; /* Makes the link non-clickable */
+    cursor: default; /* Default cursor to indicate non-clickable */
+}
     
-
-    .UnderlineNav-item.cartography {
-        color: gray; /* Gray text color */
-        font-weight: lighter; /* Lighter font weight */
-        pointer-events: none; /* Makes the link non-clickable */
-        cursor: default; /* Default cursor to indicate non-clickable */
-    }
+/* Remove hover effect for Cartography */
+.UnderlineNav-item.worknav {
+    background-color: transparent; /* No background change on hover */
+}
     
-    /* Remove hover effect for Cartography */
-    .UnderlineNav-item.cartography:hover {
-        background-color: transparent; /* No background change on hover */
-    }
-
-    .UnderlineNav-item.worknav {
-        color: gray; /* Gray text color */
-        font-weight: lighter; /* Lighter font weight */
-        pointer-events: none; /* Makes the link non-clickable */
-        cursor: default; /* Default cursor to indicate non-clickable */
-    }
-    
-    /* Remove hover effect for Cartography */
-    .UnderlineNav-item.worknav {
-        background-color: transparent; /* No background change on hover */
-    }
-    
-    /* subNavigation Bar Styles */
+/* subNavigation Bar Styles */
 .subUnderlineNav {
     background-color: white; /* Background color set to white */
     overflow: hidden;
@@ -174,45 +150,37 @@ h2 a:hover {
     margin-right: 0; /* No margin for the last item */
 }
 
-.subUnderlineNav-item:hover, .UnderlineNav-item.selected {
-    background-color: red; /* Changed background color to gold on hover */
-    }
-
-    /* subsubNavigation Bar Styles */
-    .subsubUnderlineNav {
-        background-color: white; /* Background color set to white */
-        overflow: hidden;
-        padding: 0px;
-    }
+/* subsubNavigation Bar Styles */
+.subsubUnderlineNav {
+    background-color: white; /* Background color set to white */
+    overflow: hidden;
+    padding: 0px;
+}
     
-    .subsubUnderlineNav-body {
-        display: flex;
-        justify-content: left;
-        padding: 0;
-    }
+.subsubUnderlineNav-body {
+    display: flex;
+    justify-content: left;
+    padding: 0;
+}
     
-    .subsubUnderlineNav-item {
-        display: block;
-        padding: 0px; /* Padding for the button */
-        color: black; /* Text color set to black */
-        border-radius: 0px;
-        background-color: #fff; /* Background color set to grey */
-        text-decoration: none;
-        transition: background-color 0.2s ease; /* Smooth transition for hover effect */
-        font-size: 15px; /* Font size set to 15px */
-        font-family: 'Consolas', monospace; /* Font family */
-        font-weight: light; /* Font weight set to normal */
+.subsubUnderlineNav-item {
+    display: block;
+    padding: 0px; /* Padding for the button */
+    color: black; /* Text color set to black */
+    border-radius: 0px;
+    background-color: #fff; /* Background color set to grey */
+    text-decoration: none;
+    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
+    font-size: 15px; /* Font size set to 15px */
+    font-family: 'Consolas', monospace; /* Font family */
+    font-weight: light; /* Font weight set to normal */
     margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
-    }
+}
     
-    .subsubUnderlineNav-item:last-child {
-        margin-right: 0; /* No margin for the last item */
-    }
+.subsubUnderlineNav-item:last-child {
+    margin-right: 0; /* No margin for the last item */
+}
     
-    .subsubUnderlineNav-item:hover, .UnderlineNav-item.selected {
-        background-color: blue; /* Changed background color to gold on hover */
-        }
-
 /* Main Content Styles */
 .container-lg {
     padding: 0px 0px 0px 0px;
@@ -230,12 +198,6 @@ h2 a:hover {
     text-align: left; /* Center align the text */
     background-color: white;
 }
-
-
-.containertext-lg a:hover {
-    text-decoration: underline;
-}
-
 
 .containertext-lg h1 {
     font-size: 20px;
@@ -267,17 +229,11 @@ h2 a:hover {
     padding: 0px;
 }
 
-
 .image-gridlarge {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Adjust min width to ensure more fluid resizing */
     grid-gap: 20px; /* Space between grid items */
     padding: 0px;
-}
-
-.image-grid a {
-    display: block;
-    overflow: hidden; /* In case you want to apply any image cropping or zooming effects */
 }
 
 .image-grid img {
@@ -292,19 +248,6 @@ h2 a:hover {
     font-size: 15px;
 }
 
-.imagetitle a {
-    font-family: arial; 
-    font-size: 15px;
-    color: black; 
-    background-color: white;
-}
-
-.imagetitle a:hover {
-    background-color: black;
-    
-}
-
-
 .globe-container {
     width: 800px;
     height: 600px;
@@ -316,8 +259,6 @@ h2 a:hover {
     stroke: #fff;
     stroke-width: 0.5;
 }
-
-
 
 /* Footer Styles */
 .footer {
@@ -334,8 +275,6 @@ h2 a:hover {
 
 .footer p {
     margin: 20px;
-  font-size: 12px;
-  font-family: arial; 
-  
+    font-size: 12px;
+    font-family: arial; 
 }
-
