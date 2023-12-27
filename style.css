@@ -22,6 +22,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.active-link {
+    text-decoration: underline;
+}
+
 /* Header Content Styles */
 .header-content {
     margin: 10px 20px; /* Add 15px margin to the header content */
