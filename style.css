@@ -95,18 +95,6 @@ h3 {
     margin-right: 0; /* No margin for the last item */
 }
 
-.UnderlineNav-item.cartography {
-    color: gray; /* Gray text color */
-    font-weight: lighter; /* Lighter font weight */
-    pointer-events: none; /* Makes the link non-clickable */
-    cursor: default; /* Default cursor to indicate non-clickable */
- }
-    
-/* Remove hover effect for Cartography */
-.UnderlineNav-item.cartography:hover {
-    background-color: transparent; /* No background change on hover */
-}
-
 .UnderlineNav-item.worknav {
     color: gray; /* Gray text color */
     font-weight: lighter; /* Lighter font weight */
@@ -117,69 +105,6 @@ h3 {
 /* Remove hover effect for Cartography */
 .UnderlineNav-item.worknav {
     background-color: transparent; /* No background change on hover */
-}
-    
-/* subNavigation Bar Styles */
-.subUnderlineNav {
-    background-color: white; /* Background color set to white */
-    overflow: hidden;
-    padding: 0px;
-    margin-left: 20px;
-}
-
-.subUnderlineNav-body {
-    display: flex;
-    justify-content: left;
-    padding: 0;
-}
-
-.subUnderlineNav-item {
-    display: block;
-    padding: 0px; /* Padding for the button */
-    color: black; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #fff; /* Background color set to grey */
-    text-decoration: none;
-    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
-    font-size: 15px; /* Font size set to 15px */
-    font-family: 'Consolas', monospace; /* Font family */
-    font-weight: light; /* Font weight set to normal */
-    margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
-}
-
-.subUnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
-}
-
-/* subsubNavigation Bar Styles */
-.subsubUnderlineNav {
-    background-color: white; /* Background color set to white */
-    overflow: hidden;
-    padding: 0px;
-}
-    
-.subsubUnderlineNav-body {
-    display: flex;
-    justify-content: left;
-    padding: 0;
-}
-    
-.subsubUnderlineNav-item {
-    display: block;
-    padding: 0px; /* Padding for the button */
-    color: black; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #fff; /* Background color set to grey */
-    text-decoration: none;
-    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
-    font-size: 15px; /* Font size set to 15px */
-    font-family: 'Consolas', monospace; /* Font family */
-    font-weight: light; /* Font weight set to normal */
-    margin: 10px 20px 0px 0px; /* 10px spacing between buttons */
-}
-    
-.subsubUnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
 }
     
 /* Main Content Styles */
@@ -216,7 +141,7 @@ h3 {
 
 }
 
-.image-grid {
+.image-gridtwo {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
     gap: 30px 80px; /* 10px row gap, 20px column gap */
@@ -225,23 +150,66 @@ h3 {
     margin: 0 auto; /* Center the grid in the page with automatic margins */
 }
 
-.image-container {
+.image-containertwo {
     display: flex;
-    justify-content: center; /* Center image horizontally */
-    align-items: center; /* Center image vertically */
-    overflow: hidden; /* Optional, based on your design */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    overflow: hidden;
 }
 
-.image-container img {
+.image-containertwo img {
     max-width: 100%;
     max-height: 100%;
     /* Removed object-fit: cover; */
 }
 
+.image-gridone {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Two columns of equal width */
+    gap: 30px 80px; /* 10px row gap, 20px column gap */
+    justify-content: center; /* Center the grid */
+    width: 60%; /* Adjust the width of the grid */
+    margin: 0 auto; /* Center the grid in the page with automatic margins */
+}
+
+.image-containerone {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    overflow: hidden;
+}
+
+.image-containerone img {
+    max-width: 100%;
+    max-height: 100%;
+    /* Removed object-fit: cover; */
+}
+
+.image-caption {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px; /* Space between image and caption */
+}
+
+.image-captiontitle {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px; /* Space between image and caption */
+}
+
+
 .imagetitle {
     font-family: arial; 
     font-size: 15px;
 }
+
 
 .globe-container {
     width: 800px;
