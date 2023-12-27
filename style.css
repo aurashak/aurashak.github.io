@@ -222,7 +222,8 @@ h3 {
 .globe-container {
     width: 800px;
     height: 600px;
-    /* Additional styling as needed */
+    margin: 0 auto; /* Centers the SVG horizontally */
+    display: block; /* SVG is inline by default, change it to block for proper centering */
 }
 
 .country {
