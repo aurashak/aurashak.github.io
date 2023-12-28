@@ -25,7 +25,7 @@ svg.append("path")
     .attr("stroke-width", 0.5);
 
 // Load and display the world countries
-d3.json("https://aurashak.github.io/geojson/countries.geojson").then((data) => {
+d3.json("https://aurashak.github.io/geojson/world_countries_geojson.geojson").then((data) => {
     svg.selectAll(".country")
         .data(data.features)
         .enter().append("path")
