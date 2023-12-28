@@ -4,5 +4,5 @@ var map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/aurashk/clqoqcgqx00iv01p5ddg1fknw', // your custom Mapbox style
     center: [-74.0060, 40.7128], // starting position [lng, lat]
-    zoom: 1 // starting zoom
+    zoom: 9 // starting zoom
 });

@@ -250,7 +250,22 @@ h3 {
 }
 
 
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 #map {
-    height: 600px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
     width: 100%;
 }
