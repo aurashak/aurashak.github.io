@@ -248,3 +248,16 @@ h3 {
     font-size: 12px;
     font-family: arial; 
 }
+
+.graticule {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 0.5px;
+        }
+        .country {
+            fill: white;
+            stroke: black;
+        }
+        .ocean {
+            fill: red;
+        }
