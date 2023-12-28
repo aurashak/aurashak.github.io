@@ -2,12 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqe
 
 var map = new mapboxgl.Map({
     container: 'map', // container ID
-    style: 'mapbox://styles/aurashk/clqoqcgqx00iv01p5ddg1fknw', // your Mapbox style
-    center: [40.785091, -73.968285], // starting position [lng, lat]
-    zoom: 13, // starting zoom
-    projection: 'globe' // display the map as a 3D globe
-});
-
-map.on('style.load', () => {
-    map.setFog({}); // Set the default atmosphere style
+    style: 'mapbox://styles/aurashk/clqoqcgqx00iv01p5ddg1fknw', // your custom Mapbox style
+    center: [-74.0060, 40.7128], // starting position [lng, lat]
+    zoom: 9 // starting zoom
 });
