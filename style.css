@@ -249,15 +249,23 @@ h3 {
     font-family: arial; 
 }
 
+
+        /* Rest of the styles remain the same */
+.country {
+    fill: #cccccc; /* Country fill color */
+    stroke: #000; /* Country border color */
+    stroke-width: 0.7; /* Increased stroke width for visibility */
+}
+
+.capital {
+    fill: red; /* Color of capital markers */
+    stroke: black; /* Border color of markers */
+    stroke-width: 0.7;
+}
+
 .graticule {
-            fill: none;
-            stroke: #ccc;
-            stroke-width: 0.5px;
-        }
-        .country {
-            fill: white;
-            stroke: black;
-        }
-        .ocean {
-            fill: red;
-        }
+    fill: none;
+    stroke: #777;
+    stroke-opacity: 0.5;
+    stroke-width: 0.5;
+}
