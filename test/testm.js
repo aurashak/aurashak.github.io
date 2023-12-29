@@ -1,37 +1,23 @@
-var countryStyle = new ol.style.Style({
-    fill: new ol.style.Fill({
-      color: 'black' // Color of countries
-    }),
-    stroke: new ol.style.Stroke({
-      color: 'black', // Color of country borders
-      width: 1
-    })
-  });
-  
-  var vectorLayer = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      url: 'https://aurashak.github.io/geojson/countries.geojson',
-      format: new ol.format.GeoJSON()
-    }),
-    style: countryStyle
-  });
-  
-  var map = new ol.Map({
+var map = new ol.Map({
     target: 'map',
     layers: [
+      // Stamen Terrain Background layer
       new ol.layer.Tile({
-        source: new ol.source.OSM()
-      }),
-      vectorLayer
+        source: new ol.source.XYZ({
+          url: 'https://stamen-tiles.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png',
+          attributions: [
+            'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ' +
+            '<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; ' +
+            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+          ],
+          maxZoom: 18
+        })
+      })
     ],
     view: new ol.View({
-      center: ol.proj.fromLonLat([0, 0]),
-      zoom: 2
+      center: ol.proj.fromLonLat([-74.0060, 40.7128]), // Coordinates for New York City
+      zoom: 11 // Adjusted zoom level
     })
-  });
-  
-  // Set the map background to white which will style the oceans
-  map.on('postrender', function() {
-    map.getViewport().style.background = 'white';
   });
   
