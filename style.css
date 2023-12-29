@@ -242,9 +242,9 @@ h3 {
     font-family: arial; 
 }
 
-/* Consolidated style for the map */
-#map {
-    height: 600px; /* Set a fixed height for the map */
-    width: 100%; /* Let the map fill the container */
-    /* No need for margin-top or position relative here unless you have a specific reason for them */
+.map {
+    width: 50%; /* Set the width of the map to 50% of the parent element */
+    height: 400px; /* Set the height of the map */
+    margin: 0 auto; /* Centers the map in the parent element */
+    /* Additional styles can be added if needed */
 }
