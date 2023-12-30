@@ -1,66 +1,69 @@
 var mymap = L.map('mapid').setView([0, 0], 3);
 
-// Define layers
+// Define tile layers
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 });
-var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: '© Esri and others'
-});
-// Define Copernicus (Sentinel) satellite tile layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
-var geojsonLayer;
 
-// Initially add only the GeoJSON layer
-fetch('https://aurashak.github.io/geojson/countries.geojson')
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        geojsonLayer = L.geoJSON(data, {
-            style: function(feature) {
-                return {
-                    color: 'white',
-                    weight: 2,
-                    fillColor: 'black',
-                    fillOpacity: 1
-                };
-            }
-        }).addTo(mymap);
-    })
-    .catch(function(error) {
-        console.log('Error: ' + error);
+var geojsonGroup = L.layerGroup().addTo(mymap); // Add the GeoJSON group to the map initially
+
+// Function to add GeoJSON data to the group
+function addGeoJSONToGroup(url, style) {
+    return fetch(url)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            L.geoJSON(data, { style }).addTo(geojsonGroup);
+        });
+}
+
+// Add countries, lakes, and rivers layers to the group sequentially
+addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
+    color: 'white',
+    weight: .5,
+    fillColor: 'black',
+    fillOpacity: 1
+}).then(function() {
+    return addGeoJSONToGroup('https://aurashak.github.io/geojson/ne_10m_lakes.json', {
+        color: 'white',
+        weight: 0,
+        fillColor: 'white',
+        fillOpacity: 1
     });
+}).then(function() {
+    return addGeoJSONToGroup('https://aurashak.github.io/geojson/earth-rivers.geo.json', {
+        color: 'white',
+        weight: 0.03,
+        fillOpacity: 1
+    });
+}).catch(function(error) {
+    console.log('Error: ' + error);
+});
 
 // Toggle functions
 function toggleOSMLayer() {
-    if (mymap.hasLayer(osmLayer)) {
-        mymap.removeLayer(osmLayer);
-    } else {
-        mymap.addLayer(osmLayer);
-        mymap.removeLayer(satelliteLayer);
-        mymap.removeLayer(geojsonLayer);
-    }
+    toggleLayer(osmLayer, [satelliteLayer, geojsonGroup]);
 }
 
 function toggleSatelliteLayer() {
-    if (mymap.hasLayer(satelliteLayer)) {
-        mymap.removeLayer(satelliteLayer);
-    } else {
-        mymap.addLayer(satelliteLayer);
-        mymap.removeLayer(osmLayer);
-        mymap.removeLayer(geojsonLayer);
-    }
+    toggleLayer(satelliteLayer, [osmLayer, geojsonGroup]);
 }
 
 function toggleGeoJSONLayer() {
-    if (mymap.hasLayer(geojsonLayer)) {
-        mymap.removeLayer(geojsonLayer);
+    toggleLayer(geojsonGroup, [osmLayer, satelliteLayer]);
+}
+
+function toggleLayer(layer, otherLayers) {
+    if (mymap.hasLayer(layer)) {
+        mymap.removeLayer(layer);
     } else {
-        mymap.addLayer(geojsonLayer);
-        mymap.removeLayer(osmLayer);
-        mymap.removeLayer(satelliteLayer);
+        mymap.addLayer(layer);
+        otherLayers.forEach(l => mymap.removeLayer(l));
     }
 }
+
+// No need to add OSM or Satellite layers initially
