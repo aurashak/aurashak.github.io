@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://aurashak.github.io/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body>
     <div id="navigation"></div>
@@ -15,11 +15,15 @@
         <p><a href="https://aurashak.github.io/about.html">Lorem ipsum dolor sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
     </div>
 
-    <div id="map" class="map"></div>
+    <div id="mapid"></div>
+    <button onclick="toggleOSMLayer()">Toggle OSM Layer</button>
+  <button onclick="toggleSatelliteLayer()">Toggle Satellite Layer</button>
+  <button onclick="toggleGeoJSONLayer()">Toggle GeoJSON Layer</button>
 
-
+  <script src="https://aurashak.github.io/testm.js"></script>
 
 
     <script src="https://aurashak.github.io/common.js"></script>
 </body>
 </html>
+

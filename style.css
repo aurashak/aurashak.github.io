@@ -242,9 +242,7 @@ h3 {
     font-family: arial; 
 }
 
-.map {
-    width: 50%; /* Set the width of the map to 50% of the parent element */
-    height: 400px; /* Set the height of the map */
-    margin: 0 auto; /* Centers the map in the parent element */
-    /* Additional styles can be added if needed */
+#mapid {
+    height: 500px;
+ background-color: white;
 }
