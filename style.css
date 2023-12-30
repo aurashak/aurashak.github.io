@@ -149,10 +149,11 @@ h3 {
 
 }
 
+/* Styles for larger screens */
 .image-gridtwo {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
-    gap: 30px 80px; /* 10px row gap, 20px column gap */
+    gap: 30px; /* Space between items */
     justify-content: center; /* Center the grid */
     width: 60%; /* Adjust the width of the grid */
     margin: 0 auto; /* Center the grid in the page with automatic margins */
@@ -246,4 +247,19 @@ h3 {
     height: 500px;
  background-color: white;
  border: solid 1px black;
+}
+
+
+/* Styles for mobile devices */
+@media screen and (max-width: 768px) {
+    .image-gridone, .image-gridtwo {
+        grid-template-columns: 1fr; /* Collapse to one column */
+        gap: 10px; /* Smaller gap for mobile */
+        width: 80%; /* Adjust width for smaller screens */
+    }
+
+    .image-containerone img, .image-containertwo img {
+        width: 100%; /* Full width images */
+        height: auto; /* Maintain aspect ratio */
+    }
 }
