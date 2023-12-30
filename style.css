@@ -153,7 +153,7 @@ h3 {
 .image-gridtwo {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
-    gap: 30px; /* Space between items */
+    gap: 60px; /* Space between items */
     justify-content: center; /* Center the grid */
     width: 60%; /* Adjust the width of the grid */
     margin: 0 auto; /* Center the grid in the page with automatic margins */
