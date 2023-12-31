@@ -1,18 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the map with specific options
+    // Initialize the map
     var mymap = L.map('mapid', {
-        minZoom: 2, 
-        maxZoom: 18, 
-        maxBounds: [[-90, -180], [90, 180]], 
-        maxBoundsViscosity: 1.0 
+        minZoom: 2,
+        maxZoom: 18,
+        maxBounds: [[-90, -180], [90, 180]],
+        maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
-    // Define the OpenStreetMap layer without adding it to the map initially
+    // Define the OpenStreetMap and Satellite layers
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     });
-
-    // Define the satellite layer without adding it to the map initially
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
         attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
     });
@@ -54,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fillOpacity: 1
     });
 
-    // Function to toggle layers on and off
+    // Function to toggle layers
     function toggleLayer(layer) {
         if (mymap.hasLayer(layer)) {
             mymap.removeLayer(layer);
@@ -64,28 +62,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Functions to toggle specific layers
-    function toggleOSMLayer() { toggleLayer(osmLayer); }
-    function toggleSatelliteLayer() { toggleLayer(satelliteLayer); }
-    function toggleGeoJSONLayer() { toggleLayer(geojsonGroup); }
+    window.toggleOSMLayer = function() { toggleLayer(osmLayer); };
+    window.toggleSatelliteLayer = function() { toggleLayer(satelliteLayer); };
+    window.toggleGeoJSONLayer = function() { toggleLayer(geojsonGroup); };
 
-    // Add the search control to the map
-    var searchControl = new L.Control.geocoder({
-        placeholder: "Search for a place",
-        geocoder: new L.Control.Geocoder.Nominatim()
-    }).addTo(mymap);
+    // Initialize the geocoder
+    var geocoder = new L.Control.Geocoder.Nominatim();
 
-    // Check if the search button exists before adding event listener
-    if (document.getElementById('search-button')) {
-        document.getElementById('search-button').addEventListener('click', function() {
+    // Event listener for the custom search button
+    var searchButton = document.getElementById('search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
             var query = document.getElementById('search-input').value;
-            searchControl.geocoder.geocode(query, function(results) {
+            geocoder.geocode(query, function(results) {
                 if (results.length > 0) {
-                    var bbox = results[0].bbox;
-                    mymap.fitBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]]);
-                } else {
-                    alert('Location not found');
-                }
-            });
-        });
-    }
-});
+                    var bbox = results[0].
