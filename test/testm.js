@@ -15,6 +15,22 @@ var searchControl = new L.Control.geocoder({
 
 var geojsonGroup = L.layerGroup().addTo(mymap); // Add the GeoJSON group to the map initially
 
+document.getElementById('search-button').addEventListener('click', function() {
+    var query = document.getElementById('search-input').value;
+    L.Control.Geocoder.nominatim().geocode(query, function(results) {
+        if (results.length > 0) {
+            var bbox = results[0].bbox;
+            mymap.fitBounds([
+                [bbox[1], bbox[0]],
+                [bbox[3], bbox[2]]
+            ]);
+        } else {
+            alert('Location not found');
+        }
+    });
+});
+
+
 // Function to add GeoJSON data to the group
 function addGeoJSONToGroup(url, style) {
     return fetch(url)

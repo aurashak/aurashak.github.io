@@ -247,7 +247,7 @@ h3 {
     grid-template-columns: 1fr 1fr; /* Two columns of equal width */
     gap: 60px; /* Space between columns, consistent with image-gridtwo */
     align-items: start; /* Align items to the top */
-    margin: 0 auto; /* Center the grid in the page with automatic margins */
+    margin: 50px auto; /* Center the grid in the page with automatic margins */
     width: 60%; /* Same width as image-gridtwo */
     /* Other styling as needed */
 }
