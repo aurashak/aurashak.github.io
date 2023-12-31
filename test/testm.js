@@ -1,7 +1,15 @@
 var mymap = L.map('mapid', {
     minZoom: 2,
-    maxZoom: 18
-}).setView([0, 0], 2);  // Set the initial view to a global view
+    maxZoom: 18,
+    maxBounds: [
+      // south-west corner of the bounds
+      [-90, -180],
+      // north-east corner of the bounds
+      [90, 180]
+    ],
+    maxBoundsViscosity: 1.0  // Makes the bounds fully solid, not allowing the user to pan outside
+}).setView([0, 0], 2);
+
 
 // Define the OpenStreetMap layer without adding it to the map
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
