@@ -315,8 +315,8 @@ h3 {
 
 /* Button Styles */
 button {
-    background-color: #000; /* Black background */
-    color: #fff; /* White text */
+    background-color: #bfbfbf; /* Black background */
+    color: #000; /* White text */
     border: none; /* No border */
     padding: 5px 10px; /* Top/bottom padding 10px, left/right padding 20px */
     margin: 10px 5px; /* Margin 10px top and bottom, 0 left and right */
