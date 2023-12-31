@@ -152,8 +152,6 @@ h3 {
     font-family: 'Arial', sans-serif;
     text-align: center;
     color: #fff;
-
-
 }
 
 .containerimage-lg {
@@ -238,6 +236,43 @@ h3 {
 }
 
 
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+    gap: 60px; /* Space between columns, consistent with image-gridtwo */
+    align-items: start; /* Align items to the top */
+    margin: 0 auto; /* Center the grid in the page with automatic margins */
+    width: 60%; /* Same width as image-gridtwo */
+    /* Other styling as needed */
+}
+
+.image-column img {
+    width: 100%; /* Full width of the column */
+    height: auto; /* Maintain aspect ratio */
+    /* Other styling as needed */
+}
+
+.text-column {
+    /* Center the text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    color: #fff; /* White text color */
+    background-color: #000;
+    /* If you have specific padding requirements, set them here */
+    padding: 20px; /* For example, 20px padding */
+    box-sizing: border-box; /* Include padding in the width and height */
+    /* Other styling as needed */
+}
+
+.text-column h2 {
+    margin: 0 0 10px 0; /* Example margin for h2, adjust as needed */
+    color: #fff;
+    font-family: 'Consolas', monospace; /* Font family */
+    /* Other styling as needed */
+}
+
 .country {
     fill: #ccc;
     stroke: #fff;
@@ -280,4 +315,8 @@ h3 {
         width: 100%; /* Full width images */
         height: auto; /* Maintain aspect ratio */
     }
-}
+
+
+    .content-grid {
+        grid-template-columns: 1fr; /* Stack into one column on smaller screens */
+    }
