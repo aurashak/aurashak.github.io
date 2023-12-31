@@ -14,7 +14,7 @@ body {
 p {
     color: #000; /* Default text color */
     font-family: arial;
-    font-size: 14px;
+    font-size: 15px;
   text-align: center;
 }
 
@@ -163,7 +163,7 @@ h3 {
 .containerimage-lg {
     padding: 0px 0px 0px 0px;
     max-width: 60%; /* Adjust as needed */
-    margin: 40px auto; /* Top and bottom margin 40px, left and right auto */
+    margin: 10px auto; /* Top and bottom margin 40px, left and right auto */
     font-size: 15px;
     line-height: 1.4;
     font-family: arial;
