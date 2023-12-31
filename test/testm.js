@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create a layer group for GeoJSON layers and add it to the map
     var geojsonGroup = L.layerGroup().addTo(mymap);
 
-   // Function to add GeoJSON data to the map with mouseover event for country names
+ // Function to add GeoJSON data to the map with mouseover event for country names and coordinates
 function addGeoJSONToGroup(url, style) {
     fetch(url)
         .then(response => response.json())
@@ -29,23 +29,28 @@ function addGeoJSONToGroup(url, style) {
                 style: style,
                 onEachFeature: function (feature, layer) {
                     if (feature.properties && feature.properties.ADMIN) {
-                        // Bind tooltip with country name and placeholder for latlng
-                        layer.bindTooltip('<strong>' + feature.properties.ADMIN + '</strong><br><span id="latlng"></span>', {
+                        // Initialize the tooltip with the country name and placeholders for coordinates
+                        layer.bindTooltip('', {
                             permanent: false,
                             direction: 'auto',
                             className: 'country-tooltip',
                             sticky: true // Make the tooltip follow the cursor
                         });
 
-                        layer.on('mouseover', function (e) {
+                        // Update tooltip content on mouseover
+                        layer.on('mouseover', function () {
                             this.openTooltip();
-                            // Update the tooltip with current latlng
-                            var tooltip = this.getTooltip();
-                            var content = tooltip.getContent();
-                            var latlngStr = '<strong>' + feature.properties.ADMIN + '</strong><br>' + e.latlng.lat.toFixed(5) + ', ' + e.latlng.lng.toFixed(5);
-                            tooltip.setContent(latlngStr);
                         });
 
+                        // Update tooltip content on mousemove
+                        layer.on('mousemove', function (e) {
+                            var lat = e.latlng.lat.toFixed(5);
+                            var lng = e.latlng.lng.toFixed(5);
+                            var tooltipContent = '<strong>' + feature.properties.ADMIN + '</strong><br>Lat: ' + lat + ', Lng: ' + lng;
+                            this.setTooltipContent(tooltipContent);
+                        });
+
+                        // Clear tooltip content on mouseout
                         layer.on('mouseout', function () {
                             this.closeTooltip();
                         });
@@ -54,6 +59,7 @@ function addGeoJSONToGroup(url, style) {
             }).addTo(geojsonGroup);
         });
 }
+
 
 
     // Add GeoJSON layers to the map
