@@ -3,33 +3,17 @@ var mymap = L.map('mapid').setView([0, 0], 3);
 // Define tile layers
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-});
+}).addTo(mymap); // The OSM layer is added to the map by default
+
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
-var searchControl = new L.Control.geocoder({
-    placeholder: "Search for a place", // Placeholder text for the search box
-    geocoder: new L.Control.Geocoder.Nominatim() // Using Nominatim geocoder by default
-}).addTo(mymap);
+// Set up the geocoder
+var geocoder = L.Control.Geocoder.nominatim();
 
-var geojsonGroup = L.layerGroup().addTo(mymap); // Add the GeoJSON group to the map initially
-
-document.getElementById('search-button').addEventListener('click', function() {
-    var query = document.getElementById('search-input').value;
-    L.Control.Geocoder.nominatim().geocode(query, function(results) {
-        if (results.length > 0) {
-            var bbox = results[0].bbox;
-            mymap.fitBounds([
-                [bbox[1], bbox[0]],
-                [bbox[3], bbox[2]]
-            ]);
-        } else {
-            alert('Location not found');
-        }
-    });
-});
-
+// Add the GeoJSON group to the map initially
+var geojsonGroup = L.layerGroup().addTo(mymap);
 
 // Function to add GeoJSON data to the group
 function addGeoJSONToGroup(url, style) {
@@ -38,14 +22,14 @@ function addGeoJSONToGroup(url, style) {
             return response.json();
         })
         .then(function(data) {
-            L.geoJSON(data, { style }).addTo(geojsonGroup);
+            L.geoJSON(data, { style: style }).addTo(geojsonGroup);
         });
 }
 
-// Add countries, lakes, and rivers layers to the group sequentially
+// Add countries, lakes, and rivers layers to the group
 addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
     color: 'white',
-    weight: .5,
+    weight: 0.5,
     fillColor: 'black',
     fillOpacity: 1
 }).then(function() {
@@ -62,10 +46,21 @@ addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
         fillOpacity: 1
     });
 }).catch(function(error) {
-    console.log('Error: ' + error);
+    console.error('Error loading GeoJSON data:', error);
 });
 
-// Toggle functions
+// Toggle layer functions
+function toggleLayer(layer, otherLayers) {
+    if (mymap.hasLayer(layer)) {
+        mymap.removeLayer(layer);
+    } else {
+        mymap.addLayer(layer);
+        otherLayers.forEach(function(l) {
+            mymap.removeLayer(l);
+        });
+    }
+}
+
 function toggleOSMLayer() {
     toggleLayer(osmLayer, [satelliteLayer, geojsonGroup]);
 }
@@ -78,15 +73,4 @@ function toggleGeoJSONLayer() {
     toggleLayer(geojsonGroup, [osmLayer, satelliteLayer]);
 }
 
-function toggleLayer(layer, otherLayers) {
-    if (mymap.hasLayer(layer)) {
-        mymap.removeLayer(layer);
-    } else {
-        mymap.addLayer(layer);
-        otherLayers.forEach(l => mymap.removeLayer(l));
-    }
-}
-
-// No need to add OSM or Satellite layers initially
-
-
+// Event listener for the custom
