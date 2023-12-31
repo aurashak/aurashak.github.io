@@ -89,10 +89,10 @@ h3 {
     background-color: #000; /* Background color set to grey */
     text-decoration: none;
     border-radius: 2px;
-    font-size: 17px; /* Font size set to 15px */
-    font-family: 'Consolas', monospace; /* Font family */
+    font-size: 20px; /* Font size set to 15px */
     font-weight: bold; /* Font weight set to normal */
     margin: 10px; /* Adjust margins as needed */
+    letter-spacing: .04rem;
 }
 
 .UnderlineNav-item:last-child {
@@ -105,6 +105,7 @@ h3 {
 }
 .UnderlineNav a:hover {
     color: red;
+    text-decoration: none;
 }
 
 
@@ -128,20 +129,20 @@ h3 {
     text-align: left; /* Center align the text */
     background-color: #000;
     color: #fff;
-    box-sizing: border-box; /* Include padding and border in the element's width and height */
-    line-height: 1.5;
     letter-spacing: .02rem;
-    
+    line-height: 1.4;
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
 }
 
 .containertext-lg h1 {
-    font-size: 20px;
-    font-weight: normal;
+    font-size: 19px;
+    font-weight: bold;
     font-family: 'Arial', sans-serif;
     text-align: center;
     color: #fff;
-    font-family: 'Consolas', monospace; /* Font family */
+    letter-spacing: 0.02rem;
 
+    
 }
 
 .containertext-lg a {
@@ -269,12 +270,16 @@ h3 {
     padding: 20px; /* For example, 20px padding */
     box-sizing: border-box; /* Include padding in the width and height */
     /* Other styling as needed */
+     letter-spacing: .02rem;
+    line-height: 1.4;
 }
 
 .text-column h2 {
-    margin: 0 0 10px 0; /* Example margin for h2, adjust as needed */
+    text-align: center;
     color: #fff;
-    font-family: 'Consolas', monospace; /* Font family */
+    letter-spacing: .02rem;
+    font-weight: bold;
+    font-size: 19px;
     /* Other styling as needed */
 }
 
@@ -306,6 +311,45 @@ h3 {
  background-color: white;
  border: solid 1px black;
 }
+
+
+/* Button Styles */
+button {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 5px 10px; /* Top/bottom padding 10px, left/right padding 20px */
+    margin: 10px 5px; /* Margin 10px top and bottom, 0 left and right */
+    cursor: pointer; /* Cursor to indicate clickable */
+    font-size: 13px; /* Text size */
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-weight: normal; /* Font weight */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: .02rem;
+    border-radius: 2px; /* Rounded corners */
+}
+
+button:hover {
+    background-color: none; /* Darker background on hover */
+}
+
+button:active {
+    background-color: #888; /* Even darker background when active/clicked */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    flex-wrap: wrap; /* Wrap buttons to next line if container width is too small */
+    margin: 20px 0; /* Vertical spacing */
+}
+
+.button-container button {
+    margin: 0 5px; /* Spacing between buttons */
+    /* The rest of your button styling here */
+}
+
 
 
 /* Styles for mobile devices */
