@@ -20,33 +20,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create a layer group for GeoJSON layers and add it to the map
     var geojsonGroup = L.layerGroup().addTo(mymap);
 
-    // Function to add GeoJSON data to the map with mouseover event for country names
-    function addGeoJSONToGroup(url, style) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: style,
-                    onEachFeature: function (feature, layer) {
-                        if (feature.properties && feature.properties.ADMIN) {
-                            layer.bindTooltip(feature.properties.ADMIN, {
-                                permanent: false,
-                                direction: 'auto',
-                                className: 'country-tooltip',
-                                sticky: true // Make the tooltip follow the cursor
-                            });
+   // Function to add GeoJSON data to the map with mouseover event for country names
+function addGeoJSONToGroup(url, style) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: style,
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.ADMIN) {
+                        // Bind tooltip with country name and placeholder for latlng
+                        layer.bindTooltip('<strong>' + feature.properties.ADMIN + '</strong><br><span id="latlng"></span>', {
+                            permanent: false,
+                            direction: 'auto',
+                            className: 'country-tooltip',
+                            sticky: true // Make the tooltip follow the cursor
+                        });
 
-                            layer.on('mouseover', function () {
-                                this.openTooltip();
-                            });
-                            layer.on('mouseout', function () {
-                                this.closeTooltip();
-                            });
-                        }
+                        layer.on('mouseover', function (e) {
+                            this.openTooltip();
+                            // Update the tooltip with current latlng
+                            var tooltip = this.getTooltip();
+                            var content = tooltip.getContent();
+                            var latlngStr = '<strong>' + feature.properties.ADMIN + '</strong><br>' + e.latlng.lat.toFixed(5) + ', ' + e.latlng.lng.toFixed(5);
+                            tooltip.setContent(latlngStr);
+                        });
+
+                        layer.on('mouseout', function () {
+                            this.closeTooltip();
+                        });
                     }
-                }).addTo(geojsonGroup);
-            });
-    }
+                }
+            }).addTo(geojsonGroup);
+        });
+}
+
 
     // Add GeoJSON layers to the map
     addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
