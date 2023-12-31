@@ -376,15 +376,14 @@ button:active {
 
 /* Custom styles for the country tooltip */
 .country-tooltip {
-    background:black; /* Semi-transparent white background */
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
     border: 1px solid #333; /* Dark border */
-    border-radius: 4px; /* Rounded corners */
-    color: #fff; /* Dark text color */
+    border-radius: 2px; /* Rounded corners */
+    color: #fff; /* White text color */
     font-size: 14px; /* Font size */
-    padding: 4px; /* Padding inside the tooltip */
+    padding: 2px; /* Padding inside the tooltip */
     box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
 }
-
 
 
 
