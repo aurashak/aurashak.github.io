@@ -1,11 +1,10 @@
-// Ensure the DOM is fully loaded before running the script
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the map with options
     var mymap = L.map('mapid', {
-        minZoom: 2, 
-        maxZoom: 18, 
-        maxBounds: [[-90, -180], [90, 180]], 
-        maxBoundsViscosity: 1.0 
+        minZoom: 2,
+        maxZoom: 18,
+        maxBounds: [[-90, -180], [90, 180]],
+        maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
     // Define the OpenStreetMap layer
@@ -18,11 +17,32 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
     });
 
-    // Create a layer group for GeoJSON layers and add it to the map
-    var geojsonGroup = L.layerGroup().addTo(mymap);
+    // Define a variable to hold the current visible layer
+    var currentLayer = null;
+
+    // Function to switch layers
+    function switchLayer(layer) {
+        if (currentLayer) {
+            mymap.removeLayer(currentLayer);
+        }
+        mymap.addLayer(layer);
+        currentLayer = layer;
+    }
+
+    // Define the GeoJSON layer
+    var geojsonGroup = L.layerGroup();
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
+        color: 'white',
+        weight: 0.5,
+        fillColor: 'black',
+        fillOpacity: 1
+    });
+    // Add the GeoJSON layer by default
+    switchLayer(geojsonGroup);
 
     // Function to add GeoJSON data to the map with mouseover event for country names
     function addGeoJSONToGroup(url, style) {
+        // Fetch GeoJSON data and add it to the layer group
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -49,27 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Add GeoJSON layers to the map
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
-        color: 'white',
-        weight: 0.5,
-        fillColor: 'black',
-        fillOpacity: 1
-    });
-
-    // Function to toggle layers on and off
-    function toggleLayer(layer) {
-        if (!mymap.hasLayer(layer)) {
-            mymap.addLayer(layer);
-        } else {
-            mymap.removeLayer(layer);
-        }
-    }
-
-    // Attach the toggle functions to the window object to make them accessible
-    window.toggleOSMLayer = function() { toggleLayer(osmLayer); }
-    window.toggleSatelliteLayer = function() { toggleLayer(satelliteLayer); }
-    window.toggleGeoJSONLayer = function() { toggleLayer(geojsonGroup); }
+    // Button functions to switch between layers
+    window.toggleOSMLayer = function() { switchLayer(osmLayer); }
+    window.toggleSatelliteLayer = function() { switchLayer(satelliteLayer); }
+    window.toggleGeoJSONLayer = function() { switchLayer(geojsonGroup); }
 
     // Add the search control to the map
     var searchControl = new L.Control.geocoder({
@@ -77,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         geocoder: new L.Control.Geocoder.Nominatim()
     }).addTo(mymap);
 
-    // Check if the search button exists before adding event listener
+    // Event listener for the search button
     var searchButton = document.getElementById('search-button');
     if (searchButton) {
         searchButton.addEventListener('click', function() {
