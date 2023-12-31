@@ -1,15 +1,15 @@
 var mymap = L.map('mapid').setView([0, 0], 3);
 
-// Define tile layers
+// Define tile layers without adding them to the map by default
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-}).addTo(mymap); // The OSM layer is added to the map by default
+});
 
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
-// Add the GeoJSON group to the map initially
+// Create a GeoJSON group and add it to the map
 var geojsonGroup = L.layerGroup().addTo(mymap);
 
 // Function to add GeoJSON data to the group
@@ -23,7 +23,7 @@ function addGeoJSONToGroup(url, style) {
         });
 }
 
-// Add countries, lakes, and rivers layers to the group
+// Add countries, lakes, and rivers layers to the GeoJSON group
 addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
     color: 'white',
     weight: 0.5,
@@ -48,13 +48,14 @@ addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
 
 // Toggle layer functions
 function toggleLayer(layer, otherLayers) {
-    if (mymap.hasLayer(layer)) {
-        mymap.removeLayer(layer);
-    } else {
-        mymap.addLayer(layer);
-        otherLayers.forEach(function(l) {
+    otherLayers.forEach(function(l) {
+        if (mymap.hasLayer(l)) {
             mymap.removeLayer(l);
-        });
+        }
+    });
+
+    if (!mymap.hasLayer(layer)) {
+        mymap.addLayer(layer);
     }
 }
 
@@ -70,7 +71,7 @@ function toggleGeoJSONLayer() {
     toggleLayer(geojsonGroup, [osmLayer, satelliteLayer]);
 }
 
-// Initialize the Leaflet geocoder control and add it to the map
+// Set up the Leaflet geocoder control and add it to the map
 var searchControl = L.Control.geocoder({
     placeholder: "Search for a place",
     defaultMarkGeocode: false
