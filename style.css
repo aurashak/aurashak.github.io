@@ -83,12 +83,13 @@ h3 {
 
 .UnderlineNav-item {
     display: block;
-    padding: 0px; /* Padding for the button */
-    color: black; /* Text color set to black */
+    padding: 5px 10px; /* Padding for the button */
+    color: #fff; /* Text color set to black */
     border-radius: 0px;
-    background-color: #fff; /* Background color set to grey */
+    background-color: #000; /* Background color set to grey */
     text-decoration: none;
-    font-size: 15px; /* Font size set to 15px */
+    border-radius: 2px;
+    font-size: 17px; /* Font size set to 15px */
     font-family: 'Consolas', monospace; /* Font family */
     font-weight: bold; /* Font weight set to normal */
     margin: 10px; /* Adjust margins as needed */
@@ -96,13 +97,14 @@ h3 {
 
 .UnderlineNav-item:last-child {
     margin-right: 0; /* No margin for the last item */
+
 }
 
 .UnderlineNav a {
     background-color: none;
 }
 .UnderlineNav a:hover {
-    background-color: gold;
+    color: red;
 }
 
 
@@ -117,14 +119,15 @@ h3 {
 
 
 .containertext-lg {
-    padding: 0px 0px 0px 0px;
-    max-width: 60%; /* Adjust as needed */
+    padding: 10px;
+    max-width: 58.8%; /* Adjust as needed */
     margin: 40px auto; /* Top and bottom margin 40px, left and right auto */
     font-size: 15px;
     line-height: 1.4;
     font-family: arial;
     text-align: left; /* Center align the text */
-    background-color: white;
+    background-color: #000;
+    color: #fff;
 }
 
 .containertext-lg h1 {
@@ -132,6 +135,7 @@ h3 {
     font-weight: bold;
     font-family: 'Arial', sans-serif;
     text-align: center;
+    color: #fff;
 }
 
 .containertext-lg a {
@@ -146,6 +150,8 @@ h3 {
     font-weight: normal;
     font-family: 'Arial', sans-serif;
     text-align: center;
+    color: #fff;
+
 
 }
 
