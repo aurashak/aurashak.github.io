@@ -352,6 +352,29 @@ button:active {
 
 
 
+#search-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+#search-input {
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+#search-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    /* Additional button styling... */
+}
+
+
+
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
     .image-gridone, .image-gridtwo {

@@ -8,6 +8,11 @@ var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudle
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
+var searchControl = new L.Control.geocoder({
+    placeholder: "Search for a place", // Placeholder text for the search box
+    geocoder: new L.Control.Geocoder.Nominatim() // Using Nominatim geocoder by default
+}).addTo(mymap);
+
 var geojsonGroup = L.layerGroup().addTo(mymap); // Add the GeoJSON group to the map initially
 
 // Function to add GeoJSON data to the group
@@ -67,3 +72,5 @@ function toggleLayer(layer, otherLayers) {
 }
 
 // No need to add OSM or Satellite layers initially
+
+
