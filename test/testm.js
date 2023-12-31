@@ -6,33 +6,35 @@ var mymap = L.map('mapid', {
 // Define tile layers
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-}).addTo(mymap); // OSM layer added by default
+});
 
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
-// Add the GeoJSON group to the map initially
-var geojsonGroup = L.layerGroup().addTo(mymap);
-
-// Function to add GeoJSON data to the group
-function addGeoJSONToGroup(url, style) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, { style: style }).addTo(geojsonGroup);
+// GeoJSON layer
+var geojsonLayer = L.geoJSON(null, {
+    style: function(feature) {
+        return {color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1};
+    },
+    onEachFeature: function(feature, layer) {
+        layer.on('mouseover', function() {
+            layer.bindTooltip(feature.properties.NAME, {permanent: true, direction: 'center'}).openTooltip();
         });
-}
+        layer.on('mouseout', function() {
+            layer.unbindTooltip();
+        });
+    }
+}).addTo(mymap);
 
-// Add countries, lakes, and rivers layers to the group
-addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
-    color: 'white',
-    weight: 0.5,
-    fillColor: 'black',
-    fillOpacity: 1
-});
+// Add GeoJSON data
+fetch('https://aurashak.github.io/geojson/countries.geojson')
+    .then(response => response.json())
+    .then(data => {
+        geojsonLayer.addData(data);
+    });
 
-// Add graticule (lat/long lines)
+// Graticule
 L.graticule({
     interval: 20
 }).addTo(mymap);
@@ -43,20 +45,22 @@ function toggleLayer(layer, otherLayers) {
         mymap.removeLayer(layer);
     } else {
         mymap.addLayer(layer);
-        otherLayers.forEach(l => mymap.removeLayer(l));
+        otherLayers.forEach(function(l) {
+            mymap.removeLayer(l);
+        });
     }
 }
 
 function toggleOSMLayer() {
-    toggleLayer(osmLayer, [satelliteLayer, geojsonGroup]);
+    toggleLayer(osmLayer, [satelliteLayer, geojsonLayer]);
 }
 
 function toggleSatelliteLayer() {
-    toggleLayer(satelliteLayer, [osmLayer, geojsonGroup]);
+    toggleLayer(satelliteLayer, [osmLayer, geojsonLayer]);
 }
 
 function toggleGeoJSONLayer() {
-    toggleLayer(geojsonGroup, [osmLayer, satelliteLayer]);
+    toggleLayer(geojsonLayer, [osmLayer, satelliteLayer]);
 }
 
 // Add the search control to the map
