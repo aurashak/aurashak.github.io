@@ -24,16 +24,31 @@ var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudle
 // Create a layer group for GeoJSON layers
 var geojsonGroup = L.layerGroup().addTo(mymap);
 
-// Function to add GeoJSON data to the map
+// Function to add GeoJSON data to the map with mouseover event for country names
 function addGeoJSONToGroup(url, style) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
-                style: style
+                style: style,
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.ADMIN) { // Check if the property exists
+                        layer.bindTooltip(feature.properties.ADMIN, { // Bind a tooltip with the country name
+                            permanent: false, // The tooltip will not be permanent
+                            direction: 'auto' // It will adjust its direction automatically
+                        });
+                        layer.on('mouseover', function () { // Event listener for mouseover
+                            this.openTooltip(); // Open the tooltip on mouseover
+                        });
+                        layer.on('mouseout', function () { // Event listener for mouseout
+                            this.closeTooltip(); // Close the tooltip on mouseout
+                        });
+                    }
+                }
             }).addTo(geojsonGroup);
         });
 }
+
 
 // Add GeoJSON layers to the map
 addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
