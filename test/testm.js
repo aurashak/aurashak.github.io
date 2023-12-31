@@ -12,29 +12,33 @@ var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudle
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
-// GeoJSON layer
-var geojsonLayer = L.geoJSON(null, {
-    style: function(feature) {
-        return {color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1};
-    },
-    onEachFeature: function(feature, layer) {
-        layer.on('mouseover', function() {
-            layer.bindTooltip(feature.properties.NAME, {permanent: true, direction: 'center'}).openTooltip();
-        });
-        layer.on('mouseout', function() {
-            layer.unbindTooltip();
-        });
-    }
-}).addTo(mymap);
+// Add the GeoJSON group to the map initially
+var geojsonGroup = L.layerGroup().addTo(mymap);
 
-// Add GeoJSON data
-fetch('https://aurashak.github.io/geojson/countries.geojson')
-    .then(response => response.json())
-    .then(data => {
-        geojsonLayer.addData(data);
-    });
+// Function to add GeoJSON data to the group
+function addGeoJSONToGroup(url, style) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, { 
+                style: style,
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.name) {
+                        layer.bindPopup(feature.properties.name);
+                    }
+                }
+            }).addTo(geojsonGroup);
+        });
+}
 
-// Graticule
+addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
+    color: 'white',
+    weight: 0.5,
+    fillColor: 'black',
+    fillOpacity: 1
+});
+
+// Add graticule (lat/long lines)
 L.graticule({
     interval: 20
 }).addTo(mymap);
@@ -45,23 +49,30 @@ function toggleLayer(layer, otherLayers) {
         mymap.removeLayer(layer);
     } else {
         mymap.addLayer(layer);
-        otherLayers.forEach(function(l) {
-            mymap.removeLayer(l);
-        });
+        otherLayers.forEach(l => mymap.removeLayer(l));
     }
 }
 
 function toggleOSMLayer() {
-    toggleLayer(osmLayer, [satelliteLayer, geojsonLayer]);
+    toggleLayer(osmLayer, [satelliteLayer, geojsonGroup]);
 }
 
 function toggleSatelliteLayer() {
-    toggleLayer(satelliteLayer, [osmLayer, geojsonLayer]);
+    toggleLayer(satelliteLayer, [osmLayer, geojsonGroup]);
 }
 
 function toggleGeoJSONLayer() {
-    toggleLayer(geojsonLayer, [osmLayer, satelliteLayer]);
+    toggleLayer(geojsonGroup, [osmLayer, satelliteLayer]);
 }
+
+// Add markers for specific cities
+var luanda = L.marker([-8.83833, 13.23444]).bindPopup('Luanda');
+var cartagena = L.marker([10.391049, -75.479426]).bindPopup('Cartagena');
+var stockholm = L.marker([59.329323, 18.068581]).bindPopup('Stockholm');
+
+luanda.addTo(mymap);
+cartagena.addTo(mymap);
+stockholm.addTo(mymap);
 
 // Add the search control to the map
 var searchControl = new L.Control.geocoder({
