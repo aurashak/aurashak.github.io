@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 18,
         maxBounds: [[-90, -180], [90, 180]],
         maxBoundsViscosity: 1.0
+        attributionControl: false // Disable the attribution control
     }).setView([0, 0], 2);
 
     // Define the OpenStreetMap layer without adding it to the map
