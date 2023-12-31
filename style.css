@@ -129,6 +129,9 @@ h3 {
     background-color: #000;
     color: #fff;
     box-sizing: border-box; /* Include padding and border in the element's width and height */
+    line-height: 1.5;
+    letter-spacing: .02rem;
+    
 }
 
 .containertext-lg h1 {
