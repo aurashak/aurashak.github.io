@@ -1,6 +1,6 @@
 var mymap = L.map('mapid', {
     minZoom: 2,
-    maxZoom: 18,
+    maxZoom: 12,
   }).setView([0, 0], 3);
   
   // Define tile layers
