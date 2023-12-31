@@ -7,42 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
         maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
-    // Define the OpenStreetMap layer
+    // Define the OpenStreetMap layer without adding it to the map
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     });
 
-    // Define the satellite layer
+    // Define the satellite layer without adding it to the map
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
         attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
     });
 
-    // Define a variable to hold the current visible layer
-    var currentLayer = null;
-
-    // Function to switch layers
-    function switchLayer(layer) {
-        if (currentLayer) {
-            mymap.removeLayer(currentLayer);
-        }
-        mymap.addLayer(layer);
-        currentLayer = layer;
-    }
-
-    // Define the GeoJSON layer
-    var geojsonGroup = L.layerGroup();
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
-        color: 'white',
-        weight: 0.5,
-        fillColor: 'black',
-        fillOpacity: 1
-    });
-    // Add the GeoJSON layer by default
-    switchLayer(geojsonGroup);
+    // Create a layer group for GeoJSON layers and add it to the map
+    var geojsonGroup = L.layerGroup().addTo(mymap);
 
     // Function to add GeoJSON data to the map with mouseover event for country names
     function addGeoJSONToGroup(url, style) {
-        // Fetch GeoJSON data and add it to the layer group
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -68,6 +47,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).addTo(geojsonGroup);
             });
     }
+
+    // Add GeoJSON layers to the map
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
+        color: 'white',
+        weight: 0.5,
+        fillColor: 'black',
+        fillOpacity: 1
+    });
+
+    // Function to switch layers
+    function switchLayer(layer) {
+        if (currentLayer) {
+            mymap.removeLayer(currentLayer);
+        }
+        mymap.addLayer(layer);
+        currentLayer = layer;
+        // Ensure the GeoJSON layer with tooltips is always on top
+        geojsonGroup.bringToFront();
+    }
+
+    // Define a variable to hold the current visible layer
+    var currentLayer = geojsonGroup; // Set the initial layer to GeoJSON
 
     // Button functions to switch between layers
     window.toggleOSMLayer = function() { switchLayer(osmLayer); }
