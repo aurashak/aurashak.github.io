@@ -9,9 +9,6 @@ var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudle
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
-// Set up the geocoder
-var geocoder = L.Control.Geocoder.nominatim();
-
 // Add the GeoJSON group to the map initially
 var geojsonGroup = L.layerGroup().addTo(mymap);
 
@@ -73,4 +70,17 @@ function toggleGeoJSONLayer() {
     toggleLayer(geojsonGroup, [osmLayer, satelliteLayer]);
 }
 
-// Event listener for the custom
+// Initialize the Leaflet geocoder control and add it to the map
+var searchControl = L.Control.geocoder({
+    placeholder: "Search for a place",
+    defaultMarkGeocode: false
+}).on('markgeocode', function(e) {
+    var bbox = e.geocode.bbox;
+    var poly = L.polygon([
+         bbox.getSouthEast(),
+         bbox.getNorthEast(),
+         bbox.getNorthWest(),
+         bbox.getSouthWest()
+    ]).addTo(mymap);
+    mymap.fitBounds(poly.getBounds());
+}).addTo(mymap);
