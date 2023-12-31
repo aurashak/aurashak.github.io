@@ -6,44 +6,36 @@ var mymap = L.map('mapid', {
 // Define tile layers
 var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-});
+}).addTo(mymap); // OSM layer added by default
 
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
     attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
 });
 
-// GeoJSON group added to the map initially
+// Add the GeoJSON group to the map initially
 var geojsonGroup = L.layerGroup().addTo(mymap);
 
-// Define style for GeoJSON features
-var geoStyle = {
-    color: 'white',
-    weight: 0.5,
-    fillColor: 'black',
-    fillOpacity: 1
-};
-
-// Function to add GeoJSON data to the group with tooltips
+// Function to add GeoJSON data to the group
 function addGeoJSONToGroup(url, style) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            L.geoJSON(data, {
-                style: style,
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties && feature.properties.ADMIN) {
-                        layer.bindTooltip(feature.properties.ADMIN, { permanent: false, direction: 'auto' });
-                    }
-                }
-            }).addTo(geojsonGroup);
-        })
-        .catch(error => {
-            console.error('Error loading GeoJSON data:', error);
+            L.geoJSON(data, { style: style }).addTo(geojsonGroup);
         });
 }
 
-// Add countries with tooltips
-addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', geoStyle);
+// Add countries, lakes, and rivers layers to the group
+addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
+    color: 'white',
+    weight: 0.5,
+    fillColor: 'black',
+    fillOpacity: 1
+});
+
+// Add graticule (lat/long lines)
+L.graticule({
+    interval: 20
+}).addTo(mymap);
 
 // Toggle layer functions
 function toggleLayer(layer, otherLayers) {
@@ -51,9 +43,7 @@ function toggleLayer(layer, otherLayers) {
         mymap.removeLayer(layer);
     } else {
         mymap.addLayer(layer);
-        otherLayers.forEach(function(l) {
-            mymap.removeLayer(l);
-        });
+        otherLayers.forEach(l => mymap.removeLayer(l));
     }
 }
 
