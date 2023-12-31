@@ -32,8 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             layer.bindTooltip(feature.properties.ADMIN, {
                                 permanent: false,
                                 direction: 'auto',
-                                className: 'country-tooltip'
+                                className: 'country-tooltip',
+                                sticky: true // Make the tooltip follow the cursor
                             });
+                            
                             layer.on('mouseover', function () {
                                 this.openTooltip();
                             });
