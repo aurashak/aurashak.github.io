@@ -1,5 +1,6 @@
+// Ensure the DOM is fully loaded before running the script
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the map with specific options
+    // Initialize the map with options
     var mymap = L.map('mapid', {
         minZoom: 2, 
         maxZoom: 18, 
@@ -7,12 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
         maxBoundsViscosity: 1.0 
     }).setView([0, 0], 2);
 
-    // Define the OpenStreetMap layer without adding it to the map initially
+    // Define the OpenStreetMap layer
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     });
 
-    // Define the satellite layer without adding it to the map initially
+    // Define the satellite layer
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
         attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
     });
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 className: 'country-tooltip',
                                 sticky: true // Make the tooltip follow the cursor
                             });
-                            
+
                             layer.on('mouseover', function () {
                                 this.openTooltip();
                             });
@@ -58,17 +59,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to toggle layers on and off
     function toggleLayer(layer) {
-        if (mymap.hasLayer(layer)) {
-            mymap.removeLayer(layer);
-        } else {
+        if (!mymap.hasLayer(layer)) {
             mymap.addLayer(layer);
+        } else {
+            mymap.removeLayer(layer);
         }
     }
 
-    // Functions to toggle specific layers
-    function toggleOSMLayer() { toggleLayer(osmLayer); }
-    function toggleSatelliteLayer() { toggleLayer(satelliteLayer); }
-    function toggleGeoJSONLayer() { toggleLayer(geojsonGroup); }
+    // Attach the toggle functions to the window object to make them accessible
+    window.toggleOSMLayer = function() { toggleLayer(osmLayer); }
+    window.toggleSatelliteLayer = function() { toggleLayer(satelliteLayer); }
+    window.toggleGeoJSONLayer = function() { toggleLayer(geojsonGroup); }
 
     // Add the search control to the map
     var searchControl = new L.Control.geocoder({
@@ -77,8 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(mymap);
 
     // Check if the search button exists before adding event listener
-    if (document.getElementById('search-button')) {
-        document.getElementById('search-button').addEventListener('click', function() {
+    var searchButton = document.getElementById('search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
             var query = document.getElementById('search-input').value;
             searchControl.geocoder.geocode(query, function(results) {
                 if (results.length > 0) {
