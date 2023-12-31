@@ -374,6 +374,20 @@ button:active {
 }
 
 
+/* Custom styles for the country tooltip */
+.country-tooltip {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border: 1px solid #333; /* Dark border */
+    border-radius: 4px; /* Rounded corners */
+    color: #333; /* Dark text color */
+    font-size: 14px; /* Font size */
+    padding: 4px 8px; /* Padding inside the tooltip */
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
+}
+
+
+
+
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
