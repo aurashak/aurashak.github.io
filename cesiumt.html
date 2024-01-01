@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Cesium Map</title>
+    <title>Cesium Globe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
-    <link rel="stylesheet" href="https://aurashak.github.io/style.css">
-    <script src="https://aurashak.github.io/cesiumt.js"></script>
+    <style>
+        #cesiumContainer {
+            width: 100%;
+            height: 100vh; /* or any other size */
+        }
+    </style>
 </head>
 <body>
-<div id="navigation"></div>
-
-<div class="containerimage-lg">
-    <div id="cesiumContainer"></div> <!-- Make sure this ID matches your JavaScript code -->
-</div>
-
-<script src="https://aurashak.github.io/common.js"></script>
-
+    <div id="cesiumContainer"></div>
+    <script src="http://aurashak.github.io/cesiumt.js"></script> <!-- path to the JavaScript file that contains your Cesium initialization code -->
 </body>
 </html>
