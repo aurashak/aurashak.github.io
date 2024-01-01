@@ -1,10 +1,9 @@
 function initMap() {
-    // Coordinates for a location in Afghanistan
-    var afghanistan = {lat: 34.5553, lng: 69.2075};
+    var afghanistan = {lat: 34.5553, lng: 69.2075}; // Coordinates for a location in Afghanistan
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
-        center: afghanistan, // Set Afghanistan as the center
+        center: afghanistan, 
         minZoom: 2,
         maxZoom: 7,
         disableDefaultUI: true,
@@ -43,6 +42,25 @@ function initMap() {
         fillColor: 'black',
         fillOpacity: 1
     });
+
+    // Update markers when the map is moved
+    map.addListener('bounds_changed', function() {
+        updateMarkers(map);
+    });
+}
+
+function updateMarkers(map) {
+    var bounds = map.getBounds();
+    var ne = bounds.getNorthEast();
+    var sw = bounds.getSouthWest();
+
+    // Update latitude markers
+    var latitudes = [sw.lat(), ne.lat()];
+    document.getElementById('lat-markers').textContent = latitudes.join('°, ') + '°';
+
+    // Update longitude markers
+    var longitudes = [sw.lng(), ne.lng()];
+    document.getElementById('lng-markers').textContent = longitudes.join('°, ') + '°';
 }
 
 // Existing processPoints function...
