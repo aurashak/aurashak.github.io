@@ -18,8 +18,16 @@ function initMap() {
         ]
     });
 
-    // Load the GeoJSON file
-    map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
+   // Load the GeoJSON file and adjust the bounds
+map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson', {}, function (features) {
+    var bounds = new google.maps.LatLngBounds();
+    map.data.forEach(function(feature) {
+        feature.getGeometry().forEachLatLng(function(latlng){
+            bounds.extend(latlng);
+        });
+    });
+    map.fitBounds(bounds); // Fit the map to the bounds of the GeoJSON
+});
 
     // Style the GeoJSON features
     map.data.setStyle({
