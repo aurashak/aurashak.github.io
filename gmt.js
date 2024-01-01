@@ -1,43 +1,22 @@
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
-        center: afghanistan, // Set Afghanistan as the center
-        minZoom: 2,
-        maxZoom: 7,
+        center: {lat: 0, lng: 0},
         disableDefaultUI: true,
-        backgroundColor: 'white'
-        // Other map options...
+        backgroundColor: 'white',
+        styles: [
+            // You can customize these styles to hide certain map features
+            { elementType: 'geometry', stylers: [{color: '#f5f5f5'}] },
+            { elementType: 'labels.icon', stylers: [{visibility: 'off'}] },
+            { elementType: 'labels.text.fill', stylers: [{color: '#616161'}] },
+            { elementType: 'labels.text.stroke', stylers: [{color: '#f5f5f5'}] }
+            // Add more styles as needed
+        ]
     });
 
-    // Load your GeoJSON.
-    map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson', {}, function (features) {
-        var bounds = new google.maps.LatLngBounds();
+    // Then load your GeoJSON.
+    map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
 
-        // Iterate over the features to calculate bounds
-        features.forEach(function(feature) {
-            processPoints(feature.getGeometry(), bounds.extend, bounds);
-        });
-
-        // Define the latitudinal bounds for the map
-        var strictBounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(-85, -180), // Southwestern corner
-            new google.maps.LatLng(85, 180)    // Northeastern corner
-        );
-
-        // Apply the restriction with strictBounds
-        map.setOptions({
-            restriction: {
-                latLngBounds: strictBounds,
-                strictBounds: true
-            }
-        });
-    });
-
-
-    
     // Define a style for your GeoJSON features
     map.data.setStyle({
         strokeColor: 'white',
@@ -46,5 +25,3 @@ function initMap() {
         fillOpacity: 1
     });
 }
-
-// Existing processPoints function...
