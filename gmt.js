@@ -1,11 +1,14 @@
 function initMap() {
+    // Coordinates for a location in Afghanistan
+    var afghanistan = {lat: 34.5553, lng: 69.2075};
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
-        center: {lat: 0, lng: 0},
+        center: afghanistan, // Set Afghanistan as the center
         minZoom: 2,
         maxZoom: 7,
         disableDefaultUI: true,
-        backgroundColor: 'white',
+        backgroundColor: 'white'
         // Other map options...
     });
 
@@ -18,14 +21,17 @@ function initMap() {
             processPoints(feature.getGeometry(), bounds.extend, bounds);
         });
 
-        map.fitBounds(bounds); // Fit the map to the bounds
-        map.setCenter(bounds.getCenter()); // Set the center of the map
+        // Define the latitudinal bounds for the map
+        var strictBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-85, -180), // Southwestern corner
+            new google.maps.LatLng(85, 180)    // Northeastern corner
+        );
 
-        // Apply the restriction
+        // Apply the restriction with strictBounds
         map.setOptions({
             restriction: {
-                latLngBounds: bounds,
-                strictBounds: true,
+                latLngBounds: strictBounds,
+                strictBounds: true
             }
         });
     });
@@ -39,15 +45,4 @@ function initMap() {
     });
 }
 
-// Function to process points in the geometry
-function processPoints(geometry, callback, thisArg) {
-    if (geometry instanceof google.maps.LatLng) {
-        callback.call(thisArg, geometry);
-    } else if (geometry instanceof google.maps.Data.Point) {
-        callback.call(thisArg, geometry.get());
-    } else {
-        geometry.getArray().forEach(function(g) {
-            processPoints(g, callback, thisArg);
-        });
-    }
-}
+// Existing processPoints function...
