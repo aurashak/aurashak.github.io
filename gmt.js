@@ -2,20 +2,33 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
         center: {lat: 0, lng: 0},
+        minZoom: 2,
+        maxZoom: 7,
         disableDefaultUI: true,
         backgroundColor: 'white',
-        styles: [
-            // You can customize these styles to hide certain map features
-            { elementType: 'geometry', stylers: [{color: '#f5f5f5'}] },
-            { elementType: 'labels.icon', stylers: [{visibility: 'off'}] },
-            { elementType: 'labels.text.fill', stylers: [{color: '#616161'}] },
-            { elementType: 'labels.text.stroke', stylers: [{color: '#f5f5f5'}] }
-            // Add more styles as needed
-        ]
+        // Other map options...
     });
 
-    // Then load your GeoJSON.
-    map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
+    // Load your GeoJSON.
+    map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson', {}, function (features) {
+        var bounds = new google.maps.LatLngBounds();
+
+        // Iterate over the features to calculate bounds
+        features.forEach(function(feature) {
+            processPoints(feature.getGeometry(), bounds.extend, bounds);
+        });
+
+        map.fitBounds(bounds); // Fit the map to the bounds
+        map.setCenter(bounds.getCenter()); // Set the center of the map
+
+        // Apply the restriction
+        map.setOptions({
+            restriction: {
+                latLngBounds: bounds,
+                strictBounds: true,
+            }
+        });
+    });
 
     // Define a style for your GeoJSON features
     map.data.setStyle({
@@ -24,4 +37,17 @@ function initMap() {
         fillColor: 'black',
         fillOpacity: 1
     });
+}
+
+// Function to process points in the geometry
+function processPoints(geometry, callback, thisArg) {
+    if (geometry instanceof google.maps.LatLng) {
+        callback.call(thisArg, geometry);
+    } else if (geometry instanceof google.maps.Data.Point) {
+        callback.call(thisArg, geometry.get());
+    } else {
+        geometry.getArray().forEach(function(g) {
+            processPoints(g, callback, thisArg);
+        });
+    }
 }
