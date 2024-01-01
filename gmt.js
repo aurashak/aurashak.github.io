@@ -1,7 +1,9 @@
 function initMap() {
-    var location = {lat: -34.397, lng: 150.644}; // Coordinates for the initial center of the map
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8, // Initial zoom level
-        center: location
+        zoom: 2, // Set a zoom level that shows a good portion of the globe
+        center: {lat: 0, lng: 0} // Center the map at 0 degrees latitude and longitude
     });
+
+    // Load a GeoJSON layer onto the map
+    map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
 }
