@@ -3,6 +3,7 @@ function initMap() {
         zoom: 2,
         center: {lat: 0, lng: 0},
         disableDefaultUI: true, // Disables the default UI controls
+        backgroundColor: 'white', // Sets background color beneath tiles to white
         styles: [
             {
                 featureType: 'all',
@@ -15,11 +16,11 @@ function initMap() {
     // Then load your GeoJSON.
     map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
 
-    // Optional: Define a style for your GeoJSON features
+    // Define a style for your GeoJSON features
     map.data.setStyle({
-        strokeColor: 'blue',
-        strokeWeight: 1,
-        fillColor: 'blue',
+        strokeColor: 'white',
+        strokeWeight: 0.5,
+        fillColor: 'black',
         fillOpacity: 0.1
     });
 }
