@@ -6,14 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const viewer = new Cesium.Viewer('cesiumContainer', {
       terrainProvider: Cesium.createWorldTerrain()
     });
-  
-    // Optionally load a GeoJSON file
-    viewer.dataSources.add(Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/countries.geojson', {
-      stroke: Cesium.Color.WHITE,
-      fill: Cesium.Color.BLACK.withAlpha(0.5),
-      strokeWidth: 1
-    })).then(function(dataSource) {
-      viewer.zoomTo(dataSource); // Zoom to the GeoJSON data
-    });
-  });
-  
+
+    // The rest of your code that sets up the viewer...
+    // No need to load GeoJSON if you want just the standard globe
+});
+
