@@ -5,16 +5,16 @@ function initMap() {
         disableDefaultUI: true,
         backgroundColor: 'white',
         styles: [
-            // You can customize these styles to hide certain map features
-            { elementType: 'geometry', stylers: [{color: '#f5f5f5'}] },
-            { elementType: 'labels.icon', stylers: [{visibility: 'off'}] },
-            { elementType: 'labels.text.fill', stylers: [{color: '#616161'}] },
-            { elementType: 'labels.text.stroke', stylers: [{color: '#f5f5f5'}] }
-            // Add more styles as needed
+            // Hide all default map features
+            {
+                featureType: 'all',
+                elementType: 'all',
+                stylers: [{ visibility: 'off' }]
+            }
         ]
     });
 
-    // Then load your GeoJSON.
+    // Load your GeoJSON.
     map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
 
     // Define a style for your GeoJSON features
