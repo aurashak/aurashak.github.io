@@ -1,22 +1,22 @@
 function initMap() {
     var afghanistan = {lat: 34.5553, lng: 69.2075}; // Coordinates for a location in Afghanistan
 
-    // Initialize the map with all base map features turned off
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 1,
+        zoom: 2, // Or set this to a different initial zoom level
         center: afghanistan, 
-        minZoom: 2,
+        minZoom: 0, // Allows zooming out to the lowest possible level
         maxZoom: 7,
-        disableDefaultUI: true, // Disables the entire default UI
-        zoomControl: true, // Enable zoom control
+        disableDefaultUI: true,
+        zoomControl: true,
         backgroundColor: 'white',
         styles: [
             {
                 featureType: 'all',
-                stylers: [{ visibility: 'off' }] // Turn off visibility of all features
+                stylers: [{ visibility: 'off' }]
             }
         ]
     });
+    
 
    // Load the GeoJSON file and adjust the bounds
 map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson', {}, function (features) {
