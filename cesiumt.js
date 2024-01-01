@@ -2,36 +2,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Your access token from Cesium ion (ensure this token is kept private)
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
   
-    const viewer = new Cesium.Viewer('cesiumContainer', {
+const viewer = new Cesium.Viewer('cesiumContainer', {
         terrainProvider: Cesium.createWorldTerrain(),
-        animation: false,
-        baseLayerPicker: false,
-        fullscreenButton: false,
-        vrButton: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: false,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        skyBox: false,
-        skyAtmosphere: false,
+        animation: false, // Don't show the animation widget
+        baseLayerPicker: false, // Don't show the base layer picker
+        fullscreenButton: false, // Don't show the full screen button
+        vrButton: false, // Don't show VR button
+        geocoder: false, // Don't show the geocoder widget
+        homeButton: false, // Don't show the home button
+        infoBox: false, // Don't show the info box
+        sceneModePicker: false, // Don't show the scene mode picker
+        selectionIndicator: false, // Don't show the selection indicator
+        timeline: false, // Don't show the timeline
+        navigationHelpButton: false, // Don't show the navigation help button
+        skyBox: false, // Don't show the skybox (this removes stars)
+        skyAtmosphere: false, // Don't show the atmosphere
         useDefaultRenderLoop: true,
-        // Do not disable the zoom controls
+        zoomControl: true, // Optionally remove the zoom control
     });
 
-    // Override the default imagery with a solid color or a simple imagery provider
-    viewer.imageryLayers.removeAll();
-    viewer.imageryLayers.addImageryProvider(new Cesium.ColorImageryProvider({
-        color: Cesium.Color.WHITE
-    }));
-
-    // Restore the zoom and tilt gestures
-    viewer.scene.screenSpaceCameraController.enableZoom = true;
-    viewer.scene.screenSpaceCameraController.enableTilt = true;
-    viewer.scene.screenSpaceCameraController.enableRotate = true;
-
-    // Ensure pinch zoom is enabled for touch devices
-    viewer.scene.screenSpaceCameraController.enablePinchZoom = true;
+    viewer.scene.backgroundColor = Cesium.Color.WHITE; // Set the background color to white
 });
