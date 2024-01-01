@@ -18,7 +18,7 @@ function initMap() {
         },
         zoomControl: true, // Enable zoom control
         zoomControlOptions: {
-            position: google.maps.ControlPosition.TOP_CENTER // Move zoom control to the top center
+            position: google.maps.ControlPosition.TOP_RIGHT // Move zoom control to the top center
         }
     });
 
