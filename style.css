@@ -317,6 +317,13 @@ h3 {
     width: 100%;
   }
 
+  #map {
+    height: 400px;
+    width: 100%;
+}
+
+
+
 /* Button Styles */
 button {
     background-color: #bfbfbf; /* Black background */
