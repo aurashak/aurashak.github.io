@@ -37,7 +37,6 @@ function initMap() {
     // Create the search box and link it to the UI element
     var input = document.getElementById('map-search');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards the current map's viewport
     map.addListener('bounds_changed', function() {
