@@ -2,14 +2,15 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
         center: {lat: 0, lng: 0},
-        disableDefaultUI: true, // Disables the default UI controls
-        backgroundColor: 'white', // Sets background color beneath tiles to white
+        disableDefaultUI: true,
+        backgroundColor: 'white',
         styles: [
-            {
-                featureType: 'all',
-                elementType: 'all',
-                stylers: [{visibility: 'off'}] // Turn off visibility of all features
-            }
+            // You can customize these styles to hide certain map features
+            { elementType: 'geometry', stylers: [{color: '#f5f5f5'}] },
+            { elementType: 'labels.icon', stylers: [{visibility: 'off'}] },
+            { elementType: 'labels.text.fill', stylers: [{color: '#616161'}] },
+            { elementType: 'labels.text.stroke', stylers: [{color: '#f5f5f5'}] }
+            // Add more styles as needed
         ]
     });
 
