@@ -1,28 +1,25 @@
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 1, // Set this to show the full extent of the Earth
-        center: {lat: 0, lng: 0}, // Center the map at the equator and prime meridian
-        minZoom: 1, // Minimum zoom level allowed
-        maxZoom: 7, // Maximum zoom level allowed
-        disableDefaultUI: true, // Disables the entire default UI
-        zoomControl: true, // Enable zoom control
+        zoom: 1,
+        center: {lat: 0, lng: 0},
+        minZoom: 1,
+        maxZoom: 7,
+        disableDefaultUI: true,
+        zoomControl: true,
         backgroundColor: 'white',
-        styles: [
-            {
-                featureType: 'all',
-                stylers: [{ visibility: 'off' }] // Turn off visibility of all features
-            }
-        ],
+        styles: [{ featureType: 'all', stylers: [{ visibility: 'off' }] }],
         restriction: {
             latLngBounds: {
                 north: 85,
                 south: -85,
-                east: 180,
-                west: -180
+                east: 180, // Sets the east boundary
+                west: -180 // Sets the west boundary
             },
             strictBounds: true
         }
     });
+
+    
     // Load the GeoJSON file
     map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
 
