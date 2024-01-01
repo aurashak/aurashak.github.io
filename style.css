@@ -390,6 +390,12 @@ button:active {
 
 
 
+#cesiumContainer {
+    height: 600px; /* Height for the Cesium globe container */
+    width: 100%; /* Full width of its container */
+    /* Add any additional styling as needed */
+}
+
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
