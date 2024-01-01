@@ -3,7 +3,7 @@ function initMap() {
 
     // Initialize the map with all base map features turned off
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
+        zoom: 1,
         center: afghanistan, 
         minZoom: 2,
         maxZoom: 7,
