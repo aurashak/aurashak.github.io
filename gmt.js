@@ -21,6 +21,6 @@ function initMap() {
         strokeColor: 'white',
         strokeWeight: 0.5,
         fillColor: 'black',
-        fillOpacity: 0.1
+        fillOpacity: 0
     });
 }
