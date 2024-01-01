@@ -8,10 +8,13 @@
 
     <!-- Replace YOUR_API_KEY with your actual API key -->
     <script src="https://aurashak.github.io/gmt.js"></script> 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI5f4TGsSIP-bx22y4TgoQfL4eY0BgeLA&callback=initMap" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI5f4TGsSIP-bx22y4TgoQfL4eY0BgeLA&libraries=places&callback=initMap" defer></script>
+
 </head>
 <body>
 <div id="navigation"></div>
+
+<input id="map-search" class="controls" type="text" placeholder="Search Box">
 
 <div class="containerimage-lg">
     <h3>My Google Map</h3>
