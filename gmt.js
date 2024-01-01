@@ -43,24 +43,5 @@ function initMap() {
         fillOpacity: 1
     });
 
-    // Update markers when the map is moved
-    map.addListener('bounds_changed', function() {
-        updateMarkers(map);
-    });
-}
-
-function updateMarkers(map) {
-    var bounds = map.getBounds();
-    var ne = bounds.getNorthEast();
-    var sw = bounds.getSouthWest();
-
-    // Update latitude markers
-    var latitudes = [sw.lat(), ne.lat()];
-    document.getElementById('lat-markers').textContent = latitudes.join('°, ') + '°';
-
-    // Update longitude markers
-    var longitudes = [sw.lng(), ne.lng()];
-    document.getElementById('lng-markers').textContent = longitudes.join('°, ') + '°';
-}
 
 // Existing processPoints function...
