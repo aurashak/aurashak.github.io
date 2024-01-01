@@ -1,9 +1,10 @@
 function initMap() {
-    var afghanistan = {lat: 34.5553, lng: 69.2075}; // Coordinates for a location in Afghanistan
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 2,
 
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
-        center: afghanistan, 
+        center: afghanistan, // Set Afghanistan as the center
         minZoom: 2,
         maxZoom: 7,
         disableDefaultUI: true,
@@ -35,6 +36,8 @@ function initMap() {
         });
     });
 
+
+    
     // Define a style for your GeoJSON features
     map.data.setStyle({
         strokeColor: 'white',
@@ -42,6 +45,6 @@ function initMap() {
         fillColor: 'black',
         fillOpacity: 1
     });
-
+}
 
 // Existing processPoints function...
