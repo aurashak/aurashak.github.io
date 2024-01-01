@@ -4,6 +4,8 @@
     <title>Simple Google Map</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://aurashak.github.io/style.css">
+
     <!-- Replace YOUR_API_KEY with your actual API key -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI5f4TGsSIP-bx22y4TgoQfL4eY0BgeLA&callback=initMap" async defer></script>
     <style>
@@ -15,17 +17,15 @@
     </style>
 </head>
 <body>
+    <div id="navigation"></div>
+
+    <div class="containerimage-lg">
     <h3>My Google Map</h3>
     <div id="map"></div>
+</div>
 
-    <script>
-function initMap() {
-    var location = {lat: -34.397, lng: 150.644}; // Coordinates for the initial center of the map
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8, // Initial zoom level
-        center: location
-    });
-}
-    </script>
+    <script src="https://aurashak.github.io/gmt.js"></script> 
+    <script src="https://aurashak.github.io/common.js"></script>
+
 </body>
 </html>
