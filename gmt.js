@@ -5,21 +5,24 @@ function initMap() {
         minZoom: 1,
         maxZoom: 7,
         disableDefaultUI: true,
-        zoomControl: true,
         backgroundColor: 'white',
         styles: [{ featureType: 'all', stylers: [{ visibility: 'off' }] }],
         restriction: {
             latLngBounds: {
                 north: 85,
                 south: -85,
-                east: 180, // Sets the east boundary
-                west: -180 // Sets the west boundary
+                east: 180,
+                west: -180
             },
             strictBounds: true
+        },
+        zoomControl: true, // Enable zoom control
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER // Move zoom control to the top center
         }
     });
 
-    
+
     // Load the GeoJSON file
     map.data.loadGeoJson('https://aurashak.github.io/geojson/countries.geojson');
 
