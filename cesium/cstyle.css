@@ -1,7 +1,7 @@
 /* General Body Styles */
 body {
-    background-color: #fff; /* White background for the body */
-    color: #212529; /* Default text color */
+    background-color: #fff; 
+    color: #212529; 
     margin: 0;
     font-family: arial;
     padding: 0px;
@@ -10,16 +10,16 @@ body {
 }
 
 p {
-    color: #000; /* Default text color */
+    color: #000; 
     font-family: arial;
     font-size: 15px;
-  text-align: center;
+    text-align: center;
 }
 
 a {
-    color: #fff; /* Standard link color - change as needed */
-    text-decoration: none; /* Removes underline from links */
-    transition: none; /* Smooth color transition for hover */
+    color: #fff; 
+    text-decoration: none;
+    transition: none; 
 }
 
 a:hover {
@@ -27,15 +27,14 @@ a:hover {
     text-decoration: underline;
 }
 
-/* General h1 and h2 Styles */
 h1 {
-    margin: 0; /* Margin for h1 */
+    margin: 0; 
     font-size: 21px;
     font-family: arial;
 }
 
 h2 {
-    margin: 0px; /* Margin for h2 */
+    margin: 0px; 
     font-size: 21px;
     font-family: arial;
     font-weight: normal;
@@ -44,33 +43,33 @@ h2 {
 
 /* Navigation Bar Styles */
 .UnderlineNav {
-    background-color: white; /* Background color set to white */
+    background-color: white; 
     overflow: hidden;
     padding: 20px;
 }
 
 .UnderlineNav-body {
     display: flex;
-    justify-content: center; /* Center the navigation items */
+    justify-content: center; 
     padding: 0;
 }
 
 .UnderlineNav-item {
     display: block;
-    padding: 5px 10px; /* Padding for the button */
-    color: #fff; /* Text color set to black */
+    padding: 5px 10px;
+    color: #fff; 
     border-radius: 0px;
-    background-color: #000; /* Background color set to grey */
+    background-color: #000; 
     text-decoration: none;
     border-radius: 2px;
-    font-size: 20px; /* Font size set to 15px */
-    font-weight: bold; /* Font weight set to normal */
-    margin: 10px; /* Adjust margins as needed */
+    font-size: 20px; 
+    font-weight: bold; 
+    margin: 10px; 
     letter-spacing: .04rem;
 }
 
 .UnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
+    margin-right: 0;
 
 }
 
@@ -91,12 +90,11 @@ h2 {
     background-color: white;
 }
 
-/* Style the Cesium search input more specifically */
 .cesium-viewer .cesium-geocoder-input,
 .cesium-viewer .cesium-geocoder-input:focus {
-    color: black !important; /* Text color */
-    background-color: #ffffff91 !important; /* Background color */
-    border: 0px solid black !important; /* Border color */
+    color: black !important; 
+    background-color: #ffffff91 !important; 
+    border: 0px solid black !important; 
 }
 
 .cesium-geocoder-searchButton {
@@ -133,7 +131,6 @@ h2 {
     padding-right: 0px;
     
 }
-
 
 element.style {
 }
@@ -174,6 +171,7 @@ element.style {
     display: block;
     position: relative;
     top: 0;
+    border: 2px black solid;
     border-radius: 2px;
     left: 0;
     width: 100%;
@@ -193,23 +191,14 @@ element.style {
     font-size: 16px; /* Font size */
 }
 
-/* Button hover effect */
-.toggleButton:hover {
-    background-color: #45a049; /* Darker shade of green */
-}
-
 /* Info Box Styles */
 #infoBox {
-    position: absolute; /* Position absolutely in the viewer */
-    bottom: 10px; /* Position from the bottom */
-    left: 10px; /* Position from the left */
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
     padding: 10px; /* Padding */
     border-radius: 5px; /* Rounded corners */
     max-width: 300px; /* Maximum width */
     border: 1px solid #ddd; /* Light grey border */
     font-size: 14px; /* Font size */
-    z-index: 10; /* Ensure it's above other elements */
 }
 
 
@@ -217,9 +206,9 @@ element.style {
 @media screen and (max-width: 85%) {
 
 
-    .image-containerone img, .image-containertwo img {
-        width: 100%; /* Full width images */
-        height: auto; /* Maintain aspect ratio */
-    }
+.image-containerone img, .image-containertwo img {
+    width: 100%; /* Full width images */
+    height: auto; /* Maintain aspect ratio */
+}
 
 
