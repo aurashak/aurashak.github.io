@@ -118,7 +118,34 @@ h3 {
 }
 
 
+.cesium-viewer-toolbar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    z-index: 1;
+  }
 
+  .cesium-viewer-toolbar button,
+  .cesium-viewer-toolbar input[type="button"] {
+    background-color: white;
+    color: black;
+    border-color: black; /* if you want to change the border color as well */
+  }
+
+  /* Change the toolbar button icons to black */
+  .cesium-viewer-toolbar button span,
+  .cesium-viewer-toolbar input[type="button"] span {
+    color: black;
+    fill: black; /* SVG icon fill color */
+  }
+
+  /* Change the color on hover */
+  .cesium-viewer-toolbar button:hover,
+  .cesium-viewer-toolbar input[type="button"]:hover {
+    background-color: #e6e6e6; /* Light grey background on hover */
+    color: black;
+  }
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
