@@ -105,7 +105,7 @@ hoverHandler.setInputAction(function (movement) {
         var longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
         // Display the information, e.g., in a tooltip or HTML element
         // Example: Update an element with ID 'infoBox' with the country name and coordinates
-        document.getElementById('infoBox').textContent = `Country: ${countryName}, Lat: ${latitude}, Long: ${longitude}`;
+        document.getElementById('infoBox').textContent = `${countryName ? countryName + ', ' : ''}Lat: ${latitude}, Long: ${longitude}`;
     }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
