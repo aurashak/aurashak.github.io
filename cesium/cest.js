@@ -5,21 +5,35 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     imageryProvider: Cesium.createWorldImagery(),
     // Use the Cesium World Terrain
     terrainProvider: Cesium.createWorldTerrain(),
-    // Show the Cesium ion logo
+    // Show the Cesium ion logo (there is no direct option to hide it; it can be done via CSS if necessary)
     shouldAnimate: true,
     // Enable lighting based on the sun position
     scene3DOnly: false,
     // Automatically track the entity
     timeline: true,
-    // Display the "home" button
-    navigationHelpButton: true,
-    // Display the geocoder
+    // Display the "home" button - set to false to hide
+    homeButton: true,
+    // Display the navigation help button - set to false to hide
+    navigationHelpButton: false,
+    // Display the geocoder - set to false to hide
     geocoder: true,
+    // Show fullscreen button - set to false to hide
+    fullscreenButton: false,
+    // Show scene mode picker - set to false to hide
+    sceneModePicker: false,
+    // Show base layer picker - set to false to hide
+    baseLayerPicker: false,
+    // Show animation widget - set to false to hide
+    animation: true,
+    // Show VR button - set to false to hide (if applicable)
+    vrButton: false,
+    // Show info box - set to false to hide
+    infoBox: true
 });
 
 // Set the initial view to Afghanistan
 viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 30000000), // Longitude and latitude of Afghanistan, with a higher altitude for a wider view
+    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 20000000), // Longitude and latitude of Afghanistan, with a higher altitude for a wider view
     orientation: {
         heading: Cesium.Math.toRadians(0),
         pitch: Cesium.Math.toRadians(-90), // Pointing downwards
