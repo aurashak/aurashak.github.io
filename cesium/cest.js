@@ -67,17 +67,17 @@ viewer.screenSpaceEventHandler.setInputAction(function onMouseClick(movement) {
 // Load a GeoJSON file from a URL
 var geoJsonUrl = 'https://aurashak.github.io/geojson/ne_10m_lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.HOTPINK, // Line color
-    fill: Cesium.Color.PINK.withAlpha(0.5), // Polygon fill color with some transparency
-    strokeWidth: 3
+    stroke: Cesium.Color.BLUE, // Line color
+    fill: Cesium.Color.TRANSPARENT.withAlpha(0.5), // Polygon fill color with some transparency
+    strokeWidth: 1
 }));
 
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/worldcountries.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.HOTPINK, // Line color
-    fill: Cesium.Color.PINK.withAlpha(0.5), // Polygon fill color with some transparency
-    strokeWidth: 3
+    stroke: Cesium.Color.BLACK, // Line color
+    fill: Cesium.Color.TRANSPARENT.withAlpha(0.5), // Polygon fill color with some transparency
+    strokeWidth: 1
 }));
 
 
