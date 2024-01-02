@@ -49,10 +49,20 @@ viewer.homeButton.viewModel.command = function() {
     viewer.camera.flyTo(afghanistanHomeLocation);
 };
 
-// Set the skybox to use a single white color
-viewer.scene.skyBox.destroy();
-viewer.scene.skyBox = undefined;
-viewer.scene.backgroundColor = Cesium.Color.WHITE;
+// Ensure that the skybox is removed and the background color is set to white
+function setWhiteBackground() {
+    if (viewer.scene.skyBox) {
+        viewer.scene.skyBox.destroy();
+        viewer.scene.skyBox = undefined;
+    }
+    viewer.scene.backgroundColor = Cesium.Color.WHITE;
+}
+
+// Set the white background initially
+setWhiteBackground();
+
+// Set the white background after every scene update
+viewer.scene.postUpdate.addEventListener(setWhiteBackground);
 
 
 // Zoom to an entity with a particular ID
