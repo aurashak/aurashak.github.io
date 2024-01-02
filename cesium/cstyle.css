@@ -203,7 +203,24 @@ element.style {
 
 .controls-container {
     text-align: center; /* Center the content */
-    margin-top: 20px; /* Provide some space below the navigation bar */
+    margin: 20px auto; /* Provide some space below the navigation bar */
+    width: 70%;
+}
+
+.cesium-button:hover {
+    color: #000;
+    fill: #000;
+    background: none;
+    border-color: #fff;
+    box-shadow: 0 0 8px #fff
+}
+
+.cesium-button:active {
+    color: #000;
+    fill: #000;
+    background: #none;
+    border-color: #fff;
+    box-shadow: 0 0 0px #fff
 }
 
 /* Style the buttons and info box to display inline-block so they line up in a row and center */
