@@ -31,15 +31,23 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     infoBox: true
 });
 
-// Set the initial view to Afghanistan
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 20000000), // Longitude and latitude of Afghanistan, with a higher altitude for a wider view
+// Afghanistan coordinates and view settings
+var afghanistanHomeLocation = {
+    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 20000000),
     orientation: {
         heading: Cesium.Math.toRadians(0),
-        pitch: Cesium.Math.toRadians(-90), // Pointing downwards
+        pitch: Cesium.Math.toRadians(-90), // looking down
         roll: 0.0
     }
-});
+};
+
+// Set the initial view to Afghanistan
+viewer.camera.setView(afghanistanHomeLocation);
+
+// Override the default home button behavior to fly to Afghanistan
+viewer.homeButton.viewModel.command = function() {
+    viewer.camera.flyTo(afghanistanHomeLocation);
+};
 
 
 // Zoom to an entity with a particular ID
