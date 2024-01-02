@@ -135,6 +135,37 @@ h2 {
 }
 
 
+element.style {
+}
+.cesium-sceneModePicker-wrapper .cesium-sceneModePicker-button2D, .cesium-sceneModePicker-wrapper .cesium-sceneModePicker-button3D, .cesium-sceneModePicker-wrapper .cesium-sceneModePicker-buttonColumbusView {
+    margin: 0 0 3px 0;
+}
+.cesium-toolbar-button {
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border-radius: 1px;
+    padding: 0;
+    vertical-align: middle;
+    z-index: 0;
+}
+.cesium-button {
+    display: inline-block;
+    position: relative;
+    background: #ffffff8f;
+    border: 0px solid #444;
+    color: #edffff;
+    fill: #000000;
+    border-radius: 1px;
+    padding: 5px 12px;
+    margin: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
