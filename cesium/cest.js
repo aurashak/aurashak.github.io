@@ -10,9 +10,9 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     // Enable lighting based on the sun position
     scene3DOnly: false,
     // Automatically track the entity
-    timeline: false,
+    timeline: true,
     // Display the "home" button
-    navigationHelpButton: false,
+    navigationHelpButton: true,
     // Display the geocoder
     geocoder: true,
 });
