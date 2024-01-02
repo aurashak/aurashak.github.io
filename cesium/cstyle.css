@@ -136,10 +136,11 @@ h3 {
 
 /* Style the Cesium ion attribution */
 .cesium-viewer-bottom {
-    color: black !important; /* Text color */
-    background-color: rgb(255, 0, 0) !important; /* Background color */
-    padding: 5px 10px; /* Padding for aesthetics */
+    color: #fff !important; /* Text color */
+    background-color: #fff !important; /* Background color */
+    padding: 0px; /* Padding for aesthetics */
     border-radius: 5px; /* Optional: rounded corners */
+    box-shadow: 0px;
 }
 
 
