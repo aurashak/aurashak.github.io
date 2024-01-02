@@ -20,7 +20,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
 
 // Set the initial view to Afghanistan
 viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 20000000),
+    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 15000000),
     orientation: {
         heading: Cesium.Math.toRadians(0),
         pitch: Cesium.Math.toRadians(-90), // looking down
