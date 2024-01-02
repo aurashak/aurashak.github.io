@@ -109,15 +109,14 @@ h3 {
 }
 
 
-
-
-.cesiumcontainer-lg {
+#cesiumContainer {
     padding: 0px 0px 0px 0px;
     max-width: 70%;
     height: 600px;
     margin: 40px auto;
     background-color: white;
 }
+
 
 
 
