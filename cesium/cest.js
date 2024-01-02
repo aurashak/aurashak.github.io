@@ -49,14 +49,14 @@ viewer.homeButton.viewModel.command = function() {
     viewer.camera.flyTo(afghanistanHomeLocation);
 };
 
+
+// Disable the SkyAtmosphere to prevent the sky from appearing
+viewer.scene.skyAtmosphere.show = false;
+
 // Ensure that the skybox is removed and the background color is set to white
-function setWhiteBackground() {
-    if (viewer.scene.skyBox) {
-        viewer.scene.skyBox.destroy();
-        viewer.scene.skyBox = undefined;
-    }
-    viewer.scene.backgroundColor = Cesium.Color.WHITE;
-}
+viewer.scene.skyBox && viewer.scene.skyBox.destroy();
+viewer.scene.skyBox = undefined;
+viewer.scene.backgroundColor = Cesium.Color.WHITE;
 
 // Set the white background initially
 setWhiteBackground();
