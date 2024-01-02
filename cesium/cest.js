@@ -1,8 +1,8 @@
 // script.js file
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 var viewer = new Cesium.Viewer('cesiumContainer', {
-    // Use high-resolution imagery
-    imageryProvider: Cesium.createWorldImagery(),
+    // Use Sentinel-2 imagery provided by Cesium Ion
+    imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // 3954 is the asset ID for Sentinel-2 imagery
     // Use the Cesium World Terrain
     terrainProvider: Cesium.createWorldTerrain(),
     // Show the Cesium ion logo (there is no direct option to hide it; it can be done via CSS if necessary)
