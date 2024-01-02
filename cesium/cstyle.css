@@ -181,12 +181,8 @@ element.style {
 }
 
 /* Styles for mobile devices */
-@media screen and (max-width: 768px) {
-    .image-gridone, .image-gridtwo {
-        grid-template-columns: 1fr; /* Collapse to one column */
-        gap: 10px; /* Smaller gap for mobile */
-        width: 80%; /* Adjust width for smaller screens */
-    }
+@media screen and (max-width: 85%) {
+
 
     .image-containerone img, .image-containertwo img {
         width: 100%; /* Full width images */
@@ -194,6 +190,3 @@ element.style {
     }
 
 
-    .content-grid {
-        grid-template-columns: 1fr; /* Stack into one column on smaller screens */
-    }
