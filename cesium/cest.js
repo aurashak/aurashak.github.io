@@ -10,7 +10,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     // Enable lighting based on the sun position
     scene3DOnly: false,
     // Automatically track the entity
-    timeline: true,
+    timeline: false,
     // Display the "home" button - set to false to hide
     homeButton: true,
     // Display the navigation help button - set to false to hide
@@ -24,7 +24,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     // Show base layer picker - set to false to hide
     baseLayerPicker: false,
     // Show animation widget - set to false to hide
-    animation: true,
+    animation: false,
     // Show VR button - set to false to hide (if applicable)
     vrButton: false,
     // Show info box - set to false to hide
