@@ -42,15 +42,6 @@ h2 {
     color: gray;
 }
 
-h3 {
-    margin: 0px; /* Margin for h2 */
-    font-size: 18px;
-    font-family: arial;
-    font-weight: normal;
-    color: gray;
-}
-
-
 /* Navigation Bar Styles */
 .UnderlineNav {
     background-color: white; /* Background color set to white */
@@ -91,23 +82,6 @@ h3 {
     text-decoration: none;
 }
 
-#mapid {
-    height: 500px;
- background-color: white;
- border: solid 1px black;
-}
-
-.map {
-    height: 600px;
-    width: 100%;
-  }
-
-  #map {
-    height: 600px;
-    width: 100%;
-    border: solid 1px black;
-}
-
 
 #cesiumContainer {
     padding: 0px 0px 0px 0px;
@@ -117,23 +91,28 @@ h3 {
     background-color: white;
 }
 
-/* Style the search input field more specifically */
-.cesium-viewer .cesium-geocoder-input {
+/* Style the Cesium search input more specifically */
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus {
     color: black !important; /* Text color */
     background-color: white !important; /* Background color */
     border: 1px solid black !important; /* Border color */
 }
 
-/* Style the search button to have black icon and white background */
+/* Style the Cesium search button to have black icon and white background */
 .cesium-viewer .cesium-geocoder-button,
 .cesium-viewer .cesium-geocoder-button:hover {
     background-color: white !important;
     color: black !important;
-    fill: black !important; /* SVG icon fill color */
     border: 1px solid black !important;
 }
 
-/* Center the geocoder container over the globe with increased specificity */
+/* Style the Cesium search button SVG icon */
+.cesium-viewer .cesium-geocoder-button svg {
+    fill: black !important; /* SVG icon fill color */
+}
+
+/* Center the Cesium geocoder container over the globe with increased specificity */
 .cesium-viewer .cesium-widget .cesium-geocoder-container {
     top: 50% !important;
     left: 50% !important;
@@ -146,6 +125,8 @@ h3 {
     color: black !important; /* Text color */
     background-color: white !important; /* Background color */
     box-shadow: none !important; /* Remove box shadow */
+    padding: 5px 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Rounded corners if desired */
 }
 
 
