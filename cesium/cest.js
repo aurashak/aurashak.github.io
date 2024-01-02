@@ -12,7 +12,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     // Automatically track the entity
     timeline: false,
     // Display the "home" button
-    navigationHelpButton: true,
+    navigationHelpButton: false,
     // Display the geocoder
     geocoder: true,
 });
