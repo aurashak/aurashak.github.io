@@ -83,6 +83,8 @@ h2 {
 
 
 #cesiumContainer {
+    position: relative; /* This makes it a reference for absolutely positioned child elements */
+    /* ... other styles ... */
     padding: 0px 0px 0px 0px;
     max-width: 70%;
     height: 700px;
@@ -191,15 +193,15 @@ element.style {
     font-size: 16px; /* Font size */
 }
 
-/* Info Box Styles */
 #infoBox {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    padding: 10px; /* Padding */
-    border-radius: 5px; /* Rounded corners */
-    max-width: 300px; /* Maximum width */
-    border: 1px solid #ddd; /* Light grey border */
-    font-size: 14px; /* Font size */
+    position: absolute; /* This takes it out of the normal document flow */
+    top: 0; /* Aligns the top edge with the top of the container */
+    left: 0; /* Aligns the left edge with the left of the container */
+    width: auto; /* Adjusts the width automatically based on the content */
+    max-width: 400px; /* You can set a max-width if necessary */
+    /* ... other styles ... */
 }
+
 
 .controls-container {
     text-align: center; /* Center the content */
