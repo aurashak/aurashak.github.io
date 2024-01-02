@@ -49,6 +49,11 @@ viewer.homeButton.viewModel.command = function() {
     viewer.camera.flyTo(afghanistanHomeLocation);
 };
 
+// Set the skybox to use a single white color
+viewer.scene.skyBox.destroy();
+viewer.scene.skyBox = undefined;
+viewer.scene.backgroundColor = Cesium.Color.WHITE;
+
 
 // Zoom to an entity with a particular ID
 var entityId = 'exampleEntityId'; // Replace with the actual ID of your entity
