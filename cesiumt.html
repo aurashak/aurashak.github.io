@@ -2,24 +2,23 @@
 <html>
 <head>
     <title>Cesium Globe</title>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     <style>
-        body, html {
+        html, body, #cesiumContainer {
             width: 100%;
             height: 100%;
             margin: 0;
             padding: 0;
             overflow: hidden;
         }
-
-        #cesiumContainer {
-            width: 100%;
-            height: 100%;
-        }
     </style>
-    <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
-    <script src="https://aurashak.github.io/cesiumt.js" defer></script>
 </head>
 <body>
     <div id="cesiumContainer"></div>
+
+    <script>
+        var viewer = new Cesium.Viewer('cesiumContainer');
+    </script>
 </body>
 </html>
