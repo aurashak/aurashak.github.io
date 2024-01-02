@@ -129,7 +129,18 @@ h2 {
     border-radius: 5px; /* Rounded corners if desired */
 }
 
-
+.cesium-geocoder-searchButton {
+    background-color: #f9f9f930;
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+    width: 32px;
+    top: 1px;
+    right: 1px;
+    height: 30px;
+    vertical-align: middle;
+    fill: #000000;
+}
 
 
 /* Styles for mobile devices */
