@@ -64,11 +64,19 @@ viewer.screenSpaceEventHandler.setInputAction(function onMouseClick(movement) {
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 
-// Load a local GeoJSON file (make sure the file is accessible from your server)
+// Load a GeoJSON file from a URL
 var geoJsonUrl = 'https://aurashak.github.io/geojson/ne_10m_lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.HOTPINK,
-    fill: Cesium.Color.PINK.withAlpha(0.5),
+    stroke: Cesium.Color.HOTPINK, // Line color
+    fill: Cesium.Color.PINK.withAlpha(0.5), // Polygon fill color with some transparency
+    strokeWidth: 3
+}));
+
+
+var geoJsonUrl = 'https://aurashak.github.io/geojson/worldcountries.geojson';
+viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
+    stroke: Cesium.Color.HOTPINK, // Line color
+    fill: Cesium.Color.PINK.withAlpha(0.5), // Polygon fill color with some transparency
     strokeWidth: 3
 }));
 
