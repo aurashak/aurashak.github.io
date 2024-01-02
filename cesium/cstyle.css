@@ -203,11 +203,11 @@ element.style {
 }
 
 .controls-container button:hover {
-    background-color: red; /* Darker shade of green on hover */
+    background-color: none; /* Darker shade of green on hover */
 }
 
 .controls-container button:active {
-    background-color: red; /* Even darker shade when the button is clicked */
+    background-color: none; /* Even darker shade when the button is clicked */
 }
 
 #infoBox {
@@ -255,12 +255,8 @@ element.style {
     background-color: none; /* 50% transparent white */
 }
 
-.cesium-button:active {
-    color: #000;
-    fill: #000;
-    background: none;
-    border-color: none;
-    box-shadow: 0 0 0px #fff
+.cesium-geocoder-searchButton:hover {
+    background-color: none;
 }
 
 .cesium-viewer-geocoderContainer {
@@ -268,6 +264,10 @@ element.style {
     display: inline-block;
     margin: 0px;
 }
+
+
+
+
 
 /* Styles for mobile devices */
 @media screen and (max-width: 85%) {
