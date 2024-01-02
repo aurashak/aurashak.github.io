@@ -120,9 +120,9 @@ h3 {
 
 /* Style the search button */
 .cesium-geocoder-input {
-    color: white !important; /* Text color */
-    background-color: black !important; /* Background color */
-    border: 1px solid white !important; /* Border color */
+    color: rgb(0, 0, 0) !important; /* Text color */
+    background-color: rgb(255, 255, 255) !important; /* Background color */
+    border: 1px solid rgb(255, 0, 0) !important; /* Border color */
 }
 
 /* Style the search button's container to center it over the globe */
@@ -137,7 +137,7 @@ h3 {
 /* Style the Cesium ion attribution */
 .cesium-viewer-bottom {
     color: black !important; /* Text color */
-    background-color: white !important; /* Background color */
+    background-color: rgb(255, 0, 0) !important; /* Background color */
     padding: 5px 10px; /* Padding for aesthetics */
     border-radius: 5px; /* Optional: rounded corners */
 }
