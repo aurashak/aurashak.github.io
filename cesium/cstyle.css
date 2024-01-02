@@ -182,24 +182,36 @@ element.style {
 
 
 /* Button Styles */
-.toggleButton {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
+.controls-container button {
+    background-color: #bfbfbf; /* Green background */
+    color: black; /* White text */
     padding: 10px 15px; /* Padding */
     margin: 10px 5px; /* Margin */
-    border: none; /* No border */
+    border: 1px black solid; /* No border */
     cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 2px; /* Rounded corners */
     font-size: 16px; /* Font size */
+}
+
+.controls-container button:hover {
+    background-color: none; /* Darker shade of green on hover */
+}
+
+.controls-container button:active {
+    background-color: none; /* Even darker shade when the button is clicked */
 }
 
 #infoBox {
     position: absolute; /* This takes it out of the normal document flow */
+    background-color: rgba(255, 255, 255, 0.5); /* 50% transparent white */
     top: 0; /* Aligns the top edge with the top of the container */
     left: 0; /* Aligns the left edge with the left of the container */
-    width: auto; /* Adjusts the width automatically based on the content */
-    max-width: 400px; /* You can set a max-width if necessary */
+    color: black;
+    z-index: 1000; /* Higher than other elements */
+    width: auto; /* You can set a max-width if necessary */
     /* ... other styles ... */
+    padding: 5px;
+    bac
 }
 
 
@@ -225,14 +237,7 @@ element.style {
     box-shadow: 0 0 0px #fff
 }
 
-/* Style the buttons and info box to display inline-block so they line up in a row and center */
-#toggleGeoJson,
-#toggleSatelliteImagery,
-#infoBox {
-    display: inline-block; /* Align the elements in a line */
-    margin: 0 10px; /* Provide space between the buttons and the info box */
-    /* Rest of your styles for buttons and infoBox... */
-}
+
 
 
 /* Styles for mobile devices */
