@@ -11,7 +11,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     navigationHelpButton: false,
     geocoder: true,
     fullscreenButton: false,
-    sceneModePicker: false,
+    sceneModePicker: true,
     baseLayerPicker: false,
     animation: false,
     vrButton: false,
