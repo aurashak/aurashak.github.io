@@ -118,13 +118,7 @@ h3 {
 }
 
 
-.cesium-viewer-toolbar {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 10px;
-    z-index: 1;
-  }
+
 
 
 
