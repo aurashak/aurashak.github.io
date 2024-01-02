@@ -1,4 +1,3 @@
-
 /* General Body Styles */
 body {
     background-color: #fff; /* White background for the body */
@@ -10,12 +9,103 @@ body {
     padding-bottom: 20px;
 }
 
-.cesiumcontainer-lg {
-    padding: 0px 0px 0px 0px;
-    max-width: 100%;
+p {
+    color: #000; /* Default text color */
+    font-family: arial;
+    font-size: 15px;
+  text-align: center;
+}
+
+a {
+    color: #fff; /* Standard link color - change as needed */
+    text-decoration: none; /* Removes underline from links */
+    transition: none; /* Smooth color transition for hover */
+}
+
+a:hover {
+    background-color: none;
+    text-decoration: underline;
+}
+
+/* General h1 and h2 Styles */
+h1 {
+    margin: 0; /* Margin for h1 */
+    font-size: 21px;
+    font-family: arial;
+}
+
+h2 {
+    margin: 0px; /* Margin for h2 */
+    font-size: 21px;
+    font-family: arial;
+    font-weight: normal;
+    color: gray;
+}
+
+h3 {
+    margin: 0px; /* Margin for h2 */
+    font-size: 18px;
+    font-family: arial;
+    font-weight: normal;
+    color: gray;
+}
+
+
+/* Navigation Bar Styles */
+.UnderlineNav {
+    background-color: white; /* Background color set to white */
+    overflow: hidden;
+    padding: 20px;
+}
+
+.UnderlineNav-body {
+    display: flex;
+    justify-content: center; /* Center the navigation items */
+    padding: 0;
+}
+
+.UnderlineNav-item {
+    display: block;
+    padding: 5px 10px; /* Padding for the button */
+    color: #fff; /* Text color set to black */
+    border-radius: 0px;
+    background-color: #000; /* Background color set to grey */
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 20px; /* Font size set to 15px */
+    font-weight: bold; /* Font weight set to normal */
+    margin: 10px; /* Adjust margins as needed */
+    letter-spacing: .04rem;
+}
+
+.UnderlineNav-item:last-child {
+    margin-right: 0; /* No margin for the last item */
+
+}
+
+.UnderlineNav a {
+    background-color: none;
+}
+.UnderlineNav a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+#mapid {
+    height: 500px;
+ background-color: white;
+ border: solid 1px black;
+}
+
+.map {
     height: 600px;
-    margin: 40px auto;
-    background-color: white;
+    width: 100%;
+  }
+
+  #map {
+    height: 600px;
+    width: 100%;
+    border: solid 1px black;
 }
 
 #cesiumContainer {
@@ -26,7 +116,12 @@ body {
     overflow: hidden;
 }
 
-
+.cesiumcontainer-lg {
+    padding: 0px 0px 0px 0px;
+    max-width: 100%;
+    margin: 40px 20px;
+    background-color: white;
+}
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
