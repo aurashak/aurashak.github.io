@@ -69,7 +69,7 @@ var geoJsonUrl = 'https://aurashak.github.io/geojson/ne_10m_lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLUE, // Line color
     fill: Cesium.Color.TRANSPARENT.withAlpha(0.5), // Polygon fill color with some transparency
-    strokeWidth: 1
+    strokeWidth: 0
 }));
 
 
@@ -108,4 +108,47 @@ hoverHandler.setInputAction(function (movement) {
         document.getElementById('infoBox').textContent = `Country: ${countryName}, Lat: ${latitude}, Long: ${longitude}`;
     }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+
+// Function to add a graticule
+function addGraticule(viewer) {
+    var graticule = new Cesium.CustomDataSource('graticule');
+
+    // Add lines for meridians (longitudes)
+    for (var lon = -180; lon <= 180; lon += 10) {
+        graticule.entities.add({
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+                    lon, -90, 0,
+                    lon, 90, 0
+                ]),
+                width: 1,
+                material: Cesium.Color.GRAY
+            }
+        });
+    }
+
+    // Add lines for parallels (latitudes)
+    for (var lat = -90; lat <= 90; lat += 10) {
+        graticule.entities.add({
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+                    -180, lat, 0,
+                    180, lat, 0
+                ]),
+                width: 1,
+                material: Cesium.Color.GRAY
+            }
+        });
+    }
+
+    viewer.dataSources.add(graticule);
+}
+
+// Call the function after creating the viewer
+var viewer = new Cesium.Viewer('cesiumContainer', {
+    // Viewer options...
+});
+
+addGraticule(viewer);
 
