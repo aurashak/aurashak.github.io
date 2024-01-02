@@ -167,6 +167,19 @@ element.style {
     user-select: none;
 }
 
+.cesium-viewer {
+    font-family: sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    top: 0;
+    border-radius: 2px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
     .image-gridone, .image-gridtwo {
