@@ -110,45 +110,26 @@ hoverHandler.setInputAction(function (movement) {
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
-// Function to add a graticule
-function addGraticule(viewer) {
-    var graticule = new Cesium.CustomDataSource('graticule');
 
-    // Add lines for meridians (longitudes)
-    for (var lon = -180; lon <= 180; lon += 10) {
-        graticule.entities.add({
-            polyline: {
-                positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-                    lon, -90, 0,
-                    lon, 90, 0
-                ]),
-                width: 1,
-                material: Cesium.Color.GRAY
-            }
-        });
+
+
+// Handler for toggling the GeoJSON layer
+document.getElementById('toggleGeoJson').addEventListener('click', function() {
+    if (viewer.dataSources.contains(geoJsonDataSource)) {
+        viewer.dataSources.remove(geoJsonDataSource, false);
+    } else {
+        viewer.dataSources.add(geoJsonDataSource);
     }
-
-    // Add lines for parallels (latitudes)
-    for (var lat = -90; lat <= 90; lat += 10) {
-        graticule.entities.add({
-            polyline: {
-                positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-                    -180, lat, 0,
-                    180, lat, 0
-                ]),
-                width: 1,
-                material: Cesium.Color.GRAY
-            }
-        });
-    }
-
-    viewer.dataSources.add(graticule);
-}
-
-// Call the function after creating the viewer
-var viewer = new Cesium.Viewer('cesiumContainer', {
-    // Viewer options...
 });
 
-addGraticule(viewer);
-
+// Handler for toggling the satellite imagery
+document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
+    if (viewer.imageryLayers.length > 1) {
+        // Remove the satellite imagery layer
+        viewer.imageryLayers.remove(viewer.imageryLayers.get(1));
+    } else {
+        // Add the satellite imagery layer
+        var imageryProvider = new Cesium.IonImageryProvider({ assetId: 3954 }); // Example asset ID for Sentinel-2 imagery
+        viewer.imageryLayers.addImageryProvider(imageryProvider);
+    }
+});
