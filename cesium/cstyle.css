@@ -108,6 +108,15 @@ h3 {
     border: solid 1px black;
 }
 
+
+.cesiumcontainer-lg {
+    padding: 0px 0px 0px 0px;
+    max-width: 100%;
+    height: 600px;
+    margin: 40px auto;
+    background-color: white;
+}
+
 #cesiumContainer {
     width: 100%;
     height: 100%;
@@ -116,12 +125,8 @@ h3 {
     overflow: hidden;
 }
 
-.cesiumcontainer-lg {
-    padding: 0px 0px 0px 0px;
-    max-width: 100%;
-    margin: 40px 20px;
-    background-color: white;
-}
+
+
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
