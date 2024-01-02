@@ -17,26 +17,16 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     geocoder: true,
 });
 
-// Set the initial view to a specific location and zoom level
+// Set the initial view to Afghanistan
 viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.012, 40.711, 1500),
+    destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 10000000), // Longitude and latitude of Afghanistan, with a higher altitude for a wider view
     orientation: {
-        heading: Cesium.Math.toRadians(0), // East, default value is 0
-        pitch: Cesium.Math.toRadians(-35), // Downward tilt of the camera
-        roll: 0.0 // No roll
+        heading: Cesium.Math.toRadians(0),
+        pitch: Cesium.Math.toRadians(-90), // Pointing downwards
+        roll: 0.0
     }
 });
 
-// Fly to a specific position
-viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(-122.19, 46.25, 5000), // Longitude, Latitude, and Height
-    orientation: {
-        heading: Cesium.Math.toRadians(20), // Rotation from north
-        pitch: Cesium.Math.toRadians(-20), // Angle from the surface
-        roll: 0.0
-    },
-    duration: 5 // Duration of the flight in seconds
-});
 
 // Zoom to an entity with a particular ID
 var entityId = 'exampleEntityId'; // Replace with the actual ID of your entity
