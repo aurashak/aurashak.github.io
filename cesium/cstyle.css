@@ -95,42 +95,12 @@ h2 {
 .cesium-viewer .cesium-geocoder-input,
 .cesium-viewer .cesium-geocoder-input:focus {
     color: black !important; /* Text color */
-    background-color: white !important; /* Background color */
-    border: 1px solid black !important; /* Border color */
-}
-
-/* Style the Cesium search button to have black icon and white background */
-.cesium-viewer .cesium-geocoder-button,
-.cesium-viewer .cesium-geocoder-button:hover {
-    background-color: white !important;
-    color: black !important;
-    border: 1px solid black !important;
-}
-
-/* Style the Cesium search button SVG icon */
-.cesium-viewer .cesium-geocoder-button svg {
-    fill: black !important; /* SVG icon fill color */
-}
-
-/* Center the Cesium geocoder container over the globe with increased specificity */
-.cesium-viewer .cesium-widget .cesium-geocoder-container {
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 1 !important; /* Ensure it's above the globe */
-}
-
-/* Remove box-shadow from the Cesium ion attribution with increased specificity */
-.cesium-viewer .cesium-viewer-bottom {
-    color: black !important; /* Text color */
-    background-color: white !important; /* Background color */
-    box-shadow: none !important; /* Remove box shadow */
-    padding: 5px 10px; /* Adjust padding as needed */
-    border-radius: 5px; /* Rounded corners if desired */
+    background-color: #ffffff91 !important; /* Background color */
+    border: 0px solid black !important; /* Border color */
 }
 
 .cesium-geocoder-searchButton {
-    background-color: #f9f9f930;
+    background-color: #f9f9f900;
     display: inline-block;
     position: absolute;
     cursor: pointer;
@@ -140,7 +110,30 @@ h2 {
     height: 30px;
     vertical-align: middle;
     fill: #000000;
+    border: none;
 }
+
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    bottom: auto;
+    left: auto;
+    padding-right: 0;
+    color: #fff;
+    font-size: 0px;
+    text-shadow: 0 0 0px #000;
+}
+
+.cesium-viewer-bottom {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 0px;
+    left: 0;
+    padding-right: 0px;
+    
+}
+
 
 
 /* Styles for mobile devices */
