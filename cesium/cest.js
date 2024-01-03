@@ -174,10 +174,6 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 }));
 
 
-// Example: After all data sources are loaded, if you want to bring lakes to the top:
-viewer.dataSources.add(lakeDataSource).then(function(dataSource) {
-    viewer.dataSources.raiseToTop(dataSource);
-
 
 // Add a handler for mouse move events to display feature name and lat/long
 var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
