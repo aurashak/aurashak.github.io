@@ -204,3 +204,16 @@ hoverHandler.setInputAction(function (movement) {
 
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
+
+// Function to toggle the visibility of the satellite imagery layer
+function toggleSatelliteImagery() {
+    if (viewer.imageryLayers.length > 0) {
+        var satelliteLayer = viewer.imageryLayers.get(0); // Get the first imagery layer
+        satelliteLayer.show = !satelliteLayer.show; // Toggle the visibility
+    }
+}
+
+// Get the button and add click event listener
+var toggleButton = document.getElementById('toggleSatelliteImagery');
+toggleButton.addEventListener('click', toggleSatelliteImagery);
+
