@@ -71,14 +71,14 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLACK, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
+    fill: new Cesium.Color(1, 1, 1, 0.01), // Fully transparent fill color
     strokeWidth: 0
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLACK, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
+    fill: new Cesium.Color(1, 1, 1, 0.01), // Fully transparent fill color
     strokeWidth: 0
 }));
 
@@ -129,14 +129,14 @@ var geoJsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.RED, // Line color
     fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    strokeWidth: 0
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLUE, // Line color
     fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    strokeWidth: 0
 }));
 
 
