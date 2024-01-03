@@ -139,22 +139,24 @@ var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 hoverHandler.setInputAction(function (movement) {
     var infoBoxText = ''; // This will hold the names of the features (country, lake, or river)
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
-    
-    // Store unique names to avoid duplicates if entities overlap
-    var uniqueNames = new Set();
+
+    // Use a set to store unique names to avoid duplicates
+    var uniqueFeatureNames = new Set();
 
     // Iterate over all picked objects to get names of the features
     for (var i = 0; i < pickedObjects.length; i++) {
-        var entity = pickedObjects[i].id;
-        if (Cesium.defined(entity) && entity.properties && entity.properties.name) {
-            uniqueNames.add(entity.properties.name.getValue());
+        var pickedFeature = pickedObjects[i];
+        if (Cesium.defined(pickedFeature.id) && pickedFeature.id.properties) {
+            var properties = pickedFeature.id.properties;
+            // Check if the properties have a 'name' property and it's not already in the set
+            if (properties.hasOwnProperty('name') && properties.name) {
+                uniqueFeatureNames.add(properties.name.getValue());
+            }
         }
     }
 
-    // Join all unique feature names
-    if (uniqueNames.size > 0) {
-        infoBoxText = Array.from(uniqueNames).join(', ');
-    }
+    // Convert the unique names set to an array and join with commas
+    infoBoxText = Array.from(uniqueFeatureNames).join(', ');
 
     // Update the info box with the feature names and coordinates
     if (infoBoxText !== '') {
@@ -171,10 +173,9 @@ hoverHandler.setInputAction(function (movement) {
     } else {
         infoBoxText = 'No feature under mouse';
     }
-    
+
     // Display the information
     document.getElementById('infoBox').textContent = infoBoxText;
-
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
