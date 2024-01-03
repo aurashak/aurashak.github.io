@@ -75,7 +75,7 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/satwo.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.BLACK, // Line color
+    stroke: Cesium.Color.YELLOW, // Line color
     fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
     strokeWidth: 1
 }));
