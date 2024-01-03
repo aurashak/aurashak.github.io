@@ -68,20 +68,6 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 1
 }));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.BLACK, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
-    strokeWidth: 0
-}));
-
-var geoJsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.BLACK, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
-    strokeWidth: 0
-}));
-
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
@@ -195,29 +181,23 @@ hoverHandler.setInputAction(function (movement) {
 
 
 
-// Ensure that this script is executed after the Cesium viewer has been initialized and the page is fully loaded.
-document.addEventListener('DOMContentLoaded', function() {
-    // ... initialization of the Cesium viewer ...
+// Handler for toggling the GeoJSON layer
+document.getElementById('toggleGeoJson').addEventListener('click', function() {
+    if (viewer.dataSources.contains(geoJsonDataSource)) {
+        viewer.dataSources.remove(geoJsonDataSource, false);
+    } else {
+        viewer.dataSources.add(geoJsonDataSource);
+    }
+});
 
-    // Handler for toggling the GeoJSON layer
-    document.getElementById('toggleGeoJson').addEventListener('click', function() {
-        geoJsonDataSources.forEach(function(dataSource) {
-            if (viewer.dataSources.contains(dataSource)) {
-                viewer.dataSources.remove(dataSource, false);
-            } else {
-                viewer.dataSources.add(dataSource);
-            }
-        });
-    });
-
-    // Handler for toggling the satellite imagery
-    document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
-        if (satelliteImageryLayer) {
-            // Remove the satellite imagery layer if it exists
-            viewer.imageryLayers.remove(satelliteImageryLayer);
-            satelliteImageryLayer = undefined; // Set to undefined after removal
-        } else {
-            // Add the satellite imagery layer
-            satelliteImageryLayer = viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
-        }
-    });
+// Handler for toggling the satellite imagery
+document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
+    if (viewer.imageryLayers.length > 1) {
+        // Remove the satellite imagery layer
+        viewer.imageryLayers.remove(viewer.imageryLayers.get(1));
+    } else {
+        // Add the satellite imagery layer
+        var imageryProvider = new Cesium.IonImageryProvider({ assetId: 3954 }); // Example asset ID for Sentinel-2 imagery
+        viewer.imageryLayers.addImageryProvider(imageryProvider);
+    }
+});
