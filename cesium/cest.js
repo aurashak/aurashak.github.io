@@ -108,7 +108,7 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),
+    stroke: Cesium.Color.fromCssColorString('#fff').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),    
     strokeWidth: .3
 }));
@@ -122,28 +122,28 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/europe.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),
+    stroke: Cesium.Color.fromCssColorString('#fff').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),    
     strokeWidth: .3
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/asia.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),
+    stroke: Cesium.Color.fromCssColorString('#fff').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),     
     strokeWidth: .3
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/africa.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),
+    stroke: Cesium.Color.fromCssColorString('#fff').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),    
     strokeWidth: 1
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),
+    stroke: Cesium.Color.fromCssColorString('#fff').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(1),    
     strokeWidth: .3
 }));
@@ -159,14 +159,14 @@ var geoJsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),    
-    strokeWidth: 0.1
+    strokeWidth: 0
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),    
-    strokeWidth: 0.1
+    strokeWidth: 0
 }));
 
 
