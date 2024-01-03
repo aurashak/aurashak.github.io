@@ -183,21 +183,23 @@ hoverHandler.setInputAction(function (movement) {
 
 // Handler for toggling the GeoJSON layer
 document.getElementById('toggleGeoJson').addEventListener('click', function() {
-    if (viewer.dataSources.contains(geoJsonDataSource)) {
-        viewer.dataSources.remove(geoJsonDataSource, false);
-    } else {
-        viewer.dataSources.add(geoJsonDataSource);
-    }
+    geoJsonDataSources.forEach(function(dataSource) {
+        if (viewer.dataSources.contains(dataSource)) {
+            viewer.dataSources.remove(dataSource, false);
+        } else {
+            viewer.dataSources.add(dataSource);
+        }
+    });
 });
 
 // Handler for toggling the satellite imagery
 document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
-    if (viewer.imageryLayers.length > 1) {
-        // Remove the satellite imagery layer
-        viewer.imageryLayers.remove(viewer.imageryLayers.get(1));
+    if (satelliteImageryLayer) {
+        // Remove the satellite imagery layer if it exists
+        viewer.imageryLayers.remove(satelliteImageryLayer);
+        satelliteImageryLayer = undefined; // Set to undefined after removal
     } else {
         // Add the satellite imagery layer
-        var imageryProvider = new Cesium.IonImageryProvider({ assetId: 3954 }); // Example asset ID for Sentinel-2 imagery
-        viewer.imageryLayers.addImageryProvider(imageryProvider);
+        satelliteImageryLayer = viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
     }
 });
