@@ -128,34 +128,39 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 }));
 
 
-// Add a handler for mouse move events to display country name and lat/long
+// Add a handler for mouse move events to display feature name and lat/long
 var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 hoverHandler.setInputAction(function (movement) {
-    // Get the picked object
-    var pickedFeature = viewer.scene.pick(movement.endPosition);
-    var countryName = '';
-    if (Cesium.defined(pickedFeature) && Cesium.defined(pickedFeature.id)) {
-        // For GeoJSON features, the property holding the name might be different
-        countryName = pickedFeature.id.properties.name;
+    var featureName = ''; // This will hold the name of the feature (country, lake, or river)
+    var pickedObject = viewer.scene.pick(movement.endPosition);
+    
+    // Check if an entity (like a country, lake, or river) is picked
+    if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id)) {
+        var entity = pickedObject.id;
+        
+        // Determine the type of the feature and get its name
+        if (entity.properties && entity.properties.name) {
+            featureName = entity.properties.name;
+        }
     }
 
-    // Get the cartesian position of the mouse pointer on the globe
-    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-    if (cartesian) {
-        // Convert cartesian to cartographic coordinates (radians)
-        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-        // Convert radians to degrees and show latitude/longitude
-        var latitude = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
-        var longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
-        // Display the information, e.g., in a tooltip or HTML element
-        // Example: Update an element with ID 'infoBox' with the country name and coordinates
-        document.getElementById('infoBox').textContent = `${countryName ? countryName + ', ' : ''}Lat: ${latitude}, Long: ${longitude}`;
+    // Update the info box with the feature name and coordinates
+    if (featureName) {
+        // Get the cartesian position of the mouse pointer on the globe
+        var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+        if (cartesian) {
+            // Convert cartesian to cartographic coordinates (radians)
+            var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+            // Convert radians to degrees and show latitude/longitude
+            var latitude = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+            var longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+            document.getElementById('infoBox').textContent = `${featureName}, Lat: ${latitude}, Long: ${longitude}`;
+        }
+    } else {
+        document.getElementById('infoBox').textContent = 'No feature under mouse';
     }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
-
 
 
 // Handler for toggling the GeoJSON layer
