@@ -158,29 +158,7 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 0
 }));
 
-// Add event listeners for the toggle buttons after the viewer has been fully initialized
-viewer.scene.postRender.addEventListener(function() {
-    // Handler for toggling the GeoJSON layers
-    document.getElementById('toggleGeoJson').addEventListener('click', function() {
-        geoJsonDataSources.forEach(function(dataSource) {
-            if (viewer.dataSources.contains(dataSource)) {
-                viewer.dataSources.remove(dataSource);
-            } else {
-                viewer.dataSources.add(dataSource);
-            }
-        });
-    });
 
-    // Handler for toggling the satellite imagery layer
-    document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
-        if (satelliteImageryLayer) {
-            viewer.imageryLayers.remove(satelliteImageryLayer);
-            satelliteImageryLayer = null;
-        } else {
-            satelliteImageryLayer = viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
-        }
-    });
-});
 
 // Add a handler for mouse move events to display feature name and lat/long
 var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
