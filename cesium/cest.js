@@ -46,10 +46,6 @@ viewer.scene.postRender.addEventListener(function () {
 });
 
 
-// Zoom to an entity with a particular ID
-var entityId = 'exampleEntityId'; // Replace with the actual ID of your entity
-viewer.zoomTo(viewer.entities.getById(entityId));
-
 // Set up an event handler for when the user clicks on the globe
 viewer.screenSpaceEventHandler.setInputAction(function onMouseClick(movement) {
     var pickedObject = viewer.scene.pick(movement.position);
