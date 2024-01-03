@@ -137,21 +137,20 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 hoverHandler.setInputAction(function (movement) {
-    var featureName = ''; // This will hold the name of the feature (country, lake, or river)
-    var pickedObject = viewer.scene.pick(movement.endPosition);
+    var featureName = ''; // This will hold the names of the features (country, lake, or river)
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition); // Use drillPick to get all entities at the mouse location
     
-    // Check if an entity (like a country, lake, or river) is picked
-    if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id)) {
-        var entity = pickedObject.id;
-        
-        // Determine the type of the feature and get its name
-        if (entity.properties && entity.properties.name) {
-            featureName = entity.properties.name;
+    // Iterate over all picked objects to get names of the features
+    for (var i = 0; i < pickedObjects.length; i++) {
+        var entity = pickedObjects[i].id;
+        if (Cesium.defined(entity) && entity.properties && entity.properties.name) {
+            // Append the name of the feature if it exists
+            featureName += entity.properties.name.getValue() + ' ';
         }
     }
 
-    // Update the info box with the feature name and coordinates
-    if (featureName) {
+    // Update the info box with the feature names and coordinates
+    if (featureName.trim() !== '') {
         // Get the cartesian position of the mouse pointer on the globe
         var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
         if (cartesian) {
@@ -166,6 +165,7 @@ hoverHandler.setInputAction(function (movement) {
         document.getElementById('infoBox').textContent = 'No feature under mouse';
     }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 
 // Handler for toggling the GeoJSON layer
