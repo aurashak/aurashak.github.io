@@ -137,20 +137,27 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 hoverHandler.setInputAction(function (movement) {
-    var featureName = ''; // This will hold the names of the features (country, lake, or river)
-    var pickedObjects = viewer.scene.drillPick(movement.endPosition); // Use drillPick to get all entities at the mouse location
+    var infoBoxText = ''; // This will hold the names of the features (country, lake, or river)
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
     
+    // Store unique names to avoid duplicates if entities overlap
+    var uniqueNames = new Set();
+
     // Iterate over all picked objects to get names of the features
     for (var i = 0; i < pickedObjects.length; i++) {
         var entity = pickedObjects[i].id;
         if (Cesium.defined(entity) && entity.properties && entity.properties.name) {
-            // Append the name of the feature if it exists
-            featureName += entity.properties.name.getValue() + ' ';
+            uniqueNames.add(entity.properties.name.getValue());
         }
     }
 
+    // Join all unique feature names
+    if (uniqueNames.size > 0) {
+        infoBoxText = Array.from(uniqueNames).join(', ');
+    }
+
     // Update the info box with the feature names and coordinates
-    if (featureName.trim() !== '') {
+    if (infoBoxText !== '') {
         // Get the cartesian position of the mouse pointer on the globe
         var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
         if (cartesian) {
@@ -159,12 +166,17 @@ hoverHandler.setInputAction(function (movement) {
             // Convert radians to degrees and show latitude/longitude
             var latitude = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
             var longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
-            document.getElementById('infoBox').textContent = `${featureName}, Lat: ${latitude}, Long: ${longitude}`;
+            infoBoxText += ` | Lat: ${latitude}, Long: ${longitude}`;
         }
     } else {
-        document.getElementById('infoBox').textContent = 'No feature under mouse';
+        infoBoxText = 'No feature under mouse';
     }
+    
+    // Display the information
+    document.getElementById('infoBox').textContent = infoBoxText;
+
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 
 
