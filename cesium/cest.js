@@ -217,3 +217,16 @@ function toggleSatelliteImagery() {
 var toggleButton = document.getElementById('toggleSatelliteImagery');
 toggleButton.addEventListener('click', toggleSatelliteImagery);
 
+
+// Function to toggle the visibility of GeoJSON layers
+function toggleGeoJsonLayers() {
+    for (var i = 0; i < geoJsonDataSources.length; i++) {
+        var dataSource = geoJsonDataSources[i];
+        dataSource.show = !dataSource.show; // Toggle the visibility
+    }
+}
+
+// Get the GeoJSON toggle button and add click event listener
+var toggleGeoJsonButton = document.getElementById('toggleGeoJson');
+toggleGeoJsonButton.addEventListener('click', toggleGeoJsonLayers);
+

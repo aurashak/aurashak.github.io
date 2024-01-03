@@ -111,12 +111,20 @@ h2 {
     color: #fff;
     fill: #fff;
     background: none;
-    border-color: #aef;
-    box-shadow: 0 0 8px #fff
+    border-color: none;
+    box-shadow: 0 0 0px #fff
 }
 
 .cesium-geocoder-searchButton:hover {
     background-color: none;
+}
+
+.cesium-viewer-geocoderContainer .search-results ul li.active {
+    background:none;
+}
+
+.cesium-geocoder-searchButton:hover {
+    background-color:none
 }
 
 .cesium-geocoder-searchButton {
