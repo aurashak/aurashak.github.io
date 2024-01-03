@@ -107,6 +107,18 @@ h2 {
     width: 45px;
 }
 
+.cesium-button:hover {
+    color: #fff;
+    fill: #fff;
+    background: none;
+    border-color: #aef;
+    box-shadow: 0 0 8px #fff
+}
+
+.cesium-geocoder-searchButton:hover {
+    background-color: none
+}
+
 .cesium-geocoder-searchButton {
     background-color: #f9f9f900;
     display: inline-block;
