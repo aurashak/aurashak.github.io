@@ -12,7 +12,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     geocoder: true,
     fullscreenButton: false,
     sceneModePicker: true,
-    baseLayerPicker: false,
+    baseLayerPicker: true,
     animation: false,
     vrButton: false,
     infoBox: true
@@ -91,20 +91,29 @@ function addGeoJsonDataSource(url, strokeColor, fillColor, strokeWidth) {
 
 
 // Load a GeoJSON file from a URL
-var geoJsonUrl = 'https://aurashak.github.io/geojson/graticuletwo.geojson';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#bfbfbf').withAlpha(1),
-    fill: new Cesium.Color(1, 1, 1, 1.0), // Fully transparent fill color
-    strokeWidth: 0.25
-}));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
+var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),    
-    strokeWidth: 0.1 // No stroke width
+    strokeWidth: .25
 }));
 
+var geoJsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
+    stroke: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),
+    fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),    
+    strokeWidth: .25
+}));
+
+
+
+var geoJsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
+viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
+    stroke: new Cesium.Color(1, 1, 1, .01),   
+    fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(.01),    
+    strokeWidth: .25
+}));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
@@ -148,27 +157,26 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: .25
 }));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: new Cesium.Color(1, 1, 1, .01),   
-    fill: Cesium.Color.fromCssColorString('#3b3b3b').withAlpha(.01),    
-    strokeWidth: .25
-}));
-
-var geoJsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),
     fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),    
-    strokeWidth: .25
+    strokeWidth: 0.1 // No stroke width
 }));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
+
+
+var geoJsonUrl = 'https://aurashak.github.io/geojson/graticuletwo.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),
-    fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(1),    
-    strokeWidth: .25
+    stroke: Cesium.Color.fromCssColorString('#bfbfbf').withAlpha(1),
+    fill: new Cesium.Color(1, 1, 1, 1.0), // Fully transparent fill color
+    strokeWidth: 0.25
 }));
 
+
+// Example: After all data sources are loaded, if you want to bring lakes to the top:
+viewer.dataSources.add(lakeDataSource).then(function(dataSource) {
+    viewer.dataSources.raiseToTop(dataSource);
 
 
 // Add a handler for mouse move events to display feature name and lat/long
