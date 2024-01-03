@@ -82,9 +82,9 @@ function addGeoJsonDataSource(url, strokeColor, fillColor, strokeWidth) {
 // Load a GeoJSON file from a URL
 var geoJsonUrl = 'https://aurashak.github.io/geojson/graticuletwo.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.BLACK, // Line color
+    stroke: Cesium.Color.WHITE, // Line color
     fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
@@ -101,63 +101,61 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 0
 }));
 
-
 var geoJsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.YELLOW, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    stroke: Cesium.Color.WHITE, // Line color
+    fill: new Cesium.Color(0, 0, 0, 0.9), // Fully transparent fill color
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.YELLOW, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    stroke: Cesium.Color.WHITE, // Line color
+    fill: new Cesium.Color(0, 0, 0, 0.9), // Fully transparent fill color
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/europe.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.YELLOW, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    stroke: Cesium.Color.WHITE, // Line color
+    fill: new Cesium.Color(0, 0, 0, 0.9), // Fully transparent fill color
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/asia.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.YELLOW, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    stroke: Cesium.Color.WHITE, // Line color
+    fill: new Cesium.Color(0, 0, 0, 0.9), // Fully transparent fill color
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/africa.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.YELLOW, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    stroke: Cesium.Color.WHITE, // Line color
+    fill: new Cesium.Color(0, 0, 0, 0.9), // Fully transparent fill color
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.YELLOW, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
-    strokeWidth: 1
+    stroke: Cesium.Color.WHITE, // Line color
+    fill: Cesium.Color.fromCssColorString('#000000').withAlpha(0.9),
+    strokeWidth: 0.5
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.RED, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
+    stroke: Cesium.Color.BLUE, // Line color
+    fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(0.9),    
     strokeWidth: 0
 }));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLUE, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0.5), // Fully transparent fill color
+    fill: Cesium.Color.fromCssColorString('#4682B4').withAlpha(0.9),    
     strokeWidth: 0
 }));
-
 
 
 // Add a handler for mouse move events to display feature name and lat/long
@@ -217,16 +215,4 @@ function toggleSatelliteImagery() {
 var toggleButton = document.getElementById('toggleSatelliteImagery');
 toggleButton.addEventListener('click', toggleSatelliteImagery);
 
-
-// Function to toggle the visibility of GeoJSON layers
-function toggleGeoJsonLayers() {
-    for (var i = 0; i < geoJsonDataSources.length; i++) {
-        var dataSource = geoJsonDataSources[i];
-        dataSource.show = !dataSource.show; // Toggle the visibility
-    }
-}
-
-// Get the GeoJSON toggle button and add click event listener
-var toggleGeoJsonButton = document.getElementById('toggleGeoJson');
-toggleGeoJsonButton.addEventListener('click', toggleGeoJsonLayers);
 
