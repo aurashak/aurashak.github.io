@@ -79,8 +79,15 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 1
 }));
 
+var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
+viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
+    stroke: Cesium.Color.BLACK, // Line color
+    fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
+    strokeWidth: 1
+}));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/worldcountries.geojson';
+
+var geoJsonUrl = 'https://aurashak.github.io/geojson/countriesthree.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLACK, // Line color
     fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
