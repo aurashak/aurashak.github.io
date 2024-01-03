@@ -87,14 +87,12 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 1
 }));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.geojson';
+var geoJsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLACK, // Line color
     fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
     strokeWidth: 1
 }));
-
-
 
 
 // Add a handler for mouse move events to display country name and lat/long
