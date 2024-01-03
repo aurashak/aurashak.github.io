@@ -65,13 +65,6 @@ viewer.screenSpaceEventHandler.setInputAction(function onMouseClick(movement) {
 
 
 // Load a GeoJSON file from a URL
-var geoJsonUrl = 'https://aurashak.github.io/geojson/ne_10m_lakes.json';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.TRANSPARENT, // No line color
-    fill: Cesium.Color.BLUE.withAlpha(0.5), // Blue fill color with some transparency
-    strokeWidth: 0 // No stroke
-}));
-
 var geoJsonUrl = 'https://aurashak.github.io/geojson/graticuletwo.geojson';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     stroke: Cesium.Color.BLACK, // Line color
@@ -79,12 +72,6 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 1
 }));
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.BLACK, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
-    strokeWidth: 1
-}));
 
 var geoJsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
