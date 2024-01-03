@@ -18,6 +18,10 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     infoBox: true
 });
 
+// Initialize the array to store GeoJSON data sources and the satellite imagery layer variable
+var geoJsonDataSources = [];
+var satelliteImageryLayer;
+
 // Set the initial view to Afghanistan
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(67.709953, 33.93911, 15000000),
@@ -58,6 +62,21 @@ viewer.screenSpaceEventHandler.setInputAction(function onMouseClick(movement) {
         console.log('Clicked on the globe surface at position', surfacePosition);
     }
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+
+// Function to add a GeoJSON file from a URL and keep track of it
+function addGeoJsonDataSource(url, strokeColor, fillColor, strokeWidth) {
+    var dataSourcePromise = Cesium.GeoJsonDataSource.load(url, {
+        stroke: strokeColor,
+        fill: fillColor,
+        strokeWidth: strokeWidth
+    });
+    dataSourcePromise.then(function(dataSource) {
+        viewer.dataSources.add(dataSource);
+        geoJsonDataSources.push(dataSource);
+    });
+    return dataSourcePromise;
+}
 
 
 // Load a GeoJSON file from a URL
@@ -139,6 +158,29 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
     strokeWidth: 0
 }));
 
+// Add event listeners for the toggle buttons after the viewer has been fully initialized
+viewer.scene.postRender.addEventListener(function() {
+    // Handler for toggling the GeoJSON layers
+    document.getElementById('toggleGeoJson').addEventListener('click', function() {
+        geoJsonDataSources.forEach(function(dataSource) {
+            if (viewer.dataSources.contains(dataSource)) {
+                viewer.dataSources.remove(dataSource);
+            } else {
+                viewer.dataSources.add(dataSource);
+            }
+        });
+    });
+
+    // Handler for toggling the satellite imagery layer
+    document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
+        if (satelliteImageryLayer) {
+            viewer.imageryLayers.remove(satelliteImageryLayer);
+            satelliteImageryLayer = null;
+        } else {
+            satelliteImageryLayer = viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
+        }
+    });
+});
 
 // Add a handler for mouse move events to display feature name and lat/long
 var hoverHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -176,7 +218,7 @@ hoverHandler.setInputAction(function (movement) {
             infoBoxText += ` | Lat: ${latitude}, Long: ${longitude}`;
         }
     } else {
-        infoBoxText = 'No feature under mouse';
+        infoBoxText = 'World';
     }
     
     // Display the information
@@ -184,26 +226,3 @@ hoverHandler.setInputAction(function (movement) {
 
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-
-
-
-// Handler for toggling the GeoJSON layer
-document.getElementById('toggleGeoJson').addEventListener('click', function() {
-    if (viewer.dataSources.contains(geoJsonDataSource)) {
-        viewer.dataSources.remove(geoJsonDataSource, false);
-    } else {
-        viewer.dataSources.add(geoJsonDataSource);
-    }
-});
-
-// Handler for toggling the satellite imagery
-document.getElementById('toggleSatelliteImagery').addEventListener('click', function() {
-    if (viewer.imageryLayers.length > 1) {
-        // Remove the satellite imagery layer
-        viewer.imageryLayers.remove(viewer.imageryLayers.get(1));
-    } else {
-        // Add the satellite imagery layer
-        var imageryProvider = new Cesium.IonImageryProvider({ assetId: 3954 }); // Example asset ID for Sentinel-2 imagery
-        viewer.imageryLayers.addImageryProvider(imageryProvider);
-    }
-});
