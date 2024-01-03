@@ -87,12 +87,7 @@ viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
 }));
 
 
-var geoJsonUrl = 'https://aurashak.github.io/geojson/states.provinces';
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(geoJsonUrl, {
-    stroke: Cesium.Color.BLACK, // Line color
-    fill: new Cesium.Color(1, 1, 1, 0), // Fully transparent fill color
-    strokeWidth: 1
-}));
+
 
 
 
