@@ -2,7 +2,6 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 // Create the viewer with the desired options
 var viewer = new Cesium.Viewer('cesiumContainer', {
-    imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }),
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
