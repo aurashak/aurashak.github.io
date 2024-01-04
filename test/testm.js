@@ -70,7 +70,6 @@ function addGeoJSONToGroup(url, style) {
         fillOpacity: 1
     });
 
-     // Add GeoJSON layers to the map
      addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', {
         color: 'red',
         weight: 0.5,
@@ -78,8 +77,28 @@ function addGeoJSONToGroup(url, style) {
         fillOpacity: 1
     });
 
-    // Add GeoJSON layers to the map
-         addGeoJSONToGroup('https://aurashak.github.io/geojson/graticuletwo.geojson', {
+         addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
+
+         addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
+
+           addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
+
+           addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', {
             color: 'red',
             weight: 0.5,
             fillColor: 'black',
@@ -93,6 +112,8 @@ function addGeoJSONToGroup(url, style) {
         updateWhenIdle: false // Updates the scale continuously as the map zooms
     }).addTo(mymap);
   
+
+    // Add graticule to the map (proper placement)
   L.graticule({
     interval: 20, // Interval in degrees for the graticule lines. Change as needed.
     style: {
