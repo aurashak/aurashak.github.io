@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Global variables for GeoJSON layers
     var riversLayer, lakesLayer, regionsLayer;
 
-    // Function to add GeoJSON data to the map
+// Function to add GeoJSON data to the map
 function addGeoJSONToGroup(url, style, assignLayer) {
     fetch(url)
         .then(response => response.json())
@@ -23,18 +23,37 @@ function addGeoJSONToGroup(url, style, assignLayer) {
             var layer = L.geoJSON(data, {
                 style: style,
                 onEachFeature: function (feature, layer) {
-                    var tooltipContent = feature.properties.name || feature.properties.ADMIN;
-                    layer.bindTooltip(tooltipContent, { permanent: false, direction: 'auto', className: 'geojson-tooltip', sticky: true }).openTooltip();
+                    // Bind a generic tooltip that will be updated dynamically
+                    layer.bindTooltip('', {
+                        permanent: false,
+                        direction: 'auto',
+                        className: 'geojson-tooltip',
+                        sticky: true
+                    });
+
+                    // Update tooltip content on mouseover
+                    layer.on('mouseover', function (e) {
+                        var lat = e.latlng.lat.toFixed(5);
+                        var lng = e.latlng.lng.toFixed(5);
+                        var placeName = feature.properties.name || feature.properties.ADMIN || '';
+                        var tooltipContent = `<strong>${placeName}</strong><br>Lat: ${lat}, Lng: ${lng}`;
+                        this.setTooltipContent(tooltipContent);
+                    });
+
+                    // Close tooltip on mouseout
+                    layer.on('mouseout', function () {
+                        this.closeTooltip();
+                    });
                 }
             }).addTo(geojsonGroup);
 
-            // Call bringToFront here within the .then() to ensure it is done after the layer is added
             if (assignLayer) {
                 assignLayer(layer);
                 layer.bringToFront();
             }
         });
 }
+
 
 
     // Add GeoJSON layers to the map
