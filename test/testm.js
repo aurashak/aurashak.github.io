@@ -116,12 +116,7 @@ if (riversLayer) riversLayer.bringToFront();
 
 
 
-   // Add the dynamic scale bar to the map (proper placement)
-    L.control.scale({
-        imperial: false, // Set to true if you want miles and feet
-        metric: true,    // Set to true if you want kilometers and meters
-        updateWhenIdle: false // Updates the scale continuously as the map zooms
-    }).addTo(mymap);
+ 
   
 
     // Add graticule to the map (proper placement)
@@ -133,6 +128,13 @@ if (riversLayer) riversLayer.bringToFront();
     }
 }).addTo(mymap);
   
+
+  // Add the dynamic scale bar to the map (proper placement)
+  L.control.scale({
+    imperial: false, // Set to true if you want miles and feet
+    metric: true,    // Set to true if you want kilometers and meters
+    updateWhenIdle: false // Updates the scale continuously as the map zooms
+}).addTo(mymap);
 
 
 // tooltip combined layers
