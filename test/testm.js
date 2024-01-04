@@ -57,6 +57,29 @@ document.addEventListener('DOMContentLoaded', function() {
     addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.5, fillColor: 'lightblue', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 1 });
 
+
+    function bringLayersToFront() {
+        if (window.lakesLayer) window.lakesLayer.bringToFront();
+        if (window.riversLayer) window.riversLayer.bringToFront();
+        if (window.regionsLayer) window.regionsLayer.bringToFront();
+    }
+
+    // Add a call to bringLayersToFront() after adding each layer
+// Example for lakes layer
+addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', {
+    color: 'blue',
+    weight: 0.5,
+    fillColor: 'blue',
+    fillOpacity: 1,
+    onEachFeature: onEachFeature
+}, function(geoJsonLayer) {
+    window.lakesLayer = geoJsonLayer;
+    bringLayersToFront();
+});
+
+
+
+
     L.graticule({
         interval: 20,
         style: {
