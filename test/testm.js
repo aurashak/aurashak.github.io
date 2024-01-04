@@ -78,30 +78,30 @@ function addGeoJSONToGroup(url, style) {
     });
 
          addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', {
-            color: 'red',
+            color: 'white',
             weight: 0.5,
-            fillColor: 'black',
+            fillColor: 'white',
             fillOpacity: 1
         });
 
          addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', {
-            color: 'red',
+            color: 'white',
             weight: 0.5,
-            fillColor: 'black',
-            fillOpacity: 1
+            fillColor: 'white',
+            fillOpacity: 0.01
         });
 
            addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', {
-            color: 'red',
+            color: 'blue',
             weight: 0.5,
-            fillColor: 'black',
+            fillColor: 'blue',
             fillOpacity: 1
         });
 
            addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', {
-            color: 'red',
+            color: 'blue',
             weight: 0.5,
-            fillColor: 'black',
+            fillColor: 'blue',
             fillOpacity: 1
         });
 
