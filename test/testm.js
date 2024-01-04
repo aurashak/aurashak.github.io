@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (regionsLayer) regionsLayer.bringToFront();
     }
 
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'blue', weight: 0.5, fillColor: 'blue', fillOpacity: 1 }, (layer) => { lakesLayer = layer; bringToFront(); });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'blue', weight: 0.5, fillColor: 'blue', fillOpacity: 1 }, (layer) => { riversLayer = layer; bringToFront(); });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.5, fillColor: 'lightblue', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 0.25 }, (layer) => { regionsLayer = layer; bringToFront(); });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'grey', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'white', weight: 0.5, fillColor: 'white', fillOpacity: 1 }, (layer) => { lakesLayer = layer; bringToFront(); });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'white', weight: 0.5, fillColor: 'white', fillOpacity: 1 }, (layer) => { riversLayer = layer; bringToFront(); });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'white', weight: 0.5, fillColor: 'white', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 0.001 }, (layer) => { regionsLayer = layer; bringToFront(); });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
 
     L.control.scale({ imperial: false, metric: true, updateWhenIdle: false }).addTo(mymap);
