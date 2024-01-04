@@ -62,11 +62,13 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false,
     vrButton: false,
     infoBox: true,
-    imageryProvider: false, // Disable the default imagery layer
-    terrainProvider: false, // Disable the default terrain layer
+    imageryProvider: true, // Disable the default imagery layer
+    terrainProvider: true, // Disable the default terrain layer
     imageryProviderViewModels: imageryViewModels,
     terrainProviderViewModels: terrainViewModels
 });
+
+
 
 // Load a GeoJSON file from a URL
 var geoJsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson';
