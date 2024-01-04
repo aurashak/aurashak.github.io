@@ -21,36 +21,40 @@ document.addEventListener('DOMContentLoaded', function() {
     var geojsonGroup = L.layerGroup().addTo(mymap);
 
  // Function to add GeoJSON data to the map with mouseover event for country names and coordinates
-function addGeoJSONToGroup(url, style) {
+ function addGeoJSONToGroup(url, style) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
                 style: style,
                 onEachFeature: function (feature, layer) {
+                    // Check for different properties based on layer type
+                    var tooltipContent = '';
+
                     if (feature.properties && feature.properties.ADMIN) {
-                        // Initialize the tooltip with the country name and placeholders for coordinates
+                        tooltipContent = feature.properties.ADMIN; // For countries
+                    } else if (feature.properties && feature.properties.name) {
+                        tooltipContent = feature.properties.name; // For lakes, rivers, etc.
+                    } // Add more conditions as needed
+
+                    if (tooltipContent !== '') {
                         layer.bindTooltip('', {
                             permanent: false,
                             direction: 'auto',
-                            className: 'country-tooltip',
-                            sticky: true // Make the tooltip follow the cursor
+                            className: 'geojson-tooltip',
+                            sticky: true
                         });
 
-                        // Update tooltip content on mouseover
                         layer.on('mouseover', function () {
                             this.openTooltip();
                         });
 
-                        // Update tooltip content on mousemove
                         layer.on('mousemove', function (e) {
                             var lat = e.latlng.lat.toFixed(5);
                             var lng = e.latlng.lng.toFixed(5);
-                            var tooltipContent = '<strong>' + feature.properties.ADMIN + '</strong><br>Lat: ' + lat + ', Lng: ' + lng;
-                            this.setTooltipContent(tooltipContent);
+                            this.setTooltipContent('<strong>' + tooltipContent + '</strong><br>Lat: ' + lat + ', Lng: ' + lng);
                         });
 
-                        // Clear tooltip content on mouseout
                         layer.on('mouseout', function () {
                             this.closeTooltip();
                         });
@@ -59,6 +63,7 @@ function addGeoJSONToGroup(url, style) {
             }).addTo(geojsonGroup);
         });
 }
+
 
 
 
@@ -104,6 +109,11 @@ function addGeoJSONToGroup(url, style) {
             fillColor: 'blue',
             fillOpacity: 1
         });
+
+        // After adding them to the map
+if (lakesLayer) lakesLayer.bringToFront();
+if (riversLayer) riversLayer.bringToFront();
+
 
    // Add the dynamic scale bar to the map (proper placement)
     L.control.scale({
