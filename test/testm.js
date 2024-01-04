@@ -78,6 +78,14 @@ function addGeoJSONToGroup(url, style) {
         fillOpacity: 1
     });
 
+    // Add GeoJSON layers to the map
+         addGeoJSONToGroup('https://aurashak.github.io/geojson/graticuletwo.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
+
 
     // Function to switch layers
     function switchLayer(layer) {
