@@ -6,7 +6,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
         url: 'https://a.tile.openstreetmap.org/'
     }),    
     baseLayerPicker: false,
-    geocoder: true,
+    geocoder: false,
     homeButton: false,
     infoBox: false,
     sceneModePicker: true,
