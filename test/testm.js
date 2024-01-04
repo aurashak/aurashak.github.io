@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add GeoJSON layers to the map
     addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.25 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
 
-    
+
     // Add the dynamic scale bar to the map
     L.control.scale({
         imperial: false,
