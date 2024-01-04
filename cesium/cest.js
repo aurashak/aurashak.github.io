@@ -62,12 +62,15 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false,
     vrButton: false,
     infoBox: true,
-    imageryProvider: true, // Disable the default imagery layer
-    terrainProvider: true, // Disable the default terrain layer
+    // Do not set the imageryProvider or terrainProvider here if you're setting them in the imageryProviderViewModels or terrainProviderViewModels
     imageryProviderViewModels: imageryViewModels,
     terrainProviderViewModels: terrainViewModels
 });
 
+// After creating the viewer, set the default imagery layer
+viewer.imageryLayers.addImageryProvider(new Cesium.ArcGisMapServerImageryProvider({
+    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
+}));
 
 
 // Load a GeoJSON file from a URL
