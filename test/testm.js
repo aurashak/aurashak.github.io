@@ -91,28 +91,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
          addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', {
             color: 'white',
-            weight: 0.5,
+            weight: 0.01,
             fillColor: 'white',
-            fillOpacity: 0.01
+            fillOpacity: 1
         });
 
            addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', {
-            color: 'blue',
-            weight: 0.5,
-            fillColor: 'blue',
+            color: 'white',
+            weight: 0.01,
+            fillColor: 'white',
             fillOpacity: 1
         });
 
            addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', {
-            color: 'blue',
-            weight: 0.5,
-            fillColor: 'blue',
+            color: 'white',
+            weight: 0.01,
+            fillColor: 'white',
             fillOpacity: 1
         });
 
         // After adding them to the map
 if (lakesLayer) lakesLayer.bringToFront();
 if (riversLayer) riversLayer.bringToFront();
+
 
 
    // Add the dynamic scale bar to the map (proper placement)
@@ -132,6 +133,35 @@ if (riversLayer) riversLayer.bringToFront();
     }
 }).addTo(mymap);
   
+
+
+// tooltip combined layers
+
+
+var tooltipInfo = {};
+
+function updateTooltip(layerType, content) {
+    tooltipInfo[layerType] = content;
+    var combinedContent = Object.values(tooltipInfo).join('<br>');
+    // Update the actual tooltip on the map with combinedContent
+}
+
+function onEachFeature(feature, layer) {
+    layer.on('mouseover', function(e) {
+        var layerType = /* determine the layer type (country, river, etc.) */;
+        var content = /* build content based on feature properties */;
+        updateTooltip(layerType, content);
+    });
+
+    layer.on('mouseout', function(e) {
+        var layerType = /* determine the layer type */;
+        delete tooltipInfo[layerType];
+        updateTooltip(layerType, '');
+    });
+}
+
+// Add layers and use onEachFeature for each layer
+
   
   
     // Function to switch layers
