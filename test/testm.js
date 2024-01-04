@@ -57,11 +57,11 @@ function addGeoJSONToGroup(url, style, assignLayer) {
 
 
     // Add GeoJSON layers to the map
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 }, (layer) => { lakesLayer = layer; });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 }, (layer) => { riversLayer = layer; });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.25 }, (layer) => { regionsLayer = layer; });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'grey', weight: 0.4, fillColor: 'black', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'white', weight: 0.1, fillColor: 'white', fillOpacity: 1 }, (layer) => { lakesLayer = layer; });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'white', weight: 0.1, fillColor: 'white', fillOpacity: 1 }, (layer) => { riversLayer = layer; });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'white', weight: 0.1, fillColor: 'white', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.01 }, (layer) => { regionsLayer = layer; });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
 
     // Add the dynamic scale bar to the map
