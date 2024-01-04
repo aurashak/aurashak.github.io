@@ -86,7 +86,23 @@ function addGeoJSONToGroup(url, style) {
             fillOpacity: 1
         });
 
-
+   // Add the dynamic scale bar to the map (proper placement)
+    L.control.scale({
+        imperial: false, // Set to true if you want miles and feet
+        metric: true,    // Set to true if you want kilometers and meters
+        updateWhenIdle: false // Updates the scale continuously as the map zooms
+    }).addTo(mymap);
+  
+  L.graticule({
+    interval: 20, // Interval in degrees for the graticule lines. Change as needed.
+    style: {
+        color: '#333',
+        weight: 1
+    }
+}).addTo(mymap);
+  
+  
+  
     // Function to switch layers
     function switchLayer(layer) {
         if (currentLayer) {
