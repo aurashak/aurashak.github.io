@@ -7,141 +7,65 @@ document.addEventListener('DOMContentLoaded', function() {
         maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
-    // Define the OpenStreetMap layer without adding it to the map
-    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    });
-
-    // Define the satellite layer without adding it to the map
-    var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
-        attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
-    });
+    // Define the OpenStreetMap and satellite layers
+    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
+    var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
     // Create a layer group for GeoJSON layers and add it to the map
     var geojsonGroup = L.layerGroup().addTo(mymap);
 
- // Function to add GeoJSON data to the map with mouseover event for country names and coordinates
-function addGeoJSONToGroup(url, style) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, {
-                style: style,
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties && feature.properties.ADMIN) {
-                        // Initialize the tooltip with the country name and placeholders for coordinates
-                        layer.bindTooltip('', {
-                            permanent: false,
-                            direction: 'auto',
-                            className: 'country-tooltip',
-                            sticky: true // Make the tooltip follow the cursor
-                        });
-
-                        // Update tooltip content on mouseover
-                        layer.on('mouseover', function () {
-                            this.openTooltip();
-                        });
-
-                        // Update tooltip content on mousemove
-                        layer.on('mousemove', function (e) {
-                            var lat = e.latlng.lat.toFixed(5);
-                            var lng = e.latlng.lng.toFixed(5);
-                            var tooltipContent = '<strong>' + feature.properties.ADMIN + '</strong><br>Lat: ' + lat + ', Lng: ' + lng;
-                            this.setTooltipContent(tooltipContent);
-                        });
-
-                        // Clear tooltip content on mouseout
-                        layer.on('mouseout', function () {
-                            this.closeTooltip();
-                        });
+    // Function to add GeoJSON data to the map
+    function addGeoJSONToGroup(url, style) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: style,
+                    onEachFeature: function (feature, layer) {
+                        var tooltipContent = feature.properties.name || feature.properties.ADMIN;
+                        layer.bindTooltip(tooltipContent, { permanent: false, direction: 'auto', className: 'geojson-tooltip', sticky: true }).openTooltip();
                     }
-                }
-            }).addTo(geojsonGroup);
-        });
-}
-
-
-
-    // Add GeoJSON layers to the map
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
-        color: 'white',
-        weight: 0.5,
-        fillColor: 'black',
-        fillOpacity: 1
-    });
-
-     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', {
-        color: 'red',
-        weight: 0.5,
-        fillColor: 'black',
-        fillOpacity: 1
-    });
-
-        addGeoJSONToGroup('https://aurashak.github.io/geojson/graticuletwo.geojson', {
-            color: 'red',
-            weight: 0.5,
-            fillColor: 'black',
-            fillOpacity: 1
-        });
-
-         addGeoJSONToGroup('https://aurashak.github.io/geojson/graticuletwo.geojson', {
-            color: 'red',
-            weight: 0.5,
-            fillColor: 'black',
-            fillOpacity: 1
-        });
-
-         addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', {
-            color: 'lightblue',
-            weight: 0.1,
-            fillColor: 'lightblue',
-            fillOpacity: 1
-        });
-
-         addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', {
-            color: 'red',
-            weight: 0.5,
-            fillColor: 'black',
-            fillOpacity: 1
-        });
-
-           addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', {
-            color: 'lightblue',
-            weight: 0.1,
-            fillColor: 'lightblue',
-            fillOpacity: 1
-        });
-
-           addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.geojson', {
-            color: 'lightblue',
-            weight: 0.1,
-            fillColor: 'lightblue',
-            fillOpacity: 1
-        });
-
-   // Add the dynamic scale bar to the map (proper placement)
-    L.control.scale({
-        imperial: false, // Set to true if you want miles and feet
-        metric: true,    // Set to true if you want kilometers and meters
-        updateWhenIdle: false // Updates the scale continuously as the map zooms
-    }).addTo(mymap);
-  
-  
-  
-  
-    // Function to switch layers
-    function switchLayer(layer) {
-        if (currentLayer) {
-            mymap.removeLayer(currentLayer);
-        }
-        mymap.addLayer(layer);
-        currentLayer = layer;
-        // Ensure the GeoJSON layer with tooltips is always on top
-        geojsonGroup.bringToFront();
+                }).addTo(geojsonGroup);
+            });
     }
 
-    // Define a variable to hold the current visible layer
-    var currentLayer = geojsonGroup; // Set the initial layer to GeoJSON
+    // Add GeoJSON layers to the map
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.1, fillColor: 'lightblue', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.25 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
+
+    // Add graticule to the map
+    if (typeof L.graticule === "function") {
+        L.graticule({
+            interval: 20,
+            style: { color: '#333', weight: 1 }
+        }).addTo(mymap);
+    } else {
+        console.error("L.graticule is not defined. Ensure the leaflet-graticule script is loaded.");
+    }
+
+    // Add the dynamic scale bar to the map
+    L.control.scale({
+        imperial: false,
+        metric: true,
+        updateWhenIdle: false
+    }).addTo(mymap);
+
+    // Function to switch layers
+    function switchLayer(layer) {
+        if (mymap.currentLayer) {
+            mymap.removeLayer(mymap.currentLayer);
+        }
+        mymap.addLayer(layer);
+        mymap.currentLayer = layer;
+    }
+
+    // Set the initial layer to the OpenStreetMap layer
+    mymap.currentLayer = osmLayer;
+    mymap.addLayer(osmLayer);
 
     // Button functions to switch between layers
     window.toggleOSMLayer = function() { switchLayer(osmLayer); }
