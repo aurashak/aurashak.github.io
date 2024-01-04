@@ -2,14 +2,17 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 // Create the viewer with the desired options
 var viewer = new Cesium.Viewer('cesiumContainer', {
+    imageryProvider: new Cesium.OpenStreetMapImageryProvider({
+        url: 'https://a.tile.openstreetmap.org/'
+    }),    
     baseLayerPicker: false,
-    geocoder: false,
+    geocoder: true,
     homeButton: false,
     infoBox: false,
-    sceneModePicker: false,
+    sceneModePicker: true,
     selectionIndicator: false,
     timeline: false,
     navigationHelpButton: false,
-    fullscreenButton: false
+    fullscreenButton: false,
+    animation: false // Animation widget is hidden
 });
-
