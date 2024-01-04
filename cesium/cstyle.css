@@ -1,46 +1,5 @@
 /* General Body Styles */
-body {
-    background-color: #fff; 
-    color: #212529; 
-    margin: 0;
-    font-family: arial;
-    padding: 0px;
-    font-size: 14px;
-    padding-bottom: 20px;
-}
 
-p {
-    color: #000; 
-    font-family: arial;
-    font-size: 15px;
-    text-align: center;
-}
-
-a {
-    color: #fff; 
-    text-decoration: none;
-    transition: none; 
-}
-
-a:hover {
-    background-color: none;
-    text-decoration: underline;
-}
-
-h1 {
-    margin: 0; 
-    font-size: 21px;
-    font-family: arial;
-}
-
-
-h2 {
-    margin: 0px; 
-    font-size: 21px;
-    font-family: arial;
-    font-weight: normal;
-    color: gray;
-}
 
 /* Navigation Bar Styles */
 .UnderlineNav {
