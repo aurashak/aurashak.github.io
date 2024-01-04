@@ -16,21 +16,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var riversLayer, lakesLayer, regionsLayer;
 
     // Function to add GeoJSON data to the map
-    function addGeoJSONToGroup(url, style, assignLayer) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                var layer = L.geoJSON(data, {
-                    style: style,
-                    onEachFeature: function (feature, layer) {
-                        var tooltipContent = feature.properties.name || feature.properties.ADMIN;
-                        layer.bindTooltip(tooltipContent, { permanent: false, direction: 'auto', className: 'geojson-tooltip', sticky: true }).openTooltip();
-                    }
-                }).addTo(geojsonGroup);
+function addGeoJSONToGroup(url, style, assignLayer) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: style,
+                onEachFeature: function (feature, layer) {
+                    var tooltipContent = feature.properties.name || feature.properties.ADMIN;
+                    layer.bindTooltip(tooltipContent, { permanent: false, direction: 'auto', className: 'geojson-tooltip', sticky: true }).openTooltip();
+                }
+            }).addTo(geojsonGroup);
 
-                if (assignLayer) assignLayer(layer);
-            });
-    }
+            // Call bringToFront here within the .then() to ensure it is done after the layer is added
+            if (assignLayer) {
+                assignLayer(layer);
+                layer.bringToFront();
+            }
+        });
+}
+
 
     // Add GeoJSON layers to the map
     addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
