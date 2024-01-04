@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'blue', weight: 0.5, fillColor: 'blue', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.5, fillColor: 'lightblue', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 1 });
 
 
     function bringLayersToFront() {
