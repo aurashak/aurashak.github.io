@@ -14,8 +14,8 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: true,
     vrButton: true,
     infoBox: true,
-    imageryProvider: true, // Disable the default imagery layer
-    terrainProvider: true, // Disable the default terrain layer
+    imageryProvider: undefined, 
+    terrainProvider: undefined,
     imageryProviderViewModels: imageryViewModels,
     terrainProviderViewModels: terrainViewModels
 });
