@@ -7,110 +7,154 @@ document.addEventListener('DOMContentLoaded', function() {
         maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
+    // Define the OpenStreetMap layer without adding it to the map
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     });
 
+    // Define the satellite layer without adding it to the map
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', {
         attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020'
     });
 
+    // Create a layer group for GeoJSON layers and add it to the map
     var geojsonGroup = L.layerGroup().addTo(mymap);
 
-    function onEachFeature(feature, layer) {
-        layer.on('mouseover', function(e) {
-            var tooltipContent = '';
-            if (feature.properties && feature.properties.ADMIN) {
-                tooltipContent = 'Country: ' + feature.properties.ADMIN;
-            } else if (feature.properties && feature.properties.name) {
-                tooltipContent = feature.properties.name;
-            }
-            if (tooltipContent !== '') {
-                this.bindTooltip(tooltipContent, {
-                    permanent: false,
-                    direction: 'auto',
-                    className: 'geojson-tooltip',
-                    sticky: true
-                }).openTooltip();
-            }
+ // Function to add GeoJSON data to the map with mouseover event for country names and coordinates
+function addGeoJSONToGroup(url, style) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: style,
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties && feature.properties.ADMIN) {
+                        // Initialize the tooltip with the country name and placeholders for coordinates
+                        layer.bindTooltip('', {
+                            permanent: false,
+                            direction: 'auto',
+                            className: 'country-tooltip',
+                            sticky: true // Make the tooltip follow the cursor
+                        });
+
+                        // Update tooltip content on mouseover
+                        layer.on('mouseover', function () {
+                            this.openTooltip();
+                        });
+
+                        // Update tooltip content on mousemove
+                        layer.on('mousemove', function (e) {
+                            var lat = e.latlng.lat.toFixed(5);
+                            var lng = e.latlng.lng.toFixed(5);
+                            var tooltipContent = '<strong>' + feature.properties.ADMIN + '</strong><br>Lat: ' + lat + ', Lng: ' + lng;
+                            this.setTooltipContent(tooltipContent);
+                        });
+
+                        // Clear tooltip content on mouseout
+                        layer.on('mouseout', function () {
+                            this.closeTooltip();
+                        });
+                    }
+                }
+            }).addTo(geojsonGroup);
+        });
+}
+
+
+
+    // Add GeoJSON layers to the map
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', {
+        color: 'white',
+        weight: 0.5,
+        fillColor: 'black',
+        fillOpacity: 1
+    });
+
+     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', {
+        color: 'red',
+        weight: 0.5,
+        fillColor: 'black',
+        fillOpacity: 1
+    });
+
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/graticuletwo.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
         });
 
-        layer.on('mouseout', function(e) {
-            this.closeTooltip();
+         addGeoJSONToGroup('https://aurashak.github.io/geojson/graticuletwo.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
         });
-    }
 
-    function addGeoJSONToGroup(url, style) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: style,
-                    onEachFeature: onEachFeature
-                }).addTo(geojsonGroup);
-            });
-    }
+         addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
 
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'white', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'blue', weight: 0.5, fillColor: 'blue', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'blue', weight: 0.5, fillColor: 'blue', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'lightblue', weight: 0.5, fillColor: 'lightblue', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'green', weight: 0.5, fillColor: 'green', fillOpacity: 1 });
+         addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
 
+           addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
 
-    function bringLayersToFront() {
-        if (window.lakesLayer) window.lakesLayer.bringToFront();
-        if (window.riversLayer) window.riversLayer.bringToFront();
-        if (window.regionsLayer) window.regionsLayer.bringToFront();
-    }
+           addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.geojson', {
+            color: 'red',
+            weight: 0.5,
+            fillColor: 'black',
+            fillOpacity: 1
+        });
 
-    // Add a call to bringLayersToFront() after adding each layer
-// Example for lakes layer
-addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', {
-    color: 'blue',
-    weight: 0.5,
-    fillColor: 'blue',
-    fillOpacity: 1,
-    onEachFeature: onEachFeature
-}, function(geoJsonLayer) {
-    window.lakesLayer = geoJsonLayer;
-    bringLayersToFront();
-});
-
-
-
-
-    L.graticule({
-        interval: 20,
-        style: {
-            color: '#333',
-            weight: 1
-        }
-    }).addTo(mymap);
-
+   // Add the dynamic scale bar to the map (proper placement)
     L.control.scale({
-        imperial: false,
-        metric: true,
-        updateWhenIdle: false
+        imperial: false, // Set to true if you want miles and feet
+        metric: true,    // Set to true if you want kilometers and meters
+        updateWhenIdle: false // Updates the scale continuously as the map zooms
     }).addTo(mymap);
-
+  
+  
+  
+  
+    // Function to switch layers
     function switchLayer(layer) {
-        if (mymap.hasLayer(geojsonGroup)) {
-            mymap.removeLayer(geojsonGroup);
+        if (currentLayer) {
+            mymap.removeLayer(currentLayer);
         }
         mymap.addLayer(layer);
+        currentLayer = layer;
+        // Ensure the GeoJSON layer with tooltips is always on top
+        geojsonGroup.bringToFront();
     }
 
+    // Define a variable to hold the current visible layer
+    var currentLayer = geojsonGroup; // Set the initial layer to GeoJSON
+
+    // Button functions to switch between layers
     window.toggleOSMLayer = function() { switchLayer(osmLayer); }
     window.toggleSatelliteLayer = function() { switchLayer(satelliteLayer); }
     window.toggleGeoJSONLayer = function() { switchLayer(geojsonGroup); }
 
+    // Add the search control to the map
     var searchControl = new L.Control.geocoder({
         placeholder: "Search for a place",
         geocoder: new L.Control.Geocoder.Nominatim()
     }).addTo(mymap);
 
+    // Event listener for the search button
     var searchButton = document.getElementById('search-button');
     if (searchButton) {
         searchButton.addEventListener('click', function() {
