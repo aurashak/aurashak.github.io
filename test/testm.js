@@ -37,16 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.25 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
 
-    // Add graticule to the map
-    if (typeof L.graticule === "function") {
-        L.graticule({
-            interval: 20,
-            style: { color: '#333', weight: 1 }
-        }).addTo(mymap);
-    } else {
-        console.error("L.graticule is not defined. Ensure the leaflet-graticule script is loaded.");
-    }
-
+    
     // Add the dynamic scale bar to the map
     L.control.scale({
         imperial: false,
