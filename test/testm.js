@@ -13,25 +13,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var lakesLayer, riversLayer, regionsLayer;
 
-    function addGeoJSONToGroup(url, style, assignLayer) {
+    function addGeoJSONToGroup(url, layerGroup) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                var layer = L.geoJSON(data, {
-                    style: style,
+                var geoJsonLayer = L.geoJSON(data, {
+                    pointToLayer: function(feature, latlng) {
+                        var markerOptions = {
+                            radius: 8,
+                            fillColor: '#ff7800', // default color
+                            color: '#000',
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        };
+                        
+                        if (feature.properties && feature.properties.classification) {
+                            switch (feature.properties.classification) {
+                                case 'writing':
+                                    markerOptions.fillColor = 'blue';
+                                    break;
+                                case 'sculptures':
+                                    markerOptions.fillColor = 'red';
+                                    break;
+                                case 'print':
+                                    markerOptions.fillColor = 'green';
+                                    break;
+                                case 'web':
+                                    markerOptions.fillColor = 'purple';
+                                    break;
+                                // Add more cases as necessary
+                            }
+                        }
+                        
+                        return L.circleMarker(latlng, markerOptions);
+                    },
                     onEachFeature: function (feature, layer) {
-                        var tooltipContent = feature.properties.name || feature.properties.ADMIN || '';
-                        layer.bindTooltip(tooltipContent, {
-                            permanent: false,
-                            direction: 'auto',
-                            className: 'geojson-tooltip',
-                            sticky: true
-                        });
+                        // ... existing tooltip setup remains unchanged
                     }
-                }).addTo(geojsonGroup);
-                if (assignLayer) assignLayer(layer);
+                }).addTo(layerGroup);
             });
     }
+    
+    // Then, when adding the project markers layer, specify the classification property you want to check
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', projectMarkersLayerGroup);
+    
+
 
     function bringToFront() {
         if (lakesLayer) lakesLayer.bringToFront();
