@@ -13,56 +13,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var lakesLayer, riversLayer, regionsLayer;
 
-    // leaflet-color-markers 
-    function addGeoJSONToGroup(url, assignLayer) {
+    function addGeoJSONToGroup(url, style, assignLayer) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 var layer = L.geoJSON(data, {
-                    pointToLayer: function(feature, latlng) {
-                        // Example using a blue marker from the leaflet-color-markers plugin
-                        var blueIcon = new L.Icon({
-                            iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
-                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [12, 41],
-                            popupAnchor: [1, -34],
-                            shadowSize: [41, 41]
-                        });
-                        return L.marker(latlng, { icon: blueIcon });
-                    },
+                    style: style,
                     onEachFeature: function (feature, layer) {
-                        // ... existing code for tooltip ...
+                        var tooltipContent = feature.properties.name || feature.properties.ADMIN || '';
+                        layer.bindTooltip(tooltipContent, {
+                            permanent: false,
+                            direction: 'auto',
+                            className: 'geojson-tooltip',
+                            sticky: true
+                        });
                     }
                 }).addTo(geojsonGroup);
                 if (assignLayer) assignLayer(layer);
-                layer.bringToFront();
             });
     }
-    
-    
-    
-    
-    // Call the function with the URL to your project markers GeoJSON
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', {});
-    
-    
-    // Use this function to bring to front
+
     function bringToFront() {
         if (lakesLayer) lakesLayer.bringToFront();
         if (riversLayer) riversLayer.bringToFront();
         if (regionsLayer) regionsLayer.bringToFront();
-        if (projectmarkersLayer) projectmarkersLayer.bringToFront();
-
     }
 
-    // Use this function to load geojson layers
     addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'grey', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'white', weight: 0.1, fillColor: 'white', fillOpacity: 1 }, (layer) => { lakesLayer = layer; bringToFront(); });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'white', weight: 0.25, fillColor: 'white', fillOpacity: 1 }, (layer) => { riversLayer = layer; bringToFront(); });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'white', weight: 0.5, fillColor: 'white', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.01, opacity: 0.01 }, (layer) => { regionsLayer = layer; bringToFront(); });    
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 }, (layer) => { projectmarkersLayer = layer; bringToFront(); });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
 
     L.control.scale({ imperial: false, metric: true, updateWhenIdle: false }).addTo(mymap);
 
