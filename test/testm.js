@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lakesLayer) lakesLayer.bringToFront();
         if (riversLayer) riversLayer.bringToFront();
         if (regionsLayer) regionsLayer.bringToFront();
+        if (projectmarkersLayer) projectmarkersLayer.bringToFront();
+
     }
 
     // Use this function to load geojson layers
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'white', weight: 0.25, fillColor: 'white', fillOpacity: 1 }, (layer) => { riversLayer = layer; bringToFront(); });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'white', weight: 0.5, fillColor: 'white', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.01, opacity: 0.01 }, (layer) => { regionsLayer = layer; bringToFront(); });    
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 } => { projectmarkersLayer = layer; bringToFront(); });
 
     L.control.scale({ imperial: false, metric: true, updateWhenIdle: false }).addTo(mymap);
 
