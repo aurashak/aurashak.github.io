@@ -206,8 +206,7 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         }
     }
 
-    // Add Scale Control
-    L.control.scale().addTo(mymap);
+    L.control.scale({ position: 'bottomleft' }).addTo(mymap);
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
