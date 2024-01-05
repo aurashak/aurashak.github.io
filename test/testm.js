@@ -69,13 +69,66 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         });
     }
 
+
+     // Style Functions
+     function countriesStyle(feature) {
+        return {
+        color: feature.properties.stroke || 'grey',
+        weight: feature.properties.weight || 0.25,
+        fillColor: feature.properties.fill || 'black',
+        fillOpacity: feature.properties.opacity || 1
+    };}
+    function oceansStyle(feature) {
+        return {
+        color: 'white', // outline color
+        weight: 0.25,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function lakesStyle(feature) {  
+        return {
+        color: 'white',
+        weight: 0.25,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function riversStyle(feature) { 
+        return {
+        color: 'white',
+        weight: 0.25,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function regionsStyle(feature) {
+        return {
+        color: 'red',
+        weight: 0.01,
+        fillColor: 'red',
+        fillOpacity: 0.01
+    };}
+    function projectmarkersStyle(feature) {
+        return {
+        color: 'red',
+        weight: 0.01,
+        fillColor: 'red',
+        fillOpacity: 0.01
+    };}
+
+    // Feature Interaction
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }
+
+
 // Add GeoJSON layers
 // Replace with your actual GeoJSON URLs and style/icon functions
 addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionssStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
 });
@@ -122,49 +175,7 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', pro
     popupAnchor: [1, -34],
     shadowSize: [41, 41]}); // Define a default icon
 
-    // Style Functions
-    function countriesStyle(feature) {
-        return {
-        color: feature.properties.stroke || 'grey',
-        weight: feature.properties.weight || 0.25,
-        fillColor: feature.properties.fill || 'black',
-        fillOpacity: feature.properties.opacity || 1
-    };}
-    function oceanStyle(feature) {
-        return {
-        color: 'white', // outline color
-        weight: 0.25,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function lakesStyle(feature) {  
-        return {
-        color: 'white',
-        weight: 0.25,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function riversStyle(feature) { 
-        return {
-        color: 'white',
-        weight: 0.25,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function regionsStyle(feature) {
-        return {
-        color: 'red',
-        weight: 0.01,
-        fillColor: 'red',
-        fillOpacity: 0.01
-    };}
-
-    // Feature Interaction
-    function onEachFeature(feature, layer) {
-        if (feature.properties && feature.properties.name) {
-            layer.bindPopup(feature.properties.name);
-        }
-    }
+   
 
 // Adding GeoJSON Layers
 function addGeoJSONLayer(url, styleFunc, iconFunc) {
