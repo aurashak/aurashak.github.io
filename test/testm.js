@@ -11,6 +11,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+// Function to create the Project Markers layer (don't change this)
+    function addProjectMarkers() {
+        fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: projectmarkersStyle,
+                    onEachFeature: onEachFeature,
+                    // Assuming pointToLayer and selectIcon are defined
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: selectIcon(feature) });
+                    }
+                }).addTo(mymap);
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+        }
+
+// Call this function to add the Project Markers layer immediately
+    addProjectMarkers();
+    
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
@@ -55,23 +75,41 @@ L.control.scale({
 
 // Layer Switching Functions
     window.toggleOSMLayer = function() {
-        removeAllLayers();
+    if (!mymap.hasLayer(osmLayer)) {
         mymap.addLayer(osmLayer);
-    };
+        mymap.removeLayer(satelliteLayer);
+    }
+};
 
     window.toggleSatelliteLayer = function() {
-        removeAllLayers();
+    if (!mymap.hasLayer(satelliteLayer)) {
         mymap.addLayer(satelliteLayer);
-    };
+        mymap.removeLayer(osmLayer);
+    }
+};
 
+// Make sure the project markers are not removed when toggling layers
     window.toggleGeoJSONLayer = function() {
-        removeAllLayers();
-        geoJSONLayers.forEach(layer => mymap.addLayer(layer));
+        geoJSONLayers.forEach(layer => {
+            if (!mymap.hasLayer(layer)) {
+                mymap.addLayer(layer);
+            }
+        });
     };
 
+    // Helper function to check if the layer is the project markers layer
+    function isProjectMarkerLayer(layer) {
+        // Implement logic to determine if the layer is the project markers layer.
+        // This may require setting a property on the layer when you create it,
+        // or checking if the layer has certain features or properties.
+    }
+    
+// Function to remove all layers from the map except project markers
     function removeAllLayers() {
         mymap.eachLayer(function(layer) {
-            mymap.removeLayer(layer);
+            if (layer !== osmLayer && layer !== satelliteLayer && !isProjectMarkerLayer(layer)) {
+                mymap.removeLayer(layer);
+            }
         });
     }
 
