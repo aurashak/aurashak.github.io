@@ -374,6 +374,13 @@ button:active {
     box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
 }
 
+/* Leaflet css */
+.leaflet-left .leaflet-control-scale {
+	margin-left: 0px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 0px;
+	}
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
