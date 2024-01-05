@@ -103,14 +103,15 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
             var layer = L.geoJSON(data, {
                 style: styleFunc,
                 pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
+                    return L.marker(latlng, { icon: selectIcon(feature) });
                 },
-                onEachFeature: onEachFeature
+                onEachFeature: onEachFeature // Note the comma at the end of the previous line
             }).addTo(mymap);
-            layer.bringToFront(); // Bring the added layer to the front
+            layer.bringToFront();
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
+
 
     // Icon Selector Function
     function selectIcon(feature) {
