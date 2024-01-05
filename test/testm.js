@@ -51,12 +51,14 @@ window.toggleSatelliteLayer = function() {
 };
 
 window.toggleGeoJSONLayer = function() {
-    if (mymap.hasLayer(GeoJSONLayer)) {
-        mymap.removeLayer(GeoJSONLayer);
-    } else {
-        mymap.addLayer(GeoJSONLayer);
-    }
-
+    geoJSONLayers.forEach(layer => {
+        if (mymap.hasLayer(layer)) {
+            mymap.removeLayer(layer);
+        } else {
+            mymap.addLayer(layer);
+        }
+    });
+};
 
 
     // Marker Icons
