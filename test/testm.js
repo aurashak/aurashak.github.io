@@ -31,8 +31,6 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
-
-
 // Function to remove all GeoJSON layers
 function removeAllGeoJSONLayers() {
     geoJSONLayers.forEach(layer => {
@@ -44,29 +42,46 @@ function removeAllGeoJSONLayers() {
 
 // Layer Switching Functions
 window.toggleOSMLayer = function() {
-    removeAllGeoJSONLayers(); // Remove all GeoJSON layers
-    if (!mymap.hasLayer(osmLayer)) {
-        mymap.addLayer(osmLayer); // Add OSM layer if it's not already added
+    removeAllGeoJSONLayers();
+    if (mymap.hasLayer(satelliteLayer)) {
+        mymap.removeLayer(satelliteLayer);
     }
+    mymap.addLayer(osmLayer);
 };
 
 window.toggleSatelliteLayer = function() {
-    removeAllGeoJSONLayers(); // Remove all GeoJSON layers
-    if (!mymap.hasLayer(satelliteLayer)) {
-        mymap.addLayer(satelliteLayer); // Add Satellite layer if it's not already added
+    removeAllGeoJSONLayers();
+    if (mymap.hasLayer(osmLayer)) {
+        mymap.removeLayer(osmLayer);
+    }
+    mymap.addLayer(satelliteLayer);
+};
+
+window.toggleGeoJSONLayer = function() {
+    if (mymap.hasLayer(osmLayer)) {
+        mymap.removeLayer(osmLayer);
+    }
+    if (mymap.hasLayer(satelliteLayer)) {
+        mymap.removeLayer(satelliteLayer);
+    }
+    if (geoJSONLayers.some(layer => mymap.hasLayer(layer))) {
+        removeAllGeoJSONLayers();
+    } else {
+        geoJSONLayers.forEach(layer => mymap.addLayer(layer));
     }
 };
 
+// Add GeoJSON layers
+// Replace with your actual GeoJSON URLs and style/icon functions
+addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', yourStyleFunction1, yourIconFunction1);
+addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', yourStyleFunction2, yourIconFunction2);
+addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', yourStyleFunction2, yourIconFunction2);
+addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', yourStyleFunction2, yourIconFunction2);
+addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', yourStyleFunction2, yourIconFunction2);
+addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', yourStyleFunction2, yourIconFunction2);
 
-window.toggleGeoJSONLayer = function() {
-    geoJSONLayers.forEach(layer => {
-        if (mymap.hasLayer(layer)) {
-            mymap.removeLayer(layer);
-        } else {
-            mymap.addLayer(layer);
-        }
-    });
-};
+// ... add other GeoJSON layers as needed
+});
 
 
     // Marker Icons
