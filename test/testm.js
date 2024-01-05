@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }).setView([0, 0], 2);
 
     // Tile Layers
-    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' }).addTo(mymap);
+    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
     // Marker Icons
@@ -130,11 +130,25 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
     addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
     addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
     addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
+    
     addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', null, selectIcon); // No style function for markers
 
-    // Layer Switching Functions
-    window.toggleOSMLayer = function() { switchLayer(osmLayer); };
-    window.toggleSatelliteLayer = function() { switchLayer(satelliteLayer); };
+ // Layer Switching Functions
+ window.toggleOSMLayer = function() {
+    if (mymap.hasLayer(osmLayer)) {
+        mymap.removeLayer(osmLayer);
+    } else {
+        mymap.addLayer(osmLayer);
+    }
+};
+
+window.toggleSatelliteLayer = function() {
+    if (mymap.hasLayer(satelliteLayer)) {
+        mymap.removeLayer(satelliteLayer);
+    } else {
+        mymap.addLayer(satelliteLayer);
+    }
+};
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
