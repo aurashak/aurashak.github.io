@@ -10,7 +10,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-    // Declare an array to keep track of GeoJSON layers
+    // Marker Icons (your icon URLs here)
+    var redIcon = L.icon({ /* properties */ });
+    // ... other icons
+
+    // Style Functions (your style functions here)
+    function countriesStyle(feature) { /* styling */ }
+    // ... other style functions
+
+    // Feature Interaction
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }
+
+    // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
     // Function to add GeoJSON layers
@@ -24,29 +39,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         return L.marker(latlng, { icon: iconFunc(feature) });
                     },
                     onEachFeature: onEachFeature
-                }); 
-                geoJSONLayers.push(layer); // Add the layer to the array, but don't add it to the map yet
+                });
+                geoJSONLayers.push(layer);
             })
             .catch(error => console.error('Error loading GeoJSON:', error));
     }
 
-    // Function to toggle GeoJSON layers
-    window.toggleGeoJSONLayer = function() {
-        if (geoJSONLayers.some(layer => mymap.hasLayer(layer))) {
-            // If any GeoJSON layer is on the map, remove them
-            geoJSONLayers.forEach(layer => mymap.removeLayer(layer));
-        } else {
-            // If GeoJSON layers are not on the map, add them
-            geoJSONLayers.forEach(layer => mymap.addLayer(layer));
-        }
-        // Ensure that OSM and Satellite layers are removed when GeoJSON layers are toggled
-        if (mymap.hasLayer(osmLayer)) {
-            mymap.removeLayer(osmLayer);
-        }
-        if (mymap.hasLayer(satelliteLayer)) {
-            mymap.removeLayer(satelliteLayer);
-        }
+    // Layer Switching Functions
+    window.toggleOSMLayer = function() {
+        removeAllLayers();
+        mymap.addLayer(osmLayer);
     };
+
+    window.toggleSatelliteLayer = function() {
+        removeAllLayers();
+        mymap.addLayer(satelliteLayer);
+    };
+
+    window.toggleGeoJSONLayer = function() {
+        removeAllLayers();
+        geoJSONLayers.forEach(layer => mymap.addLayer(layer));
+    };
+
+    function removeAllLayers() {
+        mymap.eachLayer(function(layer) {
+            mymap.removeLayer(layer);
+        });
+    }
 
 // Add GeoJSON layers
 // Replace with your actual GeoJSON URLs and style/icon functions
@@ -57,7 +76,6 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', yourStyleFu
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', yourStyleFunction2, yourIconFunction2);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', yourStyleFunction2, yourIconFunction2);
 
-// ... add other GeoJSON layers as needed
 });
 
 
@@ -175,23 +193,8 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         }
     }
 
-    // Adding Layers
-    addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
-    addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceanStyle, selectIcon);
-    addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
-    addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
-    addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
-    
-    addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', null, selectIcon); // No style function for markers
-
-// Add a scale control to the map
-L.control.scale({
-    maxWidth: 100, // Width of the scale bar in pixels
-    metric: true,  // Whether to show the metric scale (kilometers/meters)
-    imperial: true, // Whether to show the imperial scale (miles/feet)
-    updateWhenIdle: false // Whether to update the scale automatically
-}).addTo(mymap);
-
+    // Add Scale Control
+    L.control.scale().addTo(mymap);
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
@@ -209,5 +212,4 @@ L.control.scale({
             });
         });
     }
-
 
