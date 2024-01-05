@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Array to store GeoJSON layers
         var geoJSONLayers = [];
 
-        
+
  // Function to add GeoJSON layers
  function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
@@ -240,4 +240,3 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
             });
         });
     }
-
