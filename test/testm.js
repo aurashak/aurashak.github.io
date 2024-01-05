@@ -13,12 +13,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var lakesLayer, riversLayer, regionsLayer;
 
+    var redIcon = new L.Icon({
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
     function addGeoJSONToGroup(url, style, assignLayer) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 var layer = L.geoJSON(data, {
                     style: style,
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: redIcon });
+                    },
                     onEachFeature: function (feature, layer) {
                         var tooltipContent = feature.properties.name || feature.properties.ADMIN || '';
                         layer.bindTooltip(tooltipContent, {
@@ -32,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (assignLayer) assignLayer(layer);
             });
     }
+
 
     function bringToFront() {
         if (lakesLayer) lakesLayer.bringToFront();
