@@ -28,22 +28,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-    // Function to add GeoJSON layers
-    function addGeoJSONLayer(url, styleFunc, iconFunc) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                var layer = L.geoJSON(data, {
-                    style: styleFunc,
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: iconFunc(feature) });
-                    },
-                    onEachFeature: onEachFeature
-                });
-                geoJSONLayers.push(layer);
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
+// Function to add GeoJSON layers
+function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            });
+            // Do not add it to the map yet
+            geoJSONLayers.push(layer); // Add the layer to the array
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
 
     // Layer Switching Functions
     window.toggleOSMLayer = function() {
@@ -69,12 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add GeoJSON layers
 // Replace with your actual GeoJSON URLs and style/icon functions
-addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', yourStyleFunction1, yourIconFunction1);
-addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', yourStyleFunction2, yourIconFunction2);
-addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', yourStyleFunction2, yourIconFunction2);
-addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', yourStyleFunction2, yourIconFunction2);
-addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', yourStyleFunction2, yourIconFunction2);
-addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', yourStyleFunction2, yourIconFunction2);
+addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionssStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
 });
 
