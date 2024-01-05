@@ -19,6 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 var layer = L.geoJSON(data, {
                     style: style,
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: "#ff7800", // Customize the fill color
+                            color: "#000", // Border color of the circle
+                            weight: 1, // Border width
+                            opacity: 1,
+                            fillOpacity: 0.8 // Fill opacity
+                        });
+                    },
                     onEachFeature: function (feature, layer) {
                         var tooltipContent = feature.properties.name || feature.properties.ADMIN || '';
                         layer.bindTooltip(tooltipContent, {
@@ -32,13 +42,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (assignLayer) assignLayer(layer);
             });
     }
-
+    
+    // Call the function with the URL to your project markers GeoJSON
+    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', {});
+    
+    
+    // Use this function to bring to front
     function bringToFront() {
         if (lakesLayer) lakesLayer.bringToFront();
         if (riversLayer) riversLayer.bringToFront();
         if (regionsLayer) regionsLayer.bringToFront();
     }
 
+    // Use this function to load geojson layers
     addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'grey', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'white', weight: 0.1, fillColor: 'white', fillOpacity: 1 }, (layer) => { lakesLayer = layer; bringToFront(); });
     addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'white', weight: 0.25, fillColor: 'white', fillOpacity: 1 }, (layer) => { riversLayer = layer; bringToFront(); });
