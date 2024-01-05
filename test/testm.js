@@ -11,25 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
-          // Function to add the project markers GeoJSON layer
-          function addProjectMarkers(url) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    L.geoJSON(data, {
-                        // Assume you have a style function and an icon function defined
-                        // style: projectMarkerStyle,
-                        // pointToLayer: function(feature, latlng) {
-                        //     return L.marker(latlng, { icon: projectMarkerIcon(feature) });
-                        // },
-                        onEachFeature: onEachFeature // Assumes onEachFeature is defined
-                    }).addTo(mymap);
-                })
-                .catch(error => console.error('Error loading GeoJSON:', error));
-        }
-    
-        // Call this function once to add the project markers to the map
-        addProjectMarkers('https://aurashak.github.io/geojson/projectmarkers.geojson');
     // Marker Icons (your icon URLs here)
     var redIcon = L.icon({ /* properties */ });
     // ... other icons
