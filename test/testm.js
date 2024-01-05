@@ -1,3 +1,16 @@
+// Global scope
+var geoJSONLayers = [];
+
+function toggleGeoJSONLayer() {
+    geoJSONLayers.forEach(layer => {
+        if (mymap.hasLayer(layer)) {
+            mymap.removeLayer(layer);
+        } else {
+            mymap.addLayer(layer);
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var mymap = L.map('mapid', {
         minZoom: 2,
@@ -9,8 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Tile Layers
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
-
-    var geoJSONLayers = [];
 
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
         fetch(url)
