@@ -10,6 +10,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+
+          // Function to add the project markers GeoJSON layer
+          function addProjectMarkers(url) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        // Assume you have a style function and an icon function defined
+                        // style: projectMarkerStyle,
+                        // pointToLayer: function(feature, latlng) {
+                        //     return L.marker(latlng, { icon: projectMarkerIcon(feature) });
+                        // },
+                        onEachFeature: onEachFeature // Assumes onEachFeature is defined
+                    }).addTo(mymap);
+                })
+                .catch(error => console.error('Error loading GeoJSON:', error));
+        }
+    
+        // Call this function once to add the project markers to the map
+        addProjectMarkers('https://aurashak.github.io/geojson/projectmarkers.geojson');
     // Marker Icons (your icon URLs here)
     var redIcon = L.icon({ /* properties */ });
     // ... other icons
@@ -25,26 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-      // Function to add the project markers GeoJSON layer
-      function addProjectMarkers(url) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    // Assume you have a style function and an icon function defined
-                    // style: projectMarkerStyle,
-                    // pointToLayer: function(feature, latlng) {
-                    //     return L.marker(latlng, { icon: projectMarkerIcon(feature) });
-                    // },
-                    onEachFeature: onEachFeature // Assumes onEachFeature is defined
-                }).addTo(mymap);
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
-
-    // Call this function once to add the project markers to the map
-    addProjectMarkers('https://aurashak.github.io/geojson/projectmarkers.geojson');
-
 
     // Add Scale Control
 L.control.scale({
@@ -57,24 +57,6 @@ L.control.scale({
 
     // Array to store GeoJSON layers
     var geoJSONLayers = [];
-
-// Function to add GeoJSON layers and add them to the map
-function addGeoJSONLayer(url, styleFunc, iconFunc) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var layer = L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            });
-            layer.addTo(mymap); // Add the layer to the map immediately
-            geoJSONLayers.push(layer); // Store the layer
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
 
 
     // Layer Switching Functions
@@ -164,50 +146,50 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', pro
 });
 
 
-    // Marker Icons
-    var redIcon = L.icon({ 
+      // Marker Icons
+      var redIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [12.5, 20.5], // size of the icon
-    iconAnchor: [6, 20.5], // point of the icon which will correspond to marker's location
-    popupAnchor: [1, -20.5], // point from which the popup should open relative to the iconAnchor
-    shadowSize: [20.5, 20.5] // size of the shadow
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
 });
 
     var greenIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [12.5, 20.5], // size of the icon
-    iconAnchor: [6, 20.5], // point of the icon which will correspond to marker's location
-    popupAnchor: [1, -20.5], // point from which the popup should open relative to the iconAnchor
-    shadowSize: [20.5, 20.5] // size of the shadow
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
 });
 
     var violetIcon = L.icon({    
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [12.5, 20.5], // size of the icon
-    iconAnchor: [6, 20.5], // point of the icon which will correspond to marker's location
-    popupAnchor: [1, -20.5], // point from which the popup should open relative to the iconAnchor
-    shadowSize: [20.5, 20.5] // size of the shadow
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
 });
 
     var yellowIcon = L.icon({    
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
 });
 
     var defaultIcon = L.icon({    
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
 }); // Define a default icon
 
    
