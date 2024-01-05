@@ -1,3 +1,4 @@
+// Event listener that runs when the DOM content is fully loaded.
 document.addEventListener('DOMContentLoaded', function() {
     var mymap = L.map('mapid', {
         minZoom: 2,
@@ -6,16 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
         maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
-    // Tile Layers
+// Tile Layers
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-        // Array to store GeoJSON layers
-        var geoJSONLayers = [];
+// Array to store GeoJSON layers
+    var geoJSONLayers = [];
 
 
- // Function to add GeoJSON layers
- function addGeoJSONLayer(url, styleFunc, iconFunc) {
+// Function to load and add GeoJSON layers to the map
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -32,8 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
-// Add the project markers GeoJSON layer
-addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
+
 
 // Add other GeoJSON layers
 addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
@@ -41,25 +41,10 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle
 addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
 
-    // Marker Icons (your icon URLs here)
-    var redIcon = L.icon({ /* properties */ });
-    // ... other icons
-
-    // Style Functions (your style functions here)
-    function countriesStyle(feature) { /* styling */ }
-    // ... other style functions
-
-    // Feature Interaction
-    function onEachFeature(feature, layer) {
-        if (feature.properties && feature.properties.name) {
-            layer.bindPopup(feature.properties.name);
-        }
-    }
-
-
-    // Add Scale Control
+// Add Scale Control
 L.control.scale({
     maxWidth: 100,
     metric: true,
@@ -68,10 +53,7 @@ L.control.scale({
   }).addTo(mymap);
   
 
-
-
-
-    // Layer Switching Functions
+// Layer Switching Functions
     window.toggleOSMLayer = function() {
         removeAllLayers();
         mymap.addLayer(osmLayer);
@@ -93,8 +75,14 @@ L.control.scale({
         });
     }
 
+ // Function to remove all layers from the map
+    function removeAllLayers() {
+    mymap.eachLayer(function(layer) {
+        mymap.removeLayer(layer);
+    });
+    }
 
-     // Style Functions
+// Style Functions for Geojson layers
      function countriesStyle(feature) {
         return {
         color: feature.properties.stroke || 'grey',
@@ -138,7 +126,8 @@ L.control.scale({
         fillOpacity: 0.01
     };}
 
-    // Feature Interaction
+
+// Feature Interaction
     function onEachFeature(feature, layer) {
         if (feature.properties && feature.properties.name) {
             layer.bindPopup(feature.properties.name);
@@ -146,8 +135,8 @@ L.control.scale({
     }
 
 
-      // Marker Icons
-      var redIcon = L.icon({ 
+// Marker Icons
+    var redIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [16.67, 27.33], // 2/3 of the original size
@@ -194,25 +183,9 @@ L.control.scale({
 
    
 
-// Adding GeoJSON Layers
-function addGeoJSONLayer(url, styleFunc, iconFunc) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var layer = L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            }).addTo(mymap);
-            layer.bringToFront();
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
 
 
-    // Icon Selector Function
+// Icon Selector Function
     function selectIcon(feature) {
         switch (feature.properties['marker-color']) {
             case 'red': return redIcon;
@@ -224,7 +197,7 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
     }
 
 
-    // Search Control
+// Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
     var searchButton = document.getElementById('search-button');
     if (searchButton) {
