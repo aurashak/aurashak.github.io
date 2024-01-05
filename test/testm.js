@@ -240,3 +240,4 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
             });
         });
     }
+});
