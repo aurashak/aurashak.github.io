@@ -77,8 +77,8 @@ window.toggleSatelliteLayer = function() {
     popupAnchor: [1, -34],
     shadowSize: [41, 41]});
 
-    var purpleIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-purple.png',
+    var violetIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
@@ -94,7 +94,7 @@ window.toggleSatelliteLayer = function() {
     shadowSize: [41, 41]});
 
     var defaultIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
@@ -168,7 +168,7 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         switch (feature.properties['marker-color']) {
             case 'red': return redIcon;
             case 'green': return greenIcon;
-            case 'purple': return purpleIcon;
+            case 'violet': return violetIcon;
             case 'yellow': return yellowIcon;
             default: return defaultIcon;
         }
