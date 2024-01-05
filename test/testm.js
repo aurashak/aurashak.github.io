@@ -117,6 +117,15 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    function projectmarkersStyle(feature) {
+        return {
+            color: 'red',
+            weight: 0.25,
+            fillColor: 'red',
+            fillOpacity: 1
+        };
+    }
+
 
 
     function onEachFeature(feature, layer) {
@@ -147,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', lakesStyle, (layer) => { /*...*/ });
         addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, (layer) => { /*...*/ });
         addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, (layer) => { /*...*/ });
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', projectmarkersStyle, (layer) => { /*...*/ });
 
 
 
