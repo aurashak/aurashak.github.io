@@ -13,35 +13,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var lakesLayer, riversLayer, regionsLayer;
 
-    function addGeoJSONToGroup(url, style, assignLayer) {
+    // leaflet-color-markers 
+    function addGeoJSONToGroup(url, assignLayer) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 var layer = L.geoJSON(data, {
-                    style: style,
                     pointToLayer: function(feature, latlng) {
-                        return L.circleMarker(latlng, {
-                            radius: 8,
-                            fillColor: "#ff7800", // Customize the fill color
-                            color: "#000", // Border color of the circle
-                            weight: 1, // Border width
-                            opacity: 1,
-                            fillOpacity: 0.8 // Fill opacity
+                        // Example using a blue marker from the leaflet-color-markers plugin
+                        var blueIcon = new L.Icon({
+                            iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
+                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
                         });
+                        return L.marker(latlng, { icon: blueIcon });
                     },
                     onEachFeature: function (feature, layer) {
-                        var tooltipContent = feature.properties.name || feature.properties.ADMIN || '';
-                        layer.bindTooltip(tooltipContent, {
-                            permanent: false,
-                            direction: 'auto',
-                            className: 'geojson-tooltip',
-                            sticky: true
-                        });
+                        // ... existing code for tooltip ...
                     }
                 }).addTo(geojsonGroup);
                 if (assignLayer) assignLayer(layer);
+                layer.bringToFront();
             });
     }
+    
+    
+    
     
     // Call the function with the URL to your project markers GeoJSON
     addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', {});
