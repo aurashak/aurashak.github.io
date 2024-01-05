@@ -227,7 +227,7 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         }
     }
 
-    L.control.scale({ position: 'bottomleft' }).addTo(mymap);
+    L.control.scale({ imperial: false, metric: true, updateWhenIdle: false }).addTo(mymap);
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
