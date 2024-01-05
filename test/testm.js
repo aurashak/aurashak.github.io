@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+        // Array to store GeoJSON layers
+        var geoJSONLayers = [];
+
+        
  // Function to add GeoJSON layers
  function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
@@ -64,8 +68,7 @@ L.control.scale({
   }).addTo(mymap);
   
 
-    // Array to store GeoJSON layers
-    var geoJSONLayers = [];
+
 
 
     // Layer Switching Functions
