@@ -51,9 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function pointToLayer(feature, latlng) {
-        // Determine the marker class based on a feature property
         var icon;
-        switch(feature.properties.markerClass) {
+        switch (feature.properties['marker-color']) {
             case 'red':
                 icon = redIcon;
                 break;
@@ -67,26 +66,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon = yellowIcon;
                 break;
             default:
-                icon = redIcon; // default if no specific class is set
+                icon = defaultIcon; // A default icon in case no specific color is provided
         }
         return L.marker(latlng, { icon: icon });
     }
-
+    
     function addGeoJSONToGroup(url, assignLayer) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 var layer = L.geoJSON(data, {
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: redIcon });
-                    },
-                    onEachFeature: function (feature, layer) {
-                        var tooltipContent = feature.properties.name || feature.properties.ADMIN || '';
+                    pointToLayer: pointToLayer, // Make sure this is correctly referenced
+                    onEachFeature: function(feature, layer) {
+                        // Only apply styles if the feature is not a point (i.e., Polygon or LineString)
+                        if (feature.geometry.type !== "Point") {
+                            layer.setStyle({
+                                color: 'grey', // or feature.properties.stroke, etc.
+                                weight: 0.5,
+                                fillColor: 'black',
+                                fillOpacity: 1
+                            });
+                        }
+                        var tooltipContent = feature.properties.name || '';
                         layer.bindTooltip(tooltipContent, {
                             permanent: false,
-                            direction: 'auto',
-                            className: 'geojson-tooltip',
-                            sticky: true
+                            direction: 'auto'
                         });
                     }
                 }).addTo(geojsonGroup);
