@@ -10,66 +10,43 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-// Declare an array to keep track of GeoJSON layers
-var geoJSONLayers = [];
+    // Declare an array to keep track of GeoJSON layers
+    var geoJSONLayers = [];
 
-// Function to add GeoJSON layers
-function addGeoJSONLayer(url, styleFunc, iconFunc) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var layer = L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            }); 
-            layer.addTo(mymap);
-            geoJSONLayers.push(layer); // Add the layer to the array
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
+    // Function to add GeoJSON layers
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var layer = L.geoJSON(data, {
+                    style: styleFunc,
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: iconFunc(feature) });
+                    },
+                    onEachFeature: onEachFeature
+                }); 
+                geoJSONLayers.push(layer); // Add the layer to the array, but don't add it to the map yet
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+    }
 
-// Function to remove all GeoJSON layers
-function removeAllGeoJSONLayers() {
-    geoJSONLayers.forEach(layer => {
-        if (mymap.hasLayer(layer)) {
-            mymap.removeLayer(layer);
+    // Function to toggle GeoJSON layers
+    window.toggleGeoJSONLayer = function() {
+        if (geoJSONLayers.some(layer => mymap.hasLayer(layer))) {
+            // If any GeoJSON layer is on the map, remove them
+            geoJSONLayers.forEach(layer => mymap.removeLayer(layer));
+        } else {
+            // If GeoJSON layers are not on the map, add them
+            geoJSONLayers.forEach(layer => mymap.addLayer(layer));
         }
-    });
-}
-
-// Layer Switching Functions
-window.toggleOSMLayer = function() {
-    removeAllGeoJSONLayers();
-    if (mymap.hasLayer(satelliteLayer)) {
-        mymap.removeLayer(satelliteLayer);
-    }
-    mymap.addLayer(osmLayer);
-};
-
-window.toggleSatelliteLayer = function() {
-    removeAllGeoJSONLayers();
-    if (mymap.hasLayer(osmLayer)) {
-        mymap.removeLayer(osmLayer);
-    }
-    mymap.addLayer(satelliteLayer);
-};
-
-window.toggleGeoJSONLayer = function() {
-    if (mymap.hasLayer(osmLayer)) {
-        mymap.removeLayer(osmLayer);
-    }
-    if (mymap.hasLayer(satelliteLayer)) {
-        mymap.removeLayer(satelliteLayer);
-    }
-    if (geoJSONLayers.some(layer => mymap.hasLayer(layer))) {
-        removeAllGeoJSONLayers();
-    } else {
-        geoJSONLayers.forEach(layer => mymap.addLayer(layer));
-    }
-};
+        // Ensure that OSM and Satellite layers are removed when GeoJSON layers are toggled
+        if (mymap.hasLayer(osmLayer)) {
+            mymap.removeLayer(osmLayer);
+        }
+        if (mymap.hasLayer(satelliteLayer)) {
+            mymap.removeLayer(satelliteLayer);
+        }
+    };
 
 // Add GeoJSON layers
 // Replace with your actual GeoJSON URLs and style/icon functions
