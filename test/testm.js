@@ -33,22 +33,30 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
 
 
 
-     // Layer Switching Functions
- window.toggleOSMLayer = function() {
-    if (mymap.hasLayer(osmLayer)) {
-        mymap.removeLayer(osmLayer);
-    } else {
-        mymap.addLayer(osmLayer);
+// Function to remove all GeoJSON layers
+function removeAllGeoJSONLayers() {
+    geoJSONLayers.forEach(layer => {
+        if (mymap.hasLayer(layer)) {
+            mymap.removeLayer(layer);
+        }
+    });
+}
+
+// Layer Switching Functions
+window.toggleOSMLayer = function() {
+    removeAllGeoJSONLayers(); // Remove all GeoJSON layers
+    if (!mymap.hasLayer(osmLayer)) {
+        mymap.addLayer(osmLayer); // Add OSM layer if it's not already added
     }
 };
 
 window.toggleSatelliteLayer = function() {
-    if (mymap.hasLayer(satelliteLayer)) {
-        mymap.removeLayer(satelliteLayer);
-    } else {
-        mymap.addLayer(satelliteLayer);
+    removeAllGeoJSONLayers(); // Remove all GeoJSON layers
+    if (!mymap.hasLayer(satelliteLayer)) {
+        mymap.addLayer(satelliteLayer); // Add Satellite layer if it's not already added
     }
 };
+
 
 window.toggleGeoJSONLayer = function() {
     geoJSONLayers.forEach(layer => {
