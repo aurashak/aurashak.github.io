@@ -10,6 +10,34 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+ // Function to add GeoJSON layers
+ function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            });
+            layer.addTo(mymap);
+            geoJSONLayers.push(layer); // Store the layer
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+// Add the project markers GeoJSON layer
+addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
+
+// Add other GeoJSON layers
+addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
+
 
     // Marker Icons (your icon URLs here)
     var redIcon = L.icon({ /* properties */ });
@@ -113,18 +141,6 @@ L.control.scale({
             layer.bindPopup(feature.properties.name);
         }
     }
-
-
-// Add GeoJSON layers
-// Replace with your actual GeoJSON URLs and style/icon functions
-addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
-
-});
 
 
       // Marker Icons
