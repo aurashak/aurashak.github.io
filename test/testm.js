@@ -102,21 +102,21 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
     function oceansStyle(feature) {
         return {
         color: 'white', // outline color
-        weight: 0.25,
+        weight: 0.01,
         fillColor: 'white',
         fillOpacity: 1
     };}
     function lakesStyle(feature) {  
         return {
         color: 'white',
-        weight: 0.25,
+        weight: 0.01,
         fillColor: 'white',
         fillOpacity: 1
     };}
     function riversStyle(feature) { 
         return {
         color: 'white',
-        weight: 0.25,
+        weight: 0.01,
         fillColor: 'white',
         fillOpacity: 1
     };}
@@ -125,7 +125,7 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         color: 'red',
         weight: 0.01,
         fillColor: 'red',
-        fillOpacity: 0.01
+        fillOpacity: 0.001
     };}
     function projectmarkersStyle(feature) {
         return {
@@ -159,26 +159,29 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', pro
     var redIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]});
+    iconSize: [12.5, 20.5], // size of the icon
+    iconAnchor: [6, 20.5], // point of the icon which will correspond to marker's location
+    popupAnchor: [1, -20.5], // point from which the popup should open relative to the iconAnchor
+    shadowSize: [20.5, 20.5] // size of the shadow
+});
 
     var greenIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]});
+    iconSize: [12.5, 20.5], // size of the icon
+    iconAnchor: [6, 20.5], // point of the icon which will correspond to marker's location
+    popupAnchor: [1, -20.5], // point from which the popup should open relative to the iconAnchor
+    shadowSize: [20.5, 20.5] // size of the shadow
+});
 
     var violetIcon = L.icon({    
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]});
+    iconSize: [12.5, 20.5], // size of the icon
+    iconAnchor: [6, 20.5], // point of the icon which will correspond to marker's location
+    popupAnchor: [1, -20.5], // point from which the popup should open relative to the iconAnchor
+    shadowSize: [20.5, 20.5] // size of the shadow
+});
 
     var yellowIcon = L.icon({    
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
@@ -186,7 +189,8 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', pro
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-    shadowSize: [41, 41]});
+    shadowSize: [41, 41]
+});
 
     var defaultIcon = L.icon({    
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
@@ -194,7 +198,8 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', pro
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-    shadowSize: [41, 41]}); // Define a default icon
+    shadowSize: [41, 41]
+}); // Define a default icon
 
    
 
