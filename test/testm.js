@@ -109,7 +109,6 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
             }).addTo(mymap);
             layer.bringToFront();
         })
-        .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
 
