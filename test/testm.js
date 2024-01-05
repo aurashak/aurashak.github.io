@@ -10,6 +10,45 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+    var geoJSONLayers = [];
+
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var layer = L.geoJSON(data, {
+                    style: styleFunc,
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: iconFunc(feature) });
+                    },
+                    onEachFeature: onEachFeature
+                }).addTo(mymap);
+                geoJSONLayers.push(layer); // Add the layer to the array
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+    }
+    
+
+     // Layer Switching Functions
+ window.toggleOSMLayer = function() {
+    if (mymap.hasLayer(osmLayer)) {
+        mymap.removeLayer(osmLayer);
+    } else {
+        mymap.addLayer(osmLayer);
+    }
+};
+
+window.toggleSatelliteLayer = function() {
+    if (mymap.hasLayer(satelliteLayer)) {
+        mymap.removeLayer(satelliteLayer);
+    } else {
+        mymap.addLayer(satelliteLayer);
+    }
+};
+
+
+
+
     // Marker Icons
     var redIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
@@ -27,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
     popupAnchor: [1, -34],
     shadowSize: [41, 41]});
 
-    var blackIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-black.png',
+    var purpleIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-purple.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
@@ -118,7 +157,7 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         switch (feature.properties['marker-color']) {
             case 'red': return redIcon;
             case 'green': return greenIcon;
-            case 'black': return blackIcon;
+            case 'purple': return purpleIcon;
             case 'yellow': return yellowIcon;
             default: return defaultIcon;
         }
@@ -133,22 +172,6 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
     
     addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', null, selectIcon); // No style function for markers
 
- // Layer Switching Functions
- window.toggleOSMLayer = function() {
-    if (mymap.hasLayer(osmLayer)) {
-        mymap.removeLayer(osmLayer);
-    } else {
-        mymap.addLayer(osmLayer);
-    }
-};
-
-window.toggleSatelliteLayer = function() {
-    if (mymap.hasLayer(satelliteLayer)) {
-        mymap.removeLayer(satelliteLayer);
-    } else {
-        mymap.addLayer(satelliteLayer);
-    }
-};
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
