@@ -49,25 +49,19 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
 
     // Layer Switching Functions
     window.toggleOSMLayer = function() {
-        if (!mymap.hasLayer(osmLayer)) {
-            mymap.addLayer(osmLayer);
-            mymap.removeLayer(satelliteLayer);
-        }
+        removeAllLayers();
+        mymap.addLayer(osmLayer);
     };
-    
 
     window.toggleSatelliteLayer = function() {
-        if (!mymap.hasLayer(satelliteLayer)) {
-            mymap.addLayer(satelliteLayer);
-            mymap.removeLayer(osmLayer);
-        }
+        removeAllLayers();
+        mymap.addLayer(satelliteLayer);
     };
+
     window.toggleGeoJSONLayer = function() {
         removeAllLayers();
         geoJSONLayers.forEach(layer => mymap.addLayer(layer));
     };
-
-
 
     function removeAllLayers() {
         mymap.eachLayer(function(layer) {
