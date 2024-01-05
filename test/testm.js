@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-// Function to add GeoJSON layers
+// Function to add GeoJSON layers and add them to the map
 function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
         .then(response => response.json())
@@ -40,8 +40,8 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
                 },
                 onEachFeature: onEachFeature
             });
-            // Do not add it to the map yet
-            geoJSONLayers.push(layer); // Add the layer to the array
+            layer.addTo(mymap); // Add the layer to the map immediately
+            geoJSONLayers.push(layer); // Store the layer
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
