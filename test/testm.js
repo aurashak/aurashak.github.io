@@ -1,16 +1,3 @@
-// Global scope
-var geoJSONLayers = [];
-
-function toggleGeoJSONLayer() {
-    geoJSONLayers.forEach(layer => {
-        if (mymap.hasLayer(layer)) {
-            mymap.removeLayer(layer);
-        } else {
-            mymap.addLayer(layer);
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     var mymap = L.map('mapid', {
         minZoom: 2,
@@ -23,22 +10,28 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-    function addGeoJSONLayer(url, styleFunc, iconFunc) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                var layer = L.geoJSON(data, {
-                    style: styleFunc,
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: iconFunc(feature) });
-                    },
-                    onEachFeature: onEachFeature
-                }).addTo(mymap);
-                geoJSONLayers.push(layer); // Add the layer to the array
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
-    
+// Declare an array to keep track of GeoJSON layers
+var geoJSONLayers = [];
+
+// Function to add GeoJSON layers
+function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }); 
+            layer.addTo(mymap);
+            geoJSONLayers.push(layer); // Add the layer to the array
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+
 
      // Layer Switching Functions
  window.toggleOSMLayer = function() {
@@ -57,6 +50,12 @@ window.toggleSatelliteLayer = function() {
     }
 };
 
+window.toggleGeoJSONLayer = function() {
+    if (mymap.hasLayer(GeoJSONLayer)) {
+        mymap.removeLayer(GeoJSONLayer);
+    } else {
+        mymap.addLayer(GeoJSONLayer);
+    }
 
 
 
