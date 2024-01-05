@@ -72,19 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return L.marker(latlng, { icon: icon });
     }
 
-    function addGeoJSONLayer(url, styleFunc, icon) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: styleFunc,
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: icon });
-                    }
-                }).addTo(mymap);
-            });
-    }
-
     function countriesStyle(feature) {
         return {
             color: feature.properties.stroke || 'grey',
@@ -148,7 +135,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     
-
+    function addGeoJSONLayer(url, styleFunc, icon) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: styleFunc,
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: icon });
+                    }
+                }).addTo(mymap);
+            });
+    }
       
       // Repeat for other layers, ensuring that the getStyle function is tailored to each layer's needs.
 
