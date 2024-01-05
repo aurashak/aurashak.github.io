@@ -22,12 +22,61 @@ document.addEventListener('DOMContentLoaded', function() {
         shadowSize: [41, 41]
     });
 
-    function addGeoJSONToGroup(url, style, assignLayer) {
+    var greenIcon = new L.Icon({
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var blackIcon = new L.Icon({
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-black.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var yellowIcon = new L.Icon({
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+
+    function pointToLayer(feature, latlng) {
+        // Determine the marker class based on a feature property
+        var icon;
+        switch(feature.properties.markerClass) {
+            case 'red':
+                icon = redIcon;
+                break;
+            case 'green':
+                icon = greenIcon;
+                break;
+            case 'black':
+                icon = blackIcon;
+                break;
+            case 'yellow':
+                icon = yellowIcon;
+                break;
+            default:
+                icon = redIcon; // default if no specific class is set
+        }
+        return L.marker(latlng, { icon: icon });
+    }
+
+    function addGeoJSONToGroup(url, assignLayer) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 var layer = L.geoJSON(data, {
-                    style: style,
                     pointToLayer: function(feature, latlng) {
                         return L.marker(latlng, { icon: redIcon });
                     },
@@ -44,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (assignLayer) assignLayer(layer);
             });
     }
-
+    
 
     function bringToFront() {
         if (lakesLayer) lakesLayer.bringToFront();
