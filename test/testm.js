@@ -184,6 +184,14 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
     
     addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', null, selectIcon); // No style function for markers
 
+// Add a scale control to the map
+L.control.scale({
+    maxWidth: 100, // Width of the scale bar in pixels
+    metric: true,  // Whether to show the metric scale (kilometers/meters)
+    imperial: true, // Whether to show the imperial scale (miles/feet)
+    updateWhenIdle: false // Whether to update the scale automatically
+}).addTo(mymap);
+
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
