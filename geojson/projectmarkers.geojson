@@ -229,7 +229,7 @@
             "type": "Feature",
             "properties": {
                 "name": "West Harlem, New York City",
-                "marker-color": "black" 
+                "marker-color": "purple" 
             },
             "geometry": {
               "coordinates": [
