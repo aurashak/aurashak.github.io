@@ -46,6 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
     addProjectMarkers('https://aurashak.github.io/geojson/projectmarkers.geojson');
 
 
+    // Add Scale Control
+L.control.scale({
+    maxWidth: 100,
+    metric: true,
+    imperial: true,
+    position: 'bottomleft'
+  }).addTo(mymap);
+  
+
     // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
@@ -232,7 +241,6 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         }
     }
 
-    L.control.scale({ imperial: false, metric: true, updateWhenIdle: false }).addTo(mymap);
 
     // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
