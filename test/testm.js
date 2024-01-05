@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-    var geojsonGroup = L.layerGroup().addTo(mymap);
-
-    var lakesLayer, riversLayer, regionsLayer;
+   
 
     var redIcon = new L.Icon({
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
@@ -49,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
         shadowSize: [41, 41]
     });
 
+    var geojsonGroup = L.layerGroup().addTo(mymap);
+    var lakesLayer, riversLayer, regionsLayer;
+
 
     function pointToLayer(feature, latlng) {
         var icon;
@@ -70,48 +71,93 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return L.marker(latlng, { icon: icon });
     }
+
+    function countriesStyle(feature) {
+        return {
+            color: feature.properties.stroke || 'grey',
+            weight: feature.properties.weight || 0.5,
+            fillColor: feature.properties.fill || 'black',
+            fillOpacity: feature.properties.opacity || 1
+        };
+    }
+
+    function oceanStyle(feature) {
+        return {
+            color: 'blue', // outline color
+            weight: 1,
+            fillColor: 'white',
+            fillOpacity: 0.5
+        };
+    }
     
-    function addGeoJSONToGroup(url, assignLayer) {
+    function lakesStyle(feature) {
+        return {
+            color: 'blue',
+            weight: 0.5,
+            fillColor: 'white',
+            fillOpacity: 1
+        };
+    }
+    
+    function riversStyle(feature) {
+        return {
+            color: 'blue',
+            weight: 0.25,
+            fillColor: 'white',
+            fillOpacity: 1
+        };
+    }
+
+    function regionsStyle(feature) {
+        return {
+            color: 'red',
+            weight: 0.25,
+            fillColor: 'red',
+            fillOpacity: 1
+        };
+    }
+
+
+
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }
+
+    
+    function addGeoJSONToGroup(url, styleFunc, pointToLayerFunc, onEachFeatureFunc) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 var layer = L.geoJSON(data, {
-                    pointToLayer: pointToLayer, // Make sure this is correctly referenced
-                    onEachFeature: function(feature, layer) {
-                        // Only apply styles if the feature is not a point (i.e., Polygon or LineString)
-                        if (feature.geometry.type !== "Point") {
-                            layer.setStyle({
-                                color: 'grey', // or feature.properties.stroke, etc.
-                                weight: 0.5,
-                                fillColor: 'black',
-                                fillOpacity: 1
-                            });
-                        }
-                        var tooltipContent = feature.properties.name || '';
-                        layer.bindTooltip(tooltipContent, {
-                            permanent: false,
-                            direction: 'auto'
-                        });
-                    }
+                    style: styleFunc,
+                    pointToLayer: pointToLayerFunc,
+                    onEachFeature: onEachFeatureFunc
                 }).addTo(geojsonGroup);
-                if (assignLayer) assignLayer(layer);
+                layer.bringToFront();
             });
     }
-    
 
+      
+      // Repeat for other layers, ensuring that the getStyle function is tailored to each layer's needs.
+
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', countriesStyle);
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', oceanStyle, (layer) => { /*...*/ });
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', lakesStyle, (layer) => { /*...*/ });
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, (layer) => { /*...*/ });
+        addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, (layer) => { /*...*/ });
+
+
+
+      
     function bringToFront() {
         if (lakesLayer) lakesLayer.bringToFront();
         if (riversLayer) riversLayer.bringToFront();
         if (regionsLayer) regionsLayer.bringToFront();
     }
 
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/countries.geojson', { color: 'grey', weight: 0.5, fillColor: 'black', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/lakes.json', { color: 'white', weight: 0.1, fillColor: 'white', fillOpacity: 1 }, (layer) => { lakesLayer = layer; bringToFront(); });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/rivers.geojson', { color: 'white', weight: 0.25, fillColor: 'white', fillOpacity: 1 }, (layer) => { riversLayer = layer; bringToFront(); });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/oceans.geojson', { color: 'white', weight: 0.5, fillColor: 'white', fillOpacity: 1 });
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/regions.geojson', { color: 'green', weight: 0.1, fillColor: 'green', fillOpacity: 0.01, opacity: 0.01 }, (layer) => { regionsLayer = layer; bringToFront(); });    
-    addGeoJSONToGroup('https://aurashak.github.io/geojson/projectmarkers.geojson', { color: 'red', weight: 0.5, fillColor: 'red', fillOpacity: 1 });
-
+    
     L.control.scale({ imperial: false, metric: true, updateWhenIdle: false }).addTo(mymap);
 
     function switchLayer(layer) {
