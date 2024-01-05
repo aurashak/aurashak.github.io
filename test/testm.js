@@ -47,41 +47,21 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
 }
 
 
-// Layer Switching Functions
-window.toggleOSMLayer = function() {
-    if (!mymap.hasLayer(osmLayer)) {
-        mymap.addLayer(osmLayer);
-        if (mymap.hasLayer(satelliteLayer)) {
+    // Layer Switching Functions
+    window.toggleOSMLayer = function() {
+        if (!mymap.hasLayer(osmLayer)) {
+            mymap.addLayer(osmLayer);
             mymap.removeLayer(satelliteLayer);
         }
-        // Re-add the GeoJSON layers on top of the OSM layer
-        geoJSONLayers.forEach(layer => {
-            if (!mymap.hasLayer(layer)) {
-                mymap.addLayer(layer);
-            }
-        });
-    }
-};
+    };
+    
 
-window.toggleSatelliteLayer = function() {
-    if (!mymap.hasLayer(satelliteLayer)) {
-        mymap.addLayer(satelliteLayer);
-        if (mymap.hasLayer(osmLayer)) {
+    window.toggleSatelliteLayer = function() {
+        if (!mymap.hasLayer(satelliteLayer)) {
+            mymap.addLayer(satelliteLayer);
             mymap.removeLayer(osmLayer);
         }
-        // Re-add the GeoJSON layers on top of the satellite layer
-        geoJSONLayers.forEach(layer => {
-            if (!mymap.hasLayer(layer)) {
-                mymap.addLayer(layer);
-            }
-        });
-    }
-};
-
-// Initially, the OSM layer is added and the GeoJSON layers are displayed on top of it
-mymap.addLayer(osmLayer);
-geoJSONLayers.forEach(layer => mymap.addLayer(layer));
-44
+    };
     window.toggleGeoJSONLayer = function() {
         removeAllLayers();
         geoJSONLayers.forEach(layer => mymap.addLayer(layer));
