@@ -55,27 +55,27 @@ document.addEventListener('DOMContentLoaded', function() {
     function countriesStyle(feature) {
         return {
         color: feature.properties.stroke || 'grey',
-        weight: feature.properties.weight || 0.5,
+        weight: feature.properties.weight || 0.25,
         fillColor: feature.properties.fill || 'black',
         fillOpacity: feature.properties.opacity || 1
     };}
     function oceanStyle(feature) {
         return {
-        color: 'blue', // outline color
-        weight: 1,
+        color: 'white', // outline color
+        weight: 0.25,
         fillColor: 'white',
-        fillOpacity: 0.5
+        fillOpacity: 1
     };}
     function lakesStyle(feature) {  
         return {
-        color: 'blue',
-        weight: 0.5,
+        color: 'white',
+        weight: 0.25,
         fillColor: 'white',
         fillOpacity: 1
     };}
     function riversStyle(feature) { 
         return {
-        color: 'blue',
+        color: 'white',
         weight: 0.25,
         fillColor: 'white',
         fillOpacity: 1
@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function regionsStyle(feature) {
         return {
         color: 'red',
-        weight: 0.25,
+        weight: 0.01,
         fillColor: 'red',
-        fillOpacity: 1
+        fillOpacity: 0.01
     };}
 
     // Feature Interaction
@@ -95,23 +95,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Adding GeoJSON Layers
-    function addGeoJSONLayer(url, styleFunc, iconFunc) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: styleFunc,
-
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: selectIcon(feature) });
-                    }
-                    
-                    onEachFeature: onEachFeature
-                }).addTo(mymap);
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
+// Adding GeoJSON Layers
+function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            layer.bringToFront(); // Bring the added layer to the front
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
 
     // Icon Selector Function
     function selectIcon(feature) {
