@@ -1,6 +1,5 @@
 // Event listener that runs when the DOM content is fully loaded.
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the map on the "mapid" div with a given center and zoom level.
     var mymap = L.map('mapid', {
         minZoom: 2,
         maxZoom: 18,
@@ -8,111 +7,93 @@ document.addEventListener('DOMContentLoaded', function() {
         maxBoundsViscosity: 1.0
     }).setView([0, 0], 2);
 
-    // Define the OpenStreetMap and Satellite tile layers.
+// Tile Layers
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-    // Object to keep track of the GeoJSON layers by name for easy access.
-    var geoJSONLayers = {};
-
-    // Add scale control to the map.
-    L.control.scale({
-        maxWidth: 100,
-        metric: true,
-        imperial: true,
-        position: 'bottomleft'
-    }).addTo(mymap);
-
-    // Function to add GeoJSON layers to the map.
-    function addGeoJSONLayer(url, styleFunc, iconFunc, name) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                var layer = L.geoJSON(data, {
-                    style: styleFunc,
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: iconFunc(feature) });
-                    },
-                    onEachFeature: onEachFeature
-                }).addTo(mymap);
-
-                // Store the layer in the geoJSONLayers object with the provided name.
-                geoJSONLayers[name] = layer;
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
-
-    // Function to create and add the Project Markers layer to the map.
+// Function to create the Project Markers layer (don't change this)
     function addProjectMarkers() {
         fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
             .then(response => response.json())
             .then(data => {
-                var projectMarkersLayer = L.geoJSON(data, {
+                L.geoJSON(data, {
                     style: projectmarkersStyle,
                     onEachFeature: onEachFeature,
+                    // Assuming pointToLayer and selectIcon are defined
                     pointToLayer: function(feature, latlng) {
                         return L.marker(latlng, { icon: selectIcon(feature) });
                     }
                 }).addTo(mymap);
-                // Store the project markers layer in the geoJSONLayers object.
-                geoJSONLayers['projectMarkers'] = projectMarkersLayer;
             })
             .catch(error => console.error('Error loading GeoJSON:', error));
-    }
-
-    // Immediately call the function to add the Project Markers layer.
-    addProjectMarkers();
-
-    // Add other GeoJSON layers to the map with their specific styles and icons.
-    addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon, 'countries');
-    addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon, 'oceans');
-    addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon, 'lakes');
-    addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon, 'rivers');
-    addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon, 'regions');
-
-    // Function to handle switching to the OSM layer.
-    window.toggleOSMLayer = function() {
-        removeAllLayers();
-        mymap.addLayer(osmLayer);
-        addProjectMarkers();
-    };
-
-    // Function to handle switching to the Satellite layer.
-    window.toggleSatelliteLayer = function() {
-        removeAllLayers();
-        mymap.addLayer(satelliteLayer);
-        addProjectMarkers();
-    };
-
-    // Function to handle switching to GeoJSON layers.
-    window.toggleGeoJSONLayer = function() {
-        removeAllLayers();
-        // Re-add all the GeoJSON layers.
-        for (var name in geoJSONLayers) {
-            geoJSONLayers[name].addTo(mymap);
         }
-    };
 
-    // Function to remove all layers from the map.
-    function removeAllLayers() {
-        for (var name in geoJSONLayers) {
-            mymap.removeLayer(geoJSONLayers[name]);
-        }
-    }
-
-    // Define the style functions for each type of GeoJSON layer.
-    function countriesStyle(feature) {
-        // ...
-    }
-    function oceansStyle(feature) {
-        // ...
-    }
-    // Define the rest of the style functions and any additional functionality.
-});
-
-
-    // Ensure project markers are still there
+// Call this function to add the Project Markers layer immediately
     addProjectMarkers();
+    
+// Array to store GeoJSON layers
+    var geoJSONLayers = [];
+
+
+// Function to load and add GeoJSON layers to the map
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            });
+            layer.addTo(mymap);
+            geoJSONLayers.push(layer); // Store the layer
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+
+
+// Add other GeoJSON layers
+addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
+
+
+// Add Scale Control
+L.control.scale({
+    maxWidth: 100,
+    metric: true,
+    imperial: true,
+    position: 'bottomleft'
+  }).addTo(mymap);
+  
+
+// Function to handle switching to OSM layer
+window.toggleOSMLayer = function() {
+    removeAllLayers(); // Remove all layers
+    mymap.addLayer(osmLayer); // Add the OSM layer
+    addProjectMarkers(); // Re-add the project markers
+};
+
+// Function to handle switching to Satellite layer
+window.toggleSatelliteLayer = function() {
+    removeAllLayers(); // Remove all layers
+    mymap.addLayer(satelliteLayer); // Add the Satellite layer
+    addProjectMarkers(); // Re-add the project markers
+};
+
+// Function to handle switching to GeoJSON layers
+window.toggleGeoJSONLayer = function() {
+    removeAllLayersExceptProjectMarkers(); // Remove all layers except project markers
+    // Re-add all the GeoJSON layers
+    geoJSONLayers.forEach(layer => mymap.addLayer(layer));
+    addProjectMarkers(); // Ensure project markers are still there
+};
 
 // Helper function to remove all layers
 function removeAllLayers() {
@@ -276,3 +257,4 @@ function removeAllLayersExceptProjectMarkers() {
             });
         });
     }
+});
