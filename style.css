@@ -374,6 +374,17 @@ button:active {
     box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
 }
 
+/* Add this to your CSS file */
+.hover-info {
+    position: absolute;
+    bottom: 50px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
 
 
 /* Styles for mobile devices */
