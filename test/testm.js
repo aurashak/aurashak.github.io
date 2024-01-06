@@ -188,26 +188,24 @@ mymap.on('mousemove', function(e) {
 
 // Feature Interaction
 function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: function(e) {
-            // Create a string with the feature's properties.name and the latlng
-            var hoverText = "Name: " + (feature.properties.name || "Unknown") +
-                            "<br>Lat: " + e.latlng.lat.toFixed(5) +
-                            ", Lng: " + e.latlng.lng.toFixed(5);
+    if (feature.properties && feature.properties.name) {
+        // Bind a popup with feature's name to the layer
+        layer.bindPopup(feature.properties.name);
 
-            // Update the hover-info div with this text
+        // Event listener for mouseover on each feature
+        layer.on('mouseover', function(e) {
+            // Update hover info with feature's name and coordinates
+            var hoverText = `Name: ${feature.properties.name}<br>Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
             document.getElementById('hover-info').innerHTML = hoverText;
-        },
-        mouseout: function(e) {
-            // Reset the hover-info div when not hovering over a feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-        }
-    });
-}
+        });
 
-// Add other GeoJSON layers with the onEachFeature function attached
-addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
-// ... add the other layers as well
+        // Event listener for mouseout on each feature
+        layer.on('mouseout', function(e) {
+            // Reset hover info when the mouse leaves the feature
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        });
+    }
+}
 
 
 
