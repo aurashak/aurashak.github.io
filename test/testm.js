@@ -188,24 +188,25 @@ mymap.on('mousemove', function(e) {
 
 // Feature Interaction
 function onEachFeature(feature, layer) {
-    if (feature.properties && feature.properties.name) {
-        // Bind a popup with feature's name to the layer
-        layer.bindPopup(feature.properties.name);
+    // Remove the bindPopup call to disable popups on click
 
-        // Event listener for mouseover on each feature
-        layer.on('mouseover', function(e) {
+    layer.on({
+        mouseover: function(e) {
             // Update hover info with feature's name and coordinates
-            var hoverText = `Name: ${feature.properties.name}<br>Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+            var hoverText = feature.properties.name ?
+                            `Name: ${feature.properties.name}<br>` : ''; // Add a name if available
+            hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
             document.getElementById('hover-info').innerHTML = hoverText;
-        });
-
-        // Event listener for mouseout on each feature
-        layer.on('mouseout', function(e) {
+        },
+        mouseout: function(e) {
             // Reset hover info when the mouse leaves the feature
             document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-        });
-    }
+        }
+    });
 }
+
+// Use the modified onEachFeature function in your addGeoJSONLayer calls
+
 
 
 
