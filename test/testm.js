@@ -45,7 +45,15 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
                 pointToLayer: function(feature, latlng) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
-                onEachFeature: onEachFeature
+                onEachFeature: function(feature, layer) {
+                    // Check if feature has properties you want to display
+                    if (feature.properties && feature.properties.name) {
+                        // Create a tooltip content string
+                        var tooltipContent = "Name: " + feature.properties.name;
+                        // Bind the tooltip to the layer
+                        layer.bindTooltip(tooltipContent);
+                    }
+                }
             });
             layer.addTo(mymap);
             geoJSONLayers.push(layer); // Store the layer
@@ -160,9 +168,9 @@ function removeAllLayersExceptProjectMarkers() {
     function regionsStyle(feature) {
         return {
         color: 'red',
-        weight: 0.01,
+        weight: 0,
         fillColor: 'red',
-        fillOpacity: 0.001
+        fillOpacity: 0
     };}
     function projectmarkersStyle(feature) {
         return {
