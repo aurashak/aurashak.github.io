@@ -377,18 +377,10 @@ button:active {
 
 /* Add this to your CSS file */
 #hover-info {
-    position: absolute;
-    top: calc(100% + 10px); /* Moves the info box below the map */
-    left: 0;
-    right: 0;
-    margin: auto; /* Centers the box */
     background-color: rgba(186, 23, 23, 0.924);
     padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     font-size: 14px;
     text-align: center;
-    z-index: 11000;
 }
 
 
