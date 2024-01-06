@@ -57,10 +57,10 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
                             var latlng = layer.getBounds ? layer.getBounds().getCenter() : e.latlng;
                             tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
 
-                            document.getElementById('info').innerHTML = tooltipContent;
+                            document.getElementById('hover-info').innerHTML = tooltipContent;
                         },
                         mouseout: function(e) {
-                            document.getElementById('info').innerHTML = 'Hover over a feature';
+                            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
                         }
                     });
                 }
@@ -210,10 +210,10 @@ function onEachFeature(feature, layer) {
             content += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
 
             // Update the hover-info div
-            document.getElementById('info-hover').innerHTML = content;
+            document.getElementById('hover-info').innerHTML = content;
         },
         mouseout: function(e) {
-            document.getElementById('info-hover').innerHTML = 'Hover over a feature';
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
         }
     });
 }
