@@ -192,42 +192,37 @@ function removeAllLayersExceptProjectMarkers() {
 
 // Feature Interaction
 function onEachFeature(feature, layer) {
-    console.log("Feature added:", feature); // Debugging line
-
     layer.on({
         mouseover: function(e) {
             var layer = e.target;
-            var tooltipContent = '';
 
-            // Check for name property and add to tooltip
-            if (feature.properties && feature.properties.name) {
-                tooltipContent += 'Name: ' + feature.properties.name + '<br>';
-            }
-
-            // Handling both point and non-point features
-            var latlng;
-            if (layer.getLatLng) { // For point features like markers
-                latlng = layer.getLatLng();
-            } else if (layer.getBounds) { // For non-point features like polygons
-                latlng = layer.getBounds().getCenter();
-            }
-
-            if (latlng) {
-                tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
-            }
-
-            // Update the hover information
+            // Update hover info content
             var hoverInfo = document.getElementById('hover-info');
-            hoverInfo.innerHTML = tooltipContent;
+            var content = '';
+
+            // Check if the feature has a name property and add it to the content
+            if (feature.properties && feature.properties.name) {
+                content += 'Name: ' + feature.properties.name + '<br>';
+            }
+
+            // Add latitude and longitude
+            if (layer.getLatLng) {
+                var latlng = layer.getLatLng();
+                content += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
+            } else if (layer.getBounds) {
+                var center = layer.getBounds().getCenter();
+                content += 'Lat: ' + center.lat.toFixed(5) + '<br>Lng: ' + center.lng.toFixed(5);
+            }
+
+            // Set the content
+            hoverInfo.innerHTML = content;
         },
         mouseout: function(e) {
-            // Reset hover information when not hovering over a feature
+            // Clear hover info when not hovering over a feature
             document.getElementById('hover-info').innerHTML = 'Hover over a feature';
         }
     });
 }
-
-
 
 
 
