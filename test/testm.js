@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-
 // Function to load and add GeoJSON layers to the map
 function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
@@ -46,13 +45,24 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
                 onEachFeature: function(feature, layer) {
-                    // Check if feature has properties you want to display
-                    if (feature.properties && feature.properties.name) {
-                        // Create a tooltip content string
-                        var tooltipContent = "Name: " + feature.properties.name;
-                        // Bind the tooltip to the layer
-                        layer.bindTooltip(tooltipContent);
-                    }
+                    layer.on({
+                        mouseover: function(e) {
+                            var layer = e.target;
+                            var tooltipContent = '';
+                            
+                            if (feature.properties && feature.properties.name) {
+                                tooltipContent += 'Name: ' + feature.properties.name + '<br>';
+                            }
+
+                            var latlng = layer.getBounds ? layer.getBounds().getCenter() : e.latlng;
+                            tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
+
+                            document.getElementById('info').innerHTML = tooltipContent;
+                        },
+                        mouseout: function(e) {
+                            document.getElementById('info').innerHTML = 'Hover over a feature';
+                        }
+                    });
                 }
             });
             layer.addTo(mymap);
@@ -60,7 +70,6 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
-
 
 
 
@@ -183,27 +192,26 @@ function removeAllLayersExceptProjectMarkers() {
 
 // Feature Interaction
 function onEachFeature(feature, layer) {
-    if (feature.properties) {
-        var tooltipContent = '';
+    layer.on({
+        mouseover: function(e) {
+            var layer = e.target;
+            var tooltipContent = '';
+            
+            if (feature.properties && feature.properties.name) {
+                tooltipContent += 'Name: ' + feature.properties.name + '<br>';
+            }
 
-        // Add the name property from the feature, if it exists
-        if (feature.properties.name) {
-            tooltipContent += feature.properties.name + '<br>';
-        }
-
-        // Add latitude and longitude
-        if (layer.getLatLng) {
-            var latlng = layer.getLatLng();
+            var latlng = layer.getBounds ? layer.getBounds().getCenter() : e.latlng;
             tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
-        } else if (layer.getBounds) {
-            var center = layer.getBounds().getCenter();
-            tooltipContent += 'Lat: ' + center.lat.toFixed(5) + '<br>Lng: ' + center.lng.toFixed(5);
-        }
 
-        // Bind the tooltip to the layer
-        layer.bindTooltip(tooltipContent, { direction: 'auto' });
-    }
+            document.getElementById('info').innerHTML = tooltipContent;
+        },
+        mouseout: function(e) {
+            document.getElementById('info').innerHTML = 'Hover over a feature';
+        }
+    });
 }
+
 
 
 // Marker Icons
