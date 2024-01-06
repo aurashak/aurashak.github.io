@@ -182,11 +182,28 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 // Feature Interaction
-    function onEachFeature(feature, layer) {
-        if (feature.properties && feature.properties.name) {
-            layer.bindPopup(feature.properties.name);
+function onEachFeature(feature, layer) {
+    if (feature.properties) {
+        var tooltipContent = '';
+
+        // Add the name property from the feature, if it exists
+        if (feature.properties.name) {
+            tooltipContent += feature.properties.name + '<br>';
         }
+
+        // Add latitude and longitude
+        if (layer.getLatLng) {
+            var latlng = layer.getLatLng();
+            tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
+        } else if (layer.getBounds) {
+            var center = layer.getBounds().getCenter();
+            tooltipContent += 'Lat: ' + center.lat.toFixed(5) + '<br>Lng: ' + center.lng.toFixed(5);
+        }
+
+        // Bind the tooltip to the layer
+        layer.bindTooltip(tooltipContent, { direction: 'auto' });
     }
+}
 
 
 // Marker Icons
