@@ -375,16 +375,20 @@ button:active {
 }
 
 /* Add this to your CSS file */
-.hover-info {
+#hover-info {
     position: absolute;
-    bottom: 50px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
+    top: calc(100% + 10px); /* Moves the info box below the map */
+    left: 0;
+    right: 0;
+    margin: auto; /* Centers the box */
     background-color: rgba(255, 255, 255, 0.8);
     padding: 5px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
+    text-align: center;
 }
+
 
 
 /* Styles for mobile devices */
