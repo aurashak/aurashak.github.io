@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Add other GeoJSON layers
 addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.geojson', lakesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
@@ -73,29 +73,43 @@ L.control.scale({
   }).addTo(mymap);
   
 
-// Layer Switching Functions
-    window.toggleOSMLayer = function() {
-    if (!mymap.hasLayer(osmLayer)) {
-        mymap.addLayer(osmLayer);
-        mymap.removeLayer(satelliteLayer);
-    }
+// Function to handle switching to OSM layer
+window.toggleOSMLayer = function() {
+    removeAllLayers(); // Remove all layers
+    mymap.addLayer(osmLayer); // Add the OSM layer
+    addProjectMarkers(); // Re-add the project markers
 };
 
-    window.toggleSatelliteLayer = function() {
-    if (!mymap.hasLayer(satelliteLayer)) {
-        mymap.addLayer(satelliteLayer);
-        mymap.removeLayer(osmLayer);
-    }
+// Function to handle switching to Satellite layer
+window.toggleSatelliteLayer = function() {
+    removeAllLayers(); // Remove all layers
+    mymap.addLayer(satelliteLayer); // Add the Satellite layer
+    addProjectMarkers(); // Re-add the project markers
 };
 
-// Make sure the project markers are not removed when toggling layers
-    window.toggleGeoJSONLayer = function() {
-        geoJSONLayers.forEach(layer => {
-            if (!mymap.hasLayer(layer)) {
-                mymap.addLayer(layer);
-            }
-        });
-    };
+// Function to handle switching to GeoJSON layers
+window.toggleGeoJSONLayer = function() {
+    removeAllLayersExceptProjectMarkers(); // Remove all layers except project markers
+    // Re-add all the GeoJSON layers
+    geoJSONLayers.forEach(layer => mymap.addLayer(layer));
+    addProjectMarkers(); // Ensure project markers are still there
+};
+
+// Helper function to remove all layers
+function removeAllLayers() {
+    mymap.eachLayer(function(layer) {
+        mymap.removeLayer(layer);
+    });
+}
+
+// Helper function to remove all layers except project markers
+function removeAllLayersExceptProjectMarkers() {
+    mymap.eachLayer(function(layer) {
+        if (!isProjectMarkerLayer(layer)) {
+            mymap.removeLayer(layer);
+        }
+    });
+}
 
     // Helper function to check if the layer is the project markers layer
     function isProjectMarkerLayer(layer) {
@@ -103,15 +117,7 @@ L.control.scale({
         // This may require setting a property on the layer when you create it,
         // or checking if the layer has certain features or properties.
     }
-    
-// Function to remove all layers from the map except project markers
-    function removeAllLayers() {
-        mymap.eachLayer(function(layer) {
-            if (layer !== osmLayer && layer !== satelliteLayer && !isProjectMarkerLayer(layer)) {
-                mymap.removeLayer(layer);
-            }
-        });
-    }
+
 
  // Function to remove all layers from the map
     function removeAllLayers() {
