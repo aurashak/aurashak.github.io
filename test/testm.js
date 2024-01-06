@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hover-info').innerHTML = infoText;
     }
 
-    // Feature Interaction
+    // Function to handle feature interaction for GeoJSON layers
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: function(e) {
@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('hover-info').innerHTML = hoverText;
             },
             mouseout: function(e) {
-                document.getElementById('hover-info').innerHTML = 'Hover over the map';
+                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
             }
         });
     }
-    
+
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
@@ -59,23 +59,23 @@ function addProjectMarkers() {
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
 
-// Function to load and add GeoJSON layers to the map
+  // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var layer = L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            });
-            layer.addTo(mymap);
-            geoJSONLayers.push(layer); // Store the layer
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var layer = L.geoJSON(data, {
+                    style: styleFunc,
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: iconFunc(feature) });
+                    },
+                    onEachFeature: onEachFeature
+                });
+                layer.addTo(mymap);
+                geoJSONLayers.push(layer); // Store the layer
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+    }
 
 // Style Functions for Geojson layers
 function countriesStyle(feature) {
