@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Function to load and add GeoJSON layers to the map
-    function addGeoJSONLayer(url, styleFunc, iconFunc) {
+function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
+
+
 
 
 
