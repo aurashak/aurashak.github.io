@@ -12,14 +12,29 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
-
-
-// Feature Interaction
-function onEachFeature(feature, layer) {
-    if (feature.properties && feature.properties.name) {
-        layer.bindPopup(feature.properties.name);
+    // Update hover info function
+    function updateHoverInfo(latlng, name = '') {
+        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
+        if (name) {
+            infoText += '<br>Name: ' + name;
+        }
+        document.getElementById('hover-info').innerHTML = infoText;
     }
-}
+
+    // Feature Interaction
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: function(e) {
+                var hoverText = feature.properties.name ?
+                                `Name: ${feature.properties.name}<br>` : '';
+                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+                document.getElementById('hover-info').innerHTML = hoverText;
+            },
+            mouseout: function(e) {
+                document.getElementById('hover-info').innerHTML = 'Hover over the map';
+            }
+        });
+    }
     
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
