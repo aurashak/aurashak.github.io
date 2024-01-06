@@ -12,24 +12,110 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
+        // Add base layers immediately
+        mymap.addLayer(osmLayer);
 
-// Feature Interaction
-function onEachFeature(feature, layer) {
-    // Remove the bindPopup call to disable popups on click
-
-    layer.on({
-        mouseover: function(e) {
-            // Update hover info with feature's name and coordinates
-            var hoverText = feature.properties.name ?
-                            `Name: ${feature.properties.name}<br>` : ''; // Add a name if available
-            hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-            document.getElementById('hover-info').innerHTML = hoverText;
-        },
-        mouseout: function(e) {
-            // Reset hover info when the mouse leaves the feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+ // Function to update hover info
+    function updateHoverInfo(latlng, name = '') {
+        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
+        if (name) {
+            infoText += '<br>Name: ' + name;
         }
+        document.getElementById('hover-info').innerHTML = infoText;
+    }
+
+    // Update hover info on mouse move
+    mymap.on('mousemove', function(e) {
+        updateHoverInfo(e.latlng);
     });
+
+
+    // Feature Interaction
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: function(e) {
+                var hoverText = feature.properties.name ?
+                                `Name: ${feature.properties.name}<br>` : '';
+                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+                document.getElementById('hover-info').innerHTML = hoverText;
+            },
+            mouseout: function(e) {
+                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+            }
+        });
+    }
+
+    // Style Functions for Geojson layers
+    function countriesStyle(feature) {
+        return {
+        color: feature.properties.stroke || 'grey',
+        weight: feature.properties.weight || 0.25,
+        fillColor: feature.properties.fill || 'black',
+        fillOpacity: feature.properties.opacity || 1
+    };}
+    function oceansStyle(feature) {
+        return {
+        color: 'white', // outline color
+        weight: 0.01,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function lakesStyle(feature) {  
+        return {
+        color: 'white',
+        weight: 0.01,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function riversStyle(feature) { 
+        return {
+        color: 'white',
+        weight: 0.01,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function regionsStyle(feature) {
+        return {
+        color: 'red',
+        weight: 0.01,
+        fillColor: 'red',
+        fillOpacity: 0.001
+    };}
+    function projectmarkersStyle(feature) {
+        return {
+        color: 'red',
+        weight: 0.01,
+        fillColor: 'red',
+        fillOpacity: 0.01
+    };}
+
+
+// Icon Selector Function
+function selectIcon(feature) {
+    switch (feature.properties['marker-color']) {
+        case 'red': return redIcon;
+        case 'green': return greenIcon;
+        case 'violet': return violetIcon;
+        case 'yellow': return yellowIcon;
+        default: return defaultIcon;
+    }
+}
+
+
+// Function to load and add GeoJSON layers to the map
+function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
 
@@ -60,24 +146,6 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-
-// Function to load and add GeoJSON layers to the map
-    function addGeoJSONLayer(url, styleFunc, iconFunc) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var layer = L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            });
-            layer.addTo(mymap);
-            geoJSONLayers.push(layer); // Store the layer
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
 
 
 
@@ -152,64 +220,6 @@ function removeAllLayersExceptProjectMarkers() {
     });
     }
 
-// Style Functions for Geojson layers
-     function countriesStyle(feature) {
-        return {
-        color: feature.properties.stroke || 'grey',
-        weight: feature.properties.weight || 0.25,
-        fillColor: feature.properties.fill || 'black',
-        fillOpacity: feature.properties.opacity || 1
-    };}
-    function oceansStyle(feature) {
-        return {
-        color: 'white', // outline color
-        weight: 0.01,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function lakesStyle(feature) {  
-        return {
-        color: 'white',
-        weight: 0.01,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function riversStyle(feature) { 
-        return {
-        color: 'white',
-        weight: 0.01,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function regionsStyle(feature) {
-        return {
-        color: 'red',
-        weight: 0.01,
-        fillColor: 'red',
-        fillOpacity: 0.001
-    };}
-    function projectmarkersStyle(feature) {
-        return {
-        color: 'red',
-        weight: 0.01,
-        fillColor: 'red',
-        fillOpacity: 0.01
-    };}
-
-
-// Function to update hover info
-function updateHoverInfo(latlng, name = '') {
-    var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-    if (name) {
-        infoText += '<br>' + 'Name: ' + name;
-    }
-    document.getElementById('hover-info').innerHTML = infoText;
-}
-
-// Update hover info on mouse move
-mymap.on('mousemove', function(e) {
-    updateHoverInfo(e.latlng);
-});
 
 
 
@@ -265,17 +275,6 @@ mymap.on('mousemove', function(e) {
    
 
 
-
-// Icon Selector Function
-    function selectIcon(feature) {
-        switch (feature.properties['marker-color']) {
-            case 'red': return redIcon;
-            case 'green': return greenIcon;
-            case 'violet': return violetIcon;
-            case 'yellow': return yellowIcon;
-            default: return defaultIcon;
-        }
-    }
 
 
 // Search Control
