@@ -188,16 +188,18 @@ mymap.on('mousemove', function(e) {
 
 // Feature Interaction
 function onEachFeature(feature, layer) {
-    if (feature.properties && feature.properties.name) {
-        layer.on({
-            mouseover: function(e) {
-                updateHoverInfo(e.latlng, feature.properties.name);
-            },
-            mouseout: function() {
-                updateHoverInfo(e.latlng);
+    layer.on({
+        mouseover: function(e) {
+            var tooltipContent = 'Lat: ' + e.latlng.lat.toFixed(5) + '<br>Lng: ' + e.latlng.lng.toFixed(5);
+            if (feature.properties && feature.properties.name) {
+                tooltipContent += '<br>Name: ' + feature.properties.name;
             }
-        });
-    }
+            document.getElementById('hover-info').innerHTML = tooltipContent;
+        },
+        mouseout: function(e) {
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        }
+    });
 }
 
 
