@@ -194,23 +194,30 @@ function removeAllLayersExceptProjectMarkers() {
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: function(e) {
-            var layer = e.target;
-            var tooltipContent = '';
-            
+            var content = '';
+            // Check if feature has a name and add it to the content
             if (feature.properties && feature.properties.name) {
-                tooltipContent += 'Name: ' + feature.properties.name + '<br>';
+                content += 'Name: ' + feature.properties.name + '<br>';
             }
 
-            var latlng = layer.getBounds ? layer.getBounds().getCenter() : e.latlng;
-            tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
+            // Determine coordinates based on feature type
+            var latlng;
+            if (feature.geometry.type === 'Point') {
+                latlng = layer.getLatLng();
+            } else {
+                latlng = layer.getBounds().getCenter();
+            }
+            content += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
 
-            document.getElementById('info').innerHTML = tooltipContent;
+            // Update the hover-info div
+            document.getElementById('info-hover').innerHTML = content;
         },
         mouseout: function(e) {
-            document.getElementById('info').innerHTML = 'Hover over a feature';
+            document.getElementById('info-hover').innerHTML = 'Hover over a feature';
         }
     });
 }
+
 
 
 
@@ -294,18 +301,3 @@ function onEachFeature(feature, layer) {
     }
 });
 
-
-// Function to display a tooltip on map click
-function onMapClick(e) {
-    var latlng = e.latlng;
-    var tooltipContent = "Latitude: " + latlng.lat.toFixed(5) + "<br>Longitude: " + latlng.lng.toFixed(5);
-    
-    // You can use a popup or a tooltip to show the coordinates
-    L.popup()
-        .setLatLng(latlng)
-        .setContent(tooltipContent)
-        .openOn(mymap);
-}
-
-// Add the click event listener to your map
-mymap.on('click', onMapClick);
