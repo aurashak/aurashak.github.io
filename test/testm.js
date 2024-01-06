@@ -12,100 +12,40 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
-        // Add base layers immediately
-        mymap.addLayer(osmLayer);
-
- // Function to update hover info
-    function updateHoverInfo(latlng, name = '') {
-        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-        if (name) {
-            infoText += '<br>Name: ' + name;
-        }
-        document.getElementById('hover-info').innerHTML = infoText;
-    }
-
-    // Update hover info on mouse move
-    mymap.on('mousemove', function(e) {
-        updateHoverInfo(e.latlng);
-    });
 
 
-    // Feature Interaction
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: function(e) {
-                // Use the feature's properties to show information on hover
-                var hoverText = feature.properties.name ?
-                                `Name: ${feature.properties.name}<br>` : 'Name: Unknown<br>';
-                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-                document.getElementById('hover-info').innerHTML = hoverText;
-            },
-            mouseout: function(e) {
-                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-            }
-        });
-    }
-
-    // Style Functions for Geojson layers
-    function countriesStyle(feature) {
-        return {
-        color: feature.properties.stroke || 'grey',
-        weight: feature.properties.weight || 0.25,
-        fillColor: feature.properties.fill || 'black',
-        fillOpacity: feature.properties.opacity || 1
-    };}
-    function oceansStyle(feature) {
-        return {
-        color: 'white', // outline color
-        weight: 0.01,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function lakesStyle(feature) {  
-        return {
-        color: 'white',
-        weight: 0.01,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function riversStyle(feature) { 
-        return {
-        color: 'white',
-        weight: 0.01,
-        fillColor: 'white',
-        fillOpacity: 1
-    };}
-    function regionsStyle(feature) {
-        return {
-        color: 'red',
-        weight: 0.01,
-        fillColor: 'red',
-        fillOpacity: 0.001
-    };}
-    function projectmarkersStyle(feature) {
-        return {
-        color: 'red',
-        weight: 0.01,
-        fillColor: 'red',
-        fillOpacity: 0.01
-    };}
-
-
-// Icon Selector Function
-function selectIcon(feature) {
-    switch (feature.properties['marker-color']) {
-        case 'red': return redIcon;
-        case 'green': return greenIcon;
-        case 'violet': return violetIcon;
-        case 'yellow': return yellowIcon;
-        default: return defaultIcon;
+// Feature Interaction
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.name) {
+        layer.bindPopup(feature.properties.name);
     }
 }
+    
+// Array to store GeoJSON layers
+    var geoJSONLayers = [];
 
+// Function to create the Project Markers layer (don't change this)
+function addProjectMarkers() {
+    fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: projectmarkersStyle,
+                onEachFeature: onEachFeature,
+                // Assuming pointToLayer and selectIcon are defined
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: selectIcon(feature) });
+                }
+            }).addTo(mymap);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+    }
 
-// Ensure that your GeoJSON layers are being added to the geoJSONLayers array
-// after they are created in the addGeoJSONLayer function
-function addGeoJSONLayer(url, styleFunc, iconFunc) {
+// Call this function to add the Project Markers layer immediately
+addProjectMarkers();
+
+// Function to load and add GeoJSON layers to the map
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -117,37 +57,54 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
                 onEachFeature: onEachFeature
             });
             layer.addTo(mymap);
-            geoJSONLayers.push(layer); // Store the layer for later use
+            geoJSONLayers.push(layer); // Store the layer
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
-// Function to create the Project Markers layer (don't change this)
-    function addProjectMarkers() {
-        fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: projectmarkersStyle,
-                    onEachFeature: onEachFeature,
-                    // Assuming pointToLayer and selectIcon are defined
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: selectIcon(feature) });
-                    }
-                }).addTo(mymap);
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-        }
-
-
-
-// Call this function to add the Project Markers layer immediately
-    addProjectMarkers();
-
-
-
-// Array to store GeoJSON layers
-    var geoJSONLayers = [];
+// Style Functions for Geojson layers
+function countriesStyle(feature) {
+    return {
+    color: feature.properties.stroke || 'grey',
+    weight: feature.properties.weight || 0.25,
+    fillColor: feature.properties.fill || 'black',
+    fillOpacity: feature.properties.opacity || 1
+};}
+function oceansStyle(feature) {
+    return {
+    color: 'white', // outline color
+    weight: 0.01,
+    fillColor: 'white',
+    fillOpacity: 1
+};}
+function lakesStyle(feature) {  
+    return {
+    color: 'white',
+    weight: 0.01,
+    fillColor: 'white',
+    fillOpacity: 1
+};}
+function riversStyle(feature) { 
+    return {
+    color: 'white',
+    weight: 0.01,
+    fillColor: 'white',
+    fillOpacity: 1
+};}
+function regionsStyle(feature) {
+    return {
+    color: 'red',
+    weight: 0.01,
+    fillColor: 'red',
+    fillOpacity: 0.001
+};}
+function projectmarkersStyle(feature) {
+    return {
+    color: 'red',
+    weight: 0.01,
+    fillColor: 'red',
+    fillOpacity: 0.01
+};}
 
 
 
@@ -186,31 +143,27 @@ window.toggleSatelliteLayer = function() {
 
 // Function to handle switching to GeoJSON layers
 window.toggleGeoJSONLayer = function() {
-    // Remove all layers except base layers and project markers
-    removeAllLayersExceptProjectMarkers();
+    removeAllLayersExceptProjectMarkers(); // Remove all layers except project markers
+    // Re-add all the GeoJSON layers
+    geoJSONLayers.forEach(layer => mymap.addLayer(layer));
+    addProjectMarkers(); // Ensure project markers are still there
+};
 
-    // Add GeoJSON layers back to the map
-    geoJSONLayers.forEach(layer => {
-        if (!mymap.hasLayer(layer)) {
-            mymap.addLayer(layer);
-        }
+// Helper function to remove all layers
+function removeAllLayers() {
+    mymap.eachLayer(function(layer) {
+        mymap.removeLayer(layer);
     });
+}
 
-        // Make sure project markers are on top
-        addProjectMarkers();
-    };
-
-    
-
-// Function to remove all layers except project markers and base layers
+// Helper function to remove all layers except project markers
 function removeAllLayersExceptProjectMarkers() {
     mymap.eachLayer(function(layer) {
-        if (!isBaseLayer(layer) && !isProjectMarkerLayer(layer)) {
+        if (!isProjectMarkerLayer(layer)) {
             mymap.removeLayer(layer);
         }
     });
 }
-
 
     // Helper function to check if the layer is the project markers layer
     function isProjectMarkerLayer(layer) {
@@ -219,13 +172,6 @@ function removeAllLayersExceptProjectMarkers() {
         // or checking if the layer has certain features or properties.
     }
 
-// Function to check if the layer is the project markers layer
-// You need to implement this based on how you are marking your project marker layers
-function isProjectMarkerLayer(layer) {
-    // Implement this function based on your project marker layer identification
-    return false; // Placeholder: Replace with actual logic
-}
-
 
  // Function to remove all layers from the map
     function removeAllLayers() {
@@ -233,9 +179,6 @@ function isProjectMarkerLayer(layer) {
         mymap.removeLayer(layer);
     });
     }
-
-
-
 
 
 
@@ -289,6 +232,17 @@ function isProjectMarkerLayer(layer) {
    
 
 
+
+// Icon Selector Function
+    function selectIcon(feature) {
+        switch (feature.properties['marker-color']) {
+            case 'red': return redIcon;
+            case 'green': return greenIcon;
+            case 'violet': return violetIcon;
+            case 'yellow': return yellowIcon;
+            default: return defaultIcon;
+        }
+    }
 
 
 // Search Control
