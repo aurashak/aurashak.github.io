@@ -264,6 +264,7 @@ h3 {
     line-height: 1.4;
 }
 
+
 .text-column h2 {
     text-align: center;
     color: #fff;
@@ -387,6 +388,7 @@ button:active {
     border-radius: 4px;
     font-size: 14px;
     text-align: center;
+    z-index: 11000;
 }
 
 
