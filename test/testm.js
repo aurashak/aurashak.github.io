@@ -34,8 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: function(e) {
+                // Use the feature's properties to show information on hover
                 var hoverText = feature.properties.name ?
-                                `Name: ${feature.properties.name}<br>` : '';
+                                `Name: ${feature.properties.name}<br>` : 'Name: Unknown<br>';
                 hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
                 document.getElementById('hover-info').innerHTML = hoverText;
             },
@@ -102,22 +103,24 @@ function selectIcon(feature) {
 }
 
 
-// Function to load and add GeoJSON layers to the map
+// Ensure that your GeoJSON layers are being added to the geoJSONLayers array
+// after they are created in the addGeoJSONLayer function
 function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            L.geoJSON(data, {
+            var layer = L.geoJSON(data, {
                 style: styleFunc,
                 pointToLayer: function(feature, latlng) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
                 onEachFeature: onEachFeature
-            }).addTo(mymap);
+            });
+            layer.addTo(mymap);
+            geoJSONLayers.push(layer); // Store the layer for later use
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
-
 
 // Function to create the Project Markers layer (don't change this)
     function addProjectMarkers() {
@@ -183,27 +186,31 @@ window.toggleSatelliteLayer = function() {
 
 // Function to handle switching to GeoJSON layers
 window.toggleGeoJSONLayer = function() {
-    removeAllLayersExceptProjectMarkers(); // Remove all layers except project markers
-    // Re-add all the GeoJSON layers
-    geoJSONLayers.forEach(layer => mymap.addLayer(layer));
-    addProjectMarkers(); // Ensure project markers are still there
-};
+    // Remove all layers except base layers and project markers
+    removeAllLayersExceptProjectMarkers();
 
-// Helper function to remove all layers
-function removeAllLayers() {
-    mymap.eachLayer(function(layer) {
-        mymap.removeLayer(layer);
+    // Add GeoJSON layers back to the map
+    geoJSONLayers.forEach(layer => {
+        if (!mymap.hasLayer(layer)) {
+            mymap.addLayer(layer);
+        }
     });
-}
 
-// Helper function to remove all layers except project markers
+        // Make sure project markers are on top
+        addProjectMarkers();
+    };
+
+    
+
+// Function to remove all layers except project markers and base layers
 function removeAllLayersExceptProjectMarkers() {
     mymap.eachLayer(function(layer) {
-        if (!isProjectMarkerLayer(layer)) {
+        if (!isBaseLayer(layer) && !isProjectMarkerLayer(layer)) {
             mymap.removeLayer(layer);
         }
     });
 }
+
 
     // Helper function to check if the layer is the project markers layer
     function isProjectMarkerLayer(layer) {
@@ -211,6 +218,13 @@ function removeAllLayersExceptProjectMarkers() {
         // This may require setting a property on the layer when you create it,
         // or checking if the layer has certain features or properties.
     }
+
+// Function to check if the layer is the project markers layer
+// You need to implement this based on how you are marking your project marker layers
+function isProjectMarkerLayer(layer) {
+    // Implement this function based on your project marker layer identification
+    return false; // Placeholder: Replace with actual logic
+}
 
 
  // Function to remove all layers from the map
