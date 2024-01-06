@@ -171,12 +171,34 @@ function removeAllLayersExceptProjectMarkers() {
     };}
 
 
-// Feature Interaction
-    function onEachFeature(feature, layer) {
-        if (feature.properties && feature.properties.name) {
-            layer.bindPopup(feature.properties.name);
-        }
+// Function to update hover info
+function updateHoverInfo(latlng, name = '') {
+    var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
+    if (name) {
+        infoText += '<br>' + 'Name: ' + name;
     }
+    document.getElementById('hover-info').innerHTML = infoText;
+}
+
+// Update hover info on mouse move
+mymap.on('mousemove', function(e) {
+    updateHoverInfo(e.latlng);
+});
+
+
+// Feature Interaction
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.name) {
+        layer.on({
+            mouseover: function(e) {
+                updateHoverInfo(e.latlng, feature.properties.name);
+            },
+            mouseout: function() {
+                updateHoverInfo(e.latlng);
+            }
+        });
+    }
+}
 
 
 // Marker Icons
