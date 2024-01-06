@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: function(e) {
+                console.log(feature); // For debugging
                 var hoverText = '';
                 if (feature.properties && feature.properties.name) {
                     hoverText += `Name: ${feature.properties.name}<br>`;
