@@ -101,7 +101,7 @@ h3 {
     background-color: none;
 }
 .UnderlineNav a:hover {
-    color: none;
+    color: red;
     text-decoration: none;
 }
     
@@ -124,6 +124,7 @@ h3 {
     background-color: #000;
     color: #fff;
     letter-spacing: .02rem;
+    line-height: 1.4;
     box-sizing: border-box; /* Include padding and border in the element's width and height */
 }
 
@@ -373,23 +374,6 @@ button:active {
     box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
 }
 
-#hover-info {
-    position: fixed;
-    height: 80px;
-    z-index: 11000; /* Make sure it's above other map elements */
-    max-width: 500px; /* Adjust as needed */
-    font-size: 15px;
-    line-height: 1.4;
-}
-
-.containertexttwo-lg {
-    font-size: 15px;
-    font-family: arial;
-    text-align: left; /* Center align the text */
-    color: #000;
-    height: 100px; 
-    background-color: orange; 
-}
 
 
 /* Styles for mobile devices */
