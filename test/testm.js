@@ -11,6 +11,28 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+
+
+// Feature Interaction
+function onEachFeature(feature, layer) {
+    // Remove the bindPopup call to disable popups on click
+
+    layer.on({
+        mouseover: function(e) {
+            // Update hover info with feature's name and coordinates
+            var hoverText = feature.properties.name ?
+                            `Name: ${feature.properties.name}<br>` : ''; // Add a name if available
+            hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+            document.getElementById('hover-info').innerHTML = hoverText;
+        },
+        mouseout: function(e) {
+            // Reset hover info when the mouse leaves the feature
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        }
+    });
+}
+
+
 // Function to create the Project Markers layer (don't change this)
     function addProjectMarkers() {
         fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
@@ -28,9 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading GeoJSON:', error));
         }
 
+
+
 // Call this function to add the Project Markers layer immediately
     addProjectMarkers();
-    
+
+
+
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
@@ -186,26 +212,6 @@ mymap.on('mousemove', function(e) {
 });
 
 
-// Feature Interaction
-function onEachFeature(feature, layer) {
-    // Remove the bindPopup call to disable popups on click
-
-    layer.on({
-        mouseover: function(e) {
-            // Update hover info with feature's name and coordinates
-            var hoverText = feature.properties.name ?
-                            `Name: ${feature.properties.name}<br>` : ''; // Add a name if available
-            hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-            document.getElementById('hover-info').innerHTML = hoverText;
-        },
-        mouseout: function(e) {
-            // Reset hover info when the mouse leaves the feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-        }
-    });
-}
-
-// Use the modified onEachFeature function in your addGeoJSONLayer calls
 
 
 
