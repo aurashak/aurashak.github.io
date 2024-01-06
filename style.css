@@ -101,7 +101,7 @@ h3 {
     background-color: none;
 }
 .UnderlineNav a:hover {
-    color: red;
+    color: none;
     text-decoration: none;
 }
     
@@ -374,6 +374,14 @@ button:active {
     box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
 }
 
+#hover-info {
+    position: fixed;
+    height: 80px;
+    z-index: 11000; /* Make sure it's above other map elements */
+    max-width: 500px; /* Adjust as needed */
+    font-size: 15px;
+    line-height: 1.4;
+}
 
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
