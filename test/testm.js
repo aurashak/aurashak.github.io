@@ -258,3 +258,36 @@ function removeAllLayersExceptProjectMarkers() {
         });
     }
 });
+
+
+function onEachFeature(feature, layer) {
+    // Check if the feature has properties and a geometry
+    if (feature.properties && feature.geometry) {
+        // Extract latitude and longitude depending on the feature type
+        var lat, lng;
+        if (feature.geometry.type === "Point") {
+            lat = feature.geometry.coordinates[1];
+            lng = feature.geometry.coordinates[0];
+        } else {
+            // For non-point features, you can use the centroid or any other logic
+            var bounds = layer.getBounds();
+            lat = bounds.getCenter().lat;
+            lng = bounds.getCenter().lng;
+        }
+
+        // Create the tooltip content
+        var tooltipContent = "Latitude: " + lat + "<br>Longitude: " + lng;
+        // Add additional properties from the feature, example feature.properties.name
+        if (feature.properties.name) {
+            tooltipContent += "<br>Name: " + feature.properties.name;
+        }
+
+        // Bind the tooltip to the layer
+        layer.bindTooltip(tooltipContent);
+    }
+}
+
+// Then, when you add your GeoJSON layer, make sure to use this function
+var geojsonLayer = L.geoJSON(yourGeojsonData, {
+    onEachFeature: onEachFeature
+}).addTo(map);
