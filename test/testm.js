@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: function(e) {
-                var hoverText = feature.properties.name ?
-                                `Name: ${feature.properties.name}<br>` : '';
+                var hoverText = '';
+                if (feature.properties && feature.properties.name) {
+                    hoverText += `Name: ${feature.properties.name}<br>`;
+                }
                 hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
                 document.getElementById('hover-info').innerHTML = hoverText;
             },
