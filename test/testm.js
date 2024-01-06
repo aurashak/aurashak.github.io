@@ -11,6 +11,43 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+// References for the layers to bring to front
+    var lakesLayer, riversLayer, regionsLayer;
+
+// Modified addGeoJSONLayer function to keep references to certain layers
+function addGeoJSONLayer(url, styleFunc, iconFunc, name) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+
+            // Keep a reference to the lakes, rivers, and regions layers
+            if (name === 'lakes') {
+                lakesLayer = layer;
+            } else if (name === 'rivers') {
+                riversLayer = layer;
+            } else if (name === 'regions') {
+                regionsLayer = layer;
+            }
+
+            geoJSONLayers.push(layer); // Store the layer
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+// Function to bring specified layers to front
+function bringToFront() {
+    if (lakesLayer) lakesLayer.bringToFront();
+    if (riversLayer) riversLayer.bringToFront();
+    if (regionsLayer) regionsLayer.bringToFront();
+}
+
 // Function to create the Project Markers layer (don't change this)
     function addProjectMarkers() {
         fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
@@ -71,6 +108,15 @@ L.control.scale({
     imperial: true,
     position: 'bottomleft'
   }).addTo(mymap);
+
+
+// Call bringToFront() after toggling layers to ensure certain layers are on top
+window.toggleOSMLayer = function() {
+    removeAllLayers();
+    mymap.addLayer(osmLayer);
+    addProjectMarkers();
+    bringToFront(); // Bring specified layers to front
+};
   
 
 // Function to handle switching to OSM layer
