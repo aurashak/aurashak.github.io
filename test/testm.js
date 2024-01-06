@@ -225,6 +225,32 @@ function onEachFeature(feature, layer) {
     });
 }
 
+      var content = '';
+
+            // Check if the feature has a name property and add it to the content
+            if (feature.properties && feature.properties.name) {
+                content += 'Name: ' + feature.properties.name + '<br>';
+            }
+
+            // Add latitude and longitude
+            if (layer.getLatLng) {
+                var latlng = layer.getLatLng();
+                content += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
+            } else if (layer.getBounds) {
+                var center = layer.getBounds().getCenter();
+                content += 'Lat: ' + center.lat.toFixed(5) + '<br>Lng: ' + center.lng.toFixed(5);
+            }
+
+            // Set the content
+            hoverInfo.innerHTML = content;
+        },
+        mouseout: function(e) {
+            // Clear hover info when not hovering over a feature
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        }
+    });
+}
+
 
 
 // Marker Icons
