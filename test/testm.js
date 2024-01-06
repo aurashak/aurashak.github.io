@@ -190,17 +190,25 @@ mymap.on('mousemove', function(e) {
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: function(e) {
-            var tooltipContent = 'Lat: ' + e.latlng.lat.toFixed(5) + '<br>Lng: ' + e.latlng.lng.toFixed(5);
-            if (feature.properties && feature.properties.name) {
-                tooltipContent += '<br>Name: ' + feature.properties.name;
-            }
-            document.getElementById('hover-info').innerHTML = tooltipContent;
+            // Create a string with the feature's properties.name and the latlng
+            var hoverText = "Name: " + (feature.properties.name || "Unknown") +
+                            "<br>Lat: " + e.latlng.lat.toFixed(5) +
+                            ", Lng: " + e.latlng.lng.toFixed(5);
+
+            // Update the hover-info div with this text
+            document.getElementById('hover-info').innerHTML = hoverText;
         },
         mouseout: function(e) {
+            // Reset the hover-info div when not hovering over a feature
             document.getElementById('hover-info').innerHTML = 'Hover over a feature';
         }
     });
 }
+
+// Add other GeoJSON layers with the onEachFeature function attached
+addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
+// ... add the other layers as well
+
 
 
 // Marker Icons
