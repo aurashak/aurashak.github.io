@@ -195,31 +195,19 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: function(e) {
             var layer = e.target;
-
-            // Update hover info content
-            var hoverInfo = document.getElementById('hover-info');
-            var content = '';
-
-            // Check if the feature has a name property and add it to the content
+            var tooltipContent = '';
+            
             if (feature.properties && feature.properties.name) {
-                content += 'Name: ' + feature.properties.name + '<br>';
+                tooltipContent += 'Name: ' + feature.properties.name + '<br>';
             }
 
-            // Add latitude and longitude
-            if (layer.getLatLng) {
-                var latlng = layer.getLatLng();
-                content += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
-            } else if (layer.getBounds) {
-                var center = layer.getBounds().getCenter();
-                content += 'Lat: ' + center.lat.toFixed(5) + '<br>Lng: ' + center.lng.toFixed(5);
-            }
+            var latlng = layer.getBounds ? layer.getBounds().getCenter() : e.latlng;
+            tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
 
-            // Set the content
-            hoverInfo.innerHTML = content;
+            document.getElementById('info').innerHTML = tooltipContent;
         },
         mouseout: function(e) {
-            // Clear hover info when not hovering over a feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+            document.getElementById('info').innerHTML = 'Hover over a feature';
         }
     });
 }
@@ -305,3 +293,19 @@ function onEachFeature(feature, layer) {
         });
     }
 });
+
+
+// Function to display a tooltip on map click
+function onMapClick(e) {
+    var latlng = e.latlng;
+    var tooltipContent = "Latitude: " + latlng.lat.toFixed(5) + "<br>Longitude: " + latlng.lng.toFixed(5);
+    
+    // You can use a popup or a tooltip to show the coordinates
+    L.popup()
+        .setLatLng(latlng)
+        .setContent(tooltipContent)
+        .openOn(mymap);
+}
+
+// Add the click event listener to your map
+mymap.on('click', onMapClick);
