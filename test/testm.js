@@ -34,8 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
+
 // Function to load and add GeoJSON layers to the map
-function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -44,33 +45,13 @@ function addGeoJSONLayer(url, styleFunc, iconFunc) {
                 pointToLayer: function(feature, latlng) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
-                onEachFeature: function(feature, layer) {
-                    layer.on({
-                        mouseover: function(e) {
-                            var layer = e.target;
-                            var tooltipContent = '';
-                            
-                            if (feature.properties && feature.properties.name) {
-                                tooltipContent += 'Name: ' + feature.properties.name + '<br>';
-                            }
-
-                            var latlng = layer.getBounds ? layer.getBounds().getCenter() : e.latlng;
-                            tooltipContent += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
-
-                            document.getElementById('hover-info').innerHTML = tooltipContent;
-                        },
-                        mouseout: function(e) {
-                            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-                        }
-                    });
-                }
+                onEachFeature: onEachFeature
             });
             layer.addTo(mymap);
             geoJSONLayers.push(layer); // Store the layer
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
-
 
 
 
@@ -177,9 +158,9 @@ function removeAllLayersExceptProjectMarkers() {
     function regionsStyle(feature) {
         return {
         color: 'red',
-        weight: 0,
+        weight: 0.01,
         fillColor: 'red',
-        fillOpacity: 0
+        fillOpacity: 0.001
     };}
     function projectmarkersStyle(feature) {
         return {
@@ -191,34 +172,11 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 // Feature Interaction
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: function(e) {
-            var content = '';
-            // Check if feature has a name and add it to the content
-            if (feature.properties && feature.properties.name) {
-                content += 'Name: ' + feature.properties.name + '<br>';
-            }
-
-            // Determine coordinates based on feature type
-            var latlng;
-            if (feature.geometry.type === 'Point') {
-                latlng = layer.getLatLng();
-            } else {
-                latlng = layer.getBounds().getCenter();
-            }
-            content += 'Lat: ' + latlng.lat.toFixed(5) + '<br>Lng: ' + latlng.lng.toFixed(5);
-
-            // Update the hover-info div
-            document.getElementById('hover-info').innerHTML = content;
-        },
-        mouseout: function(e) {
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
         }
-    });
-}
-
-
+    }
 
 
 // Marker Icons
@@ -300,4 +258,3 @@ function onEachFeature(feature, layer) {
         });
     }
 });
-
