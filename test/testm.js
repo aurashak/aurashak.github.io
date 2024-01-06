@@ -192,6 +192,8 @@ function removeAllLayersExceptProjectMarkers() {
 
 // Feature Interaction
 function onEachFeature(feature, layer) {
+    console.log("Feature added:", feature); // Debugging line
+
     layer.on({
         mouseover: function(e) {
             var layer = e.target;
@@ -224,6 +226,7 @@ function onEachFeature(feature, layer) {
         }
     });
 }
+
 
 
 
