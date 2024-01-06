@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ensure project markers are still there
     addProjectMarkers();
-};
 
 // Helper function to remove all layers
 function removeAllLayers() {
