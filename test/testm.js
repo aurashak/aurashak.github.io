@@ -12,27 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
-    // Update hover info function
-    function updateHoverInfo(latlng, name = '') {
-        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-        if (name) {
-            infoText += '<br>Name: ' + name;
-        }
-        document.getElementById('hover-info').innerHTML = infoText;
-    }
+  
 
     mymap.on('mousemove', function(e) {
-        updateLatLongDisplay(e.latlng);
-    });
+    updateLatLongDisplay(e.latlng);
+});
+
+// Function to update the latitude and longitude display
+function updateLatLongDisplay(latlng) {
+    // Construct the text for the display
+    var latLongText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
     
-    // Function to update the latitude and longitude display
-    function updateLatLongDisplay(latlng) {
-        // Construct the text for the display
-        var latLongText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-        
-        // Update the display with the new text
-        document.getElementById('hover-info').innerHTML = latLongText;
-    }
+    // Update the display with the new text
+    document.getElementById('hover-info').innerHTML = latLongText;
+}
 
     // Function to handle feature interaction for GeoJSON layers
     function onEachFeature(feature, layer) {
