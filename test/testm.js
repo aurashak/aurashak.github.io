@@ -118,47 +118,35 @@ function loadGeoJSONLayer(url, styleFunc, iconFunc) {
     return fetch(url)
         .then(response => response.json())
         .then(data => {
-            var layer = L.geoJSON(data, {
+            return L.geoJSON(data, {
                 style: styleFunc,
                 pointToLayer: function(feature, latlng) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
                 onEachFeature: onEachFeature
             }).addTo(mymap);
-
-            // Ensure mouse events pass through to underlying layers
-            layer.getLayers().forEach(function(sublayer) {
-                sublayer.bringToFront();
-            });
-
-            return layer;
         });
 }
 
 // Function to bring specific layers to the front
-function bringToFrontLayers() {
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon)
-        .then(lakesLayer => {
-            lakesLayer.bringToFront();
-        });
-
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon)
-        .then(riversLayer => {
-            riversLayer.bringToFront();
-        });
-
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon)
-        .then(regionsLayer => {
-            regionsLayer.bringToFront();
-        });
+function bringToFrontLayer(layer) {
+    layer.bringToFront();
 }
 
-// Load all GeoJSON layers and then bring specific layers to front
+// Load all GeoJSON layers
 Promise.all([
     loadGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon),
     loadGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon),
     loadGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon)
-]).then(bringToFrontLayers);
+]).then(layers => {
+    // Bring specific layers to the front
+    bringToFrontLayer(layers[2]); // Lakes
+    bringToFrontLayer(layers[3]); // Rivers
+    bringToFrontLayer(layers[4]); // Regions
+});
 
 
 // Add Scale Control
