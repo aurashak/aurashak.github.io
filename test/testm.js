@@ -12,14 +12,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
-    // Update hover info function
-    function updateHoverInfo(latlng, name = '') {
-        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-        if (name) {
-            infoText += '<br>Name: ' + name;
-        }
-        document.getElementById('hover-info').innerHTML = infoText;
+// Event listener for mouse movement over the map
+mymap.on('mousemove', function(e) {
+    updateHoverInfo(e.latlng);
+});
+
+// Update hover info function - now updates coordinates dynamically
+function updateHoverInfo(latlng, name = '') {
+    // Find current name information if any
+    var currentInfo = document.getElementById('hover-info').innerHTML;
+    var nameInfo = currentInfo.split('<br>')[1] || '';
+
+    // Update the info text
+    var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
+    if (name || nameInfo) {
+        infoText += '<br>' + (name || nameInfo);
     }
+
+    // Update the hover info display
+    document.getElementById('hover-info').innerHTML = infoText;
+}
 
     // Function to handle feature interaction for GeoJSON layers
     function onEachFeature(feature, layer) {
