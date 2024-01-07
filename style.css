@@ -381,14 +381,14 @@ button:active {
     color: black; 
     font-weight: bold;
     padding: 5px 10px;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
     height: 290px;
     max-width: 60%; /* Adjust as needed */
     padding: 20px; /* Your desired padding */
-    line-height: 1.4;
+    line-height: 1.2;
     letter-spacing: .02rem;
-    margin: 10px;
+    margin: 10px auto;
 }
 
 
