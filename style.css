@@ -406,6 +406,28 @@ button:active {
 }
 
 
+.map-legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Spacing between legend and map */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Spacing between legend items */
+}
+
+.legend-item img {
+    width: 24px; /* Size of the marker icon */
+    height: auto;
+    margin-right: 8px; /* Spacing between icon and text */
+}
+
+.legend-item span {
+    font-size: 14px; /* Text size */
+    color: #333; /* Text color */
+}
 
 
 /* Styles for mobile devices */
