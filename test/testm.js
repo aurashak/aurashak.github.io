@@ -29,24 +29,30 @@ function updateHoverInfo(latlng, nameAdminText = '') {
 
 
     // Function to handle feature interaction for GeoJSON layers
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: function(e) {
-                var nameAdminText = '';
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: function(e) {
+            var nameAdminText = '';
+            // Check for 'ADMIN' property for countries or 'name' for other features
+            if (feature.properties) {
                 if (feature.properties.ADMIN) {
-                    nameAdminText += 'Admin: ' + feature.properties.ADMIN;
+                    nameAdminText += 'Admin: ' + feature.properties.ADMIN + '<br>';
                 }
                 if (feature.properties.name) {
-                    nameAdminText += (nameAdminText ? '<br>' : '') + 'Name: ' + feature.properties.name;
+                    nameAdminText += 'Name: ' + feature.properties.name;
                 }
-                updateHoverInfo(e.latlng, nameAdminText);
-            },
-            mouseout: function(e) {
-                updateHoverInfo(e.latlng);
             }
-        });
-    }
-    
+            
+            // Update the hover info with latlng and name/admin
+            updateHoverInfo(e.latlng, nameAdminText);
+        },
+        mouseout: function(e) {
+            // Reset the hover info when not hovering over a feature
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        }
+    });
+}
+
 
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
