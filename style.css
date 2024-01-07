@@ -415,7 +415,7 @@ button:active {
 .legend-item {
     display: flex;
     align-items: center;
-    margin-right: 50px; /* Spacing between legend items */
+    margin: 0 auto; /* Spacing between legend items */
 }
 
 .legend-item img {
@@ -425,7 +425,8 @@ button:active {
 }
 
 .legend-item span {
-    font: 15px black bold; 
+    font-size: 15px;
+    font-weight: bold; 
     color: #333; /* Text color */
 }
 
