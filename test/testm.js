@@ -19,21 +19,22 @@ mymap.on('mousemove', function(e) {
     updateHoverInfo(e.latlng);
 });
 
-// Update hover info function - now updates coordinates dynamically
+// Update hover info function - now ensures no duplication of lat/lng information
 function updateHoverInfo(latlng, name = '') {
-    // Find current name information if any
+    // Initialize infoText with the name if provided, otherwise get the name from the current hover info
     var currentInfo = document.getElementById('hover-info').innerHTML;
-    var nameInfo = currentInfo.split('<br>')[1] || '';
+    var nameInfo = name || currentInfo.split('<br>').slice(-1)[0] || '';
 
-    // Update the info text
+    // Update the info text with the new lat/lng and the name
     var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-    if (name || nameInfo) {
-        infoText += '<br>' + (name || nameInfo);
+    if (nameInfo.includes('Name:')) {
+        infoText += '<br>' + nameInfo;
     }
 
-    // Update the hover info display
+    // Set the hover info display to the updated info text
     document.getElementById('hover-info').innerHTML = infoText;
 }
+
 
     // Function to handle feature interaction for GeoJSON layers
     function onEachFeature(feature, layer) {
