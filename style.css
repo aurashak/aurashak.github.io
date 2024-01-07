@@ -53,8 +53,8 @@ h3 {
     margin: 0px; /* Margin for h2 */
     font-size: 18px;
     font-family: arial;
-    font-weight: normal;
-    color: gray;
+    font-weight: bold;
+    color: black;
 }
 
 .bold-text {
