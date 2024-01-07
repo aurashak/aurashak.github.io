@@ -63,6 +63,41 @@ function addProjectMarkers() {
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
 
+// Function to add and bring the lakes layer to the front
+function addAndBringToFrontLakesLayer() {
+    fetch('https://aurashak.github.io/geojson/lakes.json')
+        .then(response => response.json())
+        .then(data => {
+            var lakesLayer = L.geoJSON(data, {
+                style: lakesStyle,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: selectIcon(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            lakesLayer.bringToFront();
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+// Function to add and bring the rivers layer to the front
+function addAndBringToFrontRiversLayer() {
+    fetch('https://aurashak.github.io/geojson/rivers.geojson')
+        .then(response => response.json())
+        .then(data => {
+            var riversLayer = L.geoJSON(data, {
+                style: riversStyle,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: selectIcon(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            riversLayer.bringToFront();
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+
   // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
         fetch(url)
@@ -135,6 +170,10 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, sel
 addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
+
+// After all other layers are added, bring lakes and rivers to the front
+addAndBringToFrontLakesLayer();
+addAndBringToFrontRiversLayer();
 
 
 // Add Scale Control
