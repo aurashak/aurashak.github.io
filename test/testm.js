@@ -91,7 +91,7 @@ function lakesStyle(feature) {
 function riversStyle(feature) { 
     return {
     color: 'white',
-    weight: 0.01,
+    weight: 0.1,
     fillColor: 'white',
     fillOpacity: 1
 };}
@@ -118,58 +118,47 @@ function loadGeoJSONLayer(url, styleFunc, iconFunc) {
     return fetch(url)
         .then(response => response.json())
         .then(data => {
-            return L.geoJSON(data, {
+            var layer = L.geoJSON(data, {
                 style: styleFunc,
                 pointToLayer: function(feature, latlng) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
                 onEachFeature: onEachFeature
             }).addTo(mymap);
+
+            // Ensure mouse events pass through to underlying layers
+            layer.getLayers().forEach(function(sublayer) {
+                sublayer.bringToFront();
+            });
+
+            return layer;
         });
 }
 
-// Function to add and bring the lakes layer to the front
-function addAndBringToFrontLakesLayer() {
+// Function to bring specific layers to the front
+function bringToFrontLayers() {
     loadGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon)
         .then(lakesLayer => {
-            lakesLayer.bringToFront(); // Bring the lakes layer to the front
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
+            lakesLayer.bringToFront();
+        });
 
-function addAndBringToFrontRiversLayer() {
     loadGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon)
         .then(riversLayer => {
             riversLayer.bringToFront();
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
+        });
 
-function addAndBringToFrontRegionsLayer() {
     loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon)
         .then(regionsLayer => {
             regionsLayer.bringToFront();
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
+        });
 }
 
-
-// Load all GeoJSON layers except lakes
+// Load all GeoJSON layers and then bring specific layers to front
 Promise.all([
     loadGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon),
     loadGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon),
     loadGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon)
-]).then(() => {
-
-    // Once all other layers are loaded, add the lakes layer
-    addAndBringToFrontLakesLayer();
-addAndBringToFrontRiversLayer();
-addAndBringToFrontRegionsLayer();
-
-});
-
+]).then(bringToFrontLayers);
 
 
 // Add Scale Control
