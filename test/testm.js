@@ -49,10 +49,10 @@ function onEachFeature(feature, layer) {
             // Check for 'ADMIN' property for countries or 'name' for other features
             if (feature.properties) {
                 if (feature.properties.ADMIN) {
-                    nameAdminText += 'Admin: ' + feature.properties.ADMIN + '<br>';
+                    nameAdminText += feature.properties.ADMIN + '<br>';
                 }
                 if (feature.properties.name) {
-                    nameAdminText += 'Name: ' + feature.properties.name;
+                    nameAdminText += feature.properties.name;
                 }
             }
             // Update the hover info with latlng and name/admin
