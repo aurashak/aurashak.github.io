@@ -377,11 +377,12 @@ button:active {
 
 /* Add this to your CSS file */
 #hover-info {
-    background-color: rgba(186, 23, 23, 0.924);
+    background-color: none;
+    color: black; 
     padding: 5px 10px;
     font-size: 14px;
     text-align: center;
-    height: 100px;
+    height: 290px;
 }
 
 
