@@ -133,13 +133,34 @@ function projectmarkersStyle(feature) {
 
 
 
-// Add other GeoJSON layers
+// Function to add and bring the lakes layer to the front
+function addAndBringToFrontLakesLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var lakesLayer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            lakesLayer.bringToFront(); // Bring the lakes layer to the front
+            geoJSONLayers.push(lakesLayer); // Store the layer
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+// Load and add other GeoJSON layers
 addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
+
+// Finally, add and bring the lakes layer to the front
+addAndBringToFrontLakesLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
+
 
 
 // Add Scale Control
