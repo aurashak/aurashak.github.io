@@ -86,7 +86,7 @@ function onEachFeature(feature, layer) {
         },
         mouseout: function(e) {
             // Reset the hover info when not hovering over a feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+            document.getElementById('hover-info').innerHTML = 'Hover over map';
         }
     });
 }
