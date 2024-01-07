@@ -27,13 +27,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Header Content Styles */
-.header-content {
-    margin: 10px 20px; /* Add 15px margin to the header content */
-    display: flex; /* Use flexbox to align items in a row */
-    align-items: center; /* Align items vertically in the center */
-}
-
 /* General h1 and h2 Styles */
 h1 {
     margin: 0; /* Margin for h1 */
@@ -57,25 +50,26 @@ h3 {
     color: black;
 }
 
-.bold-text {
-    font-weight: bold; /* Makes text bold */
-}
-
-.light-text {
-    font-weight: 300; /* Makes text lighter */
+.sidebar {
+    position: fixed; /* Fix position to the side of the screen */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    width: 200px; /* Set the width of the sidebar */
+    height: 100%; /* Full height */
+    background-color: #fff; /* Background color */
+    color: white; /* Text color */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    padding-top: 20px; /* Padding at the top */
+  border-right: 1px solid black;
 }
 
 /* Navigation Bar Styles */
 .UnderlineNav {
-    background-color: white; /* Background color set to white */
     overflow: hidden;
-    padding: 20px;
 }
 
 .UnderlineNav-body {
     display: flex;
-    justify-content: center; /* Center the navigation items */
-    padding: 0;
 }
 
 .UnderlineNav-item {
@@ -85,10 +79,8 @@ h3 {
     border-radius: 0px;
     background-color: #000; /* Background color set to grey */
     text-decoration: none;
-    border-radius: 2px;
     font-size: 20px; /* Font size set to 15px */
     font-weight: bold; /* Font weight set to normal */
-    margin: 10px; /* Adjust margins as needed */
     letter-spacing: .04rem;
 }
 
@@ -99,10 +91,9 @@ h3 {
     border-radius: 0px;
     background-color: #000; /* Background color set to grey */
     text-decoration: none;
-    border-radius: 2px;
     font-size: 17px; /* Font size set to 15px */
     font-weight: bold; /* Font weight set to normal */
-    margin: 0px; /* Adjust margins as needed */
+    margin: 10px; /* Adjust margins as needed */
     letter-spacing: .04rem;
 }
 
