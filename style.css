@@ -379,11 +379,18 @@ button:active {
 #hover-info {
     background-color: none;
     color: black; 
+    font-weight: bold;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 20px;
     text-align: center;
     height: 290px;
+    max-width: 60%; /* Adjust as needed */
+    padding: 20px; /* Your desired padding */
+    line-height: 1.4;
+    letter-spacing: .02rem;
+    margin: 10px;
 }
+
 
 
 
