@@ -63,23 +63,28 @@ function addProjectMarkers() {
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
 
-  // Function to load and add GeoJSON layers to the map
-    function addGeoJSONLayer(url, styleFunc, iconFunc) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                var layer = L.geoJSON(data, {
-                    style: styleFunc,
-                    pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: iconFunc(feature) });
-                    },
-                    onEachFeature: onEachFeature
-                });
-                layer.addTo(mymap);
-                geoJSONLayers.push(layer); // Store the layer
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
+// Function to load and add GeoJSON layers to the map
+function addGeoJSONLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var layer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            geoJSONLayers.push(layer); // Store the layer
+            
+            // Check if the layer is the lakes layer and bring it to front
+            if (url.includes('lakes.json')) {
+                layer.bringToFront();
+            }
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
 
 // Style Functions for Geojson layers
 function countriesStyle(feature) {
