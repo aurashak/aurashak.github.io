@@ -12,28 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
- 
 
-
-// Function to handle feature interaction for GeoJSON layers
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: function(e) {
-            var featureName = '';
-            // Check for 'ADMIN' property for countries or 'name' for other features
-            if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
-                featureName = feature.properties.ADMIN || feature.properties.name;
+    // Function to handle feature interaction for GeoJSON layers
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: function(e) {
+                var hoverText = '';
+                // Check for 'ADMIN' property for countries or 'name' for other features
+                if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
+                    var featureName = feature.properties.ADMIN || feature.properties.name;
+                    hoverText += `Name: ${featureName}<br>`;
+                }
+                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+                document.getElementById('hover-info').innerHTML = hoverText;
+            },
+            mouseout: function(e) {
+                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
             }
-            // Call updateHoverInfo with both latlng and name
-            updateHoverInfo(e.latlng, featureName);
-        },
-        mouseout: function(e) {
-            // Reset the hover info when not hovering over a feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-        }
-    });
-}
-
+        });
+    }
 
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
@@ -130,6 +127,7 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, sel
 addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
+
 
 
     // Event listener for mouse movement over the map
