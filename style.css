@@ -102,7 +102,7 @@ h3 {
     border-radius: 2px;
     font-size: 17px; /* Font size set to 15px */
     font-weight: bold; /* Font weight set to normal */
-    margin: 10px; /* Adjust margins as needed */
+    margin: 0px; /* Adjust margins as needed */
     letter-spacing: .04rem;
 }
 
@@ -428,6 +428,19 @@ button:active {
     font-size: 15px;
     font-weight: bold; 
     color: #333; /* Text color */
+}
+
+.popup-content img {
+    width: 100px; /* Set your desired width */
+    height: auto;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.popup-content p {
+    margin: 0; /* Remove default margin */
+    font-size: 14px;
+    text-align: center;
 }
 
 
