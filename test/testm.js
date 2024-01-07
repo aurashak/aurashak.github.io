@@ -133,41 +133,6 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsSty
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
 
-// Function to add and bring the lakes layer to the front
-function addAndBringToFrontLakesLayer() {
-    fetch('https://aurashak.github.io/geojson/lakes.json')
-        .then(response => response.json())
-        .then(data => {
-            var lakesLayer = L.geoJSON(data, {
-                style: lakesStyle,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: selectIcon(feature) });
-                },
-                onEachFeature: onEachFeature
-            }).addTo(mymap);
-            lakesLayer.bringToFront();
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
-
-// Function to add and bring the rivers layer to the front
-function addAndBringToFrontRiversLayer() {
-    fetch('https://aurashak.github.io/geojson/rivers.geojson')
-        .then(response => response.json())
-        .then(data => {
-            var riversLayer = L.geoJSON(data, {
-                style: riversStyle,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: selectIcon(feature) });
-                },
-                onEachFeature: onEachFeature
-            }).addTo(mymap);
-            riversLayer.bringToFront();
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
-
-
 // Add Scale Control
 L.control.scale({
     maxWidth: 100,
@@ -312,4 +277,3 @@ function removeAllLayersExceptProjectMarkers() {
         });
     }
 });
-
