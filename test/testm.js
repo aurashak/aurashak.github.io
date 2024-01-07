@@ -74,10 +74,10 @@ function onEachFeature(feature, layer) {
             // Check for 'ADMIN' property for countries or 'name' for other features
             if (feature.properties) {
                 if (feature.properties.ADMIN) {
-                    nameAdminText += 'Admin: ' + feature.properties.ADMIN + '<br>';
+                    nameAdminText += feature.properties.ADMIN + '<br>';
                 }
                 if (feature.properties.name) {
-                    nameAdminText += 'Name: ' + feature.properties.name;
+                    nameAdminText += feature.properties.name;
                 }
             }
             
@@ -333,3 +333,40 @@ function removeAllLayersExceptProjectMarkers() {
         });
     }
 });
+
+// Example content for markers
+const markerContent = {
+    'print': {
+        text: 'This is Print',
+        imgSrc: 'phttps://live.staticflickr.com/65535/52622371450_fdc259ddf8_h.jpg'
+    },
+    'sculpture': {
+        text: 'This is Sculpture',
+        imgSrc: 'https://live.staticflickr.com/65535/52622371450_fdc259ddf8_h.jpg'
+    },
+    // ... add other markers content
+};
+
+function getMarkerPopupContent(type) {
+    const content = markerContent[type];
+    return `
+        <div class="popup-content">
+            <img src="${content.imgSrc}" alt="${type}" />
+            <p>${content.text}</p>
+        </div>
+    `;
+}
+
+function createMarker(latlng, type) {
+    const marker = L.marker(latlng, { icon: selectIcon(type) });
+    marker.bindPopup(getMarkerPopupContent(type));
+    return marker;
+}
+
+marker.on('mouseover', function(e) {
+    this.openPopup();
+});
+marker.on('mouseout', function(e) {
+    this.closePopup();
+});
+
