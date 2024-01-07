@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
     mymap.on('mousemove', function(e) {
-    updateLatLongDisplay(e.latlng);
-});
+        updateHoverInfo(e.latlng);
+    });
+    
 
 
 // This function updates the hover display with latitude, longitude, name, and admin
