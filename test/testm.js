@@ -15,51 +15,38 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
     mymap.on('mousemove', function(e) {
-    updateLatLongDisplay(e.latlng);
-});
-
-
+        updateHoverInfo(e.latlng);
+    });
+    
 // This function updates the hover display with latitude, longitude, name, and admin
 function updateHoverInfo(latlng, nameAdminText = '') {
-    // Get the current content that may include the name/admin information
-    var currentInfo = document.getElementById('hover-info').innerHTML;
-    var nameAdminInfo = nameAdminText || currentInfo.split('<br>').slice(1).join('<br>');
-
-    // Update the info text with the new lat/lng and possibly existing name/admin info
     var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-    if (nameAdminInfo) {
-        infoText += '<br>' + nameAdminInfo;
+    if (nameAdminText) {
+        infoText += '<br>' + nameAdminText;
     }
-
-    // Set the hover info display to the updated info text
     document.getElementById('hover-info').innerHTML = infoText;
 }
 
+
     // Function to handle feature interaction for GeoJSON layers
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: function(e) {
-            var nameAdminText = '';
-            // Check for 'ADMIN' property for countries or 'name' for other features
-            if (feature.properties) {
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: function(e) {
+                var nameAdminText = '';
                 if (feature.properties.ADMIN) {
-                    nameAdminText += 'Admin: ' + feature.properties.ADMIN + '<br>';
+                    nameAdminText += 'Admin: ' + feature.properties.ADMIN;
                 }
                 if (feature.properties.name) {
-                    nameAdminText += 'Name: ' + feature.properties.name;
+                    nameAdminText += (nameAdminText ? '<br>' : '') + 'Name: ' + feature.properties.name;
                 }
+                updateHoverInfo(e.latlng, nameAdminText);
+            },
+            mouseout: function(e) {
+                updateHoverInfo(e.latlng);
             }
-            
-            // Update the hover info with latlng and name/admin
-            updateHoverInfo(e.latlng, nameAdminText);
-        },
-        mouseout: function(e) {
-            // Reset the hover info when not hovering over a feature
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-        }
-    });
-}
-
+        });
+    }
+    
 
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
