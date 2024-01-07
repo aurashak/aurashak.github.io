@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('hover-info').innerHTML = 'Hover over a feature';
             }
         });
-    
+    }
 
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
