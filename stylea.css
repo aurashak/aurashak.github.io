@@ -1,0 +1,243 @@
+/* General Body Styles */
+body {
+    background-color: #fff; /* White background for the body */
+    color: #212529; /* Default text color */
+    margin: 0;
+    font-family: arial;
+    padding: 0px;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+p {
+    color: #000; /* Default text color */
+    font-family: arial;
+    font-size: 15px;
+    text-align: center;
+}
+
+a {
+    color: #fff; /* Standard link color - change as needed */
+    text-decoration: none; /* Removes underline from links */
+    transition: none; /* Smooth color transition for hover */
+}
+
+a:hover {
+    background-color: none;
+    text-decoration: underline;
+}
+
+/* General h1 and h2 Styles */
+h1 {
+    margin: 0; /* Margin for h1 */
+    font-size: 21px;
+    font-family: arial;
+}
+
+h2 {
+    margin: 0px; /* Margin for h2 */
+    font-size: 21px;
+    font-family: arial;
+    font-weight: normal;
+    color: gray;
+}
+
+h3 {
+    margin: 0px; /* Margin for h2 */
+    font-size: 18px;
+    font-family: arial;
+    font-weight: bold;
+    color: black;
+}
+
+.sidebar {
+    position: fixed; /* Fix position to the side of the screen */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    width: 200px; /* Set the width of the sidebar */
+    height: 100%; /* Full height */
+    background-color: #fff; /* Background color */
+    color: white; /* Text color */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    padding-top: 20px; /* Padding at the top */
+  border-right: 1px solid black;
+}
+
+/* Navigation Bar Styles */
+.mainnav {
+    overflow: hidden;
+}
+
+.mainnav a {
+    background-color: none;
+}
+
+.mainnav a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+.mainnav-item {
+    display: block;
+    padding: 5px 10px; /* Padding for the button */
+    color: #fff; /* Text color set to black */
+    border-radius: 0px;
+    background-color: #000; /* Background color set to grey */
+    text-decoration: none;
+    font-size: 20px; /* Font size set to 15px */
+    font-weight: bold; /* Font weight set to normal */
+    letter-spacing: .04rem;
+}
+
+.mainnavsub-item {
+    display: block;
+    padding: 4px 8px; /* Padding for the button */
+    color: #fff; /* Text color set to black */
+    border-radius: 0px;
+    background-color: #000; /* Background color set to grey */
+    text-decoration: none;
+    font-size: 17px; /* Font size set to 15px */
+    font-weight: bold; /* Font weight set to normal */
+    margin: 10px; /* Adjust margins as needed */
+    letter-spacing: .04rem;
+}
+    
+/* Main Content Styles */
+.container {
+    padding: 0px 0px 0px 0px;
+    max-width: 100%;
+    margin: 40px 20px;
+    background-color: white;
+}
+
+.containertext a {
+}
+
+.containertext a:hover {
+  background-color: none;
+}
+
+
+#mapid {
+    height: 500px;
+    background-color: white;
+    border: solid 1px black;
+}
+
+.map {
+    height: 600px;
+    width: 100%;
+  }
+
+  #map {
+    height: 600px;
+    width: 100%;
+    border: solid 1px black;
+}
+
+
+/* Button Styles */
+button {
+    background-color: #bfbfbf; /* Black background */
+    color: #000; /* White text */
+    border: none; /* No border */
+    padding: 5px 10px; /* Top/bottom padding 10px, left/right padding 20px */
+    margin: 10px 5px; /* Margin 10px top and bottom, 0 left and right */
+    cursor: pointer; /* Cursor to indicate clickable */
+    font-size: 13px; /* Text size */
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-weight: normal; /* Font weight */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: .02rem;
+    border-radius: 2px; /* Rounded corners */
+}
+
+button:hover {
+    background-color: none; /* Darker background on hover */
+}
+
+button:active {
+    background-color: #888; /* Even darker background when active/clicked */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    flex-wrap: wrap; /* Wrap buttons to next line if container width is too small */
+    margin: 20px 0; /* Vertical spacing */
+}
+
+.button-container button {
+    margin: 0 5px; /* Spacing between buttons */
+    /* The rest of your button styling here */
+}
+
+/* Custom styles for the country tooltip */
+.country-tooltip {
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    border: 1px solid #333; /* Dark border */
+    border-radius: 2px; /* Rounded corners */
+    color: #fff; /* White text color */
+    font-size: 14px; /* Font size */
+    padding: 2px; /* Padding inside the tooltip */
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
+}
+
+/* Add this to your CSS file */
+#hover-info {
+    background-color: none;
+    color: black; 
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: 15px;
+    text-align: center;
+    height: 290px;
+    max-width: 60%; /* Adjust as needed */
+    padding: 20px; /* Your desired padding */
+    line-height: 1.2;
+    letter-spacing: .02rem;
+    margin: 10px auto;
+}
+
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Spacing between legend and map */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 auto; /* Spacing between legend items */
+}
+
+.legend-item img {
+    width: 24px; /* Size of the marker icon */
+    height: auto;
+    margin-right: 8px; /* Spacing between icon and text */
+}
+
+.legend-item span {
+    font-size: 15px;
+    font-weight: bold; 
+    color: #333; /* Text color */
+}
+
+.popup-content img {
+    width: 100px; /* Set your desired width */
+    height: auto;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.popup-content p {
+    margin: 0; /* Remove default margin */
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* Styles for mobile devices */
+@media screen and (max-width: 768px) {
