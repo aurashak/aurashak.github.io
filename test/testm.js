@@ -139,6 +139,42 @@ function addAndBringToFrontLakesLayer() {
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
+// Function to add and bring the rivers layer to the front
+function addAndBringToFrontRiversLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var riversLayer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            riversLayer.bringToFront();
+            geoJSONLayers.push(riversLayer);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+// Function to add and bring the regions layer to the front
+function addAndBringToFrontRegionsLayer(url, styleFunc, iconFunc) {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var regionsLayer = L.geoJSON(data, {
+                style: styleFunc,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: iconFunc(feature) });
+                },
+                onEachFeature: onEachFeature
+            }).addTo(mymap);
+            regionsLayer.bringToFront();
+            geoJSONLayers.push(regionsLayer);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
 // Load all GeoJSON layers except lakes
 Promise.all([
     loadGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon),
@@ -147,8 +183,12 @@ Promise.all([
     loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon),
     loadGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon)
 ]).then(() => {
+    
     // Once all other layers are loaded, add the lakes layer
     addAndBringToFrontLakesLayer();
+addAndBringToFrontRiversLayer();
+addAndBringToFrontRegionsLayer();
+
 });
 
 
