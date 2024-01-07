@@ -146,6 +146,24 @@ function projectmarkersStyle(feature) {
     fillOpacity: 0.01
 };}
 
+// Function to add the lakes layer and bring it to the front
+function addAndBringToFrontLakesLayer() {
+    fetch('https://aurashak.github.io/geojson/lakes.json')
+        .then(response => response.json())
+        .then(data => {
+            var lakesLayer = L.geoJSON(data, {
+                style: lakesStyle,
+                onEachFeature: onEachFeature,
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, { icon: selectIcon(feature) });
+                }
+            }).addTo(mymap);
+            // Bring the lakes layer to the front
+            lakesLayer.bringToFront();
+            geoJSONLayers.push(lakesLayer); // Store the layer
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
 
 
 
@@ -157,6 +175,8 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle
 addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
+// After adding all other layers, add and bring the lakes layer to the front
+addAndBringToFrontLakesLayer();
 
 // Add Scale Control
 L.control.scale({
