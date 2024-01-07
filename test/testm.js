@@ -22,23 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to handle feature interaction for GeoJSON layers
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: function(e) {
-                var hoverText = '';
-                // Check for 'ADMIN' property for countries or 'name' for other features
-                if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
-                    var featureName = feature.properties.ADMIN || feature.properties.name;
-                    hoverText += `Name: ${featureName}<br>`;
-                }
-                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-                document.getElementById('hover-info').innerHTML = hoverText;
-            },
-            mouseout: function(e) {
-                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: function(e) {
+            console.log(feature.properties); // Debugging line
+            var hoverText = '';
+            // Check for 'ADMIN' or 'name' property
+            if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
+                var featureName = feature.properties.ADMIN || feature.properties.name;
+                hoverText += `Name: ${featureName}<br>`;
             }
-        });
-    }
+            hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+            document.getElementById('hover-info').innerHTML = hoverText;
+        },
+        mouseout: function(e) {
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        }
+    });
+}
     
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
@@ -70,7 +71,7 @@ addProjectMarkers();
 function countriesStyle(feature) {
     return {
     color: feature.properties.stroke || 'grey',
-    weight: feature.properties.weight || 0.25,
+    weight: feature.properties.weight || 0.5,
     fillColor: feature.properties.fill || 'black',
     fillOpacity: feature.properties.opacity || 1
 };}
