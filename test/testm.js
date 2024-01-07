@@ -21,6 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hover-info').innerHTML = infoText;
     }
 
+    mymap.on('mousemove', function(e) {
+        updateLatLongDisplay(e.latlng);
+    });
+    
+    // Function to update the latitude and longitude display
+    function updateLatLongDisplay(latlng) {
+        // Construct the text for the display
+        var latLongText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
+        
+        // Update the display with the new text
+        document.getElementById('hover-info').innerHTML = latLongText;
+    }
+
     // Function to handle feature interaction for GeoJSON layers
     function onEachFeature(feature, layer) {
         layer.on({
