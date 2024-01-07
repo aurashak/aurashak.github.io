@@ -19,16 +19,12 @@ mymap.on('mousemove', function(e) {
     updateHoverInfo(e.latlng);
 });
 
-// Update hover info function - now ensures no duplication of lat/lng information
+// Update hover info function - now correctly handles name display
 function updateHoverInfo(latlng, name = '') {
-    // Initialize infoText with the name if provided, otherwise get the name from the current hover info
-    var currentInfo = document.getElementById('hover-info').innerHTML;
-    var nameInfo = name || currentInfo.split('<br>').slice(-1)[0] || '';
-
-    // Update the info text with the new lat/lng and the name
+    // Construct the info text with the new lat/lng and any name provided
     var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-    if (nameInfo.includes('Name:')) {
-        infoText += '<br>' + nameInfo;
+    if (name) {
+        infoText += '<br>Name: ' + name; // Add name to the infoText if it exists
     }
 
     // Set the hover info display to the updated info text
@@ -36,24 +32,26 @@ function updateHoverInfo(latlng, name = '') {
 }
 
 
-    // Function to handle feature interaction for GeoJSON layers
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: function(e) {
-                var hoverText = '';
-                // Check for 'ADMIN' property for countries or 'name' for other features
-                if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
-                    var featureName = feature.properties.ADMIN || feature.properties.name;
-                    hoverText += `Name: ${featureName}<br>`;
-                }
-                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-                document.getElementById('hover-info').innerHTML = hoverText;
-            },
-            mouseout: function(e) {
-                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+
+// Function to handle feature interaction for GeoJSON layers
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: function(e) {
+            var featureName = '';
+            // Check for 'ADMIN' property for countries or 'name' for other features
+            if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
+                featureName = feature.properties.ADMIN || feature.properties.name;
             }
-        });
-    }
+            // Call updateHoverInfo with both latlng and name
+            updateHoverInfo(e.latlng, featureName);
+        },
+        mouseout: function(e) {
+            // Reset the hover info when not hovering over a feature
+            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
+        }
+    });
+}
+
 
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
