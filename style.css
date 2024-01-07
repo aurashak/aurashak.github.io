@@ -92,6 +92,20 @@ h3 {
     letter-spacing: .04rem;
 }
 
+.UnderlineNavsub-item {
+    display: block;
+    padding: 4px 8px; /* Padding for the button */
+    color: #fff; /* Text color set to black */
+    border-radius: 0px;
+    background-color: #000; /* Background color set to grey */
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 17px; /* Font size set to 15px */
+    font-weight: bold; /* Font weight set to normal */
+    margin: 10px; /* Adjust margins as needed */
+    letter-spacing: .04rem;
+}
+
 .UnderlineNav-item:last-child {
     margin-right: 0; /* No margin for the last item */
 
