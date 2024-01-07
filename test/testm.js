@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
         layer.on({
             mouseover: function(e) {
                 var hoverText = '';
-                if (feature.properties && feature.properties.ADMIN) { // Use ADMIN instead of name
-                    hoverText += `Name: ${feature.properties.ADMIN}<br>`; // Display the country name
+                // Check for 'ADMIN' property for countries or 'name' for other features
+                if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
+                    var featureName = feature.properties.ADMIN || feature.properties.name;
+                    hoverText += `Name: ${featureName}<br>`;
                 }
                 hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
                 document.getElementById('hover-info').innerHTML = hoverText;
@@ -36,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('hover-info').innerHTML = 'Hover over a feature';
             }
         });
-    }
     
 
 // Array to store GeoJSON layers
