@@ -20,14 +20,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
 
-// This function updates the hover display with latitude, longitude, name, and admin
+// This function updates the hover display with latitude, longitude, and optionally name and admin
 function updateHoverInfo(latlng, nameAdminText = '') {
+    // Get the current content that may include the name/admin information
+    var currentInfo = document.getElementById('hover-info').innerHTML;
+    var nameAdminInfo = nameAdminText || currentInfo.split('<br>').slice(1).join('<br>');
+
+    // Update the info text with the new lat/lng and possibly existing name/admin info
     var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-    if (nameAdminText) {
-        infoText += '<br>' + nameAdminText;
+    if (nameAdminInfo) {
+        infoText += '<br>' + nameAdminInfo;
     }
+
+    // Set the hover info display to the updated info text
     document.getElementById('hover-info').innerHTML = infoText;
 }
+
+// Event listener for mouse movement over the map
+mymap.on('mousemove', function(e) {
+    updateHoverInfo(e.latlng);
+});
+
+// Modify the onEachFeature function to handle feature-specific information
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: function(e) {
+            var nameAdminText = '';
+            // Check for 'ADMIN' property for countries or 'name' for other features
+            if (feature.properties) {
+                if (feature.properties.ADMIN) {
+                    nameAdminText += 'Admin: ' + feature.properties.ADMIN + '<br>';
+                }
+                if (feature.properties.name) {
+                    nameAdminText += 'Name: ' + feature.properties.name;
+                }
+            }
+            // Update the hover info with latlng and name/admin
+            updateHoverInfo(e.latlng, nameAdminText);
+        },
+        mouseout: function(e) {
+            // Optionally, you can reset the additional info when not hovering over a feature
+            updateHoverInfo(e.latlng);
+        }
+    });
+}
+
 
     // Function to handle feature interaction for GeoJSON layers
 function onEachFeature(feature, layer) {
