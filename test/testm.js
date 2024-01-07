@@ -22,25 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to handle feature interaction for GeoJSON layers
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: function(e) {
-            console.log(feature.properties); // Debugging line
-            var hoverText = '';
-            // Check for 'ADMIN' or 'name' property
-            if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
-                var featureName = feature.properties.ADMIN || feature.properties.name;
-                hoverText += `Name: ${featureName}<br>`;
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: function(e) {
+                var hoverText = '';
+                // Check for 'ADMIN' property for countries or 'name' for other features
+                if (feature.properties && (feature.properties.ADMIN || feature.properties.name)) {
+                    var featureName = feature.properties.ADMIN || feature.properties.name;
+                    hoverText += `Name: ${featureName}<br>`;
+                }
+                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+                document.getElementById('hover-info').innerHTML = hoverText;
+            },
+            mouseout: function(e) {
+                document.getElementById('hover-info').innerHTML = 'Hover over a feature';
             }
-            hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-            document.getElementById('hover-info').innerHTML = hoverText;
-        },
-        mouseout: function(e) {
-            document.getElementById('hover-info').innerHTML = 'Hover over a feature';
-        }
-    });
-}
-    
+        });
+    }
+
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
@@ -64,14 +63,29 @@ function addProjectMarkers() {
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
 
-
-
+  // Function to load and add GeoJSON layers to the map
+    function addGeoJSONLayer(url, styleFunc, iconFunc) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var layer = L.geoJSON(data, {
+                    style: styleFunc,
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: iconFunc(feature) });
+                    },
+                    onEachFeature: onEachFeature
+                });
+                layer.addTo(mymap);
+                geoJSONLayers.push(layer); // Store the layer
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+    }
 
 // Style Functions for Geojson layers
 function countriesStyle(feature) {
     return {
     color: feature.properties.stroke || 'grey',
-    weight: feature.properties.weight || 0.5,
+    weight: feature.properties.weight || 0.25,
     fillColor: feature.properties.fill || 'black',
     fillOpacity: feature.properties.opacity || 1
 };}
@@ -92,7 +106,7 @@ function lakesStyle(feature) {
 function riversStyle(feature) { 
     return {
     color: 'white',
-    weight: 0.1,
+    weight: 0.01,
     fillColor: 'white',
     fillOpacity: 1
 };}
@@ -114,54 +128,13 @@ function projectmarkersStyle(feature) {
 
 
 
-// Function to load and add a GeoJSON layer
-function loadGeoJSONLayer(url, styleFunc, iconFunc) {
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            return L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            }).addTo(mymap);
-        });
-}
-
-// Event handler for mouse movement over the map
-mymap.on('mousemove', function(e) {
-    updateHoverInfo(e.latlng);
-});
-
-// Update hover info function
-function updateHoverInfo(latlng) {
-    // Update only the coordinates in the hover info
-    var currentInfo = document.getElementById('hover-info').innerHTML;
-    var updatedInfo = currentInfo.replace(/Lat: -?\d+\.\d+, Lng: -?\d+\.\d+/, `Lat: ${latlng.lat.toFixed(5)}, Lng: ${latlng.lng.toFixed(5)}`);
-    document.getElementById('hover-info').innerHTML = updatedInfo;
-}
-
-
-// Function to bring specific layers to the front
-function bringToFrontLayer(layer) {
-    layer.bringToFront();
-}
-
-// Load all GeoJSON layers
-Promise.all([
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon),
-    loadGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon)
-]).then(layers => {
-    // Bring specific layers to the front
-    bringToFrontLayer(layers[2]); // Lakes
-    bringToFrontLayer(layers[3]); // Rivers
-    bringToFrontLayer(layers[4]); // Regions
-});
+// Add other GeoJSON layers
+addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
+addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
 
 // Add Scale Control
