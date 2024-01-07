@@ -63,27 +63,7 @@ function addProjectMarkers() {
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
 
-// Function to load and add GeoJSON layers to the map
-function addGeoJSONLayer(url, styleFunc, iconFunc) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var layer = L.geoJSON(data, {
-                style: styleFunc,
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: iconFunc(feature) });
-                },
-                onEachFeature: onEachFeature
-            }).addTo(mymap);
-            geoJSONLayers.push(layer); // Store the layer
-            
-            // Check if the layer is the lakes layer and bring it to front
-            if (url.includes('lakes.json')) {
-                layer.bringToFront();
-            }
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
+
 
 
 // Style Functions for Geojson layers
@@ -133,33 +113,43 @@ function projectmarkersStyle(feature) {
 
 
 
-// Function to add and bring the lakes layer to the front
-function addAndBringToFrontLakesLayer(url, styleFunc, iconFunc) {
-    fetch(url)
+// Function to load and add a single GeoJSON layer to the map
+function loadGeoJSONLayer(url, styleFunc, iconFunc) {
+    return fetch(url)
         .then(response => response.json())
         .then(data => {
-            var lakesLayer = L.geoJSON(data, {
+            var layer = L.geoJSON(data, {
                 style: styleFunc,
                 pointToLayer: function(feature, latlng) {
                     return L.marker(latlng, { icon: iconFunc(feature) });
                 },
                 onEachFeature: onEachFeature
-            }).addTo(mymap);
+            });
+            layer.addTo(mymap);
+            return layer; // Return the layer for further processing
+        });
+}
+
+// Function to add and bring the lakes layer to the front
+function addAndBringToFrontLakesLayer() {
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon)
+        .then(lakesLayer => {
             lakesLayer.bringToFront(); // Bring the lakes layer to the front
-            geoJSONLayers.push(lakesLayer); // Store the layer
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
-// Load and add other GeoJSON layers
-addGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon);
-addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
-
-// Finally, add and bring the lakes layer to the front
-addAndBringToFrontLakesLayer('https://aurashak.github.io/geojson/lakes.json', lakesStyle, selectIcon);
+// Load all GeoJSON layers except lakes
+Promise.all([
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/countries.geojson', countriesStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/oceans.geojson', oceansStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/rivers.geojson', riversStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsStyle, selectIcon),
+    loadGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon)
+]).then(() => {
+    // Once all other layers are loaded, add the lakes layer
+    addAndBringToFrontLakesLayer();
+});
 
 
 
