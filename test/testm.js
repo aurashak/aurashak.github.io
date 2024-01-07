@@ -11,53 +11,29 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
-
-    // Update hover info function
-    function updateHoverInfo(latlng, name = '') {
-        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-        if (name) {
-            infoText += '<br>Name: ' + name;
+// Function to create the Project Markers layer (don't change this)
+    function addProjectMarkers() {
+        fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: projectmarkersStyle,
+                    onEachFeature: onEachFeature,
+                    // Assuming pointToLayer and selectIcon are defined
+                    pointToLayer: function(feature, latlng) {
+                        return L.marker(latlng, { icon: selectIcon(feature) });
+                    }
+                }).addTo(mymap);
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
         }
-        document.getElementById('hover-info').innerHTML = infoText;
-    }
 
-    // Feature Interaction
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: function(e) {
-                var hoverText = feature.properties.name ?
-                                `Name: ${feature.properties.name}<br>` : '';
-                hoverText += `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
-                document.getElementById('hover-info').innerHTML = hoverText;
-            },
-            mouseout: function(e) {
-                document.getElementById('hover-info').innerHTML = 'Hover over the map';
-            }
-        });
-    }
+// Call this function to add the Project Markers layer immediately
+    addProjectMarkers();
     
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-// Function to create the Project Markers layer (don't change this)
-function addProjectMarkers() {
-    fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, {
-                style: projectmarkersStyle,
-                onEachFeature: onEachFeature,
-                // Assuming pointToLayer and selectIcon are defined
-                pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: selectIcon(feature) });
-                }
-            }).addTo(mymap);
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-    }
-
-// Call this function to add the Project Markers layer immediately
-addProjectMarkers();
 
 // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
@@ -76,51 +52,6 @@ addProjectMarkers();
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
-
-// Style Functions for Geojson layers
-function countriesStyle(feature) {
-    return {
-    color: feature.properties.stroke || 'grey',
-    weight: feature.properties.weight || 0.25,
-    fillColor: feature.properties.fill || 'black',
-    fillOpacity: feature.properties.opacity || 1
-};}
-function oceansStyle(feature) {
-    return {
-    color: 'white', // outline color
-    weight: 0.01,
-    fillColor: 'white',
-    fillOpacity: 1
-};}
-function lakesStyle(feature) {  
-    return {
-    color: 'white',
-    weight: 0.01,
-    fillColor: 'white',
-    fillOpacity: 1
-};}
-function riversStyle(feature) { 
-    return {
-    color: 'white',
-    weight: 0.01,
-    fillColor: 'white',
-    fillOpacity: 1
-};}
-function regionsStyle(feature) {
-    return {
-    color: 'red',
-    weight: 0.01,
-    fillColor: 'red',
-    fillOpacity: 0.001
-};}
-function projectmarkersStyle(feature) {
-    return {
-    color: 'red',
-    weight: 0.01,
-    fillColor: 'red',
-    fillOpacity: 0.01
-};}
-
 
 
 
@@ -195,7 +126,57 @@ function removeAllLayersExceptProjectMarkers() {
     });
     }
 
+// Style Functions for Geojson layers
+     function countriesStyle(feature) {
+        return {
+        color: feature.properties.stroke || 'grey',
+        weight: feature.properties.weight || 0.25,
+        fillColor: feature.properties.fill || 'black',
+        fillOpacity: feature.properties.opacity || 1
+    };}
+    function oceansStyle(feature) {
+        return {
+        color: 'white', // outline color
+        weight: 0.01,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function lakesStyle(feature) {  
+        return {
+        color: 'white',
+        weight: 0.01,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function riversStyle(feature) { 
+        return {
+        color: 'white',
+        weight: 0.01,
+        fillColor: 'white',
+        fillOpacity: 1
+    };}
+    function regionsStyle(feature) {
+        return {
+        color: 'red',
+        weight: 0.01,
+        fillColor: 'red',
+        fillOpacity: 0.001
+    };}
+    function projectmarkersStyle(feature) {
+        return {
+        color: 'red',
+        weight: 0.01,
+        fillColor: 'red',
+        fillOpacity: 0.01
+    };}
 
+
+// Feature Interaction
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }
 
 
 // Marker Icons
