@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+    
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
@@ -127,6 +127,20 @@ function loadGeoJSONLayer(url, styleFunc, iconFunc) {
             }).addTo(mymap);
         });
 }
+
+// Event handler for mouse movement over the map
+mymap.on('mousemove', function(e) {
+    updateHoverInfo(e.latlng);
+});
+
+// Update hover info function
+function updateHoverInfo(latlng) {
+    // Update only the coordinates in the hover info
+    var currentInfo = document.getElementById('hover-info').innerHTML;
+    var updatedInfo = currentInfo.replace(/Lat: -?\d+\.\d+, Lng: -?\d+\.\d+/, `Lat: ${latlng.lat.toFixed(5)}, Lng: ${latlng.lng.toFixed(5)}`);
+    document.getElementById('hover-info').innerHTML = updatedInfo;
+}
+
 
 // Function to bring specific layers to the front
 function bringToFrontLayer(layer) {
