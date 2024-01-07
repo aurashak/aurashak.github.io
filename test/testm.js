@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
-// Event listener for mouse movement over the map
+ 
+
+    // Event listener for mouse movement over the map
 mymap.on('mousemove', function(e) {
     updateHoverInfo(e.latlng);
 });
