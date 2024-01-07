@@ -21,17 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // This function updates the hover display with latitude, longitude, name, and admin
 function updateHoverInfo(latlng, nameAdminText = '') {
-    // Get the current content that may include the name/admin information
-    var currentInfo = document.getElementById('hover-info').innerHTML;
-    var nameAdminInfo = nameAdminText || currentInfo.split('<br>').slice(1).join('<br>');
-
-    // Update the info text with the new lat/lng and possibly existing name/admin info
     var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-    if (nameAdminInfo) {
-        infoText += '<br>' + nameAdminInfo;
+    if (nameAdminText) {
+        infoText += '<br>' + nameAdminText;
     }
-
-    // Set the hover info display to the updated info text
     document.getElementById('hover-info').innerHTML = infoText;
 }
 
