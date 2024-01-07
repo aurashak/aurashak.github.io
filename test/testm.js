@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
 
+    // Update hover info function
+    function updateHoverInfo(latlng, name = '') {
+        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
+        if (name) {
+            infoText += '<br>Name: ' + name;
+        }
+        document.getElementById('hover-info').innerHTML = infoText;
+    }
 
     // Function to handle feature interaction for GeoJSON layers
     function onEachFeature(feature, layer) {
@@ -129,25 +137,6 @@ addGeoJSONLayer('https://aurashak.github.io/geojson/regions.geojson', regionsSty
 addGeoJSONLayer('https://aurashak.github.io/geojson/projectmarkers.geojson', projectmarkersStyle, selectIcon);
 
 
-
-    // Event listener for mouse movement over the map
-    mymap.on('mousemove', function(e) {
-        updateHoverInfo(e.latlng);
-    });
-    
-    // Update hover info function - now correctly handles name display
-    function updateHoverInfo(latlng, name = '') {
-        // Construct the info text with the new lat/lng and any name provided
-        var infoText = 'Lat: ' + latlng.lat.toFixed(5) + ', Lng: ' + latlng.lng.toFixed(5);
-        if (name) {
-            infoText += '<br>Name: ' + name; // Add name to the infoText if it exists
-        }
-    
-        // Set the hover info display to the updated info text
-        document.getElementById('hover-info').innerHTML = infoText;
-    }
-    
-    
 // Add Scale Control
 L.control.scale({
     maxWidth: 100,
