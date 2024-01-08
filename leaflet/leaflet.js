@@ -95,7 +95,7 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-// Function to create the Project Markers layer (don't change this)
+// Function to create the Project Markers layer
 function addProjectMarkers() {
     fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
         .then(response => response.json())
@@ -103,14 +103,18 @@ function addProjectMarkers() {
             L.geoJSON(data, {
                 style: projectmarkersStyle,
                 onEachFeature: onEachFeature,
-                // Assuming pointToLayer and selectIcon are defined
                 pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: selectIcon(feature) });
+                    if (feature.properties['marker-color'] === 'red') {
+                        return L.marker(latlng, { icon: createPulsatingIcon() });
+                    } else {
+                        return L.marker(latlng, { icon: selectIcon(feature) });
+                    }
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
-    }
+}
+
 
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
@@ -256,7 +260,7 @@ function createPulsatingIcon() {
     return L.divIcon({
         className: 'pulsating-marker red', // Use your CSS classes for red pulsating marker
         iconSize: [10, 10], // Size of the icon
-        iconAnchor: [8, 27.33], // 2/3 of the original size
+        iconAnchor: [5, 5], // 2/3 of the original size
     });
 }
 
