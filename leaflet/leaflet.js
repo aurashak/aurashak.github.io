@@ -305,16 +305,35 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
-// Icon Selector Function
-    function selectIcon(feature) {
-        switch (feature.properties['marker-color']) {
-            case 'red': return redIcon;
-            case 'green': return greenIcon;
-            case 'violet': return violetIcon;
-            case 'yellow': return yellowIcon;
-            default: return defaultIcon;
-        }
+function selectIcon(feature) {
+    var className = 'pulsating-marker'; // Base class for all markers
+
+    // Add color-specific class based on the feature's properties
+    switch (feature.properties['marker-color']) {
+        case 'red':
+            className += ' red';
+            break;
+        case 'green':
+            className += ' green';
+            break;
+        case 'violet':
+            className += ' violet';
+            break;
+        case 'yellow':
+            className += ' yellow';
+            break;
+        default:
+            className += ''; // No additional class for default
     }
+
+    // Return a divIcon with the specified classes
+    return L.divIcon({
+        className: className,
+        iconSize: [20, 20], // Adjust the size as needed
+        iconAnchor: [10, 10] // Adjust the anchor point as needed
+    });
+}
+
 
 
 // Search Control
