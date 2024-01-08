@@ -76,7 +76,8 @@ h3 {
 /* Adjust the font size for sub-items if they should be smaller than main items */
 .mainnavsub-item {
     font-size: 17px; /* Sub-items size */
-    color: black;
+    color: rgb(255, 255, 255);
+    font-weight: normal; 
 }
 
 
