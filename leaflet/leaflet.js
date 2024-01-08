@@ -95,42 +95,42 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-    function createMarker(latlng, type) {
-        var icon = selectIcon(type);
-        var marker = L.marker(latlng, { icon: icon });
-        marker.bindPopup(getMarkerPopupContent(type.type));
-    
-        // Bind mouseover and mouseout events
-        marker.on('mouseover', function(e) {
-            this.openPopup();
-        });
-        marker.on('mouseout', function(e) {
-            this.closePopup();
-        });
-    
-        return marker;
-    }
+// Function to create a marker based on feature properties
+function createMarker(latlng, properties) {
+    var icon = selectIcon(properties); // Select the appropriate icon
+    var marker = L.marker(latlng, { icon: icon });
+    marker.bindPopup(getMarkerPopupContent(properties)); // Bind popup with content
 
-    function addProjectMarkers() {
-        fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    style: projectmarkersStyle,
-                    onEachFeature: onEachFeature,
-                    pointToLayer: function(feature, latlng) {
-                        // Use createMarker to create and return each marker
-                        return createMarker(latlng, feature.properties);
-                    }
-                }).addTo(mymap);
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
-    }
-    
-    addProjectMarkers();
+    // Bind mouseover and mouseout events for the popup
+    marker.on('mouseover', function(e) {
+        this.openPopup();
+    });
+    marker.on('mouseout', function(e) {
+        this.closePopup();
+    });
 
-// Call this function to add the Project Markers layer immediately
-addProjectMarkers();
+    return marker;
+}
+
+// Function to add project markers to the map
+function addProjectMarkers() {
+    fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: projectmarkersStyle,
+                onEachFeature: onEachFeature,
+                pointToLayer: function(feature, latlng) {
+                    // Use createMarker to create and return each marker
+                    return createMarker(latlng, feature.properties); // Pass entire properties object
+                }
+            }).addTo(mymap);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+addProjectMarkers(); // Call this function to add the Project Markers layer immediately
+
 
   // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
@@ -319,16 +319,26 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
-// Icon Selector Function
-    function selectIcon(feature) {
-        switch (feature.properties['marker-color']) {
-            case 'red': return createPulsatingIcon();            
-            case 'green': return greenIcon;
-            case 'violet': return violetIcon;
-            case 'yellow': return yellowIcon;
-            default: return defaultIcon;
-        }
+function getMarkerPopupContent(properties) {
+    const content = markerContent[properties.type]; // Assuming 'type' is a property
+    return `
+        <div class="popup-content">
+            <img src="${content.imgSrc}" alt="${properties.type}" />
+            <p>${content.text}</p>
+        </div>
+    `;
+}
+
+function selectIcon(properties) {
+    switch (properties['marker-color']) {
+        case 'red': return createPulsatingIcon();            
+        case 'green': return greenIcon;
+        case 'violet': return violetIcon;
+        case 'yellow': return yellowIcon;
+        default: return defaultIcon;
     }
+}
+
 
 
 // Search Control
@@ -362,14 +372,6 @@ const markerContent = {
     // ... add other markers content
 };
 
-function getMarkerPopupContent(type) {
-    const content = markerContent[type];
-    return `
-        <div class="popup-content">
-            <img src="${content.imgSrc}" alt="${type}" />
-            <p>${content.text}</p>
-        </div>
-    `;
-}
+
 
 
