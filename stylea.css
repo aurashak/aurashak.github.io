@@ -164,7 +164,7 @@ button:active {
     flex-wrap: wrap; /* Allow items to wrap onto the next line */
 }
 
-.map-legend, .button-container, #hover-info {
+.map-legend, .button-container, #hover-info, .layer-button-container {
     margin: 0px;
     flex-grow: 1;
     border: 1px solid white;
