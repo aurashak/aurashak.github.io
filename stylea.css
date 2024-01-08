@@ -115,6 +115,7 @@ button {
     background-color: #bfbfbf; /* Background color for buttons */
     color: #000; /* Text color for buttons */
     width: 100%;
+    margin: 0px; 
     height: 100%;
     border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
