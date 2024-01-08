@@ -51,7 +51,6 @@ h3 {
     display: flex; /* Establish a flex container */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
-    padding-left: 20px; /* Provides spacing from the sidebar */
     margin-left: 200px; /* Adjust to match the width of your sidebar */
 }
 
@@ -143,7 +142,6 @@ button:active {
     display: flex; /* Use flexbox for alignment */
     justify-content: space-evenly; /* Evenly space the children */
     flex-wrap: wrap; /* Allow items to wrap onto the next line */
-    margin: 20px 0; /* Margin at the top and bottom */
 }
 
 .map-legend, .button-container, #hover-info {
@@ -174,31 +172,20 @@ button:active {
     background-color: none;
     color: black; 
     font-weight: bold;
-    padding: 5px 10px;
     font-size: 15px;
     text-align: center;
-    height: 50px;
-    max-width: 60%; /* Adjust as needed */
-    padding: 20px; /* Your desired padding */
-    line-height: 1.2;
-    letter-spacing: .02rem;
-    margin: 10px auto;
     border: 1px solid black; 
 }
 
 #mapid {
-    height: 60vh; /* Adjust based on the desired view */
-    width: calc(100% - 40px); /* Adjust the width to leave some padding */
-    margin: 20px 0; /* Margin at the top and bottom */
+    width: 100%; /* Full width of the container */
+    height: 60vh; /* Or any other height you prefer */
+    margin: 0; /* No margin to the sides */
 }
 
 .map-legend {
-    width: 200px; /* Set the width of the legend box */
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-    padding: 10px;
     border: 1px solid black; 
-    left: 20px; /* Distance from the left side of the viewport */
-    top: 20px; /* Distance from the top */
     z-index: 1000; /* Ensures it appears above other elements */
 }
 
@@ -206,7 +193,6 @@ button:active {
     text-align: left; /* Align text to the left */
     display: flex;
     align-items: center;
-    margin: 5px 0; /* Spacing between legend items */
 }
 
 .legend-item img {
