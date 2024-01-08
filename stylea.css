@@ -49,7 +49,6 @@ h3 {
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
     margin-left: 200px; /* Adjust to match the width of your sidebar */
-    border-right: 1px solid grey;
 }
 
 /* Navigation Bar Styles */
@@ -111,24 +110,24 @@ button {
 }
 
 .layer-button {
-    background-color: #bfbfbf; /* Background color for buttons */
+    background-color: #ffffff; /* Background color for buttons */
     color: #000; /* Text color for buttons */
     width: 100%;
     margin: 0px; 
+    border-bottom: 1px solid black;
     height: 100%;
-    border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     font-weight: bold;
     font-size: 14px; /* Font size for text inside buttons */
     font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
     text-transform: uppercase; /* Capitalize all text inside buttons */
-    letter-spacing: 0.02rem; /* Spacing between letters inside buttons */
+    letter-spacing: 0.09rem; /* Spacing between letters inside buttons */
     transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
 /* Button hover state */
 button:hover {
-    background-color: #a2a2a2; /* Slightly darker background on hover */
+    background-color: #5e5e5e; /* Slightly darker background on hover */
 }
 
 /* Button active state (optional) */
@@ -148,6 +147,7 @@ button:active {
     flex-direction: column; /* Stack children (buttons) vertically */
     align-items: center; /* Center buttons horizontally */
     justify-content: center; /* Align buttons to the start of the container vertically */
+    border: 1px solid black;
 }
 
 
@@ -163,9 +163,17 @@ button:active {
     flex-wrap: wrap;
     /* margin: 10px; */
     /* margin-right: 30px; */
-    border-top: 1px solid grey;
-
 }
+
+.controls-container > .map-legend, 
+.controls-container > .button-container, 
+.controls-container > #hover-info, 
+.controls-container > .layer-button-container {
+    margin: 10px; /* Adjust as needed */
+}
+
+/* Other styles remain the same */
+
 
 .map-legend, .button-container, #hover-info, .layer-button-container {
     margin: 0px;
@@ -195,33 +203,33 @@ button:active {
 #hover-info {
     display: flex; /* Enables flexbox */
     width: 200px; /* Fixed width, adjust as needed */
-    background-color: black;
-    color: white; 
+    color: black; 
     font-weight: bold;
     line-height: 1.5; 
     letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
     font-size: 15px;
+    border: 1px solid black;
     text-align: center;
     justify-content: center; /* Centers content horizontally */
     align-items: center; /* Centers content vertically */
 }
 
 #mapid {
-    width: 100%; /* Full width of the container */
-    height: 90vh; /* Or any other height you prefer */
-    margin: 0; /* No margin to the sides */
-    background: black;
+    width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
+    border: 1px solid black;
+    margin-top: 10px;
 }
 
 .map-legend {
-    background: black;    
-    z-index: 1000; /* Ensures it appears above other elements */
+border: 1px solid black;
+    z-index: 1000;
 }
 
 .legend-item {
     text-align: left; /* Align text to the left */
     display: flex;
     margin: 5px;
+    color: black;
     align-items: center;
 }
 
@@ -233,7 +241,6 @@ button:active {
 
 .legend-item span {
     font-size: 15px;
-    color: #fff;
 }
 
 .popup-content img {
