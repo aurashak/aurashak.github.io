@@ -3,11 +3,10 @@ body {
     display: flex;
     margin: 0;
     padding: 0;
-    height: 100vh; /* Viewport height */
+    height: 100vh;
     background-color: #fff;
     color: #212529;
     font-family: Arial, sans-serif;
-    font-size: 14px;
 }
 
 p {
@@ -17,7 +16,6 @@ p {
 }
 
 a {
-
 }
 
 a:hover {
@@ -38,62 +36,50 @@ h3 {
 }
 
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
     width: 200px;
     height: 100%;
     background-color: #fff;
     color: black;
     border-right: 1px solid black;
-    z-index: 1000; /* Ensure sidebar is above other content */
+    padding-top: 20px;
+    z-index: 2; /* Ensures sidebar is above main-content */
 }
 
+
 .main-content {
-    margin-left: 200px; /* Same as the sidebar width */
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    padding-left: 20px; /* Provides spacing from the sidebar */
+    z-index: 1; /* Ensures main-content is below sidebar for margin to work */
 }
 
 /* Navigation Bar Styles */
-.mainnav {
-    overflow: hidden;
-}
-
-.mainnav a {
-    background-color: none;
-}
-
-.mainnav a:hover {
-    color: grey;
-    text-decoration: none;
-}
-
-.mainnav-item {
-    display: block;
-    padding: 5px 10px; /* Padding for the button */
-    color: #fff; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #000; /* Background color set to grey */
-    text-decoration: none;
-    font-size: 20px; /* Font size set to 15px */
-    font-weight: bold; /* Font weight set to normal */
-    letter-spacing: .04rem;
-}
-
+.mainnav-item,
 .mainnavsub-item {
     display: block;
-    padding: 4px 8px; /* Padding for the button */
-    color: #fff; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #000; /* Background color set to grey */
+    padding: 5px 10px;
+    color: #fff; /* Text color set to white */
+    background-color: #000; /* Background color set to black */
     text-decoration: none;
-    font-size: 17px; /* Font size set to 15px */
-    font-weight: bold; /* Font weight set to normal */
-    margin: 10px; /* Adjust margins as needed */
-    letter-spacing: .04rem;
+    font-size: 20px; /* Main items size */
+    font-weight: bold;
+    letter-spacing: 0.04rem;
+    border-radius: 0; /* If you want rounded corners, adjust this value */
+    margin: 10px 0; /* Vertical margin, no horizontal margin */
 }
+
+/* Adjust the font size for sub-items if they should be smaller than main items */
+.mainnavsub-item {
+    font-size: 17px; /* Sub-items size */
+}
+
+/* Hover effects for all navigation links */
+.mainnav-item:hover,
+.mainnavsub-item:hover {
+    color: grey;
+    background-color: #fff; /* Change if you want a different hover background */
+    text-decoration: underline; /* Underline on hover, or remove if not needed */
+}
+
     
 /* Main Content Styles */
 .container {
@@ -112,8 +98,8 @@ h3 {
 
 
 #mapid {
-    height: 500px; /* Set to desired value */
-    flex-grow: 1;
+    height: 80vh; /* Adjust based on the desired view */
+    margin-top: 20px; /* Provides spacing from the top */
 }
 
 .map {
@@ -130,38 +116,39 @@ h3 {
 
 /* Button Styles */
 button {
-    background-color: #bfbfbf; /* Black background */
-    color: #000; /* White text */
-    border: none; /* No border */
-    padding: 5px 10px; /* Top/bottom padding 10px, left/right padding 20px */
-    margin: 10px 5px; /* Margin 10px top and bottom, 0 left and right */
-    cursor: pointer; /* Cursor to indicate clickable */
-    font-size: 13px; /* Text size */
-    font-family: 'Arial', sans-serif; /* Font family */
-    font-weight: normal; /* Font weight */
-    text-transform: uppercase; /* Uppercase text */
-    letter-spacing: .02rem;
-    border-radius: 2px; /* Rounded corners */
+    background-color: #bfbfbf; /* Background color for buttons */
+    color: #000; /* Text color for buttons */
+    padding: 5px 10px; /* Padding inside buttons */
+    margin: 10px 5px; /* Margin around buttons */
+    border: none; /* No border for a flat design */
+    cursor: pointer; /* Cursor changes to pointer to indicate button */
+    font-size: 13px; /* Font size for text inside buttons */
+    font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
+    text-transform: uppercase; /* Capitalize all text inside buttons */
+    letter-spacing: 0.02rem; /* Spacing between letters inside buttons */
+    border-radius: 2px; /* Slight rounding of corners for buttons */
+    transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
+/* Button hover state */
 button:hover {
+    background-color: #a2a2a2; /* Slightly darker background on hover */
 }
 
+/* Button active state (optional) */
 button:active {
+    background-color: #888; /* Even darker background to indicate active/clicked state */
 }
 
+/* Button container */
 .button-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically if needed */
-    flex-wrap: wrap; /* Wrap buttons to next line if container width is too small */
-    margin: 20px 0; /* Vertical spacing */
+    justify-content: center; /* Horizontally center buttons within the container */
+    align-items: center; /* Vertically center buttons (if necessary) */
+    flex-wrap: wrap; /* Allow buttons to wrap onto next line on small screens */
+    margin: 20px 0; /* Vertical spacing outside the button container */
 }
 
-.button-container button {
-    margin: 0 5px; /* Spacing between buttons */
-    /* The rest of your button styling here */
-}
 
 /* Add this to your CSS file */
 #hover-info {
