@@ -66,7 +66,7 @@ h3 {
     font-weight: bold;
     letter-spacing: 0.04rem;
     border-radius: 0;
-    margin: 10px;
+    margin: 0px;
 
 }
 
@@ -305,12 +305,16 @@ button:active {
 
 /* Add this to your CSS file */
 #hover-info {
+    display: flex; /* Enables flexbox */
+    width: 200px; /* Fixed width, adjust as needed */
     background-color: none;
     color: black; 
     font-weight: bold;
     font-size: 15px;
     text-align: center;
     border: 1px solid black; 
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
 }
 
 #mapid {
