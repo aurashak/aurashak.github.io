@@ -91,6 +91,11 @@ function onEachFeature(feature, layer) {
     });
 }
 
+// Array to store GeoJSON layers
+var geoJSONLayers = [];
+
+
+// Function to create a pulsating icon with a specified color
 function createPulsatingIcon(color) {
     return L.divIcon({
         className: `pulsating-marker ${color}`,
@@ -98,10 +103,6 @@ function createPulsatingIcon(color) {
         iconAnchor: [5, 5]
     });
 }
-
-
-// Array to store GeoJSON layers
-    var geoJSONLayers = [];
 
 // Function to create the Project Markers layer
 function addProjectMarkers() {
@@ -111,24 +112,21 @@ function addProjectMarkers() {
             L.geoJSON(data, {
                 onEachFeature: onEachFeature,
                 pointToLayer: function(feature, latlng) {
-                    // Check if the feature has the 'marker-color' property
-                    if (feature.properties && feature.properties['marker-color']) {
-                        // Use the createPulsatingIcon function to create the correct icon
-                        var icon = createPulsatingIcon(feature.properties['marker-color']);
-                        return L.marker(latlng, { icon: icon });
-                    } else {
-                        // Handle features without 'marker-color' property
-                        // This could be a default icon or no icon (null)
-                        return L.marker(latlng); // Default Leaflet marker
-                    }
+                    // Determine the icon color from the feature properties
+                    var iconColor = feature.properties['marker-color'] || 'default'; // 'default' is a fallback color
+                    var icon = createPulsatingIcon(iconColor);
+
+                    // Create and return the marker with the appropriate icon
+                    return L.marker([latlng.lat, latlng.lng], { icon: icon });
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
-// Ensure this function is called to add the markers to the map
+// Call this function to add the Project Markers layer immediately
 addProjectMarkers();
+
 
 
   // Function to load and add GeoJSON layers to the map
