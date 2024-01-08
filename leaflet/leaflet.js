@@ -360,13 +360,14 @@ function getMarkerPopupContent(type) {
 function createMarker(latlng, type) {
     const marker = L.marker(latlng, { icon: selectIcon(type) });
     marker.bindPopup(getMarkerPopupContent(type));
+
+    // Bind mouseover and mouseout events to the marker
+    marker.on('mouseover', function(e) {
+        this.openPopup();
+    });
+    marker.on('mouseout', function(e) {
+        this.closePopup();
+    });
+
     return marker;
 }
-
-marker.on('mouseover', function(e) {
-    this.openPopup();
-});
-marker.on('mouseout', function(e) {
-    this.closePopup();
-});
-
