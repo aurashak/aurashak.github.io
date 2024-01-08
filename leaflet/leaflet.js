@@ -137,14 +137,14 @@ addProjectMarkers();
 function countriesStyle(feature) {
     return {
     color: feature.properties.stroke || 'grey',
-    weight: feature.properties.weight || 0.25,
+    weight: feature.properties.weight || 0.45,
     fillColor: feature.properties.fill || 'white',
     fillOpacity: feature.properties.opacity || 1
 };}
 function oceansStyle(feature) {
     return {
     color: 'white', // outline color
-    weight: 0.01,
+    weight: 0,
     fillColor: 'black',
     fillOpacity: 1
 };}
