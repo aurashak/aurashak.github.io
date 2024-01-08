@@ -103,25 +103,33 @@ function createPulsatingIcon(color) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-// Function to create the Project Markers layer (don't change this)
+// Function to create the Project Markers layer
 function addProjectMarkers() {
     fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
-                style: projectmarkersStyle,
                 onEachFeature: onEachFeature,
-                // Assuming pointToLayer and selectIcon are defined
                 pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: selectIcon(feature) });
+                    // Check if the feature has the 'marker-color' property
+                    if (feature.properties && feature.properties['marker-color']) {
+                        // Use the createPulsatingIcon function to create the correct icon
+                        var icon = createPulsatingIcon(feature.properties['marker-color']);
+                        return L.marker(latlng, { icon: icon });
+                    } else {
+                        // Handle features without 'marker-color' property
+                        // This could be a default icon or no icon (null)
+                        return L.marker(latlng); // Default Leaflet marker
+                    }
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
-    }
+}
 
-// Call this function to add the Project Markers layer immediately
+// Ensure this function is called to add the markers to the map
 addProjectMarkers();
+
 
   // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
