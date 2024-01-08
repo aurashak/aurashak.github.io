@@ -95,26 +95,25 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-// Function to create the Project Markers layer
-function addProjectMarkers() {
-    fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, {
-                style: projectmarkersStyle,
-                onEachFeature: onEachFeature,
-                pointToLayer: function(feature, latlng) {
-                    if (feature.properties['marker-color'] === 'red') {
-                        return L.marker(latlng, { icon: createPulsatingIcon() });
-                    } else {
-                        return L.marker(latlng, { icon: selectIcon(feature) });
+    function addProjectMarkers() {
+        fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: projectmarkersStyle,
+                    onEachFeature: onEachFeature,
+                    pointToLayer: function(feature, latlng) {
+                        if (feature.properties['marker-color'] === 'red') {
+                            return L.marker(latlng, { icon: createPulsatingIcon() });
+                        } else {
+                            return L.marker(latlng, { icon: selectIcon(feature) });
+                        }
                     }
-                }
-            }).addTo(mymap);
-        })
-        .catch(error => console.error('Error loading GeoJSON:', error));
-}
-
+                }).addTo(mymap);
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+    }
+    
 
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
@@ -256,14 +255,13 @@ function removeAllLayersExceptProjectMarkers() {
     }
 
 
-function createPulsatingIcon() {
-    return L.divIcon({
-        className: 'pulsating-marker red', // Use your CSS classes for red pulsating marker
-        iconSize: [10, 10], // Size of the icon
-        iconAnchor: [5, 5], // 2/3 of the original size
-    });
-}
-
+    function createPulsatingIcon() {
+        return L.divIcon({
+            className: 'pulsating-marker red', // Ensure this matches your CSS class
+            iconSize: [10, 10], // Adjust if needed
+            iconAnchor: [5, 5] // Center the icon over the point
+        });
+    }
 
 // Marker Icons
     var redIcon = L.icon({ 
@@ -371,13 +369,15 @@ function getMarkerPopupContent(type) {
 function createMarker(latlng, type) {
     const marker = L.marker(latlng, { icon: selectIcon(type) });
     marker.bindPopup(getMarkerPopupContent(type));
+
+    marker.on('mouseover', function(e) {
+        this.openPopup();
+    });
+    marker.on('mouseout', function(e) {
+        this.closePopup();
+    });
+
     return marker;
 }
 
-marker.on('mouseover', function(e) {
-    this.openPopup();
-});
-marker.on('mouseout', function(e) {
-    this.closePopup();
-});
 
