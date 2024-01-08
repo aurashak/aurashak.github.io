@@ -38,7 +38,6 @@ h3 {
     width: 200px;
     height: 100%;
     background-color: #000;
-    border-right: 1px solid white;
     z-index: 2000; /* Ensures sidebar is above main-content */
     position: fixed; /* Fixed position to keep sidebar in view */
     height: 100vh; /* Full viewport height */
@@ -58,13 +57,13 @@ h3 {
 .mainnavsub-item {
     display: block;
     color: #fff;
-    background-color: #000;
+    padding: 10px;
+    background-color: #000000;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 0.04rem;
     border-radius: 0;
-
 }
 
 /* Hover effects for all navigation links */
@@ -116,6 +115,7 @@ button {
     width: 80px;
     height: 30px;
     margin-top: 10px;
+    border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     font-weight: bold;
     font-size: 13px; /* Font size for text inside buttons */
@@ -165,6 +165,7 @@ button:active {
 .map-legend, .button-container, #hover-info, .layer-button-container {
     margin: 0px;
     flex-grow: 1;
+
 }
 
 .controls {
@@ -189,7 +190,7 @@ button:active {
 #hover-info {
     display: flex; /* Enables flexbox */
     width: 200px; /* Fixed width, adjust as needed */
-    background-color: rgb(35, 19, 19);
+    background-color: black;
     color: white; 
     font-weight: bold;
     font-size: 15px;
@@ -206,13 +207,13 @@ button:active {
 
 .map-legend {
     background: black;    
-    border: 1px solid white; 
     z-index: 1000; /* Ensures it appears above other elements */
 }
 
 .legend-item {
     text-align: left; /* Align text to the left */
     display: flex;
+    margin: 5px;
     align-items: center;
 }
 
