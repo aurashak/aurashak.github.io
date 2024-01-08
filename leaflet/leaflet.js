@@ -314,7 +314,7 @@ function removeAllLayersExceptProjectMarkers() {
 // Icon Selector Function
     function selectIcon(feature) {
         switch (feature.properties['marker-color']) {
-            case 'red': return redIcon;
+            case 'red': return createPulsatingIcon();            
             case 'green': return greenIcon;
             case 'violet': return violetIcon;
             case 'yellow': return yellowIcon;
