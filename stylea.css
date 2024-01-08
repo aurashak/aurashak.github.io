@@ -119,7 +119,7 @@ button {
     border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     font-weight: bold;
-    font-size: 13px; /* Font size for text inside buttons */
+    font-size: 14px; /* Font size for text inside buttons */
     font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
     text-transform: uppercase; /* Capitalize all text inside buttons */
     letter-spacing: 0.02rem; /* Spacing between letters inside buttons */
@@ -194,6 +194,8 @@ button:active {
     background-color: black;
     color: white; 
     font-weight: bold;
+    line-height: 1.5; 
+    letter-spacing: 3px; 
     font-size: 15px;
     text-align: center;
     justify-content: center; /* Centers content horizontally */
