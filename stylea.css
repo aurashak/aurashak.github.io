@@ -50,6 +50,7 @@ h3 {
 .main-content {
     flex-grow: 1;
     padding-left: 20px; /* Provides spacing from the sidebar */
+    margin-left: 200px;
     z-index: 1; /* Ensures main-content is below sidebar for margin to work */
 }
 
@@ -169,7 +170,6 @@ button:active {
     letter-spacing: .02rem;
     margin: 10px auto;
     border: 1px solid black; 
-
 }
 
 #mapid {
