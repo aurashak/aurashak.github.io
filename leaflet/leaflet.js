@@ -95,6 +95,54 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
+
+// Marker Icons
+
+var redMarker = L.divIcon({
+    className: 'pulsating-marker red', // Refer to the CSS class
+    iconSize: [10, 10] // Size of the icon
+  });
+
+  
+
+
+    var greenIcon = L.icon({ 
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var violetIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var yellowIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var defaultIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+}); // Define a default icon
+
+ 
 // Function to create the Project Markers layer (don't change this)
 function addProjectMarkers() {
     fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
@@ -258,52 +306,7 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
-
-// Marker Icons
-
-var redMarker = L.divIcon({
-    className: 'pulsating-marker red', // Refer to the CSS class
-    iconSize: [10, 10] // Size of the icon
-  });
-
-
-    var greenIcon = L.icon({ 
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var violetIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var yellowIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var defaultIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-}); // Define a default icon
-
-   
+  
 
 
 
