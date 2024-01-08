@@ -91,42 +91,30 @@ function onEachFeature(feature, layer) {
     });
 }
 
+
+
 // Array to store GeoJSON layers
-var geoJSONLayers = [];
+    var geoJSONLayers = [];
 
-
-// Function to create a pulsating icon with a specified color
-function createPulsatingIcon(color) {
-    return L.divIcon({
-        className: `pulsating-marker ${color}`,
-        iconSize: [20, 20], // Assuming the pulsating dot is 20x20 pixels
-        iconAnchor: [10, 10], // Anchor at the center of the icon
-        html: '<div class="pulsating-dot"></div>'
-    });
-}
-
-// Function to create the Project Markers layer
+// Function to create the Project Markers layer (don't change this)
 function addProjectMarkers() {
     fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
+                style: projectmarkersStyle,
                 onEachFeature: onEachFeature,
+                // Assuming pointToLayer and selectIcon are defined
                 pointToLayer: function(feature, latlng) {
-                    var iconColor = feature.properties['marker-color'] || 'default'; // 'default' is a fallback color
-                    var icon = createPulsatingIcon(iconColor);
-                    return L.marker(latlng, { icon: icon }); // latlng is already an L.LatLng object
+                    return L.marker(latlng, { icon: selectIcon(feature) });
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
-}
+    }
+
+// Call this function to add the Project Markers layer immediately
 addProjectMarkers();
-
-
-
-
-
 
   // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
@@ -267,16 +255,66 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
+// Marker Icons
+    var redIcon = L.icon({ 
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var greenIcon = L.icon({ 
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var violetIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var yellowIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
+
+    var defaultIcon = L.icon({    
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+}); // Define a default icon
+
+   
+
+
+
 // Icon Selector Function
-function selectIcon(feature) {
-    switch (feature.properties['marker-color']) {
-        case 'red': return createPulsatingIcon('red');
-        case 'green': return createPulsatingIcon('green');
-        case 'violet': return createPulsatingIcon('violet');
-        case 'yellow': return createPulsatingIcon('yellow');
-        default: return createPulsatingIcon('default'); // define a default pulsating icon if needed
+    function selectIcon(feature) {
+        switch (feature.properties['marker-color']) {
+            case 'red': return redIcon;
+            case 'green': return greenIcon;
+            case 'violet': return violetIcon;
+            case 'yellow': return yellowIcon;
+            default: return defaultIcon;
+        }
     }
-}
 
 
 // Search Control
