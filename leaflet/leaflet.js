@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 18,
         maxBounds: [[-90, -180], [90, 180]],
         maxBoundsViscosity: 1.0
-    }).setView([0, 0], 2);
+    }).setView([0, 0], 2.2);
 
 // Tile Layers
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
@@ -136,14 +136,14 @@ addProjectMarkers();
 // Style Functions for Geojson layers
 function countriesStyle(feature) {
     return {
-    color: feature.properties.stroke || 'red',
+    color: feature.properties.stroke || 'black',
     weight: feature.properties.weight || 0.45,
     fillColor: feature.properties.fill || 'white',
     fillOpacity: feature.properties.opacity || 1
 };}
 function oceansStyle(feature) {
     return {
-    color: 'white', // outline color
+    color: 'black', // outline color
     weight: 0,
     fillColor: 'black',
     fillOpacity: 1
@@ -158,7 +158,7 @@ function lakesStyle(feature) {
 function riversStyle(feature) { 
     return {
     color: 'white',
-    weight: 0.01,
+    weight: 0,
     fillColor: 'white',
     fillOpacity: 1
 };}
@@ -172,9 +172,9 @@ function regionsStyle(feature) {
 function projectmarkersStyle(feature) {
     return {
     color: 'red',
-    weight: 0.01,
+    weight: 0,
     fillColor: 'red',
-    fillOpacity: 0.01
+    fillOpacity: 0
 };}
 
 
