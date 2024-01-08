@@ -144,7 +144,7 @@ button:active {
     justify-content: center; /* Align buttons to the start of the container vertically */
 }
 
-.layerbutton-container {
+.layer-button-container {
     display: flex;
     flex-direction: column; /* Stack children (buttons) vertically */
     align-items: center; /* Center buttons horizontally */
