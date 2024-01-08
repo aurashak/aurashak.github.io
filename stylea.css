@@ -171,7 +171,8 @@ button:active {
 
 #mapid {
     height: 80vh; /* Adjust based on the desired view, leaving room for the legend */
-    margin-top: 20px; /* Provides spacing from the top */
+    margin: 20px; /* Provides spacing from the top */
+
     /* Rest of your styles */
 }
 
