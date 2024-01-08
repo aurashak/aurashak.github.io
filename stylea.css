@@ -189,16 +189,25 @@ button:active {
 }
 
 
+#mapid {
+    position: relative; /* Needed for absolute positioning of children */
+    height: 500px; /* Set to desired value */
+}
+
 .map-legend {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px; /* Spacing between legend and map */
+    position: absolute;
+    bottom: 0; /* Aligns the legend to the bottom of the map container */
+    left: 0; /* Aligns the legend to the left of the map container */
+    background: rgba(255, 255, 255, 0.8); /* Optional: semi-transparent white background */
+    padding: 10px;
+    border-radius: 4px; /* Optional: if you want rounded corners */
+    z-index: 1000; /* Ensures the legend is above the map */
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    margin: 0 auto; /* Spacing between legend items */
+    margin: 5px 0; /* Spacing between legend items, no horizontal margin needed */
 }
 
 .legend-item img {
@@ -208,8 +217,7 @@ button:active {
 }
 
 .legend-item span {
-    font-size: 15px;
-    font-weight: bold; 
+    font-size: 15px; /* Text size */
     color: #333; /* Text color */
 }
 
