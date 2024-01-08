@@ -18,7 +18,6 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
 }
 
 /* General h1 and h2 Styles */
@@ -62,15 +61,15 @@ h3 {
     padding: 10px;
     background-color: #000000;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     letter-spacing: 0.04rem;
-    border-radius: 0;
 }
 
 /* Hover effects for all navigation links */
 .mainnav-item:hover,
-.mainnavsub-item:hover {
+ {
+    background-color: gray; 
 }
 
 
@@ -249,7 +248,45 @@ button:active {
     text-align: center;
 }
 
+@keyframes pulsate {
+    0% {
+      transform: scale(0.5);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  .pulsating-marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulsate 1s ease-out infinite;
+  }
 
+  .pulsating-marker.red {
+    background: red;
+  }
+  
+  .pulsating-marker.green {
+    background: green;
+  }
+  
+  .pulsating-marker.violet {
+    background: violet;
+  }
+  
+  .pulsating-marker.yellow {
+    background: yellow;
+  }
+  
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
 
