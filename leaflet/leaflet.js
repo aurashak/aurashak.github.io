@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 18,
         maxBounds: [[-90, -180], [90, 180]],
         maxBoundsViscosity: 1.0
-    }).setView([0, 0], 3);
+    }).setView([0, 0], 2.7);
 
 // Tile Layers
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
