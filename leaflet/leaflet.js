@@ -103,14 +103,19 @@ function addProjectMarkers() {
             L.geoJSON(data, {
                 style: projectmarkersStyle,
                 onEachFeature: onEachFeature,
-                // Assuming pointToLayer and selectIcon are defined
                 pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, { icon: selectIcon(feature) });
+                    // This checks for the property to determine if the icon should be a pulsating red marker
+                    if (feature.properties['marker-color'] === 'red') {
+                        return L.marker(latlng, { icon: redMarker }); // Uses the redMarker divIcon
+                    } else {
+                        return L.marker(latlng, { icon: selectIcon(feature) }); // Fallback to standard icons
+                    }
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
-    }
+}
+
 
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
