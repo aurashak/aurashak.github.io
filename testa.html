@@ -24,16 +24,14 @@
     </head>
     
 <body>
-  
-  <div class="sidebar">
+    <div class="sidebar">
     <a href="https://aurashak.github.io" class="mainnav-item">Aurash Khawarzad</a>
     <span class="mainnavsub-item">Geography</span>
-    <!-- Add more navigation items here -->
 </div>
   
   
      
-<div class="container">
+<div class="main-content">
 <div class="map-legend">
 <div class="legend-item">
 <img src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png" alt="Print" />
@@ -56,19 +54,16 @@
     
     <div class="container">
         <div id="mapid"></div>
-    </div>
 
-    <div class="container">
         <div class="button-container">
             <button onclick="toggleOSMLayer()">OSM</button>
             <button onclick="toggleSatelliteLayer()">SAT</button>
             <button onclick="toggleGeoJSONLayer()">BLK</button>
         </div>
-    </div>
 
        
     <div id="hover-info" class="hover-info">Hover over map</div>
-
+    </div>  
 
     <!-- Include Leaflet scripts -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
