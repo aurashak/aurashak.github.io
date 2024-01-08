@@ -176,8 +176,9 @@ addProjectMarkers();
                 var layer = L.geoJSON(data, {
                     style: styleFunc,
                     pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng, { icon: iconFunc(feature) });
-                    },
+                        return L.marker(latlng, { icon: selectIcon(feature) });
+                    }
+                    
                     onEachFeature: onEachFeature
                 });
                 layer.addTo(mymap);
@@ -305,22 +306,16 @@ function removeAllLayersExceptProjectMarkers() {
     }
 
 
-
-  
-
-
-
-// Icon Selector Function
     function selectIcon(feature) {
         switch (feature.properties['marker-color']) {
-            case 'red': return redIcon;
-            case 'green': return greenIcon;
-            case 'violet': return violetIcon;
-            case 'yellow': return yellowIcon;
-            default: return defaultIcon;
+            case 'red': return redPulsatingMarker;
+            case 'green': return greenPulsatingMarker;
+            case 'violet': return violetPulsatingMarker;
+            case 'yellow': return yellowPulsatingMarker;
+            default: return defaultIcon; // defaultIcon can be a static icon for other cases
         }
     }
-
+    
 
 // Search Control
     var searchControl = new L.Control.geocoder({ placeholder: "Search for a place", geocoder: new L.Control.Geocoder.Nominatim() }).addTo(mymap);
