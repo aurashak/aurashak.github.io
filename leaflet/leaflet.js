@@ -136,7 +136,7 @@ addProjectMarkers();
 // Style Functions for Geojson layers
 function countriesStyle(feature) {
     return {
-    color: feature.properties.stroke || 'grey',
+    color: feature.properties.stroke || 'red',
     weight: feature.properties.weight || 0.45,
     fillColor: feature.properties.fill || 'white',
     fillOpacity: feature.properties.opacity || 1
