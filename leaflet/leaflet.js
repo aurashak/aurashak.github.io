@@ -117,15 +117,16 @@ function addProjectMarkers() {
                     var icon = createPulsatingIcon(iconColor);
 
                     // Create and return the marker with the appropriate icon
-                    return L.marker([latlng.lat, latlng.lng], { icon: icon });
+                    return L.marker(latlng, { icon: icon });
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
 
-// Call this function to add the Project Markers layer immediately
+// Ensure this function is called to add the markers to the map
 addProjectMarkers();
+
 
 
 
