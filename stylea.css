@@ -111,7 +111,7 @@ button {
     transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
-layerbutton {
+.layerbutton {
     background-color: #bfbfbf; /* Background color for buttons */
     color: #000; /* Text color for buttons */
     width: 80px;
