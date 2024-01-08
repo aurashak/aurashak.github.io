@@ -310,16 +310,16 @@ function selectIcon(feature) {
 
     // Add color-specific class based on the feature's properties
     switch (feature.properties['marker-color']) {
-        case 'red':
+        case '#FF0000': // red
             className += ' red';
             break;
-        case 'green':
+        case '#008000': // green
             className += ' green';
             break;
-        case 'violet':
+        case '#EE82EE': // violet
             className += ' violet';
             break;
-        case 'yellow':
+        case '#FFFF00': // yellow
             className += ' yellow';
             break;
         default:
@@ -329,10 +329,12 @@ function selectIcon(feature) {
     // Return a divIcon with the specified classes
     return L.divIcon({
         className: className,
+        html: '<div></div>', // This is needed to create the div inside the icon
         iconSize: [20, 20], // Adjust the size as needed
         iconAnchor: [10, 10] // Adjust the anchor point as needed
     });
 }
+
 
 
 
