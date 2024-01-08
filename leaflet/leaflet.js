@@ -277,15 +277,7 @@ function removeAllLayersExceptProjectMarkers() {
         });
     }
 
-// Marker Icons
-    var redIcon = L.icon({ 
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
+
 
     var greenIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
