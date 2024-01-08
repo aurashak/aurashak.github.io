@@ -39,7 +39,7 @@ h3 {
     height: 100%;
     background-color: #000;
     border-right: 1px solid white;
-    z-index: 2; /* Ensures sidebar is above main-content */
+    z-index: 2000; /* Ensures sidebar is above main-content */
     position: fixed; /* Fixed position to keep sidebar in view */
     height: 100vh; /* Full viewport height */
 }
@@ -70,7 +70,6 @@ h3 {
 /* Hover effects for all navigation links */
 .mainnav-item:hover,
 .mainnavsub-item:hover {
-    text-decoration: underline; /* Underline on hover, or remove if not needed */
 }
 
 
