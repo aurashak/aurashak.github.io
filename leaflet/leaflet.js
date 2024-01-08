@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' });
     var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg', { attribution: '© EOX IT Services GmbH - Source: contains modified Copernicus Sentinel data 2020' });
 
+
+  
+
     mymap.on('mousemove', function(e) {
         updateHoverInfo(e.latlng);
     });
@@ -37,9 +40,6 @@ function updateHoverInfo(latlng, nameAdminText = '') {
 mymap.on('mousemove', function(e) {
     updateHoverInfo(e.latlng);
 });
-
-
-
 
 // Modify the onEachFeature function to handle feature-specific information
 function onEachFeature(feature, layer) {
@@ -90,16 +90,6 @@ function onEachFeature(feature, layer) {
         }
     });
 }
-
-
-var pulsatingIcon = function(color) {
-    return L.divIcon({
-        className: 'pulsating-marker ' + color, // Use your CSS classes
-        iconSize: L.point(20, 20), // Size of the icon
-        html: '<div></div>'
-    });
-};
-
 
 
 // Array to store GeoJSON layers
@@ -314,16 +304,16 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
-function selectIcon(feature) {
-    var color = feature.properties['marker-color'];
-    switch (color) {
-        case 'red': return pulsatingIcon('red');
-        case 'green': return pulsatingIcon('green');
-        case 'violet': return pulsatingIcon('violet');
-        case 'yellow': return pulsatingIcon('yellow');
-        default: return defaultIcon;
+// Icon Selector Function
+    function selectIcon(feature) {
+        switch (feature.properties['marker-color']) {
+            case 'red': return redIcon;
+            case 'green': return greenIcon;
+            case 'violet': return violetIcon;
+            case 'yellow': return yellowIcon;
+            default: return defaultIcon;
+        }
     }
-}
 
 
 // Search Control
