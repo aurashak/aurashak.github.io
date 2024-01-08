@@ -218,6 +218,7 @@ button:active {
     width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
     border: 1px solid black;
     margin-top: 10px;
+    background: black;
 }
 
 .map-legend {
@@ -226,13 +227,12 @@ border: 1px solid black;
 }
 
 .legend-item {
-    text-align: left; /* Align text to the left */
     display: flex;
-    margin: 5px;
-    color: black;
     align-items: center;
-}
-
+    margin: 5px;
+    position: relative; /* Add this line */
+  }
+  
 .legend-item img {
     width: 24px; /* Size of marker icon */
     height: auto;
@@ -268,16 +268,17 @@ border: 1px solid black;
   }
   
   .pulsating-marker {
-    width: 10px;
-    height: 10px;
+    width: 20px; /* Increase size */
+    height: 20px; /* Increase size */
     border-radius: 50%;
     background: red;
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -50%);
     animation: pulsate 1s ease-out infinite;
   }
+  
 
   .pulsating-marker.red {
     background: red;
