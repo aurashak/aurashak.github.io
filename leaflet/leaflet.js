@@ -151,7 +151,7 @@ function oceansStyle(feature) {
 function lakesStyle(feature) {  
     return {
     color: 'white',
-    weight: 0.01,
+    weight: 0,
     fillColor: 'white',
     fillOpacity: 1
 };}
@@ -165,9 +165,9 @@ function riversStyle(feature) {
 function regionsStyle(feature) {
     return {
     color: 'red',
-    weight: 0.01,
+    weight: 0,
     fillColor: 'red',
-    fillOpacity: 0.001
+    fillOpacity: 0
 };}
 function projectmarkersStyle(feature) {
     return {
