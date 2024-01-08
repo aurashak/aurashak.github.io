@@ -40,7 +40,7 @@ h3 {
     background-color: #fff;
     color: black;
     border-right: 1px solid black;
-    padding-top: 20px;
+    padding-top: 0px;
     z-index: 2; /* Ensures sidebar is above main-content */
     position: fixed; /* Fixed position to keep sidebar in view */
     height: 100vh; /* Full viewport height */
@@ -65,7 +65,7 @@ h3 {
     font-weight: bold;
     letter-spacing: 0.04rem;
     border-radius: 0; /* If you want rounded corners, adjust this value */
-    margin: 10px 0; /* Vertical margin, no horizontal margin */
+    margin: 10px; /* Vertical margin, no horizontal margin */
 }
 
 /* Adjust the font size for sub-items if they should be smaller than main items */
@@ -180,7 +180,6 @@ button:active {
     padding: 10px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: adds some depth */
-    position: absolute; /* Position it over other content if needed */
     left: 20px; /* Distance from the left side of the viewport */
     top: 20px; /* Distance from the top */
     z-index: 1000; /* Ensures it appears above other elements */
