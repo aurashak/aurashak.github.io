@@ -97,12 +97,15 @@ var geoJSONLayers = [];
 
 // Function to create a pulsating icon with a specified color
 function createPulsatingIcon(color) {
+    // Assuming the pulsating effect is 20x20 pixels
+    var size = [20, 20];
     return L.divIcon({
         className: `pulsating-marker ${color}`,
-        iconSize: [10, 10],
-        iconAnchor: [5, 5]
+        iconSize: size,
+        iconAnchor: [size[0] / 2, size[1] / 2] // Centers the icon
     });
 }
+
 
 // Function to create the Project Markers layer
 function addProjectMarkers() {
@@ -112,17 +115,15 @@ function addProjectMarkers() {
             L.geoJSON(data, {
                 onEachFeature: onEachFeature,
                 pointToLayer: function(feature, latlng) {
-                    // Determine the icon color from the feature properties
-                    var iconColor = feature.properties['marker-color'] || 'default'; // 'default' is a fallback color
+                    var iconColor = feature.properties['marker-color'] || 'default';
                     var icon = createPulsatingIcon(iconColor);
-
-                    // Create and return the marker with the appropriate icon
                     return L.marker(latlng, { icon: icon });
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
 }
+
 
 // Ensure this function is called to add the markers to the map
 addProjectMarkers();
@@ -266,10 +267,6 @@ function removeAllLayersExceptProjectMarkers() {
     });
     }
 
-
-
-
-   
 
 
 
