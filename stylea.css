@@ -116,7 +116,6 @@ button {
     width: 80px;
     height: 30px;
     margin-top: 10px;
-    border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     font-weight: bold;
     font-size: 13px; /* Font size for text inside buttons */
@@ -166,8 +165,6 @@ button:active {
 .map-legend, .button-container, #hover-info, .layer-button-container {
     margin: 0px;
     flex-grow: 1;
-    border: 1px solid white;
-
 }
 
 .controls {
@@ -192,12 +189,11 @@ button:active {
 #hover-info {
     display: flex; /* Enables flexbox */
     width: 200px; /* Fixed width, adjust as needed */
-    background-color: black;
+    background-color: rgb(35, 19, 19);
     color: white; 
     font-weight: bold;
     font-size: 15px;
     text-align: center;
-    border: 1px solid white; 
     justify-content: center; /* Centers content horizontally */
     align-items: center; /* Centers content vertically */
 }
