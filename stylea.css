@@ -97,17 +97,33 @@ h3 {
 
 /* Button Styles */
 button {
-    background-color: #bfbfbf; /* Background color for buttons */
     color: #000; /* Text color for buttons */
-    padding: 5px 10px; /* Padding inside buttons */
-    margin: 10px 5px; /* Margin around buttons */
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
     border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
+    font-weight: bold;
     font-size: 13px; /* Font size for text inside buttons */
     font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
     text-transform: uppercase; /* Capitalize all text inside buttons */
     letter-spacing: 0.02rem; /* Spacing between letters inside buttons */
-    border-radius: 2px; /* Slight rounding of corners for buttons */
+    transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
+}
+
+layerbutton {
+    background-color: #bfbfbf; /* Background color for buttons */
+    color: #000; /* Text color for buttons */
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
+    border: none; /* No border for a flat design */
+    cursor: pointer; /* Cursor changes to pointer to indicate button */
+    font-weight: bold;
+    font-size: 13px; /* Font size for text inside buttons */
+    font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
+    text-transform: uppercase; /* Capitalize all text inside buttons */
+    letter-spacing: 0.02rem; /* Spacing between letters inside buttons */
     transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
@@ -121,15 +137,20 @@ button:active {
     background-color: #888; /* Even darker background to indicate active/clicked state */
 }
 
-/* Button container */
 .button-container {
     display: flex;
-    justify-content: center; /* Horizontally center buttons within the container */
-    align-items: center; /* Vertically center buttons (if necessary) */
-    flex-wrap: wrap; /* Allow buttons to wrap onto next line on small screens */
-    margin: 20px 0; /* Vertical spacing outside the button container */
-    border: 1px solid black;
+    flex-direction: column; /* Stack children (buttons) vertically */
+    align-items: center; /* Center buttons horizontally */
+    justify-content: center; /* Align buttons to the start of the container vertically */
 }
+
+.layerbutton-container {
+    display: flex;
+    flex-direction: column; /* Stack children (buttons) vertically */
+    align-items: center; /* Center buttons horizontally */
+    justify-content: center; /* Align buttons to the start of the container vertically */
+}
+
 
 #search-container {
     text-align: center; /* Center the search container */
