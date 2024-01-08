@@ -108,7 +108,7 @@ button {
     font-size: 13px; /* Font size for text inside buttons */
     font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
     text-transform: uppercase; /* Capitalize all text inside buttons */
-    letter-spacing: 0.02rem; /* Spacing between letters inside buttons */
+    letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
     transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
@@ -198,7 +198,7 @@ button:active {
     color: white; 
     font-weight: bold;
     line-height: 1.5; 
-    letter-spacing: 3px; 
+    letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
     font-size: 15px;
     text-align: center;
     justify-content: center; /* Centers content horizontally */
