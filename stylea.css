@@ -204,6 +204,7 @@ button:active {
     width: 100%; /* Full width of the container */
     height: 90vh; /* Or any other height you prefer */
     margin: 0; /* No margin to the sides */
+    background: black;
 }
 
 .map-legend {
