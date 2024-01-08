@@ -99,6 +99,7 @@ button {
     width: 80px;
     height: 30px;
     margin-top: 10px;
+    background: none;
     border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     font-weight: bold;
@@ -112,9 +113,9 @@ button {
 .layer-button {
     background-color: #bfbfbf; /* Background color for buttons */
     color: #000; /* Text color for buttons */
-    width: 80px;
-    height: 30px;
-    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
     border: none; /* No border for a flat design */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     font-weight: bold;
