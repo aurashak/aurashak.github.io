@@ -95,24 +95,7 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
-// Function to create a marker based on feature properties
-function createMarker(latlng, properties) {
-    var icon = selectIcon(properties); // Select the appropriate icon
-    var marker = L.marker(latlng, { icon: icon });
-    marker.bindPopup(getMarkerPopupContent(properties)); // Bind popup with content
-
-    // Bind mouseover and mouseout events for the popup
-    marker.on('mouseover', function(e) {
-        this.openPopup();
-    });
-    marker.on('mouseout', function(e) {
-        this.closePopup();
-    });
-
-    return marker;
-}
-
-// Function to add project markers to the map
+// Function to create the Project Markers layer (don't change this)
 function addProjectMarkers() {
     fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
         .then(response => response.json())
@@ -120,17 +103,17 @@ function addProjectMarkers() {
             L.geoJSON(data, {
                 style: projectmarkersStyle,
                 onEachFeature: onEachFeature,
+                // Assuming pointToLayer and selectIcon are defined
                 pointToLayer: function(feature, latlng) {
-                    // Use createMarker to create and return each marker
-                    return createMarker(latlng, feature.properties); // Pass entire properties object
+                    return L.marker(latlng, { icon: selectIcon(feature) });
                 }
             }).addTo(mymap);
         })
         .catch(error => console.error('Error loading GeoJSON:', error));
-}
+    }
 
-addProjectMarkers(); // Call this function to add the Project Markers layer immediately
-
+// Call this function to add the Project Markers layer immediately
+addProjectMarkers();
 
   // Function to load and add GeoJSON layers to the map
     function addGeoJSONLayer(url, styleFunc, iconFunc) {
@@ -269,15 +252,17 @@ function removeAllLayersExceptProjectMarkers() {
     }
 
 
-    function createPulsatingIcon() {
-        return L.divIcon({
-            className: 'pulsating-marker red', // Ensure this matches your CSS class
-            iconSize: [10, 10], // Adjust if needed
-            iconAnchor: [5, 5] // Center the icon over the point
-        });
-    }
 
 
+// Marker Icons
+    var redIcon = L.icon({ 
+        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [16.67, 27.33], // 2/3 of the original size
+    iconAnchor: [8, 27.33], // 2/3 of the original size
+    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
+    shadowSize: [27.33, 27.33] // 2/3 of the original size
+});
 
     var greenIcon = L.icon({ 
         iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
@@ -319,26 +304,16 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
-function getMarkerPopupContent(properties) {
-    const content = markerContent[properties.type]; // Assuming 'type' is a property
-    return `
-        <div class="popup-content">
-            <img src="${content.imgSrc}" alt="${properties.type}" />
-            <p>${content.text}</p>
-        </div>
-    `;
-}
-
-function selectIcon(properties) {
-    switch (properties['marker-color']) {
-        case 'red': return createPulsatingIcon();            
-        case 'green': return greenIcon;
-        case 'violet': return violetIcon;
-        case 'yellow': return yellowIcon;
-        default: return defaultIcon;
+// Icon Selector Function
+    function selectIcon(feature) {
+        switch (feature.properties['marker-color']) {
+            case 'red': return redIcon;
+            case 'green': return greenIcon;
+            case 'violet': return violetIcon;
+            case 'yellow': return yellowIcon;
+            default: return defaultIcon;
+        }
     }
-}
-
 
 
 // Search Control
@@ -372,6 +347,26 @@ const markerContent = {
     // ... add other markers content
 };
 
+function getMarkerPopupContent(type) {
+    const content = markerContent[type];
+    return `
+        <div class="popup-content">
+            <img src="${content.imgSrc}" alt="${type}" />
+            <p>${content.text}</p>
+        </div>
+    `;
+}
 
+function createMarker(latlng, type) {
+    const marker = L.marker(latlng, { icon: selectIcon(type) });
+    marker.bindPopup(getMarkerPopupContent(type));
+    return marker;
+}
 
+marker.on('mouseover', function(e) {
+    this.openPopup();
+});
+marker.on('mouseout', function(e) {
+    this.closePopup();
+});
 
