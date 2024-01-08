@@ -252,14 +252,14 @@ function removeAllLayersExceptProjectMarkers() {
     }
 
 
-    function createPulsatingIcon() {
-        return L.divIcon({
-            className: 'pulsating-marker red', // Use your CSS classes for red pulsating marker
-            iconSize: [10, 10], // Size of the icon
-            iconAnchor: [5, 5] // Anchor point of the icon
-        });
-    }
-    
+function createPulsatingIcon() {
+    return L.divIcon({
+        className: 'pulsating-marker red', // Use your CSS classes for red pulsating marker
+        iconSize: [10, 10], // Size of the icon
+        iconAnchor: [8, 27.33], // 2/3 of the original size
+    });
+}
+
 
 // Marker Icons
     var redIcon = L.icon({ 
