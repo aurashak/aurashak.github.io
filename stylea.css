@@ -41,6 +41,7 @@ h3 {
     z-index: 2000; /* Ensures sidebar is above main-content */
     position: fixed; /* Fixed position to keep sidebar in view */
     height: 100vh; /* Full viewport height */
+    border-right: 1px solid grey; 
 }
 
 .main-content {
@@ -163,6 +164,7 @@ button:active {
     display: flex; /* Use flexbox for alignment */
     justify-content: space-evenly; /* Evenly space the children */
     flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    border-top: 1px solid grey;
 }
 
 .map-legend, .button-container, #hover-info, .layer-button-container {
