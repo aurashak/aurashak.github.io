@@ -170,37 +170,38 @@ button:active {
 }
 
 #mapid {
-    height: 80vh; /* Adjust based on the desired view, leaving room for the legend */
+    height: 40vh; /* Adjust based on the desired view, leaving room for the legend */
     margin: 20px; /* Provides spacing from the top */
-
-    /* Rest of your styles */
 }
 
 .map-legend {
-    background: rgba(255, 255, 255, 0.8); /* Optional: semi-transparent white background */
+    width: 200px; /* Set the width of the legend box */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
     padding: 10px;
-    border-radius: 4px; /* Optional: if you want rounded corners */
-    display: flex;
-    flex-direction: column; /* Stack legend items vertically */
-    align-items: center; /* Center items horizontally */
-    margin-top: 20px; /* Space between the map and legend */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: adds some depth */
+    position: absolute; /* Position it over other content if needed */
+    left: 20px; /* Distance from the left side of the viewport */
+    top: 20px; /* Distance from the top */
+    z-index: 1000; /* Ensures it appears above other elements */
 }
 
 .legend-item {
+    text-align: left; /* Align text to the left */
     display: flex;
     align-items: center;
     margin: 5px 0; /* Spacing between legend items */
 }
 
 .legend-item img {
-    width: 24px; /* Size of the marker icon */
+    width: 24px; /* Size of marker icon */
     height: auto;
     margin-right: 8px; /* Spacing between icon and text */
 }
 
 .legend-item span {
-    font-size: 15px; /* Text size */
-    color: #333; /* Text color */
+    font-size: 15px;
+    color: #333;
 }
 
 .popup-content img {
