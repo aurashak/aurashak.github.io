@@ -95,6 +95,22 @@ function onEachFeature(feature, layer) {
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
 
+    function createMarker(latlng, type) {
+        var icon = selectIcon(type);
+        var marker = L.marker(latlng, { icon: icon });
+        marker.bindPopup(getMarkerPopupContent(type.type));
+    
+        // Bind mouseover and mouseout events
+        marker.on('mouseover', function(e) {
+            this.openPopup();
+        });
+        marker.on('mouseout', function(e) {
+            this.closePopup();
+        });
+    
+        return marker;
+    }
+
     function addProjectMarkers() {
         fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
             .then(response => response.json())
@@ -103,17 +119,15 @@ function onEachFeature(feature, layer) {
                     style: projectmarkersStyle,
                     onEachFeature: onEachFeature,
                     pointToLayer: function(feature, latlng) {
-                        if (feature.properties['marker-color'] === 'red') {
-                            return L.marker(latlng, { icon: createPulsatingIcon() });
-                        } else {
-                            return L.marker(latlng, { icon: selectIcon(feature) });
-                        }
+                        // Use createMarker to create and return each marker
+                        return createMarker(latlng, feature.properties);
                     }
                 }).addTo(mymap);
             })
             .catch(error => console.error('Error loading GeoJSON:', error));
     }
     
+    addProjectMarkers();
 
 // Call this function to add the Project Markers layer immediately
 addProjectMarkers();
@@ -364,20 +378,6 @@ function getMarkerPopupContent(type) {
             <p>${content.text}</p>
         </div>
     `;
-}
-
-function createMarker(latlng, type) {
-    const marker = L.marker(latlng, { icon: selectIcon(type) });
-    marker.bindPopup(getMarkerPopupContent(type));
-
-    marker.on('mouseover', function(e) {
-        this.openPopup();
-    });
-    marker.on('mouseout', function(e) {
-        this.closePopup();
-    });
-
-    return marker;
 }
 
 
