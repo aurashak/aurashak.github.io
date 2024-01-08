@@ -91,6 +91,14 @@ function onEachFeature(feature, layer) {
     });
 }
 
+function createPulsatingIcon(color) {
+    return L.divIcon({
+        className: `pulsating-marker ${color}`,
+        iconSize: [10, 10],
+        iconAnchor: [5, 5]
+    });
+}
+
 
 // Array to store GeoJSON layers
     var geoJSONLayers = [];
@@ -254,66 +262,20 @@ function removeAllLayersExceptProjectMarkers() {
 
 
 
-// Marker Icons
-    var redIcon = L.icon({ 
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-red.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var greenIcon = L.icon({ 
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-green.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var violetIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-violet.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var yellowIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-yellow.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-});
-
-    var defaultIcon = L.icon({    
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers/img/marker-icon-2x-blue.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [16.67, 27.33], // 2/3 of the original size
-    iconAnchor: [8, 27.33], // 2/3 of the original size
-    popupAnchor: [1, -22.67], // Adjusted y-coordinate to 2/3 of the original size
-    shadowSize: [27.33, 27.33] // 2/3 of the original size
-}); // Define a default icon
-
    
 
 
 
 // Icon Selector Function
-    function selectIcon(feature) {
-        switch (feature.properties['marker-color']) {
-            case 'red': return redIcon;
-            case 'green': return greenIcon;
-            case 'violet': return violetIcon;
-            case 'yellow': return yellowIcon;
-            default: return defaultIcon;
-        }
+function selectIcon(feature) {
+    switch (feature.properties['marker-color']) {
+        case 'red': return createPulsatingIcon('red');
+        case 'green': return createPulsatingIcon('green');
+        case 'violet': return createPulsatingIcon('violet');
+        case 'yellow': return createPulsatingIcon('yellow');
+        default: return createPulsatingIcon('default'); // define a default pulsating icon if needed
     }
+}
 
 
 // Search Control
