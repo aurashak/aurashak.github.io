@@ -42,15 +42,34 @@ coordsBox.textContent = 'Map data: Lat: -, Lon: -'; // Default text
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
+    var entity = viewer.scene.pick(movement.endPosition); // Pick the entity at the mouse position
+
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
 
-        // Update text content with "Map data:" prefix
-        coordsBox.textContent = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
+        var propertyData = '';
+
+        // Check if an entity was picked
+        if (Cesium.defined(entity)) {
+            // Get the properties of the picked entity
+            var properties = entity.id.properties; // Assuming the entity has properties
+            propertyData += '<p><strong>Entity Data:</strong></p>';
+            // Loop through all properties and append them to the propertyData string
+            properties.propertyNames.forEach(function(propertyName) {
+                var property = properties[propertyName];
+                propertyData += '<p>' + propertyName + ': ' + property.getValue() + '</p>';
+            });
+        }
+
+        // Update text content with "Map data:" prefix and properties
+        coordsBox.innerHTML = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°' + propertyData;
+    } else {
+        coordsBox.style.display = 'none';
     }
 }
+
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
@@ -94,7 +113,7 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
                 pixelSize: 10,
                 color: color, // Use the color from the GeoJSON properties
                 outlineColor: Cesium.Color.WHITE,
-                outlineWidth: 2
+                outlineWidth: 0
             });
         }
 
