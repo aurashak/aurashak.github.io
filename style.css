@@ -1,365 +1,191 @@
-/* General Body Styles */
 body {
-    background-color: #fff; /* White background for the body */
-    color: #212529; /* Default text color */
     margin: 0;
-    font-family: arial;
+    padding: 0;
+    min-height: 100vh; /* Changed to min-height to allow content to expand */
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    margin: 100px 130px 70px 130px; /* Top, Right, Bottom, Left */
+    background-color: #000;
     padding: 0px;
-    font-size: 14px;
-    padding-bottom: 20px;
+    align-items: center; /* Vertically align content */
 }
 
-p {
-    color: #000; /* Default text color */
-    font-family: arial;
-    font-size: 15px;
-    text-align: center;
-}
-
-a {
-    color: #fff; /* Standard link color - change as needed */
-    text-decoration: none; /* Removes underline from links */
-    transition: none; /* Smooth color transition for hover */
-}
-
-a:hover {
-    background-color: none;
-    text-decoration: underline;
-}
-
-/* General h1 and h2 Styles */
-h1 {
-    margin: 0; /* Margin for h1 */
-    font-size: 21px;
-    font-family: arial;
-}
-
-h2 {
-    margin: 0px; /* Margin for h2 */
-    font-size: 21px;
-    font-family: arial;
-    font-weight: normal;
-    color: gray;
-}
-
-h3 {
-    margin: 0px; /* Margin for h2 */
-    font-size: 18px;
-    font-family: arial;
+.header-left {
+    flex: 1;
+    font-size: 50px;
     font-weight: bold;
-    color: black;
 }
 
-.sidebar {
-    position: fixed; /* Fix position to the side of the screen */
-    left: 0; /* Align to the left */
-    top: 0; /* Align to the top */
-    width: 200px; /* Set the width of the sidebar */
-    height: 100%; /* Full height */
-    background-color: #fff; /* Background color */
-    color: white; /* Text color */
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    padding-top: 20px; /* Padding at the top */
-  border-right: 1px solid black;
+.header-right {
+    flex: 3;
+    text-align: left;
+    font-weight: lighter;
+    font-size: 35px;
 }
 
-/* Navigation Bar Styles */
-.UnderlineNav {
-    overflow: hidden;
-}
-
-.UnderlineNav-body {
+/* Boxes Section Styles */
+.boxes-container {
     display: flex;
+    justify-content: start; /* Align the boxes at the start of the container */
+    margin: 20px 130px; /* Top and Bottom Margin */
 }
 
-.UnderlineNav-item {
-    display: block;
-    padding: 5px 10px; /* Padding for the button */
-    color: #fff; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #000; /* Background color set to grey */
-    text-decoration: none;
-    font-size: 20px; /* Font size set to 15px */
-    font-weight: bold; /* Font weight set to normal */
-    letter-spacing: .04rem;
+.box {
+    width: 100px; /* Set the width of each box to 100px */
+    text-align: center; /* Center the text inside the box */
+    font-size: 20px; /* Adjust the font size as needed */
+    padding: 10px; /* Add some padding inside the box */
+    border: 1px solid #fff; /* Add a border for visibility */
+    margin-right: 10px; /* Add right margin between boxes */
 }
 
-.UnderlineNavsub-item {
-    display: block;
-    padding: 4px 8px; /* Padding for the button */
-    color: #fff; /* Text color set to black */
-    border-radius: 0px;
-    background-color: #000; /* Background color set to grey */
-    text-decoration: none;
-    font-size: 17px; /* Font size set to 15px */
-    font-weight: bold; /* Font weight set to normal */
-    margin: 10px; /* Adjust margins as needed */
-    letter-spacing: .04rem;
+.box:last-child {
+    margin-right: 0; /* No right margin on the last box */
 }
 
-.UnderlineNav-item:last-child {
-    margin-right: 0; /* No margin for the last item */
-
+/* Third Row Styles */
+.third-row {
+    display: flex;
+    margin: 100px 130px; /* Top and Bottom Margin */
 }
 
-.UnderlineNav a {
-    background-color: none;
+.third-row-left {
+    width: 400px; /* Set width to 100px */
+    font-size: 30px;
+    text-align: left; /* Center the text */
+    margin-right: 10px; /* Right Margin */
 }
-.UnderlineNav a:hover {
-    color: grey;
-    text-decoration: none;
+
+.third-row-right {
+    flex-grow: 1; /* Take remaining space */
+    font-size: 30px;
+    text-align: left; /* Align text to the left */
 }
-    
+
+
 /* Main Content Styles */
-.container-lg {
-    padding: 0px 0px 0px 0px;
-    max-width: 100%;
-    margin: 40px 20px;
-    background-color: white;
-}
-
-.containertext-lg {
-    padding: 20px; /* Your desired padding */
-    max-width: 60%; /* Adjust as needed */
-    margin: 40px auto; /* Top and bottom margin 40px, left and right auto */
-    font-size: 15px;
-    line-height: 1.4;
-    font-family: arial;
-    text-align: left; /* Center align the text */
-    background-color: none;
-    color: #fff;
-    letter-spacing: .02rem;
-    line-height: 1.4;
-    box-sizing: border-box; /* Include padding and border in the element's width and height */
-}
-
-.containertext-lg h1 {
-    font-size: 19px;
-    font-weight: bold;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    color: #fff;
-    letter-spacing: 0.02rem;
-}
-
-.containertext-lg a {
-}
-
-.containertext-lg a:hover {
-  background-color: none;
-}
-
-.containertext-lg h2 {
-    font-size: 20px;
-    font-weight: normal;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    color: #fff;
-}
-
-.containerimage-lg {
-    padding: 0px 0px 0px 0px;
-    max-width: 60%; /* Adjust as needed */
-    margin: 10px auto; /* Top and bottom margin 40px, left and right auto */
-    font-size: 15px;
-    line-height: 1.4;
-    font-family: arial;
-    text-align: left; /* Center align the text */
-    background-color: white;
-}
-
-/* Styles for larger screens */
-.image-gridtwo {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
-    gap: 60px; /* Space between items */
-    justify-content: center; /* Center the grid */
-    width: 60%; /* Adjust the width of the grid */
-    margin: 0 auto; /* Center the grid in the page with automatic margins */
-}
-
-.image-containertwo {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    overflow: hidden;
-}
-
-.image-containertwo img {
-    max-width: 100%;
-    max-height: 100%;
-    /* Removed object-fit: cover; */
-}
-
-.image-gridone {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Two columns of equal width */
-    gap: 30px 80px; /* 10px row gap, 20px column gap */
-    justify-content: center; /* Center the grid */
-    width: 60%; /* Adjust the width of the grid */
-    margin: 0 auto; /* Center the grid in the page with automatic margins */
-}
-
-.image-containerone {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    overflow: hidden;
-}
-
-.image-containerone img {
-    max-width: 100%;
-    max-height: 100%;
-    /* Removed object-fit: cover; */
-}
-
-.image-caption {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #333;
-    margin-top: 5px; /* Space between image and caption */
-}
-
-.image-captiontitle {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-top: 5px; /* Space between image and caption */
-}
-
-.imagetitle {
-    font-family: arial; 
-    font-size: 15px;
-}
-
-.content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
-    gap: 60px; /* Space between columns, consistent with image-gridtwo */
-    align-items: start; /* Align items to the top */
-    margin: 50px auto; /* Center the grid in the page with automatic margins */
-    width: 60%; /* Same width as image-gridtwo */
-    /* Other styling as needed */
-}
-
-.image-column img {
-    width: 100%; /* Full width of the column */
-    height: auto; /* Maintain aspect ratio */
-    /* Other styling as needed */
-}
-
-.text-column {
-    /* Center the text */
+.main-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    color: #fff; /* White text color */
-    background-color: #000;
-    /* If you have specific padding requirements, set them here */
-    padding: 20px; /* For example, 20px padding */
-    box-sizing: border-box; /* Include padding in the width and height */
-    /* Other styling as needed */
-     letter-spacing: .02rem;
-    line-height: 1.4;
+    align-items: center;
+    width: 100%;
 }
 
-
-.text-column h2 {
-    text-align: center;
+/* Adjust Navigation Bar Styles */
+.mainnav-item, .mainnavsub-item {
+    display: block;
+    background: #000;
     color: #fff;
-    letter-spacing: .02rem;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 45px;
     font-weight: bold;
-    font-size: 19px;
-    /* Other styling as needed */
+    letter-spacing: 0.04rem;
 }
 
-.country {
-    fill: #ccc;
-    stroke: #fff;
-    stroke-width: 0.5;
+.mainnav-item:hover {
 }
 
-/* Footer Styles */
-.footer {
-    background-color: #fff;
-    color: black;
-    text-align: left;
-    padding: 0px;
-    width: 100%;
-    margin: 0; /* Removed the margin */
-    font-size: 12px;
+.mainnavsub-item {
+    font-size: 17px; /* Sub-items size */
+    font-weight: normal; 
 }
 
-.footer p {
-    margin: 20px;
-    font-size: 12px;
-    font-family: arial; 
-}
-
-#mapid {
-    height: 500px;
-    background-color: white;
-    border: solid 1px black;
-}
-
-.map {
-    height: 600px;
-    width: 100%;
-  }
-
-  #map {
-    height: 600px;
-    width: 100%;
-    border: solid 1px black;
+/* Container Styles */
+.container {
+    max-width: 100%;
+    margin: 40px 20px;
 }
 
 
 /* Button Styles */
 button {
-    background-color: #bfbfbf; /* Black background */
-    color: #000; /* White text */
-    border: none; /* No border */
-    padding: 5px 10px; /* Top/bottom padding 10px, left/right padding 20px */
-    margin: 10px 5px; /* Margin 10px top and bottom, 0 left and right */
-    cursor: pointer; /* Cursor to indicate clickable */
-    font-size: 13px; /* Text size */
-    font-family: 'Arial', sans-serif; /* Font family */
-    font-weight: normal; /* Font weight */
-    text-transform: uppercase; /* Uppercase text */
-    letter-spacing: .02rem;
-    border-radius: 2px; /* Rounded corners */
+    color: #fff; /* Text color for buttons */
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
+    border: none; /* No border for a flat design */
+    cursor: pointer; /* Cursor changes to pointer to indicate button */
+    font-weight: bold;
+    font-size: 13px; /* Font size for text inside buttons */
+    font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
+    text-transform: uppercase; /* Capitalize all text inside buttons */
+    letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
+    transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
+.layer-button {
+    color: #fff; /* Text color for buttons */
+    width: 100%;
+    margin: 0px;
+    border-bottom: 1px solid black;
+    height: 100%;
+    cursor: pointer; /* Cursor changes to pointer to indicate button */
+    font-weight: bold;
+    font-size: 14px; /* Font size for text inside buttons */
+    font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
+    text-transform: uppercase; /* Capitalize all text inside buttons */
+    letter-spacing: 0.09rem; /* Spacing between letters inside buttons */
+}
+
+/* Button hover state */
 button:hover {
-    background-color: none; /* Darker background on hover */
 }
 
+/* Button active state (optional) */
 button:active {
-    background-color: #888; /* Even darker background when active/clicked */
 }
 
 .button-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically if needed */
-    flex-wrap: wrap; /* Wrap buttons to next line if container width is too small */
-    margin: 20px 0; /* Vertical spacing */
+    flex-direction: column; /* Stack children (buttons) vertically */
+    align-items: center; /* Center buttons horizontally */
+    justify-content: center; /* Align buttons to the start of the container vertically */
 }
 
-.button-container button {
-    margin: 0 5px; /* Spacing between buttons */
-    /* The rest of your button styling here */
+.layer-button-container {
+    display: flex;
+    flex-direction: column; /* Stack children (buttons) vertically */
+    align-items: center; /* Center buttons horizontally */
+    justify-content: center; /* Align buttons to the start of the container vertically */
 }
+
 
 #search-container {
     text-align: center; /* Center the search container */
     padding: 10px; /* Add some padding around the search box */
+}
+
+.controls-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    border-radius: 2px; 
+    /* margin: 10px; */
+    /* margin-right: 30px; */
+}
+
+.controls-container > .map-legend, 
+.controls-container > .button-container, 
+.controls-container > #hover-info, 
+.controls-container > .layer-button-container {
+    margin: 10px; /* Adjust as needed */
+}
+
+/* Other styles remain the same */
+
+
+.map-legend, .button-container, #hover-info, .layer-button-container {
+    margin: 0px;
+    flex-grow: 1;
+
 }
 
 .controls {
@@ -382,43 +208,47 @@ button:active {
 
 /* Add this to your CSS file */
 #hover-info {
-    background-color: none;
-    color: black; 
+    display: flex; /* Enables flexbox */
+    width: 200px; /* Fixed width, adjust as needed */
+    color: #fff; 
     font-weight: bold;
-    padding: 5px 10px;
+    line-height: 1.5; 
+    letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
     font-size: 15px;
+    border: 1px solid black;
     text-align: center;
-    height: 290px;
-    max-width: 60%; /* Adjust as needed */
-    padding: 20px; /* Your desired padding */
-    line-height: 1.2;
-    letter-spacing: .02rem;
-    margin: 10px auto;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
 }
 
+#mapid {
+    width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
+    border: 1px solid black;
+    margin-top: 10px;
+    background: black;
+    border-radius: 2px; 
+
+}
 
 .map-legend {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px; /* Spacing between legend and map */
+border: 1px solid black;
+    z-index: 1000;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    margin: 0 auto; /* Spacing between legend items */
+    margin-bottom: 10px; /* Add some space between items */
 }
-
+  
 .legend-item img {
-    width: 24px; /* Size of the marker icon */
+    width: 24px; /* Size of marker icon */
     height: auto;
     margin-right: 8px; /* Spacing between icon and text */
 }
 
 .legend-item span {
     font-size: 15px;
-    font-weight: bold; 
-    color: #333; /* Text color */
 }
 
 .popup-content img {
@@ -434,22 +264,163 @@ button:active {
     text-align: center;
 }
 
+@keyframes pulsate {
+    0% {
+      transform: scale(0.5);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+.pulsating-marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 10px; /* Add space between marker and text */
+    animation: pulsate 1s ease-out infinite;
+}
+  
 
+  .pulsating-marker.red {
+    background: red;
+  }
+  
+  .pulsating-marker.green {
+    background: green;
+  }
+  
+  .pulsating-marker.violet {
+    background: violet;
+  }
+  
+  .pulsating-marker.yellow {
+    background: yellow;
+  }
+
+  .circle-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #FFFFFF; /* Default color, will be overridden */
+}
+
+.circle-marker.red {
+    background-color: red;
+}
+
+.circle-marker.green {
+    background-color: green;
+}
+
+.circle-marker.violet {
+    background-color: violet;
+}
+
+.circle-marker.yellow {
+    background-color: yellow;
+}
+
+  
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
 
-.image-gridone, .image-gridtwo {
-    grid-template-columns: 1fr; /* Collapse to one column */
-    gap: 10px; /* Smaller gap for mobile */
-    width: 80%; /* Adjust width for smaller screens */
-}
 
-.image-containerone img, .image-containertwo img {
-    width: 100%; /* Full width images */
-    height: auto; /* Maintain aspect ratio */
-}
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh; /* Changed to min-height to allow content to expand */
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Header Styles */
+    .header {
+        display: flex;
+        margin: 100px 130px 70px 130px; /* Top, Right, Bottom, Left */
+        background-color: #000;
+        padding: 0px;
+        align-items: center; /* Vertically align content */
+    }
+    
+    .header-left {
+        flex: 1;
+        font-size: 50px;
+        font-weight: bold;
+    }
+    
+    .header-right {
+        flex: 3;
+        text-align: left;
+        font-weight: lighter;
+        font-size: 35px;
+    }
+    
+    /* Boxes Section Styles */
+    .boxes-container {
+        display: flex;
+        justify-content: start; /* Align the boxes at the start of the container */
+        margin: 20px 130px; /* Top and Bottom Margin */
+    }
+    
+    .box {
+        width: 100px; /* Set the width of each box to 100px */
+        text-align: center; /* Center the text inside the box */
+        font-size: 20px; /* Adjust the font size as needed */
+        padding: 10px; /* Add some padding inside the box */
+        border: 1px solid #fff; /* Add a border for visibility */
+        margin-right: 10px; /* Add right margin between boxes */
+    }
+    
+    .box:last-child {
+        margin-right: 0; /* No right margin on the last box */
+    }
+    
+    /* Third Row Styles */
+    .third-row {
+        display: flex;
+        margin: 100px 130px; /* Top and Bottom Margin */
+    }
+    
+    .third-row-left {
+        width: 400px; /* Set width to 100px */
+        font-size: 30px;
+        text-align: left; /* Center the text */
+        margin-right: 10px; /* Right Margin */
+    }
+    
+    .third-row-right {
+        flex-grow: 1; /* Take remaining space */
+        font-size: 30px;
+        text-align: left; /* Align text to the left */
+    }
+    
+    
+    /* Main Content Styles */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 
 
-.content-grid {
-    grid-template-columns: 1fr; /* Stack into one column on smaller screens */
-}
+    
+    #mapid {
+        width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
+        border: 1px solid black;
+        margin-top: 10px;
+        background: black;
+        border-radius: 2px; 
+    
+    }
+ 
+      
+    /* Styles for mobile devices */
+    @media screen and (max-width: 768px) {
+    
+    
+    
