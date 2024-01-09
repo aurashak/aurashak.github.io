@@ -33,6 +33,10 @@ viewer.scene.preRender.addEventListener(function() {
 
 var coordsBox = document.getElementById('coordsBox');
 
+// Initialize the handler for mouse movement
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
@@ -49,3 +53,24 @@ function showCoordinates(movement) {
 }
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
+
+Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
+    viewer.dataSources.add(dataSource);
+
+    var entities = dataSource.entities.values;
+    for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+
+        // Customize the point appearance
+        entity.point = new Cesium.PointGraphics({
+            pixelSize: 10,
+            color: Cesium.Color.fromRandom({alpha: 1.0}), // Random color for each point
+            outlineColor: Cesium.Color.WHITE,
+            outlineWidth: 2
+        });
+
+        // Additional customizations based on GeoJSON properties can be added here
+    }
+});
