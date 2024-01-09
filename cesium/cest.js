@@ -42,42 +42,33 @@ coordsBox.textContent = 'Map data: Lat: -, Lon: -'; // Default text
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
-    var entity = viewer.scene.pick(movement.endPosition); // Pick the entity at the mouse position
-
-    // Default text when not hovering over the globe
-    var defaultText = 'Map data: Lat: -, Lon: -';
+    var entity = viewer.scene.pick(movement.endPosition);
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-
-        var propertyData = '';
+        
+        var hoverText = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
 
         // Check if an entity was picked
-        if (Cesium.defined(entity)) {
-            // Get the properties of the picked entity
-            var properties = entity.id.properties; // Assuming the entity has properties
-            propertyData += '<p><strong>Entity Data:</strong></p>';
-            // Loop through all properties and append them to the propertyData string
-            properties.propertyNames.forEach(function(propertyName) {
-                var property = properties[propertyName];
-                propertyData += '<p>' + propertyName + ': ' + property.getValue() + '</p>';
-            });
+        if (Cesium.defined(entity) && entity.id && entity.id.properties) {
+            var nameProperty = entity.id.properties.name;
+            if (Cesium.defined(nameProperty)) {
+                hoverText += '<br>' + 'Name: ' + nameProperty.getValue();
+            }
         }
 
-        // Update text content with "Map data:" prefix and properties
-        coordsBox.innerHTML = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°' + propertyData;
+        // Update text content
+        coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     } else {
-        // When not hovering over the globe, show the default text
-        coordsBox.innerHTML = defaultText;
-        coordsBox.style.display = 'block';
+        coordsBox.style.display = 'none';
     }
 }
 
-// Set the event listener for mouse movement
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
 // to set the coordsBox to the default text
