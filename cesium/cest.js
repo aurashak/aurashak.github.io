@@ -64,6 +64,9 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
     for (var i = 0; i < entities.length; i++) {
         var entity = entities[i];
 
+        // Remove the billboard property to get rid of the pin icon
+        entity.billboard = undefined;
+
         // Check if the entity has properties and a marker-color
         if (entity.properties && entity.properties['marker-color']) {
             var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
