@@ -298,6 +298,14 @@ border: 1px solid black;
     background: yellow;
   }
 
+
+  .basic-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    border: 1px solid #ffffff; /* Optional: white border for visibility */
+}
   
   
 /* Styles for mobile devices */
