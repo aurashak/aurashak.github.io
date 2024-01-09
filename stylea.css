@@ -258,25 +258,29 @@ border: 1px solid black;
     text-align: center;
 }
 
-@keyframes pulsate {
-    0% {
-      transform: scale(0.5);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1.5);
-      opacity: 0;
-    }
-  }
-  
 .pulsating-marker {
-    width: 10px;
-    height: 10px;
+    width: 30px; /* Increased size for visibility */
+    height: 30px; /* Increased size for visibility */
     border-radius: 50%;
-    margin: 10px; /* Add space between marker and text */
+    margin: 10px;
+    background-color: red; /* Default color, will be overridden by specific classes */
     animation: pulsate 1s ease-out infinite;
 }
-  
+
+@keyframes pulsate {
+    0% {
+      transform: scale(1); /* Start at full size */
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2); /* Modestly increase size */
+    }
+    100% {
+      transform: scale(1); /* Return to full size */
+      opacity: 1;
+    }
+}
+
 
   .pulsating-marker.red {
     background: red;
