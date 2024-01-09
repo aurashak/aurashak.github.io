@@ -53,3 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading GeoJSON:', error));
     }
     
+
+    // Call this function to add the Project Markers layer immediately
+    addProjectMarkers();
+});
