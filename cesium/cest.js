@@ -96,7 +96,7 @@ Cesium.GeoJsonDataSource.load(oceansGeojsonUrl).then(function(dataSource) {
 });
 
 
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/countries.geojson'; // URL to the countries GeoJSON
+var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/countries.json'; // URL to the countries GeoJSON
 
 Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
     // Apply styling to the data source here
