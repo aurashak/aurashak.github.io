@@ -302,19 +302,22 @@ function removeAllLayersExceptProjectMarkers() {
 }); // Define a default icon
 
    
-
-
-
 // Icon Selector Function
-    function selectIcon(feature) {
-        switch (feature.properties['marker-color']) {
-            case 'red': return redIcon;
-            case 'green': return greenIcon;
-            case 'violet': return violetIcon;
-            case 'yellow': return yellowIcon;
-            default: return defaultIcon;
-        }
+function selectIcon(feature) {
+    var className = 'circle-marker';
+    switch (feature.properties['marker-color']) {
+        case '#FF0000': className += ' red'; break;    // Hexadecimal for red
+        case '#008000': className += ' green'; break;  // Hexadecimal for green
+        case '#EE82EE': className += ' violet'; break; // Hexadecimal for violet
+        case '#FFFF00': className += ' yellow'; break; // Hexadecimal for yellow
+        default: className += ''; // Default class
     }
+    return L.divIcon({
+        className: className,
+        iconSize: [20, 20], // Size of the icon
+        iconAnchor: [10, 10] // Position of the icon
+    });
+}
 
 
 // Search Control
