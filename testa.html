@@ -1,55 +1,18 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Index</title>
-        <!-- Include the Leaflet CSS and JavaScript -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <!-- Include your custom CSS -->
-        <link rel="stylesheet" href="https://aurashak.github.io/stylea.css">    
-    </head>
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet Map with Pulsating Markers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <link rel="stylesheet" href="https://aurashak.github.io/stylea.css">    
+
+    <style>
+        /* Your custom CSS for pulsating markers here */
+    </style>
+</head>
 <body>
-    <div class="sidebar">
-    <a href="https://aurashak.github.io" class="mainnav-item">Aurash Khawarzad</a>
-    <span class="mainnavsub-item">Geography</span>
-    <span class="mainnavsub-item">Geoinformatics</span>
-    <span class="mainnavsub-item">Cartography</span>
-    <span class="mainnavsub-item">Urban Planning</span>
-    <span class="mainnavsub-item">Urban Design</span>
-    </div>
-  
-<div class="main-content">
-    <div class="controls-container">
-        <div class="map-legend">
-            <div class="legend-item">
-                <div class="pulsating-marker red"></div><span>Print</span>
-            </div>
-            <div class="legend-item">
-                <div class="pulsating-marker red"></div><span>Print</span>
-            </div>
-        </div>
-
-        <div class="layer-button-container">
-            <button class="layer-button" onclick="toggleOSMLayer()">OSM</button>
-            <button class="layer-button" onclick="toggleSatelliteLayer()">SAT</button>
-            <button class="layer-button" onclick="toggleGeoJSONLayer()">AAK</button>
-        </div>
-
-        <div id="hover-info" class="hover-info">Hover over map</div>
-    </div>
-
-        <div id="mapid"></div>
-
-    
-    </div>
-
-    <!-- Include Leaflet scripts and other necessary JavaScript files -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-graticule"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-color-markers/js/leaflet-color-markers.js"></script>
+    <div id="mapid" style="width: 100%; height: 100vh;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <script src="https://aurashak.github.io/leaflet/leaflet.js"></script>
 
 </body>

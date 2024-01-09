@@ -161,6 +161,7 @@ button:active {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    border-radius: 2px; 
     /* margin: 10px; */
     /* margin-right: 30px; */
 }
@@ -219,6 +220,8 @@ button:active {
     border: 1px solid black;
     margin-top: 10px;
     background: black;
+    border-radius: 2px; 
+
 }
 
 .map-legend {
@@ -290,6 +293,8 @@ border: 1px solid black;
   .pulsating-marker.yellow {
     background: yellow;
   }
+
+  
   
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
