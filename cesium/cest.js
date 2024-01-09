@@ -9,7 +9,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     geocoder: false,
     homeButton: false,
     infoBox: false,
-    sceneModePicker: true,
+    sceneModePicker: false,
     selectionIndicator: false,
     timeline: false,
     navigationHelpButton: false,
