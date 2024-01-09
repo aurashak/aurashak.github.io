@@ -3,7 +3,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 var viewer = new Cesium.Viewer('cesiumContainer', {
     // imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // Commented out to use default imagery
     baseLayerPicker: false,
-    geocoder: false,
+    geocoder: true,
     homeButton: false,
     infoBox: false,
     sceneModePicker: false,
@@ -63,18 +63,20 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
     for (var i = 0; i < entities.length; i++) {
         var entity = entities[i];
 
-        // Customize the point appearance
-        entity.point = new Cesium.PointGraphics({
-            pixelSize: 10,
-            color: Cesium.Color.fromRandom({alpha: 1.0}), // Random color for each point
-            outlineColor: Cesium.Color.WHITE,
-            outlineWidth: 2
-        });
+        // Check if the entity has properties and a marker-color
+        if (entity.properties && entity.properties['marker-color']) {
+            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
+
+            // Customize the point appearance with the marker-color from the GeoJSON properties
+            entity.point = new Cesium.PointGraphics({
+                pixelSize: 10,
+                color: color, // Use the color from the GeoJSON properties
+                outlineColor: Cesium.Color.WHITE,
+                outlineWidth: 2
+            });
+        }
 
         // Disable the pop-up infobox for each point
         entity.description = undefined;
-        entity.popup = undefined; // Some versions of Cesium might use 'popup' instead of 'description'
-
-        // Additional customizations based on GeoJSON properties can be added here
     }
 });
