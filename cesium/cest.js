@@ -44,6 +44,9 @@ function showCoordinates(movement) {
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
     var entity = viewer.scene.pick(movement.endPosition); // Pick the entity at the mouse position
 
+    // Default text when not hovering over the globe
+    var defaultText = 'Map data: Lat: -, Lon: -';
+
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
@@ -65,13 +68,23 @@ function showCoordinates(movement) {
 
         // Update text content with "Map data:" prefix and properties
         coordsBox.innerHTML = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°' + propertyData;
+        coordsBox.style.display = 'block';
     } else {
-        coordsBox.style.display = 'none';
+        // When not hovering over the globe, show the default text
+        coordsBox.innerHTML = defaultText;
+        coordsBox.style.display = 'block';
     }
 }
 
-
+// Set the event listener for mouse movement
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Additionally, you may want to set up an event listener for when the mouse leaves the globe
+// to set the coordsBox to the default text
+viewer.scene.canvas.addEventListener('mouseleave', function() {
+    coordsBox.innerHTML = defaultText;
+    coordsBox.style.display = 'block';
+});
 
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; // URL to the oceans GeoJSON
 
