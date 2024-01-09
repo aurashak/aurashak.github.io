@@ -19,7 +19,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Fortaleza de São Miguel, Luanda, Angola",
-                "marker-color": "#FF0000d" 
+                "marker-color": "#FF0000" 
             },
             "geometry": {
                 "type": "Point",
