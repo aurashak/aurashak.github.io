@@ -71,33 +71,8 @@ body {
     line-height: 1.5; /* Set line height */
 }
 
-
 /* Main Content Styles */
 .main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-/* Adjust Navigation Bar Styles */
-.mainnav-item, .mainnavsub-item {
-    display: block;
-    background: #000;
-    color: #fff;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 45px;
-    font-weight: bold;
-    letter-spacing: 0.04rem;
-}
-
-.mainnav-item:hover {
-}
-
-.mainnavsub-item {
-    font-size: 17px; /* Sub-items size */
-    font-weight: normal; 
 }
 
 /* Container Styles */
@@ -106,322 +81,87 @@ body {
     margin: 40px 20px;
 }
 
-
-/* Button Styles */
-button {
-    color: #fff; /* Text color for buttons */
-    width: 80px;
-    height: 30px;
-    margin-top: 10px;
-    border: none; /* No border for a flat design */
-    cursor: pointer; /* Cursor changes to pointer to indicate button */
-    font-weight: bold;
-    font-size: 13px; /* Font size for text inside buttons */
-    font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
-    text-transform: uppercase; /* Capitalize all text inside buttons */
-    letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
-    transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
-}
-
-.layer-button {
-    color: #fff; /* Text color for buttons */
-    width: 100%;
-    margin: 0px;
-    border-bottom: 1px solid black;
-    height: 100%;
-    cursor: pointer; /* Cursor changes to pointer to indicate button */
-    font-weight: bold;
-    font-size: 14px; /* Font size for text inside buttons */
-    font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
-    text-transform: uppercase; /* Capitalize all text inside buttons */
-    letter-spacing: 0.09rem; /* Spacing between letters inside buttons */
-}
-
-/* Button hover state */
-button:hover {
-}
-
-/* Button active state (optional) */
-button:active {
-}
-
-.button-container {
-    display: flex;
-    flex-direction: column; /* Stack children (buttons) vertically */
-    align-items: center; /* Center buttons horizontally */
-    justify-content: center; /* Align buttons to the start of the container vertically */
-}
-
-.layer-button-container {
-    display: flex;
-    flex-direction: column; /* Stack children (buttons) vertically */
-    align-items: center; /* Center buttons horizontally */
-    justify-content: center; /* Align buttons to the start of the container vertically */
-}
-
-
-#search-container {
-    text-align: center; /* Center the search container */
-    padding: 10px; /* Add some padding around the search box */
-}
-
-.controls-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    border-radius: 2px; 
-    /* margin: 10px; */
-    /* margin-right: 30px; */
-}
-
-.controls-container > .map-legend, 
-.controls-container > .button-container, 
-.controls-container > #hover-info, 
-.controls-container > .layer-button-container {
-    margin: 10px; /* Adjust as needed */
-}
-
-/* Other styles remain the same */
-
-
-.map-legend, .button-container, #hover-info, .layer-button-container {
-    margin: 0px;
-    flex-grow: 1;
-
-}
-
-.controls {
-    width: 300px; /* Set the width of the search box */
-    height: 25px; /* Set the height of the search box */
-    padding: 5px; /* Add some padding inside the search box */
-    margin-bottom: 10px; /* Add some space below the search box */
-}
-
-/* Custom styles for the country tooltip */
-.country-tooltip {
-    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
-    border: 1px solid #333; /* Dark border */
-    border-radius: 2px; /* Rounded corners */
-    color: #fff; /* White text color */
-    font-size: 14px; /* Font size */
-    padding: 2px; /* Padding inside the tooltip */
-    box-shadow: 0 3px 14px rgba(0,0,0,0.4); /* Subtle shadow for depth */
-}
-
-/* Add this to your CSS file */
-#hover-info {
-    display: flex; /* Enables flexbox */
-    width: 200px; /* Fixed width, adjust as needed */
-    color: #fff; 
-    font-weight: bold;
-    line-height: 1.5; 
-    letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
-    font-size: 15px;
-    border: 1px solid black;
-    text-align: center;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
-}
-
 #mapid {
     width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
     border: 1px solid black;
     margin-top: 10px;
     background: black;
     border-radius: 2px; 
-
 }
 
-.map-legend {
-border: 1px solid black;
-    z-index: 1000;
+
+#cesiumContainer {
+    position: relative;
+    padding: 0;
+    max-width: 70%;
+    height: 700px;
+    margin: 40px auto;
+    background-color: white;
 }
 
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; /* Add some space between items */
-}
-  
-.legend-item img {
-    width: 24px; /* Size of marker icon */
-    height: auto;
-    margin-right: 8px; /* Spacing between icon and text */
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    color: black;
+    background-color: #ffffff91;
+    border: 0 solid black;
+    width: 45px;
 }
 
-.legend-item span {
-    font-size: 15px;
+.cesium-button,
+.cesium-button:hover,
+.cesium-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    fill: black;
+    border: 0 solid #444;
+    box-shadow: none;
 }
 
-.popup-content img {
-    width: 100px; /* Set your desired width */
-    height: auto;
-    display: block;
-    margin-bottom: 5px;
+.cesium-viewer-geocoderContainer .cesium-button:hover,
+.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
+    color: #edffff;
+    fill: #edffff;
 }
 
-.popup-content p {
-    margin: 0; /* Remove default margin */
-    font-size: 14px;
-    text-align: center;
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    color: #fff;
+    font-size: 0;
 }
 
-@keyframes pulsate {
-    0% {
-      transform: scale(0.5);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1.5);
-      opacity: 0;
-    }
-  }
-  
-.pulsating-marker {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 10px; /* Add space between marker and text */
-    animation: pulsate 1s ease-out infinite;
-}
-  
+/* ... other styles ... */
 
-  .pulsating-marker.red {
-    background: red;
-  }
-  
-  .pulsating-marker.green {
-    background: green;
-  }
-  
-  .pulsating-marker.violet {
-    background: violet;
-  }
-  
-  .pulsating-marker.yellow {
-    background: yellow;
-  }
-
-  .circle-marker {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #FFFFFF; /* Default color, will be overridden */
+.controls-container button {
+    background-color: #bfbfbf;
+    color: black;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 16px;
 }
 
-.circle-marker.red {
-    background-color: red;
+/* ... other styles ... */
+
+#loadingOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 10000;
+    display: none;
 }
 
-.circle-marker.green {
-    background-color: green;
-}
-
-.circle-marker.violet {
-    background-color: violet;
-}
-
-.circle-marker.yellow {
-    background-color: yellow;
-}
-
-  
-/* Styles for mobile devices */
-@media screen and (max-width: 768px) {
 
 
-    body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh; /* Changed to min-height to allow content to expand */
-        background-color: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-    }
-    
-    /* Header Styles */
-    .header {
-        display: flex;
-        margin: 100px 130px 70px 130px; /* Top, Right, Bottom, Left */
-        background-color: #000;
-        padding: 0px;
-        align-items: center; /* Vertically align content */
-    }
-    
-    .header-left {
-        flex: 1;
-        font-size: 50px;
-        font-weight: bold;
-    }
-    
-    .header-right {
-        flex: 3;
-        text-align: left;
-        font-weight: lighter;
-        font-size: 35px;
-    }
-    
-    /* Boxes Section Styles */
-    .boxes-container {
-        display: flex;
-        justify-content: start; /* Align the boxes at the start of the container */
-        margin: 20px 130px; /* Top and Bottom Margin */
-    }
-    
-    .box {
-        width: 100px; /* Set the width of each box to 100px */
-        text-align: center; /* Center the text inside the box */
-        font-size: 20px; /* Adjust the font size as needed */
-        padding: 10px; /* Add some padding inside the box */
-        border: 1px solid #fff; /* Add a border for visibility */
-        margin-right: 10px; /* Add right margin between boxes */
-    }
-    
-    .box:last-child {
-        margin-right: 0; /* No right margin on the last box */
-    }
-    
-    /* Third Row Styles */
-    .third-row {
-        display: flex;
-        margin: 100px 130px; /* Top and Bottom Margin */
-    }
-    
-    .third-row-left {
-        width: 400px; /* Set width to 100px */
-        font-size: 30px;
-        text-align: left; /* Center the text */
-        margin-right: 10px; /* Right Margin */
-    }
-    
-    .third-row-right {
-        flex-grow: 1; /* Take remaining space */
-        font-size: 30px;
-        text-align: left; /* Align text to the left */
-    }
-    
-    
-    /* Main Content Styles */
-    .main-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-
-    
-    #mapid {
-        width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
-        border: 1px solid black;
-        margin-top: 10px;
-        background: black;
-        border-radius: 2px; 
-    
-    }
- 
-      
     /* Styles for mobile devices */
     @media screen and (max-width: 768px) {
     
