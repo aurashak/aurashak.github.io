@@ -40,9 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
             .then(response => response.json())
             .then(data => {
+                console.log(data); // Log the data to inspect its structure
                 L.geoJSON(data, {
                     onEachFeature: function(feature, layer) {
-                        // Bind popup or any other feature interactions here if necessary
+                        // ...
                     },
                     pointToLayer: function(feature, latlng) {
                         return L.marker(latlng, { icon: selectIcon(feature) });
@@ -51,7 +52,4 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => console.error('Error loading GeoJSON:', error));
     }
-
-    // Call this function to add the Project Markers layer immediately
-    addProjectMarkers();
-});
+    
