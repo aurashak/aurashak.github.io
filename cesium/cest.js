@@ -14,6 +14,10 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false
 });
 
+// Define handler in the global scope
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+
 // Set a standard initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000), // Longitude, Latitude, Height
