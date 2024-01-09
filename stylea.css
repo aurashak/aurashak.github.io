@@ -38,16 +38,16 @@ body {
 /* Adjust Navigation Bar Styles */
 .mainnav-item, .mainnavsub-item {
     display: block;
+    background: #000;
     color: #fff;
     padding: 10px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 45px;
     font-weight: bold;
     letter-spacing: 0.04rem;
 }
 
 .mainnav-item:hover {
-    background-color: gray; 
 }
 
 .mainnavsub-item {
