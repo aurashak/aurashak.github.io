@@ -230,7 +230,14 @@ a:active {
     display: none;
 }
 
-
+.cesium-viewer-bottom {
+    display: block;
+    height: 0px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-right:5px
+}
 
     /* Styles for mobile devices */
     @media screen and (max-width: 768px) {
