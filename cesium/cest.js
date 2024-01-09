@@ -31,10 +31,7 @@ viewer.scene.preRender.addEventListener(function() {
     viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
 });
 
-var coordsDisplay = document.getElementById('coords');
-
-// Create the handler for mouse movement
-var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+var coordsBox = document.getElementById('coordsBox');
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
@@ -44,14 +41,11 @@ function showCoordinates(movement) {
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
 
-        coordsDisplay.style.display = 'block';
-        coordsDisplay.style.left = (movement.endPosition.x + 10) + 'px'; // Offset a bit for better visibility
-        coordsDisplay.style.top = (movement.endPosition.y + 10) + 'px';
-        coordsDisplay.textContent = 'Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
+        coordsBox.style.display = 'block';
+        coordsBox.textContent = 'Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
     } else {
-        coordsDisplay.style.display = 'none';
+        coordsBox.style.display = 'none';
     }
 }
 
-// Add an event listener for mouse movement
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
