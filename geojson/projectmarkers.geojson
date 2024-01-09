@@ -5,7 +5,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Cais do Valongo, Rio de Janeiro, Brazil",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -19,7 +19,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Fortaleza de São Miguel, Luanda, Angola",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -33,7 +33,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Rågsved, Stockholm, Sweden",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -47,7 +47,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Gaza, Palestine",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -61,7 +61,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Troparyovo-Nikulino District, Moscow, Russia",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -75,7 +75,7 @@
             "type": "Feature",
             "properties": {
                 "name": "San Juan, Puerto Rico",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -89,7 +89,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Cartagena, Colombia",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -103,7 +103,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Brasilia, Brazil",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -117,7 +117,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Istanbul, Turkey",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -131,7 +131,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Microrayon, Kabul, Afghanistan",
-                "marker-color": "#FF0000" 
+                "marker-color": "red" 
             },
             "geometry": {
                 "type": "Point",
@@ -145,7 +145,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Manhattan, New York, New York",
-                "marker-color": "#FFFF00" 
+                "marker-color": "yellow" 
             },
             "geometry": {
                 "type": "Point",
@@ -159,7 +159,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Genoa, Italy",
-                "marker-color": "#00FF00" 
+                "marker-color": "green" 
             },
             "geometry": {
                 "type": "Point",
@@ -173,7 +173,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Venice, Italy",
-                "marker-color": "#00FF00" 
+                "marker-color": "green" 
             },
             "geometry": {
                 "type": "Point",
@@ -187,7 +187,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Amsterdam, Netherlands",
-                "marker-color": "#00FF00" 
+                "marker-color": "green" 
             },
             "geometry": {
                 "type": "Point",
@@ -201,7 +201,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Brooklyn, New York",
-                "marker-color": "#00FF00" 
+                "marker-color": "green" 
             },
             "geometry": {
                 "type": "Point",
@@ -215,7 +215,7 @@
             "type": "Feature",
             "properties": {
                 "name": "Standing Rock",
-                "marker-color": "#00FF00" 
+                "marker-color": "green" 
             },
             "geometry": {
                 "type": "Point",
@@ -229,7 +229,7 @@
             "type": "Feature",
             "properties": {
                 "name": "West Harlem, New York City",
-                "marker-color": "#7F00FF" 
+                "marker-color": "violet" 
             },
             "geometry": {
               "coordinates": [
