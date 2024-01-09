@@ -9,6 +9,8 @@ body {
 
 /* Unvisited links */
 a:link {
+    color: #fff;
+    text-decoration: none;
 }
 
 /* Visited links */
