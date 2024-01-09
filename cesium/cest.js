@@ -32,10 +32,8 @@ viewer.scene.preRender.addEventListener(function() {
 });
 
 var coordsBox = document.getElementById('coordsBox');
-
-// Initialize the handler for mouse movement
-var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-
+coordsBox.style.display = 'block';
+coordsBox.textContent = 'Map data: Lat: -, Lon: -'; // Default text
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
@@ -45,14 +43,13 @@ function showCoordinates(movement) {
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
 
-        coordsBox.style.display = 'block';
-        coordsBox.textContent = 'Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
-    } else {
-        coordsBox.style.display = 'none';
+        // Update text content with "Map data:" prefix
+        coordsBox.textContent = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
     }
 }
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
 
