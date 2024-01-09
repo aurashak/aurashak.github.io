@@ -32,13 +32,13 @@ a:active {
 }
 
 /* Apply pointer-events: none; to overlays to let clicks pass through */
-.header, .boxes-container, .third-row {
+.header, .boxes-container, .third-row, fourth-row {
     pointer-events: none;
     /* ... other styles ... */
 }
 
 /* Re-enable pointer events for interactive elements within overlays */
-.header a, .boxes-container a, .third-row a {
+.header a, .boxes-container a, .third-row a, .fourth-row a {
     pointer-events: auto;
     /* ... other styles ... */
 }
@@ -120,6 +120,30 @@ a:active {
 
 }
 
+/* Fourth Row Styles */
+.fourth-row {
+    display: flex;
+    margin: 80px 130px; /* Top and Bottom Margin */
+    align-items: flex-start; /* Align items at the top of the container */
+}
+
+.fourth-row-left {
+    font-size: 18px;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    text-align: left; /* Align text to the left */
+    border-radius: 2px;
+    margin-right: 50px;
+    z-index: 3; /* Above the globe */
+}
+
+.fourth-row-right {
+    font-size: 30px;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    text-align: left; /* Align text to the left */
+    border-radius: 2px;
+    z-index: 3; /* Above the globe */
+}
+
 /* Main Content Styles */
 .main-content {
     position: relative;
@@ -132,28 +156,7 @@ a:active {
     margin: 40px 20px;
 }
 
-#mapid {
-    width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
-    border: 1px solid black;
-    margin-top: 10px;
-    background: black;
-    border-radius: 2px; 
-}
-
 .coords-box {
-    position: absolute;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border-radius: 5px;
-    z-index: 10000;
-    display: none; /* Initially hidden */
-    text-align: center;
-    margin: auto;
-    width: max-content; /* Adjust width to fit content */
-    bottom: 10px; /* Position it at the bottom of the page or below your third row */
-    left: 0;
-    right: 0;
 }
 
 
