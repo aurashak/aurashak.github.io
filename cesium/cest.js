@@ -71,6 +71,10 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
             outlineWidth: 2
         });
 
+        // Disable the pop-up infobox for each point
+        entity.description = undefined;
+        entity.popup = undefined; // Some versions of Cesium might use 'popup' instead of 'description'
+
         // Additional customizations based on GeoJSON properties can be added here
     }
 });
