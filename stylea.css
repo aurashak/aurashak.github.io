@@ -1,5 +1,4 @@
 body {
-    display: flex;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -8,52 +7,28 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* General Styles */
 p {
     color: #000; /* Default text color */
-    font-family: arial;
+    font-family: Arial;
     font-size: 15px;
 }
 
-a {
+h1, h2, h3 {
+    text-align: center; /* Centering the header */
+    font-size: 21px; /* Adjust the size as needed */
 }
 
-a:hover {
-}
-
-/* General h1 and h2 Styles */
-h1 {
-    font-size: 21px;
-}
-
-h2 {
-    font-size: 21px;
-}
-
-h3 {
-    font-size: 18px;
-}
-
-.sidebar {
-    width: 200px;
-    height: 100%;
-    background-color: #fff;
-    z-index: 2000; /* Ensures sidebar is above main-content */
-    position: fixed; /* Fixed position to keep sidebar in view */
-    height: 100vh; /* Full viewport height */
-    border-right: 1px solid grey; 
-}
-
+/* Main Content Styles */
 .main-content {
-    flex-grow: 1;
     display: flex; /* Establish a flex container */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
-    margin-left: 200px; /* Adjust to match the width of your sidebar */
+    width: 100%; /* Use full width */
 }
 
-/* Navigation Bar Styles */
-.mainnav-item,
-.mainnavsub-item {
+/* Adjust Navigation Bar Styles */
+.mainnav-item, .mainnavsub-item {
     display: block;
     color: #000;
     padding: 10px;
@@ -63,34 +38,20 @@ h3 {
     letter-spacing: 0.04rem;
 }
 
-/* Hover effects for all navigation links */
-.mainnav-item:hover,
- {
+.mainnav-item:hover {
     background-color: gray; 
 }
 
-
-/* Adjust the font size for sub-items if they should be smaller than main items */
 .mainnavsub-item {
     font-size: 17px; /* Sub-items size */
-    color: rgb(0, 0, 0);
     font-weight: normal; 
 }
 
-
+/* Container Styles */
 .container {
-    padding: 0px 0px 0px 0px;
     max-width: 100%;
     margin: 40px 20px;
 }
-
-.container a {
-}
-
-.container a:hover {
-  background-color: none;
-}
-
 
 
 /* Button Styles */
