@@ -25,7 +25,7 @@ viewer.camera.setView({
 });
 
 // Slow down the rotation
-var spinRate = 0.00005;
+var spinRate = 0.0001;
 viewer.clock.multiplier = 1; // Normal time speed
 viewer.scene.preRender.addEventListener(function() {
     viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
