@@ -140,6 +140,22 @@ a:active {
     border-radius: 2px; 
 }
 
+.coords-box {
+    position: absolute;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 5px;
+    z-index: 10000;
+    display: none; /* Initially hidden */
+    text-align: center;
+    margin: auto;
+    width: max-content; /* Adjust width to fit content */
+    bottom: 10px; /* Position it at the bottom of the page or below your third row */
+    left: 0;
+    right: 0;
+}
+
 
 #cesiumContainer {
     position: absolute;
