@@ -1,3 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Unvisited links */
+a:link {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Visited links */
+a:visited {
+        color: white;
+
+}
+
+/* Links when hovered */
+a:hover {
+    border-bottom: 2px solid currentColor; /* Add a border bottom to simulate an underline */
+}}
+
+/* Links when clicked */
+a:active {
+    text-decoration: none;
+    color: white;
+}
+
+/* Apply pointer-events: none; to overlays to let clicks pass through */
+.header, .boxes-container, .third-row {
+    pointer-events: none;
+    /* ... other styles ... */
+}
+
+/* Re-enable pointer events for interactive elements within overlays */
+.header a, .boxes-container a, .third-row a {
+    pointer-events: auto;
+    /* ... other styles ... */
+}
+
 /* Header Styles */
 .header {
     display: flex;
@@ -27,3 +72,149 @@
     z-index: 3; /* Above the globe */
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
 }
+
+/* Boxes Section Styles */
+.boxes-container {
+    display: flex;
+    justify-content: start; /* Align the boxes at the start of the container */
+    margin: 20px 130px; /* Top and Bottom Margin */
+}
+
+.box {
+    font-size: 20px; /* Adjust the font size as needed */
+    margin-right: 60px; /* Add right margin between boxes */
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    text-align: left;
+    border-radius: 2px;
+    z-index: 3; /* Above the globe */
+}
+
+.box:last-child {
+    margin-right: 0; /* No right margin on the last box */
+}
+
+/* Third Row Styles */
+.third-row {
+    display: flex;
+    margin: 80px 130px; /* Top and Bottom Margin */
+    align-items: flex-start; /* Align items at the top of the container */
+}
+
+.third-row-left {
+    font-size: 30px;
+    font-weight: 800;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    text-align: left; /* Align text to the left */
+    border-radius: 2px;
+    margin-right: 50px;
+    z-index: 3; /* Above the globe */
+
+}
+
+.third-row-right {
+    font-size: 30px;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    text-align: left; /* Align text to the left */
+    border-radius: 2px;
+    z-index: 3; /* Above the globe */
+
+}
+
+/* Main Content Styles */
+.main-content {
+    position: relative;
+    z-index: 1; /* Above the globe */
+}
+
+/* Container Styles */
+.container {
+    max-width: 100%;
+    margin: 40px 20px;
+}
+
+#mapid {
+    width: calc(100% - 20px); /* Subtract the total horizontal margin from 100% width */    height: 90vh; /* Or any other height you prefer */
+    border: 1px solid black;
+    margin-top: 10px;
+    background: black;
+    border-radius: 2px; 
+}
+
+
+#cesiumContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Behind the content */
+}
+
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    color: black;
+    background-color: #ffffff91;
+    border: 0 solid black;
+    width: 45px;
+}
+
+.cesium-button,
+.cesium-button:hover,
+.cesium-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    fill: black;
+    border: 0 solid #444;
+    box-shadow: none;
+}
+
+.cesium-viewer-geocoderContainer .cesium-button:hover,
+.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
+    color: #edffff;
+    fill: #edffff;
+}
+
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    color: #fff;
+    font-size: 0;
+}
+
+/* ... other styles ... */
+
+.controls-container button {
+    background-color: #bfbfbf;
+    color: black;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+/* ... other styles ... */
+
+#loadingOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 10000;
+    display: none;
+}
+
+
+
+    /* Styles for mobile devices */
+    @media screen and (max-width: 768px) {
+    
+    
+    
