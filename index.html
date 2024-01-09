@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Index</title>
-        <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
-        <link href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://aurashak.github.io/style.css">    
-    </head>
-    
-    <body>
-        <div class="main-content">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://aurashak.github.io/style.css">    
+</head>
 
+<body>
+    <div id="cesiumContainer"></div>
+
+    <div class="main-content">
         <div class="header">
             <div class="header-left">Aurash Khawarzad</div>
             <div class="header-right">
@@ -25,27 +26,14 @@
             <div class="box">Bio</div>
         </div>
 
-        <!-- Third Row -->
         <div class="third-row">
-            <div class="third-row-left">
-                <!-- Content for the left side of the third row -->
-                Projects:
-            </div>
+            <div class="third-row-left">Projects:</div>
             <div class="third-row-right">
-                <!-- Content for the right side of the third row -->
                 Upper Manhattan Plan // NYC Climate Map // Luanda / Istanbul / San Juan / Cartagena / Stockholm / Kabul / Gaza / Brasilia / Rio de Janeiro / Manhattan
             </div>
         </div>
+    </div>
 
-            <div id="mapid"></div>
-        </div>
-
-
-        <div id="cesiumContainer">
-            <div id="infoBox"></div>
-            </div>
-            
-            <script src="https://aurashak.github.io/cesium/cest.js"></script>
-
-    </body>
+    <script src="https://aurashak.github.io/cesium/cest.js"></script>
+</body>
 </html>
