@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return L.divIcon({
             className: className,
             html: '<div></div>',
-            iconSize: L.point(20, 20),
-            iconAnchor: [10, 10]
+            iconSize: L.point(10, 10),  // Adjust if necessary
+            iconAnchor: [10, 10]        // Adjust if necessary
         });
+        
     }
 
     function addProjectMarkers() {
@@ -43,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Additional interactions can be added here
                     },
                     pointToLayer: function(feature, latlng) {
-                        return L.marker(latlng); // Use default marker for testing
+                        console.log('Creating marker for:', feature.properties.name); // Log to check the feature
+                        return L.marker(latlng, { icon: selectIcon(feature) });
                     }
                 }).addTo(mymap);
             })
