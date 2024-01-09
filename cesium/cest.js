@@ -1,6 +1,5 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
-// Create the viewer with the satellite imagery and disable unwanted widgets
 var viewer = new Cesium.Viewer('cesiumContainer', {
     imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // Satellite imagery
     baseLayerPicker: false,
@@ -15,19 +14,19 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false
 });
 
-// Set the initial view
-viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 1500000), // Longitude, Latitude, Height in meters
+// Set a standard initial view
+viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000), // Longitude, Latitude, Height
     orientation: {
-        heading: Cesium.Math.toRadians(0.0), // East, default value is 0.0 (north)
-        pitch: Cesium.Math.toRadians(-90), // Downward tilt of the camera
+        heading: Cesium.Math.toRadians(0.0), // Facing East
+        pitch: Cesium.Math.toRadians(-90.0), // Looking down
         roll: 0.0
     }
 });
 
-// Enable slow rotation of the globe
-viewer.clock.multiplier = 30; // Adjust the speed of time (the higher, the faster)
+// Slow down the rotation
+var spinRate = 0.00005;
+viewer.clock.multiplier = 1; // Normal time speed
 viewer.scene.preRender.addEventListener(function() {
-    var spinRate = 0.0005;
-    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate * viewer.clock.multiplier);
+    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
 });
