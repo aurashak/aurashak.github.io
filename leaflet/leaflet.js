@@ -8,52 +8,50 @@ document.addEventListener('DOMContentLoaded', function() {
     function selectIcon(feature) {
         var className = 'pulsating-marker'; // Base class for all markers
 
-        // Add color-specific class based on the feature's properties
         switch (feature.properties['marker-color']) {
-            case '#FF0000': // red
+            case '#FF0000':
                 className += ' red';
                 break;
-            case '#00FF00': // green
+            case '#00FF00':
                 className += ' green';
                 break;
-            case '#7F00FF': // violet
+            case '#7F00FF':
                 className += ' violet';
                 break;
-            case '#FFFF00': // yellow
+            case '#FFFF00':
                 className += ' yellow';
                 break;
             default:
                 className += ''; // No additional class for default
         }
 
-        // Return a divIcon with the specified classes
         return L.divIcon({
             className: className,
-            html: '<div></div>', // This is needed to create the div inside the icon
-            iconSize: [20, 20], // Adjust the size as needed
-            iconAnchor: [10, 10] // Adjust the anchor point as needed
+            html: '<div></div>',
+            iconSize: L.point(20, 20),
+            iconAnchor: [10, 10]
         });
     }
 
-    // Function to create the Project Markers layer
     function addProjectMarkers() {
         fetch('https://aurashak.github.io/geojson/projectmarkers.geojson')
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Log the data to inspect its structure
+                console.log('GeoJSON data:', data); // Log to check the data
                 L.geoJSON(data, {
                     onEachFeature: function(feature, layer) {
-                        // ...
+                        // Additional interactions can be added here
                     },
                     pointToLayer: function(feature, latlng) {
+                        console.log('Creating marker for:', feature.properties.name); // Log to check the feature
                         return L.marker(latlng, { icon: selectIcon(feature) });
                     }
                 }).addTo(mymap);
             })
-            .catch(error => console.error('Error loading GeoJSON:', error));
+            .catch(error => {
+                console.error('Error loading GeoJSON:', error);
+            });
     }
-    
 
-    // Call this function to add the Project Markers layer immediately
     addProjectMarkers();
 });
