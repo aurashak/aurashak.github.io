@@ -130,6 +130,27 @@ Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
 });
 
 
+var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json'; // URL to the countries GeoJSON
+
+Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
+    // Apply styling to the data source here
+    dataSource.entities.values.forEach(function(entity) {
+        if (entity.polygon) {
+            // Set polygon material to black and make it opaque
+            entity.polygon.material = Cesium.Color.BLACK.withAlpha(1.0);
+            // Enable the outline for polygons and set it to white
+            entity.polygon.outline = true;
+            entity.polygon.outlineColor = Cesium.Color.WHITE;
+        }
+    });
+
+    viewer.dataSources.add(dataSource);
+}).otherwise(function(error){
+    // Handle any errors that might occur during loading of the GeoJSON
+    console.error(error);
+});
+
+
 
 
 var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
