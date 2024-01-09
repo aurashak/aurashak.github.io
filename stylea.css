@@ -2,35 +2,43 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background-color: #fff;
-    color: #000000;
+    background-color: #000;
+    color: #fff;
     font-family: Arial, sans-serif;
 }
 
-/* General Styles */
-p {
-    color: #000; /* Default text color */
-    font-family: Arial;
-    font-size: 15px;
+/* Header Styles */
+.header {
+    display: flex;
+    background-color: #333; /* Background color of the header */
+    padding: 10px;
+    align-items: center;
 }
 
-h1, h2, h3 {
-    text-align: center; /* Centering the header */
-    font-size: 21px; /* Adjust the size as needed */
+.header-left {
+    flex: 1; /* Smaller section for name */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold;
+}
+
+.header-right {
+    flex: 3; /* Larger section for other info */
+    text-align: left;
+    font-size: 20px; /* Adjust the font size as needed */
 }
 
 /* Main Content Styles */
 .main-content {
-    display: flex; /* Establish a flex container */
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-    width: 100%; /* Use full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 /* Adjust Navigation Bar Styles */
 .mainnav-item, .mainnavsub-item {
     display: block;
-    color: #000;
+    color: #fff;
     padding: 10px;
     text-decoration: none;
     font-size: 25px;
@@ -56,7 +64,7 @@ h1, h2, h3 {
 
 /* Button Styles */
 button {
-    color: #000; /* Text color for buttons */
+    color: #fff; /* Text color for buttons */
     width: 80px;
     height: 30px;
     margin-top: 10px;
@@ -71,10 +79,9 @@ button {
 }
 
 .layer-button {
-    background-color: #ffffff; /* Background color for buttons */
-    color: #000; /* Text color for buttons */
+    color: #fff; /* Text color for buttons */
     width: 100%;
-    margin: 0px; 
+    margin: 0px;
     border-bottom: 1px solid black;
     height: 100%;
     cursor: pointer; /* Cursor changes to pointer to indicate button */
@@ -83,17 +90,14 @@ button {
     font-family: 'Arial', sans-serif; /* Font family for text inside buttons */
     text-transform: uppercase; /* Capitalize all text inside buttons */
     letter-spacing: 0.09rem; /* Spacing between letters inside buttons */
-    transition: background-color 0.3s ease; /* Smooth background color transition for hover effect */
 }
 
 /* Button hover state */
 button:hover {
-    background-color: #5e5e5e; /* Slightly darker background on hover */
 }
 
 /* Button active state (optional) */
 button:active {
-    background-color: #888; /* Even darker background to indicate active/clicked state */
 }
 
 .button-container {
@@ -108,7 +112,6 @@ button:active {
     flex-direction: column; /* Stack children (buttons) vertically */
     align-items: center; /* Center buttons horizontally */
     justify-content: center; /* Align buttons to the start of the container vertically */
-    border: 1px solid black;
 }
 
 
@@ -165,7 +168,7 @@ button:active {
 #hover-info {
     display: flex; /* Enables flexbox */
     width: 200px; /* Fixed width, adjust as needed */
-    color: black; 
+    color: #fff; 
     font-weight: bold;
     line-height: 1.5; 
     letter-spacing: 0.04rem; /* Spacing between letters inside buttons */
