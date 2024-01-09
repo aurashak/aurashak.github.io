@@ -205,11 +205,6 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; // URL to the oceans GeoJSON
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
 var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json';
-var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
-var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
-var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
-var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
-var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 
 
 
@@ -235,10 +230,8 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
 loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.BLACK.withAlpha(1.0), Cesium.Color.WHITE);
 loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK.withAlpha(1.0), Cesium.Color.WHITE);
 loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.RED.withAlpha(1.0), Cesium.Color.WHITE);
-loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED.withAlpha(1.0), Cesium.Color.WHITE);
-loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED.withAlpha(1.0), Cesium.Color.WHITE);
-loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED.withAlpha(1.0), Cesium.Color.WHITE);
-loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED.withAlpha(1.0), Cesium.Color.WHITE);
+
+
 
 
 
