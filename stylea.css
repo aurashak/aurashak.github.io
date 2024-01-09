@@ -293,6 +293,30 @@ border: 1px solid black;
   .pulsating-marker.yellow {
     background: yellow;
   }
+
+  .circle-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #FFFFFF; /* Default color, will be overridden */
+}
+
+.circle-marker.red {
+    background-color: red;
+}
+
+.circle-marker.green {
+    background-color: green;
+}
+
+.circle-marker.violet {
+    background-color: violet;
+}
+
+.circle-marker.yellow {
+    background-color: yellow;
+}
+
   
 /* Styles for mobile devices */
 @media screen and (max-width: 768px) {
