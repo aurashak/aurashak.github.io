@@ -30,3 +30,25 @@ viewer.clock.multiplier = 1; // Normal time speed
 viewer.scene.preRender.addEventListener(function() {
     viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
 });
+
+var coordsDisplay = document.getElementById('coords');
+
+function showCoordinates(movement) {
+    var ray = viewer.camera.getPickRay(movement.endPosition);
+    var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+
+        coordsDisplay.style.display = 'block';
+        coordsDisplay.style.left = movement.endPosition.x + 'px';
+        coordsDisplay.style.top = movement.endPosition.y + 'px';
+        coordsDisplay.textContent = 'Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
+    } else {
+        coordsDisplay.style.display = 'none';
+    }
+}
+
+handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
