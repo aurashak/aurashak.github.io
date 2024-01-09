@@ -43,8 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Additional interactions can be added here
                     },
                     pointToLayer: function(feature, latlng) {
-                        console.log('Creating marker for:', feature.properties.name); // Log to check the feature
-                        return L.marker(latlng, { icon: selectIcon(feature) });
+                        return L.marker(latlng); // Use default marker for testing
                     }
                 }).addTo(mymap);
             })
