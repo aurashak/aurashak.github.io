@@ -54,6 +54,24 @@ function showCoordinates(movement) {
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
+var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; // URL to the oceans GeoJSON
+
+Cesium.GeoJsonDataSource.load(oceansGeojsonUrl).then(function(dataSource) {
+    // Apply any desired styling to the data source here
+    // For example, setting the fill color for polygons representing oceans
+    dataSource.entities.values.forEach(function(entity) {
+        if (entity.polygon) {
+            entity.polygon.material = Cesium.Color.BLUE.withAlpha(0.5); // Semi-transparent blue
+            entity.polygon.outline = false; // Disable the outline for polygons
+        }
+    });
+
+    viewer.dataSources.add(dataSource);
+}).otherwise(function(error){
+    // Handle any errors that might occur during loading of the GeoJSON
+    console.error(error);
+});
+
 
 var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
 
@@ -84,3 +102,4 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
         entity.description = undefined;
     }
 });
+
