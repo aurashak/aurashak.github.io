@@ -113,10 +113,10 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
 var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json';
-var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
-var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
-var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
-var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
+var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
+var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
+var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
+var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 
 
 // Load and style the layers
