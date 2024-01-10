@@ -239,13 +239,6 @@ a:active {
     padding-right:5px
 }
 
-.toolbar-container {
-    position: absolute; /* Position absolutely within .fourth-row-left */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    /* ... other styles ... */
-}
-
     /* Styles for mobile devices */
     @media screen and (max-width: 768px) {
     
