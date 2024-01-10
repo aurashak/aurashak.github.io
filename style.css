@@ -201,6 +201,14 @@ a:active {
     font-size: 0;
 }
 
+.cesium-viewer-bottom {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-right:5px
+}
+
 /* ... other styles ... */
 
 .controls-container button {
