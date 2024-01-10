@@ -182,23 +182,23 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
     for (var i = 0; i < entities.length; i++) {
         var entity = entities[i];
 
-        // Remove the billboard property to get rid of the pin icon
+        // Remove the billboard property
         entity.billboard = undefined;
 
         // Customize the point appearance
         var pulsatingColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
         entity.point = new Cesium.PointGraphics({
-            pixelSize: 10, // Starting size
+            pixelSize: 5, // Starting size - smaller
             color: pulsatingColor
         });
 
-        // Apply pulsating effect
-        createPulsatingEffect(entity, pulsatingColor, 10, 20, 1000); // minSize, maxSize, duration in milliseconds
+        // Apply enhanced pulsating effect
+        createEnhancedPulsatingEffect(entity, pulsatingColor, 5, 30, 300); // minSize, maxSize, duration (faster)
     }
 });
 
-// Define a function to create a pulsating effect
-function createPulsatingEffect(entity, color, minSize, maxSize, duration) {
+// Enhanced function for pulsating effect
+function createEnhancedPulsatingEffect(entity, color, minSize, maxSize, duration) {
     var lastUpdate = Date.now();
     var growing = true;
 
@@ -209,13 +209,13 @@ function createPulsatingEffect(entity, color, minSize, maxSize, duration) {
 
         var size = entity.point.pixelSize.getValue();
         if (growing) {
-            size += delta;
+            size += delta * (maxSize - minSize);
             if (size > maxSize) {
                 growing = false;
                 size = maxSize;
             }
         } else {
-            size -= delta;
+            size -= delta * (maxSize - minSize);
             if (size < minSize) {
                 growing = true;
                 size = minSize;
@@ -223,9 +223,15 @@ function createPulsatingEffect(entity, color, minSize, maxSize, duration) {
         }
 
         entity.point.pixelSize = new Cesium.ConstantProperty(size);
-        entity.point.color = new Cesium.ConstantProperty(color);
+
+        // Dissipating outer ring effect
+        var outerRingSize = size + 10; // Slightly larger than the point
+        var outerRingColor = color.withAlpha(Math.max(0, 1 - (outerRingSize - size) / 10));
+        entity.point.outlineColor = new Cesium.ConstantProperty(outerRingColor);
+        entity.point.outlineWidth = new Cesium.ConstantProperty(outerRingSize);
     });
 }
+
 
 
 
