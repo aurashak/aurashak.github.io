@@ -99,7 +99,7 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
                 // Set polygon material to slightly transparent
                 entity.polygon.material = color.withAlpha(0.01);
                 // Enable the outline for polygons and set it to the specified color
-                entity.polygon.outline = true;
+                entity.polygon.outline = fale;
                 entity.polygon.outlineColor = outlineColor;
             }
         });
@@ -120,6 +120,7 @@ var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.js
 
 
 // Load and style the layers
+loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE);
 loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE);
 loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
