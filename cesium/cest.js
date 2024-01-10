@@ -79,8 +79,6 @@ function showCoordinates(movement) {
         // Update text content
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
-    } else {
-        coordsBox.style.display = 'none';
     }
 }
 
@@ -101,7 +99,7 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
                 // Set polygon material to slightly transparent
-                entity.polygon.material = color.withAlpha(0.1);
+                entity.polygon.material = color.withAlpha(0.01);
                 // Enable the outline for polygons and set it to the specified color
                 entity.polygon.outline = false;
                 entity.polygon.outlineColor = outlineColor;
