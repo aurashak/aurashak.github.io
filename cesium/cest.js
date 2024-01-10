@@ -49,8 +49,9 @@ function stopRotation() {
 handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
 var coordsBox = document.getElementById('coordsBox');
-coordsBox.style.display = 'block';
-coordsBox.textContent = 'Coordinates'; // Default text
+// Set the default content when the page loads
+coordsBox.innerHTML = `Latitude: -, Longitude: -<br>Name: -`;
+coordsBox.style.display = 'block';  // Show the box by default
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
@@ -61,25 +62,26 @@ function showCoordinates(movement) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        
-        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+        var hoverText = `Latitude: ${latitudeString}°, Longitude: ${longitudeString}°`;
 
         // Check if an entity was picked
         if (Cesium.defined(entity) && entity.id && entity.id.properties) {
             var nameProperty = entity.id.properties.name;
             if (Cesium.defined(nameProperty)) {
-                hoverText += '<br>' + 'Name: ' + nameProperty.getValue();
+                var nameValue = nameProperty.getValue();
+                hoverText += `<br>Place: ${nameValue}`;
             }
         }
 
         // Update text content
         coordsBox.innerHTML = hoverText;
-        coordsBox.style.display = 'block';
     } else {
+        // Hide the box when not hovering over the globe
         coordsBox.style.display = 'none';
     }
 }
 
+// Set the event listener for mouse movement
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
