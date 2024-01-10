@@ -105,8 +105,9 @@ function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
                 entity.polygon.outlineColor = outlineColor;
             } else if (isRiverLayer && entity.polyline) {
                 // Customize river lines
-                var riverColor = Cesium.Color.BLUE.withAlpha(0.5); // Set the desired transparency using withAlpha
-                entity.polyline.material = Cesium.Color.BLUE; // Or any color you prefer
+                var riverHexColor = '#6495ED'; // Replace with your desired hex color for blue
+                var riverColor = Cesium.Color.fromCssColorString(riverHexColor).withAlpha(0.5); // Set the desired transparency using withAlpha
+                entity.polyline.material = riverColor;
                 entity.polyline.width = 0.25; // Adjust the width as needed
             }
         });
@@ -172,8 +173,6 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
-// ... [existing code above]
-
 // Load and style the project markers
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
     viewer.dataSources.add(dataSource);
@@ -193,7 +192,7 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
         });
 
         // Apply enhanced pulsating effect
-        createEnhancedPulsatingEffect(entity, pulsatingColor, 5, 30, 300); // minSize, maxSize, duration (faster)
+        createEnhancedPulsatingEffect(entity, pulsatingColor, 5, 30, 800); // minSize, maxSize, duration (faster)
     }
 });
 
