@@ -172,6 +172,64 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
+// ... [existing code above]
+
+// Load and style the project markers
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
+    viewer.dataSources.add(dataSource);
+
+    var entities = dataSource.entities.values;
+    for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+
+        // Remove the billboard property to get rid of the pin icon
+        entity.billboard = undefined;
+
+        // Customize the point appearance
+        var pulsatingColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
+        entity.point = new Cesium.PointGraphics({
+            pixelSize: 10, // Starting size
+            color: pulsatingColor
+        });
+
+        // Apply pulsating effect
+        createPulsatingEffect(entity, pulsatingColor, 10, 20, 1000); // minSize, maxSize, duration in milliseconds
+    }
+});
+
+// Define a function to create a pulsating effect
+function createPulsatingEffect(entity, color, minSize, maxSize, duration) {
+    var lastUpdate = Date.now();
+    var growing = true;
+
+    viewer.scene.preRender.addEventListener(function() {
+        var now = Date.now();
+        var delta = (now - lastUpdate) / duration;
+        lastUpdate = now;
+
+        var size = entity.point.pixelSize.getValue();
+        if (growing) {
+            size += delta;
+            if (size > maxSize) {
+                growing = false;
+                size = maxSize;
+            }
+        } else {
+            size -= delta;
+            if (size < minSize) {
+                growing = true;
+                size = minSize;
+            }
+        }
+
+        entity.point.pixelSize = new Cesium.ConstantProperty(size);
+        entity.point.color = new Cesium.ConstantProperty(color);
+    });
+}
+
+
+
+
 window.onload = function() {
     var viewer = new Cesium.Viewer('cesiumContainer', {
         // your viewer options
