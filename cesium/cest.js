@@ -48,9 +48,13 @@ function stopRotation() {
 // Add the left click event handler to stop rotation
 handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
+// At the top of your script, define the default text
+var defaultText = 'Latitude: -, Longitude: -<br>Name: -';
+
 var coordsBox = document.getElementById('coordsBox');
 coordsBox.style.display = 'block';
-coordsBox.textContent = 'Coordinates'; // Default text
+coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
+
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
