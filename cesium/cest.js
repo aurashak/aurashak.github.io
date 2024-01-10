@@ -90,149 +90,44 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
     coordsBox.style.display = 'block';
 });
 
-var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; // URL to the oceans GeoJSON
 
-Cesium.GeoJsonDataSource.load(oceansGeojsonUrl).then(function(dataSource) {
-    // Apply any desired styling to the data source here
-    // For example, setting the fill color for polygons representing oceans
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            entity.polygon.material = Cesium.Color.BLUE.withAlpha(0.5); // Semi-transparent blue
-            entity.polygon.outline = false; // Disable the outline for polygons
-        }
+// Function to load and style a GeoJSON layer
+function loadAndStyleGeoJson(url, color, outlineColor) {
+    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
+            if (entity.polygon) {
+                // Set polygon material to slightly transparent
+                entity.polygon.material = color.withAlpha(0.01);
+                // Enable the outline for polygons and set it to the specified color
+                entity.polygon.outline = true;
+                entity.polygon.outlineColor = outlineColor;
+            }
+        });
+        viewer.dataSources.add(dataSource);
+    }).otherwise(function(error){
+        console.error(error);
     });
+}
 
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
-
-
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json'; // URL to the countries GeoJSON
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
-    // Apply styling to the data source here
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            // Set polygon material to black and make it opaque
-            entity.polygon.material = Cesium.Color.BLACK.withAlpha(0);
-            // Enable the outline for polygons and set it to white
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.WHITE;
-        }
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
+// URLs to the GeoJSON data
+var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
+var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 
 
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json'; // URL to the countries GeoJSON
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
-    // Apply styling to the data source here
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            // Set polygon material to black and make it opaque
-            entity.polygon.material = Cesium.Color.BLACK.withAlpha(1.0);
-            // Enable the outline for polygons and set it to white
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.WHITE;
-        }
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
+// Load and style the layers
+loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE);
+loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
+loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
+loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
+loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
+loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 
 
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json'; // URL to the countries GeoJSON
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
-    // Apply styling to the data source here
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            // Set polygon material to black and make it opaque
-            entity.polygon.material = Cesium.Color.BLACK.withAlpha(1.0);
-            // Enable the outline for polygons and set it to white
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.WHITE;
-        }
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
-
-
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json'; // URL to the countries GeoJSON
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
-    // Apply styling to the data source here
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            // Set polygon material to black and make it opaque
-            entity.polygon.material = Cesium.Color.BLACK.withAlpha(1.0);
-            // Enable the outline for polygons and set it to white
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.WHITE;
-        }
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
-
-
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json'; // URL to the countries GeoJSON
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
-    // Apply styling to the data source here
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            // Set polygon material to black and make it opaque
-            entity.polygon.material = Cesium.Color.BLACK.withAlpha(1.0);
-            // Enable the outline for polygons and set it to white
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.WHITE;
-        }
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
-
-
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json'; // URL to the countries GeoJSON
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function(dataSource) {
-    // Apply styling to the data source here
-    dataSource.entities.values.forEach(function(entity) {
-        if (entity.polygon) {
-            // Set polygon material to black and make it opaque
-            entity.polygon.material = Cesium.Color.BLACK.withAlpha(1.0);
-            // Enable the outline for polygons and set it to white
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.WHITE;
-        }
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function(error){
-    // Handle any errors that might occur during loading of the GeoJSON
-    console.error(error);
-});
 
 var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
 
