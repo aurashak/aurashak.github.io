@@ -185,14 +185,17 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
         entity.billboard = undefined;
 
         // Customize the point appearance
-        var pulsatingColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
+        var colorString = entity.properties['marker-color'].getValue();
+        var pulsatingColor = Cesium.Color.fromCssColorString(colorString).withAlpha(0.7); // Adjusted alpha value
         entity.point = new Cesium.PointGraphics({
-            pixelSize: 5, // Starting size - smaller
-            color: pulsatingColor
+            pixelSize: 5, // Reduced starting size
+            color: pulsatingColor,
+            outlineColor: pulsatingColor.withAlpha(0.3), // Subtle outline color
+            outlineWidth: 1 // Thin outline
         });
 
         // Apply enhanced pulsating effect
-        createEnhancedPulsatingEffect(entity, pulsatingColor, 5, 30, 800); // minSize, maxSize, duration (faster)
+        createEnhancedPulsatingEffect(entity, pulsatingColor, 5, 15, 1500); // Reduced maxSize, increased duration
     }
 });
 
@@ -223,9 +226,10 @@ function createEnhancedPulsatingEffect(entity, color, minSize, maxSize, duration
 
         entity.point.pixelSize = new Cesium.ConstantProperty(size);
 
-        // Dissipating outer ring effect
-        var outerRingSize = size + 10; // Slightly larger than the point
-        var outerRingColor = color.withAlpha(Math.max(0, 1 - (outerRingSize - size) / 10));
+        // Enhanced outer ring effect
+        var outerRingSize = size + 5; // Slightly larger than the point
+        var outerRingOpacity = Math.max(0, 1 - (outerRingSize - size) / 10);
+        var outerRingColor = color.withAlpha(outerRingOpacity);
         entity.point.outlineColor = new Cesium.ConstantProperty(outerRingColor);
         entity.point.outlineWidth = new Cesium.ConstantProperty(outerRingSize);
     });
