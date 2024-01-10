@@ -194,25 +194,3 @@ window.onload = function() {
     });
 };
 
-
-function searchPlace() {
-    var query = document.getElementById('placeSearchInput').value;
-    var geocoderService = new Cesium.IonGeocoderService();
-
-    geocoderService.geocode(query).then(function (results) {
-        if (results.length > 0) {
-            // Take the first result and fly the camera to that position
-            viewer.camera.flyTo({
-                destination: Cesium.Cartesian3.fromDegrees(
-                    results[0].longitude,
-                    results[0].latitude,
-                    results[0].height + 10000.0 // Adjust height as necessary
-                )
-            });
-        } else {
-            console.log('No results found');
-        }
-    }).otherwise(function (error) {
-        console.error(error);
-    });
-}
