@@ -50,7 +50,7 @@ handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
 var coordsBox = document.getElementById('coordsBox');
 coordsBox.style.display = 'block';
-coordsBox.textContent = 'Map data: Lat: -, Lon: -'; // Default text
+coordsBox.textContent = 'Coordinates'; // Default text
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
@@ -62,7 +62,7 @@ function showCoordinates(movement) {
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         
-        var hoverText = 'Map data: Lat: ' + latitudeString + '°, Lon: ' + longitudeString + '°';
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
         // Check if an entity was picked
         if (Cesium.defined(entity) && entity.id && entity.id.properties) {
