@@ -106,7 +106,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
             } else if (isRiverLayer && entity.polyline) {
                 // Customize river lines
                 entity.polyline.material = Cesium.Color.BLUE; // Or any color you prefer
-                entity.polyline.width = 5; // Adjust the width as needed
+                entity.polyline.width = 0.25; // Adjust the width as needed
             }
         });
         viewer.dataSources.add(dataSource);
@@ -169,4 +169,28 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
         entity.description = undefined;
     }
 });
+
+
+window.onload = function() {
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+        // your viewer options
+    });
+
+    // Wait for Cesium to fully initialize
+    viewer.scene.globe.tileLoadProgressEvent.addEventListener(function () {
+        if (viewer.scene.globe.tilesLoaded) {
+            // Locate the existing toolbar
+            var toolbar = document.getElementsByClassName('cesium-viewer-toolbar')[0];
+
+            // Create or locate a container for the toolbar
+            var toolbarContainer = document.createElement('div');
+            toolbarContainer.className = 'toolbar-container';
+            document.body.appendChild(toolbarContainer);
+
+            // Move the toolbar to the new container
+            toolbarContainer.appendChild(toolbar);
+            toolbar.className += ' custom-toolbar';
+        }
+    });
+};
 
