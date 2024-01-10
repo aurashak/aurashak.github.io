@@ -49,7 +49,7 @@ function stopRotation() {
 handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
 // At the top of your script, define the default text
-var defaultText = 'Latitude: -, Longitude: -<br>Name: -';
+var defaultText = 'Latitude: , Longitude: <br>Place: ';
 
 var coordsBox = document.getElementById('coordsBox');
 coordsBox.style.display = 'block';
@@ -94,7 +94,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor) {
+function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
@@ -103,6 +103,10 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
                 // Enable the outline for polygons and set it to the specified color
                 entity.polygon.outline = false;
                 entity.polygon.outlineColor = outlineColor;
+            } else if (isRiverLayer && entity.polyline) {
+                // Customize river lines
+                entity.polyline.material = Cesium.Color.BLUE; // Or any color you prefer
+                entity.polyline.width = 5; // Adjust the width as needed
             }
         });
         viewer.dataSources.add(dataSource);
@@ -133,8 +137,7 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.RED, null, true); // Custom style for rivers
 
 
 var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
