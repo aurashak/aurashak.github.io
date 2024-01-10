@@ -99,7 +99,7 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
                 // Set polygon material to slightly transparent
                 entity.polygon.material = color.withAlpha(0.1);
                 // Enable the outline for polygons and set it to the specified color
-                entity.polygon.outline = true;
+                entity.polygon.outline = false;
                 entity.polygon.outlineColor = outlineColor;
             }
         });
