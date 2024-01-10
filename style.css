@@ -239,11 +239,11 @@ a:active {
     padding-right:5px
 }
 
-.cesium-viewer-toolbar {
-    display: block;
-    position: absolute;
-    top: 5px;
-    left: 5px; /* Change from 'right' to 'left' */
+.toolbar-container {
+    position: absolute; /* Position absolutely within .fourth-row-left */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    /* ... other styles ... */
 }
 
     /* Styles for mobile devices */
