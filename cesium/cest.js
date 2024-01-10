@@ -172,11 +172,4 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
-viewer.extend(Cesium.viewerCesiumNavigationMixin, {});
-
-// After the viewer has been initialized...
-var toolbar = document.querySelector('.cesium-viewer-toolbar');
-var toolbarContainer = document.querySelector('.toolbar-container');
-toolbarContainer.appendChild(toolbar);
-
 
