@@ -172,21 +172,6 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
-var viewer = new Cesium.Viewer('cesiumContainer', {
-    // ... your viewer options
-});
-
-// Wait for Cesium to fully initialize
-viewer.scene.globe.tileLoadProgressEvent.addEventListener(function () {
-    if (viewer.scene.globe.tilesLoaded) {
-        // Locate the existing toolbar
-        var toolbar = document.querySelector('.cesium-viewer-toolbar');
-        // Locate the toolbar container
-        var toolbarContainer = document.getElementById('toolbarContainer');
-        // Move the toolbar to the new container
-        toolbarContainer.appendChild(toolbar);
-    }
-});
 
 
 
