@@ -172,26 +172,11 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
-window.onload = function() {
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-        // your viewer options
-    });
+viewer.extend(Cesium.viewerCesiumNavigationMixin, {});
 
-    // Wait for Cesium to fully initialize
-    viewer.scene.globe.tileLoadProgressEvent.addEventListener(function () {
-        if (viewer.scene.globe.tilesLoaded) {
-            // Locate the existing toolbar
-            var toolbar = document.getElementsByClassName('cesium-viewer-toolbar')[0];
+// After the viewer has been initialized...
+var toolbar = document.querySelector('.cesium-viewer-toolbar');
+var toolbarContainer = document.querySelector('.toolbar-container');
+toolbarContainer.appendChild(toolbar);
 
-            // Create or locate a container for the toolbar
-            var toolbarContainer = document.createElement('div');
-            toolbarContainer.className = 'toolbar-container';
-            document.body.appendChild(toolbarContainer);
-
-            // Move the toolbar to the new container
-            toolbarContainer.appendChild(toolbar);
-            toolbar.className += ' custom-toolbar';
-        }
-    });
-};
 
