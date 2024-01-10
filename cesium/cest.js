@@ -45,13 +45,14 @@ function stopRotation() {
     isRotating = false; // Set the flag to false to stop the rotation
 }
 
-// Add the left click event handler to stop rotation
-handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+// At the top of your script, define the default text
+var defaultText = 'Latitude: -, Longitude: -<br>Name: -';
 
-var coordsBox = document.getElementById('coordsBox');
-// Set the default content when the page loads
-coordsBox.innerHTML = `Latitude: -, Longitude: -<br>Name: -`;
-coordsBox.style.display = 'block';  // Show the box by default
+// Then later in your code, you can use this variable:
+viewer.scene.canvas.addEventListener('mouseleave', function() {
+    coordsBox.innerHTML = defaultText;
+    coordsBox.style.display = 'block';
+});
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
