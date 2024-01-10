@@ -99,7 +99,7 @@ function loadAndStyleGeoJson(url, color, outlineColor) {
                 // Set polygon material to slightly transparent
                 entity.polygon.material = color.withAlpha(0.01);
                 // Enable the outline for polygons and set it to the specified color
-                entity.polygon.outline = fale;
+                entity.polygon.outline = true;
                 entity.polygon.outlineColor = outlineColor;
             }
         });
@@ -117,6 +117,9 @@ var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
 var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
+var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+
 
 
 // Load and style the layers
@@ -127,6 +130,8 @@ loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
+loadAndStyleGeoJson(lakesaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 
 
 
