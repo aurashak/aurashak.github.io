@@ -45,14 +45,12 @@ function stopRotation() {
     isRotating = false; // Set the flag to false to stop the rotation
 }
 
-// At the top of your script, define the default text
-var defaultText = 'Latitude: -, Longitude: -<br>Name: -';
+// Add the left click event handler to stop rotation
+handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
-// Then later in your code, you can use this variable:
-viewer.scene.canvas.addEventListener('mouseleave', function() {
-    coordsBox.innerHTML = defaultText;
-    coordsBox.style.display = 'block';
-});
+var coordsBox = document.getElementById('coordsBox');
+coordsBox.style.display = 'block';
+coordsBox.textContent = 'Coordinates'; // Default text
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
@@ -63,26 +61,25 @@ function showCoordinates(movement) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        var hoverText = `Latitude: ${latitudeString}°, Longitude: ${longitudeString}°`;
+        
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
         // Check if an entity was picked
         if (Cesium.defined(entity) && entity.id && entity.id.properties) {
             var nameProperty = entity.id.properties.name;
             if (Cesium.defined(nameProperty)) {
-                var nameValue = nameProperty.getValue();
-                hoverText += `<br>Place: ${nameValue}`;
+                hoverText += '<br>' + 'Place: ' + nameProperty.getValue();
             }
         }
 
         // Update text content
         coordsBox.innerHTML = hoverText;
+        coordsBox.style.display = 'block';
     } else {
-        // Hide the box when not hovering over the globe
         coordsBox.style.display = 'none';
     }
 }
 
-// Set the event listener for mouse movement
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
