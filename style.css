@@ -239,14 +239,11 @@ a:active {
     padding-right:5px
 }
 
-.toolbar-container {
-    display: flex;
-   
-    padding: 10px 0; /* Give some padding above and below the toolbar */
-}
-
-.custom-toolbar {
-    z-index: 10; /* Ensure it's above other elements */
+.cesium-viewer-toolbar {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 5px; /* Change from 'right' to 'left' */
 }
 
     /* Styles for mobile devices */
