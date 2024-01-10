@@ -23,7 +23,7 @@ a:visited {
 /* Links when hovered */
 a:hover {
     border-bottom: 2px solid currentColor; /* Add a border bottom to simulate an underline */
-}}
+}
 
 /* Links when clicked */
 a:active {
@@ -237,6 +237,18 @@ a:active {
     bottom: 0;
     left: 0;
     padding-right:5px
+}
+
+.toolbar-container {
+    position: relative;
+    /* Other styling as needed */
+}
+
+.custom-toolbar {
+    position: absolute;
+    top: 0; /* Adjust as needed */
+    right: 0; /* Adjust as needed */
+    z-index: 10; /* Ensure it's above other elements */
 }
 
     /* Styles for mobile devices */
