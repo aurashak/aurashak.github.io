@@ -105,6 +105,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
                 entity.polygon.outlineColor = outlineColor;
             } else if (isRiverLayer && entity.polyline) {
                 // Customize river lines
+                var riverColor = Cesium.Color.BLUE.withAlpha(0.5); // Set the desired transparency using withAlpha
                 entity.polyline.material = Cesium.Color.BLUE; // Or any color you prefer
                 entity.polyline.width = 0.25; // Adjust the width as needed
             }
