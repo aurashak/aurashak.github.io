@@ -240,14 +240,13 @@ a:active {
 }
 
 .toolbar-container {
-    position: relative;
-    /* Other styling as needed */
+    display: flex;
+    justify-content: center; /* Center toolbar items horizontally */
+    align-items: center; /* Center toolbar items vertically */
+    padding: 10px 0; /* Give some padding above and below the toolbar */
 }
 
 .custom-toolbar {
-    position: absolute;
-    top: 0; /* Adjust as needed */
-    right: 0; /* Adjust as needed */
     z-index: 10; /* Ensure it's above other elements */
 }
 
