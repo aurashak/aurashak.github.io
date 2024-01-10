@@ -241,13 +241,19 @@ a:active {
 
 .toolbar-container {
     display: flex;
-    justify-content: center; /* Center toolbar items horizontally */
-    align-items: center; /* Center toolbar items vertically */
-    padding: 10px 0; /* Give some padding above and below the toolbar */
+    justify-content: start; /* Align items to the start (left) */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Add some padding */
+    position: absolute; /* Position it absolutely within the fourth-row-left */
+    top: 0; /* At the very top of its container */
+    left: 0; /* At the very left of its container */
+    width: 100%; /* Full width to allow content to be left aligned */
+    z-index: 10; /* High enough z-index to be on top */
 }
 
-.custom-toolbar {
-    z-index: 10; /* Ensure it's above other elements */
+/* Adjust the fourth-row-left to position relatively to allow absolute positioning within it */
+.fourth-row-left {
+    position: relative; /* Add this line */
 }
 
     /* Styles for mobile devices */
