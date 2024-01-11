@@ -22,15 +22,7 @@ baseLayer.contrast = 1.2; // Adjust the contrast, default is 1.0
 var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
-// Create a black rectangle using SingleTileImageryProvider
-var blackOverlay = new Cesium.SingleTileImageryProvider({
-    url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAesB9FD6P9QAAAAASUVORK5CYII=', // This is a base64-encoded 1x1 black pixel
-    rectangle: Cesium.Rectangle.fromDegrees(-180, -90, 180, 90)
-});
 
-// Add the black overlay above the satellite imagery
-var blackLayer = viewer.imageryLayers.addImageryProvider(blackOverlay);
-blackLayer.zIndex = 1;
 
 
 // Load and style the project markers with halos
