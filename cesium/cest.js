@@ -182,6 +182,7 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
+
 // Load and style the project markers
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
     viewer.dataSources.add(dataSource);
@@ -190,23 +191,37 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
     for (var i = 0; i < entities.length; i++) {
         var entity = entities[i];
 
-        // Remove the billboard property
-        entity.billboard = undefined;
-
         // Check if the entity has properties and a marker-color
         if (entity.properties && entity.properties['marker-color']) {
             var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
 
-           // Create a more visible halo effect
-    entity.ellipse = new Cesium.EllipseGraphics({
-        semiMinorAxis: 50000, // Larger size
-        semiMajorAxis: 50000, // Larger size
-        height: 1000, // Higher above the surface
-        material: color.withAlpha(0.8), // More opaque for visibility
-        outline: true, // Keep the outline
-        outlineColor: Cesium.Color.WHITE, // Contrast color for outline
-        fill: false // No fill in the center
-    });
+            // Set the point to be transparent
+            entity.point = new Cesium.PointGraphics({
+                pixelSize: 10,
+                color: Cesium.Color.TRANSPARENT // Set the point color to transparent
+            });
+
+            // Modify the ellipse to create a glowing halo effect
+            entity.ellipse = new Cesium.EllipseGraphics({
+                semiMinorAxis: 5000, // Adjust size as needed
+                semiMajorAxis: 5000, // Adjust size as needed
+                height: 10, // Height above the surface
+                material: new Cesium.Material({
+                    fabric: {
+                        type: 'Color',
+                        uniforms: {
+                            color: color.withAlpha(0.2) // Set a lower alpha for a more diffuse effect
+                        }
+                    }
+                }),
+                outline: true, // Set to true to show the outline
+                outlineColor: color, // Match the outline color to the marker color
+                outlineWidth: 10, // Make the outline thicker
+                fill: false // No fill in the center
+            });
+
+            // Additional glow effect can be achieved using a custom post-process stage or by overlaying a glTF model with a bloom effect
+            // This is a more advanced implementation and may require additional steps not covered here
         }
     }
 }).otherwise(function(error) {
