@@ -23,6 +23,101 @@ var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
 
+// Load and style the project markers with halos
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
+    viewer.dataSources.add(dataSource);
+
+    dataSource.entities.values.forEach(function(entity) {
+        // Set the billboard property to undefined
+        entity.billboard = undefined;
+
+        // Check if the entity has a marker-color property
+        if (entity.properties && entity.properties['marker-color']) {
+            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
+
+            // Set the point to be transparent
+            entity.point = new Cesium.PointGraphics({
+                pixelSize: 0, // Hide the default point
+                color: Cesium.Color.TRANSPARENT
+            });
+
+            // Create the halo effect using EllipseGraphics
+            entity.ellipse = new Cesium.EllipseGraphics({
+                semiMinorAxis: 5000, // Initial size, will be updated based on zoom
+                semiMajorAxis: 5000, // Initial size, will be updated based on zoom
+                height: 10, // Height above the surface
+                material: color.withAlpha(0.5), // Set transparency for the halo
+                outline: true,
+                outlineColor: color,
+                outlineWidth: 3,
+                fill: false
+            });
+        }
+    });
+
+    // Update halos based on camera height
+    viewer.camera.changed.addEventListener(function() {
+        var cameraHeight = viewer.camera.positionCartographic.height;
+        dataSource.entities.values.forEach(function(entity) {
+            if (entity.ellipse) {
+                var baseSize = 5000; // Base size of the halo
+                var sizeFactor = cameraHeight / 1000000;
+                var newSize = Math.max(baseSize, baseSize * Math.max(sizeFactor, 0.1)); // Prevent size from going below a minimum
+
+                entity.ellipse.semiMinorAxis = newSize;
+                entity.ellipse.semiMajorAxis = newSize;
+            }
+        });
+    });
+}).otherwise(function(error) {
+    console.error('Error loading GeoJSON data:', error);
+});
+
+// Create arcs between points
+function createAnimatedArc(startEntity, endEntity) {
+    var startPosition = startEntity.position.getValue(Cesium.JulianDate.now());
+    var endPosition = endEntity.position.getValue(Cesium.JulianDate.now());
+
+    var arcEntity = viewer.entities.add({
+        polyline: {
+            positions: new Cesium.CallbackProperty(function() {
+                return Cesium.PolylinePipeline.generateArc({
+                    positions: [startPosition, endPosition],
+                    height: 500000, // Adjust arc height
+                    granularity: 0.001
+                });
+            }, false),
+            material: Cesium.Color.fromRandom({alpha: 1.0}),
+            width: 2
+        }
+    });
+
+    // Optional: Remove arc after some time
+    setTimeout(function() {
+        viewer.entities.remove(arcEntity);
+    }, 10000); // Duration of 10 seconds
+}
+
+// Example usage of createAnimatedArc
+// Wait for the data source to be loaded
+viewer.dataSources.when(function() {
+    var entities = viewer.dataSources.get(0).entities.values;
+    for (var i = 0; i < entities.length - 1; i++) {
+        createAnimatedArc(entities[i], entities[i + 1]); // Create arcs between consecutive points
+    }
+});
+
+// Set the initial view
+viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
+    orientation: {
+        heading: Cesium.Math.toRadians(0.0),
+        pitch: Cesium.Math.toRadians(-90.0),
+        roll: 0.0
+    }
+});
+
+
 // Define handler in the global scope
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
@@ -151,156 +246,6 @@ loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.RED, null, true); // Custom style for rivers
 
 
-var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
-
-Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
-    viewer.dataSources.add(dataSource);
-
-    var entities = dataSource.entities.values;
-    for (var i = 0; i < entities.length; i++) {
-        var entity = entities[i];
-
-        // Remove the billboard property to get rid of the pin icon
-        entity.billboard = undefined;
-
-        // Check if the entity has properties and a marker-color
-        if (entity.properties && entity.properties['marker-color']) {
-            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-
-            // Customize the point appearance with the marker-color from the GeoJSON properties
-            entity.point = new Cesium.PointGraphics({
-                pixelSize: 10,
-                color: color, // Use the color from the GeoJSON properties
-                outlineColor: Cesium.Color.WHITE,
-                outlineWidth: 0
-            });
-        }
-
-        // Disable the pop-up infobox for each point
-        entity.description = undefined;
-    }
-});
-
-
-
-var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
-
-Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
-    viewer.dataSources.add(dataSource);
-
-    var entities = dataSource.entities.values;
-    for (var i = 0; i < entities.length; i++) {
-        var entity = entities[i];
-
-        // Set the billboard to undefined to ensure it doesn't show
-        entity.billboard = undefined;
-
-        // Check if the entity has properties and a marker-color
-        if (entity.properties && entity.properties['marker-color']) {
-            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-
-            // Set the point to be transparent
-            entity.point = new Cesium.PointGraphics({
-                pixelSize: 0, // Set pixel size to 0 to hide the point
-                color: Cesium.Color.TRANSPARENT // Make the point fully transparent
-            });
-
-            // Modify the ellipse to create a glowing halo effect
-            entity.ellipse = new Cesium.EllipseGraphics({
-                semiMinorAxis: 5000, // Adjust size as needed
-                semiMajorAxis: 5000, // Adjust size as needed
-                height: 10, // Height above the surface
-                material: new Cesium.Material({
-                    fabric: {
-                        type: 'Color',
-                        uniforms: {
-                            color: color.withAlpha(0.2) // Set a lower alpha for a more diffuse effect
-                        }
-                    }
-                }),
-                outline: true, // Set to true to show the outline
-                outlineColor: color, // Match the outline color to the marker color
-                outlineWidth: 10, // Make the outline thicker
-                fill: false // No fill in the center
-            });
-        }
-    }
-}).otherwise(function(error) {
-    console.error("Error loading GeoJSON data: ", error);
-});
-
-
-// Define a function to update the size of the halos based on the camera height
-function updateHaloSizeBasedOnZoom(viewer) {
-    var scene = viewer.scene;
-    var entities = viewer.entities.values;
-
-    var cameraHeight = scene.camera.positionCartographic.height;
-    entities.forEach(function(entity) {
-        if (entity.ellipse) {
-            // Define a base size for your halo
-            var baseSize = 5000; // Adjust base size as needed
-            // Define how the size changes with zoom level
-            var sizeFactor = cameraHeight / 1000000; // Adjust divisor to control scaling
-            var newSize = baseSize * Math.max(sizeFactor, 1); // Prevent size from going below the base size
-
-            // Update the size of the ellipse
-            entity.ellipse.semiMinorAxis = newSize;
-            entity.ellipse.semiMajorAxis = newSize;
-        }
-    });
-}
-
-// Add an event listener to the camera changed event to update halos on zoom
-viewer.camera.changed.addEventListener(function() {
-    updateHaloSizeBasedOnZoom(viewer);
-});
-
-// Initial update of halos
-updateHaloSizeBasedOnZoom(viewer);
-
-
-
-// Function to calculate the midpoint for the arc's height
-function computeMidpointHeight(start, end, heightFactor) {
-    var distance = Cesium.Cartesian3.distance(start, end);
-    return distance * heightFactor; // Height of the arc as a fraction of the distance
-}
-
-// Function to create an animated arc between two points
-function createAnimatedArc(startEntity, endEntity, color, duration) {
-    var startPosition = startEntity.position.getValue();
-    var endPosition = endEntity.position.getValue();
-
-    var midHeight = computeMidpointHeight(startPosition, endPosition, 0.15); // 15% of the distance
-
-    var arcPositions = new Cesium.SampledPositionProperty();
-    arcPositions.addSample(Cesium.JulianDate.now(), startPosition);
-    arcPositions.addSample(Cesium.JulianDate.now().addSeconds(duration / 2), Cesium.Cartesian3.fromRadians(
-        (Cesium.Cartographic.fromCartesian(startPosition).longitude + Cesium.Cartographic.fromCartesian(endPosition).longitude) / 2,
-        (Cesium.Cartographic.fromCartesian(startPosition).latitude + Cesium.Cartographic.fromCartesian(endPosition).latitude) / 2,
-        midHeight
-    ));
-    arcPositions.addSample(Cesium.JulianDate.now().addSeconds(duration), endPosition);
-
-    var arcEntity = viewer.entities.add({
-        position: arcPositions,
-        polyline: {
-            positions: new Cesium.CallbackProperty(function(time, result) {
-                return Cesium.PolylinePipeline.generateArc({
-                    positions: [startPosition, arcPositions.getValue(time), endPosition],
-                    granularity: 0.001
-                });
-            }, false),
-            material: new Cesium.ColorMaterialProperty(color),
-            width: 2
-        }
-    });
-
-    setTimeout(function() {
-        viewer.entities.remove(arcEntity); // Remove the arc after duration
-    }, duration * 1000);
-}
 
 
 
