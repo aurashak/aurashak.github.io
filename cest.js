@@ -167,7 +167,9 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 // Define heights for different layer types
 var continentHeight = 500; // Adjust as needed
-var lakeRiverHeight = 100; // Adjust as needed
+var lakeRiverHeight = 600; // Adjust as needed
+var oceansHeight = 500; // Adjust as needed
+
 
 // Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false) {
