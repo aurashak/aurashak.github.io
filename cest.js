@@ -220,7 +220,6 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 
-
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, layerHeight);
 loadAndStyleGeoJson('https://aurashak.github.io/geojson/rivers.geojson', Cesium.Color.BLUE, Cesium.Color.BLUE, layerHeight, true); // For rivers
 loadAndStyleGeoJson('https://aurashak.github.io/geojson/regions.geojson', Cesium.Color.GREEN, Cesium.Color.GREEN, layerHeight); // For regions
