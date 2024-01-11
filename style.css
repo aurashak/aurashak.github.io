@@ -239,31 +239,33 @@ a:active {
 }
 
 
+/* ... existing styles ... */
+
 /* Mobile-specific Styles */
 @media screen and (max-width: 768px) {
     /* Header adjustments for mobile */
     .header {
         margin: 50px 20px 35px 20px; /* Reduced margins */
         flex-direction: column; /* Stack elements vertically */
-        align-items: center; /* Center-align items */
+        align-items: flex-start; /* Align items to the start (left) */
     }
 
     .header-left {
         font-size: 30px; /* Reduced font size */
         margin-right: 0; /* Remove right margin */
-        text-align: center; /* Center text */
+        text-align: left; /* Align text to the left */
     }
 
     .header-right {
         font-size: 20px; /* Reduced font size */
-        text-align: center; /* Center text */
+        text-align: left; /* Align text to the left */
         margin-top: 20px; /* Add space between elements */
     }
 
     /* Boxes section adjustments */
     .boxes-container {
         flex-direction: column; /* Stack elements vertically */
-        align-items: center; /* Center-align items */
+        align-items: flex-start; /* Align items to the start (left) */
         margin: 10px 20px; /* Reduced margins */
     }
 
@@ -281,7 +283,7 @@ a:active {
 
     .third-row-left, .third-row-right {
         font-size: 18px; /* Reduced font size */
-        text-align: center; /* Center text */
+        text-align: left; /* Align text to the left */
         margin-right: 0; /* Remove right margin */
     }
 
@@ -292,7 +294,7 @@ a:active {
 
     .fourth-row-left, .fourth-row-right {
         font-size: 16px; /* Reduced font size */
-        text-align: center; /* Center text */
+        text-align: left; /* Align text to the left */
     }
 
     /* Adjust main content container */
