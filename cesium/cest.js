@@ -41,19 +41,28 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
                 color: Cesium.Color.TRANSPARENT
             });
 
-            // Create the halo effect using EllipseGraphics
-            entity.ellipse = new Cesium.EllipseGraphics({
-                semiMinorAxis: 5000, // Initial size, will be updated based on zoom
-                semiMajorAxis: 5000, // Initial size, will be updated based on zoom
-                height: 10, // Height above the surface
-                material: color.withAlpha(0.5), // Set transparency for the halo
-                outline: true,
-                outlineColor: color,
-                outlineWidth: 10,
-                fill: false
-            });
-        }
-    });
+// Create the rotating dashed halo effect using EllipseGraphics
+var dashPattern = 255; // A simple dash pattern (11111111)
+entity.ellipse = new Cesium.EllipseGraphics({
+    semiMinorAxis: 5000, // Initial size, will be updated based on zoom
+    semiMajorAxis: 5000, // Initial size, will be updated based on zoom
+    height: 10, // Height above the surface
+    material: new Cesium.PolylineDashMaterialProperty({
+        color: color,
+        dashPattern: dashPattern
+    }),
+    outline: true,
+    outlineColor: color,
+    outlineWidth: 10, // Thickness of the halo ring
+    numberOfVerticalLines: 0, // No vertical lines
+    fill: false
+});
+
+// Store the rotation offset in the entity for use in the animation loop
+entity.properties.addProperty('rotationOffset', 0);
+}
+});
+
 
     // Update halos based on camera height
     viewer.camera.changed.addEventListener(function() {
@@ -101,7 +110,7 @@ viewer.camera.setView({
 });
 
 // Slow down the rotation
-var spinRate = 0.0003;ƒhalo
+var spinRate = 0.0005;
 var isRotating = true; // To keep track of the rotation state
 var rotateGlobeFunction = function() {
     if (isRotating) {
