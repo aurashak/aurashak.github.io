@@ -179,26 +179,26 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
             if (entity.polygon) {
                 if (isCountryLayer) {
                     // Custom styling for continents
-                    entity.polygon.material = color.withAlpha(0.5); // Semi-transparent
+                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
                     entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
                     // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(0.3); // More transparency for water
-                    entity.polygon.outline = true; // With outline
+                    entity.polygon.material = color.withAlpha(1); // More transparency for water
+                    entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     // Oceans typically do not need extrusion
                 } else {
                     // Default styling for other polygon layers (like lakes)
-                    entity.polygon.material = color.withAlpha(0.5); // Semi-transparent
-                    entity.polygon.outline = false; // No outline for lakes
+                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
+                    entity.polygon.outline = true; // No outline for lakes
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
-                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(0.7); // Stronger color for visibility
+                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
                 entity.polyline.material = riverColor;
                 entity.polyline.width = 2; // Wider lines for rivers
                 // Update the polyline positions for height
@@ -232,15 +232,15 @@ var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
 // Load and style the layers
-loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.3), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans, set isOceanLayer to true
+loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans, set isOceanLayer to true
 loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Europe, set isCountryLayer to true
 loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Asia, set isCountryLayer to true
 loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Africa, set isCountryLayer to true
 loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Oceania, set isCountryLayer to true
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.5), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.7), Cesium.Color.BLUE, riverHeight, true); // For rivers, set isRiverLayer to true
+loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, riverHeight, true); // For rivers, set isRiverLayer to true
 
 
 
