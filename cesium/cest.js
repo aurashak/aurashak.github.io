@@ -256,17 +256,6 @@ function createAnimatedArc(startEntity, endEntity, color, duration) {
     }, duration * 1000);
 }
 
-// Create arcs between each pair of glowing halo markers
-var entities = dataSource.entities.values;
-for (var i = 0; i < entities.length; i++) {
-    for (var j = i + 1; j < entities.length; j++) {
-        var startEntity = entities[i];
-        var endEntity = entities[j];
-        var color = Cesium.Color.fromRandom({ alpha: 1.0 }); // Random color for each arc
-        createAnimatedArc(startEntity, endEntity, color, 10); // Duration of 10 seconds
-    }
-}
-
 
 
 window.onload = function() {
