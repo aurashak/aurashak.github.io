@@ -166,49 +166,6 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
-// Define the height at which the geojson layers will be rendered
-var layerHeight = 100; // Define the height for lakes, rivers, and regions
-
-// Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isContinentLayer = false) {
-    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
-        dataSource.entities.values.forEach(function(entity) {
-            if (entity.polygon) {
-                // Custom styling for continent layer
-                if (isContinentLayer) {
-                    entity.polygon.material = color.withAlpha(0.5); // Slightly transparent
-                    entity.polygon.outline = true;
-                    entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = 0; // No extrusion for continents
-                } else {
-                    // Default styling for other polygon layers (like lakes)
-                    entity.polygon.material = color.withAlpha(0.01);
-                    entity.polygon.outline = false;
-                    entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height;
-                }
-            } else if (isRiverLayer && entity.polyline) {
-                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(0.5);
-                entity.polyline.material = riverColor;
-                entity.polyline.width = 0.25;
-                entity.polyline.arcType = Cesium.ArcType.NONE; // Disable clamping to ground
-                entity.polyline.positions = entity.polyline.positions.getValue().map(
-                    position => Cesium.Cartesian3.fromDegrees(
-                        Cesium.Cartographic.fromCartesian(position).longitude,
-                        Cesium.Cartographic.fromCartesian(position).latitude,
-                        height
-                    )
-                );
-            }
-        });
-        viewer.dataSources.add(dataSource);
-    }).otherwise(function(error){
-        console.error(error);
-    });
-}
-
-User
-integrate code into this segment. 
 
 // Define the height at which the geojson layers will be rendered
 var layerHeight = 100; // Define the height for lakes, rivers, and regions
