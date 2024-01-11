@@ -201,8 +201,9 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
                 entity.polyline.material = riverColor;
                 entity.polyline.width = 2; // Wider lines for rivers
-                // Update the polyline positions for height
-                entity.polyline.positions = entity.polyline.positions.getValue().map(
+                entity.polyline.clampToGround = true; // Clamp the polyline to the ground
+                entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
+                            entity.polyline.positions = entity.polyline.positions.getValue().map(
                     position => Cesium.Cartesian3.fromDegrees(
                         Cesium.Cartographic.fromCartesian(position).longitude,
                         Cesium.Cartographic.fromCartesian(position).latitude,
