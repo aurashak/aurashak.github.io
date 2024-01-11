@@ -169,7 +169,6 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 600; // Adjust as needed
-var riverHeight = 700; // Adjust as needed
 
 
 // Function to load and style a GeoJSON layer
@@ -199,19 +198,22 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
                 var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
+                var offsetHeight = 10; // Height offset above the ground in meters
             
                 entity.polyline.material = riverColor;
                 entity.polyline.width = 2; // Wider lines for rivers
-                entity.polyline.clampToGround = false; // Do not clamp the polyline to the ground
+                entity.polyline.clampToGround = true; // Clamp the polyline to the ground
+                entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
             
-                // Update the polyline positions for height
+                // No need to manually update the polyline positions if clamping to ground
+                // Instead, apply a height offset to each position
                 entity.polyline.positions = new Cesium.CallbackProperty(function() {
                     var cartographicPositions = entity.polyline.positions.getValue().map(function(position) {
                         var cartographic = Cesium.Cartographic.fromCartesian(position);
                         return Cesium.Cartesian3.fromDegrees(
                             Cesium.Math.toDegrees(cartographic.longitude),
                             Cesium.Math.toDegrees(cartographic.latitude),
-                            riverHeight // Use the riverHeight for all positions
+                            cartographic.height + offsetHeight
                         );
                     });
                     return cartographicPositions;
@@ -248,7 +250,7 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, co
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, riverHeight, true); // For rivers, set isRiverLayer to true
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers, set isRiverLayer to true
 
 
 
