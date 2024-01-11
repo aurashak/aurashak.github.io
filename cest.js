@@ -165,25 +165,32 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 });
 
 
-
-
-// Define the height at which the geojson layers will be rendered
-var layerHeight = 100; // Define the height for lakes, rivers, and regions
+// Define heights for different layer types
+var continentHeight = 500; // Adjust as needed
+var lakeRiverHeight = 100; // Adjust as needed
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false) {
+function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
-                entity.polygon.material = color.withAlpha(0.01);
-                entity.polygon.outline = false;
-                entity.polygon.outlineColor = outlineColor;
-                entity.polygon.extrudedHeight = height; // Use extrudedHeight for polygons
+                if (isCountryLayer) {
+                    // Custom styling and extrusion for continents
+                    entity.polygon.material = color.withAlpha(0.5);
+                    entity.polygon.outline = true;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else {
+                    // Default styling for other polygon layers (like lakes)
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = false;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                }
             } else if (isRiverLayer && entity.polyline) {
                 var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(0.5);
                 entity.polyline.material = riverColor;
                 entity.polyline.width = 0.25;
-                entity.polyline.arcType = Cesium.ArcType.NONE; // Disable clamping to ground
                 entity.polyline.positions = entity.polyline.positions.getValue().map(
                     position => Cesium.Cartesian3.fromDegrees(
                         Cesium.Cartographic.fromCartesian(position).longitude,
@@ -195,11 +202,9 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
         });
         viewer.dataSources.add(dataSource);
     }).otherwise(function(error){
-        console.error(error);
+        console.error('Error loading GeoJSON data:', error);
     });
 }
-
-
 
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
@@ -212,20 +217,16 @@ var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.js
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
-
-
-// Load and style the layers with custom styling for continents
-loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, 0, false, true);
-loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, 0, false, true);
-loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, 0, false, true);
-loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, 0, false, true);
-loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, 0, false, true);
-loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, 0, false, true);
-
-// Load and style lakes, rivers, and regions with extruded height
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, layerHeight);
-loadAndStyleGeoJson('https://aurashak.github.io/geojson/rivers.geojson', Cesium.Color.BLUE, Cesium.Color.BLUE, layerHeight, true);
-loadAndStyleGeoJson('https://aurashak.github.io/geojson/regions.geojson', Cesium.Color.GREEN, Cesium.Color.GREEN, layerHeight);
+// Load and style the layers
+loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE);
+loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
+loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
+loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
+loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
+loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
+loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
+loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, lakeRiverHeight);
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE, Cesium.Color.BLUE, lakeRiverHeight, true);
 
 
 window.onload = function() {
