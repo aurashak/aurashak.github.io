@@ -49,7 +49,7 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
                 material: color.withAlpha(0.5), // Set transparency for the halo
                 outline: true,
                 outlineColor: color,
-                outlineWidth: 3,
+                outlineWidth: 10,
                 fill: false
             });
         }
@@ -101,7 +101,7 @@ viewer.camera.setView({
 });
 
 // Slow down the rotation
-var spinRate = 0.0003;
+var spinRate = 0.0003;ƒhalo
 var isRotating = true; // To keep track of the rotation state
 var rotateGlobeFunction = function() {
     if (isRotating) {
