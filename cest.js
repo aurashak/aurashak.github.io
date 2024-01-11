@@ -172,33 +172,34 @@ var continentHeight = 500; // Adjust as needed
 var lakeRiverHeight = 600; // Adjust as needed
 var oceanHeight = 500; // Oceans typically don't need extrusion
 
-// Function to load and style GeoJSON data with custom heights
+// Function to load and style a GeoJSON layer with extrusion
 function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer = false) {
-    return Cesium.GeoJsonDataSource.load(url).then(function (dataSource) {
-        dataSource.entities.values.forEach(function (entity) {
-            // If the entity is a polygon (Continents, Lakes)
+    return Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
+                // Styling for polygon features (Continents and Lakes)
                 entity.polygon.material = color;
                 entity.polygon.outline = true;
                 entity.polygon.outlineColor = outlineColor;
                 entity.polygon.extrudedHeight = height;
             }
-            // If the entity is a polyline (Rivers)
             if (isRiverLayer && entity.polyline) {
+                // Styling for polyline features (Rivers)
                 entity.polyline.material = color;
                 entity.polyline.width = 2;
-                entity.polyline.clampToGround = false; // Set to false to enable height
-                entity.polyline.positions = new Cesium.CallbackProperty(function (time, result) {
-                    return Cesium.PolylinePipeline.generateArc({
-                        positions: entity.polyline.positions.getValue(time, result),
-                        height: height,
-                        granularity: 0.0001
-                    });
-                }, false);
+                // Replace the CallbackProperty with a direct assignment
+                // Generate the positions for the polyline
+                var positions = Cesium.PolylinePipeline.generateArc({
+                    positions: entity.polyline.positions.getValue(Cesium.JulianDate.now()),
+                    height: height,
+                    granularity: 0.0001
+                });
+                // Assign the positions directly to the polyline
+                entity.polyline.positions = positions;
             }
         });
         return viewer.dataSources.add(dataSource);
-    }).otherwise(function (error) {
+    }).otherwise(function(error){
         console.error('Error loading GeoJSON data:', error);
     });
 }
