@@ -49,7 +49,7 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
                 material: color.withAlpha(0.5), // Set transparency for the halo
                 outline: true,
                 outlineColor: color,
-                outlineWidth: 10,
+                outlineWidth: 30,
                 fill: false
             });
         }
