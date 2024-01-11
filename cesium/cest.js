@@ -183,13 +183,17 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 
 
 
-// Load and style the project markers
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
+var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; // Define the URL
+
+Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
     viewer.dataSources.add(dataSource);
 
     var entities = dataSource.entities.values;
     for (var i = 0; i < entities.length; i++) {
         var entity = entities[i];
+
+        // Set the billboard to undefined to ensure it doesn't show
+        entity.billboard = undefined;
 
         // Check if the entity has properties and a marker-color
         if (entity.properties && entity.properties['marker-color']) {
@@ -197,8 +201,8 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
 
             // Set the point to be transparent
             entity.point = new Cesium.PointGraphics({
-                pixelSize: 10,
-                color: Cesium.Color.TRANSPARENT // Set the point color to transparent
+                pixelSize: 0, // Set pixel size to 0 to hide the point
+                color: Cesium.Color.TRANSPARENT // Make the point fully transparent
             });
 
             // Modify the ellipse to create a glowing halo effect
@@ -219,15 +223,11 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
                 outlineWidth: 10, // Make the outline thicker
                 fill: false // No fill in the center
             });
-
-            // Additional glow effect can be achieved using a custom post-process stage or by overlaying a glTF model with a bloom effect
-            // This is a more advanced implementation and may require additional steps not covered here
         }
     }
 }).otherwise(function(error) {
     console.error("Error loading GeoJSON data: ", error);
 });
-
 
 
 // Function to calculate the midpoint for the arc's height
