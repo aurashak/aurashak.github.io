@@ -175,12 +175,15 @@ function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
                 // Enable the outline for polygons and set it to the specified color
                 entity.polygon.outline = false;
                 entity.polygon.outlineColor = outlineColor;
+                entity.polygon.height = height;
             } else if (isRiverLayer && entity.polyline) {
                 // Customize river lines
                 var riverHexColor = '#6495ED'; // Replace with your desired hex color for blue
                 var riverColor = Cesium.Color.fromCssColorString(riverHexColor).withAlpha(0.5); // Set the desired transparency using withAlpha
                 entity.polyline.material = riverColor;
                 entity.polyline.width = 0.25; // Adjust the width as needed
+                entity.polyline.clampToGround = false;
+                entity.polyline.height = height;
             }
         });
         viewer.dataSources.add(dataSource);
@@ -188,6 +191,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
         console.error(error);
     });
 }
+
 
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
@@ -210,9 +214,14 @@ loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.RED, null, true); // Custom style for rivers
 
+
+// Define the height at which the geojson layers will be rendered
+var layerHeight = 100; // This is an arbitrary value; adjust as needed for your data
+
+loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, layerHeight);
+loadAndStyleGeoJson('https://aurashak.github.io/geojson/rivers.geojson', Cesium.Color.BLUE, Cesium.Color.BLUE, layerHeight, true); // For rivers
+loadAndStyleGeoJson('https://aurashak.github.io/geojson/regions.geojson', Cesium.Color.GREEN, Cesium.Color.GREEN, layerHeight); // For regions
 
 
 
