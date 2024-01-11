@@ -165,6 +165,11 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 });
 
 
+
+// Define the height at which the geojson layers will be rendered
+var layerHeight = 100; // This is an arbitrary value; adjust as needed for your data
+
+
 // Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
@@ -215,9 +220,6 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
 
-
-// Define the height at which the geojson layers will be rendered
-var layerHeight = 100; // This is an arbitrary value; adjust as needed for your data
 
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, layerHeight);
 loadAndStyleGeoJson('https://aurashak.github.io/geojson/rivers.geojson', Cesium.Color.BLUE, Cesium.Color.BLUE, layerHeight, true); // For rivers
