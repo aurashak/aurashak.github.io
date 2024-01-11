@@ -174,7 +174,9 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 
 
 // Load and style the project markers
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
+var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; 
+
+Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
     viewer.dataSources.add(dataSource);
 
     var entities = dataSource.entities.values;
@@ -184,58 +186,79 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
         // Remove the billboard property
         entity.billboard = undefined;
 
-        // Customize the point appearance
-        var colorString = entity.properties['marker-color'].getValue();
-        var pulsatingColor = Cesium.Color.fromCssColorString(colorString).withAlpha(0.7); // Adjusted alpha value
-        entity.point = new Cesium.PointGraphics({
-            pixelSize: 5, // Reduced starting size
-            color: pulsatingColor,
-            outlineColor: pulsatingColor.withAlpha(0.3), // Subtle outline color
-            outlineWidth: 1 // Thin outline
-        });
+        // Check if the entity has properties and a marker-color
+        if (entity.properties && entity.properties['marker-color']) {
+            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
 
-        // Apply enhanced pulsating effect
-        createEnhancedPulsatingEffect(entity, pulsatingColor, 5, 15, 1500); // Reduced maxSize, increased duration
+            // Create a halo effect using EllipseGraphics
+            entity.ellipse = new Cesium.EllipseGraphics({
+                semiMinorAxis: 5000,  // Adjust size as needed
+                semiMajorAxis: 5000,  // Adjust size as needed
+                height: 10,           // Height above the surface
+                material: color.withAlpha(0.5), // Adjust transparency
+                outline: true,
+                outlineColor: color,
+                fill: false           // No fill in the center
+            });
+        }
+
+        // Remove the pulsating effect code
     }
 });
 
-// Enhanced function for pulsating effect
-function createEnhancedPulsatingEffect(entity, color, minSize, maxSize, duration) {
-    var lastUpdate = Date.now();
-    var growing = true;
 
-    viewer.scene.preRender.addEventListener(function() {
-        var now = Date.now();
-        var delta = (now - lastUpdate) / duration;
-        lastUpdate = now;
 
-        var size = entity.point.pixelSize.getValue();
-        if (growing) {
-            size += delta * (maxSize - minSize);
-            if (size > maxSize) {
-                growing = false;
-                size = maxSize;
-            }
-        } else {
-            size -= delta * (maxSize - minSize);
-            if (size < minSize) {
-                growing = true;
-                size = minSize;
-            }
-        }
-
-        entity.point.pixelSize = new Cesium.ConstantProperty(size);
-
-        // Enhanced outer ring effect
-        var outerRingSize = size + 5; // Slightly larger than the point
-        var outerRingOpacity = Math.max(0, 1 - (outerRingSize - size) / 10);
-        var outerRingColor = color.withAlpha(outerRingOpacity);
-        entity.point.outlineColor = new Cesium.ConstantProperty(outerRingColor);
-        entity.point.outlineWidth = new Cesium.ConstantProperty(outerRingSize);
-    });
+// Function to calculate the midpoint for the arc's height
+function computeMidpointHeight(start, end, heightFactor) {
+    var distance = Cesium.Cartesian3.distance(start, end);
+    return distance * heightFactor; // Height of the arc as a fraction of the distance
 }
 
+// Function to create an animated arc between two points
+function createAnimatedArc(startEntity, endEntity, color, duration) {
+    var startPosition = startEntity.position.getValue();
+    var endPosition = endEntity.position.getValue();
 
+    var midHeight = computeMidpointHeight(startPosition, endPosition, 0.15); // 15% of the distance
+
+    var arcPositions = new Cesium.SampledPositionProperty();
+    arcPositions.addSample(Cesium.JulianDate.now(), startPosition);
+    arcPositions.addSample(Cesium.JulianDate.now().addSeconds(duration / 2), Cesium.Cartesian3.fromRadians(
+        (Cesium.Cartographic.fromCartesian(startPosition).longitude + Cesium.Cartographic.fromCartesian(endPosition).longitude) / 2,
+        (Cesium.Cartographic.fromCartesian(startPosition).latitude + Cesium.Cartographic.fromCartesian(endPosition).latitude) / 2,
+        midHeight
+    ));
+    arcPositions.addSample(Cesium.JulianDate.now().addSeconds(duration), endPosition);
+
+    var arcEntity = viewer.entities.add({
+        position: arcPositions,
+        polyline: {
+            positions: new Cesium.CallbackProperty(function(time, result) {
+                return Cesium.PolylinePipeline.generateArc({
+                    positions: [startPosition, arcPositions.getValue(time), endPosition],
+                    granularity: 0.001
+                });
+            }, false),
+            material: new Cesium.ColorMaterialProperty(color),
+            width: 2
+        }
+    });
+
+    setTimeout(function() {
+        viewer.entities.remove(arcEntity); // Remove the arc after duration
+    }, duration * 1000);
+}
+
+// Create arcs between each pair of glowing halo markers
+var entities = dataSource.entities.values;
+for (var i = 0; i < entities.length; i++) {
+    for (var j = i + 1; j < entities.length; j++) {
+        var startEntity = entities[i];
+        var endEntity = entities[j];
+        var color = Cesium.Color.fromRandom({ alpha: 1.0 }); // Random color for each arc
+        createAnimatedArc(startEntity, endEntity, color, 10); // Duration of 10 seconds
+    }
+}
 
 
 
