@@ -73,39 +73,7 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
     console.error('Error loading GeoJSON data:', error);
 });
 
-// Create arcs between points
-function createAnimatedArc(startEntity, endEntity) {
-    var startPosition = startEntity.position.getValue(Cesium.JulianDate.now());
-    var endPosition = endEntity.position.getValue(Cesium.JulianDate.now());
 
-    var arcEntity = viewer.entities.add({
-        polyline: {
-            positions: new Cesium.CallbackProperty(function() {
-                return Cesium.PolylinePipeline.generateArc({
-                    positions: [startPosition, endPosition],
-                    height: 500000, // Adjust arc height
-                    granularity: 0.001
-                });
-            }, false),
-            material: Cesium.Color.fromRandom({alpha: 1.0}),
-            width: 2
-        }
-    });
-
-    // Optional: Remove arc after some time
-    setTimeout(function() {
-        viewer.entities.remove(arcEntity);
-    }, 10000); // Duration of 10 seconds
-}
-
-// Example usage of createAnimatedArc
-// Wait for the data source to be loaded
-viewer.dataSources.when(function() {
-    var entities = viewer.dataSources.get(0).entities.values;
-    for (var i = 0; i < entities.length - 1; i++) {
-        createAnimatedArc(entities[i], entities[i + 1]); // Create arcs between consecutive points
-    }
-});
 
 // Set the initial view
 viewer.camera.setView({
