@@ -167,28 +167,29 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 // Define the height at which the geojson layers will be rendered
-var layerHeight = 100; // This is an arbitrary value; adjust as needed for your data
-
+var layerHeight = 100; // Define the height for lakes, rivers, and regions
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
+function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
-                // Set polygon material to slightly transparent
                 entity.polygon.material = color.withAlpha(0.01);
-                // Enable the outline for polygons and set it to the specified color
                 entity.polygon.outline = false;
                 entity.polygon.outlineColor = outlineColor;
-                entity.polygon.height = height;
+                entity.polygon.extrudedHeight = height; // Use extrudedHeight for polygons
             } else if (isRiverLayer && entity.polyline) {
-                // Customize river lines
-                var riverHexColor = '#6495ED'; // Replace with your desired hex color for blue
-                var riverColor = Cesium.Color.fromCssColorString(riverHexColor).withAlpha(0.5); // Set the desired transparency using withAlpha
+                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(0.5);
                 entity.polyline.material = riverColor;
-                entity.polyline.width = 0.25; // Adjust the width as needed
-                entity.polyline.clampToGround = false;
-                entity.polyline.height = height;
+                entity.polyline.width = 0.25;
+                entity.polyline.arcType = Cesium.ArcType.NONE; // Disable clamping to ground
+                entity.polyline.positions = entity.polyline.positions.getValue().map(
+                    position => Cesium.Cartesian3.fromDegrees(
+                        Cesium.Cartographic.fromCartesian(position).longitude,
+                        Cesium.Cartographic.fromCartesian(position).latitude,
+                        height
+                    )
+                );
             }
         });
         viewer.dataSources.add(dataSource);
@@ -196,6 +197,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
         console.error(error);
     });
 }
+
 
 
 // URLs to the GeoJSON data
