@@ -207,6 +207,56 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
     });
 }
 
+User
+integrate code into this segment. 
+
+// Define the height at which the geojson layers will be rendered
+var layerHeight = 100; // Define the height for lakes, rivers, and regions
+
+// Function to load and style a GeoJSON layer
+function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false) {
+    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
+            if (entity.polygon) {
+                entity.polygon.material = color.withAlpha(0.01);
+                entity.polygon.outline = false;
+                entity.polygon.outlineColor = outlineColor;
+                entity.polygon.extrudedHeight = height; // Use extrudedHeight for polygons
+            } else if (isRiverLayer && entity.polyline) {
+                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(0.5);
+                entity.polyline.material = riverColor;
+                entity.polyline.width = 0.25;
+                entity.polyline.arcType = Cesium.ArcType.NONE; // Disable clamping to ground
+                entity.polyline.positions = entity.polyline.positions.getValue().map(
+                    position => Cesium.Cartesian3.fromDegrees(
+                        Cesium.Cartographic.fromCartesian(position).longitude,
+                        Cesium.Cartographic.fromCartesian(position).latitude,
+                        height
+                    )
+                );
+            }
+        });
+        viewer.dataSources.add(dataSource);
+    }).otherwise(function(error){
+        console.error(error);
+    });
+}
+
+
+
+// URLs to the GeoJSON data
+var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
+var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json';
+var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
+var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
+var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
+var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
+var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+
+
+
 // Load and style the layers with custom styling for continents
 loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, 0, false, true);
 loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE, 0, false, true);
