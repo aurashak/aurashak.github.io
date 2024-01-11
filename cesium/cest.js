@@ -197,16 +197,16 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
         if (entity.properties && entity.properties['marker-color']) {
             var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
 
-            // Create a halo effect using EllipseGraphics
-            entity.ellipse = new Cesium.EllipseGraphics({
-                semiMinorAxis: 5000, // Adjust size as needed
-                semiMajorAxis: 5000, // Adjust size as needed
-                height: 10, // Height above the surface
-                material: color.withAlpha(0.5), // Adjust transparency
-                outline: true, // Set to false if no outline is needed
-                outlineColor: color,
-                fill: false // No fill in the center
-            });
+           // Create a more visible halo effect
+    entity.ellipse = new Cesium.EllipseGraphics({
+        semiMinorAxis: 50000, // Larger size
+        semiMajorAxis: 50000, // Larger size
+        height: 1000, // Higher above the surface
+        material: color.withAlpha(0.8), // More opaque for visibility
+        outline: true, // Keep the outline
+        outlineColor: Cesium.Color.WHITE, // Contrast color for outline
+        fill: false // No fill in the center
+    });
         }
     }
 }).otherwise(function(error) {
