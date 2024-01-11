@@ -174,9 +174,7 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 
 
 // Load and style the project markers
-var geojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson'; 
-
-Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
     viewer.dataSources.add(dataSource);
 
     var entities = dataSource.entities.values;
@@ -201,9 +199,9 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
                 fill: false           // No fill in the center
             });
         }
-
-        // Remove the pulsating effect code
     }
+}).otherwise(function(error) {
+    console.error(error);
 });
 
 
