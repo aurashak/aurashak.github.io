@@ -24,13 +24,13 @@ viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesiu
 
 // Create a black rectangle using SingleTileImageryProvider
 var blackOverlay = new Cesium.SingleTileImageryProvider({
-    url: Cesium.buildModuleUrl('Assets/Textures/black.png'), // Ensure you have a 1x1 pixel black PNG image in the Textures directory
+    url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAesB9FD6P9QAAAAASUVORK5CYII=', // This is a base64-encoded 1x1 black pixel
     rectangle: Cesium.Rectangle.fromDegrees(-180, -90, 180, 90)
 });
 
 // Add the black overlay above the satellite imagery
-var blackLayer = imageryLayers.addImageryProvider(blackOverlay);
-blackLayer.zIndex = 1; // Set a zIndex higher than the base layer to overlay on top
+var blackLayer = viewer.imageryLayers.addImageryProvider(blackOverlay);
+blackLayer.zIndex = 1;
 
 
 // Load and style the project markers with halos
