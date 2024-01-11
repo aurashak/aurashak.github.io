@@ -190,18 +190,18 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers
 
             // Create a halo effect using EllipseGraphics
             entity.ellipse = new Cesium.EllipseGraphics({
-                semiMinorAxis: 5000,  // Adjust size as needed
-                semiMajorAxis: 5000,  // Adjust size as needed
-                height: 10,           // Height above the surface
+                semiMinorAxis: 5000, // Adjust size as needed
+                semiMajorAxis: 5000, // Adjust size as needed
+                height: 10, // Height above the surface
                 material: color.withAlpha(0.5), // Adjust transparency
-                outline: true,
+                outline: true, // Set to false if no outline is needed
                 outlineColor: color,
-                fill: false           // No fill in the center
+                fill: false // No fill in the center
             });
         }
     }
 }).otherwise(function(error) {
-    console.error(error);
+    console.error("Error loading GeoJSON data: ", error);
 });
 
 
