@@ -20,7 +20,7 @@ baseLayer.brightness = 1.2; // Adjust the brightness, default is 1.0
 baseLayer.contrast = 1.2; // Adjust the contrast, default is 1.0
 
 var currentTime = Cesium.JulianDate.now();
-viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 6, new Cesium.JulianDate()); // Move 6 hours forward
+viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
 
 // Define handler in the global scope
