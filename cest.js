@@ -22,6 +22,16 @@ baseLayer.contrast = 1.2; // Adjust the contrast, default is 1.0
 var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
+// Create a black rectangle using SingleTileImageryProvider
+var blackOverlay = new Cesium.SingleTileImageryProvider({
+    url: Cesium.buildModuleUrl('Assets/Textures/black.png'), // Ensure you have a 1x1 pixel black PNG image in the Textures directory
+    rectangle: Cesium.Rectangle.fromDegrees(-180, -90, 180, 90)
+});
+
+// Add the black overlay above the satellite imagery
+var blackLayer = imageryLayers.addImageryProvider(blackOverlay);
+blackLayer.zIndex = 1; // Set a zIndex higher than the base layer to overlay on top
+
 
 // Load and style the project markers with halos
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
@@ -238,7 +248,7 @@ var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
 var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
-var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/earth-lakes-1km.geo.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
 // Load and style the layers
