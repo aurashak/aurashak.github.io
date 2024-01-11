@@ -230,6 +230,37 @@ Cesium.GeoJsonDataSource.load(geojsonUrl).then(function(dataSource) {
 });
 
 
+// Define a function to update the size of the halos based on the camera height
+function updateHaloSizeBasedOnZoom(viewer) {
+    var scene = viewer.scene;
+    var entities = viewer.entities.values;
+
+    var cameraHeight = scene.camera.positionCartographic.height;
+    entities.forEach(function(entity) {
+        if (entity.ellipse) {
+            // Define a base size for your halo
+            var baseSize = 5000; // Adjust base size as needed
+            // Define how the size changes with zoom level
+            var sizeFactor = cameraHeight / 1000000; // Adjust divisor to control scaling
+            var newSize = baseSize * Math.max(sizeFactor, 1); // Prevent size from going below the base size
+
+            // Update the size of the ellipse
+            entity.ellipse.semiMinorAxis = newSize;
+            entity.ellipse.semiMajorAxis = newSize;
+        }
+    });
+}
+
+// Add an event listener to the camera changed event to update halos on zoom
+viewer.camera.changed.addEventListener(function() {
+    updateHaloSizeBasedOnZoom(viewer);
+});
+
+// Initial update of halos
+updateHaloSizeBasedOnZoom(viewer);
+
+
+
 // Function to calculate the midpoint for the arc's height
 function computeMidpointHeight(start, end, heightFactor) {
     var distance = Cesium.Cartesian3.distance(start, end);
