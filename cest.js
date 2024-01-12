@@ -80,6 +80,29 @@ coordsBox.style.display = 'block';
 coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
 
 
+function getTypeFromProperties(properties) {
+    // This is a placeholder function. You'll need to implement the logic based on your actual data structure.
+    // For example, if you have a 'FEATURECLA' property that says 'Country' or 'River', use that to determine the type.
+    if (properties.FEATURECLA === 'continent') {
+        return 'Continent';
+    } else if (properties.FEATURECLA === 'country') {
+        return 'Country';
+    } else if (properties.FEATURECLA === 'LakeCenterline') {
+        return 'River';
+    } else if (properties.FEATURECLA === 'River') {
+        return 'River';
+    } else if (properties.FEATURECLA === 'Lake') {
+        return 'Lake';
+    } else if (properties.FEATURECLA === 'REGION') {
+        return 'Region';
+    } // Add more conditions as needed for other types.
+    // ...
+    return 'Unknown'; // Default type if no other matches are found.
+}
+
+
+
+
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
@@ -91,22 +114,33 @@ function showCoordinates(movement) {
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
-        var entitiesList = [];
+        var placeList = {
+            'Continent': [],
+            'Country': [],
+            'Region': [],
+            'Ocean': [],
+            'Lake': [],
+            'River': []
+        };
 
-        // Iterate over all picked objects
+        // Iterate over all picked objects and categorize them
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var nameProperty = properties.name || properties.NAME; // Try 'name' first, then 'NAME'
-                if (Cesium.defined(nameProperty)) {
-                    entitiesList.push(nameProperty.getValue());
+                var type = getTypeFromProperties(properties); // Use the new function to get the type
+                var nameProperty = properties.name || properties.NAME; // Adjust based on your GeoJSON properties
+
+                if (Cesium.defined(nameProperty) && placeList.hasOwnProperty(type)) {
+                    placeList[type].push(nameProperty.getValue());
                 }
             }
         });
 
-        // Check if we have any entities and add them to the hoverText
-        if (entitiesList.length > 0) {
-            hoverText += '<br>Entity: ' + entitiesList.join(', '); // Join all entities into a single line
+        // Format the hover text by place type
+        for (var placeType in placeList) {
+            if (placeList[placeType].length > 0) {
+                hoverText += '<br>' + placeType + ': ' + placeList[placeType].join(', ');
+            }
         }
 
         // Update text content
@@ -114,6 +148,7 @@ function showCoordinates(movement) {
         coordsBox.style.display = 'block';
     }
 }
+
 
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
