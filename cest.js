@@ -118,43 +118,36 @@ var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 600; // Adjust as needed
 var projectMarkerHeight = 1000; // Adjust as needed
+var rotationSpeed = 0.1; // Radians per second
+
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false) {
+function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isProjectMarkerLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        viewer.dataSources.add(dataSource);
         dataSource.entities.values.forEach(function(entity) {
-            function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isProjectMarkerLayer = false) {
-                Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
-                    dataSource.entities.values.forEach(function(entity) {
-                        if (isProjectMarkerLayer && entity.properties && entity.properties['marker-color']) {
-                            var markerColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-                            entity.billboard = undefined; // Disable the billboard if it exists
-            
-                            entity.point = new Cesium.PointGraphics({
-                                pixelSize: 0,
-                                color: Cesium.Color.TRANSPARENT
-                            });
-            
-                            entity.ellipse = new Cesium.EllipseGraphics({
-                                semiMinorAxis: 5000,
-                                semiMajorAxis: 5000,
-                                height: height, // Use the provided height for the project marker layer
-                                material: markerColor.withAlpha(0.5),
-                                outline: true,
-                                outlineColor: markerColor,
-                                outlineWidth: 30,
-                                fill: true
-                            });
+            if (isProjectMarkerLayer && entity.properties && entity.properties['marker-color']) {
+                // Style project markers
+                var markerColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
+                entity.point = new Cesium.PointGraphics({
+                    pixelSize: 10,
+                    color: markerColor
+                });
+                // Add a rotating billboard for halo effect
+                entity.billboard = new Cesium.BillboardGraphics({
+                    image: 'https://aurashak.github.io/images/reddashedcircle.png',
+                    rotation: new Cesium.CallbackProperty(function(time, result) {
+                        return viewer.clock.currentTime.secondsOfDay * rotationSpeed;
+                    }, false)
+                });
             else if (entity.polygon) {
                 if (isCountryLayer) {
                     // Custom styling for continents
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
                     entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
                     // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(0.5); // More transparency for water
                     entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     // Oceans typically do not need extrusion
@@ -167,7 +160,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
-                var riverColor = Cesium.Color.BLUE.withAlpha(1); // Define the blue color with full opacity
+                var riverColor = Cesium.Color.BLUE.withAlpha(0.1); // Define the blue color with full opacity
                 var offsetHeight = 10; // Height offset above the ground in meters
 
                 entity.polyline.material = riverColor; // Apply the riverColor to the polyline material
