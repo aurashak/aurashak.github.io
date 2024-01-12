@@ -81,13 +81,10 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    if (properties.featurecla === 'name') {
+    if (properties.featurecla === 'c') {
         return 'Country';
     }
-    if (properties.featurecla === 'Name') {
-        return 'Country';
-    }
-
+    
     // Default type if no other matches are found.
     return 'Unknown';
 }
