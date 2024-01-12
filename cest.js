@@ -199,11 +199,10 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
-                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
                 var offsetHeight = 10; // Height offset above the ground in meters
             
-                entity.polyline.material = riverColor;
-                entity.polyline.width = 2; // Wider lines for rivers
+                entity.polyline.material = color.withAlpha(1); // Semi-transparent
+                entity.polyline.width = .5; // Wider lines for rivers
                 entity.polyline.clampToGround = true; // Clamp the polyline to the ground
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
             
