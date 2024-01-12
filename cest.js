@@ -135,7 +135,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 if (isCountryLayer) {
                     // Custom styling for continents
                     entity.polygon.material = color.withAlpha(0.1); // Semi-transparent
-                    entity.polygon.outline = false; // Remove outline
+                    entity.polygon.outline = true; // Remove outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
