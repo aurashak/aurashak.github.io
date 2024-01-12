@@ -83,46 +83,57 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 function getTypeFromProperties(properties) {
     if (properties.featurecla === 'Admin-0 country') {
         return 'Country';
+    } else if (properties.featurecla === 'Lake') {
+        return 'Lake';
+    } else if (properties.featurecla === 'Region') {
+        return 'Region';
+    } else if (properties.featurecla === 'Subregion') {
+        return 'Subregion';
+    } else if (properties.featurecla === 'Continent') {
+        return 'Continent';
     }
-
-    // Default type if no other matches are found.
+    // Add other conditions for different categories if necessary
     return 'Unknown';
 }
 
-function getTypeFromProperties(properties) {
-    // Simplified to handle only 'Admin-0 country'
-    if (properties.featurecla === 'Admin-0 country') {
-        return 'Country';
-    }
-    // Default type if no other matches are found.
-    return 'Unknown';
-}
+
 
 function showCoordinates(movement) {
-    var ray = viewer.camera.getPickRay(movement.endPosition);
-    var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+
+        var placeHierarchy = {
+            'Continent': '',
+            'Country': '',
+            'Region': '',
+            'Subregion': '',
+            'Lake': ''
+        };
 
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
-                var nameProperty = properties.name || properties.NAME;
+                var name = properties.name || properties.NAME;
 
-                if (Cesium.defined(nameProperty)) {
-                    hoverText += `<br>${type}: ${nameProperty.getValue()}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
+                if (Cesium.defined(name) && placeHierarchy.hasOwnProperty(type)) {
+                    placeHierarchy[type] = name.getValue();
                 }
             }
         });
+
+        // Now order the information by the hierarchy
+        for (var type in placeHierarchy) {
+            if (placeHierarchy[type]) {
+                hoverText += `<br>${type}: ${placeHierarchy[type]}`;
+            }
+        }
 
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
@@ -130,7 +141,6 @@ function showCoordinates(movement) {
 }
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
 
 
 
