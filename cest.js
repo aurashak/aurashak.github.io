@@ -100,6 +100,13 @@ function showCoordinates(movement) {
             }
         }
 
+        if (Cesium.defined(entity) && entity.id && entity.id.properties) {
+            var nameProperty = entity.id.properties.NAME; // Access the 'NAME' property
+            if (Cesium.defined(nameProperty)) {
+                hoverText += '<br>' + 'Region: ' + nameProperty.getValue();
+            }
+        }
+
         // Update text content
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
