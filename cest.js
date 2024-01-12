@@ -117,7 +117,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 600; // Adjust as needed
-
+var projectMarkerHeight = 1000; // Adjust as needed
 
 // Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false) {
@@ -208,6 +208,7 @@ var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.js
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+var projectMarkersGeojsonUrl = 'https://aurashak.github.io/geojson/projectmarkers.geojson';
 
 // Load and style the layers
 loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans, set isOceanLayer to true
@@ -219,6 +220,7 @@ loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHI
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, riversHeight, true, false, false); // For rivers, set isRiverLayer to true
+loadAndStyleGeoJson(projectMarkersGeojsonUrl, null, null, projectMarkerHeight, false, false, false, true); // Set isProjectMarkerLayer to true for project markers
 
 
     // Update halos based on camera height
