@@ -120,6 +120,11 @@ var lakesHeight = 700; // Adjust as needed
 var projectMarkerHeight = 1000; // Adjust as needed
 var rotationSpeed = 0.1; // Radians per second
 
+var viewer = new Cesium.Viewer('cesiumContainer', {
+    // Viewer options here...
+});
+
+
 
 // Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isProjectMarkerLayer = false) {
