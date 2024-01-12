@@ -1,4 +1,4 @@
-`
+
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
 var viewer = new Cesium.Viewer('cesiumContainer', {
@@ -24,6 +24,9 @@ var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
 
+
+
+
 // Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -38,6 +41,16 @@ viewer.camera.setView({
 // Define handler in the global scope
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
+
+// Set a standard initial view
+viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000), // Longitude, Latitude, Height
+    orientation: {
+        heading: Cesium.Math.toRadians(0.0), // Facing East
+        pitch: Cesium.Math.toRadians(-90.0), // Looking down
+        roll: 0.0
+    }
+});
 
 // Slow down the rotation
 var spinRate = 0.0003;
@@ -67,60 +80,84 @@ coordsBox.style.display = 'block';
 coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
 
 
-function getTypeFromProperties(properties, datasetName) {
-    if (datasetName === 'riverslakes') {
-        if (properties.featurecla === 'Lake Centerline') {
-            return 'River'; // categorizing 'Lake Centerline' as 'River'
-        } else {
-            return 'Lake'; // assuming other features in this dataset are lakes
-        }
+function getTypeFromProperties(properties) {
+    if (properties.featurecla === 'Admin-0 country') {
+        return 'Country';
+    } else if (properties.featurecla === 'Island') {
+        return 'Region';
+    } else if (properties.featurecla === 'continent') {
+        return 'Continent';
+    } else if (properties.featurecla === 'country') {
+        return 'Country';
+    } else if (properties.featurecla === 'LakeCenterline') {
+        return 'River';
+    } else if (properties.featurecla === 'River') {
+        return 'River';
+    } else if (properties.featurecla === 'Lake') {
+        return 'Lake';
+    } else if (properties.featurecla === 'REGION') {
+        return 'Region';
     }
+    // Add more conditions as needed for other types.
+
+    // Default type if no other matches are found.
+    return 'Unknown';
+}
+
 
 
 
 
 function showCoordinates(movement) {
-    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
+    var ray = viewer.camera.getPickRay(movement.endPosition);
+    var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition); // Get all entities at the clicked position
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+        
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
-
         var placeList = {
-            'River': [],
-            'Lake': [],
+            'Continent': [],
+            'Country': [],
+            'Region': [],
             'Ocean': [],
-            'Region': []
+            'Lake': [],
+            'River': []
         };
 
+        // Iterate over all picked objects and categorize them
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var datasetName = pickedObject.id.dataSetName; // Assuming you store dataset name here
-                var type = getTypeFromProperties(properties, datasetName);
-                var name = properties.name || properties.NAME;
+                var type = getTypeFromProperties(properties); // Use the new function to get the type
+                var nameProperty = properties.name || properties.NAME; // Adjust based on your GeoJSON properties
 
-                if (Cesium.defined(name) && placeList.hasOwnProperty(type)) {
-                    placeList[type].push(name.getValue());
+                if (Cesium.defined(nameProperty) && placeList.hasOwnProperty(type)) {
+                    placeList[type].push(nameProperty.getValue());
                 }
             }
+
+            console.log(`Type: ${type}, Name: ${nameProperty ? nameProperty.getValue() : 'N/A'}`);
+            
         });
 
-        for (var type in placeList) {
-            if (placeList[type].length > 0) {
-                hoverText += '<br>' + type + ': ' + placeList[type].join(', ');
+        // Format the hover text by place type
+        for (var placeType in placeList) {
+            if (placeList[placeType].length > 0) {
+                hoverText += '<br>' + placeType + ': ' + placeList[placeType].join(', ');
             }
         }
 
+        // Update text content
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
 
-viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
@@ -132,11 +169,13 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
     coordsBox.style.display = 'block';
 });
 
+
 // Define heights for different layer types
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 700; // Adjust as needed
 var regionsHeight = 600; // Adjust as needed
+
 
 // Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isRegionsLayer = false) {    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
@@ -201,6 +240,8 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
 }
 
 
+
+
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
 
@@ -229,6 +270,7 @@ loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Colo
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers
 
 
+
 window.onload = function() {
     var viewer = new Cesium.Viewer('cesiumContainer', {
         // your viewer options
@@ -250,6 +292,5 @@ window.onload = function() {
             toolbar.className += ' custom-toolbar';
         }
     });
+};
 
-
-`
