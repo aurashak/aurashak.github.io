@@ -200,7 +200,7 @@ var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.js
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojson';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
-var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.json';
+var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
 // Load and style the layers
