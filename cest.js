@@ -89,14 +89,19 @@ function getTypeFromProperties(properties) {
     return 'Unknown';
 }
 
-
-
-
+function getTypeFromProperties(properties) {
+    // Simplified to handle only 'Admin-0 country'
+    if (properties.featurecla === 'Admin-0 country') {
+        return 'Country';
+    }
+    // Default type if no other matches are found.
+    return 'Unknown';
+}
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
-    var pickedObjects = viewer.scene.drillPick(movement.endPosition); // Get all entities at the clicked position
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
@@ -104,43 +109,28 @@ function showCoordinates(movement) {
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
-        var placeList = {
-            'Continent': [],
-            'Country': [],
-            'Region': [],
-            'Ocean': [],
-            'Lake': [],
-            'River': []
-        };
 
-        // Iterate over all picked objects and categorize them
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties); // Use the new function to get the type
-                var nameProperty = properties.name || properties.NAME; // Adjust based on your GeoJSON properties
+                var type = getTypeFromProperties(properties);
+                var nameProperty = properties.name || properties.NAME;
 
-                if (Cesium.defined(nameProperty) && placeList.hasOwnProperty(type)) {
-                    placeList[type].push(nameProperty.getValue());
+                if (Cesium.defined(nameProperty)) {
+                    hoverText += `<br>${type}: ${nameProperty.getValue()}`;
+                } else {
+                    hoverText += `<br>${type}: N/A`;
                 }
             }
-
-            console.log(`Type: ${type}, Name: ${nameProperty ? nameProperty.getValue() : 'N/A'}`);
-            
         });
 
-        // Format the hover text by place type
-        for (var placeType in placeList) {
-            if (placeList[placeType].length > 0) {
-                hoverText += '<br>' + placeType + ': ' + placeList[placeType].join(', ');
-            }
-        }
-
-        // Update text content
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
+
+viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 
 
