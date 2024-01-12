@@ -47,7 +47,7 @@ a:active {
 .top-row {
     display: flex;
     justify-content: start; /* Align the top row at the start of the container */
-    margin: 20px 130px; /* Top and Bottom Margin */
+    margin: 20px 0px; /* Top and Bottom Margin */
 }
 
 .top-box {
@@ -66,7 +66,7 @@ a:active {
 /* Header Styles */
 .header {
     display: flex;
-    margin: 100px 130px 50px 130px; /* Top, Right, Bottom, Left */
+    margin: 80px 130px 50px 130px; /* Top, Right, Bottom, Left */
     padding: 0px;
     align-items: flex-end; /* Align items at the bottom */
 }
@@ -260,10 +260,11 @@ a:active {
 
 
 .footer {
-    background-color: #333; /* Background color for the footer */
+    background-color: none; /* Background color for the footer */
     color: #fff; /* Text color for the footer */
     padding: 20px; /* Padding to create some space around the content inside the footer */
-    text-align: center; /* Center-align the text inside the footer */
+    text-align: left; /* Center-align the text inside the footer */
+    z-index: 2000;
   }
   
 
