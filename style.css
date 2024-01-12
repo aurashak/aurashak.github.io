@@ -43,6 +43,26 @@ a:active {
     /* ... other styles ... */
 }
 
+/* Top Row Styles */
+.top-row {
+    display: flex;
+    justify-content: start; /* Align the top row at the start of the container */
+    margin: 20px 130px; /* Top and Bottom Margin */
+}
+
+.top-box {
+    font-size: 20px; /* Adjust the font size as needed */
+    margin-right: 60px; /* Add right margin between boxes */
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    text-align: left;
+    border-radius: 2px;
+    z-index: 3; /* Above the globe */
+}
+
+.top-box:last-child {
+    margin-right: 0; /* No right margin on the last box */
+}
+
 /* Header Styles */
 .header {
     display: flex;
