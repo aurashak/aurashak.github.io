@@ -118,12 +118,6 @@ var regionsHeight = 600; // Adjust as needed for regions layer
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 700; // Adjust as needed
 var projectMarkerHeight = 1000; // Adjust as needed
-var rotationSpeed = 0.1; // Radians per second
-
-var viewer = new Cesium.Viewer('cesiumContainer', {
-    // Viewer options here...
-});
-
 
 
 // Function to load and style a GeoJSON layer
@@ -131,21 +125,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         viewer.dataSources.add(dataSource);
         dataSource.entities.values.forEach(function(entity) {
-            if (isProjectMarkerLayer && entity.properties && entity.properties['marker-color']) {
-                // Style project markers
-                var markerColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-                entity.point = new Cesium.PointGraphics({
-                    pixelSize: 10,
-                    color: markerColor
-                });
-                // Add a rotating billboard for halo effect
-                entity.billboard = new Cesium.BillboardGraphics({
-                    image: 'https://aurashak.github.io/images/reddashedcircle.png',
-                    rotation: new Cesium.CallbackProperty(function(time, result) {
-                        return viewer.clock.currentTime.secondsOfDay * rotationSpeed;
-                    }, false)
-                });
-            else if (entity.polygon) {
+        if (entity.polygon) {
                 if (isCountryLayer) {
                     // Custom styling for continents
                     entity.polygon.outline = true; // With outline
