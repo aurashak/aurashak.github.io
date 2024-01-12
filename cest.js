@@ -86,9 +86,11 @@ function getTypeFromProperties(properties) {
         case 'Admin-0 country':
         case 'Country':
             return 'Country';
-        case 'Continent':
+        case 'continent':
             return 'Continent';
-        case 'Region':
+        case 'region_un':
+            return 'Region';
+        case 'subregion':
             return 'Region';
         // Add more cases as needed
         default:
