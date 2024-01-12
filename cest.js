@@ -81,24 +81,29 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
+    // Map 'featurecla' to your desired types
+    var featureClassToType = {
+        'Admin-0 country': 'Country',
+        'Island': 'Region',
+        if (properties.FEATURECLA === 'continent') {
+            return 'Continent';
+        } else if (properties.FEATURECLA === 'country') {
+            return 'Country';
+        } else if (properties.FEATURECLA === 'LakeCenterline') {
+            return 'River';
+        } else if (properties.FEATURECLA === 'River') {
+            return 'River';
+        } else if (properties.FEATURECLA === 'Lake') {
+            return 'Lake';
+        } else if (properties.FEATURECLA === 'REGION') {
+            return 'Region';
+        } // Add more conditions as needed for other types.
+        // ...
+        return 'Unknown'; // Default type if no other matches are found.
+    }
     // This is a placeholder function. You'll need to implement the logic based on your actual data structure.
     // For example, if you have a 'FEATURECLA' property that says 'Country' or 'River', use that to determine the type.
-    if (properties.FEATURECLA === 'continent') {
-        return 'Continent';
-    } else if (properties.FEATURECLA === 'country') {
-        return 'Country';
-    } else if (properties.FEATURECLA === 'LakeCenterline') {
-        return 'River';
-    } else if (properties.FEATURECLA === 'River') {
-        return 'River';
-    } else if (properties.FEATURECLA === 'Lake') {
-        return 'Lake';
-    } else if (properties.FEATURECLA === 'REGION') {
-        return 'Region';
-    } // Add more conditions as needed for other types.
-    // ...
-    return 'Unknown'; // Default type if no other matches are found.
-}
+   
 
 
 
