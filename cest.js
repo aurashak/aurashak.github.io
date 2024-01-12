@@ -199,13 +199,15 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
-                var riverColor = Cesium.Color.BLUE.withAlpha(1);
+                // Custom styling for rivers
+                var riverColor = Cesium.Color.BLUE.withAlpha(1); // Define the blue color with full opacity
                 var offsetHeight = 10; // Height offset above the ground in meters
-            
-                entity.polyline.material = color.withAlpha(1); // Semi-transparent
-                entity.polyline.width = .5; // Wider lines for rivers
+
+                entity.polyline.material = riverColor; // Apply the riverColor to the polyline material
+                entity.polyline.width = 0.5; // Wider lines for rivers
                 entity.polyline.clampToGround = true; // Clamp the polyline to the ground
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
+
             
                 // No need to manually update the polyline positions if clamping to ground
                 // Instead, apply a height offset to each position
@@ -252,7 +254,7 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, co
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers, set isRiverLayer to true
+loadAndStyleGeoJson(riversGeojsonUrl, true); // For rivers, set isRiverLayer to true
 
 
 
