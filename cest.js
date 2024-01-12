@@ -120,7 +120,7 @@ function showCoordinates(movement) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
-                var name = properties.name || properties.NAME;
+                var name = properties.name || properties.Name || properties.NAME;
 
                 if (Cesium.defined(name) && placeHierarchy.hasOwnProperty(type)) {
                     placeHierarchy[type] = name.getValue();
