@@ -83,7 +83,7 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
     var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
-    var entity = viewer.scene.pick(movement.endPosition);
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition); // Get all entities at the clicked position
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
@@ -92,20 +92,16 @@ function showCoordinates(movement) {
         
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
-        // Check if an entity was picked
-        if (Cesium.defined(entity) && entity.id && entity.id.properties) {
-            var nameProperty = entity.id.properties.name;
-            if (Cesium.defined(nameProperty)) {
-                hoverText += '<br>' + 'Place: ' + nameProperty.getValue();
+        // Iterate over all picked objects
+        pickedObjects.forEach(function(pickedObject) {
+            if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
+                var properties = pickedObject.id.properties;
+                var nameProperty = properties.name || properties.NAME; // Try 'name' first, then 'NAME'
+                if (Cesium.defined(nameProperty)) {
+                    hoverText += '<br>' + 'Entity: ' + nameProperty.getValue();
+                }
             }
-        }
-
-        if (Cesium.defined(entity) && entity.id && entity.id.properties) {
-            var nameProperty = entity.id.properties.NAME; // Access the 'NAME' property
-            if (Cesium.defined(nameProperty)) {
-                hoverText += '<br>' + 'Region: ' + nameProperty.getValue();
-            }
-        }
+        });
 
         // Update text content
         coordsBox.innerHTML = hoverText;
