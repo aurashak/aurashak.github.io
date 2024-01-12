@@ -190,7 +190,7 @@ var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojson';
-var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
+var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
