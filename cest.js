@@ -119,7 +119,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 // Define heights for different layer types
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
-var lakesHeight = 600; // Adjust as needed
+var lakesHeight = 700; // Adjust as needed
 var regionsHeight = 600; // Adjust as needed
 
 
@@ -130,26 +130,25 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
             if (entity.polygon) {
                 if (isCountryLayer) {
                     // Custom styling for continents
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
+                    entity.polygon.material = color.withAlpha(0.1); // Semi-transparent
                     entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
                     // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(1); // More transparency for water
+                    entity.polygon.material = color.withAlpha(0.1); // More transparency for water
                     entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     // Oceans typically do not need extrusion
                 } else {
                     // Default styling for other polygon layers (like lakes)
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
+                    entity.polygon.material = color.withAlpha(0.1); // Semi-transparent
                     entity.polygon.outline = true; // No outline for lakes
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
-                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
                 var offsetHeight = 10; // Height offset above the ground in meters
             
                 entity.polyline.material = riverColor;
