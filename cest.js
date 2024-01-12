@@ -199,6 +199,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
+                var riverColor = Cesium.Color.BLUE.withAlpha(1);
                 var offsetHeight = 10; // Height offset above the ground in meters
             
                 entity.polyline.material = color.withAlpha(1); // Semi-transparent
