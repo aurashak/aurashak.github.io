@@ -80,14 +80,34 @@ coordsBox.style.display = 'block';
 coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
 
 
-function getPlaceDetails(properties) {
-    let placeDetails = {
-        "Country": properties.name || 'N/A',
-        "Continent": properties.continent || 'N/A',
-        "Region": properties.region_un || 'N/A',
-        "Subregion": properties.subregion || 'N/A'
-    };
-    return placeDetails;
+function getTypeFromProperties(properties) {
+    // You would define your mapping based on actual values in featurecla
+    switch (properties.featurecla) {
+        case 'Admin-0 country':
+        case 'Country':
+            return 'Country';
+        case 'Continent':
+            return 'Continent';
+        case 'Region':
+            return 'Region';
+        // Add more cases as needed
+        default:
+            return 'Unknown';
+    }
+}
+
+function getDetailsFromType(type, properties) {
+    // Depending on the type, extract the relevant details
+    let details = '';
+    if (type === 'Country') {
+        details = properties.name || 'N/A';
+    } else if (type === 'Continent') {
+        details = properties.continent || 'N/A';
+    } else if (type === 'Region') {
+        details = properties.region_un || 'N/A';
+    }
+    // Add more logic for other types if necessary
+    return details;
 }
 
 function showCoordinates(movement) {
@@ -103,11 +123,11 @@ function showCoordinates(movement) {
 
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
-                var details = getPlaceDetails(pickedObject.id.properties);
-                hoverText += `<br>Country: ${details.Country}`;
-                hoverText += `<br>Continent: ${details.Continent}`;
-                hoverText += `<br>Region: ${details.Region}`;
-                hoverText += `<br>Subregion: ${details.Subregion}`;
+                var properties = pickedObject.id.properties;
+                var type = getTypeFromProperties(properties);
+                var details = getDetailsFromType(type, properties);
+
+                hoverText += `<br>${type}: ${details}`;
             }
         });
 
@@ -115,6 +135,7 @@ function showCoordinates(movement) {
         coordsBox.style.display = 'block';
     }
 }
+
 
 // Rest of your code...
 
