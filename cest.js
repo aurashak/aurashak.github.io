@@ -24,9 +24,6 @@ var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
 
-
-
-
 // Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -125,9 +122,6 @@ function showCoordinates(movement) {
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-
-
-
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
@@ -138,13 +132,11 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
     coordsBox.style.display = 'block';
 });
 
-
 // Define heights for different layer types
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 700; // Adjust as needed
 var regionsHeight = 600; // Adjust as needed
-
 
 // Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isRegionsLayer = false) {    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
@@ -209,8 +201,6 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
 }
 
 
-
-
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
 
@@ -237,7 +227,6 @@ loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLA
 loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Antarctica
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers
-
 
 
 window.onload = function() {
