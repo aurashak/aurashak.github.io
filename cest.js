@@ -81,19 +81,13 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties, datasetName) {
-    switch (datasetName) {
-        case 'riverslakes':
-            // Assuming rivers and lakes are distinguished by a property
-            return properties.type === 'River' ? 'River' : 'Lake';
-        case 'oceans':
-            return 'Ocean';
-        case 'regions':
-            return 'Region';
-        default:
-            return 'Unknown';
+    if (datasetName === 'riverslakes') {
+        if (properties.featurecla === 'Lake Centerline') {
+            return 'River'; // categorizing 'Lake Centerline' as 'River'
+        } else {
+            return 'Lake'; // assuming other features in this dataset are lakes
+        }
     }
-}
-
 
 
 
