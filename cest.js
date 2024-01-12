@@ -81,21 +81,21 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    if (properties.FEATURECLA === 'Admin-0 country') {
+    if (properties.featurecla === 'Admin-0 country') {
         return 'Country';
-    } else if (properties.FEATURECLA === 'Island') {
+    } else if (properties.featurecla === 'Island') {
         return 'Region';
-    } else if (properties.FEATURECLA === 'continent') {
+    } else if (properties.featurecla === 'continent') {
         return 'Continent';
-    } else if (properties.FEATURECLA === 'country') {
+    } else if (properties.featurecla === 'country') {
         return 'Country';
-    } else if (properties.FEATURECLA === 'LakeCenterline') {
+    } else if (properties.featurecla === 'LakeCenterline') {
         return 'River';
-    } else if (properties.FEATURECLA === 'River') {
+    } else if (properties.featurecla === 'River') {
         return 'River';
-    } else if (properties.FEATURECLA === 'Lake') {
+    } else if (properties.featurecla === 'Lake') {
         return 'Lake';
-    } else if (properties.FEATURECLA === 'REGION') {
+    } else if (properties.featurecla === 'REGION') {
         return 'Region';
     }
     // Add more conditions as needed for other types.
