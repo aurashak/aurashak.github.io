@@ -139,6 +139,9 @@ function showCoordinates(movement) {
                     placeList[type].push(nameProperty.getValue());
                 }
             }
+
+            console.log(`Type: ${type}, Name: ${nameProperty ? nameProperty.getValue() : 'N/A'}`);
+            
         });
 
         // Format the hover text by place type
