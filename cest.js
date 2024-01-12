@@ -181,7 +181,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 600; // Adjust as needed
-var regionsHeight = 400; // Height for regions layer
+var regionsHeight = 700; // Height for regions layer
 
 
 // Function to load and style a GeoJSON layer
@@ -251,7 +251,7 @@ var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojson'; 
-var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/earth-lakes-1km.geo.json';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
 
