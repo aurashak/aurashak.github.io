@@ -181,6 +181,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 600; // Adjust as needed
+var regionsHeight = 400; // Height for regions layer
 
 
 // Function to load and style a GeoJSON layer
@@ -188,8 +189,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
-                if (isCountryLayer) {
-                    // Custom styling for continents
+                if (isCountryLayer || isRegionsLayer) { // Apply same styling for continents and regions
                     entity.polygon.material = color.withAlpha(1); // Semi-transparent
                     entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
@@ -253,6 +253,7 @@ var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.js
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojson'; 
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/earth-lakes-1km.geo.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
 
 // Load and style the layers
 loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans, set isOceanLayer to true
@@ -265,7 +266,7 @@ loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLA
 loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Antarctica, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers, set isRiverLayer to true
-
+loadAndStyleGeoJson(regionsGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, regionsHeight, false, false, false, true); // For regions, apply continent-like styling
 
 
 window.onload = function() {
