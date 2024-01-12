@@ -91,33 +91,22 @@ function showCoordinates(movement) {
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
-        var placeList = {
-            'Continent': [],
-            'Country': [],
-            'Region': [],
-            'Ocean': [],
-            'Lake': [],
-            'River': []
-        };
+        var entitiesList = [];
 
-        // Iterate over all picked objects and categorize them
+        // Iterate over all picked objects
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var type = properties.type || properties.TYPE; // Adjust based on your GeoJSON properties
-                var nameProperty = properties.name || properties.NAME; // Adjust based on your GeoJSON properties
-
-                if (Cesium.defined(nameProperty) && Cesium.defined(type) && placeList.hasOwnProperty(type.getValue())) {
-                    placeList[type.getValue()].push(nameProperty.getValue());
+                var nameProperty = properties.name || properties.NAME; // Try 'name' first, then 'NAME'
+                if (Cesium.defined(nameProperty)) {
+                    entitiesList.push(nameProperty.getValue());
                 }
             }
         });
 
-        // Format the hover text by place type
-        for (var placeType in placeList) {
-            if (placeList[placeType].length > 0) {
-                hoverText += '<br>' + placeType + ': ' + placeList[placeType].join(', ');
-            }
+        // Check if we have any entities and add them to the hoverText
+        if (entitiesList.length > 0) {
+            hoverText += '<br>Entity: ' + entitiesList.join(', '); // Join all entities into a single line
         }
 
         // Update text content
@@ -125,7 +114,6 @@ function showCoordinates(movement) {
         coordsBox.style.display = 'block';
     }
 }
-
 
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
