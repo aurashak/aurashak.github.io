@@ -135,7 +135,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 if (isCountryLayer) {
                     // Custom styling for continents
                     entity.polygon.material = color.withAlpha(0.1); // Semi-transparent
-                    entity.polygon.outline = true; // With outline
+                    entity.polygon.outline = false; // Remove outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
@@ -147,8 +147,8 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 } else {
                     // Default styling for other polygon layers (like lakes)
                     entity.polygon.material = color.withAlpha(0.1); // Semi-transparent
-                    entity.polygon.outline = true; // No outline for lakes
-                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.outline = false; // Remove outline
+                    sentity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
             } else if (isRiverLayer && entity.polyline) {
