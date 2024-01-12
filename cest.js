@@ -23,6 +23,10 @@ var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
 
+
+
+
+
 // Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -198,6 +202,9 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
     });
 }
 
+
+
+
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
@@ -219,25 +226,6 @@ loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHI
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, riversHeight, true, false, false); // For rivers, set isRiverLayer to true
-
-
-    // Update halos based on camera height
-    viewer.camera.changed.addEventListener(function() {
-        var cameraHeight = viewer.camera.positionCartographic.height;
-        dataSource.entities.values.forEach(function(entity) {
-            if (entity.ellipse) {
-                var baseSize = 5000; // Base size of the halo
-                var sizeFactor = cameraHeight / 1000000;
-                var newSize = Math.max(baseSize, baseSize * Math.max(sizeFactor, 0.1)); // Prevent size from going below a minimum
-
-                entity.ellipse.semiMinorAxis = newSize;
-                entity.ellipse.semiMajorAxis = newSize;
-            }
-        });
-    });
-}).otherwise(function(error) {
-    console.error('Error loading GeoJSON data:', error);
-});
 
 
 
