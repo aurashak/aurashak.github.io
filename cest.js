@@ -80,16 +80,15 @@ coordsBox.style.display = 'block';
 coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
 
 
-function getTypeFromProperties(properties) {
-    if (properties.featurecla === 'c') {
-        return 'Country';
-    }
-    
-    // Default type if no other matches are found.
-    return 'Unknown';
+function getPlaceDetails(properties) {
+    let placeDetails = {
+        "Country": properties.name || 'N/A',
+        "Continent": properties.continent || 'N/A',
+        "Region": properties.region_un || 'N/A',
+        "Subregion": properties.subregion || 'N/A'
+    };
+    return placeDetails;
 }
-
-
 
 function showCoordinates(movement) {
     var ray = viewer.camera.getPickRay(movement.endPosition);
@@ -100,30 +99,15 @@ function showCoordinates(movement) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        
-        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+        var hoverText = `Latitude: ${latitudeString}°, Longitude: ${longitudeString}°`;
 
-
-        var placeHierarchy = {
-            'Continent': '',
-            'Country': '',
-            'Region': '',
-            'Subregion': '',
-            'Lake': ''
-        };
-
-        
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
-                var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties);
-                var nameProperty = properties.name || properties.NAME;
-
-                if (Cesium.defined(nameProperty)) {
-                    hoverText += `<br>${type}: ${nameProperty.getValue()}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
-                }
+                var details = getPlaceDetails(pickedObject.id.properties);
+                hoverText += `<br>Country: ${details.Country}`;
+                hoverText += `<br>Continent: ${details.Continent}`;
+                hoverText += `<br>Region: ${details.Region}`;
+                hoverText += `<br>Subregion: ${details.Subregion}`;
             }
         });
 
@@ -131,6 +115,9 @@ function showCoordinates(movement) {
         coordsBox.style.display = 'block';
     }
 }
+
+// Rest of your code...
+
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
