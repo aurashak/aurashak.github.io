@@ -83,9 +83,7 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 function getTypeFromProperties(properties) {
     // You would define your mapping based on actual values in featurecla
     switch (properties.featurecla) {
-        case 'Admin-0 country':
-        case 'Country':
-            return 'Country';
+
         case 'continent':
             return 'Continent';
         case 'region_un':
