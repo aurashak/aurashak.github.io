@@ -254,7 +254,7 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, co
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
-loadAndStyleGeoJson(riversGeojsonUrl, true); // For rivers, set isRiverLayer to true
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, riversHeight, true, false, false); // For rivers, set isRiverLayer to true
 
 
 
