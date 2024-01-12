@@ -262,7 +262,8 @@ a:active {
 .footer {
     background-color: none; /* Background color for the footer */
     color: #7c7c7c; /* Text color for the footer */
-    padding: 10px; /* Padding to create some space around the content inside the footer */
+    padding: 0px; /* Padding to create some space around the content inside the footer */
+    margin-left: 130px;
     text-align: left; /* Center-align the text inside the footer */
     z-index: 2000;
   }
