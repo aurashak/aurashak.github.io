@@ -104,19 +104,19 @@ a:active {
     font-size: 30px;
     font-weight: 800;
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-    text-align: left; /* Align text to the left */
+    text-align: left; 
     border-radius: 2px;
     margin-right: 50px;
-    z-index: 3; /* Above the globe */
+    z-index: 3; 
 
 }
 
 .third-row-right {
     font-size: 30px;
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-    text-align: left; /* Align text to the left */
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
+    text-align: left;
     border-radius: 2px;
-    z-index: 3; /* Above the globe */
+    z-index: 3; 
 
 }
 
@@ -237,6 +237,15 @@ a:active {
     z-index: 10000;
     display: none;
 }
+
+
+.footer {
+    background-color: #333; /* Background color for the footer */
+    color: #fff; /* Text color for the footer */
+    padding: 20px; /* Padding to create some space around the content inside the footer */
+    text-align: center; /* Center-align the text inside the footer */
+  }
+  
 
 
 /* ... existing styles ... */
