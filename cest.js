@@ -87,7 +87,7 @@ function getTypeFromProperties(properties, datasetName) {
         } else {
             return 'Lake'; // assuming other features in this dataset are lakes
         }
-    }
+    }s
 
 
 
@@ -271,5 +271,5 @@ window.onload = function() {
             toolbar.className += ' custom-toolbar';
         }
     });
-};
+
 
