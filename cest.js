@@ -26,7 +26,6 @@ viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesiu
 
 
 
-
 // Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -127,29 +126,7 @@ var lakesHeight = 600; // Adjust as needed
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
-            function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isProjectMarkerLayer = false) {
-                Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
-                    dataSource.entities.values.forEach(function(entity) {
-                        if (isProjectMarkerLayer && entity.properties && entity.properties['marker-color']) {
-                            var markerColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-                            entity.billboard = undefined; // Disable the billboard if it exists
-            
-                            entity.point = new Cesium.PointGraphics({
-                                pixelSize: 0,
-                                color: Cesium.Color.TRANSPARENT
-                            });
-            
-                            entity.ellipse = new Cesium.EllipseGraphics({
-                                semiMinorAxis: 5000,
-                                semiMajorAxis: 5000,
-                                height: height, // Use the provided height for the project marker layer
-                                material: markerColor.withAlpha(0.5),
-                                outline: true,
-                                outlineColor: markerColor,
-                                outlineWidth: 30,
-                                fill: true
-                            });
-            else if (entity.polygon) {
+            if (entity.polygon) {
                 if (isCountryLayer) {
                     // Custom styling for continents
                     entity.polygon.material = color.withAlpha(1); // Semi-transparent
@@ -158,7 +135,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
                     // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(0.5); // More transparency for water
+                    entity.polygon.material = color.withAlpha(1); // More transparency for water
                     entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     // Oceans typically do not need extrusion
@@ -171,14 +148,13 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 }
             } else if (isRiverLayer && entity.polyline) {
                 // Custom styling for rivers
-                var riverColor = Cesium.Color.BLUE.withAlpha(1); // Define the blue color with full opacity
+                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
                 var offsetHeight = 10; // Height offset above the ground in meters
-
-                entity.polyline.material = riverColor; // Apply the riverColor to the polyline material
-                entity.polyline.width = 0.5; // Wider lines for rivers
+            
+                entity.polyline.material = riverColor;
+                entity.polyline.width = 2; // Wider lines for rivers
                 entity.polyline.clampToGround = true; // Clamp the polyline to the ground
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
-
             
                 // No need to manually update the polyline positions if clamping to ground
                 // Instead, apply a height offset to each position
@@ -213,19 +189,19 @@ var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
 var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
-var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/earth-lakes-1km.geo.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
 // Load and style the layers
 loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans, set isOceanLayer to true
-loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For Europe, set isCountryLayer to true
-loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For Asia, set isCountryLayer to true
-loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For Africa, set isCountryLayer to true
-loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For Oceania, set isCountryLayer to true
-loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For North America, set isCountryLayer to true
-loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For South America, set isCountryLayer to true
+loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Europe, set isCountryLayer to true
+loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Asia, set isCountryLayer to true
+loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Africa, set isCountryLayer to true
+loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Oceania, set isCountryLayer to true
+loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
+loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, riversHeight, true, false, false); // For rivers, set isRiverLayer to true
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers, set isRiverLayer to true
 
 
 
