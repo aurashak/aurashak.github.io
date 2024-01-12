@@ -23,60 +23,6 @@ var currentTime = Cesium.JulianDate.now();
 viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
 
 
-
-
-// Load and style the project markers with halos
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
-    viewer.dataSources.add(dataSource);
-
-    dataSource.entities.values.forEach(function(entity) {
-        // Set the billboard property to undefined
-        entity.billboard = undefined;
-
-        // Check if the entity has a marker-color property
-        if (entity.properties && entity.properties['marker-color']) {
-            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-
-            // Set the point to be transparent
-            entity.point = new Cesium.PointGraphics({
-                pixelSize: 0, // Hide the default point
-                color: Cesium.Color.TRANSPARENT
-            });
-
-            // Create the halo effect using EllipseGraphics
-            entity.ellipse = new Cesium.EllipseGraphics({
-                semiMinorAxis: 5000, // Initial size, will be updated based on zoom
-                semiMajorAxis: 5000, // Initial size, will be updated based on zoom
-                height: 10, // Height above the surface
-                material: color.withAlpha(0.5), // Set transparency for the halo
-                outline: true,
-                outlineColor: color,
-                outlineWidth: 30,
-                fill: true
-            });
-        }
-    });
-
-    // Update halos based on camera height
-    viewer.camera.changed.addEventListener(function() {
-        var cameraHeight = viewer.camera.positionCartographic.height;
-        dataSource.entities.values.forEach(function(entity) {
-            if (entity.ellipse) {
-                var baseSize = 5000; // Base size of the halo
-                var sizeFactor = cameraHeight / 1000000;
-                var newSize = Math.max(baseSize, baseSize * Math.max(sizeFactor, 0.1)); // Prevent size from going below a minimum
-
-                entity.ellipse.semiMinorAxis = newSize;
-                entity.ellipse.semiMajorAxis = newSize;
-            }
-        });
-    });
-}).otherwise(function(error) {
-    console.error('Error loading GeoJSON data:', error);
-});
-
-
-
 // Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -177,7 +123,29 @@ var lakesHeight = 600; // Adjust as needed
 function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false) {
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
-            if (entity.polygon) {
+            function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isProjectMarkerLayer = false) {
+                Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+                    dataSource.entities.values.forEach(function(entity) {
+                        if (isProjectMarkerLayer && entity.properties && entity.properties['marker-color']) {
+                            var markerColor = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
+                            entity.billboard = undefined; // Disable the billboard if it exists
+            
+                            entity.point = new Cesium.PointGraphics({
+                                pixelSize: 0,
+                                color: Cesium.Color.TRANSPARENT
+                            });
+            
+                            entity.ellipse = new Cesium.EllipseGraphics({
+                                semiMinorAxis: 5000,
+                                semiMajorAxis: 5000,
+                                height: height, // Use the provided height for the project marker layer
+                                material: markerColor.withAlpha(0.5),
+                                outline: true,
+                                outlineColor: markerColor,
+                                outlineWidth: 30,
+                                fill: true
+                            });
+            else if (entity.polygon) {
                 if (isCountryLayer) {
                     // Custom styling for continents
                     entity.polygon.material = color.withAlpha(1); // Semi-transparent
@@ -198,7 +166,6 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
             } else if (isRiverLayer && entity.polyline) {
-                // Custom styling for rivers
                 // Custom styling for rivers
                 var riverColor = Cesium.Color.BLUE.withAlpha(1); // Define the blue color with full opacity
                 var offsetHeight = 10; // Height offset above the ground in meters
@@ -231,9 +198,6 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
     });
 }
 
-
-
-
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
@@ -255,6 +219,25 @@ loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHI
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, riversHeight, true, false, false); // For rivers, set isRiverLayer to true
+
+
+    // Update halos based on camera height
+    viewer.camera.changed.addEventListener(function() {
+        var cameraHeight = viewer.camera.positionCartographic.height;
+        dataSource.entities.values.forEach(function(entity) {
+            if (entity.ellipse) {
+                var baseSize = 5000; // Base size of the halo
+                var sizeFactor = cameraHeight / 1000000;
+                var newSize = Math.max(baseSize, baseSize * Math.max(sizeFactor, 0.1)); // Prevent size from going below a minimum
+
+                entity.ellipse.semiMinorAxis = newSize;
+                entity.ellipse.semiMajorAxis = newSize;
+            }
+        });
+    });
+}).otherwise(function(error) {
+    console.error('Error loading GeoJSON data:', error);
+});
 
 
 
