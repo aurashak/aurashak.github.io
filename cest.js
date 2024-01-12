@@ -3,7 +3,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 var viewer = new Cesium.Viewer('cesiumContainer', {
     // imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // Commented out to use default imagery
     baseLayerPicker: false,
-    geocoder: true,
+    geocoder: false,
     homeButton: false,
     infoBox: false,
     sceneModePicker: false,
@@ -95,15 +95,19 @@ function showCoordinates(movement) {
         if (Cesium.defined(entity) && entity.id && entity.id.properties) {
             var nameProperty = entity.id.properties.name;
             if (Cesium.defined(nameProperty)) {
-                hoverText += '<br>' + 'Place: ' + nameProperty.getValue();
+                hoverText += '<br>Place: ' + nameProperty.getValue();
+            }
+            // Additionally, check specifically for region names
+            else if (entity.id.properties.regionName) {
+                hoverText += '<br>Region: ' + entity.id.properties.regionName.getValue();
             }
         }
 
-        // Update text content
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
+
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
