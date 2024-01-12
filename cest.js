@@ -4,7 +4,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 var viewer = new Cesium.Viewer('cesiumContainer', {
     // imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // Commented out to use default imagery
     baseLayerPicker: false,
-    geocoder: true,
+    geocoder: false,
     homeButton: false,
     infoBox: false,
     sceneModePicker: false,
