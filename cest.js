@@ -91,6 +91,7 @@ function showCoordinates(movement) {
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+        var entitiesList = [];
 
         // Iterate over all picked objects
         pickedObjects.forEach(function(pickedObject) {
@@ -98,16 +99,22 @@ function showCoordinates(movement) {
                 var properties = pickedObject.id.properties;
                 var nameProperty = properties.name || properties.NAME; // Try 'name' first, then 'NAME'
                 if (Cesium.defined(nameProperty)) {
-                    hoverText += '<br>' + 'Entity: ' + nameProperty.getValue();
+                    entitiesList.push(nameProperty.getValue());
                 }
             }
         });
+
+        // Check if we have any entities and add them to the hoverText
+        if (entitiesList.length > 0) {
+            hoverText += '<br>Entity: ' + entitiesList.join(', '); // Join all entities into a single line
+        }
 
         // Update text content
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
+
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
