@@ -120,7 +120,8 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 // Define heights for different layer types
 var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
-var lakesHeight = 600; // Adjust as needed
+var lakesHeight = 700; // Adjust as needed
+var regionsHeight = 600; // Adjust as needed
 
 
 // Function to load and style a GeoJSON layer
@@ -128,7 +129,13 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
-                if (isCountryLayer) {
+                if (isRegionsLayer) {
+                    // Custom styling for regions
+                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
+                    entity.polygon.outline = true; // With outline
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height; // Extruded height if needed
+                } else if (isCountryLayer) {
                     // Custom styling for continents
                     entity.polygon.material = color.withAlpha(1); // Semi-transparent
                     entity.polygon.outline = true; // With outline
@@ -139,6 +146,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.material = color.withAlpha(1); // More transparency for water
                     entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                     // Oceans typically do not need extrusion
                 } else {
                     // Default styling for other polygon layers (like lakes)
@@ -153,7 +161,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 var offsetHeight = 10; // Height offset above the ground in meters
             
                 entity.polyline.material = riverColor;
-                entity.polyline.width = 2; // Wider lines for rivers
+                entity.polyline.width = 10; // Wider lines for rivers
                 entity.polyline.clampToGround = true; // Clamp the polyline to the ground
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
             
@@ -192,6 +200,7 @@ var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.js
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojson';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
+var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.json';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
 
 // Load and style the layers
@@ -203,7 +212,7 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, co
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes, do not set any additional layer booleans
+loadAndStyleGeoJson(regionsGeojsonUrl, Cesium.Color.GREEN.withAlpha(1), Cesium.Color.WHITE, regionsHeight); // 
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers, set isRiverLayer to true
 
 
