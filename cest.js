@@ -42,16 +42,6 @@ viewer.camera.setView({
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 
-// Set a standard initial view
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000), // Longitude, Latitude, Height
-    orientation: {
-        heading: Cesium.Math.toRadians(0.0), // Facing East
-        pitch: Cesium.Math.toRadians(-90.0), // Looking down
-        roll: 0.0
-    }
-});
-
 // Slow down the rotation
 var spinRate = 0.0003;
 var isRotating = true; // To keep track of the rotation state
@@ -87,7 +77,7 @@ function getTypeFromProperties(properties, datasetName) {
         } else {
             return 'Lake'; // assuming other features in this dataset are lakes
         }
-    }s
+    }
 
 
 
