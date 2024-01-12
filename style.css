@@ -265,7 +265,7 @@ a:active {
     padding: 0px; /* Padding to create some space around the content inside the footer */
     margin-left: 130px;
     text-align: left; /* Center-align the text inside the footer */
-    z-index: 2000;
+    z-index: 30000;
   }
   
 
