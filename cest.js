@@ -83,22 +83,7 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 function getTypeFromProperties(properties) {
     if (properties.featurecla === 'Admin-0 country') {
         return 'Country';
-    } else if (properties.featurecla === 'Island') {
-        return 'Region';
-    } else if (properties.featurecla === 'continent') {
-        return 'Continent';
-    } else if (properties.featurecla === 'country') {
-        return 'Country';
-    } else if (properties.featurecla === 'LakeCenterline') {
-        return 'River';
-    } else if (properties.featurecla === 'River') {
-        return 'River';
-    } else if (properties.featurecla === 'Lake') {
-        return 'Lake';
-    } else if (properties.featurecla === 'REGION') {
-        return 'Region';
     }
-    // Add more conditions as needed for other types.
 
     // Default type if no other matches are found.
     return 'Unknown';
