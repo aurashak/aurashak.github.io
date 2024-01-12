@@ -106,6 +106,16 @@ function showCoordinates(movement) {
         
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
+
+        var placeHierarchy = {
+            'Continent': '',
+            'Country': '',
+            'Region': '',
+            'Subregion': '',
+            'Lake': ''
+        };
+
+        
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
