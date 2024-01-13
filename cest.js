@@ -163,10 +163,6 @@ var layerStyles = {
         color: Cesium.Color.ORANGE,
         outlineColor: Cesium.Color.BLACK,
         height: 550 // Adjust as needed for states/provinces
-    },
-    graticule: { // New graticule layer configuration
-        color: Cesium.Color.DARKGRAY, // Color for the graticule lines
-        height: 1000 // Adjust as needed for graticule
     }
 };
 
@@ -240,7 +236,6 @@ var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
 var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
 var statesProvincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json'; // New states/provinces GeoJSON URL
-var graticuleGeojsonUrl = 'https://aurashak.github.io/world/graticule.geojson'; // New graticule GeoJSON URL
 
 // Load and style the layers
 loadAndStyleGeoJson('oceans', oceansGeojsonUrl, false, false, true); // For oceans
@@ -256,7 +251,6 @@ loadAndStyleGeoJson('lakes', lakesGeojsonUrl); // For lakes
 loadAndStyleGeoJson('rivers', riversGeojsonUrl, true); // For rivers
 loadAndStyleGeoJson('cities', citiesGeojsonUrl, false, false, false, false, true);
 loadAndStyleGeoJson('statesprovinces', statesProvincesGeojsonUrl); // Load and style states/provinces layer
-loadAndStyleGeoJson('graticule', graticuleGeojsonUrl, false, false, false, false, false, true); // Load and style gr
 
 
 window.onload = function() {
