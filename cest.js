@@ -44,15 +44,15 @@ function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
         case 'Lake':
             return 'Lake';
-        case 'Admin-0 country':
+        case 'Country':
             return 'Country';
         case 'continent':
             return 'Continent';
         case 'River':
             return 'River';
-        case 'Region':
+        case 'REGION':
             return 'Region';
-        case 'Subregion':
+        case 'SUBREGION':
             return 'Subregion';
         default:
             return properties.featurecla || 'Unknown';
