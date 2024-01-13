@@ -82,7 +82,7 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 function getTypeFromProperties(properties) {
     if (properties.featurecla === 'Lake') {
-        return 'Lake';
+        return 'name';
     }
     // Add other cases as needed
     return 'Unknown';
