@@ -83,17 +83,26 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 function getTypeFromProperties(properties) {
     var typeMap = {
         'continent': 'Continent',
-        'region_un': 'Region',
+        'region': 'Region',
         'subregion': 'Subregion',
-        'Admin-0 country': 'Country', // Assuming this is for countries
+        'admin-0 country': 'Country', // Make sure the key is all lowercase to match the toLowerCase() result
         'Lake': 'Lake',
-        'name': 'Ocean' // Assuming 'name' is used for oceans, if 'ocean' is a featurecla use that instead
+        // 'name': 'Ocean' // Removed because 'name' is typically not used as a feature class
         // Add any additional types as needed
     };
 
-    // If featurecla is not in the typeMap, return null
-    return typeMap[properties.featurecla.toLowerCase()] || null; // Use toLowerCase() to handle any case variations
+    // Obtain the feature class value as a string
+    var featureClass = properties.featurecla instanceof Cesium.Property ? properties.featurecla.getValue() : properties.featurecla;
+
+    // If featurecla is a string, convert it to lowercase and check the typeMap
+    if (typeof featureClass === 'string') {
+        var type = typeMap[featureClass.toLowerCase()];
+        return type || null; // If not found in the typeMap, return null
+    }
+    
+    return null; // Return null if featurecla is not a string
 }
+
 
 
 
