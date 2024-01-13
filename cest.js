@@ -240,17 +240,18 @@ var statesProvincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/states
 // Load and style the layers
 loadAndStyleGeoJson('oceans', oceansGeojsonUrl, false, false, true); // For oceans
 loadAndStyleGeoJson('regions', regionsGeojsonUrl, false, false, false, true); // For regions
-loadAndStyleGeoJson('europe', europeGeojsonUrl, false, true); // For Europe
+loadAndStyleGeoJson('europe', europeGeojsonUrl, false, true); // For Europe, set isCountryLayer to true
 loadAndStyleGeoJson('asia', asiaGeojsonUrl, false, true); // For Asia, set isCountryLayer to true
 loadAndStyleGeoJson('africa', africaGeojsonUrl, false, true); // For Africa, set isCountryLayer to true
 loadAndStyleGeoJson('oceania', oceaniaGeojsonUrl, false, true); // For Oceania, set isCountryLayer to true
 loadAndStyleGeoJson('northamerica', northamericaGeojsonUrl, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson('southamerica', southamericaGeojsonUrl, false, true); // For South America, set isCountryLayer to true
-loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl, false, true); // For Antarctica
+loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl, false, true); // For Antarctica, set isCountryLayer to true
 loadAndStyleGeoJson('lakes', lakesGeojsonUrl); // For lakes
 loadAndStyleGeoJson('rivers', riversGeojsonUrl, true); // For rivers
 loadAndStyleGeoJson('cities', citiesGeojsonUrl, false, false, false, false, true);
 loadAndStyleGeoJson('statesprovinces', statesProvincesGeojsonUrl); // Load and style states/provinces layer
+
 
 
 window.onload = function() {
