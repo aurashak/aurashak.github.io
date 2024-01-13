@@ -112,42 +112,42 @@ var layerStyles = {
     regions: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.GREEN,
-        height: 600 
+        height: 600 // Adjust as needed
     },
     europe: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500 
+        height: 500 // Adjust as needed
     },
     asia: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500 
+        height: 500 // Adjust as needed
     },
     africa: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500 
+        height: 500 // Adjust as needed
     },
     oceania: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500
+        height: 500 // Adjust as needed
     },
     northamerica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500
+        height: 500 // Adjust as needed
     },
     southamerica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500
+        height: 500 // Adjust as needed
     },
     antarctica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500
+        height: 500 // Adjust as needed
     },
     lakes: {
         color: Cesium.Color.BLUE,
@@ -166,6 +166,7 @@ var layerStyles = {
     }
 };
 
+// Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
     var layerStyle = layerStyles[layerName];
     var color = layerStyle.color;
@@ -229,7 +230,7 @@ var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamer
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
 var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
-var statesProvincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json'; // New states/provinces GeoJSON URL
+var statesprovincesGeojsonUrl = 'URL_TO_YOUR_STATESPROVINCES.GEOJSON'; // Replace with the actual URL to your states/provinces GeoJSON file
 
 // Load and style the layers
 loadAndStyleGeoJson('oceans', oceansGeojsonUrl, false, false, true); // For oceans
@@ -244,7 +245,8 @@ loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl, false, true); // For Ant
 loadAndStyleGeoJson('lakes', lakesGeojsonUrl); // For lakes
 loadAndStyleGeoJson('rivers', riversGeojsonUrl, true); // For rivers
 loadAndStyleGeoJson('cities', citiesGeojsonUrl, false, false, false, false, true);
-loadAndStyleGeoJson('statesprovinces', statesProvincesGeojsonUrl); // Load and style states/provinces layer
+loadAndStyleGeoJson('statesprovinces', statesprovincesGeojsonUrl); // Load and style states/provinces layer
+
 
 
 
