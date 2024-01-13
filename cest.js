@@ -2,7 +2,6 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
 var viewer = new Cesium.Viewer('cesiumContainer', {
-    // imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // Commented out to use default imagery
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
@@ -15,19 +14,9 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false
 });
 
-var imageryLayers = viewer.imageryLayers;
-var baseLayer = imageryLayers.get(0); // Assuming the base layer is the first one
-baseLayer.brightness = 1.2; // Adjust the brightness, default is 1.0
-baseLayer.contrast = 1.2; // Adjust the contrast, default is 1.0
+viewer.imageryLayers.get(0).brightness = 1.2;
+viewer.imageryLayers.get(0).contrast = 1.2;
 
-var currentTime = Cesium.JulianDate.now();
-viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
-
-
-
-
-
-// Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
@@ -37,55 +26,14 @@ viewer.camera.setView({
     }
 });
 
-
-// Define handler in the global scope
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-
-// Set a standard initial view
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000), // Longitude, Latitude, Height
-    orientation: {
-        heading: Cesium.Math.toRadians(0.0), // Facing East
-        pitch: Cesium.Math.toRadians(-90.0), // Looking down
-        roll: 0.0
-    }
-});
-
-// Slow down the rotation
-var spinRate = 0.0003;
-var isRotating = true; // To keep track of the rotation state
-var rotateGlobeFunction = function() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
-    }
-};
-
-// Add the preRender event listener to start rotating the globe
-viewer.scene.preRender.addEventListener(rotateGlobeFunction);
-
-// Function to stop the globe rotation
-function stopRotation() {
-    isRotating = false; // Set the flag to false to stop the rotation
-}
-
-// Add the left click event handler to stop rotation
-handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
-
-
-
-
-
-// At the top of your script, define the default text
 var defaultText = 'Latitude: Longitude: <br>Place: ';
-
 var coordsBox = document.getElementById('coordsBox');
+coordsBox.innerHTML = defaultText;
 coordsBox.style.display = 'block';
-coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
-
 
 function getTypeFromProperties(properties) {
-    // Handle different types of features by checking the 'featurecla' property
     switch (properties.featurecla) {
         case 'Lake':
             return 'Lake';
@@ -99,16 +47,10 @@ function getTypeFromProperties(properties) {
             return 'Region';
         case 'Subregion':
             return 'Subregion';
-        // Add more cases as needed for other feature classes
         default:
-            // Return the value of 'featurecla' if it's not one of the standard types you handle
-            // or return 'Unknown' if you want to mask unknown types.
             return properties.featurecla || 'Unknown';
     }
 }
-
-
-
 
 function showCoordinates(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
@@ -116,6 +58,7 @@ function showCoordinates(movement) {
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
