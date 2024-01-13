@@ -161,8 +161,7 @@ var citiesHeight = 800; // Adjust as needed
 
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isRegionsLayer = false) {    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
-        dataSource.entities.values.forEach(function(entity) {
+function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isRegionsLayer = false, isCitiesLayer = false) {        dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
                 if (isRegionsLayer) {
                     // Custom styling for regions
@@ -197,7 +196,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
             } else if (isRiverLayer && entity.polyline) {
-                // Custom styling for rivers
+                                // Custom styling for rivers
                 var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
                 var offsetHeight = 10; // Height offset above the ground in meters
             
@@ -215,18 +214,15 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                             Cesium.Math.toDegrees(cartographic.longitude),
                             Cesium.Math.toDegrees(cartographic.latitude),
                             cartographic.height + offsetHeight
-                        );
+                        }
                     });
-                    return cartographicPositions;
-                }, false);
-            }
-            
-        });
+                    
         viewer.dataSources.add(dataSource);
     }).otherwise(function(error){
         console.error('Error loading GeoJSON data:', error);
     });
 }
+
 
 
 
