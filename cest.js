@@ -14,6 +14,12 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false
 });
 
+// Remove the existing Bing Maps imagery layer
+viewer.imageryLayers.remove(viewer.imageryLayers.get(0));
+
+// Add the Sentinel imagery layer
+viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
+
 viewer.imageryLayers.get(0).brightness = 1.2;
 viewer.imageryLayers.get(0).contrast = 1.2;
 
