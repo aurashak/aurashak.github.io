@@ -81,6 +81,9 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
+
+    console.log(properties);
+
     // Check for lake feature
     if (properties.featurecla === 'Lake') {
         return 'Lake';
@@ -94,23 +97,34 @@ function getTypeFromProperties(properties) {
 
 
 
-pickedObjects.forEach(function(pickedObject) {
-    if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
-        var properties = pickedObject.id.properties;
-        var type = getTypeFromProperties(properties); // This should return 'Lake' for lake features
-        var nameProperty = properties.name || properties.NAME; // Adjust based on your GeoJSON properties
+function showCoordinates(movement) {
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
-        // Check if a name property is defined for the current picked object
-        if (Cesium.defined(nameProperty)) {
-            // Append the type and name to the hover text
-            hoverText += `<br>${type}: ${nameProperty.getValue()}`;
-        } else {
-            // If no name property is found, display 'N/A'
-            hoverText += `<br>${type}: N/A`;
-        }
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+
+        pickedObjects.forEach(function(pickedObject) {
+            if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
+                var properties = pickedObject.id.properties;
+                var type = getTypeFromProperties(properties);
+                var name = properties.name;
+
+                if (name) {
+                    hoverText += `<br>${type}: ${name}`;
+                } else {
+                    hoverText += `<br>${type}: N/A`;
+                }
+            }
+        });
+
+        coordsBox.innerHTML = hoverText;
+        coordsBox.style.display = 'block';
     }
-});
-
+}
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
@@ -139,7 +153,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 if (isRegionsLayer) {
                     // Custom styling for regions
                     entity.polygon.material = color.withAlpha(1); // Semi-transparent
-                    entity.polygon.outline = false; // With outline
+                    entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isCountryLayer) {
@@ -158,7 +172,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                 } else {
                     // Default styling for other polygon layers (like lakes)
                     entity.polygon.material = color.withAlpha(1); // Semi-transparent
-                    entity.polygon.outline = false; // No outline for lakes
+                    entity.polygon.outline = true; // No outline for lakes
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
