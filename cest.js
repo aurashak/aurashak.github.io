@@ -82,10 +82,10 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 function getTypeFromProperties(properties) {
     if (properties.featurecla === 'Lake') {
-        return 'name';
+        return 'Lake'; // Return the type 'Lake' if featurecla is 'Lake'
     }
     // Add other cases as needed
-    return 'Unknown';
+    return 'Unknown'; // Return 'Unknown' for all other cases
 }
 
 
@@ -102,13 +102,13 @@ function showCoordinates(movement) {
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties);
+                var type = getTypeFromProperties(properties); // This will be 'Lake' or 'Unknown'
                 var name = properties.name; // Directly access the name property
 
-                if (name) {
+                if (type !== 'Unknown' && name) { // Check if the type is not 'Unknown' and name exists
                     hoverText += `<br>${type}: ${name}`;
                 } else {
-                    hoverText += `<br>${type}: N/A`;
+                    hoverText += `<br>${type}: N/A`; // If type is 'Unknown' or name doesn't exist
                 }
             }
         });
@@ -117,6 +117,7 @@ function showCoordinates(movement) {
         coordsBox.style.display = 'block';
     }
 }
+
 
 
 
