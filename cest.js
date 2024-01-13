@@ -111,43 +111,43 @@ var layerStyles = {
     },
     regions: {
         color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 600 // Adjust as needed
+        outlineColor: Cesium.Color.GREEN,
+        height: 600 
     },
     europe: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500 
     },
     asia: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500 
     },
     africa: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500 
     },
     oceania: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500
     },
     northamerica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500
     },
     southamerica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500
     },
     antarctica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: continentHeight // Use the previously defined height
+        height: 500
     },
     lakes: {
         color: Cesium.Color.BLUE,
@@ -155,8 +155,8 @@ var layerStyles = {
         height: 700 // Adjust as needed
     },
     cities: {
-        color: Cesium.Color.BLUE,
-        outlineColor: Cesium.Color.BLUE,
+        color: Cesium.Color.BLACK,
+        outlineColor: Cesium.Color.BLACK,
         height: 800 // Adjust as needed
     },
     statesprovinces: { // New states/provinces layer configuration
@@ -166,7 +166,7 @@ var layerStyles = {
     },
     graticule: { // New graticule layer configuration
         color: Cesium.Color.DARKGRAY, // Color for the graticule lines
-        height: 550 // Adjust as needed for graticule
+        height: 1000 // Adjust as needed for graticule
     }
 };
 
@@ -186,7 +186,7 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 } else if (isCitiesLayer) {
-                    entity.polygon.material = color.withAlpha(1);
+                    entity.polygon.material = color.withAlpha(0.7);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
@@ -200,7 +200,7 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                 var riverColor = Cesium.Color.BLUE;
                 var offsetHeight = 10;
                 entity.polyline.material = riverColor;
-                entity.polyline.width = 10;
+                entity.polyline.width = 3;
                 entity.polyline.clampToGround = true;
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC;
                 entity.polyline.positions = new Cesium.CallbackProperty(function() {
@@ -218,6 +218,7 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                 var graticuleColor = layerStyles.graticule.color;
                 entity.polyline.material = graticuleColor;
                 entity.polyline.width = 2; // Adjust the width of graticule lines as needed
+                entity.polygon.extrudedHeight = height;
             }
         });
 
