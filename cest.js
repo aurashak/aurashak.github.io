@@ -72,6 +72,35 @@ function stopRotation() {
 // Add the left click event handler to stop rotation
 handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
+
+
+var imageryLayers = viewer.imageryLayers;
+
+// Function to show the satellite imagery layer
+function showSatelliteLayer() {
+    // Remove existing layers
+    imageryLayers.removeAll();
+
+    // Add the satellite imagery layer
+    imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
+}
+
+// Function to show the OpenStreetMap layer
+function showOpenStreetMapLayer() {
+    // Remove existing layers
+    imageryLayers.removeAll();
+
+    // Add the OpenStreetMap layer (Cesium World Terrain)
+    imageryLayers.addImageryProvider(Cesium.createOpenStreetMapImageryProvider());
+}
+
+// Add click event handlers to the buttons
+document.getElementById('satelliteButton').addEventListener('click', showSatelliteLayer);
+document.getElementById('openStreetMapButton').addEventListener('click', showOpenStreetMapLayer);
+
+
+
+
 // At the top of your script, define the default text
 var defaultText = 'Latitude: Longitude: <br>Place: ';
 
@@ -153,6 +182,7 @@ var continentHeight = 500; // Adjust as needed
 var oceansHeight = 500; // Adjust as needed
 var lakesHeight = 700; // Adjust as needed
 var regionsHeight = 600; // Adjust as needed
+var citiesHeight = 800; // Adjust as needed
 
 
 // Function to load and style a GeoJSON layer
@@ -178,6 +208,12 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                     // Oceans typically do not need extrusion
+                } else if (isCitiesLayer) {
+                    // Custom styling for cities
+                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
+                    entity.polygon.outline = true; // With outline
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else {
                     // Default styling for other polygon layers (like lakes)
                     entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
@@ -233,6 +269,7 @@ var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojso
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
 var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/regions.geojson';
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
+var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/cities.geojson';
 
 // Load and style the layers
 loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans
@@ -246,7 +283,7 @@ loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLA
 loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Antarctica
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.WHITE, lakesHeight); // For lakes
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.BLUE, true); // For rivers
-
+loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
 
 window.onload = function() {
