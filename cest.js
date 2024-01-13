@@ -152,7 +152,6 @@ function loadAndStyleGeoJson(layerName, url) {
 
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson'; 
-var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/world/regions.geojson';
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
 var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
 var africaGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
@@ -160,13 +159,14 @@ var oceaniaGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceania.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamerica.json';
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
-var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
-var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
 var statesprovincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
+var riversGeojsonUrl = 'https://aurashak.github.io/geojson/world/rivers.geojson';
+var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/world/regions.geojson';
+var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
 
 // Load and style the layers
 loadAndStyleGeoJson('oceans', oceansGeojsonUrl);
-loadAndStyleGeoJson('regions', regionsGeojsonUrl);
 loadAndStyleGeoJson('europe', europeGeojsonUrl);
 loadAndStyleGeoJson('asia', asiaGeojsonUrl);
 loadAndStyleGeoJson('africa', africaGeojsonUrl);
@@ -174,10 +174,11 @@ loadAndStyleGeoJson('oceania', oceaniaGeojsonUrl);
 loadAndStyleGeoJson('northamerica', northamericaGeojsonUrl);
 loadAndStyleGeoJson('southamerica', southamericaGeojsonUrl);
 loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl);
+loadAndStyleGeoJson('statesprovinces', statesprovincesGeojsonUrl);
 loadAndStyleGeoJson('lakes', lakesGeojsonUrl);
 loadAndStyleGeoJson('rivers', riversGeojsonUrl);
+loadAndStyleGeoJson('regions', regionsGeojsonUrl);
 loadAndStyleGeoJson('cities', citiesGeojsonUrl);
-loadAndStyleGeoJson('statesprovinces', statesprovincesGeojsonUrl);
 
 
 
