@@ -81,16 +81,30 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-
-    // Check for lake feature
-    if (properties.featurecla) {
+    // Handle different types of features by checking the 'featurecla' property
+    switch (properties.featurecla) {
+        case 'Lake':
+            return 'Lake';
+        case 'Admin-0 country':
+            return 'Country';
+        case 'continent':
+            return 'Continent';
+        case 'River':
+            return 'River';
+        case 'Lake Centeerline':
+            return 'River';
+        case 'region_un':
+            return 'Region';
+        case 'subregion':
+            return 'Subregion';
+        // Add more cases as needed for other feature classes
+        default:
+            // Return the value of 'featurecla' if it's not one of the standard types you handle
+            // or return 'Unknown' if you want to mask unknown types.
+            return properties.featurecla || 'Unknown';
     }
-    // Check for other features and add them as needed
-    // ...
-
-    // Return 'Unknown' if no known feature class is matched
-    return 'Unknown';
 }
+
 
 
 
