@@ -104,69 +104,22 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 // Define colors and heights for different layers
 var layerStyles = {
-    oceans: {
-        color: Cesium.Color.BLUE,
-        outlineColor: Cesium.Color.WHITE,
-        height: 500 // Adjust as needed
-    },
-    regions: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.GREEN,
-        height: 600 // Adjust as needed
-    },
-    europe: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
-    },
-    asia: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
-    },
-    africa: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
-    },
-    oceania: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
-    },
-    northamerica: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
-    },
-    southamerica: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-    },
-    antarctica: {
-        color: Cesium.Color.KHAKI,
-        outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
-    },
-    lakes: {
-        color: Cesium.Color.BLUE,
-        outlineColor: Cesium.Color.WHITE,
-        height: 700 // Adjust as needed
-    },
-    cities: {
-        color: Cesium.Color.BLACK,
-        outlineColor: Cesium.Color.BLACK,
-        height: 800 // Adjust as needed
-    },
-    statesprovinces: { // New states/provinces layer configuration
-        color: Cesium.Color.ORANGE,
-        outlineColor: Cesium.Color.BLACK,
-        height: 550 // Adjust as needed for states/provinces
-    }
+    oceans: { color: Cesium.Color.BLUE, outlineColor: Cesium.Color.WHITE, height: 500 },
+    regions: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.GREEN, height: 600 },
+    europe: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
+    asia: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
+    africa: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
+    oceania: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
+    northamerica: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
+    southamerica: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK },
+    antarctica: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
+    lakes: { color: Cesium.Color.BLUE, outlineColor: Cesium.Color.WHITE, height: 700 },
+    cities: { color: Cesium.Color.BLACK, outlineColor: Cesium.Color.BLACK, height: 800 },
+    statesprovinces: { color: Cesium.Color.ORANGE, outlineColor: Cesium.Color.BLACK, height: 550 }
 };
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
+function loadAndStyleGeoJson(layerName, url) {
     var layerStyle = layerStyles[layerName];
     var color = layerStyle.color;
     var outlineColor = layerStyle.outlineColor;
@@ -174,41 +127,13 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
 
     Cesium.GeoJsonDataSource.load(url).then(function (dataSource) {
         dataSource.entities.values.forEach(function (entity) {
-            if (entity.polygon) {
-                if (isRegionsLayer || isCountryLayer || isOceanLayer || layerName === 'statesprovinces') {
-                    entity.polygon.material = color.withAlpha(1);
-                    entity.polygon.outline = true;
-                    entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height;
-                } else if (isCitiesLayer) {
-                    entity.polygon.material = color.withAlpha(1);
-                    entity.polygon.outline = true;
-                    entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height;
-                } else {
-                    entity.polygon.material = color.withAlpha(1);
-                    entity.polygon.outline = true;
-                    entity.polygon.outlineColor = outlineColor;
+            if (entity.polygon || entity.polyline) {
+                entity.material = color.withAlpha(1);
+                entity.outline = true;
+                entity.outlineColor = outlineColor;
+                if (entity.polygon) {
                     entity.polygon.extrudedHeight = height;
                 }
-            } else if (isRiverLayer && entity.polyline) {
-                var riverColor = Cesium.Color.BLUE;
-                var offsetHeight = 10;
-                entity.polyline.material = riverColor;
-                entity.polyline.width = 3;
-                entity.polyline.clampToGround = true;
-                entity.polyline.arcType = Cesium.ArcType.GEODESIC;
-                entity.polyline.positions = new Cesium.CallbackProperty(function () {
-                    var cartographicPositions = entity.polyline.positions.getValue().map(function (position) {
-                        var cartographic = Cesium.Cartographic.fromCartesian(position);
-                        return Cesium.Cartesian3.fromDegrees(
-                            Cesium.Math.toDegrees(cartographic.longitude),
-                            Cesium.Math.toDegrees(cartographic.latitude),
-                            cartographic.height + offsetHeight
-                        );
-                    });
-                    return cartographicPositions;
-                }, false);
             }
         });
 
@@ -229,22 +154,23 @@ var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamer
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
 var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
-var statesprovincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.geojson'; // Replace with the actual URL to your states/provinces GeoJSON file
+var statesprovincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json';
 
 // Load and style the layers
-loadAndStyleGeoJson('oceans', oceansGeojsonUrl, false, false, true); // For oceans
-loadAndStyleGeoJson('regions', regionsGeojsonUrl, false, false, false, true); // For regions
-loadAndStyleGeoJson('europe', europeGeojsonUrl, false, true); // For Europe, set isCountryLayer to true
-loadAndStyleGeoJson('asia', asiaGeojsonUrl, false, true); // For Asia, set isCountryLayer to true
-loadAndStyleGeoJson('africa', africaGeojsonUrl, false, true); // For Africa, set isCountryLayer to true
-loadAndStyleGeoJson('oceania', oceaniaGeojsonUrl, false, true); // For Oceania, set isCountryLayer to true
-loadAndStyleGeoJson('northamerica', northamericaGeojsonUrl, false, true); // For North America, set isCountryLayer to true
-loadAndStyleGeoJson('southamerica', southamericaGeojsonUrl, false, true); // For South America, set isCountryLayer to true
-loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl, false, true); // For Antarctica, set isCountryLayer to true
-loadAndStyleGeoJson('lakes', lakesGeojsonUrl); // For lakes
-loadAndStyleGeoJson('rivers', riversGeojsonUrl, true); // For rivers
-loadAndStyleGeoJson('cities', citiesGeojsonUrl, false, false, false, false, true);
-loadAndStyleGeoJson('statesprovinces', statesprovincesGeojsonUrl); // Load and style states/provinces layer
+loadAndStyleGeoJson('oceans', oceansGeojsonUrl);
+loadAndStyleGeoJson('regions', regionsGeojsonUrl);
+loadAndStyleGeoJson('europe', europeGeojsonUrl);
+loadAndStyleGeoJson('asia', asiaGeojsonUrl);
+loadAndStyleGeoJson('africa', africaGeojsonUrl);
+loadAndStyleGeoJson('oceania', oceaniaGeojsonUrl);
+loadAndStyleGeoJson('northamerica', northamericaGeojsonUrl);
+loadAndStyleGeoJson('southamerica', southamericaGeojsonUrl);
+loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl);
+loadAndStyleGeoJson('lakes', lakesGeojsonUrl);
+loadAndStyleGeoJson('rivers', riversGeojsonUrl);
+loadAndStyleGeoJson('cities', citiesGeojsonUrl);
+loadAndStyleGeoJson('statesprovinces', statesprovincesGeojsonUrl);
+
 
 
 
