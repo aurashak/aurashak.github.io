@@ -81,50 +81,48 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    // Check if the properties object has a 'featurecla' and it's a string
-    if (properties.hasOwnProperty('featurecla') && typeof properties.featurecla === 'string') {
-        var featureClass = properties.featurecla.toLowerCase(); // Convert to lower case to standardize
-        var typeMap = {
-            'continent': 'Continent',
-            'region': 'Region',
-            'subregion': 'Subregion',
-            'Admin-0 country': 'Country',
-            'Lake': 'Lake',
-            'ocean': 'Ocean',
-            'River': 'River'
-            'Lake Centerline': 'River'
-
-            // Add any additional mappings needed
-        };
-        
-        return typeMap[featureClass] || null; // Return the mapped type or null if not found
+    // Check for lake feature
+    if (properties.featurecla === 'Lake') {
+        return 'Lake';
     }
-    return null; // Return null if 'featurecla' is not a string or not present
+    // Check for other features and add them as needed
+    // ...
+
+    // Return 'Unknown' if no known feature class is matched
+    return 'Unknown';
 }
-
-
-
 
 function showCoordinates(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
-    
-    pickedObjects.forEach(function(pickedObject) {
-        if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
-            var properties = pickedObject.id.properties.getValue(); // Get the actual value from the Cesium Property object
-            var type = getTypeFromProperties(properties);
-            var name = properties.name; // Directly access the name property
 
-            // If type is recognized and name is present, append them to hoverText
-            if (type && name) {
-                hoverText += `<br>${type}: ${name}`;
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+
+        pickedObjects.forEach(function(pickedObject) {
+            if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
+                var properties = pickedObject.id.properties;
+                var type = getTypeFromProperties(properties); // Should return 'Lake' for lake features
+                var name = properties.name; // Access the name property directly
+
+                // Check if a name property is defined for the current picked object
+                if (name) {
+                    // Append the type and name to the hover text
+                    hoverText += `<br>${type}: ${name}`;
+                } else {
+                    // If no name property is found, display 'N/A'
+                    hoverText += `<br>${type}: N/A`;
+                }
             }
-        }
-    });
+        });
 
-    // Assuming coordsBox is a DOM element where hover text will be displayed
-    coordsBox.innerHTML = hoverText;
-    coordsBox.style.display = 'block';
+        // Assuming coordsBox is a DOM element where hover text will be displayed
+        coordsBox.innerHTML = hoverText;
+        coordsBox.style.display = 'block';
+    }
 }
 
 // Assuming viewer.screenSpaceEventHandler is the correct handler to use
