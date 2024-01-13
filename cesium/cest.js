@@ -1,9 +1,9 @@
+
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
 var viewer = new Cesium.Viewer('cesiumContainer', {
-    // imageryProvider: new Cesium.IonImageryProvider({ assetId: 3954 }), // Commented out to use default imagery
     baseLayerPicker: false,
-    geocoder: true,
+    geocoder: false,
     homeButton: false,
     infoBox: false,
     sceneModePicker: false,
@@ -14,77 +14,16 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false
 });
 
-var imageryLayers = viewer.imageryLayers;
-var baseLayer = imageryLayers.get(0); // Assuming the base layer is the first one
-baseLayer.brightness = 1.2; // Adjust the brightness, default is 1.0
-baseLayer.contrast = 1.2; // Adjust the contrast, default is 1.0
-
-var currentTime = Cesium.JulianDate.now();
-viewer.clock.currentTime = Cesium.JulianDate.addHours(currentTime, 10, new Cesium.JulianDate()); // Move 6 hours forward
+// Remove the existing Bing Maps imagery layer
+viewer.imageryLayers.remove(viewer.imageryLayers.get(0));
 
 
-// Load and style the project markers with halos
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/projectmarkers.geojson').then(function(dataSource) {
-    viewer.dataSources.add(dataSource);
+// Add the Sentinel imagery layer
+viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
 
-    dataSource.entities.values.forEach(function(entity) {
-        // Set the billboard property to undefined
-        entity.billboard = undefined;
+viewer.imageryLayers.get(0).brightness = 1.2;
+viewer.imageryLayers.get(0).contrast = 1.2;
 
-        // Check if the entity has a marker-color property
-        if (entity.properties && entity.properties['marker-color']) {
-            var color = Cesium.Color.fromCssColorString(entity.properties['marker-color'].getValue());
-
-            // Set the point to be transparent
-            entity.point = new Cesium.PointGraphics({
-                pixelSize: 0, // Hide the default point
-                color: Cesium.Color.TRANSPARENT
-            });
-
-// Create the rotating dashed halo effect using EllipseGraphics
-var dashPattern = 255; // A simple dash pattern (11111111)
-entity.ellipse = new Cesium.EllipseGraphics({
-    semiMinorAxis: 5000, // Initial size, will be updated based on zoom
-    semiMajorAxis: 5000, // Initial size, will be updated based on zoom
-    height: 10, // Height above the surface
-    material: new Cesium.PolylineDashMaterialProperty({
-        color: color,
-        dashPattern: dashPattern
-    }),
-    outline: true,
-    outlineColor: color,
-    outlineWidth: 10, // Thickness of the halo ring
-    numberOfVerticalLines: 0, // No vertical lines
-    fill: false
-});
-
-// Store the rotation offset in the entity for use in the animation loop
-entity.properties.addProperty('rotationOffset', 0);
-}
-});
-
-
-    // Update halos based on camera height
-    viewer.camera.changed.addEventListener(function() {
-        var cameraHeight = viewer.camera.positionCartographic.height;
-        dataSource.entities.values.forEach(function(entity) {
-            if (entity.ellipse) {
-                var baseSize = 5000; // Base size of the halo
-                var sizeFactor = cameraHeight / 1000000;
-                var newSize = Math.max(baseSize, baseSize * Math.max(sizeFactor, 0.1)); // Prevent size from going below a minimum
-
-                entity.ellipse.semiMinorAxis = newSize;
-                entity.ellipse.semiMajorAxis = newSize;
-            }
-        });
-    });
-}).otherwise(function(error) {
-    console.error('Error loading GeoJSON data:', error);
-});
-
-
-
-// Set the initial view
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
@@ -94,74 +33,63 @@ viewer.camera.setView({
     }
 });
 
-
-// Define handler in the global scope
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
+var defaultText = 'Latitude: Longitude: <br>Place: ';
+var coordsBox = document.getElementById('coordsBox');
+coordsBox.innerHTML = defaultText;
+coordsBox.style.display = 'block';
 
-// Set a standard initial view
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000), // Longitude, Latitude, Height
-    orientation: {
-        heading: Cesium.Math.toRadians(0.0), // Facing East
-        pitch: Cesium.Math.toRadians(-90.0), // Looking down
-        roll: 0.0
+function getTypeFromProperties(properties) {
+    switch (properties.featurecla) {
+        case 'Lake':
+            return 'Lake';
+        case 'Admin-0 country':
+            return 'Country';
+        case 'continent':
+            return 'Continent';
+        case 'River':
+            return 'River';
+        case 'Region':
+            return 'Region';
+        case 'Subregion':
+            return 'Subregion';
+        default:
+            return properties.featurecla || 'Unknown';
     }
-});
-
-// Slow down the rotation
-var spinRate = 0.0005;
-var isRotating = true; // To keep track of the rotation state
-var rotateGlobeFunction = function() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
-    }
-};
-
-// Add the preRender event listener to start rotating the globe
-viewer.scene.preRender.addEventListener(rotateGlobeFunction);
-
-// Function to stop the globe rotation
-function stopRotation() {
-    isRotating = false; // Set the flag to false to stop the rotation
 }
 
-// Add the left click event handler to stop rotation
-handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
-
-// At the top of your script, define the default text
-var defaultText = 'Latitude: Longitude: <br>Place: ';
-
-var coordsBox = document.getElementById('coordsBox');
-coordsBox.style.display = 'block';
-coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead of textContent
-
-
 function showCoordinates(movement) {
-    var ray = viewer.camera.getPickRay(movement.endPosition);
-    var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
-    var entity = viewer.scene.pick(movement.endPosition);
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
-        // Check if an entity was picked
-        if (Cesium.defined(entity) && entity.id && entity.id.properties) {
-            var nameProperty = entity.id.properties.name;
-            if (Cesium.defined(nameProperty)) {
-                hoverText += '<br>' + 'Place: ' + nameProperty.getValue();
-            }
-        }
+        pickedObjects.forEach(function(pickedObject) {
+            if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
+                var properties = pickedObject.id.properties;
+                var type = getTypeFromProperties(properties);
+                var name = properties.name;
 
-        // Update text content
+                if (name) {
+                    hoverText += `<br>${type}: ${name}`;
+                } else {
+                    hoverText += `<br>${type}: N/A`;
+                }
+            }
+        });
+
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
+
+viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
@@ -174,55 +102,150 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 });
 
 
+// Define colors and heights for different layers
+var layerStyles = {
+    oceans: {
+        color: Cesium.Color.RED,
+        outlineColor: Cesium.Color.WHITE,
+        height: 500 // Adjust as needed
+    },
+    regions: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: 600 // Adjust as needed
+    },
+    europe: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    asia: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    africa: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    oceania: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    northamerica: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    southamerica: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    antarctica: {
+        color: Cesium.Color.KHAKI,
+        outlineColor: Cesium.Color.BLACK,
+        height: continentHeight // Use the previously defined height
+    },
+    lakes: {
+        color: Cesium.Color.BLUE,
+        outlineColor: Cesium.Color.WHITE,
+        height: 700 // Adjust as needed
+    },
+    cities: {
+        color: Cesium.Color.BLUE,
+        outlineColor: Cesium.Color.BLUE,
+        height: 800 // Adjust as needed
+    },
+    statesprovinces: { // New states/provinces layer configuration
+        color: Cesium.Color.ORANGE,
+        outlineColor: Cesium.Color.BLACK,
+        height: 550 // Adjust as needed for states/provinces
+    }
+};
+
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, isRiverLayer = false) {
+function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
+    var layerStyle = layerStyles[layerName];
+    var color = layerStyle.color;
+    var outlineColor = layerStyle.outlineColor;
+    var height = layerStyle.height;
+
     Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
-                // Set polygon material to slightly transparent
-                entity.polygon.material = color.withAlpha(0.01);
-                // Enable the outline for polygons and set it to the specified color
-                entity.polygon.outline = false;
-                entity.polygon.outlineColor = outlineColor;
+                if (isRegionsLayer || isCountryLayer || isOceanLayer || isStatesProvincesLayer) {
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = true;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else if (isCitiesLayer) {
+                    entity.polygon.material = color.withAlpha(1);
+                    entity.polygon.outline = true;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else {
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = false;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                }
             } else if (isRiverLayer && entity.polyline) {
-                // Customize river lines
-                var riverHexColor = '#6495ED'; // Replace with your desired hex color for blue
-                var riverColor = Cesium.Color.fromCssColorString(riverHexColor).withAlpha(0.5); // Set the desired transparency using withAlpha
+                var riverColor = Cesium.Color.BLUE.withAlpha(0.01); 
+                var offsetHeight = 10;
                 entity.polyline.material = riverColor;
-                entity.polyline.width = 0.25; // Adjust the width as needed
+                entity.polyline.width = 10;
+                entity.polyline.clampToGround = true;
+                entity.polyline.arcType = Cesium.ArcType.GEODESIC;
+                entity.polyline.positions = new Cesium.CallbackProperty(function() {
+                    var cartographicPositions = entity.polyline.positions.getValue().map(function(position) {
+                        var cartographic = Cesium.Cartographic.fromCartesian(position);
+                        return Cesium.Cartesian3.fromDegrees(
+                            Cesium.Math.toDegrees(cartographic.longitude),
+                            Cesium.Math.toDegrees(cartographic.latitude),
+                            cartographic.height + offsetHeight
+                        );
+                    });
+                    return cartographicPositions;
+                }, false);
             }
         });
+
         viewer.dataSources.add(dataSource);
     }).otherwise(function(error){
-        console.error(error);
+        console.error('Error loading GeoJSON data:', error);
     });
 }
 
 // URLs to the GeoJSON data
-var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
-var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
-var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json';
-var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
-var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/oceana.json';
-var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
-var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
-var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
-var riversGeojsonUrl = 'https://aurashak.github.io/geojson/rivers.geojson';
-
-
+var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson'; 
+var europeGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
+var africaGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
+var oceaniaGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceania.json';
+var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/northamerica.json';
+var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/vsouthamerica.json';
+var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
+var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
+var statesProvincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json'; // New states/provinces GeoJSON URL
 
 // Load and style the layers
-loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE);
-loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.BLACK, Cesium.Color.WHITE);
-loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.RED, Cesium.Color.WHITE);
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.RED, null, true); // Custom style for rivers
-
-
+loadAndStyleGeoJson('oceans', oceansGeojsonUrl, false, false, true); // For oceans
+loadAndStyleGeoJson('regions', regionsGeojsonUrl, false, false, false, true); // For regions
+loadAndStyleGeoJson('europe', europeGeojsonUrl, false, true); // For Europe
+loadAndStyleGeoJson('asia', asiaGeojsonUrl, false, true); // For Asia, set isCountryLayer to true
+loadAndStyleGeoJson('africa', africaGeojsonUrl, false, true); // For Africa, set isCountryLayer to true
+loadAndStyleGeoJson('oceania', oceaniaGeojsonUrl, false, true); // For Oceania, set isCountryLayer to true
+loadAndStyleGeoJson('northamerica', northamericaGeojsonUrl, false, true); // For North America, set isCountryLayer to true
+loadAndStyleGeoJson('southamerica', southamericaGeojsonUrl, false, true); // For South America, set isCountryLayer to true
+loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl, false, true); // For Antarctica
+loadAndStyleGeoJson('lakes', lakesGeojsonUrl); // For lakes
+loadAndStyleGeoJson('rivers', riversGeojsonUrl, true); // For rivers
+loadAndStyleGeoJson('cities', citiesGeojsonUrl, false, false, false, false, true);
+loadAndStyleGeoJson('statesprovinces', statesProvincesGeojsonUrl); // Load and style states/provinces layer
 
 
 
