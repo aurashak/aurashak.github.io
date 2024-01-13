@@ -142,7 +142,6 @@ var layerStyles = {
     southamerica: {
         color: Cesium.Color.KHAKI,
         outlineColor: Cesium.Color.BLACK,
-        height: 500 // Adjust as needed
     },
     antarctica: {
         color: Cesium.Color.KHAKI,
@@ -230,7 +229,7 @@ var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamer
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
 var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
-var statesprovincesGeojsonUrl = 'URL_TO_YOUR_STATESPROVINCES.GEOJSON'; // Replace with the actual URL to your states/provinces GeoJSON file
+var statesprovincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.geojson'; // Replace with the actual URL to your states/provinces GeoJSON file
 
 // Load and style the layers
 loadAndStyleGeoJson('oceans', oceansGeojsonUrl, false, false, true); // For oceans
