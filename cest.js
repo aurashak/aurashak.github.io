@@ -122,13 +122,23 @@ function showCoordinates(movement) {
                 var type = getTypeFromProperties(properties);
                 var name = properties.name;
 
-                if (name) {
-                    hoverText += `<br>${type}: ${name}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
-                }
-            }
-        });
+                pickedObjects.forEach(function(pickedObject) {
+                    if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
+                        var properties = pickedObject.id.properties;
+                        var type = getTypeFromProperties(properties);
+                        var nameProperty = properties.name; // Adjust based on your GeoJSON properties
+                        var name = nameProperty ? nameProperty.getValue() : null;
+        
+                        // Only append the type and
+        
+        
+                        if (type&&name) {
+                            hoverText += `<br>${type}: ${name}`;
+                        } else {
+                            hoverText += `<br>${type}: N/A`;
+                        }
+                    }
+                });
 
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
