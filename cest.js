@@ -81,20 +81,18 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    // Map the 'featurecla' to the proper display type
     var typeMap = {
-        'Continent': 'Continent',
-        'Country': 'Country',
-        'Region': 'Region',
-        'Subregion': 'Subregion',
-        'Ocean': 'Ocean',
+        'continent': 'Continent',
+        'region_un': 'Region',
+        'subregion': 'Subregion',
+        'Admin-0 country': 'Country', // Assuming this is for countries
         'Lake': 'Lake',
-        'River': 'River'
-        // Add more mappings as needed
+        'name': 'Ocean' // Assuming 'name' is used for oceans, if 'ocean' is a featurecla use that instead
+        // Add any additional types as needed
     };
-    
-    // Return the display type if recognized, otherwise null
-    return typeMap[properties.featurecla] || null;
+
+    // If featurecla is not in the typeMap, return null
+    return typeMap[properties.featurecla.toLowerCase()] || null; // Use toLowerCase() to handle any case variations
 }
 
 
@@ -113,15 +111,15 @@ function showCoordinates(movement) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
-                var name = properties.name; // Access the name property directly
-    
-                // Check if a name property is defined for the current picked object
+                var name = properties.name; // Directly access the name property
+        
+                // If type is recognized and name is present, append them to hoverText
                 if (type && name) {
                     hoverText += `<br>${type}: ${name}`;
                 }
-                // Skip the item if type is null, meaning it's not a recognized feature class
             }
         });
+        
 
         // Assuming coordsBox is a DOM element where hover text will be displayed
         coordsBox.innerHTML = hoverText;
