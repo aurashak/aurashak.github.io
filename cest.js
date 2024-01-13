@@ -81,42 +81,36 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
+    // Check for lake feature
     if (properties.featurecla === 'Lake') {
         return 'Lake';
     }
-    // ... Add other cases as needed
+    // Check for other features and add them as needed
+    // ...
+
+    // Return 'Unknown' if no known feature class is matched
     return 'Unknown';
 }
 
 
-function showCoordinates(movement) {
-    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
-    if (cartesian) {
-        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
-        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+pickedObjects.forEach(function(pickedObject) {
+    if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
+        var properties = pickedObject.id.properties;
+        var type = getTypeFromProperties(properties); // This should return 'Lake' for lake features
+        var nameProperty = properties.name || properties.NAME; // Adjust based on your GeoJSON properties
 
-        pickedObjects.forEach(function(pickedObject) {
-            if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
-                var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties);
-                var name = properties.name;
-
-                if (name) {
-                    hoverText += `<br>${type}: ${name}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
-                }
-            }
-        });
-
-        coordsBox.innerHTML = hoverText;
-        coordsBox.style.display = 'block';
+        // Check if a name property is defined for the current picked object
+        if (Cesium.defined(nameProperty)) {
+            // Append the type and name to the hover text
+            hoverText += `<br>${type}: ${nameProperty.getValue()}`;
+        } else {
+            // If no name property is found, display 'N/A'
+            hoverText += `<br>${type}: N/A`;
+        }
     }
-}
+});
+
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
