@@ -85,7 +85,7 @@ function getTypeFromProperties(properties) {
     var featureClass = properties.featurecla.getValue();
 
     // Check for lake feature
-    if (featurecla === 'Lake') {
+    if (featureClass === 'Lake') {
         return 'Lake';
     }
     // Check for other features and add them as needed
