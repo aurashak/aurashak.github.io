@@ -152,6 +152,7 @@ function loadAndStyleGeoJson(layerName, url) {
 
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson'; 
+var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/world/regions.geojson';
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
 var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
 var africaGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
