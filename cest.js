@@ -81,6 +81,9 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
+
+    console.log(properties);
+    
     // Check for lake feature
     if (properties.featurecla === 'Lake') {
         return 'Lake';
