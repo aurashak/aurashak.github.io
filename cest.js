@@ -82,8 +82,7 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 function getTypeFromProperties(properties) {
 
-    console.log(properties);
-
+        console.log(properties);
     // Check for lake feature
     if (properties.featurecla === 'Lake') {
         return 'Lake';
@@ -164,7 +163,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
                     // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(0.01); // More transparency for water
+                    entity.polygon.material = color.withAlpha(0.1); // More transparency for water
                     entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
