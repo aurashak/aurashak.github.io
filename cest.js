@@ -161,27 +161,27 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
             if (entity.polygon) {
                 if (isRegionsLayer) {
                     // Custom styling for regions
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
+                    entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
                     entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isCountryLayer) {
                     // Custom styling for continents
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
-                    entity.polygon.outline = true; // With outline
+                    entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
+                    entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isOceanLayer) {
                     // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(0.1); // More transparency for water
+                    entity.polygon.material = color.withAlpha(0.01); // More transparency for water
                     entity.polygon.outline = false; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                     // Oceans typically do not need extrusion
                 } else {
                     // Default styling for other polygon layers (like lakes)
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
-                    entity.polygon.outline = true; // No outline for lakes
+                    entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
+                    entity.polygon.outline = false; // No outline for lakes
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
                 }
@@ -244,8 +244,8 @@ loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, co
 loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
 loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
 loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Antarctica
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.WHITE, lakesHeight); // For lakes
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, true); // For rivers
+loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.WHITE, lakesHeight); // For lakes
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.BLUE, true); // For rivers
 
 
 
