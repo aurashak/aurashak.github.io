@@ -81,11 +81,11 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-
-    console.log(properties);
+    // Since properties.featurecla is a ConstantProperty, we need to get its value
+    var featureClass = properties.featurecla.getValue();
 
     // Check for lake feature
-    if (properties.featurecla === 'Lake') {
+    if (featureClass === 'Lake') {
         return 'Lake';
     }
     // Check for other features and add them as needed
@@ -94,6 +94,7 @@ function getTypeFromProperties(properties) {
     // Return 'Unknown' if no known feature class is matched
     return 'Unknown';
 }
+
 
 
 
@@ -111,16 +112,15 @@ function showCoordinates(movement) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
-                var name = properties.name;
-
-                if (name) {
-                    hoverText += `<br>${type}: ${name}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
-                }
+                var nameProperty = properties.name; // Adjusted for simplicity, assuming 'name' is the correct property
+        
+                // Since nameProperty is a ConstantProperty, we need to get its value
+                var name = Cesium.defined(nameProperty) ? nameProperty.getValue() : 'N/A';
+        
+                hoverText += `<br>${type}: ${name}`;
             }
         });
-
+        
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
