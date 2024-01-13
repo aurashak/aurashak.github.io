@@ -161,52 +161,43 @@ var citiesHeight = 800; // Adjust as needed
 
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer = false, isCountryLayer = false, isOceanLayer = false, isRegionsLayer = false, isCitiesLayer = false) {        dataSource.entities.values.forEach(function(entity) {
+function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
+    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
                 if (isRegionsLayer) {
-                    // Custom styling for regions
-                    entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
-                    entity.polygon.outline = true; // With outline
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height; // Extruded height if needed
+                    entity.polygon.extrudedHeight = height;
                 } else if (isCountryLayer) {
-                    // Custom styling for continents
-                    entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
-                    entity.polygon.outline = false; // With outline
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height; // Extruded height if needed
+                    entity.polygon.extrudedHeight = height;
                 } else if (isOceanLayer) {
-                    // Custom styling for oceans
-                    entity.polygon.material = color.withAlpha(0.01); // More transparency for water
-                    entity.polygon.outline = false; // With outline
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = false;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
-                    // Oceans typically do not need extrusion
+                    entity.polygon.extrudedHeight = height;
                 } else if (isCitiesLayer) {
-                    // Custom styling for cities
-                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
-                    entity.polygon.outline = true; // With outline
+                    entity.polygon.material = color.withAlpha(1);
+                    entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height; // Extruded height if needed
+                    entity.polygon.extrudedHeight = height;
                 } else {
-                    // Default styling for other polygon layers (like lakes)
-                    entity.polygon.material = color.withAlpha(0.01); // Semi-transparent
-                    entity.polygon.outline = false; // No outline for lakes
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = false;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.extrudedHeight = height; // Extruded height for lakes if needed
+                    entity.polygon.extrudedHeight = height;
                 }
             } else if (isRiverLayer && entity.polyline) {
-                                // Custom styling for rivers
-                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1); // Stronger color for visibility
-                var offsetHeight = 10; // Height offset above the ground in meters
-            
+                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1);
+                var offsetHeight = 10;
                 entity.polyline.material = riverColor;
-                entity.polyline.width = 10; // Wider lines for rivers
-                entity.polyline.clampToGround = true; // Clamp the polyline to the ground
-                entity.polyline.arcType = Cesium.ArcType.GEODESIC; // Follow the curvature of the Earth
-            
-                // No need to manually update the polyline positions if clamping to ground
-                // Instead, apply a height offset to each position
+                entity.polyline.width = 10;
+                entity.polyline.clampToGround = true;
+                entity.polyline.arcType = Cesium.ArcType.GEODESIC;
                 entity.polyline.positions = new Cesium.CallbackProperty(function() {
                     var cartographicPositions = entity.polyline.positions.getValue().map(function(position) {
                         var cartographic = Cesium.Cartographic.fromCartesian(position);
@@ -214,14 +205,19 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                             Cesium.Math.toDegrees(cartographic.longitude),
                             Cesium.Math.toDegrees(cartographic.latitude),
                             cartographic.height + offsetHeight
-                        }
+                        );
                     });
-                    
+                    return cartographicPositions;
+                }, false);
+            }
+        });
+
         viewer.dataSources.add(dataSource);
     }).otherwise(function(error){
         console.error('Error loading GeoJSON data:', error);
     });
 }
+
 
 
 
