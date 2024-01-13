@@ -167,7 +167,7 @@ var layerStyles = {
 };
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer, isGraticuleLayer) {
+function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
     var layerStyle = layerStyles[layerName];
     var color = layerStyle.color;
     var outlineColor = layerStyle.outlineColor;
