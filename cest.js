@@ -81,8 +81,11 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
+    // Since properties.featurecla is a ConstantProperty, we need to get its value
+    var featureClass = properties.featurecla.getValue();
+
     // Check for lake feature
-    if (properties.featurecla === 'Lake') {
+    if (featureClass === 'Lake') {
         return 'Lake';
     }
     // Check for other features and add them as needed
@@ -91,6 +94,9 @@ function getTypeFromProperties(properties) {
     // Return 'Unknown' if no known feature class is matched
     return 'Unknown';
 }
+
+
+
 
 function showCoordinates(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
@@ -105,28 +111,24 @@ function showCoordinates(movement) {
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties); // Should return 'Lake' for lake features
-                var name = properties.name; // Access the name property directly
-
-                // Check if a name property is defined for the current picked object
-                if (name) {
-                    // Append the type and name to the hover text
-                    hoverText += `<br>${type}: ${name}`;
-                } else {
-                    // If no name property is found, display 'N/A'
-                    hoverText += `<br>${type}: N/A`;
-                }
+                var type = getTypeFromProperties(properties);
+                var nameProperty = properties.name; // Adjusted for simplicity, assuming 'name' is the correct property
+        
+                // Since nameProperty is a ConstantProperty, we need to get its value
+                var name = Cesium.defined(nameProperty) ? nameProperty.getValue() : 'N/A';
+        
+                hoverText += `<br>${type}: ${name}`;
             }
         });
-
-        // Assuming coordsBox is a DOM element where hover text will be displayed
+        
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
 
-// Assuming viewer.screenSpaceEventHandler is the correct handler to use
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
@@ -156,7 +158,7 @@ function loadAndStyleGeoJson(url, color, outlineColor, height = 0, isRiverLayer 
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
                 } else if (isCountryLayer) {
                     // Custom styling for continents
-                    entity.polygon.material = color.withAlpha(0.1); // Semi-transparent
+                    entity.polygon.material = color.withAlpha(1); // Semi-transparent
                     entity.polygon.outline = true; // With outline
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height; // Extruded height if needed
