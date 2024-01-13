@@ -105,7 +105,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 // Define colors and heights for different layers
 var layerStyles = {
     oceans: {
-        color: Cesium.Color.RED,
+        color: Cesium.Color.BLUE,
         outlineColor: Cesium.Color.WHITE,
         height: 500 // Adjust as needed
     },
@@ -181,17 +181,17 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
         dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
                 if (isRegionsLayer || isCountryLayer || isOceanLayer || isStatesProvincesLayer) {
-                    entity.polygon.material = color.withAlpha(0.1);
+                    entity.polygon.material = color.withAlpha(1);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 } else if (isCitiesLayer) {
-                    entity.polygon.material = color.withAlpha(0.7);
+                    entity.polygon.material = color.withAlpha(1);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 } else {
-                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.material = color.withAlpha(1);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
