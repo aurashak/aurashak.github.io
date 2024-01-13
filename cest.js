@@ -91,7 +91,8 @@ function getTypeFromProperties(properties) {
     // Check for other features and add them as needed
     // ...
 
-
+    // Return 'Unknown' if no known feature class is matched
+    return 'Unknown';
 }
 
 
