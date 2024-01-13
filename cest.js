@@ -14,13 +14,6 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false
 });
 
-// Remove the existing Bing Maps imagery layer
-viewer.imageryLayers.remove(viewer.imageryLayers.get(0));
-
-
-// Add the Sentinel imagery layer
-viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
-
 viewer.imageryLayers.get(0).brightness = 1.2;
 viewer.imageryLayers.get(0).contrast = 1.2;
 
@@ -44,15 +37,15 @@ function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
         case 'Lake':
             return 'Lake';
-        case 'Country':
+        case 'Admin-0 country':
             return 'Country';
         case 'continent':
             return 'Continent';
         case 'River':
             return 'River';
-        case 'REGION':
+        case 'Region':
             return 'Region';
-        case 'SUBREGION':
+        case 'Subregion':
             return 'Subregion';
         default:
             return properties.featurecla || 'Unknown';
@@ -102,86 +95,105 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 });
 
 
-// Define colors and heights for different layers
-var layerStyles = {
-    oceans: { color: Cesium.Color.BLUE, outlineColor: Cesium.Color.WHITE, height: 500 },
-    regions: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.GREEN, height: 600 },
-    europe: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
-    asia: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
-    africa: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
-    oceania: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
-    northamerica: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
-    southamerica: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK },
-    antarctica: { color: Cesium.Color.KHAKI, outlineColor: Cesium.Color.BLACK, height: 500 },
-    lakes: { color: Cesium.Color.BLUE, outlineColor: Cesium.Color.WHITE, height: 700 },
-    cities: { color: Cesium.Color.BLACK, outlineColor: Cesium.Color.BLACK, height: 800 },
-    statesprovinces: { color: Cesium.Color.ORANGE, outlineColor: Cesium.Color.BLACK, height: 550 }
-};
+// Define heights for different layer types
+var continentHeight = 500; // Adjust as needed
+var oceansHeight = 500; // Adjust as needed
+var lakesHeight = 700; // Adjust as needed
+var regionsHeight = 600; // Adjust as needed
+var citiesHeight = 800; // Adjust as needed
+
 
 // Function to load and style a GeoJSON layer
-function loadAndStyleGeoJson(layerName, url) {
-    var layerStyle = layerStyles[layerName];
-    var color = layerStyle.color;
-    var outlineColor = layerStyle.outlineColor;
-    var height = layerStyle.height;
-
-
-    console.log('Loading GeoJSON for layer:', layerName);
-
-    Cesium.GeoJsonDataSource.load(url).then(function (dataSource) {
-
-        console.log('GeoJSON loaded for layer:', layerName);
-
-        dataSource.entities.values.forEach(function (entity) {
-            if (entity.polygon || entity.polyline) {
-                entity.material = color.withAlpha(1);
-                entity.outline = true;
-                entity.outlineColor = outlineColor;
-                if (entity.polygon) {
+function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
+    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
+            if (entity.polygon) {
+                if (isRegionsLayer) {
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = true;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else if (isCountryLayer) {
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = true;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else if (isOceanLayer) {
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = false;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else if (isCitiesLayer) {
+                    entity.polygon.material = color.withAlpha(1);
+                    entity.polygon.outline = true;
+                    entity.polygon.outlineColor = outlineColor;
+                    entity.polygon.extrudedHeight = height;
+                } else {
+                    entity.polygon.material = color.withAlpha(0.01);
+                    entity.polygon.outline = false;
+                    entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 }
+            } else if (isRiverLayer && entity.polyline) {
+                var riverColor = Cesium.Color.fromCssColorString('#6495ED').withAlpha(1);
+                var offsetHeight = 10;
+                entity.polyline.material = riverColor;
+                entity.polyline.width = 10;
+                entity.polyline.clampToGround = true;
+                entity.polyline.arcType = Cesium.ArcType.GEODESIC;
+                entity.polyline.positions = new Cesium.CallbackProperty(function() {
+                    var cartographicPositions = entity.polyline.positions.getValue().map(function(position) {
+                        var cartographic = Cesium.Cartographic.fromCartesian(position);
+                        return Cesium.Cartesian3.fromDegrees(
+                            Cesium.Math.toDegrees(cartographic.longitude),
+                            Cesium.Math.toDegrees(cartographic.latitude),
+                            cartographic.height + offsetHeight
+                        );
+                    });
+                    return cartographicPositions;
+                }, false);
             }
         });
 
         viewer.dataSources.add(dataSource);
-        console.log('Added GeoJSON to viewer for layer:', layerName);
-    }).otherwise(function (error) {
+    }).otherwise(function(error){
         console.error('Error loading GeoJSON data:', error);
     });
 }
 
+
+
+
+
+
 // URLs to the GeoJSON data
 var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson'; 
+
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
 var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
 var africaGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
-var oceaniaGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceania.json';
+var oceanaGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceana.json';
 var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/northamerica.json';
 var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamerica.json';
 var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
-var statesprovincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json';
 var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
-var riversGeojsonUrl = 'https://aurashak.github.io/geojson/world/rivers.geojson';
 var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/world/regions.geojson';
+var riversGeojsonUrl = 'https://aurashak.github.io/geojson/world/rivers.geojson';
 var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
 
 // Load and style the layers
-loadAndStyleGeoJson('oceans', oceansGeojsonUrl);
-loadAndStyleGeoJson('europe', europeGeojsonUrl);
-loadAndStyleGeoJson('asia', asiaGeojsonUrl);
-loadAndStyleGeoJson('africa', africaGeojsonUrl);
-loadAndStyleGeoJson('oceania', oceaniaGeojsonUrl);
-loadAndStyleGeoJson('northamerica', northamericaGeojsonUrl);
-loadAndStyleGeoJson('southamerica', southamericaGeojsonUrl);
-loadAndStyleGeoJson('antarctica', antarcticaGeojsonUrl);
-loadAndStyleGeoJson('statesprovinces', statesprovincesGeojsonUrl);
-loadAndStyleGeoJson('lakes', lakesGeojsonUrl);
-loadAndStyleGeoJson('rivers', riversGeojsonUrl);
-loadAndStyleGeoJson('regions', regionsGeojsonUrl);
-loadAndStyleGeoJson('cities', citiesGeojsonUrl);
-
-
-
+loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans
+loadAndStyleGeoJson(regionsGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, regionsHeight, false, false, false, true); // For regions
+loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Europe
+loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Asia, set isCountryLayer to true
+loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Africa, set isCountryLayer to true
+loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Oceania, set isCountryLayer to true
+loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
+loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
+loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Antarctica
+loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.WHITE, lakesHeight); // For lakes
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.BLUE, true); // For rivers
+loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
 
 window.onload = function() {
