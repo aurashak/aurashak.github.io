@@ -72,30 +72,6 @@ function stopRotation() {
 // Add the left click event handler to stop rotation
 handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
-var imageryLayers = viewer.imageryLayers;
-
-// Function to show the satellite imagery layer
-function showSatelliteLayer() {
-    // Remove existing layers
-    imageryLayers.removeAll();
-
-    // Add the satellite imagery layer
-    imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3954 }));
-}
-
-// Function to show the OpenStreetMap layer
-function showOpenStreetMapLayer() {
-    // Remove existing layers
-    imageryLayers.removeAll();
-
-    // Add the OpenStreetMap layer (Cesium World Terrain)
-    imageryLayers.addImageryProvider(Cesium.createOpenStreetMapImageryProvider());
-}
-
-// Add click event handlers to the buttons
-document.getElementById('satelliteButton').addEventListener('click', showSatelliteLayer);
-document.getElementById('openStreetMapButton').addEventListener('click', showOpenStreetMapLayer);
-
 
 
 // At the top of your script, define the default text
