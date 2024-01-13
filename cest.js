@@ -184,18 +184,15 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                     entity.polygon.material = color.withAlpha(0.01);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.allowPicking = false; 
                     entity.polygon.extrudedHeight = height;
                 } else if (isCitiesLayer) {
                     entity.polygon.material = color.withAlpha(0.7);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
-                    entity.polygon.allowPicking = false; 
                     entity.polygon.extrudedHeight = height;
                 } else {
                     entity.polygon.material = color.withAlpha(0.01);
                     entity.polygon.outline = false;
-                    entity.polygon.allowPicking = false; 
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 }
