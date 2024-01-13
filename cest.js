@@ -82,18 +82,27 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 function getTypeFromProperties(properties) {
     // Since properties.featurecla is a ConstantProperty, we need to get its value
-    var featureClass = properties.featurecla.getValue();
-
-    // Check for lake feature
-    if (featureClass === 'Lake') {
-        return 'Lake';
+    switch (properties.featurecla) {
+        case 'Lake':
+            return 'Lake';
+        case 'Country':
+            return 'Country';
+        case 'Continent':
+            return 'Continent';
+        case 'River':
+            return 'River';
+        case 'Region':
+            return 'Region';
+        case 'Subregion':
+            return 'Subregion';
+        // Add more cases as needed for other feature classes
+        default:
+            // Return the value of 'featurecla' if it's not one of the standard types you handle
+            // or return 'Unknown' if you want to mask unknown types.
+            return properties.featurecla || 'Unknown';
     }
-    // Check for other features and add them as needed
-    // ...
-
-    // Return 'Unknown' if no known feature class is matched
-    return 'Unknown';
 }
+
 
 
 
