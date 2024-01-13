@@ -82,10 +82,10 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 function getTypeFromProperties(properties) {
     if (properties.featurecla === 'Lake') {
-        return 'Lake'; // Return the type 'Lake' if featurecla is 'Lake'
+        return 'Lake';
     }
-    // Add other cases as needed
-    return 'Unknown'; // Return 'Unknown' for all other cases
+    // ... Add other cases as needed
+    return 'Unknown';
 }
 
 
@@ -102,13 +102,13 @@ function showCoordinates(movement) {
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties); // This will be 'Lake' or 'Unknown'
-                var name = properties.name; // Directly access the name property
+                var type = getTypeFromProperties(properties);
+                var name = properties.name;
 
-                if (type !== 'Unknown' && name) { // Check if the type is not 'Unknown' and name exists
+                if (name) {
                     hoverText += `<br>${type}: ${name}`;
                 } else {
-                    hoverText += `<br>${type}: N/A`; // If type is 'Unknown' or name doesn't exist
+                    hoverText += `<br>${type}: N/A`;
                 }
             }
         });
@@ -118,16 +118,7 @@ function showCoordinates(movement) {
     }
 }
 
-
-
-
-// Rest of your code...
-
-
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
-
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
