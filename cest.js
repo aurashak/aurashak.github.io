@@ -81,27 +81,22 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    // Handle different types of features by checking the 'featurecla' property
-    switch (properties.featurecla) {
-        case 'Lake':
-            return 'Lake';
-        case 'Country':
-            return 'Country';
-        case 'Continent':
-            return 'Continent';
-        case 'River':
-            return 'River';
-        case 'Region':
-            return 'Region';
-        case 'Subregion':
-            return 'Subregion';
-        // Add more cases as needed for other feature classes
-        default:
-            // Return the value of 'featurecla' if it's not one of the standard types you handle
-            // or return 'Unknown' if you want to mask unknown types.
-            return properties.featurecla || 'Unknown';
-    }
+    // Map the 'featurecla' to the proper display type
+    var typeMap = {
+        'Continent': 'Continent',
+        'Country': 'Country',
+        'Region': 'Region',
+        'Subregion': 'Subregion',
+        'Ocean': 'Ocean',
+        'Lake': 'Lake',
+        'River': 'River'
+        // Add more mappings as needed
+    };
+    
+    // Return the display type if recognized, otherwise null
+    return typeMap[properties.featurecla] || null;
 }
+
 
 
 function showCoordinates(movement) {
@@ -117,17 +112,14 @@ function showCoordinates(movement) {
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties); // Should return 'Lake' for lake features
+                var type = getTypeFromProperties(properties);
                 var name = properties.name; // Access the name property directly
-
+    
                 // Check if a name property is defined for the current picked object
-                if (name) {
-                    // Append the type and name to the hover text
+                if (type && name) {
                     hoverText += `<br>${type}: ${name}`;
-                } else {
-                    // If no name property is found, display 'N/A'
-                    hoverText += `<br>${type}: N/A`;
                 }
+                // Skip the item if type is null, meaning it's not a recognized feature class
             }
         });
 
