@@ -81,9 +81,8 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    var featureClass = properties.featurecla;
     // Handle different types of features by checking the 'featurecla' property
-    switch (featureClass) {
+    switch (properties.featurecla) {
         case 'Lake':
             return 'Lake';
         case 'Admin-0 country':
@@ -91,16 +90,16 @@ function getTypeFromProperties(properties) {
         case 'continent':
             return 'Continent';
         case 'River':
-        case 'Lake Centerline': // Corrected typo from 'Lake Centeerline'
             return 'River';
-        case 'region_un':
+        case 'Region':
             return 'Region';
-        case 'subregion':
+        case 'Subregion':
             return 'Subregion';
         // Add more cases as needed for other feature classes
         default:
-            // Return null if no known feature class is matched
-            return null;
+            // Return the value of 'featurecla' if it's not one of the standard types you handle
+            // or return 'Unknown' if you want to mask unknown types.
+            return properties.featurecla || 'Unknown';
     }
 }
 
@@ -121,15 +120,12 @@ function showCoordinates(movement) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
-                var nameProperty = properties.name; // Adjust based on your GeoJSON properties
-                var name = nameProperty ? nameProperty.getValue() : null;
+                var name = properties.name;
 
-                // Only append the type and
-
-
-                if (type && name) {
+                if (name) {
                     hoverText += `<br>${type}: ${name}`;
-             
+                } else {
+                    hoverText += `<br>${type}: N/A`;
                 }
             }
         });
