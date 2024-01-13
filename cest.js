@@ -166,17 +166,16 @@ var layerStyles = {
     }
 };
 
-// Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
     var layerStyle = layerStyles[layerName];
     var color = layerStyle.color;
     var outlineColor = layerStyle.outlineColor;
     var height = layerStyle.height;
 
-    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
-        dataSource.entities.values.forEach(function(entity) {
+    Cesium.GeoJsonDataSource.load(url).then(function (dataSource) {
+        dataSource.entities.values.forEach(function (entity) {
             if (entity.polygon) {
-                if (isRegionsLayer || isCountryLayer || isOceanLayer || isStatesProvincesLayer) {
+                if (isRegionsLayer || isCountryLayer || isOceanLayer || layerName === 'statesprovinces') {
                     entity.polygon.material = color.withAlpha(1);
                     entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
@@ -199,8 +198,8 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                 entity.polyline.width = 3;
                 entity.polyline.clampToGround = true;
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC;
-                entity.polyline.positions = new Cesium.CallbackProperty(function() {
-                    var cartographicPositions = entity.polyline.positions.getValue().map(function(position) {
+                entity.polyline.positions = new Cesium.CallbackProperty(function () {
+                    var cartographicPositions = entity.polyline.positions.getValue().map(function (position) {
                         var cartographic = Cesium.Cartographic.fromCartesian(position);
                         return Cesium.Cartesian3.fromDegrees(
                             Cesium.Math.toDegrees(cartographic.longitude),
@@ -210,16 +209,11 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                     });
                     return cartographicPositions;
                 }, false);
-            } else if (isGraticuleLayer && entity.polyline) { // Check for graticule layer
-                var graticuleColor = layerStyles.graticule.color;
-                entity.polyline.material = graticuleColor;
-                entity.polyline.width = 2; // Adjust the width of graticule lines as needed
-                entity.polygon.extrudedHeight = height;
             }
         });
 
         viewer.dataSources.add(dataSource);
-    }).otherwise(function(error){
+    }).otherwise(function (error) {
         console.error('Error loading GeoJSON data:', error);
     });
 }
