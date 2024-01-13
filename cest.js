@@ -81,53 +81,35 @@ coordsBox.innerHTML = defaultText;  // Set the default text as innerHTML instead
 
 
 function getTypeFromProperties(properties) {
-    // You would define your mapping based on actual values in featurecla
-    switch (properties.featurecla) {
-
-        case 'continent':
-            return 'Continent';
-        case 'region_un':
-            return 'Region';
-        case 'subregion':
-            return 'Region';
-        // Add more cases as needed
-        default:
-            return 'Unknown';
+    if (properties.featurecla === 'Lake') {
+        return 'Lake';
     }
+    // Add other cases as needed
+    return 'Unknown';
 }
 
-function getDetailsFromType(type, properties) {
-    // Depending on the type, extract the relevant details
-    let details = '';
-    if (type === 'Country') {
-        details = properties.name || 'N/A';
-    } else if (type === 'Continent') {
-        details = properties.continent || 'N/A';
-    } else if (type === 'Region') {
-        details = properties.region_un || 'N/A';
-    }
-    // Add more logic for other types if necessary
-    return details;
-}
 
 function showCoordinates(movement) {
-    var ray = viewer.camera.getPickRay(movement.endPosition);
-    var cartesian = viewer.scene.globe.pick(ray, viewer.scene);
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        var hoverText = `Latitude: ${latitudeString}°, Longitude: ${longitudeString}°`;
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
-                var details = getDetailsFromType(type, properties);
+                var name = properties.name; // Directly access the name property
 
-                hoverText += `<br>${type}: ${details}`;
+                if (name) {
+                    hoverText += `<br>${type}: ${name}`;
+                } else {
+                    hoverText += `<br>${type}: N/A`;
+                }
             }
         });
 
@@ -135,6 +117,7 @@ function showCoordinates(movement) {
         coordsBox.style.display = 'block';
     }
 }
+
 
 
 // Rest of your code...
