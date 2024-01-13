@@ -91,10 +91,8 @@ function getTypeFromProperties(properties) {
     // Check for other features and add them as needed
     // ...
 
- // Return the display type if recognized, otherwise null
- return typeMap[properties.featurecla] || null;
-}
 
+}
 
 
 
