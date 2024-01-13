@@ -197,7 +197,7 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                     entity.polygon.extrudedHeight = height;
                 }
             } else if (isRiverLayer && entity.polyline) {
-                var riverColor = Cesium.Color.BLUE.withAlpha(0.01); 
+                var riverColor = Cesium.Color.BLUE;
                 var offsetHeight = 10;
                 entity.polyline.material = riverColor;
                 entity.polyline.width = 10;
@@ -228,16 +228,16 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
 }
 
 // URLs to the GeoJSON data
-var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/oceans.geojson'; 
-var europeGeojsonUrl = 'https://aurashak.github.io/geojson/europe.json';
-var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/asia.json';
-var africaGeojsonUrl = 'https://aurashak.github.io/geojson/africa.json';
-var oceaniaGeojsonUrl = 'https://aurashak.github.io/geojson/oceania.json';
-var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/northamerica.json';
-var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/southamerica.json';
-var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/antarctica.geojson';
-var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/lakes.json';
-var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/cities.geojson';
+var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson'; 
+var europeGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
+var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
+var africaGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
+var oceaniaGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceania.json';
+var northamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/northamerica.json';
+var southamericaGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamerica.json';
+var antarcticaGeojsonUrl = 'https://aurashak.github.io/geojson/world/antarctica.geojson';
+var lakesGeojsonUrl = 'https://aurashak.github.io/geojson/world/lakes.json';
+var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
 var statesProvincesGeojsonUrl = 'https://aurashak.github.io/geojson/world/statesprovinces.json'; // New states/provinces GeoJSON URL
 var graticuleGeojsonUrl = 'https://aurashak.github.io/world/graticule.geojson'; // New graticule GeoJSON URL
 
