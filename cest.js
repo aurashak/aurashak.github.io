@@ -102,8 +102,9 @@ pickedObjects.forEach(function(pickedObject) {
 
         // Check if a name property is defined for the current picked object
         if (Cesium.defined(nameProperty)) {
+            var nameValue = nameProperty.getValue ? nameProperty.getValue() : nameProperty; // Handle both cases
             // Append the type and name to the hover text
-            hoverText += `<br>${type}: ${nameProperty.getValue()}`;
+            hoverText += `<br>${type}: ${nameValue}`;
         } else {
             // If no name property is found, display 'N/A'
             hoverText += `<br>${type}: N/A`;
@@ -111,6 +112,7 @@ pickedObjects.forEach(function(pickedObject) {
     }
 });
 
+console.log(properties); // This will show you what properties are available for each feature
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
