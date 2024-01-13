@@ -192,7 +192,7 @@ function loadAndStyleGeoJson(layerName, url, isRiverLayer, isCountryLayer, isOce
                     entity.polygon.extrudedHeight = height;
                 } else {
                     entity.polygon.material = color.withAlpha(0.01);
-                    entity.polygon.outline = false;
+                    entity.polygon.outline = true;
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 }
