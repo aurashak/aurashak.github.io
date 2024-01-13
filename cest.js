@@ -125,7 +125,13 @@ function loadAndStyleGeoJson(layerName, url) {
     var outlineColor = layerStyle.outlineColor;
     var height = layerStyle.height;
 
+
+    console.log('Loading GeoJSON for layer:', layerName);
+
     Cesium.GeoJsonDataSource.load(url).then(function (dataSource) {
+
+        console.log('GeoJSON loaded for layer:', layerName);
+
         dataSource.entities.values.forEach(function (entity) {
             if (entity.polygon || entity.polyline) {
                 entity.material = color.withAlpha(1);
@@ -138,6 +144,7 @@ function loadAndStyleGeoJson(layerName, url) {
         });
 
         viewer.dataSources.add(dataSource);
+        console.log('Added GeoJSON to viewer for layer:', layerName);
     }).otherwise(function (error) {
         console.error('Error loading GeoJSON data:', error);
     });
