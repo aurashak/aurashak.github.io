@@ -127,7 +127,7 @@ a:active {
      font-size: 30px;
     font-weight: bold;
     background: rgba(10, 228, 255, 0.92);
-    padding: 5px 13px;
+    padding: 10px 19px;
     color: #000000;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
@@ -139,7 +139,7 @@ a:active {
 }
 
 .homesubprojects {
-     font-size: 25px;
+    font-size: 25px;
     color: #000000;
     font-weight: 800;
     background: rgba(212, 212, 212, 0.91);
@@ -149,11 +149,15 @@ a:active {
     margin-left: 75px;
     line-height: 1.4;
     border-radius: 2px;
-    display:inline-block;
+    display: inline-block;
     position: relative;
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
     transition: background-color 0.3s ease; /* Add transition property */
+}
+
+.homesubprojects:hover {
+    background-color: rgb(188, 96, 249);
 }
 
 .homesubprojects a:link {
@@ -164,12 +168,10 @@ a:active {
     color: black;
 }
 
-.homesubprojects a:active {
+.homesubprojects a:hover {
+    text-decoration: none;
 }
 
-.homesubprojects a:hover {
-background-color: lightgray;
-}
 
 .title {
     font-size: 50px;
