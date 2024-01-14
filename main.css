@@ -71,23 +71,12 @@ a:active {
     position: relative;
     z-index: 1;
     margin: 20px 100px;
-    border: 1px solid black;
+    border: 0px solid black;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the left */
 }
 
-/* Adjust margin and padding for each item */
-.hometitle,
-.homesubtitle,
-.homeprojects,
-.homesubprojects {
-    margin: 10px 0; /* Add margin to separate items */
-    padding: 10px; /* Add padding for spacing */
-    display: inline-block; /* Make items inline-block */
-    max-width: max-content; /* Limit width to content width */
-    border-radius: 10px; /* Add border-radius for styling */
-}
 
 
 .hometitle {
@@ -95,7 +84,7 @@ a:active {
     font-weight: bold;
     background: rgba(61, 51, 51, 0.92);
     padding: 12px 20px;
-    color: #e6e6e6;
+    color: #ffffff;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.8); 
     z-index: 4; /* Increase z-index value */
     margin: 40px 0px 10px;
@@ -107,7 +96,7 @@ a:active {
 
 .homesubtitle {
     font-size: 25px;
-    color: #e6e6e6;
+    color: #000000;
     font-weight: 500;
     background: rgba(52, 32, 74, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
@@ -123,14 +112,12 @@ a:active {
 }
 
 
-
-
 .homeprojects {
     font-size: 30px;
-    color: #040202;
+    color: #000000;
     font-weight: 800;
-    background: rgba(250, 246, 255, 0.86);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.872); 
+    background: rgba(250, 246, 255, 0.9);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.9); 
     padding: 12px 20px;
     display:inline-block;
     position: relative;
@@ -144,9 +131,9 @@ a:active {
 
 .homesubprojects {
     font-size: 25px;
-    color: #e6e6e6;
+    color: #ffffff;
     font-weight: 800;
-    background: rgba(88, 65, 112, 0.659);
+    background: rgba(255, 255, 255, 0.9);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.707); 
     padding: 20px;
     display:inline-block;
@@ -469,29 +456,29 @@ a:active {
 .hometitle {
     font-size: 40px;
     font-weight: bold;
-    background: rgba(61, 51, 51, 0.92);
+    background: rgba(255, 185, 10, 0.92);
     padding: 12px 20px;
-    color: #e6e6e6;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.8); 
+    color: #141111;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
-    margin: 40px 0px 10px;
+    margin: 40px 0px 20px;
     position: relative;
     display:inline-block;
-    border-radius: 10px;
+    border-radius: 2px;
     border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .homesubtitle {
     font-size: 25px;
-    color: #e6e6e6;
-    font-weight: 500;
-    background: rgba(52, 32, 74, 0.91);
+    color: #000000;
+    font-weight: 800;
+    background: rgba(212, 212, 212, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    padding: 12px 17px;
+    padding: 12px 22px;
     margin-top: 5px;
     margin-left: 75px;
     line-height: 1.4;
-    border-radius: 10px;
+    border-radius: 2px;
     display:inline-block;
     position: relative;
     z-index: 4;
@@ -499,41 +486,42 @@ a:active {
 }
 
 
-
-
 .homeprojects {
-    font-size: 30px;
-    color: #040202;
-    font-weight: 800;
-    background: rgba(250, 246, 255, 0.86);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.872); 
-    padding: 12px 20px;
-    display:inline-block;
-    position: relative;
+     font-size: 30px;
+    font-weight: bold;
+    background: rgba(10, 228, 255, 0.92);
+    padding: 5px 13px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
-    margin-left:  0px;
-    margin-top: 80px;
-    margin-bottom: 20px;
-    line-height: 1.4
-    border-radius: 10px;
+    margin: 90px 0px 20px;
+    position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .homesubprojects {
-    font-size: 25px;
-    color: #e6e6e6;
+     font-size: 25px;
+    color: #000000;
     font-weight: 800;
-    background: rgba(88, 65, 112, 0.659);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.707); 
-    padding: 20px;
+    background: rgba(212, 212, 212, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    margin-top: 5px;
+    margin-left: 75px;
+    line-height: 1.4;
+    border-radius: 2px;
     display:inline-block;
     position: relative;
-    z-index: 4; /* Increase z-index value */
-    margin-left:  75px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    line-height: 1.4
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
+
+.homesubprojects a:visited {
+    color: black;
+}
 
 .title {
     font-size: 50px;
@@ -548,7 +536,7 @@ a:active {
 
 .subtitle {
     font-size: 25px;
-    color: #e6e6e6;
+    color: #ffffff;
     max-width: 700px;
     position: relative;
     z-index: 4; /* Increase z-index value */
