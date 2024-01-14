@@ -76,6 +76,7 @@ a:active {
     max-width: 1000px;
     z-index: 4; /* Increase z-index value */
     margin: 10 0;
+    position: relative;
 }
 
 .subtitle {
