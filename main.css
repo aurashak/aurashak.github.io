@@ -90,7 +90,7 @@ a:active {
     background: rgba(88, 65, 112, 0.659);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.707); 
     padding: 20px;
-    width: 720px;
+    display:inline-block;
     position: relative;
     z-index: 4; /* Increase z-index value */
     text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
@@ -124,7 +124,7 @@ a:active {
     background: rgba(88, 65, 112, 0.659);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.707); 
     padding: 20px;
-    width: 720px;
+    display:inline-block;
     position: relative;
     z-index: 4; /* Increase z-index value */
     text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
@@ -158,7 +158,7 @@ a:active {
     background: rgba(88, 65, 112, 0.659);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.707); 
     padding: 20px;
-    width: 720px;
+    display:inline-block;
     position: relative;
     z-index: 4; /* Increase z-index value */
     text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
