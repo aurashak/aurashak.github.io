@@ -182,11 +182,16 @@ a:active {
 /* Apply styles to the background */
 .background {
     background-color: #f0f0f0; /* Change to your desired background color */
-    height: 100vh;
+    position: fixed; /* Make the background fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 
 /* Center and add margins to the Cesium container */
 .centered-container {
@@ -194,7 +199,10 @@ a:active {
     max-width: 1200px; /* Set a maximum width if desired */
     height: 80vh; /* Adjust as needed */
     border: 1px solid #ccc; /* Add a border for visual separation */
+    margin: 0 auto; /* Center horizontally */
+    position: relative; /* Add this for z-index to work correctly */
 }
+
 #cesiumContainer {
     width: 100%;
     height: 100%;
