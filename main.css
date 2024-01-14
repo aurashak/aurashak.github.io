@@ -128,21 +128,6 @@ a:active {
     border-radius: 3px;
 }
 
-.hometitle {
-    font-size: 50px;
-    font-weight: bold;
-    background: rgb(61, 51, 51);
-    padding: 20px;
-    color: #e6e6e6;
-    box-shadow: 3px 3px 2px rgba(78, 52, 73, 0.5); 
-    text-shadow: 3px 3px 2px årgba(31, 25, 30, 0.5); 
-    max-width: 1000px;
-    z-index: 4; /* Increase z-index value */
-    margin: 10 0;
-    position: relative;
-    display:inline-block;
-}
-
 .homesubprojects {
     font-size: 25px;
     color: #e6e6e6;
