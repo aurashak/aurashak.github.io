@@ -290,11 +290,10 @@ a:active {
     background-color: none; 
     color: #7c7c7c; 
     padding: 0px; 
-    margin: 0 100px;
+    margin: 0px;
     text-align: left; 
     z-index: 3000;
     position: fixed;
-    bottom: 30px;
   }
   
 
