@@ -67,6 +67,27 @@ a:active {
     align-items: flex-end;
 }
 
+.hometitle {
+    font-size: 50px;
+    font-weight: bold;
+    color: #e6e6e6;
+    text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
+    max-width: 1000px;
+    z-index: 4; /* Increase z-index value */
+    margin: 10 0;
+    position: relative;
+}
+
+.homesubtitle {
+    font-size: 25px;
+    color: #e6e6e6;
+    max-width: 700px;
+    position: relative;
+    z-index: 4; /* Increase z-index value */
+    text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
+    margin: 20 0;
+    line-height: 1.4
+}
 .title {
     font-size: 50px;
     font-weight: bold;
