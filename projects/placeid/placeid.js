@@ -26,11 +26,40 @@ viewer.camera.setView({
     }
 });
 
-// Create a scale bar and add it to the bottom left corner of the Cesium viewer
-var scaleBar = new Cesium.ScaleBar({
-    container: 'cesiumContainer', // The ID of the container element
-    units: 'metric', // You can change this to 'imperial' if you prefer imperial units
-});
+// Scalebar
+
+var scaleBarElement = document.getElementById('scaleBar');
+var cesiumScaleElement = document.getElementById('cesiumScale');
+
+viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
+
+function updateScaleBar() {
+  var scene = viewer.scene;
+  var ellipsoid = scene.globe.ellipsoid;
+
+  var pixelDistance = scene.canvas.clientWidth * 0.15; // Adjust the factor as needed
+
+  var cartographicCenter = ellipsoid.cartesianToCartographic(scene.camera.positionWC);
+  var longitude = cartographicCenter.longitude;
+  var latitude = cartographicCenter.latitude;
+
+  var position1 = Cesium.Cartographic.fromDegrees(longitude, latitude, 0);
+  var position2 = Cesium.Cartographic.fromDegrees(longitude, latitude, pixelDistance);
+
+  var distance = Cesium.Cartographic.distance(position1, position2);
+
+  var scale = distance / pixelDistance;
+
+  // Update the scale bar element
+  cesiumScaleElement.textContent = scale.toPrecision(4);
+}
+
+// Hook into the camera move event to update the scale bar
+viewer.camera.changed.addEventListener(updateScaleBar);
+
+// Initial update
+updateScaleBar();
+
 
 // Function to rotate the globe slowly
 function rotateGlobe() {
