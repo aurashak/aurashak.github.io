@@ -88,6 +88,17 @@ a:active {
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
 }
 
+.title {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #333; /* Adjust the color as needed */
+}
+
+.subtitle {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: #777; /* Adjust the color as needed */
+}
+
+
 /* Boxes Section Styles */
 .boxes-container {
     display: flex;
