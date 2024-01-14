@@ -12,6 +12,7 @@ body {
 a:link {
     color: #fff;
     text-decoration: none;
+    transition: border-bottom 0.2s ease; /* Add a transition effect to the border-bottom property */
 }
 
 /* Visited links */
@@ -20,7 +21,6 @@ a:visited {
 
 }
 
-/* Links when hovered */
 a:hover {
     border-bottom: 2px solid currentColor; /* Add a border bottom to simulate an underline */
 }
@@ -290,7 +290,7 @@ a:active {
     background-color: none; 
     color: #7c7c7c; 
     padding: 0px; 
-    margin: 0px;
+    margin: s0px;
     text-align: left; 
     z-index: 3000;
     position: fixed;
