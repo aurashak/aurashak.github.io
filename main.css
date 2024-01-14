@@ -263,10 +263,23 @@ a:active {
     background-color: none; /* Background color for the footer */
     color: #7c7c7c; /* Text color for the footer */
     padding: 0px; /* Padding to create some space around the content inside the footer */
-    margin-left: 130px;
+    margin-left: 0px;
     text-align: left; /* Center-align the text inside the footer */
     z-index: 3000;
+    position: fixed;
+    bottom: 10px;
   }
+  
+
+.footer a {
+    color: #888888; /* Link color */
+    text-decoration: none; /* Remove underlines from links */
+    margin-right: 10px; /* Add some space between links */
+}
+
+.footer a:hover {
+    text-decoration: none; /* Underline links on hover */
+}
   
 
   #map {
