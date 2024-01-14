@@ -52,7 +52,7 @@ a:active {
     margin-right: 60px; 
     text-align: left;
     border-radius: 2px;
-    color: #e6e6e6;
+    color: #e6e6e6;s
     z-index: 3; 
     text-shadow: 2px 2px 1px rgba(173, 134, 170, 0.5); 
 }
@@ -248,12 +248,11 @@ a:active {
     background-color: none; 
     color: #7c7c7c; 
     padding: 0px; 
-    margin: s0px;
+    margin: 0px; /* Remove the extra 's' here */
     text-align: left; 
     z-index: 3000;
     position: fixed;
-  }
-  
+}
 
 .footer a {
     color: #888888; 
