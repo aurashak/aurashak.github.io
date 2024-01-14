@@ -44,18 +44,33 @@ coordsBox.style.display = 'block';
 
 function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
-        case 'Lake':
-            return 'Lake';
-        case 'Country':
-            return 'Country';
+
+        case 'State/Province':
+            return 'State/Province';
+
         case 'Continent':
             return 'Continent';
+
+        case 'Country':
+            return 'Country';
+
+        case 'Lake':
+            return 'Lake';
+        
+            case 'Oceann':
+                return 'Ocean';
+ 
+        
         case 'River':
             return 'River';
+
         case 'Region':
+
             return 'Region';
+
         case 'Subregion':
             return 'Subregion';
+            
         default:
             return properties.featurecla || 'Unknown';
     }
