@@ -8,6 +8,18 @@
     border-radius: 5px;
 }
 
+
+/* Center and add margins to the Cesium container */
+.nymapcontainer {
+    width: 100%;
+    /* max-width: 1200px; */
+    height: 85vh;
+    border: 1px solid #f2e4e4;
+    margin: 0 100px;
+    position: relative;
+
+}
+
 /* styles.css */
 
 /* Common button styles */
