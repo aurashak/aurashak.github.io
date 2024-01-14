@@ -41,8 +41,11 @@ a:active {
 .top-row {
     display: flex;
     justify-content: start; 
-    margin: 20px 0px; 
+    margin-top: 20px;
+    margin-left: 2px; 
+    margin-bottom: 20px;
 }
+
 
 .top-box {
     font-size: 20px; 
@@ -51,6 +54,7 @@ a:active {
     text-align: left;
     border-radius: 2px;
     z-index: 3; 
+    text-shadow: 2px 2px 1px rgb(255, 1, 238); /* Change the text shadow color to red */
 }
 
 .top-box:last-child {
@@ -58,7 +62,7 @@ a:active {
 }
 
 .header {
-    display: flex;
+    display: block;
     margin: 40px 100px 50px 100px;
     padding: 0px;
     align-items: flex-end;
@@ -89,13 +93,18 @@ a:active {
 }
 
 .title {
-    font-size: 24px; /* Adjust the font size as needed */
+    font-size: 50px; /* Adjust the font size as needed */
+    font-weight: bold;
     color: #333; /* Adjust the color as needed */
+    text-shadow: 3px 3px 2px rgba(226, 38, 38, 0.7); /
+    max-width: 1000px;
 }
 
 .subtitle {
-    font-size: 18px; /* Adjust the font size as needed */
-    color: #777; /* Adjust the color as needed */
+    font-size: 25px; /* Adjust the font size as needed */
+    color: #fff; /* Adjust the color as needed */
+    max-width: 1000px; 
+    position: relative;
 }
 
 
