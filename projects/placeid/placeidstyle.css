@@ -183,6 +183,41 @@ a:active {
 .coords-box {
 }
 
+/* Style the table */
+#infoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+/* Style the table headers */
+#infoTable th {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style the table rows */
+#infoTable tr {
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style the table cells */
+#infoTable td {
+    padding: 10px;
+}
+
+/* Style alternate rows with a different background color */
+#infoTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect for rows */
+#infoTable tr:hover {
+    background-color: #ddd;
+}
+
 /* Apply styles to the background */
 .background {
     background-color: #000;
@@ -286,27 +321,6 @@ a:active {
 }
 
 
-.footer {
-    background-color: none; 
-    color: #7c7c7c; 
-    padding: 0px; 
-    margin: 0px;
-    text-align: left; 
-    z-index: 3000;
-    position: fixed;
-  }
-  
-
-.footer a {
-    color: #888888; 
-    text-decoration: none;
-    margin-right: 10px; 
-}
-
-.footer a:hover {
-    text-decoration: none; 
-}
-  
 
   #map {
     width: 100%;
