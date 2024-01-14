@@ -66,7 +66,7 @@ a:active {
     margin: 40px 100px 50px 100px;
     padding: 0px;
     align-items: flex-end;
-
+    z-index: 4; /* Increase z-index value */
 }
 
 .header-left {
@@ -75,7 +75,6 @@ a:active {
     font-weight: bold;
     justify-content: flex-end;
     margin-right: 60px; /* Adjust right margin */
-    z-index: 3; /* Above the globe */
 }
 
 .header-right {
@@ -85,7 +84,6 @@ a:active {
     line-height: 1.2; /* Set line height */
     border-radius: 2px;
     padding-bottom: 2px;
-    z-index: 3; /* Above the globe */
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
 }
 
@@ -95,7 +93,6 @@ a:active {
     color: #333;
     text-shadow: 3px 3px 2px rgba(226, 38, 38, 0.7);
     max-width: 1000px;
-    z-index: 4; /* Increase z-index value */
 }
 
 .subtitle {
@@ -103,7 +100,6 @@ a:active {
     color: #fff;
     max-width: 1000px;
     position: relative;
-    z-index: 4; /* Increase z-index value */
 }
 .boxes-container {
     display: flex;
