@@ -186,7 +186,7 @@ a:active {
     position: relative;
     z-index: 1; /* Above the globe */
     margin: 20px 100px;
-    border: 1px solid grey
+    border: 1px solid black;
 }
 
 .container {
