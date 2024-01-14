@@ -12,8 +12,6 @@ body {
 a:link {
     color: #fff;
     text-decoration: none;
-    transition: border-bottom 0.3s ease; /* Add a transition effect to the border-bottom property */
-
 }
 
 /* Visited links */
@@ -204,7 +202,7 @@ a:active {
 .centered-container {
     width: 100%;
     /* max-width: 1200px; */
-    height: 85vh;
+    height: 80vh;
     border: 1px solid #f2e4e4;
     margin: 0 100px;
     position: relative;
