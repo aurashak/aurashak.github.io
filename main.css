@@ -518,6 +518,9 @@ a:active {
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
+.homesubprojects a:link {
+    color: black;
+}
 
 .homesubprojects a:visited {
     color: black;
@@ -583,66 +586,6 @@ a:active {
     margin-right: 0; /* No right margin on the last box */
 }
 
-/* Third Row Styles */
-.third-row {
-    display: flex;
-    margin-left: 100px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    align-items: flex-start;
-
-}
-
-.third-row-left {
-    font-size: 30px;
-    font-weight: 800;
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-    text-align: left; 
-    border-radius: 2px;
-    margin-right: 50px;
-    z-index: 3; 
-
-}
-
-.third-row-right {
-    font-size: 30px;
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
-    text-align: left;
-    border-radius: 2px;
-    z-index: 3; 
-
-}
-
-/* Fourth Row Styles */
-.fourth-row {
-    display: flex;
-    margin: 80px 135px;
-    align-items: flex-start;
-
-}
-
-.fourth-row-left {
-    font-size: 20px;
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-    text-align: left; /* Align text to the left */
-    border-radius: 2px;
-    margin-right: 50px;
-    z-index: 3; /* Above the globe */
-}
-
-.fourth-row-right {
-    font-size: 30px;
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-    text-align: left; /* Align text to the left */
-    border-radius: 2px;
-    z-index: 3; /* Above the globe */
-}
-
-
-.container {
-    max-width: 100%;
-    margin: 40px 20px;
-}
 
 
 /* Apply styles to the background for cesium globe*/
