@@ -26,6 +26,15 @@ viewer.camera.setView({
     }
 });
 
+// Slow down the rotation
+var spinRate = 0.0003;
+var isRotating = true; // To keep track of the rotation state
+var rotateGlobeFunction = function() {
+    if (isRotating) {
+        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+    }
+};
+
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 var defaultText = 'Latitude: Longitude: <br>Place: ';
@@ -37,9 +46,9 @@ function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
         case 'Lake':
             return 'Lake';
-        case 'Admin-0 country':
+        case 'Country':
             return 'Country';
-        case 'continent':
+        case 'Continent':
             return 'Continent';
         case 'River':
             return 'River';
