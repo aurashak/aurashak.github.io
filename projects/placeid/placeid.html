@@ -27,31 +27,27 @@
         
         <div class="fourth-row">
             <div class="fourth-row-left">
+                <!-- Add the revised buttons with improved CSS classes -->
                 <button id="satelliteButton">Satellite</button>
                 <button id="openStreetMapButton">OpenStreetMap</button>
                 <div id="coordsBox" class="coords-box"></div>
-
             </div>
         </div>
     
    
    
-            <div class="main-content">
-                <div id="cesiumContainer"></div>    
-            </div>
-            
-            <div id="scaleBar" class="cesium-widget">
-                <div class="cesium-scene-mode">
-                  <table>
+        <div class="main-content">
+            <div id="cesiumContainer"></div>    
+            <div id="scaleBar" class="custom-scale-bar">
+                <table>
                     <tr>
-                      <td>SCALE</td>
-                      <td id="cesiumScale"></td>
-                      <td>MILES</td>
+                        <td>SCALE</td>
+                        <td id="cesiumScale"></td>
+                        <td>MILES</td>
                     </tr>
-                  </table>
-                </div>
-              </div>
+                </table>
             </div>
+        </div>
    
 
         <script src="https://aurashak.github.io/projects/placeid/placeid.js"></script>

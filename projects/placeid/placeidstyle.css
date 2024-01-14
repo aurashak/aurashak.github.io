@@ -46,16 +46,14 @@ a:active {
 /* Top Row Styles */
 .top-row {
     display: flex;
-    justify-content: start; /* Align the top row at the start of the container */
-    margin: 20px 0px; /* Top and Bottom Margin */
+    margin-left: 2px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .top-box {
     font-size: 20px; /* Adjust the font size as needed */
     margin-right: 60px; /* Add right margin between boxes */
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-    text-align: left;
-    border-radius: 2px;
     z-index: 3; /* Above the globe */
 }
 
@@ -66,8 +64,8 @@ a:active {
 /* Header Styles */
 .header {
     display: flex;
-    margin: 40px 100px 50px 100px;
     padding: 0px;
+    margin: 20px 100px;
     align-items: flex-end;
 
 }
@@ -76,12 +74,9 @@ a:active {
     flex: 1;
     font-size: 50px;
     font-weight: bold;
-    border-radius: 2px;
     justify-content: flex-end;
     margin-right: 60px; /* Adjust right margin */
     z-index: 3; /* Above the globe */
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
-
 }
 
 .header-right {
@@ -99,7 +94,7 @@ a:active {
 .boxes-container {
     display: flex;
     justify-content: start;
-    margin: 20px 100px;
+    margin: 0px 100px;
 
 }
 
@@ -254,6 +249,38 @@ a:active {
     position: relative;
 
 }
+
+
+#satelliteButton,
+#openStreetMapButton {
+    background-color: #0074e4; /* Set the background color */
+    color: white; /* Set the text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; /* Add some spacing between buttons */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+#satelliteButton:hover,
+#openStreetMapButton:hover {
+    background-color: #0059b3; /* Change color on hover */
+}
+
+/* Add or modify your existing styles as needed */
+
+.custom-scale-bar {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+}
+
+
 
 #cesiumContainer {
     width: 100%;
