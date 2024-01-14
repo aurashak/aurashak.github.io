@@ -36,7 +36,6 @@ a:active {
 /* Re-enable pointer events for interactive elements within overlays */
 .header a, .boxes-container a, .third-row a, .fourth-row a {
     pointer-events: auto;
-    /* ... other styles ... */
 }
 
 .top-row {
