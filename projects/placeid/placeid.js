@@ -33,22 +33,45 @@ var cesiumScaleElement = document.getElementById('cesiumScale');
 
 viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
 
+function haversineDistance(lon1, lat1, lon2, lat2) {
+  // Convert latitude and longitude from degrees to radians
+  var lon1Rad = Cesium.Math.toRadians(lon1);
+  var lat1Rad = Cesium.Math.toRadians(lat1);
+  var lon2Rad = Cesium.Math.toRadians(lon2);
+  var lat2Rad = Cesium.Math.toRadians(lat2);
+
+  // Haversine formula
+  var dlon = lon2Rad - lon1Rad;
+  var dlat = lat2Rad - lat1Rad;
+  var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
+          Math.cos(lat1Rad) * Math.cos(lat2Rad) *
+          Math.sin(dlon / 2) * Math.sin(dlon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  // Earth's radius in meters (change this value if needed)
+  var radius = 6371000; // approximately 6371 km
+
+  return radius * c;
+}
+
 function updateScaleBar() {
   var scene = viewer.scene;
+  var camera = viewer.camera;
   var ellipsoid = scene.globe.ellipsoid;
 
-  var pixelDistance = scene.canvas.clientWidth * 0.15; // Adjust the factor as needed
+  var canvasWidth = scene.canvas.clientWidth;
+  var pixelDistance = canvasWidth * 0.15; // Adjust the factor as needed
 
-  var cartographicCenter = ellipsoid.cartesianToCartographic(scene.camera.positionWC);
-  var longitude = cartographicCenter.longitude;
-  var latitude = cartographicCenter.latitude;
+  var cartographicCenter = ellipsoid.cartesianToCartographic(camera.positionWC);
+  var longitude = Cesium.Math.toDegrees(cartographicCenter.longitude);
+  var latitude = Cesium.Math.toDegrees(cartographicCenter.latitude);
 
-  var position1 = Cesium.Cartographic.fromDegrees(longitude, latitude, 0);
-  var position2 = Cesium.Cartographic.fromDegrees(longitude, latitude, pixelDistance);
+  var position1 = { lon: longitude, lat: latitude };
+  var position2 = { lon: longitude + 1, lat: latitude }; // Assuming a 1-degree difference
 
-  var distance = Cesium.Cartographic.distance(position1, position2);
+  var groundDistance = haversineDistance(position1.lon, position1.lat, position2.lon, position2.lat);
 
-  var scale = distance / pixelDistance;
+  var scale = groundDistance / pixelDistance;
 
   // Update the scale bar element
   cesiumScaleElement.textContent = scale.toPrecision(4);
@@ -59,6 +82,7 @@ viewer.camera.changed.addEventListener(updateScaleBar);
 
 // Initial update
 updateScaleBar();
+
 
 
 // Function to rotate the globe slowly
