@@ -66,7 +66,7 @@ a:active {
 /* Header Styles */
 .header {
     display: flex;
-    margin: 40px 130px 50px 135px;
+    margin: 40px 100px 50px 100px;
     padding: 0px;
     align-items: flex-end;
 
@@ -169,11 +169,13 @@ a:active {
     z-index: 3; /* Above the globe */
 }
 
-/* Main Content Styles */
 .main-content {
     position: relative;
     z-index: 1; /* Above the globe */
+    margin: 20px 100px;
+    border: 1px solid grey
 }
+
 
 /* Container Styles */
 .container {
