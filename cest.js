@@ -220,26 +220,4 @@ loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.
 loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
 
-window.onload = function() {
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-        // your viewer options
-    });
-
-    // Wait for Cesium to fully initialize
-    viewer.scene.globe.tileLoadProgressEvent.addEventListener(function () {
-        if (viewer.scene.globe.tilesLoaded) {
-            // Locate the existing toolbar
-            var toolbar = document.getElementsByClassName('cesium-viewer-toolbar')[0];
-
-            // Create or locate a container for the toolbar
-            var toolbarContainer = document.createElement('div');
-            toolbarContainer.className = 'toolbar-container';
-            document.body.appendChild(toolbarContainer);
-
-            // Move the toolbar to the new container
-            toolbarContainer.appendChild(toolbar);
-            toolbar.className += ' custom-toolbar';
-        }
-    });
-};
 
