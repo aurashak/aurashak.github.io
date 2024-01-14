@@ -140,360 +140,203 @@ a:active {
 
 .homesubprojects {
     font-size: 20px
-    body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        background-color: #000;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        overflow: hidden; /* Prevent scrolling */
-    }
-    
-    a:link {
-        color: #fff;
-        text-decoration: none;
-    }
-    
-    a:visited {
-        color: rgb(255, 255, 255);
-    
-    }
-    
-    a:hover {
-    }
-    
-    a:active {
-        text-decoration: none;
-        color: white;
-    }
-    
-    /* Apply pointer-events: none; to overlays to let clicks pass through */
-    .header, .boxes-container, .third-row, fourth-row {
-        pointer-events: none;
-        /* ... other styles ... */
-    }
-    
-    /* Re-enable pointer events for interactive elements within overlays */
-    .header a, .boxes-container a, .third-row a, .fourth-row a {
-        pointer-events: auto;
-    }
-    
-    .top-row {
-        display: flex;
-        justify-content: start; 
-        margin-top:40px;
-        margin-left: 2px; 
-        margin-bottom: 20px;
-    }
-    
-    .top-box {
-        font-size: 20px; 
-        margin-right: 60px; 
-        text-align: left;
-        border-radius: 2px;
-        color: #e6e6e6;
-        z-index: 3; 
-        text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
-    }
-    
-    .top-box:last-child {
-        margin-right: 0; 
-    }
-    
-    .header {
-        display: block;
-        margin: 20px 100px 20px 100px;
-        padding: 0px;
-        align-items: flex-end;
-    }
-    
-    .main-content {
-        position: relative;
-        z-index: 1;
-        margin: 20px 100px;
-        border: 0px solid black;
-        display: flex;
-        flex-direction: column; /* Stack items vertically */
-        align-items: flex-start; /* Align items to the left */
-    }
-    
-    /* Adjust margin and padding for each item */
-    .hometitle,
-    .homesubtitle,
-    .homeprojects,
-    .homesubprojects {
-        margin: 10px 0; /* Add margin to separate items */
-        padding: 10px; /* Add padding for spacing */
-        display: inline-block; /* Make items inline-block */
-        max-width: max-content; /* Limit width to content width */
-        border-radius: 10px; /* Add border-radius for styling */
-    }
-    
-    
-    .hometitle {
-        font-size: 40px;
-        font-weight: bold;
-        background: rgba(255, 185, 10, 0.92);
-        padding: 12px 20px;
-        color: #141111;
-        box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-        z-index: 4; /* Increase z-index value */
-        margin: 40px 0px 20px;
-        position: relative;
-        display:inline-block;
-        border-radius: 2px;
-        border: 2px solid rgba(0, 0, 0, 0.75);
-    }
-    
-    .homesubtitle {
-        font-size: 25px;
-        color: #000000;
-        font-weight: 800;
-        background: rgba(212, 212, 212, 0.91);
-        box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-        padding: 12px 22px;
-        margin-top: 5px;
-        margin-left: 75px;
-        line-height: 1.4;
-        border-radius: 2px;
-        display:inline-block;
-        position: relative;
-        z-index: 4;
-        border: 2px solid rgba(0, 0, 0, 0.91);
-    }
-    
-    
-    .homeprojects {
-         font-size: 26px;
-        font-weight: bold;
-        background: rgba(10, 228, 255, 0.92);
-        padding: 10px 19px;
-        color: #000000;
-        box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-        z-index: 4; /* Increase z-index value */
-        margin: 90px 0px 20px;
-        position: relative;
-        display:inline-block;
-        border-radius: 2px;
-        border: 2px solid rgba(0, 0, 0, 0.75);
-    }
-    
-    .homesubprojects {
-        font-size: 20px;
-        color: #000000;
-        font-weight: 800;
-        background: rgba(212, 212, 212, 0.91);
-        box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-        padding: 12px 22px;
-        margin-top: 5px;
-        margin-left: 75px;
-        line-height: 1.4;
-        border-radius: 2px;
-        display: inline-block;
-        position: relative;
-        z-index: 4;
-        border: 2px solid rgba(0, 0, 0, 0.91);
-        transition: background-color 0.3s ease; /* Add transition property */
-    }
-    
-    .homesubprojects:hover {
-        background-color: rgb(188, 96, 249);
-    }
-    
-    .homesubprojects a:link {
-        color: black;
-    }
-    
-    .homesubprojects a:visited {
-        color: black;
-    }
-    
-    .homesubprojects a:hover {
-        text-decoration: none;
-    }
-    
-    
-    .title {
-        font-size: 30px;
-        font-weight: bold;
-        background: rgba(255, 185, 10, 0.92);
-        padding: 10px 19px;
-        color: #000000;
-        box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-        z-index: 4; /* Increase z-index value */
-        margin: 90px 0px 20px;
-        position: relative;
-        display:inline-block;
-        border-radius: 2px;
-        border: 2px solid rgba(0, 0, 0, 0.75);
-    }
-    
-    .subtitle {
-        font-size: 2px;
-        color: #000000;
-        font-weight: 800;
-        background: rgba(212, 212, 212, 0.91);
-        box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-        padding: 12px 22px;
-        margin-top: 5px;
-        margin-left: 75px;
-        line-height: 1.4;
-        border-radius: 2px;
-        display: inline-block;
-        position: relative;
-        z-index: 4;
-        border: 2px solid rgba(0, 0, 0, 0.91);
-        transition: background-color 0.3s ease; /* Add transition property */
-    }
-    
-    /* Add a CSS class for the image */
-    .image-container {
-        float: left; /* Float the image to the left */
-        margin-right: 20px; /* Add some margin to separate the image from the description */
-    }
-    
-    .description {
-        font-size: 15px;
-        color: #000000;
-        font-weight: 800;
-        background: rgba(212, 212, 212, 0.91);
-        box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-        padding: 12px 22px;
-        margin-top: 5px;
-        margin-left: 125px;
-        line-height: 1.4;
-        border-radius: 2px;
-        display: inline-block;
-        position: relative;
-        z-index: 4;
-        border: 2px solid rgba(0, 0, 0, 0.91);
-    }
-    
-    .description:hover {
-        text-decoration: underline;
-    }
-    
-    .description a:link {
-        color: black;
-    }
-    
-    .description a:visited {
-        color: black;
-    }
-    
-    .description a:hover {
-    }
-    
-    .boxes-container {
-        display: flex;
-        justify-content: start;
-        margin: 0px 100px;
-    
-    }
-    
-    .box {
-        font-size: 20px; 
-        margin-right: 60px; 
-        text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
-        text-align: left;
-        border-radius: 2px;
-        z-index: 3; 
-    }
-    
-    .box:last-child {
-        margin-right: 0; 
-    }
-    
-    /* Apply styles to the background for cesium globe*/
-    .background {
-        background-color: #000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    
-    }
-    
-    .centered-container {
-        width: 100%;
-        /* max-width: 1200px; */
-        height: 100vh;
-        border: 1px solid #000000;
-        margin: 0px;
-        position: relative;
-    }
-    
-    #cesiumContainer {
-        width: 100%;
-        height: 100%;
-    }
-    
-    .cesium-viewer .cesium-geocoder-input,
-    .cesium-viewer .cesium-geocoder-input:focus,
-    .cesium-viewer .cesium-geocoder-input:hover {
-        color: black;
-        background-color: #ffffff91;
-        border: 0 solid black;
-        width: 45px;
-    }
-    
-    .cesium-button,
-    .cesium-button:hover,
-    .cesium-button:active {
-        background-color: rgba(255, 255, 255, 0.5);
-        color: black;
-        fill: black;
-        border: 0 solid #444;
-        box-shadow: none;
-    }
-    
-    .cesium-viewer-geocoderContainer .cesium-button:hover,
-    .cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
-        color: #edffff;
-        fill: #edffff;
-    }
-    
-    .cesium-viewer .cesium-widget-credits {
-        display: inline;
-        position: static;
-        color: #fff;
-        font-size: 0;
-    }
-    
-    .cesium-viewer-bottom {
-        display: none;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding-right:5px
-    }
-    
-    .footer {
-        background-color: none; 
-        color: #7c7c7c; 
-        padding: 0px; 
-        margin: 0px;
-        margin-left: 100px;
-        bottom: 0;
-        left: 0;
-        text-align: left; 
-        z-index: 3000;
-        position: fixed;
-      }
-    
-    .footer a {
-        color: #888888; 
-        text-decoration: none;
-        margin-right: 10px; 
-    }
-    
-    .footer a:hover {
-        text-decoration: none; 
-    }
-    
-    
+    color: #000000;
+    font-weight: 800;
+    background: rgba(212, 212, 212, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    margin-top: 5px;
+    margin-left: 75px;
+    line-height: 1.4;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+    transition: background-color 0.3s ease; /* Add transition property */
+}
+
+.homesubprojects:hover {
+    background-color: rgb(188, 96, 249);
+}
+
+.homesubprojects a:link {
+    color: black;
+}
+
+.homesubprojects a:visited {
+    color: black;
+}
+
+.homesubprojects a:hover {
+    text-decoration: none;
+}
+
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    background: rgba(10, 228, 255, 0.92);
+    padding: 10px 19px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    z-index: 4; /* Increase z-index value */
+    margin: 90px 0px 20px;
+    position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
+}
+
+.subtitle {
+    font-size: 25px;
+    color: #000000;
+    font-weight: 800;
+    background: rgba(212, 212, 212, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    margin-top: 5px;
+    margin-left: 75px;
+    line-height: 1.4;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+    transition: background-color 0.3s ease; /* Add transition property */
+}
+
+/* Add a CSS class for the image */
+.image-container {
+    float: left; /* Float the image to the left */
+    margin-right: 20px; /* Add some margin to separate the image from the description */
+}
+
+.description {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 800;
+    background: rgba(212, 212, 212, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    margin-top: 5px;
+    margin-left: 75px;
+    line-height: 1.4;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+}
+
+.boxes-container {
+    display: flex;
+    justify-content: start;
+    margin: 0px 100px;
+
+}
+
+.box {
+    font-size: 20px; 
+    margin-right: 60px; 
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
+    text-align: left;
+    border-radius: 2px;
+    z-index: 3; 
+}
+
+.box:last-child {
+    margin-right: 0; 
+}
+
+/* Apply styles to the background for cesium globe*/
+.background {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.centered-container {
+    width: 100%;
+    /* max-width: 1200px; */
+    height: 100vh;
+    border: 1px solid #000000;
+    margin: 0px;
+    position: relative;
+}
+
+#cesiumContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    color: black;
+    background-color: #ffffff91;
+    border: 0 solid black;
+    width: 45px;
+}
+
+.cesium-button,
+.cesium-button:hover,
+.cesium-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    fill: black;
+    border: 0 solid #444;
+    box-shadow: none;
+}
+
+.cesium-viewer-geocoderContainer .cesium-button:hover,
+.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
+    color: #edffff;
+    fill: #edffff;
+}
+
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    color: #fff;
+    font-size: 0;
+}
+
+.cesium-viewer-bottom {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-right:5px
+}
+
+.footer {
+    background-color: none; 
+    color: #7c7c7c; 
+    padding: 0px; 
+    margin: 0px;
+    margin-left: 100px;
+    bottom: 0;
+    left: 0;
+    text-align: left; 
+    z-index: 3000;
+    position: fixed;
+  }
+
+.footer a {
+    color: #888888; 
+    text-decoration: none;
+    margin-right: 10px; 
+}
+
+.footer a:hover {
+    text-decoration: none; 
+}
+
