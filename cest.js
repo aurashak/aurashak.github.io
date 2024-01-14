@@ -49,7 +49,7 @@ function getTypeFromProperties(properties) {
             return 'State/Province';
 
         case 'Continent':
-            return 'Continent';
+            return 'continent';
 
         case 'Country':
             return 'Country';
@@ -70,7 +70,7 @@ function getTypeFromProperties(properties) {
 
         case 'Subregion':
             return 'Subregion';
-            
+
         default:
             return properties.featurecla || 'Unknown';
     }
