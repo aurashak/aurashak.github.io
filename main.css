@@ -15,12 +15,11 @@ a:link {
 }
 
 a:visited {
-    color: white;
+    color: rgb(255, 255, 255);
 
 }
 
 a:hover {
-    border-bottom: 2px solid currentColor; /* Add a border bottom to simulate an underline */
 }
 
 a:active {
@@ -154,6 +153,7 @@ a:active {
     position: relative;
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
+    transition: background-color 0.3s ease; /* Add transition property */
 }
 
 .homesubprojects a:link {
@@ -165,7 +165,10 @@ a:active {
 }
 
 .homesubprojects a:active {
-transform: translateY(2px); /* Push the button down by 2 pixels */
+}
+
+.homesubprojects a:hover {
+background-color: lightgray;
 }
 
 .title {
