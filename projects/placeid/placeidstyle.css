@@ -281,6 +281,21 @@ a:active {
 }
 
 
+/* Add or modify your existing styles as needed */
+
+.title {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #333; /* Adjust the color as needed */
+}
+
+.subtitle {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: #777; /* Adjust the color as needed */
+}
+
+/* Add any additional styling for your title and subtitle here */
+
+
 
 #cesiumContainer {
     width: 100%;
