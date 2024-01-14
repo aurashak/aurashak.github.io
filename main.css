@@ -67,18 +67,6 @@ a:active {
     align-items: flex-end;
 }
 
-.main-content {
-    position: relative;
-    z-index: 1;
-    margin: 20px 100px;
-    border: 0px solid black;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the left */
-}
-
-
-
 .hometitle {
     font-size: 40px;
     font-weight: bold;
@@ -473,7 +461,7 @@ a:active {
     position: relative;
     z-index: 1;
     margin: 20px 100px;
-    border: 1px solid black;
+    border: 0px solid black;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the left */
@@ -563,6 +551,10 @@ a:active {
 
 .homesubprojects a:visited {
     color: black;
+}
+
+.homesubprojects a:active {
+transform: translateY(2px); /* Push the button down by 2 pixels */
 }
 
 .title {
