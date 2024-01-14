@@ -66,9 +66,10 @@ a:active {
 /* Header Styles */
 .header {
     display: flex;
-    margin: 80px 130px 50px 130px; /* Top, Right, Bottom, Left */
+    margin: 40px 130px 50px 135px;
     padding: 0px;
-    align-items: flex-end; /* Align items at the bottom */
+    align-items: flex-end;
+
 }
 
 .header-left {
@@ -96,8 +97,9 @@ a:active {
 /* Boxes Section Styles */
 .boxes-container {
     display: flex;
-    justify-content: start; /* Align the boxes at the start of the container */
-    margin: 20px 130px; /* Top and Bottom Margin */
+    justify-content: start;
+    margin: 20px 100px;
+
 }
 
 .box {
@@ -116,8 +118,9 @@ a:active {
 /* Third Row Styles */
 .third-row {
     display: flex;
-    margin: 60px 130px; /* Top and Bottom Margin */
-    align-items: flex-start; /* Align items at the top of the container */
+    margin: 60px 135px;
+    align-items: flex-start;
+
 }
 
 .third-row-left {
@@ -143,8 +146,9 @@ a:active {
 /* Fourth Row Styles */
 .fourth-row {
     display: flex;
-    margin: 80px 130px; /* Top and Bottom Margin */
-    align-items: flex-start; /* Align items at the top of the container */
+    margin: 80px 135px;
+    align-items: flex-start;
+
 }
 
 .fourth-row-left {
@@ -181,8 +185,8 @@ a:active {
 
 /* Apply styles to the background */
 .background {
-    background-color: #f0f0f0; /* Change to your desired background color */
-    position: fixed; /* Make the background fixed */
+    background-color: #000;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -190,17 +194,19 @@ a:active {
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 
 /* Center and add margins to the Cesium container */
 .centered-container {
-    width: 80%; /* Adjust as needed for margins */
-    max-width: 1200px; /* Set a maximum width if desired */
-    height: 80vh; /* Adjust as needed */
-    border: 1px solid #ccc; /* Add a border for visual separation */
-    margin: 0 auto; /* Center horizontally */
-    position: relative; /* Add this for z-index to work correctly */
+    width: 100%;
+    /* max-width: 1200px; */
+    height: 85vh;
+    border: 1px solid #f2e4e4;
+    margin: 0 100px;
+    position: relative;
+
 }
 
 #cesiumContainer {
@@ -281,25 +287,25 @@ a:active {
 
 
 .footer {
-    background-color: none; /* Background color for the footer */
-    color: #7c7c7c; /* Text color for the footer */
-    padding: 0px; /* Padding to create some space around the content inside the footer */
-    margin-left: 0px;
-    text-align: left; /* Center-align the text inside the footer */
+    background-color: none; 
+    color: #7c7c7c; 
+    padding: 0px; 
+    margin: 0 100px;
+    text-align: left; 
     z-index: 3000;
     position: fixed;
-    bottom: 10px;
+    bottom: 30px;
   }
   
 
 .footer a {
-    color: #888888; /* Link color */
-    text-decoration: none; /* Remove underlines from links */
-    margin-right: 10px; /* Add some space between links */
+    color: #888888; 
+    text-decoration: none;
+    margin-right: 10px; 
 }
 
 .footer a:hover {
-    text-decoration: none; /* Underline links on hover */
+    text-decoration: none; 
 }
   
 
