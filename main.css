@@ -67,12 +67,6 @@ a:active {
     align-items: flex-end;
 }
 
-.hometitle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    text-align: center;
-}
 
 
 .hometitle {
