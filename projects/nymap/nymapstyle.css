@@ -19,7 +19,18 @@
     position: relative;
 }
 
-/* styles.css */
+.first-button-row {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    margin-top: 20px;
+}
+
+/* Add a separate class for the second button row */
+.second-button-row {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    margin-top: 20px;
+}
 
 /* Common button styles */
 .button {
