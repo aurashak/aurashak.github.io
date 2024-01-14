@@ -46,26 +46,32 @@ a:active {
 /* Top Row Styles */
 .top-row {
     display: flex;
-    margin-left: 2px;
+    justify-content: start; 
     margin-top: 20px;
+    margin-left: 2px; 
     margin-bottom: 20px;
 }
 
+
 .top-box {
-    font-size: 20px; /* Adjust the font size as needed */
-    margin-right: 60px; /* Add right margin between boxes */
-    z-index: 3; /* Above the globe */
+    font-size: 20px; 
+    margin-right: 60px; 
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /
+    text-align: left;
+    border-radius: 2px;
+    z-index: 3; 
+    text-shadow: 2px 2px 1px rgb(255, 1, 238); /* Change the text shadow color to red */
 }
 
 .top-box:last-child {
-    margin-right: 0; /* No right margin on the last box */
+    margin-right: 0; 
 }
 
 /* Header Styles */
 .header {
-    display: flex;
+    display: block;
+    margin: 40px 100px 50px 100px;
     padding: 0px;
-    margin: 20px 100px;
     align-items: flex-end;
 
 }
@@ -89,6 +95,22 @@ a:active {
     z-index: 3; /* Above the globe */
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
 }
+
+.title {
+    font-size: 50px; /* Adjust the font size as needed */
+    font-weight: bold;
+    color: #333; /* Adjust the color as needed */
+    text-shadow: 3px 3px 2px rgba(226, 38, 38, 0.7); /
+    max-width: 1000px;
+}
+
+.subtitle {
+    font-size: 25px; /* Adjust the font size as needed */
+    color: #fff; /* Adjust the color as needed */
+    max-width: 1000px; 
+    position: relative;
+}
+
 
 /* Boxes Section Styles */
 .boxes-container {
