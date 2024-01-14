@@ -270,12 +270,14 @@ a:active {
     background-color: none; 
     color: #7c7c7c; 
     padding: 0px; 
-    margin: s0px;
+    margin: 0px;
+    margin-left: 100px;
+    bottom: 0;
+    left: 0;
     text-align: left; 
     z-index: 3000;
     position: fixed;
   }
-  
 
 .footer a {
     color: #888888; 
