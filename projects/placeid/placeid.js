@@ -26,14 +26,22 @@ viewer.camera.setView({
     }
 });
 
-// Slow down the rotation
-var spinRate = 0.0003;
-var isRotating = true; // To keep track of the rotation state
-var rotateGlobeFunction = function() {
+// Create a scale bar and add it to the bottom left corner of the Cesium viewer
+var scaleBar = new Cesium.ScaleBar({
+    container: 'cesiumContainer', // The ID of the container element
+    units: 'metric', // You can change this to 'imperial' if you prefer imperial units
+});
+
+// Function to rotate the globe slowly
+function rotateGlobe() {
     if (isRotating) {
         viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
     }
-};
+}
+
+// Slow down the rotation
+var spinRate = 0.0003;
+var isRotating = true; // To keep track of the rotation state
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
