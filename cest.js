@@ -48,8 +48,8 @@ function getTypeFromProperties(properties) {
         case 'State/Province':
             return 'State/Province';
 
-        case 'Continent':
-            return 'continent';
+        case 'continent':
+            return 'Continent';
 
         case 'Country':
             return 'Country';
