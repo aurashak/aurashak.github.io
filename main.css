@@ -124,7 +124,7 @@ a:active {
 
 
 .homeprojects {
-     font-size: 30px;
+     font-size: 26px;
     font-weight: bold;
     background: rgba(10, 228, 255, 0.92);
     padding: 10px 19px;
@@ -139,7 +139,7 @@ a:active {
 }
 
 .homesubprojects {
-    font-size: 25px;
+    font-size: 20px;
     color: #000000;
     font-weight: 800;
     background: rgba(212, 212, 212, 0.91);
@@ -174,25 +174,36 @@ a:active {
 
 
 .title {
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
-    color: #e6e6e6;
-    text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
-    max-width: 1000px;
+    background: rgba(10, 228, 255, 0.92);
+    padding: 10px 19px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
-    margin: 10 0;
+    margin: 90px 0px 20px;
     position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .subtitle {
     font-size: 25px;
-    color: #ffffff;
-    max-width: 700px;
+    color: #000000;
+    font-weight: 800;
+    background: rgba(212, 212, 212, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    margin-top: 5px;
+    margin-left: 75px;
+    line-height: 1.4;
+    border-radius: 2px;
+    display: inline-block;
     position: relative;
-    z-index: 4; /* Increase z-index value */
-    text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
-    margin: 20 0;
-    line-height: 1.4
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+    transition: background-color 0.3s ease; /* Add transition property */
 }
 
 /* Add a CSS class for the image */
@@ -201,7 +212,6 @@ a:active {
     margin-right: 20px; /* Add some margin to separate the image from the description */
 }
 
-/* Apply styles to the description */
 .description {
     font-size: 15px;
     color: #e6e6e6;
@@ -221,19 +231,17 @@ a:active {
 }
 
 .box {
-    font-size: 20px; /* Adjust the font size as needed */
-    margin-right: 60px; /* Add right margin between boxes */
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); /* Horizontal, Vertical, Blur, Color */
+    font-size: 20px; 
+    margin-right: 60px; 
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
     text-align: left;
     border-radius: 2px;
-    z-index: 3; /* Above the globe */
+    z-index: 3; 
 }
 
 .box:last-child {
-    margin-right: 0; /* No right margin on the last box */
+    margin-right: 0; 
 }
-
-
 
 /* Apply styles to the background for cesium globe*/
 .background {
@@ -249,7 +257,6 @@ a:active {
 
 }
 
-/* Center and add margins to the Cesium container */
 .centered-container {
     width: 100%;
     /* max-width: 1200px; */
@@ -257,7 +264,6 @@ a:active {
     border: 1px solid #000000;
     margin: 0px;
     position: relative;
-
 }
 
 #cesiumContainer {
