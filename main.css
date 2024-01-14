@@ -62,7 +62,7 @@ a:active {
 
 .header {
     display: block;
-    margin: 40px 100px 50px 100px;
+    margin: 20px 100px 20px 100px;
     padding: 0px;
     align-items: flex-end;
 }
@@ -72,45 +72,47 @@ a:active {
 .hometitle {
     font-size: 40px;
     font-weight: bold;
-    background: rgb(61, 51, 51);
-    padding: 20px;
+    background: rgba(61, 51, 51, 0.92);
+    padding: 12px 20px;
     color: #e6e6e6;
-    box-shadow: 3px 3px 2px rgba(78, 52, 73, 0.5); 
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.8); 
     text-shadow: 3px 3px 2px årgba(31, 25, 30, 0.5); 
-    max-width: 1000px;
     z-index: 4; /* Increase z-index value */
-    margin: 10 0;
+    margin: 40px 0px 10px;
     position: relative;
     display:inline-block;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .homesubtitle {
     font-size: 25px;
     color: #e6e6e6;
     font-weight: 500;
-    background: rgba(52, 32, 74, 0.659);
+    background: rgba(52, 32, 74, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    padding: 8px 17px;
+    padding: 12px 17px;
     text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-left: 75px;
     line-height: 1.4;
-    border-radius: 3px;
+    border-radius: 10px;
     display:inline-block;
     position: relative;
-
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
 
 
 
 .homeprojects {
-    font-size: 25px;
+    font-size: 20px;
     color: #e6e6e6;
     font-weight: 800;
-    max-width: 700px;
-    background: rgba(88, 65, 112, 0.659);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.707); 
-    padding: 20px;
+    background: rgba(88, 65, 112, 0.858);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.872); 
+    padding: 12px 20px;
     display:inline-block;
     position: relative;
     z-index: 4; /* Increase z-index value */
@@ -119,7 +121,6 @@ a:active {
     margin-top: 30px;
     margin-bottom: 20px;
     line-height: 1.4
-    border-radius: 3px;
 }
 
 .homesubprojects {
@@ -138,7 +139,6 @@ a:active {
     margin-top: 30px;
     margin-bottom: 20px;
     line-height: 1.4
-    border-radius: 3px;
 }
 
 
