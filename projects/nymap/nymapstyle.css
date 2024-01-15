@@ -29,6 +29,11 @@ body {
     color: #000;
 }
 
+.top-box a:visited {
+    color: #161616;
+}
+
+
 #map {
     width: 100%; 
     height: 80vh;
