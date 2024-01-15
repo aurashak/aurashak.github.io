@@ -177,6 +177,7 @@ a:active {
 .title {
     font-size: 30px;
     font-weight: bold;
+    width: 40vh;
     background: rgba(10, 228, 255, 0.92);
     padding: 12px 20px;
     color: #000000;
@@ -193,11 +194,13 @@ a:active {
     font-size: 25px;
     color: #000000;
     font-weight: 800;
+    width: 50vh;
     background: rgba(212, 212, 212, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
     margin-top: 5px;
-    margin-left: 75px;
+    max-width: 700;
+    margin-left: 0px;
     line-height: 1.4;
     border-radius: 2px;
     display: inline-block;
