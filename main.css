@@ -191,7 +191,6 @@ a:active {
 .title {
     font-size: 30px;
     font-weight: bold;
-    width: 40vh;
     max-width: 500px;
     background: rgba(255, 185, 10, 0.92);
     padding: 12px 20px;
@@ -208,7 +207,6 @@ a:active {
 .bodytitle {
     font-size: 30px;
     font-weight: bold;
-    width: 40vh;
     max-width: 500px;
     background: rgba(0, 187, 255, 0.92);
     padding: 12px 20px;
