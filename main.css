@@ -35,12 +35,10 @@ a:active {
 }
 
 h3 {
-    font-size: 20px; /* Adjust the font size as needed */
-    font-weight: bold; /* You can change the font weight to suit your design */
-    color: #333; /* Set the text color to your preference */
-    margin-top: 10px; /* Add margin to separate it from other content */
-    margin-bottom: 10px; /* Add margin to separate it from other content */
-    /* You can add more styles like text-align, text-transform, etc. */
+    font-size: 20px; 
+    font-weight: bold;
+    color: #333; 
+    margin: 0;
 }
 
 
@@ -113,11 +111,11 @@ h3 {
 .homesubtitle,
 .homeprojects,
 .homesubprojects {
-    margin: 10px 0; /* Add margin to separate items */
-    padding: 10px; /* Add padding for spacing */
-    display: inline-block; /* Make items inline-block */
-    max-width: max-content; /* Limit width to content width */
-    border-radius: 10px; /* Add border-radius for styling */
+    margin: 10px 0; 
+    padding: 10px; 
+    display: inline-block; 
+    max-width: max-content; 
+    border-radius: 10px; 
 }
 
 
@@ -260,8 +258,8 @@ h3 {
 
 /* Add a CSS class for the image */
 .image-container {
-    float: left; /* Float the image to the left */
-    margin-right: 20px; /* Add some margin to separate the image from the description */
+    float: left; 
+    margin-right: 20px; 
 }
 
 .description {
@@ -333,10 +331,10 @@ height: 550px;
     font-weight: 400;
     background: rgba(243, 243, 243, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    padding: 12px 22px;
-    max-width: 500px;
-    margin: 5px 0px 0px 50px;
+    padding: 20px;
     line-height: 1.1;
+    margin-top: 60px;
+    max-width: 400px;
     border-radius: 2px;
     display: block;
     position: relative;
