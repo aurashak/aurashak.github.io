@@ -5,6 +5,25 @@ body {
 
 }
 
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: none;
+
+}
+
+a:hover {
+    border-bottom: 2px solid color;
+}
+
+a:active {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
 .top-box {
     font-size: 20px; 
     margin-right: 60px; 
