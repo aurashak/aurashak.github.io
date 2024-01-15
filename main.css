@@ -29,7 +29,7 @@ a:active {
 }
 
 /* Apply pointer-events: none; to overlays to let clicks pass through */
-.header, .boxes-container, .third-row, fourth-row {
+.header, .boxes-container, .third-row, .fourth-row {
     pointer-events: none;
     /* ... other styles ... */
 }
@@ -254,7 +254,21 @@ h3 {
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
-
+.subbodytitle {
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 500px;
+    background: rgb(19, 213, 216);
+    padding: 6px 12px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    z-index: 4; /* Increase z-index value */
+    margin: 40px 0px 20px;
+    position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
+}
 
 /* Add a CSS class for the image */
 .image-container {
