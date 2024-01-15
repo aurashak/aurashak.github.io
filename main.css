@@ -55,6 +55,7 @@ a:active {
     background: rgba(9, 9, 8, 0.72);
     color: #e9e9e9;
     z-index: 3; 
+    text-shadow: none;
 }
 
 .top-box a:link {
@@ -280,6 +281,19 @@ a:active {
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
+
+.descriptionimg {
+    background: rgba(243, 243, 243, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    max-width: 600px;
+    margin: 20px 50px;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+}
+
 
 .boxes-container {
     display: flex;
