@@ -239,22 +239,6 @@ a:active {
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
-.bodytitle {
-    font-size: 25px;
-    font-weight: bold;
-    width: 40vh;
-    max-width: 500px;
-    background: rgba(8, 154, 245, 0.92);
-    padding: 12px 20px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-    z-index: 4; /* Increase z-index value */
-    margin: 40px 0px 20px;
-    position: relative;
-    display:inline-block;
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
-}
 
 
 /* Add a CSS class for the image */
@@ -296,17 +280,18 @@ a:active {
 
 .two-column-container {
     display: flex;
-    justify-content: space-between; 
-    margin: 20px 0; 
+    border-radius: 2px;
+    width: 100%;
+
 }
 
 .two-column {
-    flex: 1; 
-    padding: 20px; 
-    background: rgba(255, 255, 255, 1); 
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    border-radius: 2px; 
-    border: 2px solid rgba(0, 0, 0, 0.91); 
+    flex: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+    margin-right: 30px;
 }
 
 .boxes-container {
