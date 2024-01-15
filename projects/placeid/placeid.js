@@ -64,10 +64,28 @@ var isRotating = true; // To keep track of the rotation state
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-var defaultText = 'Latitude: Longitude: <br>Place: ';
+var defaultText = 'Latitude: Longitude: <br>Continent:<br>Country<br>State/Province:<br>Lake ';
 var coordsBox = document.getElementById('coordsBox');
 coordsBox.innerHTML = defaultText;
 coordsBox.style.display = 'block';
+
+// Define variables to keep track of layer visibility
+var osmLayerVisible = true; // OpenStreetMap
+var sentinelLayerVisible = true; // Sentinel-2
+
+// Function to toggle OpenStreetMap layer
+function toggleOSMLayer() {
+    osmLayerVisible = !osmLayerVisible;
+    viewer.imageryLayers.get(0).show = osmLayerVisible;
+}
+
+// Function to toggle Sentinel-2 layer
+function toggleSentinelLayer() {
+    sentinelLayerVisible = !sentinelLayerVisible;
+    // Replace 'Sentinel-2' with the name of the layer you want to toggle (if it's not the first layer)
+    viewer.imageryLayers.get(1).show = sentinelLayerVisible;
+}
+
 
 function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
