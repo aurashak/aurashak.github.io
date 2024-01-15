@@ -204,11 +204,11 @@ h3 {
 
 
 .title {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     max-width: 500px;
     background: rgba(255, 185, 10, 0.92);
-    padding: 12px 20px;
+    padding: 6px 12px;
     color: #000000;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
@@ -220,11 +220,11 @@ h3 {
 }
 
 .bodytitle {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     max-width: 500px;
     background: rgba(0, 187, 255, 0.92);
-    padding: 12px 20px;
+    padding: 6px 12px;
     color: #000000;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
@@ -237,7 +237,7 @@ h3 {
 
 
 .subtitle {
-    font-size: 25px;
+    font-size: 20px;
     color: #000000;
     font-weight: 800;
     width: 70vh;
@@ -246,7 +246,7 @@ h3 {
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
     margin-top: 5px;
-    margin-left: 50px;
+    margin-left: 0px;
     line-height: 1.4;
     border-radius: 2px;
     position: relative;
@@ -268,9 +268,9 @@ h3 {
     font-weight: 400;
     background: rgba(243, 243, 243, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    padding: 12px 22px;
+    padding: 20px;
     max-width: 600px;
-    margin: 5px 0px 0px 50px;
+    margin: 5px 0px 0px 0px;
     line-height: 1.4;
     border-radius: 2px;
     display: block;
