@@ -20,13 +20,23 @@ var baseLayers = {
 openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
 
 // Function to toggle base layers
-function toggleBaseLayer(layerName) {
+function toggleBaseLayer(layerName, event) {
+    event.preventDefault(); // Prevent the default behavior of anchor links
     if (map.hasLayer(baseLayers[layerName])) {
         map.removeLayer(baseLayers[layerName]);
     } else {
         map.addLayer(baseLayers[layerName]);
     }
 }
+
+// Add event listeners to layer toggle buttons and prevent default link behavior
+document.getElementById('openStreetMapToggle').addEventListener('click', function(event) {
+    toggleBaseLayer('OpenStreetMap', event);
+});
+document.getElementById('satelliteToggle').addEventListener('click', function(event) {
+    toggleBaseLayer('Satellite', event);
+});
+
 
 // Load and add the GeoJSON layer with initial style
 var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
