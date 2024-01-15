@@ -190,6 +190,23 @@ a:active {
     border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
+.bodytitle {
+    font-size: 30px;
+    font-weight: bold;
+    width: 40vh;
+    background: rgba(255, 185, 10, 0.92);
+    padding: 12px 20px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    z-index: 4; /* Increase z-index value */
+    margin: 40px 0px 20px;
+    position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
+}
+
+
 .subtitle {
     font-size: 25px;
     color: #000000;
@@ -207,6 +224,23 @@ a:active {
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
+
+.bodytitle {
+    font-size: 25px;
+    font-weight: bold;
+    width: 40vh;
+    background: rgba(8, 154, 245, 0.92);
+    padding: 12px 20px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    z-index: 4; /* Increase z-index value */
+    margin: 40px 0px 20px;
+    position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
+}
+
 
 /* Add a CSS class for the image */
 .image-container {
@@ -231,10 +265,10 @@ a:active {
 }
 
 .description {
-    font-size: 15px;
+    font-size: 20px;
     color: #000000;
-    font-weight: 800;
-    background: rgba(212, 212, 212, 0.91);
+    font-weight: 400;
+    background: rgba(243, 243, 243, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
     margin: 20px 50px;
