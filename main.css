@@ -293,9 +293,22 @@ h3 {
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
+.description a:link {
+    color: black;
+}
+
+.description a:visited {
+    color: black;
+}
+
+.description a:hover {
+    border-bottom: 2px solid black;
+}
+
 .description:last-child {
     margin-bottom: 0;
 }
+
 
 .descriptionimg {
     background: rgba(243, 243, 243, 0.91);
