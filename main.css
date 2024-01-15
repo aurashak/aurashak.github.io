@@ -178,7 +178,7 @@ a:active {
     font-size: 30px;
     font-weight: bold;
     width: 40vh;
-    background: rgba(10, 228, 255, 0.92);
+    background: rgba(255, 185, 10, 0.92);
     padding: 12px 20px;
     color: #000000;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
@@ -194,26 +194,40 @@ a:active {
     font-size: 25px;
     color: #000000;
     font-weight: 800;
-    width: 50vh;
+    width: 70vh;
     background: rgba(212, 212, 212, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
     margin-top: 5px;
-    max-width: 700;
-    margin-left: 0px;
+    max-width: 800;
+    margin-left: 50px;
     line-height: 1.4;
     border-radius: 2px;
-    display: inline-block;
     position: relative;
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
-    transition: background-color 0.3s ease; /* Add transition property */
 }
 
 /* Add a CSS class for the image */
 .image-container {
     float: left; /* Float the image to the left */
     margin-right: 20px; /* Add some margin to separate the image from the description */
+}
+
+.bodytitle {
+    font-size: 20px;
+    font-weight: bold;
+    width: 40vh;
+    background: rgba(59, 89, 135, 0.92);
+    padding: 12px 20px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    z-index: 4; /* Increase z-index value */
+    margin: 40px 0px 20px;
+    position: relative;
+    display:inline-block;
+    border-radius: 2px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .description {
@@ -223,7 +237,7 @@ a:active {
     background: rgba(212, 212, 212, 0.91);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
-    margin-top: 5px;
+    margin: 20px 50px;
     line-height: 1.4;
     border-radius: 2px;
     display: inline-block;
