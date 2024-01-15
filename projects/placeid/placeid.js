@@ -26,10 +26,6 @@ viewer.camera.setView({
     }
 });
 
-// Scalebar
-
-var scaleBarElement = document.getElementById('scaleBar');
-var cesiumScaleElement = document.getElementById('cesiumScale');
 
 viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
 
@@ -53,36 +49,6 @@ function haversineDistance(lon1, lat1, lon2, lat2) {
 
   return radius * c;
 }
-
-function updateScaleBar() {
-  var scene = viewer.scene;
-  var camera = viewer.camera;
-  var ellipsoid = scene.globe.ellipsoid;
-
-  var canvasWidth = scene.canvas.clientWidth;
-  var pixelDistance = canvasWidth * 0.15; // Adjust the factor as needed
-
-  var cartographicCenter = ellipsoid.cartesianToCartographic(camera.positionWC);
-  var longitude = Cesium.Math.toDegrees(cartographicCenter.longitude);
-  var latitude = Cesium.Math.toDegrees(cartographicCenter.latitude);
-
-  var position1 = { lon: longitude, lat: latitude };
-  var position2 = { lon: longitude + 1, lat: latitude }; // Assuming a 1-degree difference
-
-  var groundDistance = haversineDistance(position1.lon, position1.lat, position2.lon, position2.lat);
-
-  var scale = groundDistance / pixelDistance;
-
-  // Update the scale bar element
-  cesiumScaleElement.textContent = scale.toPrecision(4);
-}
-
-// Hook into the camera move event to update the scale bar
-viewer.camera.changed.addEventListener(updateScaleBar);
-
-// Initial update
-updateScaleBar();
-
 
 
 // Function to rotate the globe slowly
