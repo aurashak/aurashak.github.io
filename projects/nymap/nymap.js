@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Initialize the map with a specific location and zoom level
-    var map = L.map('map').setView([40.7128, -74.0060], 13); // New York City coordinates
+    var map = L.map('map', {
+        center: [40.7128, -74.0060], // New York City coordinates
+        zoom: 13, // Initial zoom level
+        minZoom: 10 // Minimum zoom level to restrict zooming out
+    });
 
     // Define the base layers (OpenStreetMap and Satellite)
     var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -70,4 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault(); // Prevent the default behavior of anchor links
         toggleBaseLayer('Satellite');
     });
+
+    // Define the bounds for New York City area
+    var maxBounds = [
+        [40.4774, -74.2591], // Southwestern corner coordinates
+        [40.9176, -73.7004]  // Northeastern corner coordinates
+    ];
+
+    // Set the maximum bounds for the map
+    map.setMaxBounds(maxBounds);
 });
