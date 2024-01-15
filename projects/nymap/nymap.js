@@ -63,11 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to toggle base layers when clicking links
     document.getElementById('openStreetMapToggle').addEventListener('click', function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent the default behavior of anchor links
         toggleBaseLayer('OpenStreetMap');
     });
     document.getElementById('satelliteToggle').addEventListener('click', function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent the default behavior of anchor links
         toggleBaseLayer('Satellite');
     });
 });
