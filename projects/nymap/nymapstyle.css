@@ -2,12 +2,12 @@
 
 
 #map {
-    width: calc(100% - 40px); 
+    width: 100%; 
     height: 80vh;
-    border: 6px solid #000000;
+    border: 0px solid #000000;
     border-radius: 8px;
-    margin: 20px; 
-}
+    margin: 0px; 
+}å
 
 .first-button-row {
     display: flex;
