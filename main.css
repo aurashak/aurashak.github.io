@@ -52,9 +52,22 @@ a:active {
     margin-right: 60px; 
     text-align: left;
     border-radius: 2px;
-    color: #e6e6e6;
+    background: rgba(9, 9, 8, 0.72);
+    color: #e9e9e9;
     z-index: 3; 
-    text-shadow: 3px 3px 2px rgba(31, 25, 30, 0.5); 
+}
+
+.top-box a:link {
+    color: #e9e9e9;
+}
+
+.top-box a:hover {
+    color: #e9e9e9;
+    border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+.top-box a:active {
+    color: #e9e9e9;
 }
 
 .top-box:last-child {
