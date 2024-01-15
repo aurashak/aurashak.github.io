@@ -1,4 +1,35 @@
 
+
+body {
+    background-color: #e3e3e3;
+    color: #070707;
+}
+
+.top-box {
+    font-size: 20px; 
+    margin-right: 60px; 
+    text-align: left;
+    color: #000000;
+    z-index: 3; 
+    text-shadow: none;
+    background: none;
+
+}
+
+.top-box a:link {
+    color: #000;
+}
+
+.top-box a:hover {
+    color: #000;
+    border-bottom: 2px solid black;
+}
+
+.top-box a:active {
+    color: #000;
+}
+
+
 .coords-box {
     background-color: rgba(255, 255, 255, 0.1); /* Background color with transparency */
     color: white; /* Text color */
