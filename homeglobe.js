@@ -29,26 +29,6 @@ viewer.camera.setView({
 
 viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
 
-function haversineDistance(lon1, lat1, lon2, lat2) {
-  // Convert latitude and longitude from degrees to radians
-  var lon1Rad = Cesium.Math.toRadians(lon1);
-  var lat1Rad = Cesium.Math.toRadians(lat1);
-  var lon2Rad = Cesium.Math.toRadians(lon2);
-  var lat2Rad = Cesium.Math.toRadians(lat2);
-
-  // Haversine formula
-  var dlon = lon2Rad - lon1Rad;
-  var dlat = lat2Rad - lat1Rad;
-  var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
-          Math.cos(lat1Rad) * Math.cos(lat2Rad) *
-          Math.sin(dlon / 2) * Math.sin(dlon / 2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  // Earth's radius in meters (change this value if needed)
-  var radius = 6371000; // approximately 6371 km
-
-  return radius * c;
-}
 
 
 // Function to rotate the globe slowly
@@ -64,10 +44,7 @@ var isRotating = true; // To keep track of the rotation state
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-var defaultText = 'Latitude: Longitude: <br>Continent:<br>Country<br>State/Province:<br>Lake ';
-var coordsBox = document.getElementById('coordsBox');
-coordsBox.innerHTML = defaultText;
-coordsBox.style.display = 'block';
+
 
 // Define variables to keep track of layer visibility
 var osmLayerVisible = true; // OpenStreetMap
