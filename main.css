@@ -445,6 +445,12 @@ height: 550px;
     position: fixed;
   }
 
+  .image {
+    max-width: 100%; /* Limit the width to the container width */
+    max-height: 100%; /* Limit the height to the container height */
+}
+
+
 .footer a {
     color: #888888; 
     text-decoration: none;
