@@ -17,6 +17,10 @@ var satelliteMap = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={
     attribution: '&copy; <a href="https://www.google.com/maps">Google Maps</a> contributors'
 });
 
+
+// Add a full-screen control to the map
+mymap.addControl(L.control.fullscreen());
+
 // Create a group for overlay layers (TBD layers)
 var overlayLayers = L.layerGroup();
 
