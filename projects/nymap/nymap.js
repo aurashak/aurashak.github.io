@@ -9,15 +9,14 @@ var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.
 // Add the base layer (OpenStreetMap) to the map
 openStreetMap.addTo(map);
 
-// Load the GeoJSON layer using Leaflet.Ajax
-var geojsonLayer = new L.GeoJSON.AJAX('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+// Load and add the GeoJSON layer with initial style
+var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
     style: {
         color: 'blue', // Initial color
         weight: 2,      // Initial line weight
         opacity: 0.7    // Initial opacity
     }
 }).addTo(map);
-
 
 // Create a control panel for styling options
 var stylingControl = L.control({ position: 'topright' });
