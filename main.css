@@ -291,7 +291,10 @@ h3 {
     position: relative;
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
+}
 
+.description:last-child {
+    margin-bottom: 0;
 }
 
 .descriptionimg {
