@@ -68,15 +68,36 @@ a:active {
     align-items: flex-end;
 }
 
+/* ... Your existing CSS ... */
+
 .main-content {
     position: relative;
     z-index: 1;
     margin: 20px 100px;
     border: 0px solid black;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the left */
+    flex-direction: row; /* Display columns side by side */
+    align-items: flex-start; /* Align items to the top of the row */
 }
+
+.title,
+.subtitle {
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+    display: inline-block; /* Make items inline-block */
+    max-width: max-content; /* Limit width to content width */
+    border-radius: 10px; /* Add border-radius for styling */
+    width: 60%; /* Set width to 60% for title */
+}
+
+.subtitle {
+    width: 40%; /* Set width to 40% for subtitle */
+    margin-left: 0; /* Remove margin in between title and subtitle */
+}
+
+/* ... Your existing CSS ... */
+
+
 
 /* Adjust margin and padding for each item */
 .hometitle,
@@ -177,13 +198,12 @@ a:active {
 .title {
     font-size: 30px;
     font-weight: bold;
-    width: 40vh;
+    width: 70vh;
     background: rgba(10, 228, 255, 0.92);
     padding: 12px 20px;
     color: #000000;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
-    margin: 40px 0px 20px;
     position: relative;
     display:inline-block;
     border-radius: 2px;
@@ -196,18 +216,18 @@ a:active {
     font-weight: 800;
     width: 50vh;
     background: rgba(212, 212, 212, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
     padding: 12px 22px;
-    margin-top: 5px;
     max-width: 700;
-    margin-left: 0px;
+    margin-left: 30px; 
     line-height: 1.4;
     border-radius: 2px;
     display: inline-block;
     position: relative;
     z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
-    transition: background-color 0.3s ease; /* Add transition property */
+    transition: background-color 0.3s ease;
+
 }
 
 /* Add a CSS class for the image */
