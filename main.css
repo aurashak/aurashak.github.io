@@ -34,6 +34,16 @@ a:active {
     /* ... other styles ... */
 }
 
+h3 {
+    font-size: 20px; /* Adjust the font size as needed */
+    font-weight: bold; /* You can change the font weight to suit your design */
+    color: #333; /* Set the text color to your preference */
+    margin-top: 10px; /* Add margin to separate it from other content */
+    margin-bottom: 10px; /* Add margin to separate it from other content */
+    /* You can add more styles like text-align, text-transform, etc. */
+}
+
+
 /* Re-enable pointer events for interactive elements within overlays */
 .header a, .boxes-container a, .third-row a, .fourth-row a {
     pointer-events: auto;
