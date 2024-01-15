@@ -332,6 +332,22 @@ h3 {
     height: 70vh; /* 70% of the viewport height */
 }
 
+.column-1blank {
+    flex: 1;
+    background: none;
+    box-shadow: none;
+    border-radius: none;
+    border: none;
+    margin-right: 30px;
+    height: 70vh; 
+}
+
+.column-1 img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+}
+
 .column-2 {
     flex: 1;
     background: rgba(255, 255, 255, 1);
@@ -339,6 +355,12 @@ h3 {
     border-radius: 2px;
     border: 2px solid rgba(0, 0, 0, 0.91);
     height: 30vh; /* 30% of the viewport height */
+}
+
+.column-2 img {
+    width: 100%; /* Make the image width 100% of the column */
+    height: 100%; /* Make the image height 100% of the column */
+    object-fit: cover; /* Ensure the image covers the entire space */
 }
 
 .notes {
