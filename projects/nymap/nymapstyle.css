@@ -88,3 +88,16 @@ body {
     background-color: #dc3545; /* Red color for danger button */
     color: #fff; /* White text color */
 }
+
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    color: black;
+
+}
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    color: black;
+
+}
