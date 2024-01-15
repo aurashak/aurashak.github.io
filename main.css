@@ -339,6 +339,11 @@ height: 550px;
     z-index: 4;
 }
 
+.notesdescription a:link {color: grey; text-decoration: underlline}
+    .notesdescription a:hover {}
+        .notesdescription a:visited {color:black}
+
+
 .boxes-container {
     display: flex;
     justify-content: start;
