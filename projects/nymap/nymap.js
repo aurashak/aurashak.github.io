@@ -1,8 +1,5 @@
-// Initialize the map
-var mymap = L.map('map', {
-    center: [40.7128, -74.0060],
-    zoom: 12 // Set your desired zoom level here
-});
+var map = L.map('map').setView([51.505, -0.09], 13); // Example coordinates
+
 
 // Rest of your code...
 
