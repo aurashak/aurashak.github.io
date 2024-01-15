@@ -1,13 +1,32 @@
 // Initialize the map with a specific location and zoom level
 var map = L.map('map').setView([40.7128, -74.0060], 13); // New York City coordinates
 
-// Define the base layer (OpenStreetMap)
+// Define the base layers (OpenStreetMap and Satellite)
 var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-// Add the base layer (OpenStreetMap) to the map
-openStreetMap.addTo(map);
+var satellite = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
+    attribution: '&copy; <a href="https://s2maps.eu/">Sentinel-2 cloudless by EOX IT Services GmbH</a>'
+});
+
+// Create a layer group for base layers
+var baseLayers = {
+    "OpenStreetMap": openStreetMap,
+    "Satellite": satellite
+};
+
+// Add the base layers to the map
+openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
+
+// Function to toggle base layers
+function toggleBaseLayer(layerName) {
+    if (map.hasLayer(baseLayers[layerName])) {
+        map.removeLayer(baseLayers[layerName]);
+    } else {
+        map.addLayer(baseLayers[layerName]);
+    }
+}
 
 // Load and add the GeoJSON layer with initial style
 var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
@@ -18,23 +37,10 @@ var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccou
     }
 }).addTo(map);
 
-// Create a control panel for styling options
-var stylingControl = L.control({ position: 'topright' });
+// Create a control panel for layer toggles
+var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
 
-stylingControl.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML = '<h4>GeoJSON Styling</h4>' +
-        '<label for="color">Color:</label>' +
-        '<input type="color" id="color" value="blue"><br>' +
-        '<label for="weight">Line Weight:</label>' +
-        '<input type="range" id="weight" min="1" max="10" value="2"><br>' +
-        '<label for="opacity">Opacity:</label>' +
-        '<input type="range" id="opacity" min="0" max="1" step="0.1" value="0.7"><br>';
-
-    return div;
-};
-
-stylingControl.addTo(map);
+layerControl.addTo(map);
 
 // Function to update the style based on user input
 function updateStyle() {
