@@ -329,9 +329,7 @@ height: 550px;
     font-size: 13px;
     color: #000000;
     font-weight: 400;
-    background: rgba(243, 243, 243, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    padding: 20px;
+    padding: 0px;
     line-height: 1.1;
     margin-top: 60px;
     max-width: 400px;
@@ -339,7 +337,6 @@ height: 550px;
     display: block;
     position: relative;
     z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
 .boxes-container {
