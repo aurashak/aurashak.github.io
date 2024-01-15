@@ -1,55 +1,25 @@
+    // Initialize Cesium Viewer
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+        terrainProvider: Cesium.createWorldTerrain(),
+    });
 
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
+    // Add a simple entity (marker) on the globe
+    viewer.entities.add({
+        name: 'Sample Location',
+        position: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 0),
+        point: {
+            pixelSize: 10,
+            color: Cesium.Color.RED,
+        },
+    });
 
+    // Set the camera view to a specific location and zoom level
+    viewer.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 1000000),
+        orientation: {
+            heading: Cesium.Math.toRadians(0.0),
+            pitch: Cesium.Math.toRadians(-45.0),
+            roll: 0.0,
+        },
+    });
 
-var viewer = new Cesium.Viewer('cesiumContainer', {
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: false,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false
-});
-
-viewer.imageryLayers.get(0).brightness = 1.2;
-viewer.imageryLayers.get(0).contrast = 1.2;
-
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
-    orientation: {
-        heading: Cesium.Math.toRadians(0.0),
-        pitch: Cesium.Math.toRadians(-90.0),
-        roll: 0.0
-    }
-});
-
-// Slow down the rotation
-var spinRate = 0.0003;
-var isRotating = true; // To keep track of the rotation state
-
-// Function to rotate the globe slowly
-function rotateGlobe() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
-    }
-}
-
-// Call the rotateGlobe function periodically to create the rotation effect
-viewer.clock.onTick.addEventListener(rotateGlobe);
-
-var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-
-
-// Function to stop the rotation
-function stopRotation() {
-    isRotating = false;
-}
-
-// Add a click event listener to the Cesium canvas to stop rotation on click
-handler.setInputAction(stopRotation, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
-// Your other event handlers and code can remain unchanged
