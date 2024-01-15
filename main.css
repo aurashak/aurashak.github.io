@@ -68,35 +68,66 @@ a:active {
     align-items: flex-end;
 }
 
-/* ... Your existing CSS ... */
-
 .main-content {
     position: relative;
     z-index: 1;
-    margin: 20px 100px;
+    margin: 20px 100px; /* Remove margin */
+    padding: 0; /* Remove padding */
     border: 0px solid black;
     display: flex;
+    max-width: 1200px; 
     flex-direction: row; /* Display columns side by side */
     align-items: flex-start; /* Align items to the top of the row */
 }
 
-.title,
-.subtitle {
+title,
+.subtitle,
+.description {
     margin: 0; /* Remove margin */
     padding: 0; /* Remove padding */
-    display: inline-block; /* Make items inline-block */
-    max-width: max-content; /* Limit width to content width */
-    border-radius: 10px; /* Add border-radius for styling */
-    width: 60%; /* Set width to 60% for title */
+    box-sizing: border-box; /* Include padding and border in the width */
+    text-align: left; /* Left-align the text within each column */
+}
+
+.title {
+    font-size: 30px; 
+    max-width: 400px;
+    min-width: 200px;
+    font-weight: bold;
+    background: rgba(10, 228, 255, 0.92);
+    padding: 12px 20px;
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    z-index: 4; /* Increase z-index value */
+    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .subtitle {
-    width: 40%; /* Set width to 40% for subtitle */
-    margin-left: 0; /* Remove margin in between title and subtitle */
+    font-size: 25px;
+    color: #000000;
+    max-width: 800px;
+    min-width: 400px;    
+    margin-left: 30px;
+    font-weight: 800;
+    background: rgba(212, 212, 212, 0.91);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    line-height: 1.4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
-/* ... Your existing CSS ... */
-
+.description {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 800;
+   max-width: 400px;
+    min-width: 200px;    
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    padding: 12px 22px;
+    line-height: 1.4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+}
 
 
 /* Adjust margin and padding for each item */
@@ -194,62 +225,9 @@ a:active {
     text-decoration: none;
 }
 
-
-.title {
-    font-size: 30px;
-    font-weight: bold;
-    width: 70vh;
-    background: rgba(10, 228, 255, 0.92);
-    padding: 12px 20px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-    z-index: 4; /* Increase z-index value */
-    position: relative;
-    display:inline-block;
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
-}
-
-.subtitle {
-    font-size: 25px;
-    color: #000000;
-    font-weight: 800;
-    width: 50vh;
-    background: rgba(212, 212, 212, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    padding: 12px 22px;
-    max-width: 700;
-    margin-left: 30px; 
-    line-height: 1.4;
-    border-radius: 2px;
-    display: inline-block;
-    position: relative;
-    z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-    transition: background-color 0.3s ease;
-
-}
-
-/* Add a CSS class for the image */
 .image-container {
     float: left; /* Float the image to the left */
     margin-right: 20px; /* Add some margin to separate the image from the description */
-}
-
-.description {
-    font-size: 15px;
-    color: #000000;
-    font-weight: 800;
-    background: rgba(212, 212, 212, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    padding: 12px 22px;
-    margin-top: 5px;
-    line-height: 1.4;
-    border-radius: 2px;
-    display: inline-block;
-    position: relative;
-    z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
 .boxes-container {
