@@ -1,9 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Define the bounds of the New York City metropolitan region
+    var southWest = L.latLng(40.477399, -74.259090),
+        northEast = L.latLng(41.134986, -73.700180),
+        bounds = L.latLngBounds(southWest, northEast);
+
     // Initialize the map with a specific location and zoom level
     var map = L.map('map', {
         center: [40.7128, -74.0060], // New York City coordinates
         zoom: 13, // Initial zoom level
-        minZoom: 10 // Minimum zoom level to restrict zooming out
+        minZoom: 10, // Minimum zoom level to restrict zooming out
+        maxBounds: bounds, // Restrict panning to the New York City metropolitan region
+        maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
     });
 
     // Define the base layers (OpenStreetMap and Satellite)
@@ -33,12 +40,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Load and add the GeoJSON layer with initial style
+    // Load and add the GeoJSON layer with updated style
     var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 5,
+                fillColor: 'brown',
+                color: 'black',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            });
+        }
+    }).addTo(map);
+
+    // Load and add the counties GeoJSON layer with fill and line styling
+    var countiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
         style: {
-            color: 'blue', // Initial color
-            weight: 2,      // Initial line weight
-            opacity: 0.7    // Initial opacity
+            fillColor: 'gray',
+            color: 'white',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
         }
     }).addTo(map);
 
