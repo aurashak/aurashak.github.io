@@ -33,45 +33,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Load and add the GeoJSON layer with initial style (NYC Counties)
-    var geojsonLayerCounties = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycregioncounties.geojson', {
+    // Load and add the GeoJSON layer with initial style
+    var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
         style: {
             color: 'blue', // Initial color
             weight: 2,      // Initial line weight
             opacity: 0.7    // Initial opacity
         }
-    });
-
-    // Load and add the GeoJSON layer with lines (NYC Streets)
-    var geojsonLayerStreets = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyc-streets/geojson', {
-        style: {
-            color: 'red', // Color for streets
-            weight: 3,     // Line weight for streets
-            opacity: 1.0   // Opacity for streets
-        }
-    });
-
-    // Load and add the GeoJSON layer with points (Citywide Outfalls)
-    var geojsonLayerCitywideOutfalls = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls/geojson', {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 5,
-                fillColor: 'green', // Color for outfall points
-                color: 'green',
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        }
-    });
+    }).addTo(map);
 
     // Create a control panel for layer toggles
     var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
-
-    // Add the GeoJSON layers to the control panel with toggle buttons
-    layerControl.addOverlay(geojsonLayerCounties, 'Counties');
-    layerControl.addOverlay(geojsonLayerStreets, 'Streets');
-    layerControl.addOverlay(geojsonLayerCitywideOutfalls, 'Citywide Outfalls');
 
     layerControl.addTo(map);
 
@@ -81,15 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var weight = document.getElementById('weight').value;
         var opacity = document.getElementById('opacity').value;
 
-        geojsonLayerCounties.setStyle({
+        geojsonLayer.setStyle({
             color: color,
             weight: weight,
-            opacity: opacity
-        });
-
-        geojsonLayerStreets.setStyle({
-            color: color,   // You can adjust the style properties as needed
-            weight: weight, // for both layers
             opacity: opacity
         });
     }
@@ -117,26 +83,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Set the maximum bounds for the map
     map.setMaxBounds(maxBounds);
-
-    // Event listeners for toggling GeoJSON layers
-    document.getElementById('countiesToggle').addEventListener('click', function () {
-        toggleGeoJSONLayer(geojsonLayerCounties);
-    });
-
-    document.getElementById('streetsToggle').addEventListener('click', function () {
-        toggleGeoJSONLayer(geojsonLayerStreets);
-    });
-
-    document.getElementById('citywideOutfallsToggle').addEventListener('click', function () {
-        toggleGeoJSONLayer(geojsonLayerCitywideOutfalls);
-    });
-
-    // Function to toggle GeoJSON layers
-    function toggleGeoJSONLayer(layer) {
-        if (map.hasLayer(layer)) {
-            map.removeLayer(layer);
-        } else {
-            map.addLayer(layer);
-        }
-    }
 });
