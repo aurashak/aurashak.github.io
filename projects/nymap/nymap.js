@@ -157,34 +157,3 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 });
 
 
-
-
-// Replace 'YOUR_API_KEY' with your actual API key
-const apiKey = '6e5734e8-2042-4b6e-9fb9-e723be01b908';
-
-// Define a function to fetch air quality data
-function getAirQualityData(latitude, longitude) {
-  const apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${apiKey}`;
-
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      // Extract relevant air quality data from 'data' here
-      const airQuality = data.data;
-      // Display the air quality data on the map (e.g., in a popup)
-      const popupContent = `
-        <h3>${airQuality.city}</h3>
-        <p>AQI: ${airQuality.current.pollution.aqius}</p>
-        <p>PM2.5: ${airQuality.current.pollution.pm25} µg/m³</p>
-        <!-- Add more data as needed -->
-      `;
-      L.marker([latitude, longitude]).bindPopup(popupContent).addTo(map);
-    })
-    .catch((error) => {
-      console.error('Error fetching air quality data:', error);
-    });
-}
-
-// Example usage: Call getAirQualityData with specific coordinates
-getAirQualityData(40.7128, -74.0060); // New York City coordinates
-
