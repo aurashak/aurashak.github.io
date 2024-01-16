@@ -212,8 +212,11 @@ a:active {
 .two-column-containermap {
     display: flex;
     border-radius: 2px;
-    width: 100%;     
+    width: 100%;
+    background: rgba(243, 243, 243, 0.91);
+    border: 2px solid black;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
+
 }
 
 .column-1blankmap {
@@ -221,7 +224,8 @@ a:active {
     box-shadow: none;
     border-radius: none;
     border: none;
-    width:  40vh;
+    width: 40vh;
+
 }
 
 .column-2blankmap {
@@ -243,7 +247,7 @@ a:active {
     display: block;
     position: relative;
     z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
+    border-top: 2px solid rgba(0, 0, 0, 0.91);
 }
 
 .mapsection a:link {
@@ -260,4 +264,8 @@ a:active {
 
 .mapsection:last-child {
     margin-bottom: 0;
+}
+
+.mapsection:first-child {
+border-top: none;
 }

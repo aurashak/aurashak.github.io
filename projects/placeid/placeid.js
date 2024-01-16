@@ -64,7 +64,7 @@ var isRotating = true; // To keep track of the rotation state
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-var defaultText = 'Latitude: Longitude: <br>Continent:<br>Country<br>State/Province:<br>Lake ';
+var defaultText = 'Latitude: Longitude:<br>Continent:<br>Country:<br>State/Province:<br>Region:<br>Ocean:<br>Lake:<br>River:';
 var coordsBox = document.getElementById('coordsBox');
 coordsBox.innerHTML = defaultText;
 coordsBox.style.display = 'block';
