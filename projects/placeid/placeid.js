@@ -121,8 +121,6 @@ function getTypeFromProperties(properties) {
     }
 }
 
-var displayedNames = []; // Initialize an array to keep track of displayed names
-
 function showCoordinates(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
@@ -134,38 +132,24 @@ function showCoordinates(movement) {
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
-        var namesToShow = []; // Initialize an array to store names to display
-
         pickedObjects.forEach(function(pickedObject) {
             if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
                 var properties = pickedObject.id.properties;
                 var type = getTypeFromProperties(properties);
                 var name = properties.name;
 
-                if (name && !displayedNames.includes(name)) {
-                    namesToShow.push(`${type}: ${name}`);
-                    displayedNames.push(name); // Add the name to the displayed names array
+                if (name) {
+                    hoverText += `<br>${type}: ${name}`;
+                } else {
+                    hoverText += `<br>${type}: N/A`;
                 }
             }
         });
-
-        if (namesToShow.length > 0) {
-            hoverText += '<br>' + namesToShow.join('<br>');
-        }
 
         coordsBox.innerHTML = hoverText;
         coordsBox.style.display = 'block';
     }
 }
-
-// Additionally, you may want to set up an event listener for when the mouse leaves the globe
-// to reset the displayed names array
-viewer.scene.canvas.addEventListener('mouseleave', function() {
-    coordsBox.innerHTML = defaultText;
-    coordsBox.style.display = 'block';
-    displayedNames = []; // Reset the displayed names array
-});
-
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
