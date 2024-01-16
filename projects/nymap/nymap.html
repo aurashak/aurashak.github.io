@@ -18,113 +18,95 @@
         </div>
     </div>
 
-    <div class="main-content">
+    <div class="container">
         <div class="title">NYC Environmental Map</div>
         <div class="subtitle">This map documents the environmental conditions of New York City in real time, in 2D and 3D. Adjust the maps with the controls below.</div>
     </div>
 
-    <div class="main-content">
+    <div class="container">
         <div class="subbodytitle">About</div>
         <div class="description">Infrastructure in New York City is constantly shaping our environment by emitting toxins, posing a disaster threat, polluting the air and water, and more. Networks of sensors around the city, in satellites, and with other remote sensing, are generating data that allows for tracking and research of environmental conditions. This map seeks to identify key infrastructure, social conditions, and to integrate evolving datasets on the environment.</div>
     </div>
 
 
-
-
-    <div class="main-content">
+    <div class="container">
         <div class="subbodytitle">Map Layers</div>
-        <div class="two-column-containermap">
-
-            <div class="full-width">
-                <label class="switch-label">Air Pollution</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="toggle-air-pollution">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label> </div>
-
-            <div class="column-1blankmap">
-
-            <div class="mapsection">
-                <label class="switch-label">Air Pollution</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="toggle-air-pollution">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-            
-            <div class="mapsection">
-                <label class="switch-label">Toggle NYC Waste</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="toggle-nycwaste">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-            
-            <div class="mapsection">
-                <label class="switch-label">Floodplain</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="toggle-floodplain">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-            
-            <div class="mapsection">
-                <label class="switch-label">Outfalls</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="toggle-citywideoutfalls">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-            
-            <div class="mapsection">
-                <label class="switch-label">Toggle Powerplants</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="toggle-powerplants">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-            </div>
-
-            <div class="column-2blankmap">
-                <div id="map"></div>
-            </div>
-
-        </div>
     </div>
     
-    <div class="main-content">
-        <div class="subbodytitle">Related</div>
-        <div class="two-column-container">
-            <div class="column-1 img">
-                <img src="https://live.staticflickr.com/65535/52134640255_d585d8107c_k.jpg" class="image">
-            </div>
-            <div class="column-2">Climate Change Displacement Map</div>
+    <div class="mapcontainer">
+        <div class="mapsection">
+            Weather ticker
+        </div>
+    
+
+        <div class="mapsectionleft">
+            <label class="switch-label">Air Pollution</label>
+            <label class="switch">
+                <input type="checkbox" class="switch-input" id="toggle-air-pollution">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+
+        <div class="mapsectionleft">
+            <label class="switch-label">Toggle NYC Waste</label>
+            <label class="switch">
+                <input type="checkbox" class="switch-input" id="toggle-nycwaste">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    
+        <div class="mapsectionleft">
+            <label class="switch-label">Floodplain</label>
+            <label class="switch">
+                <input type="checkbox" class="switch-input" id="toggle-floodplain">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    
+        <div class="mapsectionleft">
+            <label class="switch-label">Outfalls</label>
+            <label class="switch">
+                <input type="checkbox" class="switch-input" id="toggle-citywideoutfalls">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    
+        <div class="mapsectionleft">
+            <label class="switch-label">Toggle Powerplants</label>
+            <label class="switch">
+                <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
         </div>
     </div>
 
-    <div class="main-content">
+
+        <div id="map"></div>
+
+
+    
+    
+    
+
+    <div class="container">
         <div class="notesdescription">
             <h3>Notes</h3><br>This map uses <a href="https://aurashak.github.io">Leaflet</a><br>This map uses data from the following sources: Add more information here and more here and more here just seeing how it looks with information typed out. placeholder information.<br><br>and now with some more information
         </div>
     </div>
 
     <script src="https://aurashak.github.io/projects/nymap/nycweather.js"></script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-
     <script src="https://aurashak.github.io/projects/nymap/nymap.js"></script>
+
 </body>
 </html>
