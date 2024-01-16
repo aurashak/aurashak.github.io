@@ -87,39 +87,7 @@ function toggleSentinelLayer() {
 }
 
 
-function getTypeFromProperties(properties) {
-    switch (properties.featurecla) {
 
-        case 'State/Province':
-            return 'State/Province';
-
-        case 'continent':
-            return 'Continent';
-
-        case 'Country':
-            return 'Country';
-
-        case 'Lake':
-            return 'Lake';
-        
-            case 'Oceann':
-                return 'Ocean';
- 
-        
-        case 'River':
-            return 'River';
-
-        case 'Region':
-
-            return 'Region';
-
-        case 'Subregion':
-            return 'Subregion';
-
-        default:
-            return properties.featurecla || 'Unknown';
-    }
-}
 
 
 function showCoordinates(movement) {
