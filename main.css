@@ -222,10 +222,10 @@ h3 {
     font-size: 25px;
     font-weight: bold;
     max-width: 500px;
-    background: rgba(255, 185, 10, 0.92);
+    background: rgba(255, 185, 10, 1);
     padding: 6px 12px;
     color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     z-index: 4; /* Increase z-index value */
     margin: 40px 0px 20px;
     position: relative;
@@ -241,7 +241,7 @@ h3 {
     background: rgba(245, 237, 126, 1);
     padding: 6px 12px;
     color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     z-index: 4; /* Increase z-index value */
     margin: 40px 0px 20px;
     position: relative;
@@ -257,7 +257,7 @@ h3 {
     font-weight: 800;
     width: 70vh;
     max-width: 600px;
-    background: rgba(212, 212, 212, 0.91);
+    background: rgba(212, 212, 212, 1);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
     margin-top: 5px;
@@ -276,7 +276,7 @@ h3 {
     background: rgb(19, 213, 216);
     padding: 6px 12px;
     color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     z-index: 4; /* Increase z-index value */
     margin: 40px 0px 20px;
     position: relative;
@@ -295,8 +295,8 @@ h3 {
     font-size: 20px;
     color: #000000;
     font-weight: 400;
-    background: rgba(243, 243, 243, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
+    background: rgba(243, 243, 243, 1);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 20px;
     max-width: 600px;
     margin: 0px 0px 20px 0px;
@@ -347,7 +347,7 @@ h3 {
 .one-column {
     flex: 1;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     border-radius: 2px;
     border: 2px solid rgba(0, 0, 0, 0.91);
     margin-right: 30px;
