@@ -121,6 +121,7 @@ function getTypeFromProperties(properties) {
     }
 }
 
+
 function showCoordinates(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
@@ -138,11 +139,14 @@ function showCoordinates(movement) {
                 var type = getTypeFromProperties(properties);
                 var name = properties.name;
 
-                if (name) {
-                    hoverText += `<br>${type}: ${name}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
-                }
+                // Create a table for the information
+                var table = '<table>' +
+                    '<tr><th>Type</th><td>' + type + '</td></tr>' +
+                    '<tr><th>Name</th><td>' + (name || 'N/A') + '</td></tr>' +
+                    // Add more rows as needed
+                    '</table>';
+
+                hoverText += table;
             }
         });
 
@@ -155,13 +159,13 @@ viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpac
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
 // to set the coordsBox to the default text
 viewer.scene.canvas.addEventListener('mouseleave', function() {
     coordsBox.innerHTML = defaultText;
     coordsBox.style.display = 'block';
 });
+
 
 
 // Define heights for different layer types
