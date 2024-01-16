@@ -4,34 +4,25 @@ body {
     padding: 0;
     min-height: 100vh;
     background-color: #000;
-    color: #fff;
+    color: #000;
     font-family: Arial, sans-serif;
-    overflow: hidden;
 }
 
 a:link {
-    color: #fff;
-    text-decoration: none;
+        text-decoration: none;
 }
 
-a:visited {
-    color: none;
-
-}
+a:visited {}
 
 a:hover {
     border-bottom: 2px solid color;
 }
 
-a:active {
-    text-decoration: none;
-    color: white;
-}
+a:active {}
 
 /* Apply pointer-events: none; to overlays to let clicks pass through */
 .header, .boxes-container, .third-row, .fourth-row {
     pointer-events: none;
-    /* ... other styles ... */
 }
 
 h3 {
@@ -40,7 +31,6 @@ h3 {
     color: #333; 
     margin: 0;
 }
-
 
 /* Re-enable pointer events for interactive elements within overlays */
 .header a, .boxes-container a, .third-row a, .fourth-row a {
@@ -51,7 +41,6 @@ h3 {
     display: flex;
     justify-content: start; 
     margin-top:40px;
-    color: red;
     margin-left: 2px; 
     margin-bottom: 20px;
 }
@@ -60,34 +49,37 @@ h3 {
     font-size: 20px;
     margin-right: 60px;
     text-align: left;
-    border-radius: 2px;
-    background: rgba(9, 9, 8, 0.72);
-    color: #f1f1f1;
     z-index: 3;
-    /* text-shadow: none; */
-
 }
 
-.top-box a:link {
-    color: #e9e9e9;
-}
-
-.top-box a:hover {
-    color: #e9e9e9;
-    border-bottom: 2px solid rgb(255, 255, 255);
-}
-
-.top-box a:active {
-    color: #e9e9e9;
-}
-
-.top-box a:visited {
-    color: #e9e9e9;
-}
+.top-box a:link {}
+.top-box a:hover {}
+.top-box a:active {}
+.top-box a:visited {}
 
 .top-box:last-child {
     margin-right: 0; 
 }
+
+.hometop-box {
+    font-size: 20px;
+    margin-right: 60px;
+    text-align: left;
+    border-radius: 2px;
+    background: rgba(9, 9, 8, 0.72);
+    color: #e6e6e6;
+    z-index: 3;
+}
+
+.hometop-box a:link {color: #e6e6e6;}
+.hometop-box a:hover { border-bottom: 2px solid #e6e6e6;}
+.hometop-box a:active {color: #e6e6e6;}
+.hometop-box a:visited { color: #e6e6e6;}
+
+.hometop-box:last-child {
+    margin-right: 0; 
+}
+
 
 .header {
     display: block;
@@ -100,7 +92,6 @@ h3 {
     position: relative;
     z-index: 1;
     margin: 20px 100px;
-    border: 0px solid black;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the left */
@@ -110,182 +101,113 @@ h3 {
     position: relative;
     z-index: 1;
     margin: 20px 100px;
-    border: 0px solid black;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the left */
     pointer-events: none;
 }
 
-/* Adjust margin and padding for each item */
-.hometitle,
-.homesubtitle,
-.homeprojects,
-.homesubprojects {
-    margin: 10px 0; 
-    padding: 10px; 
-    display: inline-block; 
-    max-width: max-content; 
-    border-radius: 10px; 
-}
 
-
-.hometitle {
+.hometitle, .homeprojects {
     font-size: 40px;
     font-weight: bold;
-    background: rgba(255, 185, 10, 0.92);
     padding: 12px 20px;
-    color: #141111;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-    z-index: 4; /* Increase z-index value */
+    color: #000000;
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91);
     margin: 40px 0px 20px;
-    position: relative;
-    display:inline-block;
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
-.homesubtitle {
-    font-size: 25px;
-    color: #000000;
-    font-weight: 800;
-    max-width: 600px;
-    background: rgba(212, 212, 212, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    padding: 12px 22px;
-    margin-top: 5px;
-    margin-left: 75px;
-    line-height: 1.4;
-    border-radius: 2px;
-    display:inline-block;
-    position: relative;
-    z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-    pointer-events: auto;
-
+.hometitle {
+    background: rgba(255, 185, 10, 0.92);
+    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91);
 }
 
-
-.homeprojects {
-     font-size: 26px;
-    font-weight: bold;
-    background: rgba(10, 228, 255, 0.92);
-    padding: 10px 19px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
-    z-index: 4; /* Increase z-index value */
-    margin: 90px 0px 20px;
-    position: relative;
-    display:inline-block;
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
-}
-
-.homesubprojects {
+.homesubtitle, .homesubprojects {
     font-size: 20px;
     color: #000000;
     font-weight: 800;
-    background: rgba(212, 212, 212, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    max-width: 600px;
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
     padding: 12px 22px;
+}
+
+.homesubtitle  {
+    background: rgba(212, 212, 212, 0.91);
     margin-top: 5px;
     margin-left: 75px;
-    line-height: 1.4;
-    border-radius: 2px;
-    display: inline-block;
-    position: relative;
-    z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-    transition: background-color 0.3s ease; /* Add transition property */
-    pointer-events: auto;
+}
 
+.homeprojects {
+    font-size: 30px;
+    background: rgba(10, 228, 255, 0.92);
+    color: #000000;
+}
+
+.homesubprojects {
+    background: rgba(212, 212, 212, 0.91);
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 75px;
+    transition: background-color 0.3s ease;
 }
 
 .homesubprojects:hover {
     background-color: rgb(188, 96, 249);
 }
 
-.homesubprojects a:link {
-    color: black;
-}
-
+.homesubprojects a:link,
 .homesubprojects a:visited {
     color: black;
-}
-
-.homesubprojects a:hover {
     text-decoration: none;
 }
 
+.homesubprojects a:hover {
+    text-decoration: underline;
+}
 
-.title {
+
+.title, .bodytitle, .subtitle, .subbodytitle {
     font-size: 25px;
+    color: #000000;
     font-weight: bold;
     max-width: 500px;
-    background: rgba(255, 185, 10, 1);
     padding: 6px 12px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    z-index: 4; /* Increase z-index value */
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
+    z-index: 4;
     margin: 40px 0px 20px;
     position: relative;
-    display:inline-block;
+    display: inline-block;
     border-radius: 2px;
     border: 2px solid rgba(0, 0, 0, 0.75);
+}
+
+/* Styles for titles */
+.title {
+    background: rgba(255, 185, 10, 1);
 }
 
 .bodytitle {
-    font-size: 25px;
-    font-weight: bold;
-    max-width: 500px;
     background: rgba(245, 237, 126, 1);
-    padding: 6px 12px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    z-index: 4; /* Increase z-index value */
-    margin: 40px 0px 20px;
-    position: relative;
-    display:inline-block;
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
-
+/* Styles for subtitles */
 .subtitle {
     font-size: 20px;
-    color: #000000;
     font-weight: 800;
     width: 70vh;
     max-width: 600px;
     background: rgba(212, 212, 212, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
     padding: 12px 22px;
     margin-top: 5px;
     margin-left: 0px;
     line-height: 1.4;
-    border-radius: 2px;
-    position: relative;
-    z-index: 4;
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
 .subbodytitle {
-    font-size: 20px;
-    font-weight: bold;
-    max-width: 500px;   
     background: rgb(19, 213, 216);
-    padding: 6px 12px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    z-index: 4; /* Increase z-index value */
-    margin: 40px 0px 20px;
-    position: relative;
-    display:inline-block;
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
-/* Add a CSS class for the image */
 .image-container {
     float: left; 
     margin-right: 20px; 
@@ -308,22 +230,13 @@ h3 {
     border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
-.description a:link {
-    color: black;
-}
-
-.description a:visited {
-    color: black;
-}
-
-.description a:hover {
-    border-bottom: 2px solid black;
-}
+.description a:link { color: black; }
+.description a:visited { color: black; }
+.description a:hover { border-bottom: 2px solid black; }
 
 .description:last-child {
     margin-bottom: 0;
 }
-
 
 .descriptionimg {
     background: rgba(243, 243, 243, 0.91);
