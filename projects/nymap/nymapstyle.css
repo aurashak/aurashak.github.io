@@ -89,6 +89,50 @@ body {
     color: #fff; /* White text color */
 }
 
+
+
+.column-1blankmap {
+    background: none;
+    box-shadow: none;
+    border-radius: none;
+    border: none;
+    width:  40vh;
+}
+
+.mapsection {
+    font-size: 20px;
+    color: #000000;
+    font-weight: 400;
+    background: rgba(243, 243, 243, 0.91);
+    padding: 20px;
+    max-width: 600px;
+    line-height: 1.4;
+    border-radius: 2px;
+    display: block;
+    position: relative;
+    z-index: 4;
+    border: 2px solid rgba(0, 0, 0, 0.91);
+}
+
+.mapsection a:link {
+    color: black;
+}
+
+.mapsection a:visited {
+    color: black;
+}
+
+.mapsection a:hover {
+    border-bottom: 2px solid black;
+}
+
+.mapsection:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
 .leaflet-touch .leaflet-bar a:first-child {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
