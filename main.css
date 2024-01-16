@@ -513,6 +513,48 @@ border-top: none;
     z-index: 4;
 }
 
+/* Style for the label of the switch */
+.switch-label {
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+/* Style for the switch input */
+.switch-input {
+    display: none; /* Hide the default checkbox input */
+}
+
+/* Style for the switch track */
+.switch-track {
+    width: 40px; /* Adjust the width of the track */
+    height: 20px; /* Adjust the height of the track */
+    background-color: #ccc; /* Track background color when off */
+    border-radius: 20px; /* Adjust border radius to create a rounded track */
+    position: relative;
+}
+
+/* Style for the switch thumb (circle) */
+.switch-thumb {
+    width: 18px; /* Adjust the width of the thumb (circle) */
+    height: 18px; /* Adjust the height of the thumb (circle) */
+    background-color: #007BFF; /* Thumb background color when on */
+    border-radius: 50%; /* Make the thumb a circle */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 0.3s ease; /* Smooth left transition for the thumb */
+}
+
+/* Style for the switch input when checked (on) */
+.switch-input:checked + .switch-track {
+    background-color: #66c2ff; /* Track background color when on */
+}
+
+/* Style for the switch thumb when checked (on) */
+.switch-input:checked + .switch-track .switch-thumb {
+    left: 20px; /* Move the thumb to the right when on */
+}
+
+
 .notesdescription a:link {color: grey; text-decoration: underlline}
     .notesdescription a:hover {}
         .notesdescription a:visited {color:black}
