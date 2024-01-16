@@ -92,6 +92,22 @@ var map = L.map('map', {
     }).addTo(map);
 
 
+    document.getElementById('toggle-floodplain').addEventListener('click', function() {
+        if (map.hasLayer(floodplainLayer)) {
+            map.removeLayer(floodplainLayer);
+        } else {
+            map.addLayer(floodplainLayer);
+        }
+    });
+    
+    document.getElementById('toggle-powerplants').addEventListener('click', function() {
+        if (map.hasLayer(powerplantsLayer)) {
+            map.removeLayer(powerplantsLayer);
+        } else {
+            map.addLayer(powerplantsLayer);
+        }
+    });
+    
 
     // Create a control panel for layer toggles
     var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
