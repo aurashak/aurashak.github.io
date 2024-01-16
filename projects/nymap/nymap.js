@@ -73,10 +73,10 @@ var map = L.map('map', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
             fillColor: 'gray',
-            color: 'white',
-            weight: 1,
-            opacity: 0.1,
-            fillOpacity: 0.1
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.4,
+            fillOpacity: 0.01
         });
         }
     }).addTo(map);
