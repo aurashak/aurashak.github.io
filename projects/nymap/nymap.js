@@ -45,12 +45,12 @@ var map = L.map('map', {
     var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
-                radius: 3,
+                radius: 1,
                 fillColor: 'brown',
                 color: 'black',
                 weight: 0.1,
                 opacity: 1,
-                fillOpacity: 0.8
+                fillOpacity: 0.5
             });
         }
     }).addTo(map);
@@ -61,8 +61,8 @@ var map = L.map('map', {
             fillColor: 'gray',
             color: 'white',
             weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
+            opacity: 0.01,
+            fillOpacity: 0.01
         }
     }).addTo(map);
     
@@ -72,7 +72,7 @@ var map = L.map('map', {
             fillColor: 'blue',
             color: 'black',
             weight: 1,
-            opacity: 1,
+            opacity: 0.01,
             fillOpacity: 0.6
         }
     }).addTo(map);
@@ -81,15 +81,30 @@ var map = L.map('map', {
     var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
-                radius: 5,
+                radius: 2,
                 fillColor: 'red',
                 color: 'black',
                 weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
+                opacity: 0.01,
+                fillOpacity: 0.5
             });
         }
     }).addTo(map);
+
+
+        // Load and add the NYC power plants GeoJSON layer
+        var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 2,
+                    fillColor: 'green',
+                    color: 'black',
+                    weight: 1,
+                    opacity: 0.01,
+                    fillOpacity: 0.5
+                });
+            }
+        }).addTo(map);
 
 
     document.getElementById('toggle-floodplain').addEventListener('click', function() {
@@ -105,6 +120,22 @@ var map = L.map('map', {
             map.removeLayer(powerplantsLayer);
         } else {
             map.addLayer(powerplantsLayer);
+        }
+    });
+
+    document.getElementById('toggle-citywideoutfalls').addEventListener('click', function() {
+        if (map.hasLayer(citywideoutfallsLayer)) {
+            map.removeLayer(citywideoutfallsLayer);
+        } else {
+            map.addLayer(citywideoutfallsLayer);
+        }
+    });
+
+    document.getElementById('toggle-nycwaste').addEventListener('click', function() {
+        if (map.hasLayer(nycwasteLayer)) {
+            map.removeLayer(nycwasteLayer);
+        } else {
+            map.addLayer(nycwasteLayer);
         }
     });
     
