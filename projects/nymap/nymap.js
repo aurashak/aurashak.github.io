@@ -68,18 +68,19 @@ var map = L.map('map', {
         }
     }).addTo(map);
 
-    // Load and add the counties GeoJSON layer with fill and line styling
-    var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
+// Load and add the counties GeoJSON layer with fill and line styling
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+    style: function (feature) {
+        return {
             fillColor: 'gray',
             color: 'black',
             weight: 0.25,
             opacity: 0.4,
-            fillOpacity: 0.01
-        });
-        }
-    }).addTo(map);
+            fillOpacity: 0.5
+        };
+    }
+}).addTo(map);
+
     
 
     
