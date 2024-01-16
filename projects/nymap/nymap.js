@@ -41,11 +41,22 @@ var map = L.map('map', {
         }
     }
 
+        // Load and add the 100 year floodplain GeoJSON layer
+        var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+            style: {
+                fillColor: 'blue',
+                color: 'black',
+                weight: 1,
+                opacity: 0.5,
+                fillOpacity: 0.6
+            }
+        }).addTo(map);
+
     // Load and add the GeoJSON layer with updated style
     var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
-                radius: 1,
+                radius: 3,
                 fillColor: 'brown',
                 color: 'black',
                 weight: 0.1,
@@ -66,26 +77,17 @@ var map = L.map('map', {
         }
     }).addTo(map);
     
-    // Load and add the 100 year floodplain GeoJSON layer
-    var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-        style: {
-            fillColor: 'blue',
-            color: 'black',
-            weight: 1,
-            opacity: 0.01,
-            fillOpacity: 0.6
-        }
-    }).addTo(map);
+
     
     // Load and add the NYC power plants GeoJSON layer
     var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
-                radius: 2,
+                radius: 3,
                 fillColor: 'red',
                 color: 'black',
                 weight: 1,
-                opacity: 0.01,
+                opacity: 0.5,
                 fillOpacity: 0.5
             });
         }
@@ -96,11 +98,11 @@ var map = L.map('map', {
         var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
-                    radius: 2,
+                    radius: 3,
                     fillColor: 'green',
                     color: 'black',
                     weight: 1,
-                    opacity: 0.01,
+                    opacity: 0.5,
                     fillOpacity: 0.5
                 });
             }
