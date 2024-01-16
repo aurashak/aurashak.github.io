@@ -41,6 +41,9 @@ var map = L.map('map', {
         }
     }
 
+
+    
+
         // Load and add the 100 year floodplain GeoJSON layer
         var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
             pointToLayer: function (feature, latlng) {
