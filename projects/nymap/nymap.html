@@ -30,24 +30,23 @@
 
     <div class="main-content">
         <div class="subbodytitle">Map Layers</div>
-    </div>
+        <div class="two-column-containermap">
+            
+            <div class="column-1blankmap">
     
-    <div class="two-column-containermap">
-        
-        <div class="column-1blankmap">
-            <!-- Other map sections go here -->
-            <div class="mapsection"><button id="toggle-nycwaste">Toggle NYC Waste</button></div>
-            <div class="mapsection"><button id="toggle-floodplain">Toggle Floodplain</button></div>
-            <div class="mapsection"><button id="toggle-citywideoutfalls">Toggle Outfalls</button></div>
-            <div class="mapsection"><button id="toggle-powerplants">Toggle Powerplants</button></div>
+                <div class="mapsection">Air Pollution</div>
+                <div class="mapsection"><button id="toggle-nycwaste">Toggle NYC Waste</button></div>
+                <div class="mapsection"><button id="toggle-floodplain">Toggle Floodplain</button></div>
+                <div class="mapsection"><button id="toggle-citywideoutfalls">Toggle Outfalls</button></div>
+                <div class="mapsection"><button id="toggle-powerplants">Toggle Powerplants</button></div>
+            </div>
+
+            <div class="column-2blankmap">
+                <div id="map"></div>
+            </div>
+
         </div>
-    
-        <div class="column-2blankmap">
-            <div id="map"></div>
-        </div>
     </div>
-    
-    
     
     <div class="main-content">
         <div class="subbodytitle">Related</div>
@@ -66,7 +65,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <script src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js"></script>
 
     <script src="https://aurashak.github.io/projects/nymap/nymap.js"></script>
 </body>
