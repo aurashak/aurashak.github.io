@@ -94,23 +94,7 @@ function getTypeFromProperties(properties) {
         case 'continent':
             return 'Continent';
 
-        case 'Country':
-            return 'Country';
 
-        case 'Lake':
-            return 'Lake';
-        
-            case 'Oceann':
-                return 'Ocean';
- 
-        
-        case 'River':
-            return 'River';
-
-
-        default:
-            return properties.featurecla || 'Unknown';
-    }
 }
 
 function showCoordinates(movement) {
