@@ -88,13 +88,26 @@ h3 {
     align-items: flex-end;
 }
 
-.main-content {
+.container {
     position: relative;
     z-index: 1;
     margin: 20px 100px;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the left */
+}
+
+.mapcontainer {
+    position: relative;
+    z-index: 1;
+    margin: 20px 100px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+    background: rgba(243, 243, 243, 1);
+    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
+    border: 2px solid rgba(0, 0, 0, 0.75);
+
 }
 
 .homemain-content {
@@ -114,7 +127,7 @@ h3 {
     padding: 12px 20px;
     color: #000000;
     box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91);
-    margin: 40px 0px 20px;
+    margin: 40px 0px 30px;
 }
 
 .hometitle {
@@ -129,24 +142,21 @@ h3 {
     max-width: 600px;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
     padding: 12px 22px;
+    margin: 0px 0px 25px 0px;
 }
 
 .homesubtitle  {
     background: rgba(212, 212, 212, 0.91);
-    margin-top: 5px;
     margin-left: 75px;
 }
 
 .homeprojects {
     font-size: 30px;
     background: rgba(10, 228, 255, 0.92);
-    color: #000000;
 }
 
 .homesubprojects {
     background: rgba(212, 212, 212, 0.91);
-    margin-top: 0px;
-    margin-bottom: 20px;
     margin-left: 75px;
     transition: background-color 0.3s ease;
 }
@@ -170,56 +180,36 @@ h3 {
     font-size: 25px;
     color: #000000;
     font-weight: bold;
-    max-width: 500px;
-    padding: 6px 12px;
+    max-width: 600px;
+    padding: 10px 20px;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
     z-index: 4;
     margin: 40px 0px 20px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
+    line-height: 1.4;
     border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
-/* Styles for titles */
-.title {
-    background: rgba(255, 185, 10, 1);
-}
+.title { background: rgba(255, 185, 10, 1); }
+.bodytitle { background: rgba(245, 237, 126, 1); }
 
-.bodytitle {
-    background: rgba(245, 237, 126, 1);
-}
-
-/* Styles for subtitles */
 .subtitle {
     font-size: 20px;
-    font-weight: 800;
-    width: 70vh;
-    max-width: 600px;
     background: rgba(212, 212, 212, 1);
-    padding: 12px 22px;
     margin-top: 5px;
-    margin-left: 0px;
-    line-height: 1.4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
 }
 
-.subbodytitle {
-    background: rgb(19, 213, 216);
-}
+.subbodytitle {     background: rgb(19, 213, 216); }
 
-.image-container {
-    float: left; 
-    margin-right: 20px; 
-}
 
 .description {
     font-size: 20px;
-    color: #000000;
     font-weight: 400;
     background: rgba(243, 243, 243, 1);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    padding: 20px;
+    padding: 10px 20px;
     max-width: 600px;
     margin: 0px 0px 20px 0px;
     line-height: 1.4;
@@ -233,183 +223,80 @@ h3 {
 .description a:link { color: black; }
 .description a:visited { color: black; }
 .description a:hover { border-bottom: 2px solid black; }
+.description:last-child {     margin-bottom: 0; }
 
-.description:last-child {
-    margin-bottom: 0;
-}
 
-.descriptionimg {
-    background: rgba(243, 243, 243, 0.91);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    max-width: 600px;
-    width: 600px;
-    margin: 20px 0px 20px 50px;
-    border-radius: 2px;
-    display: block;
-    position: relative;
-    z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-}
-
-.one-column-container {
-    display: flex;
-    border-radius: 2px;
-    width: 100%; 
-}
-
-.one-column {
-    flex: 1;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-    margin-right: 30px;
-}
-
-.two-column-container {
-    display: flex;
-    border-radius: 2px;
-    width: 100%; 
-}
-
-.two-column {
-    flex: 1;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-    margin-right: 30px;
-}
-
-.column-1 {
-    flex: 1;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-    margin-right: 30px;
-}
-
-.column-1blank {
-    background: none;
-    box-shadow: none;
-    border-radius: none;
-    border: none;
-    margin-right: 30px;
-    width:  40vh;
-}
-
-.column-1 img {
-    width: 100%; 
-    height: 100%;
-    object-fit: cover; 
-}
-
-.column-2 {
-    flex: 1;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.91);
-}
-
-.column-2 img {
-    width: 100%; /* Make the image width 100% of the column */
-    height: 100%; /* Make the image height 100% of the column */
-    object-fit: cover; /* Ensure the image covers the entire space */
-}
-
-.two-column-containermap {
-    display: flex;
-    border-radius: 2px;
+.column1 {
     width: 100%;
-    background: rgba(243, 243, 243, 0.91);
-    border: 2px solid black;
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
 }
 
-.column-1blankmap {
-    background: none;
-    box-shadow: none;
-    border-radius: none;
-    border: none;
-    width: 40vh;
-
+.column2 {
+    width: 40%;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #e0e0e0;
+    border: 1px solid #999;
 }
 
-.column-2blankmap {
-    flex: 1;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 2px;
-    width: 60vh;
-    border-left: 2px solid black;
+.column3 {
+    width: 60%;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #d0d0d0;
+    border: 1px solid #888;
 }
 
-.mapsection {
+/* Clearfix to clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+
+.mapsection, .mapsectionleft, .mapsectionright {
     font-size: 20px;
     color: #000000;
     font-weight: 400;
-    background: rgba(243, 243, 243, 0.91);
-    padding: 20px;
-    max-width: 600px;
     line-height: 1.4;
     border-radius: 2px;
+    background: white;
     display: block;
-    position: relative;
     z-index: 4;
+    width: 100%;
     border-top: 2px solid rgba(0, 0, 0, 0.91);
 }
 
-.mapsectionfull {
-    font-size: 20px;
-    color: #000000;
-    font-weight: 400;
-    background: rgba(243, 243, 243, 0.91);
-    padding: 20px;
-    max-width: 600px;
-    line-height: 1.4;
-    border-radius: 2px;
-    display: block;
-    position: relative;
-    z-index: 4;
+.mapsectionleft {
+    width: 30vh;
 }
 
-.mapsection a:link {
-    color: black;
+.mapsectionright {
+    width: 70vh;
+
 }
 
-.mapsection a:visited {
-    color: black;
-}
 
-.mapsection a:hover {
-    border-bottom: 2px solid black;
-}
-
-.mapsection:last-child {
-    margin-bottom: 0;
-}
-
-.mapsection:first-child {
-border-top: none;
-}
-
+.mapsection a:link {    color: black;}
+.mapsection a:visited {color: black;}
+.mapsection a:hover {border-bottom: 2px solid black;}
+.mapsection:last-child {margin-bottom: 0;}
+.mapsection:first-child {border-top: none;}
 
 .notes {
-    font-size: 20px;
-    font-weight: bold;
-    max-width: 500px;
-    background: rgba(255, 208, 0, 0.92);
-    padding: 12px 20px;
     color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91); 
     z-index: 4; /* Increase z-index value */
     margin: 40px 0px 20px;
     position: relative;
     display:inline-block;
     border-radius: 2px;
-    border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
 .notesdescription {
