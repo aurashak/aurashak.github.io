@@ -43,7 +43,8 @@ var map = L.map('map', {
 
         // Load and add the 100 year floodplain GeoJSON layer
         var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-            style: {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
                 fillColor: 'blue',
                 color: 'black',
                 weight: 1,
@@ -53,7 +54,7 @@ var map = L.map('map', {
         }).addTo(map);
 
     // Load and add the GeoJSON layer with updated style
-    var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
+    var citywideoutfallsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
                 radius: 3,
@@ -67,13 +68,14 @@ var map = L.map('map', {
     }).addTo(map);
 
     // Load and add the counties GeoJSON layer with fill and line styling
-    var countiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-        style: {
+    var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
             fillColor: 'gray',
             color: 'white',
             weight: 1,
-            opacity: 0.01,
-            fillOpacity: 0.01
+            opacity: 0.1,
+            fillOpacity: 0.1
         }
     }).addTo(map);
     
@@ -95,7 +97,7 @@ var map = L.map('map', {
 
 
         // Load and add the NYC power plants GeoJSON layer
-        var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
+        var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                     radius: 3,
