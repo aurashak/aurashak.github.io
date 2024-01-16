@@ -147,3 +147,20 @@ var map = L.map('map', {
 
     layerControl.addTo(map); // Add the layer control to the map
 });
+
+
+// Initialize the weather widget
+var weatherWidget = new OpenWeatherMapWeatherWidget();
+
+// Configure the widget
+weatherWidget.options({
+    key: 'YOUR_API_KEY', // Replace with your OpenWeatherMap API key
+    city: 'New York', // Specify the city for which you want weather information
+    units: 'metric', // Choose the unit system (metric, imperial, standard)
+    container: 'weather-ticker', // ID of the HTML container for the widget
+    mode: 'ticker', // Use ticker mode for continuous updates
+    interval: 60000 // Set the update interval in milliseconds (e.g., 1 minute)
+});
+
+// Start the weather widget
+weatherWidget.start();
