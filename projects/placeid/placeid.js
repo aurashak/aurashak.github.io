@@ -90,12 +90,6 @@ function toggleSentinelLayer() {
 function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
 
-
-        case 'continent':
-            return 'Continent';
-
-  
-
         default:
             return properties.featurecla || 'Unknown';
     }
