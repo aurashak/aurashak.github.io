@@ -94,7 +94,11 @@ function getTypeFromProperties(properties) {
         case 'continent':
             return 'Continent';
 
+  
 
+        default:
+            return properties.featurecla || 'Unknown';
+    }
 }
 
 function showCoordinates(movement) {
