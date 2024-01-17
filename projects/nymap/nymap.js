@@ -121,14 +121,14 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }).addTo(map);
 
 
-// Add event listeners for layer buttons
-document.getElementById('openStreetMap').addEventListener('click', function() {
-    toggleBaseLayer('OpenStreetMap');
-});
-
-document.getElementById('satellite').addEventListener('click', function() {
-    toggleBaseLayer('Satellite');
-});
+        document.getElementById('toggle-openStreetMap').addEventListener('click', function() {
+            toggleBaseLayer('OpenStreetMap');
+        });
+        
+        document.getElementById('toggle-satellite').addEventListener('click', function() {
+            toggleBaseLayer('Satellite');
+        });
+        
     
 
 
