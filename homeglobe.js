@@ -11,8 +11,13 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     timeline: false,
     navigationHelpButton: false,
     fullscreenButton: false,
-    animation: false
+    animation: false,
+    skyBox: undefined, // Remove the skybox
+    skyAtmosphere: undefined, // Remove the atmosphere
+    scene3DOnly: true, // Set 3D scene mode
+    backgroundColor: Cesium.Color.WHITE // Set background color to white
 });
+
 
 viewer.imageryLayers.get(0).brightness = 1.2;
 viewer.imageryLayers.get(0).contrast = 1.2;
