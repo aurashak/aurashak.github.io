@@ -1,27 +1,18 @@
 
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: #000;
     color: #000;
+    background: #fff;
     font-family: Arial, sans-serif;
+    overflow: visible;
 }
 
-a:link {
-        text-decoration: none;
-}
-
+a:link { text-decoration: none; }
 a:visited {}
-
-a:hover {
-    border-bottom: 2px solid color;
-}
-
+a:hover { border-bottom: 2px solid color; }
 a:active {}
 
 /* Apply pointer-events: none; to overlays to let clicks pass through */
-.header, .boxes-container, .third-row, .fourth-row {
+.boxes-container, .third-row, .fourth-row {
     pointer-events: none;
 }
 
@@ -29,25 +20,20 @@ h3 {
     font-size: 20px; 
     font-weight: bold;
     color: #333; 
-    margin: 0;
 }
 
 /* Re-enable pointer events for interactive elements within overlays */
-.header a, .boxes-container a, .third-row a, .fourth-row a {
+.boxes-container a, .third-row a, .fourth-row a {
     pointer-events: auto;
 }
 
 .top-row {
     display: flex;
     justify-content: start; 
-    margin-top:40px;
-    margin-left: 2px; 
-    margin-bottom: 20px;
 }
 
 .top-box {
     font-size: 20px;
-    margin-right: 60px;
     text-align: left;
     z-index: 3;
 }
@@ -56,14 +42,10 @@ h3 {
 .top-box a:hover {}
 .top-box a:active {}
 .top-box a:visited {}
-
-.top-box:last-child {
-    margin-right: 0; 
-}
+.top-box:last-child {margin-right: 0; }
 
 .hometop-box {
     font-size: 20px;
-    margin-right: 60px;
     text-align: left;
     border-radius: 2px;
     background: rgba(9, 9, 8, 0.72);
@@ -75,120 +57,60 @@ h3 {
 .hometop-box a:hover { border-bottom: 2px solid #e6e6e6;}
 .hometop-box a:active {color: #e6e6e6;}
 .hometop-box a:visited { color: #e6e6e6;}
-
-.hometop-box:last-child {
-    margin-right: 0; 
-}
-
-
-.header {
-    display: block;
-    margin: 20px 100px 20px 100px;
-    padding: 0px;
-    align-items: flex-end;
-}
+.hometop-box:last-child {margin-right: 0; }
 
 .container {
-    position: relative;
-    z-index: 1;
-    margin: 20px 100px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the left */
 }
 
 .mapcontainer {
-    position: relative;
-    z-index: 1;
-    margin: 20px 100px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the left */
-    background: rgba(243, 243, 243, 1);
+    background: white;
+    border: 2px solid black;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    border: 2px solid rgba(0, 0, 0, 0.75);
-
 }
 
-.homemain-content {
-    position: relative;
-    z-index: 1;
-    margin: 20px 100px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the left */
-    pointer-events: none;
+.containercolumn {
+    vertical-align: top; /* Align columns to the top */
+    display: inline-block;
 }
 
-
-.hometitle, .homeprojects {
-    font-size: 40px;
-    font-weight: bold;
-    padding: 12px 20px;
-    color: #000000;
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91);
-    margin: 40px 0px 30px;
+.containerrow {
+    display: inline-block; /* Display row inline */
+    vertical-align: top; /* Align row to the top */
 }
 
-.hometitle {
-    background: rgba(255, 185, 10, 0.92);
-    box-shadow: 12px 12px 2px rgba(38, 23, 35, 0.91);
-}
-
-.homesubtitle, .homesubprojects {
+.mapsection, .mapsectionleft, .mapsectionright {
     font-size: 20px;
     color: #000000;
-    font-weight: 800;
-    max-width: 600px;
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    padding: 12px 22px;
-    margin: 0px 0px 25px 0px;
+    font-weight: 400;
 }
 
-.homesubtitle  {
-    background: rgba(212, 212, 212, 0.91);
-    margin-left: 75px;
+.mapsection {
 }
 
-.homeprojects {
-    font-size: 30px;
-    background: rgba(10, 228, 255, 0.92);
+.mapsectionleft {
+    flex-direction: row; /* Stack items vertically */
 }
 
-.homesubprojects {
-    background: rgba(212, 212, 212, 0.91);
-    margin-left: 75px;
-    transition: background-color 0.3s ease;
+.mapsectionright {
+    flex-direction: row; /* Stack items vertically */
 }
 
-.homesubprojects:hover {
-    background-color: rgb(188, 96, 249);
-}
-
-.homesubprojects a:link,
-.homesubprojects a:visited {
-    color: black;
-    text-decoration: none;
-}
-
-.homesubprojects a:hover {
-    text-decoration: underline;
-}
-
+.mapsection a:link {    color: black;}
+.mapsection a:visited {color: black;}
+.mapsection a:hover {border-bottom: 2px solid black;}
+.mapsection:last-child {margin-bottom: 0;}
+.mapsection:first-child {border-top: none;}
+.mapsectionleft:first-child {border-top: none;}
 
 .title, .bodytitle, .subtitle, .subbodytitle {
     font-size: 25px;
     color: #000000;
     font-weight: bold;
-    max-width: 600px;
-    padding: 10px 20px;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
     z-index: 4;
-    margin: 40px 0px 20px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
-    line-height: 1.4;
     border: 2px solid rgba(0, 0, 0, 0.75);
 }
 
@@ -198,162 +120,80 @@ h3 {
 .subtitle {
     font-size: 20px;
     background: rgba(212, 212, 212, 1);
-    margin-top: 5px;
 }
 
-.subbodytitle {     background: rgb(19, 213, 216); }
-
+.subbodytitle { background: rgb(19, 213, 216); }
 
 .description {
     font-size: 20px;
     font-weight: 400;
     background: rgba(243, 243, 243, 1);
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    padding: 10px 20px;
-    max-width: 600px;
-    margin: 0px 0px 20px 0px;
-    line-height: 1.4;
     border-radius: 2px;
     display: block;
     position: relative;
     z-index: 4;
-    border: 2px solid rgba(0, 0, 0, 0.91);
+    border: 2px solid black;
 }
 
 .description a:link { color: black; }
 .description a:visited { color: black; }
 .description a:hover { border-bottom: 2px solid black; }
-.description:last-child {     margin-bottom: 0; }
-
-
-.column1 {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-}
-
-.column2 {
-    width: 40%;
-    float: left;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #e0e0e0;
-    border: 1px solid #999;
-}
-
-.column3 {
-    width: 60%;
-    float: left;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #d0d0d0;
-    border: 1px solid #888;
-}
-
-/* Clearfix to clear floats */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-
-
-.mapsection, .mapsectionleft, .mapsectionright {
-    font-size: 20px;
-    color: #000000;
-    font-weight: 400;
-    line-height: 1.4;
-    border-radius: 2px;
-    background: white;
-    display: block;
-    z-index: 4;
-    width: 100%;
-    border-top: 2px solid rgba(0, 0, 0, 0.91);
-}
-
-.mapsectionleft {
-    width: 30vh;
-}
-
-.mapsectionright {
-    width: 70vh;
-
-}
-
-
-.mapsection a:link {    color: black;}
-.mapsection a:visited {color: black;}
-.mapsection a:hover {border-bottom: 2px solid black;}
-.mapsection:last-child {margin-bottom: 0;}
-.mapsection:first-child {border-top: none;}
+.description:last-child { margin-bottom: 0; }
 
 .notes {
     color: #000000;
     z-index: 4; /* Increase z-index value */
-    margin: 40px 0px 20px;
-    position: relative;
-    display:inline-block;
     border-radius: 2px;
 }
 
 .notesdescription {
     font-size: 13px;
     color: #000000;
-    font-weight: 400;
-    padding: 0px;
-    line-height: 1.1;
-    margin-top: 60px;
-    max-width: 400px;
     border-radius: 2px;
-    display: block;
-    position: relative;
     z-index: 4;
 }
 
-/* Style for the label of the switch */
 .switch-label {
-    font-size: 16px; /* Adjust font size as needed */
+    display: inline-block;
+    vertical-align: middle;
 }
 
-/* Style for the switch input */
+.switch {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .switch-input {
-    display: none; /* Hide the default checkbox input */
+    display: none; 
 }
 
-/* Style for the switch track */
 .switch-track {
-    width: 40px; /* Adjust the width of the track */
-    height: 20px; /* Adjust the height of the track */
-    background-color: #ccc; /* Track background color when off */
-    border-radius: 20px; /* Adjust border radius to create a rounded track */
+    width: 40px; 
+    height: 20px; 
+    background-color: #ccc; 
+    border-radius: 20px; 
     position: relative;
 }
 
-/* Style for the switch thumb (circle) */
 .switch-thumb {
-    width: 18px; /* Adjust the width of the thumb (circle) */
-    height: 18px; /* Adjust the height of the thumb (circle) */
-    background-color: #007BFF; /* Thumb background color when on */
-    border-radius: 50%; /* Make the thumb a circle */
+    width: 18px; 
+    height: 18px; 
+    background-color: #007BFF; 
+    border-radius: 50%; 
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    transition: left 0.3s ease; /* Smooth left transition for the thumb */
+    transition: left 0.3s ease; 
 }
 
-/* Style for the switch input when checked (on) */
 .switch-input:checked + .switch-track {
-    background-color: #66c2ff; /* Track background color when on */
+    background-color: #66c2ff;
 }
 
-/* Style for the switch thumb when checked (on) */
 .switch-input:checked + .switch-track .switch-thumb {
-    left: 20px; /* Move the thumb to the right when on */
+    left: 20px; 
 }
-
 
 .notesdescription a:link {color: grey; text-decoration: underlline}
     .notesdescription a:hover {}
@@ -363,26 +203,20 @@ h3 {
 .boxes-container {
     display: flex;
     justify-content: start;
-    margin: 0px 100px;
-
 }
 
 .box {
     font-size: 20px; 
-    margin-right: 60px; 
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
     text-align: left;
     border-radius: 2px;
     z-index: 3; 
 }
 
-.box:last-child {
-    margin-right: 0; 
-}
+.box:last-child {margin-right: 0; }
 
 /* Apply styles to the background for cesium globe*/
 .background {
-    background-color: #000;
     position: fixed;
     top: 0;
     left: 0;
@@ -391,15 +225,12 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .centered-container {
     width: 100%;
-    /* max-width: 1200px; */
     height: 100vh;
     border: 1px solid #000000;
-    margin: 0px;
     position: relative;
 }
 
@@ -445,15 +276,11 @@ h3 {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding-right:5px
 }
 
 .footer {
     background-color: none; 
     color: #7c7c7c; 
-    padding: 0px; 
-    margin: 0px;
-    margin-left: 100px;
     bottom: 0;
     left: 0;
     text-align: left; 
@@ -461,19 +288,43 @@ h3 {
     position: fixed;
   }
 
-  .image {
-    max-width: 100%; /* Limit the width to the container width */
-    max-height: 100%; /* Limit the height to the container height */
+
+.footer a {color: #888888; text-decoration: none;}
+.footer a:hover {text-decoration: none; }
+
+.top-box {
+    font-size: 20px; 
+    text-align: left;
+    color: #000000;
+    z-index: 3; 
+    text-shadow: none;
+    background: none;
 }
 
+.top-box a:link {color: #000;}
+.top-box a:hover {color: #000; border-bottom: 2px solid black;}
+.top-box a:active {color: #000;}
+.top-box a:visited {color: #161616;}
 
-.footer a {
-    color: #888888; 
-    text-decoration: none;
-    margin-right: 10px; 
+#map {
+    height: 100vh;
+    width: 100vh;
 }
 
-.footer a:hover {
-    text-decoration: none; 
+.button {
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-right-radius: 2px;
+    color: black;
+
+}
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    color: black;
+}
