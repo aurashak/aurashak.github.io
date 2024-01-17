@@ -24,9 +24,7 @@ var map = L.map('map', {
     });
 
 
-    // Create a scale control and add it to the map
-L.control.scale().addTo(map);
-
+    
 
     // Create a layer group for base layers
     var baseLayers = {
