@@ -10,7 +10,7 @@ body {
 }
 
 a:link { text-decoration: none; }
-a:visited {}
+a:visited { color: black;}
 a:hover { border-bottom: 2px solid color; }
 a:active {}
 
@@ -23,6 +23,7 @@ h3 {
     font-size: 20px; 
     font-weight: bold;
     color: #333; 
+    margin: 0px;
 }
 
 /* Re-enable pointer events for interactive elements within overlays */
@@ -33,12 +34,13 @@ h3 {
 .top-row {
     display: flex;
     justify-content: start; 
+    margin: 20px 100px 40px 100px;
 }
 
 .top-box {
     font-size: 20px;
     text-align: left;
-    z-index: 3;
+    margin-right: 60px;
 }
 
 .top-box a:link {}
@@ -47,39 +49,28 @@ h3 {
 .top-box a:visited {}
 .top-box:last-child {margin-right: 0; }
 
-.hometop-box {
-    font-size: 20px;
-    text-align: left;
-    border-radius: 2px;
-    background: rgba(9, 9, 8, 0.72);
-    color: #e6e6e6;
-    z-index: 3;
-}
-
-.hometop-box a:link {color: #e6e6e6;}
-.hometop-box a:hover { border-bottom: 2px solid #e6e6e6;}
-.hometop-box a:active {color: #e6e6e6;}
-.hometop-box a:visited { color: #e6e6e6;}
-.hometop-box:last-child {margin-right: 0; }
-
 .container {
+    margin: 0px 100px;
 }
 
 .mapcontainer {
     background: white;
     border: 2px solid black;
+    margin: 0px 100px;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
 }
 
 .containercolumn {
     vertical-align: top; /* Align columns to the top */
     display: inline-block;
+    width: 30%;
 }
 
 .containerrow {
     display: inline-block; /* Display row inline */
     vertical-align: top; /* Align row to the top */
-    width: 100%;
+    width: 69.8%;
+    border-left: 2px solid black;
 }
 
 .mapsection, .mapsectionleft, .mapsectionright {
@@ -89,10 +80,15 @@ h3 {
 }
 
 .mapsection {
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+    background: #e4e4e4;ac
 }
 
 .mapsectionleft {
     flex-direction: row; /* Stack items vertically */
+    border-bottom: 2px solid black;
+    padding: 20px 20px;
 }
 
 .mapsectionright {
@@ -111,7 +107,9 @@ h3 {
     color: #000000;
     font-weight: bold;
     box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7);
-    z-index: 4;
+    max-width: 600px;
+    margin-bottom: 30px;
+    padding: 10px 20px;
     position: relative;
     display: inline-block;
     border-radius: 2px;
@@ -131,23 +129,18 @@ h3 {
 .description {
     font-size: 20px;
     font-weight: 400;
-    background: rgba(243, 243, 243, 1);
-    box-shadow: 12px 12px 2px rgba(8, 8, 8, 0.7); 
-    border-radius: 2px;
+    background: none;
     display: block;
-    position: relative;
-    z-index: 4;
-    border: 2px solid black;
+    margin: 20px 0px 30px 0px;
+    position: relative; 
 }
 
 .description a:link { color: black; }
 .description a:visited { color: black; }
 .description a:hover { border-bottom: 2px solid black; }
-.description:last-child { margin-bottom: 0; }
 
 .notes {
     color: #000000;
-    z-index: 4; /* Increase z-index value */
     border-radius: 2px;
 }
 
@@ -155,7 +148,7 @@ h3 {
     font-size: 13px;
     color: #000000;
     border-radius: 2px;
-    z-index: 4;
+    margin-top: 60px;
 }
 
 .switch-label {
@@ -203,21 +196,6 @@ h3 {
     .notesdescription a:hover {}
         .notesdescription a:visited {color:black}
 
-
-.boxes-container {
-    display: flex;
-    justify-content: start;
-}
-
-.box {
-    font-size: 20px; 
-    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7); 
-    text-align: left;
-    border-radius: 2px;
-    z-index: 3; 
-}
-
-.box:last-child {margin-right: 0; }
 
 /* Apply styles to the background for cesium globe*/
 .background {
@@ -296,24 +274,14 @@ h3 {
 .footer a {color: #888888; text-decoration: none;}
 .footer a:hover {text-decoration: none; }
 
-.top-box {
-    font-size: 20px; 
-    text-align: left;
-    color: #000000;
-    z-index: 3; 
-    text-shadow: none;
-    background: none;
-}
 
-.top-box a:link {color: #000;}
-.top-box a:hover {color: #000; border-bottom: 2px solid black;}
-.top-box a:active {color: #000;}
-.top-box a:visited {color: #161616;}
 
 #map {
     height: 100vh;
+    max-height: 600px;
     width: 100%; /* Set width to 100% */
 }
+
 .button {
     display: inline-block;
     font-size: 16px;
@@ -331,3 +299,163 @@ h3 {
     border-bottom-right-radius: 2px;
     color: black;
 }
+
+
+
+.coords-box {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: rgb(0, 0, 0);
+    padding: 10px; 
+    border-radius: 5px; 
+    top: 20px;
+    right: 20px; 
+    z-index: 2; 
+}
+
+/* Style the table */
+#infoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+/* Style the table headers */
+#infoTable th {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style the table rows */
+#infoTable tr {
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style the table cells */
+#infoTable td {
+    padding: 10px;
+}
+
+/* Style alternate rows with a different background color */
+#infoTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect for rows */
+#infoTable tr:hover {
+    background-color: #ddd;
+}
+
+/* Apply styles to the background */
+.background {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+/* Center and add margins to the Cesium container */
+.centered-container {
+    width: 100%;
+    /* max-width: 1200px; */
+    height: 85vh;
+    border: 1px solid #f2e4e4;
+    margin: 0 100px;
+    position: relative;
+
+}
+
+
+#satelliteButton,
+#openStreetMapButton {
+    background-color: #0074e4; /* Set the background color */
+    color: white; /* Set the text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; /* Add some spacing between buttons */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+#satelliteButton:hover,
+#openStreetMapButton:hover {
+    background-color: #0059b3; /* Change color on hover */
+}
+
+/* Add or modify your existing styles as needed */
+
+.custom-scale-bar {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+}
+
+#cesiumContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    color: black;
+    background-color: #ffffff91;
+    border: 0 solid black;
+    width: 45px;
+}
+
+.cesium-button,
+.cesium-button:hover,
+.cesium-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    fill: black;
+    border: 0 solid #444;
+    box-shadow: none;
+}
+
+.cesium-viewer-geocoderContainer .cesium-button:hover,
+.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
+    color: #edffff;
+    fill: #edffff;
+}
+
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    color: #fff;
+    font-size: 0;
+}
+
+.cesium-viewer-bottom {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-right:5px
+}
+
+.controls-container button {
+    background-color: #bfbfbf;
+    color: black;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
