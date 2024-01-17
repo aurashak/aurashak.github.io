@@ -57,7 +57,6 @@ h3 {
     align-items: center;
     justify-content: center;
     z-index: 10;
-    pointer-events: none; /* Disable pointer events for the entire body */
 }
 
 .mapcontainer {
