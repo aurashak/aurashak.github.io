@@ -34,7 +34,9 @@ h3 {
 .top-row {
     display: flex;
     justify-content: start; 
-    margin: 20px 100px 40px 100px;
+    margin: 20px 0 40px 0;
+    position: relative;
+    z-index: 20;
 }
 
 .top-box {
@@ -43,14 +45,28 @@ h3 {
     margin-right: 60px;
 }
 
+.hometop-box {
+    font-size: 20px;
+    text-align: left;
+    margin-right: 60px;
+    color: white;
+}
+
 .top-box a:link {}
 .top-box a:hover {}
 .top-box a:active {}
 .top-box a:visited {}
 .top-box:last-child {margin-right: 0; }
 
+.hometop-box a:link {}
+.hometop-box a:hover {}
+.hometop-box a:active {}
+.hometop-box a:visited {}
+
 .container {
     margin: 0px 100px;
+    position: relative; 
+    z-index: 10;
 }
 
 .mapcontainer {
@@ -268,6 +284,7 @@ h3 {
     text-align: left; 
     z-index: 3000;
     position: fixed;
+    margin-left: 20px;
   }
 
 
@@ -362,18 +379,6 @@ h3 {
 }
 
 
-/* Center and add margins to the Cesium container */
-.centered-container {
-    width: 100%;
-    /* max-width: 1200px; */
-    height: 85vh;
-    border: 1px solid #f2e4e4;
-    margin: 0 100px;
-    position: relative;
-
-}
-
-
 #satelliteButton,
 #openStreetMapButton {
     background-color: #0074e4; /* Set the background color */
@@ -459,3 +464,7 @@ h3 {
     font-size: 16px;
 }
 
+.notesdescription ul {
+    list-style-type: disc; /* Use disc bullets */
+    margin-left: 20px; /* Adjust the margin to control the indentation */
+}
