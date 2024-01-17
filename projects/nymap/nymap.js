@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }).addTo(map);
 
     // Load and add the GeoJSON layer with updated style
-    var citywideoutfallsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
+    var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
                 radius: 3,
@@ -82,9 +82,9 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         return {
             fillColor: 'gray',
             color: 'black',
-            weight: 0.25,
+            weight: 0.15,
             opacity: 0.4,
-            fillOpacity: 0.1
+            fillOpacity: 0.01
         };
     }
 }).addTo(map);
@@ -138,11 +138,11 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }
     });
 
-    document.getElementById('toggle-citywideoutfalls').addEventListener('click', function() {
-        if (map.hasLayer(citywideoutfallsLayer)) {
-            map.removeLayer(citywideoutfallsLayer);
+    document.getElementById('toggle-nycso').addEventListener('click', function() {
+        if (map.hasLayer(nycsoLayer)) {
+            map.removeLayer(nycsoLayer);
         } else {
-            map.addLayer(citywideoutfallsLayer);
+            map.addLayer(nycsoLayer);
         }
     });
 
