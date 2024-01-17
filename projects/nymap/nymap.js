@@ -4,17 +4,16 @@ document.addEventListener("DOMContentLoaded", function () {
         northEast = L.latLng(41.134986, -73.700180),
         bounds = L.latLngBounds(southWest, northEast);
 
-// Initialize the map with a specific location and zoom level
-var map = L.map('map', {
-    center: [40.7128, -74.0060], // New York City coordinates
-    zoom: 10, // Initial zoom level
-    minZoom: 10, // Minimum zoom level to restrict zooming out
-    maxBounds: bounds, // Restrict panning to the New York City metropolitan region
-    maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
-});
+    // Initialize the map with a specific location and zoom level
+    var map = L.map('map', {
+        center: [40.7128, -74.0060], // New York City coordinates
+        zoom: 10, // Initial zoom level
+        minZoom: 10, // Minimum zoom level to restrict zooming out
+        maxBounds: bounds, // Restrict panning to the New York City metropolitan region
+        maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
+    });
 
-
-    // Define the base layers (OpenStreetMap and Satellite)
+    // Define the base layers (OpenStreetMap, Satellite, and Surface Temperature)
     var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
@@ -23,13 +22,17 @@ var map = L.map('map', {
         attribution: '© <a href="https://s2maps.eu/">Sentinel-2 cloudless by EOX IT Services GmbH</a>'
     });
 
-
-    
+    var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
+        attribution: 'Surface Temperature data © NASA Worldview',
+        minZoom: 10,
+        maxZoom: 12
+    });
 
     // Create a layer group for base layers
     var baseLayers = {
         "OpenStreetMap": openStreetMap,
-        "Satellite": satellite
+        "Satellite": satellite,
+        "Surface Temperature": surfaceTemperatureLayer
     };
 
     // Add the base layers to the map
@@ -43,7 +46,6 @@ var map = L.map('map', {
             map.addLayer(baseLayers[layerName]);
         }
     }
-
 
     
 
@@ -152,11 +154,13 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }
     });
     
+    // Add a scale control to the map
+    L.control.scale().addTo(map);
 
-    // Create a control panel for layer toggles
-    var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
-
-    layerControl.addTo(map); // Add the layer control to the map
-});
-
+    
+     // Create a control panel for layer toggles
+     var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
+     layerControl.addTo(map); // Add the layer control to the map
+ });
+ 
 
