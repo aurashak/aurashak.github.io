@@ -22,17 +22,37 @@ document.addEventListener("DOMContentLoaded", function () {
         attribution: '© <a href="https://s2maps.eu/">Sentinel-2 cloudless by EOX IT Services GmbH</a>'
     });
 
-    var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
-        attribution: 'Surface Temperature data © NASA Worldview',
-        minZoom: 10,
-        maxZoom: 12
+    // Define overlay layers (GeoJSON layers)
+    var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+        // ... your styling options ...
+    });
+
+    var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
+        // ... your styling options ...
     });
 
     // Add the base layers to the map
     openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
 
+    // Create a base layers object
+    var baseLayers = {
+        "OpenStreetMap": openStreetMap,
+        "Satellite": satellite
+    };
 
+    // Create an overlay layers object
+    var overlayLayers = {
+        "Floodplain": floodplainLayer,
+        "NYC SO": nycsoLayer,
+        // Add other overlay layers here...
+    };
 
+    // Add the layers control to the map
+    L.control.layers(baseLayers, overlayLayers, { position: 'topright' }).addTo(map);
+
+    // ... Your existing code ...
+
+});
 
 
         // Load and add the 100 year floodplain GeoJSON layer
@@ -121,14 +141,14 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }).addTo(map);
 
 
-        document.getElementById('toggle-openStreetMap').addEventListener('click', function() {
-            toggleBaseLayer('OpenStreetMap');
-        });
-        
-        document.getElementById('toggle-satellite').addEventListener('click', function() {
-            toggleBaseLayer('Satellite');
-        });
-        
+document.getElementById('toggle-openStreetMap').addEventListener('click', function() {
+    toggleBaseLayer('OpenStreetMap');
+});
+
+document.getElementById('toggle-satellite').addEventListener('click', function() {
+    toggleBaseLayer('Satellite');
+});
+
     
 
 
