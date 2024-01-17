@@ -12,7 +12,7 @@ body {
 a:link { text-decoration: none; }
 a:visited { color: black;}
 a:hover { border-bottom: 2px solid color; }
-a:active {}
+a:active { color: black}
 
 /* Apply pointer-events: none; to overlays to let clicks pass through */
 .boxes-container, .third-row, .fourth-row {
@@ -43,7 +43,14 @@ h3 {
     font-size: 20px;
     text-align: left;
     margin-right: 60px;
+    color: white;
 }
+
+.top-box a:link {color: white;}
+.top-box a:hover {color: white; border-bottom: 2px solid white;}
+.top-box a:active{color: white;}
+.top-box a:visited {color: white;}
+
 
 .hometop-box {
     font-size: 20px;
@@ -138,7 +145,12 @@ h3 {
 .subtitle {
     font-size: 20px;
     background: rgba(212, 212, 212, 1);
+    margin-left: 50px; /* Adjust the margin-left value to control the indentation */
 }
+
+.subtitle a:link {color: black;}
+.subtitle a:visited {color: black;}
+.subtitle a:hover {background: purple; transition: left 0.3s ease; }
 
 .subbodytitle { background: rgb(19, 213, 216); }
 
