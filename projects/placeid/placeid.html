@@ -8,51 +8,110 @@
         <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
         <link href="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
         <link rel="stylesheet" href="https://aurashak.github.io/main.css">   
-        <link rel="stylesheet" href="https://aurashak.github.io/projects/placeid/placeidstyle.css">    
 
     </head>
     
     <body>
 
-        <div class="boxes-container">
+        <div class="container">
             <div class="top-row">
                 <div class="top-box"><a href="https://aurashak.github.io">Home</a></div>
                 <div class="top-box"><a href="https://aurashak.github.io">Contact</a></div>
             </div>
         </div>
 
-        <div class="main-content">
+        <div class="container">
             <div class="title">Place Identification</div>
-            <div class="subtitle">This project seeks to build a database of social and physical lboundaries in the world. It allows for  global exploration of social and physical geograpahy. Explore the globe below.</div>
+            <div class="description">This project seeks to build a database of social and physical lboundaries in the world. It allows for  global exploration of social and physical geograpahy. Explore the globe below.</div>
         </div>
   
-        <div class="main-content">
-            <div class="bodytitle">About</div>
-            <div class="description">Infrastructure in New York City is constantly shaping our environment by emitting toxins, posing a disaster threat, polluting the air and water, and more. Networks of sensors around the city, in satellites, and with other remote sensing, are generating data that allows for tracking and research of environmental conditions. This map seeks to identify key infrastructure, social conditions, and to integrate evolving datasets on the environment.</div>
+        <div class="mapcontainer">
+        <div class="mapsection">
+            Weather ticker
         </div>
+
+            <div class="containercolumn">
+                <div class="mapsectionleft">
+                    <label class="switch-label">Air Pollution</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-air-pollution">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
+                </div>
+        
+                <div class="mapsectionleft">
+                    <label class="switch-label">Waste Facilities</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-nycwaste">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
+                </div>
+        
+                <div class="mapsectionleft">
+                    <label class="switch-label">Floodplain</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-floodplain">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
+                </div>
+        
+                <div class="mapsectionleft">
+                    <label class="switch-label">Sewer Outfalls</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-citywideoutfalls">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
+                </div>
+        
+                <div class="mapsectionleft">
+                    <label class="switch-label">Powerplants</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
+                </div>
     
-
-
-
-        <div class="main-content">
-            <div class="subbodytitle">Map Layers</div>
-            <div class="two-column-containermap">
-                <div class="column-1blankmap">
-                    <div class="mapsection">Waste</div>
-                    <div class="mapsection"><button id="satelliteButton">Satellite</button>
-                    <button id="openStreetMapButton">OpenStreetMap</button></div>
-                    <div class="mapsection"><div id="coordsBox" class="coords-box"></div></div>
+                <div class="mapsectionleft">
+                    <label class="switch-label">Pipelines</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
                 </div>
-                <div class="column-2blankmap">
-                    <div id="cesiumContainer" style="height: 500px;"></div>   
+    
+                <div class="mapsectionleft">
+                    <label class="switch-label">Surface Temperatures</label>
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
                 </div>
+    
+                </div><div class="containerrow">
+                    <div id="cesiumContainer" style="height: 600px;"></div>   
             </div>
         </div>
-        
+        </div>
+    
+                
     
 
    
-        <div class="main-content">
+        <div class="container">
             <div class="notesdescription"><h3>Notes</h3><br>This globe is built using <a href="https://aurashak.github.io">Cesium</a><br><br><li>Data sources include:</li><li>list information for data</li><li>list information for data</li><li>list information for data</li>
         </div>
 
