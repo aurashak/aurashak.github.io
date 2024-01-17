@@ -12,8 +12,8 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
-    skyBox: undefined, // Remove the skybox
-    skyAtmosphere: undefined, // Remove the atmosphere
+    skyBox: false, // Remove the skybox
+    skyAtmosphere: false, // Remove the atmosphere
     scene3DOnly: true, // Set 3D scene mode
     backgroundColor: Cesium.Color.WHITE // Set background color to white
 });
