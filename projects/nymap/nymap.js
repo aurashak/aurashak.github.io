@@ -28,26 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
         maxZoom: 12
     });
 
-    // Create a layer group for base layers
-    var baseLayers = {
-        "OpenStreetMap": openStreetMap,
-        "Satellite": satellite,
-        "Surface Temperature": surfaceTemperatureLayer
-    };
-
     // Add the base layers to the map
     openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
 
-    // Function to toggle base layers
-    function toggleBaseLayer(layerName) {
-        if (map.hasLayer(baseLayers[layerName])) {
-            map.removeLayer(baseLayers[layerName]);
-        } else {
-            map.addLayer(baseLayers[layerName]);
-        }
-    }
 
-    
+
+
 
         // Load and add the 100 year floodplain GeoJSON layer
         var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
@@ -135,6 +121,17 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }).addTo(map);
 
 
+// Add event listeners for layer buttons
+document.getElementById('openStreetMap').addEventListener('click', function() {
+    toggleBaseLayer('OpenStreetMap');
+});
+
+document.getElementById('satellite').addEventListener('click', function() {
+    toggleBaseLayer('Satellite');
+});
+    
+
+
     document.getElementById('toggle-floodplain').addEventListener('click', function() {
         if (map.hasLayer(floodplainLayer)) {
             map.removeLayer(floodplainLayer);
@@ -174,6 +171,8 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             map.addLayer(nycwasteLayer);
         }
     });
+
+    
     
     // Add a scale control to the map
     L.control.scale().addTo(map);
