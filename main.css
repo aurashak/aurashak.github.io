@@ -25,33 +25,27 @@ h3 {
     margin: 0px;
 }
 
-/* Re-enable pointer events for interactive elements within overlays */
-.boxes-container a, .third-row a, .fourth-row a {
-    pointer-events: auto;
-}
 
-.top-row {
+.header {
     display: flex;
     position: relative;
-    z-index: 20;
 }
 
-.top-box {
+.navigation {
     font-size: 20px;
     text-align: center;
     color: black;
     margin: 10px 30px 30px 30px;
 }
 
-.top-box a:link {color: black;}
-.top-box a:hover {color: black; border-bottom: 2px solid black;}
-.top-box a:active{color: black;}
-.top-box a:visited {color: black;}
-
+.navigation a:link {color: black;}
+.navigation a:hover {color: black; border-bottom: 2px solid black;}
+.navigation a:active{color: black;}
+.navigation a:visited {color: black;}
 
 .container {
     width: 60%;
-    margin: 0px auto;
+    margin: 30px auto;
     position: relative; 
     display: flex;
     align-items: center;
