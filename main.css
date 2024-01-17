@@ -565,7 +565,7 @@ h3 {
 }
 
 .top-box a:link {color: black;}
-.top-box a:hover {color: black; border-bottom: 2px solid white;}
+.top-box a:hover {color: black; border-bottom: 2px solid black;}
 .top-box a:active{color: black;}
 .top-box a:visited {color: black;}
 
@@ -718,6 +718,7 @@ h3 {
     border-radius: 2px;
     margin-top: 60px;
     max-width: 600px;
+    margin-bottom: 30px;
 }
 
 .switch-label {
