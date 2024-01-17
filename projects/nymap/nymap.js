@@ -110,15 +110,12 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 
         // Load and add the NYC GeoJSON layer
         var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, {
-                    radius: 3,
-                    fillColor: 'green',
-                    color: 'black',
-                    weight: 1,
-                    opacity: 0.5,
-                    fillOpacity: 0.5
-                });
+            style: function (feature) {
+                return {
+                    color: 'green', // Line color
+                    weight: 2,      // Line width
+                    opacity: 0.7    // Line opacity
+                };
             }
         }).addTo(map);
 
@@ -168,7 +165,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         } else {
             map.addLayer(nygaspipelinesLayer);
         }
-    });v
+    });
 
     document.getElementById('toggle-nycwaste').addEventListener('click', function() {
         if (map.hasLayer(nycwasteLayer)) {
