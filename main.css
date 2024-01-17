@@ -9,7 +9,7 @@ body {
     height: 100%;
 }
 
-a:link { text-decoration: none; }
+a:link { text-decoration: none;     pointer-events: auto; }
 a:visited { color: black;}
 a:hover { border-bottom: 2px solid color; }
 a:active { color: black}
@@ -43,13 +43,13 @@ h3 {
     font-size: 20px;
     text-align: left;
     margin-right: 60px;
-    color: white;
+    color: black;
 }
 
-.top-box a:link {color: white;}
-.top-box a:hover {color: white; border-bottom: 2px solid white;}
-.top-box a:active{color: white;}
-.top-box a:visited {color: white;}
+.top-box a:link {color: black;}
+.top-box a:hover {color: black; border-bottom: 2px solid white;}
+.top-box a:active{color: black;}
+.top-box a:visited {color: black;}
 
 
 .hometop-box {
@@ -59,10 +59,10 @@ h3 {
     color: white;
 }
 
-.top-box a:link {}
-.top-box a:hover {}
-.top-box a:active {}
-.top-box a:visited {}
+.hometop-box a:link {color: white;}
+.hometop-box a:hover {color: white; border-bottom: 2px solid white;}
+.hometop-box a:active {color: white;}
+.hometop-box a:visited {color: white;}
 .top-box:last-child {margin-right: 0; }
 
 .hometop-box a:link {}
@@ -74,6 +74,8 @@ h3 {
     margin: 0px 100px;
     position: relative; 
     z-index: 10;
+    pointer-events: none; /* Disable pointer events for the entire body */
+
 }
 
 .mapcontainer {
@@ -151,6 +153,17 @@ h3 {
 .subtitle a:link {color: black;}
 .subtitle a:visited {color: black;}
 .subtitle a:hover {background: purple; transition: left 0.3s ease; }
+
+.homesubtitle {
+    font-size: 20px;
+    background: rgba(212, 212, 212, 1);
+    margin-left: 50px; /* Adjust the margin-left value to control the indentation */
+    margin-top:25px;
+}
+
+.homesubtitle a:link {color: black;}
+.homesubtitle a:visited {color: black;}
+.homesubtitle a:hover {background: purple; transition: left 0.3s ease; }
 
 .subbodytitle { background: rgb(19, 213, 216); }
 
