@@ -4,72 +4,65 @@ document.addEventListener("DOMContentLoaded", function () {
         northEast = L.latLng(41.134986, -73.700180),
         bounds = L.latLngBounds(southWest, northEast);
 
-    // Initialize the map with a specific location and zoom level
-    var map = L.map('map', {
-        center: [40.7128, -74.0060], // New York City coordinates
-        zoom: 10, // Initial zoom level
-        minZoom: 10, // Minimum zoom level to restrict zooming out
-        maxBounds: bounds, // Restrict panning to the New York City metropolitan region
-        maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
+// Initialize the map with a specific location and zoom level
+var map = L.map('map', {
+    center: [40.7128, -74.0060], // New York City coordinates
+    zoom: 10, // Initial zoom level
+    minZoom: 10, // Minimum zoom level to restrict zooming out
+    maxBounds: bounds, // Restrict panning to the New York City metropolitan region
+    maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
+});
+
+
+    // Define the base layers (OpenStreetMap and Satellite)
+    var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
- // Define the base layers (Surface Temperature, Powerplants, Nyccounties, Waste, Floodplain, and Outfalls)
- var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
-    attribution: 'Surface Temperature data © NASA Worldview',
-    minZoom: 10,
-    maxZoom: 12,
-}).addTo(map);
+    var satellite = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
+        attribution: '© <a href="https://s2maps.eu/">Sentinel-2 cloudless by EOX IT Services GmbH</a>'
+    });
 
-    var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 3,
-                fillColor: 'red',
-                color: 'black',
-                weight: 1,
-                opacity: 0.5,
-                fillOpacity: 0.5
-            });
+
+    // Create a scale control and add it to the map
+L.control.scale().addTo(map);
+
+
+    // Create a layer group for base layers
+    var baseLayers = {
+        "OpenStreetMap": openStreetMap,
+        "Satellite": satellite
+    };
+
+    // Add the base layers to the map
+    openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
+
+    // Function to toggle base layers
+    function toggleBaseLayer(layerName) {
+        if (map.hasLayer(baseLayers[layerName])) {
+            map.removeLayer(baseLayers[layerName]);
+        } else {
+            map.addLayer(baseLayers[layerName]);
         }
-    });
+    }
 
-    var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-        style: function (feature) {
-            return {
-                fillColor: 'gray',
-                color: 'black',
-                weight: 0.25,
-                opacity: 0.4,
-                fillOpacity: 0.1
-            };
-        }
-    });
 
-    var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 3,
-                fillColor: 'green',
-                color: 'black',
-                weight: 1,
-                opacity: 0.5,
-                fillOpacity: 0.5
-            });
-        }
-    });
+    
 
-    var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
+        // Load and add the 100 year floodplain GeoJSON layer
+        var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
                 fillColor: 'blue',
                 color: 'black',
                 weight: 1,
                 opacity: 0.5,
                 fillOpacity: 0.6
             });
-        }
-    });
+            }
+        }).addTo(map);
 
+    // Load and add the GeoJSON layer with updated style
     var citywideoutfallsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
@@ -81,86 +74,91 @@ document.addEventListener("DOMContentLoaded", function () {
                 fillOpacity: 0.5
             });
         }
-    });
+    }).addTo(map);
 
-    // Create a scale control and add it to the map
-    L.control.scale().addTo(map);
-
-    // Create a layer group for base layers
-    var baseLayers = {
-        "Surface Temperature": surfaceTemperatureLayer,        
-        "Powerplants": powerplantsLayer,
-        "Nyccounties": nyccountiesLayer,
-        "Waste": nycwasteLayer,
-        "Floodplain": floodplainLayer,
-        "Outfalls": citywideoutfallsLayer
-    };
-
-// Add the Surface Temperature layer by default
-surfaceTemperatureLayer.addTo(map);
-
-    // Function to toggle base layers
-    function toggleBaseLayer(layerName) {
-        if (map.hasLayer(baseLayers[layerName])) {
-            map.removeLayer(baseLayers[layerName]);
-        } else {
-            map.addLayer(baseLayers[layerName]);
-        }
+// Load and add the counties GeoJSON layer with fill and line styling
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'gray',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.4,
+            fillOpacity: 0.1
+        };
     }
+}).addTo(map);
 
+    
+
+    
     // Load and add the NYC power plants GeoJSON layer
+    var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 3,
+                fillColor: 'red',
+                color: 'black',
+                weight: 1,
+                opacity: 0.5,
+                fillOpacity: 0.5
+            });
+        }
+    }).addTo(map);
 
-    document.getElementById('toggle-powerplants').addEventListener('click', function () {
-        toggleLayer(powerplantsLayer);
+
+        // Load and add the NYC power plants GeoJSON layer
+        var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 3,
+                    fillColor: 'green',
+                    color: 'black',
+                    weight: 1,
+                    opacity: 0.5,
+                    fillOpacity: 0.5
+                });
+            }
+        }).addTo(map);
+
+
+    document.getElementById('toggle-floodplain').addEventListener('click', function() {
+        if (map.hasLayer(floodplainLayer)) {
+            map.removeLayer(floodplainLayer);
+        } else {
+            map.addLayer(floodplainLayer);
+        }
+    });
+    
+    document.getElementById('toggle-powerplants').addEventListener('click', function() {
+        if (map.hasLayer(powerplantsLayer)) {
+            map.removeLayer(powerplantsLayer);
+        } else {
+            map.addLayer(powerplantsLayer);
+        }
     });
 
-    document.getElementById('toggle-nyccounties').addEventListener('click', function () {
-        toggleLayer(nyccountiesLayer);
+    document.getElementById('toggle-citywideoutfalls').addEventListener('click', function() {
+        if (map.hasLayer(citywideoutfallsLayer)) {
+            map.removeLayer(citywideoutfallsLayer);
+        } else {
+            map.addLayer(citywideoutfallsLayer);
+        }
     });
 
-    document.getElementById('toggle-nycwaste').addEventListener('click', function () {
-        toggleLayer(nycwasteLayer);
+    document.getElementById('toggle-nycwaste').addEventListener('click', function() {
+        if (map.hasLayer(nycwasteLayer)) {
+            map.removeLayer(nycwasteLayer);
+        } else {
+            map.addLayer(nycwasteLayer);
+        }
     });
-
-    document.getElementById('toggle-floodplain').addEventListener('click', function () {
-        toggleLayer(floodplainLayer);
-    });
-
-    document.getElementById('toggle-citywideoutfalls').addEventListener('click', function () {
-        toggleLayer(citywideoutfallsLayer);
-    });
+    
 
     // Create a control panel for layer toggles
     var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
 
-    // Add the layer control to the map
-    layerControl.addTo(map);
-
-    // Function to toggle GeoJSON layers
-    function toggleLayer(layer) {
-        if (map.hasLayer(layer)) {
-            map.removeLayer(layer);
-        } else {
-            map.addLayer(layer);
-        }
-    }
-
-  // Add a toggle for Surface Temperature
-  var surfaceTemperatureToggle = L.control({
-    position: 'topright'
+    layerControl.addTo(map); // Add the layer control to the map
 });
 
-
-surfaceTemperatureToggle.onAdd = function () {
-    var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML += '<h4>Surface Temperature</h4>';
-    div.innerHTML += '<label class="switch"><input type="checkbox" id="toggle-surface-temperature"><span class="slider round"></span></label>';
-    return div;
-};
-
-surfaceTemperatureToggle.addTo(map);
-
-document.getElementById('toggle-surface-temperature').addEventListener('change', function () {
-    toggleLayer(surfaceTemperatureLayer);
-});
 
