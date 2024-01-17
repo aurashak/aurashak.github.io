@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body>
-    <div class="boxes-container">
+    <div class="container">
         <div class="top-row">
             <div class="top-box"><a href="https://aurashak.github.io">Home</a></div>
             <div class="top-box"><a href="https://aurashak.github.io">Contact</a></div>
@@ -23,10 +23,6 @@
         <div class="description">This map documents the environmental conditions of New York City in real time, in 2D and 3D. Adjust the maps with the controls below.</div>
     </div>
 
-    <div class="container">
-        <div class="subbodytitle">Map Layers</div>
-    </div>
-    
 
     <div class="mapcontainer">
         <div class="mapsection">
@@ -45,7 +41,7 @@
             </div>
     
             <div class="mapsectionleft">
-                <label class="switch-label">Toggle NYC Waste</label>
+                <label class="switch-label">Waste Facilities</label>
                 <label class="switch">
                     <input type="checkbox" class="switch-input" id="toggle-nycwaste">
                     <div class="switch-track">
@@ -65,7 +61,7 @@
             </div>
     
             <div class="mapsectionleft">
-                <label class="switch-label">Outfalls</label>
+                <label class="switch-label">Sewer Outfalls</label>
                 <label class="switch">
                     <input type="checkbox" class="switch-input" id="toggle-citywideoutfalls">
                     <div class="switch-track">
@@ -75,7 +71,7 @@
             </div>
     
             <div class="mapsectionleft">
-                <label class="switch-label">Toggle Powerplants</label>
+                <label class="switch-label">Powerplants</label>
                 <label class="switch">
                     <input type="checkbox" class="switch-input" id="toggle-powerplants">
                     <div class="switch-track">
@@ -83,6 +79,27 @@
                     </div>
                 </label>
             </div>
+
+            <div class="mapsectionleft">
+                <label class="switch-label">Pipelines</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="mapsectionleft">
+                <label class="switch-label">Surface Temperatures</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+
             </div><div class="containerrow">
             <div id="map"></div>
         </div>
