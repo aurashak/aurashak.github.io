@@ -13,13 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
         maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
     });
 
-    // Define the base layers (Surface Temperature, Powerplants, Nyccounties, Waste, Floodplain, and Outfalls)
-    var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
-        attribution: 'Surface Temperature data © NASA Worldview',
-        minZoom: 1,
-        maxZoom: 12,
-    });
-    
+ // Define the base layers (Surface Temperature, Powerplants, Nyccounties, Waste, Floodplain, and Outfalls)
+ var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
+    attribution: 'Surface Temperature data © NASA Worldview',
+    minZoom: 10,
+    maxZoom: 12,
+}).addTo(map);
 
     var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
         pointToLayer: function (feature, latlng) {
@@ -89,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create a layer group for base layers
     var baseLayers = {
-        "Surface Temperature": surfaceTemperature,
+        "Surface Temperature": surfaceTemperatureLayer,        
         "Powerplants": powerplantsLayer,
         "Nyccounties": nyccountiesLayer,
         "Waste": nycwasteLayer,
@@ -97,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "Outfalls": citywideoutfallsLayer
     };
 
-    // Add the Surface Temperature layer by default
-    surfaceTemperature.addTo(map);
+// Add the Surface Temperature layer by default
+surfaceTemperatureLayer.addTo(map);
 
     // Function to toggle base layers
     function toggleBaseLayer(layerName) {
@@ -146,22 +145,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Add a toggle for Surface Temperature
-    var surfaceTemperatureToggle = L.control({
-        position: 'topright'
-    });
-
-    surfaceTemperatureToggle.onAdd = function () {
-        var div = L.DomUtil.create('div', 'info legend');
-        div.innerHTML += '<h4>Surface Temperature</h4>';
-        div.innerHTML += '<label class="switch"><input type="checkbox" id="toggle-surface-temperature"><span class="slider round"></span></label>';
-        return div;
-    };
-
-    surfaceTemperatureToggle.addTo(map);
-
-    document.getElementById('toggle-surface-temperature').addEventListener('change', function () {
-        toggleLayer(surfaceTemperature);
-    });
-
+  // Add a toggle for Surface Temperature
+  var surfaceTemperatureToggle = L.control({
+    position: 'topright'
 });
+
+
+surfaceTemperatureToggle.onAdd = function () {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML += '<h4>Surface Temperature</h4>';
+    div.innerHTML += '<label class="switch"><input type="checkbox" id="toggle-surface-temperature"><span class="slider round"></span></label>';
+    return div;
+};
+
+surfaceTemperatureToggle.addTo(map);
+
+document.getElementById('toggle-surface-temperature').addEventListener('change', function () {
+    toggleLayer(surfaceTemperatureLayer);
+});
+
