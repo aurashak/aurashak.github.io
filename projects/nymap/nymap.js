@@ -107,7 +107,23 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }).addTo(map);
 
 
-        // Load and add the NYC power plants GeoJSON layer
+
+        // Load and add the NYC GeoJSON layer
+        var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 3,
+                    fillColor: 'green',
+                    color: 'black',
+                    weight: 1,
+                    opacity: 0.5,
+                    fillOpacity: 0.5
+                });
+            }
+        }).addTo(map);
+
+
+        // Load and add the NYC GeoJSON layer
         var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
@@ -145,6 +161,14 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             map.addLayer(nycsoLayer);
         }
     });
+
+    document.getElementById('toggle-nygaspipelines').addEventListener('click', function() {
+        if (map.hasLayer(nygaspipelinesLayer)) {
+            map.removeLayer(nygaspipelinesLayer);
+        } else {
+            map.addLayer(nygaspipelinesLayer);
+        }
+    });v
 
     document.getElementById('toggle-nycwaste').addEventListener('click', function() {
         if (map.hasLayer(nycwasteLayer)) {
