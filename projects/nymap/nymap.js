@@ -1,19 +1,13 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Define the bounds of the New York City metropolitan region
-    var southWest = L.latLng(40.377399, -74.259090),
-        northEast = L.latLng(41.134986, -73.700180),
-        bounds = L.latLngBounds(southWest, northEast);
+// Create a map object and set its view to our chosen geographical coordinates and a zoom level
+var map = L.map('map').setView([51.505, -0.09], 13);
 
-    // Initialize the map with a specific location and zoom level
-    var map = L.map('map', {
-        center: [40.7128, -74.0060], // New York City coordinates
-        zoom: 10, // Initial zoom level
-        minZoom: 10, // Minimum zoom level to restrict zooming out
-        maxBounds: bounds, // Restrict panning to th New York City metropolitan region
-        maxBoundsViscosity: 1.0 // Make the map bounce baack when dragged outside the bounds
-    });
+// Add a tile layer to the map
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    maxZoom: 18
+}).addTo(map);
 
-    // Define the base layers (OpenStreetMap, Satellite, and Surface Temperature)
-    var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
+// Add a marker to the map
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
