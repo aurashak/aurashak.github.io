@@ -396,19 +396,36 @@ marquee {
 }
 
 
-
-.leaflet-radar {
-       
-    /* from leaflet-control-layers */
-    border-radius: 5px;
-    background: #fff;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    background-clip: padding-box;
-    
-    padding: 5px;
-    height: 67.5px;
+/* Styling for the layer control box */
+.leaflet-control-layers {
+    background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+    border: 2px solid #ccc; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the box */
+    font-family: Arial, sans-serif; /* Font family */
+    font-size: 14px; /* Font size */
+    max-width: 250px; /* Maximum width of the box */
 }
 
-.leaflet-radar .leaflet-radar-timestamp {
-    text-align: center;
-}s
+/* Styling for the layer control headings */
+.leaflet-control-layers h4 {
+    margin-top: 0; /* Remove top margin for headings */
+    font-weight: bold; /* Bold text for headings */
+}
+
+/* Styling for the layer control labels */
+.leaflet-control-layers label {
+    display: block; /* Display labels as block elements */
+    margin-bottom: 5px; /* Margin between labels */
+}
+
+/* Styling for the layer control switches */
+.leaflet-control-layers input[type="checkbox"] {
+    margin-right: 5px; /* Margin between the checkbox and label */
+}
+
+/* Styling for the checked checkboxes (active layers) */
+.leaflet-control-layers input[type="checkbox"]:checked + label {
+    font-weight: bold; /* Bold text for active layers */
+    color: #0074D9; /* Change text color for active layers */
+}
