@@ -37,41 +37,41 @@ style: function (feature) {
 }).addTo(map);
 
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-            fillColor: 'blue',
-            color: 'black',
-            weight: 1,
-            opacity: 0.5,
-            fillOpacity: 0.6
-        });
-    }
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                fillColor: 'blue',
+                color: 'black',
+                weight: 1,
+                opacity: 0.5,
+                fillOpacity: 0.6
+            });
+            }
 }).addTo(map);
 
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-            radius: 3,
-            fillColor: 'brown',
-            color: 'black',
-            weight: 0.1,
-            opacity: 1,
-            fillOpacity: 0.5
-        });
-    }
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 3,
+                fillColor: 'brown',
+                color: 'black',
+                weight: 0.1,
+                opacity: 1,
+                fillOpacity: 0.5
+            });
+        }
 }).addTo(map);
 
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-            radius: 3,
-            fillColor: 'red',
-            color: 'black',
-            weight: 1,
-            opacity: 0.5,
-            fillOpacity: 0.5
-        });
-    }
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 3,
+                fillColor: 'red',
+                color: 'black',
+                weight: 1,
+                opacity: 0.5,
+                fillOpacity: 0.5
+            });
+        }
 }).addTo(map);
 
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
@@ -82,6 +82,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
     }
 }).addTo(map);
 
+
 var satellite = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     attribution: '© <a href="https://s2maps.eu/">Sentinel-2</a>',
 }).addTo(map);
@@ -90,23 +91,7 @@ var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wm
     attribution: 'Surface Temperature data © <a href="https://worldview.earthdata.nasa.gov/">NASA Worldview</a>',
 }).addTo(map);
 
-// Function to handle layer toggle
-function toggleLayer(layer) {
-    if (map.hasLayer(layer)) {
-        map.removeLayer(layer);
-    } else {
-        map.addLayer(layer);
-    }
-}
 
-// Event listeners for toggling layers
-document.getElementById('toggle-openstreetmap').addEventListener('click', function () {
-    toggleLayer(openStreetMap);
-});
-
-document.getElementById('toggle-satellite').addEventListener('click', function () {
-    toggleLayer(satellite);
-});
 
 document.getElementById('toggle-floodplain').addEventListener('click', function() {
         if (map.hasLayer(floodplainLayer)) {
@@ -148,7 +133,14 @@ document.getElementById('toggle-nycwaste').addEventListener('click', function() 
         }
 });
 
- 
+     document.getElementById('toggle-floodplain').addEventListener('click', function () {
+        if (map.hasLayer(floodplainLayer)) {
+            map.removeLayer(floodplainLayer);
+        } else {
+            map.addLayer(floodplainLayer);
+        }
+    });
+      
     
 // Add a scale control to the map
 L.control.scale().addTo(map);
