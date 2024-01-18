@@ -62,7 +62,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+});
 
 
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
@@ -74,7 +74,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             opacity: 0.6
         };
     }
-}).addTo(map);
+});
 
 // Create a layer group containing powerplantsLayer and nygaspipelinesLayer
 var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipelinesLayer]);
