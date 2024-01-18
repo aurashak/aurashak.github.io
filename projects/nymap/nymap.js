@@ -1,14 +1,17 @@
 var map = L.map('map').setView([40.7128, -74.0060], 10);
 
 
+
+
+
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
-            fillColor: 'blue',
+            fillColor: 'red',
             color: 'black',
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.5, // Adjust fill opacity as needed
+            fillOpacity: 1, // Adjust fill opacity as needed
             radius: 6 // Adjust circle radius as needed
         });
     }
@@ -18,8 +21,8 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
-            radius: 10,
-            fillColor: 'brown',
+            radius: 20,
+            fillColor: 'yellow',
             color: 'black',
             weight: 0.5,
             opacity: 1,
@@ -29,17 +32,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
 }).addTo(map);
 
 
-var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'gray',
-            color: 'black',
-            weight: 0.5, // Adjust line weight as needed
-            opacity: 0.6, // Adjust line opacity as needed
-            fillOpacity: 0.3 // Adjust fill opacity as needed
-        };
-    }
-}).addTo(map);
+
 
 
     
@@ -47,7 +40,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
             radius: 5, // Adjust circle radius as needed
-            fillColor: 'red',
+            fillColor: 'green',
             color: 'black',
             weight: 1,
             opacity: 0.7, // Adjust opacity as needed
@@ -85,14 +78,6 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 }).addTo(map);
 
 
-    // Create an object to hold the base layers
-    var baseLayers = {
-        "Satellite": satelliteLayer,
-        "Open Street Maps": openstreetmapLayer
-    };
-
-    // Add the base layers to the map control
-    L.control.layers(baseLayers).addTo(map);
 
 
 document.getElementById('floodplain').addEventListener('click', function() {
@@ -144,14 +129,6 @@ document.getElementById('floodplain').addEventListener('click', function() {
     });
 
 
-    document.getElementById('nyccounties').addEventListener('click', function() {
-        if (map.hasLayer(nyccountiesLayer)) {
-            map.removeLayer(nyccountiesLayer);
-        } else {
-            map.addLayer(nyccountiesLayer);
-        }
-    });
 
-    
  
 
