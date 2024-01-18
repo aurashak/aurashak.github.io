@@ -178,6 +178,14 @@ document.getElementById('floodplain').addEventListener('click', function() {
         }
     });
 
+    document.getElementById('radar').addEventListener('click', function() {
+        if (map.hasLayer(radarLayer)) {
+            map.removeLayer(radarLayer);
+        } else {
+            map.addLayer(radarLayer);
+        }
+    });
+
 
     // Add the base layers to the map
     openstreetmap.addTo(map); // By default, start with OpenStreetMap as the visible layer

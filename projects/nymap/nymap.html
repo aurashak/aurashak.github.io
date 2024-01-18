@@ -7,6 +7,8 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
+    <link rel="stylesheet" href="path-to-leaflet-radar.css" />
+    <script src="path-to-leaflet-radar.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body>
@@ -27,7 +29,8 @@
         <div class="nymapsection">
             <div class="ticker-container">
                 <marquee behavior="scroll" direction="left" scrollamount="4">
-                    <span id="weather-info">weather data...</span>
+                    <span id="weather-info"><div id="openweathermap-widget-19"></div>
+                        <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 19,cityid: '5128581',appid: '7aac7c91785ec3578082ffc8aac1c88a',units: 'metric',containerid: 'openweathermap-widget-19',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script></span>
                 </marquee>
             </div>
         </div>
@@ -96,6 +99,15 @@
             </div>
 
          
+            <div class="mapsectionleft">
+                <label class="switch-label">Radar</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="radar">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
              
         </div>
         <div class="containercolumntwo">
