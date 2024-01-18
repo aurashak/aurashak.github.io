@@ -86,10 +86,10 @@ powerplantsandpipelinesGroup.addTo(map);
 
 // Event listener for layer toggling
 document.getElementById('powerplantsAndPipelines').addEventListener('click', function() {
-    if (map.hasLayer(powerplantsAndPipelinesGroup)) {
-        map.removeLayer(powerplantsAndPipelinesGroup);
+    if (map.hasLayer(powerplantsandpipelinesGroup)) {
+        map.removeLayer(powerplantsandpipelinesGroup);
     } else {
-        map.addLayer(powerplantsAndPipelinesGroup);
+        map.addLayer(powerplantsandpipelinesGroup);
     }
 });
 
