@@ -110,6 +110,29 @@ var layerControl = L.control.layers(baseLayers, null, {
 // Set OpenStreetMap as the default base layer
 openstreetmapLayer.addTo(map);
 
+// Create a custom control to turn off both base layers
+var turnOffLayersControl = L.control({
+    position: 'topright'
+});
+
+turnOffLayersControl.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'custom-control');
+    div.innerHTML = '<label>Turn Off Base Layers:</label><br><button id="turnOffLayersButton">Turn Off</button>';
+    
+    // Prevent click events on the control from propagating to the map
+    L.DomEvent.disableClickPropagation(div);
+    
+    L.DomEvent.on(div.querySelector('#turnOffLayersButton'), 'click', function (e) {
+        e.stopPropagation();
+        satelliteLayer.removeFrom(map);
+        openstreetmapLayer.removeFrom(map);
+    });
+
+    return div;
+};
+
+turnOffLayersControl.addTo(map);
+
 
 // Event listeners for layer toggling
 
