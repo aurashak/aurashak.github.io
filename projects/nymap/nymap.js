@@ -110,8 +110,7 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 }).addTo(map);
 
 
-var surfacetemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z',
-{
+var surfacetemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox=' + bbox + '&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
     style: function (feature) {
         return {
         };
