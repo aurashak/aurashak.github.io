@@ -110,13 +110,6 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 }).addTo(map);
 
 
-var surfacetemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox=' + bbox + '&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
-    style: function (feature) {
-        return {
-        };
-    }
-}).addTo(map);
-
 
 
 
@@ -168,13 +161,6 @@ document.getElementById('floodplain').addEventListener('click', function() {
         }
     });
 
-    document.getElementById('surfacetemperature').addEventListener('click', function() {
-        if (map.hasLayer(surfacetemperatureLayer)) {
-            map.removeLayer(surfacetemperatureLayer);
-        } else {
-            map.addLayer(surfacetemperatureLayer);
-        }
-    });
 
     document.getElementById('nyccounties').addEventListener('click', function() {
         if (map.hasLayer(nyccountiesLayer)) {
