@@ -176,6 +176,9 @@ h3 {
     margin: 40px 100px 30px 100px;
 }
 
+.notesdescription a:link, a:visited, a:hover {color: black; text-decoration: underline}
+
+
 .notesdescription ul {
     list-style-type: disc; /* Use disc bullets */
     margin-left: 20px; /* Adjust the margin to control the indentation */
@@ -222,9 +225,7 @@ v
     left: 20px; 
 }
 
-.notesdescription a:link {color: grey; text-decoration: underlline}
-    .notesdescription a:hover {}
-        .notesdescription a:visited {color:black}
+
 
 
 #cesiumContainer {
@@ -403,4 +404,4 @@ marquee {
 
 .leaflet-radar .leaflet-radar-timestamp {
     text-align: center;
-}
+}s
