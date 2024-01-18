@@ -27,6 +27,18 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
     }
 }).addTo(map);
 
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'black',
+            color: 'black',
+            weight: 0,
+            opacity: 1,
+            fillOpacity: 0.5 // Adjust fill opacity as needed
+        };
+    }
+}).addTo(map);
+
 
 // Define a function to calculate marker and line sizes based on zoom level
 function calculateSize(zoom) {
