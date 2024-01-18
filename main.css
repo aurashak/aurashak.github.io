@@ -73,7 +73,7 @@ h3 {
     border-right: 2px solid black;
     height: auto; /* Let it adjust its height based on content */
     flex-grow: 0; /* Prevent it from growing in height */
-    border: red 1px solid;
+    border-right: 2px solid black;
 }
 
 .containercolumntwo {
@@ -81,7 +81,7 @@ h3 {
     max-width: 70%; /* Limit the width to 70% */
     height: auto; /* Let it adjust its height based on content */
     flex-grow: 0; /* Prevent it from growing in heighat */
-    border: 1px red solid;
+    border-bottom: 2px solid black;
 }
 
 #map {
