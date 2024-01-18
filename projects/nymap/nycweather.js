@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update the ticker with forecast information
       const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.innerHTML += `<br><span>🌧️ Forecast (Next Day): Rain: ${rain} mm</span>, <span>🌄 Sunrise: ${sunrise}</span>, <span>🌅 Sunset: ${sunset}</span>`;
+      weatherInfo.innerHTML += ` | <span>🌧️ Forecast (Next Day): Rain: ${rain} mm</span>, <span>🌄 Sunrise: ${sunrise}</span>, <span>🌅 Sunset: ${sunset}</span>`;
     })
     .catch((error) => {
       console.error('Error:', error);
