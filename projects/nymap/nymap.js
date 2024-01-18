@@ -46,9 +46,9 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             weight: 0.25,
             opacity: 0.7,
             fillOpacity: 0.5
-        }).addTo(map);
+        };
     }
-});
+}).addTo(map);
 
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -60,9 +60,9 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             weight: 0.25,
             opacity: 0.7,
             fillOpacity: 0.5
-        }).addTo(map);
+        };
     }
-});
+}).addTo(map);
 
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
     style: function (feature) {
@@ -82,17 +82,13 @@ var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudle
     style: function (feature) {
         return {};
     }
-}).addTo(map);
+});
 
 var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     style: function (feature) {
         return {};
     }
 }).addTo(map);
-
-// Event listeners for layer toggling
-// ...
-
 
 
 // Event listeners for layer toggling
