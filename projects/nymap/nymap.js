@@ -8,7 +8,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillColor: 'blue',
             color: 'black',
             weight: 0,
-            opacity: 1,
+            opacity: 0,
             fillOpacity: 0.5
         };
     }
@@ -19,8 +19,8 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         return {
             fillColor: 'black',
             color: 'black',
-            weight: 20,
-            opacity: 0.9,
+            weight: 2,
+            opacity: 0.8,
             fillOpacity: 0
         };
     }
@@ -28,7 +28,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
-    var initialSize = 20;
+    var initialSize = 10;
     var minSize = 5;
 
     // Calculate the size based on zoom level with a minimum size
@@ -43,8 +43,8 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             radius: size,
             fillColor: 'brown',
             color: 'black',
-            weight: 0,
-            opacity: 1,
+            weight: 0.25,
+            opacity: 0.7,
             fillOpacity: 0.5
         });
     }
@@ -57,7 +57,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             radius: size,
             fillColor: 'red',
             color: 'black',
-            weight: 0,
+            weight: 0.25,
             opacity: 0.7,
             fillOpacity: 0.5
         });
