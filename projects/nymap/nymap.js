@@ -13,19 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
     });
 
-    var radarLayer = L.radarLayer({
-        position: 'topright', // Position of the radar control
-        radarOptions: {
-            // Radar options here
-        },
-    }).addTo(map);
-    
-    // Now you can set the data source for radarLayer
-    radarLayer.setDataSource('nexrad', {
-        radarId: 'ABC',
-        radarRange: 124, // Radar range (in nautical miles)
-    });
-    
+
 
 // Load and add the 100 year floodplain GeoJSON layer
     var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
