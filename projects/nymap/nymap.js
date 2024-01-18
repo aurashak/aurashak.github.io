@@ -31,45 +31,34 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add the base layers to the map
     openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
 
-
-    
-    // Function to toggle base layers
-    function toggleBaseLayer(layerName) {
-        if (map.hasLayer(baseLayers[layerName])) {
-            map.removeLayer(baseLayers[layerName]);
-        } else {
-            map.addLayer(baseLayers[layerName]);
-        }
-    }
-
     
 
-        // Load and add the 100 year floodplain GeoJSON layer
-        var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, {
-                fillColor: 'blue',
-                color: 'black',
-                weight: 1,
-                opacity: 0.5,
-                fillOpacity: 0.6
-            });
-            }
-        }).addTo(map);
-
-    // Load and add the GeoJSON layer with updated style
-    var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
+// Load and add the 100 year floodplain GeoJSON layer
+    var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
-                radius: 3,
-                fillColor: 'brown',
-                color: 'black',
-                weight: 0.1,
-                opacity: 1,
-                fillOpacity: 0.5
-            });
-        }
-    }).addTo(map);
+            fillColor: 'blue',
+            color: 'black',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 1
+        });
+    }
+}).addTo(map);
+
+// Load and add the GeoJSON layer with updated style
+var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 10,
+            fillColor: 'brown',
+            color: 'black',
+            weight: 0.5,
+            opacity: 1,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(map);
 
 // Load and add the counties GeoJSON layer with fill and line styling
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
@@ -85,14 +74,39 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 }).addTo(map);
 
     
+// Load and add the NYC power plants GeoJSON layer
+var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 3,
+            fillColor: 'red',
+            color: 'black',
+            weight: 1,
+            opacity: 0.5,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(map);
 
-    
-    // Load and add the NYC power plants GeoJSON layer
-    var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
+
+// Load and add the NYC GeoJSON layer
+    var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
+        style: function (feature) {
+            return {
+                color: 'black', // Line color
+                weight: 12,      // Line width
+                opacity: 0.7    // Line opacity
+            };
+        }
+}).addTo(map);
+
+
+// Load and add the NYC GeoJSON layer
+    var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
                 radius: 3,
-                fillColor: 'red',
+                fillColor: 'green',
                 color: 'black',
                 weight: 1,
                 opacity: 0.5,
@@ -102,35 +116,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }).addTo(map);
 
 
-
-        // Load and add the NYC GeoJSON layer
-        var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
-            style: function (feature) {
-                return {
-                    color: 'green', // Line color
-                    weight: 2,      // Line width
-                    opacity: 0.7    // Line opacity
-                };
-            }
-        }).addTo(map);
-
-
-        // Load and add the NYC GeoJSON layer
-        var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, {
-                    radius: 3,
-                    fillColor: 'green',
-                    color: 'black',
-                    weight: 1,
-                    opacity: 0.5,
-                    fillOpacity: 0.5
-                });
-            }
-        }).addTo(map);
-
-
-    document.getElementById('toggle-floodplain').addEventListener('click', function() {
+document.getElementById('toggle-floodplain').addEventListener('click', function() {
         if (map.hasLayer(floodplainLayer)) {
             map.removeLayer(floodplainLayer);
         } else {
@@ -171,7 +157,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     });
 
     
-    
+
     // Add a scale control to the map
     L.control.scale().addTo(map);
 
