@@ -95,40 +95,17 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
     }
 });
 
-// Create a custom control to turn off both base layers
-var turnOffLayersControl = L.control({
-    position: 'topright'
-});
-
-turnOffLayersControl.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'custom-control');
-    div.innerHTML = '<label>Turn Off Base Layers:</label><br><button id="turnOffLayersButton">Turn Off</button>';
-    
-    // Prevent click events on the control from propagating to the map
-    L.DomEvent.disableClickPropagation(div);
-    
-    L.DomEvent.on(div.querySelector('#turnOffLayersButton'), 'click', function (e) {
-        e.stopPropagation();
-        satelliteLayer.removeFrom(map);
-        openstreetmapLayer.removeFrom(map);
-    });
-
-    return div;
-};
-
 // Create a layer group for base layers including "Satellite" and "OpenStreetMap"
 var baseLayers = {
     "Satellite": satelliteLayer,
-    "OpenStreetMap": openstreetmapLayer
+    "OpenStreetMap": openstreetmapLayer,
+    "Turn Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
 };
 
 // Create a layer control with baseLayers
 var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
-
-// Add the turnOffLayersControl to the map separately
-turnOffLayersControl.addTo(map);
 
 // Set OpenStreetMap as the default base layer
 openstreetmapLayer.addTo(map);
