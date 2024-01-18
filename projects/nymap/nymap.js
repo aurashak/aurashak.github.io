@@ -1,4 +1,4 @@
-var map = L.map('map').setView([39.9042, 116.4074], 10); // Beijing, China coordinates
+var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordinates
 
 L.control.scale().addTo(map);
 
