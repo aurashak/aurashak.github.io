@@ -80,7 +80,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipelinesLayer]);
 
 // Add the combined group to the map
-powerplantsAndpipelinesGroup.addTo(map);
+powerplantsandpipelinesGroup.addTo(map);
 
 // Rest of your code...
 
