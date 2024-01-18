@@ -184,7 +184,11 @@ h3 {
     margin-left: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
 
+
+.notesdescription ul li {
+    list-style-type: disc;
 }
 
 .switch-label {
