@@ -70,7 +70,8 @@ h3 {
 .containercolumntwo {
     vertical-align: top; /* Align columns to the top */
     display: inline-block;
-    width: 69;
+    width: 60%;
+    float: right;
 }
 
 .mapsection, .mapsectionleft, .mapsectionright, .nymapsection {
@@ -262,8 +263,7 @@ v
 .footer a:hover {text-decoration: none; }
 
 #map {
-    height: 100vh;
-    max-height: 600px;
+    height: 100%;
     width: 100%; /* Set width to 100% */
 }
 
