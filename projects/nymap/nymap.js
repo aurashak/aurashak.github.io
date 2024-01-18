@@ -161,21 +161,6 @@ document.getElementById('nycso').addEventListener('click', function() {
     }
 });
 
-document.getElementById('openstreetmap').addEventListener('click', function() {
-    if (map.hasLayer(openstreetmapLayer)) {
-        map.removeLayer(openstreetmapLayer);
-    } else {
-        map.addLayer(openstreetmapLayer);
-    }
-});
-
-document.getElementById('satellite').addEventListener('click', function() {
-    if (map.hasLayer(satelliteLayer)) {
-        map.removeLayer(satelliteLayer);
-    } else {
-        map.addLayer(satelliteLayer);
-    }
-});
 
 document.getElementById('airpollution').addEventListener('click', function() {
     if (map.hasLayer(airpollutionLayer)) {
