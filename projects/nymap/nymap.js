@@ -107,6 +107,9 @@ var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
 
+// Set OpenStreetMap as the default base layer
+openstreetmapLayer.addTo(map);
+
 
 // Event listeners for layer toggling
 
