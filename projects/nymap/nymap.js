@@ -18,9 +18,9 @@ L.control.scale().addTo(map);
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
-            fillColor: 'red',
+            fillColor: 'blue',
             color: 'black',
-            weight: 1,
+            weight: 0,
             opacity: 1,
             fillOpacity: 0.5 // Adjust fill opacity as needed
         };
@@ -47,7 +47,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
         var size = calculateSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'black',
+            fillColor: 'brown',
             color: 'black',
             weight: 0,
             opacity: 1,
@@ -61,11 +61,11 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         var size = calculateSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'green',
+            fillColor: 'red',
             color: 'black',
-            weight: 1,
+            weight: 0,
             opacity: 0.7,
-            fillOpacity: 0.7
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
