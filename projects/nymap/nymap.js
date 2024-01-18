@@ -97,17 +97,19 @@ var baseLayers = {
     "Satellite": satelliteLayer
 };
 
-// Create a layer control with baseLayers and overlays
+// Define overlays including the air pollution layer
 var overlayLayers = {
     "NYC Counties": nyccountiesLayer,
     "Floodplain": floodplainLayer,
     "NYC SO": nycsoLayer,
-    "Power Plants and Pipelines": powerplantsandpipelinesGroup
+    "Power Plants and Pipelines": powerplantsandpipelinesGroup,
+    "Air Pollution": heatLayer // Add the air pollution layer here
 };
 
 var layerControl = L.control.layers(baseLayers, overlayLayers, {
     position: 'topright'
 }).addTo(map);
+
 
 // Set OpenStreetMap as the default base layer
 openstreetmapLayer.addTo(map);
