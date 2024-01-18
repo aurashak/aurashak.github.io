@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
         maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
     });
 
+    radarLayer.setDataSource('nexrad', {
+        radarId: 'ABC',
+        radarRange: 124, // Radar range (in nautical miles)
+    });
 
 // Load and add the 100 year floodplain GeoJSON layer
     var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
@@ -82,6 +86,14 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 }).addTo(map);
 
 
+var radarLayer = L.radarLayer({
+    position: 'topright', // Position of the radar control
+    radarOptions: {
+        // Radar options here
+    },
+}).addTo(map);
+
+
 
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
@@ -99,7 +111,14 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 }).addTo(map);
 
 
+    // Create an object to hold the base layers
+    var baseLayers = {
+        "Satellite": satelliteLayer,
+        "Open Street Maps": openstreetmapLayer
+    };
 
+    // Add the base layers to the map control
+    L.control.layers(baseLayers).addTo(map);
 
 
 document.getElementById('floodplain').addEventListener('click', function() {
