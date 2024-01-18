@@ -5,7 +5,6 @@ var map = L.map('map', {
 
 L.control.scale().addTo(map);
 
-
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
@@ -30,15 +29,19 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }
 }).addTo(map);
 
-function calculateSize(zoom) {
+function calculateMarkerSize(zoom) {
+    // Define the initial and minimum sizes
     var initialSize = 20;
-    var maxSize = 50;
-    return initialSize + (zoom - 10) * 5;
+    var minSize = 5;
+
+    // Calculate the size based on zoom level with a minimum size
+    var size = initialSize - (zoom - 10) * 5;
+    return Math.max(size, minSize);
 }
 
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
-        var size = calculateSize(map.getZoom());
+        var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
             fillColor: 'brown',
@@ -52,7 +55,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
 
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
-        var size = calculateSize(map.getZoom());
+        var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
             fillColor: 'red',
@@ -66,7 +69,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
     style: function (feature) {
-        var size = calculateSize(map.getZoom());
+        var size = calculateMarkerSize(map.getZoom());
         return {
             color: 'green',
             weight: size / 10,
@@ -74,6 +77,9 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
         };
     }
 }).addTo(map);
+
+// Rest of your code...
+
 
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
