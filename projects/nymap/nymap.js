@@ -82,16 +82,6 @@ var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipeline
 // Add the combined group to the map
 powerplantsandpipelinesGroup.addTo(map);
 
-// Rest of your code...
-
-// Event listener for layer toggling
-document.getElementById('powerplantsandpipelines').addEventListener('click', function() {
-    if (map.hasLayer(powerplantsandpipelinesGroup)) {
-        map.removeLayer(powerplantsandpipelinesGroup);
-    } else {
-        map.addLayer(powerplantsandpipelinesGroup);
-    }
-});
 
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
@@ -104,6 +94,17 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
     style: function (feature) {
         return {};
     }
+});
+
+// Create a layer group for base layers
+var baseLayers = {
+    "Satellite": satelliteLayer,
+    "OpenStreetMap": openstreetmapLayer
+};
+
+// Create a layer control with baseLayers
+var layerControl = L.control.layers(baseLayers, null, {
+    position: 'topright' // Position the control in the top right corner
 }).addTo(map);
 
 
