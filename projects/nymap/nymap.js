@@ -58,8 +58,8 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
         var size = calculateMarkerSize(map.getZoom());
         return {
             color: 'purple',
-            weight: 10,
-            opacity: 0.8
+            weight: 5,
+            opacity: 0.6
         };
     }
 }).addTo(map);
@@ -67,7 +67,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
-            fillColor: 'blue',
+            fillColor: '#ADD8E6',
             color: 'black',
             weight: 0,
             opacity: 0,
