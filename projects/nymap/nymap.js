@@ -19,8 +19,8 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         return {
             fillColor: 'black',
             color: 'black',
-            weight: 2,
-            opacity: 0.8,
+            weight: 0.5,
+            opacity: 0.5,
             fillOpacity: 0
         };
     }
@@ -55,7 +55,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'red',
+            fillColor: 'gold',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
