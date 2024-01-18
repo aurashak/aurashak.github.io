@@ -163,7 +163,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
 
     document.getElementById('toggle-satellite').addEventListener('click', function() {
         if (map.hasLayer(satelliteLayer)) {
-            map.removeLayer(satetlliteLayer);
+            map.removeLayer(satelliteLayer);
         } else {
             map.addLayer(satelliteLayer);
         }
@@ -187,15 +187,12 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
 
 
     // Add the base layers to the map
-    openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
+    openstreetmap.addTo(map); // By default, start with OpenStreetMap as the visible layer
 
     // Add a scale control to the map
     L.control.scale().addTo(map);
 
     
-     // Create a control panel for layer toggles
-     var layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
-     layerControl.addTo(map); // Add the layer control to the map
  });
  
 
