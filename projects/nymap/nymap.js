@@ -85,7 +85,7 @@ powerplantsandpipelinesGroup.addTo(map);
 // Rest of your code...
 
 // Event listener for layer toggling
-document.getElementById('powerplantsAndPipelines').addEventListener('click', function() {
+document.getElementById('powerplantsandpipelines').addEventListener('click', function() {
     if (map.hasLayer(powerplantsandpipelinesGroup)) {
         map.removeLayer(powerplantsandpipelinesGroup);
     } else {
