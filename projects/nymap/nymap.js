@@ -1,7 +1,7 @@
-var map = L.map('map', {
-    maxBounds: bounds,
-    maxBoundsViscosity: 1.0
-}).setView([39.9042, 116.4074], 10); // Beijing, China coordinates
+var southWest = L.latLng(40.4774, -74.2591); // Southwest corner (Lower left)
+var northEast = L.latLng(41.4846, -73.6917); // Northeast corner (Upper right)
+var bounds = L.latLngBounds(southWest, northEast);
+
 
 L.control.scale().addTo(map);
 
