@@ -131,7 +131,14 @@ turnOffLayersControl.onAdd = function (map) {
     return div;
 };
 
-turnOffLayersControl.addTo(map);
+// Add both the layer control and the turn off button to a container
+var controlContainer = L.DomUtil.create('div', 'control-container');
+controlContainer.appendChild(layerControl.getContainer());
+controlContainer.appendChild(turnOffLayersControl.getContainer());
+
+// Add the combined control container to the map
+map.addControl(L.control.container({ top: true, right: true }).setContent(controlContainer));
+
 
 
 // Event listeners for layer toggling
