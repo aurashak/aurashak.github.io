@@ -2,19 +2,6 @@ var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordi
 
 L.control.scale().addTo(map);
 
-
-var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'black',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.5,
-            fillOpacity: 0
-        };
-    }
-}).addTo(map);
-
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
     var initialSize = 10;
@@ -25,41 +12,14 @@ function calculateMarkerSize(zoom) {
     return Math.max(size, minSize);
 }
 
-var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'brown',
-            color: 'black',
-            weight: 0.25,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-}).addTo(map);
-
-var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'gold',
-            color: 'black',
-            weight: 0.25,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-}).addTo(map);
-
-var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
     style: function (feature) {
-        var size = calculateMarkerSize(map.getZoom());
         return {
-            color: 'purple',
-            weight: 5,
-            opacity: 0.6
+            fillColor: 'black',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: 0
         };
     }
 }).addTo(map);
@@ -76,12 +36,46 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
     }
 }).addTo(map);
 
-// Bring floodplain layer to the back
-floodplainLayer.bringToBack();
+var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'brown',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        }).addTo(map);
+    }
+});
 
+var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'gold',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        }).addTo(map);
+    }
+});
+
+var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
+    style: function (feature) {
+        var size = calculateMarkerSize(map.getZoom());
+        return {
+            color: 'purple',
+            weight: 5,
+            opacity: 0.6
+        };
+    }
+}).addTo(map);
 
 // Rest of your code...
-
 
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
@@ -95,6 +89,9 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
         return {};
     }
 }).addTo(map);
+
+// Event listeners for layer toggling
+// ...
 
 
 
