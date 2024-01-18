@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NY Map</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://aurashak.github.io/main.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+        <div class="header">
+            <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
+            <div class="navigation"><a href="https://aurashak.github.io">Contact</a></div>
+        </div>
+
+
+        <div class="container">
+            <div class="title">NY Environmental Map</div>
+        </div>
+        <div class="container">
+            <div class="description">This map aggregates environmental data about New York City using open source methods of data and graphic information systems.</div>
+        </div>
+
+    <div class="mapcontainer">
+        <div class="nymapsection">
+            <div class="ticker-container">
+                <marquee behavior="scroll" direction="left" scrollamount="4">
+                    <span id="weather-info">weather data...</span>
+                </marquee>
+            </div>
+        </div>
+    
+        
+        <div class="containercolumn">
+            <div class="mapsectionleft">
+                <label class="switch-label">Open Street Maps</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-openstreetmap">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+    
+            <div class="mapsectionleft">
+                <label class="switch-label">Satellite</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-satellite">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+    
+
+            <div class="mapsectionleft">
+                <label class="switch-label">Combined Sewer Overflow</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-nycso">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+    
+            <div class="mapsectionleft">
+                <label class="switch-label">Coastal Flooding</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-floodplain">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+    
+            <div class="mapsectionleft">
+                <label class="switch-label">Gas Pipelines</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-nygaspipelines">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+    
+            <div class="mapsectionleft">
+                <label class="switch-label">Powerplants</label>
+                <label class="switch">
+                    <input type="checkbox" class="switch-input" id="toggle-powerplants">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
+
+         
+             
+        </div>
+        <div class="containercolumntwo">
+            <div id="map"></div>
+        </div>
+        
+    </div>
+
+
+ 
+    
+        <div class="notesdescription">
+            <b>Notes</b><br>This map uses <a href="https://aurashak.github.io">Leaflet</a><br>
+            Sources:<br>
+            <a href="https://data.gis.ny.gov/datasets/21c2ab88012444f69d20fbb1550e8937/explore?location=41.296346%2C-74.396782%2C8.53"></a>NYS GIS Clearing house</a><br>
+        </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+    <script src="https://aurashak.github.io/projects/nymap/nymap.js"></script>
+    <script src="https://aurashak.github.io/projects/nymap/nycweather.js"></script>
+
+</body>
+</html>
