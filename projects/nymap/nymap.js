@@ -57,7 +57,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
     style: function (feature) {
         var size = calculateMarkerSize(map.getZoom());
         return {
-            color: 'green',
+            color: 'purple',
             weight: 10,
             opacity: 0.8
         };
