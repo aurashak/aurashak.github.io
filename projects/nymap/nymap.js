@@ -82,6 +82,7 @@ var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipeline
 // Add the combined group to the map
 powerplantsandpipelinesGroup.addTo(map);
 
+
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     style: function (feature) {
@@ -94,20 +95,6 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
         return {};
     }
 });
-
-// Create a layer group for base layers
-var baseLayers = {
-    "Satellite": satelliteLayer,
-    "OpenStreetMap": openstreetmapLayer
-};
-
-// Create a layer control with baseLayers
-var layerControl = L.control.layers(baseLayers, null, {
-    position: 'topright' // Position the control in the top right corner
-}).addTo(map);
-
-// Set OpenStreetMap as the default base layer
-openstreetmapLayer.addTo(map);
 
 // Create a custom control to turn off both base layers
 var turnOffLayersControl = L.control({
@@ -130,8 +117,20 @@ turnOffLayersControl.onAdd = function (map) {
     return div;
 };
 
-// Add the combined control container to the map
-map.addControl(turnOffLayersControl);
+// Create a layer group for base layers including "Satellite," "OpenStreetMap," and "Off"
+var baseLayers = {
+    "Satellite": satelliteLayer,
+    "OpenStreetMap": openstreetmapLayer,
+    "Off": turnOffLayersControl
+};
+
+// Create a layer control with baseLayers
+var layerControl = L.control.layers(baseLayers, null, {
+    position: 'topright' // Position the control in the top right corner
+}).addTo(map);
+
+// Set OpenStreetMap as the default base layer
+openstreetmapLayer.addTo(map);
 
 
 
