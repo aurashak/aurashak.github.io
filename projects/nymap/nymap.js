@@ -74,7 +74,10 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillOpacity: 0.8
         };
     }
-}).addTo(map).bringToBack(); // Bring floodplain layer to the back
+}).addTo(map);
+
+// Bring floodplain layer to the back
+floodplainLayer.bringToBack();
 
 
 // Rest of your code...
