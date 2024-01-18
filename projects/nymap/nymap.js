@@ -111,30 +111,24 @@ var layerControl = L.control.layers(baseLayers, null, {
 openstreetmapLayer.addTo(map);
 
 
-
 // Sample air pollution data as LatLng objects
-var airPollutionData = [
-    new google.maps.LatLng(40.7128, -74.0060), // Example data point
+var airpollutionData = [
+    [40.7128, -74.0060], // Example data point
     // Add more data points as needed
 ];
 
 // Create a heatmap layer
-var heatmap = new google.maps.visualization.HeatmapLayer({
-    data: airPollutionData,
-    map: map
-});
+var heatLayer = L.heatLayer(airpollutionData, { radius: 20 }).addTo(map);
 
 // Event listener for toggling the heatmap layer
 document.getElementById('airpollution').addEventListener('click', function() {
-    if (heatmap.getMap()) {
-        heatmap.setMap(null); // Remove the heatmap layer from the map
+    if (map.hasLayer(heatLayer)) {
+        map.removeLayer(heatLayer); // Remove the heatmap layer from the map
     } else {
-        heatmap.setMap(map); // Add the heatmap layer to the map
+        map.addLayer(heatLayer); // Add the heatmap layer to the map
     }
 });
 
-// Define air pollution layer
-var airpollutionLayer = heatmap;
 
 document.getElementById('floodplain').addEventListener('click', function() {
     if (map.hasLayer(floodplainLayer)) {
@@ -169,8 +163,4 @@ document.getElementById('airpollution').addEventListener('click', function() {
         map.addLayer(airpollutionLayer);
     }
 });
-
-
-
- 
 
