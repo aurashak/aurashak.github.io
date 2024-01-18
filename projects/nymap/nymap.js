@@ -76,7 +76,22 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
     }
 }).addTo(map);
 
+// Create a layer group containing powerplantsLayer and nygaspipelinesLayer
+var powerplantsAndPipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipelinesLayer]);
+
+// Add the combined group to the map
+powerplantsAndPipelinesGroup.addTo(map);
+
 // Rest of your code...
+
+// Event listener for layer toggling
+document.getElementById('powerplantsAndPipelines').addEventListener('click', function() {
+    if (map.hasLayer(powerplantsAndPipelinesGroup)) {
+        map.removeLayer(powerplantsAndPipelinesGroup);
+    } else {
+        map.addLayer(powerplantsAndPipelinesGroup);
+    }
+});
 
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
@@ -102,13 +117,17 @@ document.getElementById('floodplain').addEventListener('click', function() {
         }
     });
     
-    document.getElementById('powerplants').addEventListener('click', function() {
-        if (map.hasLayer(powerplantsLayer)) {
-            map.removeLayer(powerplantsLayer);
-        } else {
-            map.addLayer(powerplantsLayer);
-        }
-    });
+
+
+// Event listener for layer toggling
+document.getElementById('powerplantsAndPipelines').addEventListener('click', function() {
+    if (map.hasLayer(powerplantsAndPipelinesGroup)) {
+        map.removeLayer(powerplantsAndPipelinesGroup);
+    } else {
+        map.addLayer(powerplantsAndPipelinesGroup);
+    }
+});
+
 
     document.getElementById('nycso').addEventListener('click', function() {
         if (map.hasLayer(nycsoLayer)) {
@@ -118,13 +137,7 @@ document.getElementById('floodplain').addEventListener('click', function() {
         }
     });
 
-    document.getElementById('nygaspipelines').addEventListener('click', function() {
-        if (map.hasLayer(nygaspipelinesLayer)) {
-            map.removeLayer(nygaspipelinesLayer);
-        } else {
-            map.addLayer(nygaspipelinesLayer);
-        }
-    });
+
 
     document.getElementById('openstreetmap').addEventListener('click', function() {
         if (map.hasLayer(openstreetmapLayer)) {
