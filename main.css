@@ -180,10 +180,13 @@ h3 {
 
 
 .notesdescription ul {
-    list-style-type: disc; /* Use disc bullets */
-    margin-left: 20px; /* Adjust the margin to control the indentation */
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
 }
-v
+
 .switch-label {
     display: inline-block;
     vertical-align: middle;
