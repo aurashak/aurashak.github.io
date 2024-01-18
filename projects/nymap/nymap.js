@@ -121,7 +121,7 @@ var surfacetemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wm
 
 
 
-document.getElementById('toggle-floodplain').addEventListener('click', function() {
+document.getElementById('floodplain').addEventListener('click', function() {
         if (map.hasLayer(floodplainLayer)) {
             map.removeLayer(floodplainLayer);
         } else {
@@ -129,7 +129,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
     
-    document.getElementById('toggle-powerplants').addEventListener('click', function() {
+    document.getElementById('powerplants').addEventListener('click', function() {
         if (map.hasLayer(powerplantsLayer)) {
             map.removeLayer(powerplantsLayer);
         } else {
@@ -137,7 +137,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-nycso').addEventListener('click', function() {
+    document.getElementById('nycso').addEventListener('click', function() {
         if (map.hasLayer(nycsoLayer)) {
             map.removeLayer(nycsoLayer);
         } else {
@@ -145,7 +145,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-nygaspipelines').addEventListener('click', function() {
+    document.getElementById('nygaspipelines').addEventListener('click', function() {
         if (map.hasLayer(nygaspipelinesLayer)) {
             map.removeLayer(nygaspipelinesLayer);
         } else {
@@ -153,7 +153,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-openstreetmap').addEventListener('click', function() {
+    document.getElementById('openstreetmap').addEventListener('click', function() {
         if (map.hasLayer(openstreetmapLayer)) {
             map.removeLayer(openstreetmapLayer);
         } else {
@@ -161,7 +161,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-satellite').addEventListener('click', function() {
+    document.getElementById('satellite').addEventListener('click', function() {
         if (map.hasLayer(satelliteLayer)) {
             map.removeLayer(satelliteLayer);
         } else {
@@ -169,7 +169,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-surfacetemperature').addEventListener('click', function() {
+    document.getElementById('surfacetemperature').addEventListener('click', function() {
         if (map.hasLayer(surfacetemperatureLayer)) {
             map.removeLayer(surfacetemperatureLayer);
         } else {
@@ -177,7 +177,7 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-c').addEventListener('click', function() {
+    document.getElementById('nyccounties').addEventListener('click', function() {
         if (map.hasLayer(nyccountiesLayer)) {
             map.removeLayer(nyccountiesLayer);
         } else {
