@@ -111,6 +111,28 @@ var layerControl = L.control.layers(baseLayers, null, {
 openstreetmapLayer.addTo(map);
 
 
+
+// Sample air pollution data as LatLng objects
+var airPollutionData = [
+    new google.maps.LatLng(40.7128, -74.0060), // Example data point
+    // Add more data points as needed
+];
+
+// Create a heatmap layer
+var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: airPollutionData,
+    map: map
+});
+
+// Event listener for toggling the heatmap layer
+document.getElementById('airpollution').addEventListener('click', function() {
+    if (heatmap.getMap()) {
+        heatmap.setMap(null); // Remove the heatmap layer from the map
+    } else {
+        heatmap.setMap(map); // Add the heatmap layer to the map
+    }
+});
+
 // Define air pollution layer
 var airpollutionLayer = heatmap;
 
