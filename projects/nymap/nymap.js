@@ -1,18 +1,9 @@
-// Define the bounds of the New York City Tri-State Area
-var southWest = L.latLng(40.4774, -74.2591), // Southwest corner (Lower left)
-    northEast = L.latLng(41.4846, -73.6917), // Northeast corner (Upper right)
-    bounds = L.latLngBounds(southWest, northEast);
-
-// Create the map and set the initial view to the bounds
 var map = L.map('map', {
-    maxBounds: bounds, // Set the maximum allowed bounds
-    maxBoundsViscosity: 1.0, // Adjust the viscosity to control how the bounds behave
-}).setView([40.7128, -74.0060], 10); // New York City coordinates
-
-
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0
+}).setView([39.9042, 116.4074], 10); // Beijing, China coordinates
 
 L.control.scale().addTo(map);
-
 
 
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
@@ -22,7 +13,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             color: 'black',
             weight: 0,
             opacity: 1,
-            fillOpacity: 0.5 // Adjust fill opacity as needed
+            fillOpacity: 0.5
         };
     }
 }).addTo(map);
@@ -34,25 +25,16 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             color: 'black',
             weight: 0,
             opacity: 1,
-            fillOpacity: 0.5 // Adjust fill opacity as needed
+            fillOpacity: 0.5
         };
     }
 }).addTo(map);
 
-
-// Define a function to calculate marker and line sizes based on zoom level
 function calculateSize(zoom) {
-    // Define the initial and maximum sizes
     var initialSize = 20;
     var maxSize = 50;
-
-    // Calculate the size based on zoom level
-    var size = initialSize + (zoom - 10) * 5; // Adjust as needed
-
-    // Ensure the size doesn't exceed the maximum size
-    return Math.min(size, maxSize);
+    return initialSize + (zoom - 10) * 5;
 }
-
 
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -87,45 +69,28 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
         var size = calculateSize(map.getZoom());
         return {
             color: 'green',
-            weight: size / 10, // Adjust line width based on size
+            weight: size / 10,
             opacity: 0.8
         };
     }
 }).addTo(map);
 
-
-// Listen for zoom events and update marker and line sizes
-map.on('zoomend', function () {
-    var zoom = map.getZoom();
-    nycsoLayer.eachLayer(function (layer) {
-        layer.setRadius(calculateSize(zoom));
-    });
-    powerplantsLayer.eachLayer(function (layer) {
-        layer.setRadius(calculateSize(zoom));
-    });
-    nygaspipelinesLayer.setStyle({
-        weight: calculateSize(zoom) / 10 // Adjust line width based on size
-    });
-});
-
-
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     style: function (feature) {
-        return {
-        };
+        return {};
     }
 }).addTo(map);
 
 var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     style: function (feature) {
-        return {
-        };
+        return {};
     }
 }).addTo(map);
 
 
 
+// Event listeners for layer toggling
 
 document.getElementById('floodplain').addEventListener('click', function() {
         if (map.hasLayer(floodplainLayer)) {
