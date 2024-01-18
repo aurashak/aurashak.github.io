@@ -1,4 +1,15 @@
-var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordinates
+// Define the bounds of the New York City Tri-State Area
+var southWest = L.latLng(40.4774, -74.2591), // Southwest corner (Lower left)
+    northEast = L.latLng(41.4846, -73.6917), // Northeast corner (Upper right)
+    bounds = L.latLngBounds(southWest, northEast);
+
+// Create the map and set the initial view to the bounds
+var map = L.map('map', {
+    maxBounds: bounds, // Set the maximum allowed bounds
+    maxBoundsViscosity: 1.0, // Adjust the viscosity to control how the bounds behave
+}).setView([40.7128, -74.0060], 10); // New York City coordinates
+
+
 
 L.control.scale().addTo(map);
 
