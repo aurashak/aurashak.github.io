@@ -81,17 +81,6 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }
 }).addTo(map);
 
-// Load and add the NYC GeoJSON layer
-var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
-    style: function (feature) {
-        return {
-            color: 'black', // Line color
-            weight: 12,      // Line width
-            opacity: 0.7    // Line opacity
-        };
-    }
-}).addTo(map);
-
 
 
 // Load and add the NYC GeoJSON layer
