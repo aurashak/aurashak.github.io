@@ -17,10 +17,25 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
 }).addTo(map);
 
 
+// Define a function to calculate marker and line sizes based on zoom level
+function calculateSize(zoom) {
+    // Define the initial and maximum sizes
+    var initialSize = 20;
+    var maxSize = 50;
+
+    // Calculate the size based on zoom level
+    var size = initialSize + (zoom - 10) * 5; // Adjust as needed
+
+    // Ensure the size doesn't exceed the maximum size
+    return Math.min(size, maxSize);
+}
+
+
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
+        var size = calculateSize(map.getZoom());
         return L.circleMarker(latlng, {
-            radius: 20,
+            radius: size,
             fillColor: 'black',
             color: 'black',
             weight: 0,
@@ -30,31 +45,45 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
     }
 }).addTo(map);
 
-    
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
+        var size = calculateSize(map.getZoom());
         return L.circleMarker(latlng, {
-            radius: 5, // Adjust circle radius as needed
+            radius: size,
             fillColor: 'green',
             color: 'black',
             weight: 1,
-            opacity: 0.7, // Adjust opacity as needed
+            opacity: 0.7,
             fillOpacity: 0.7
         });
     }
 }).addTo(map);
 
-
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
     style: function (feature) {
+        var size = calculateSize(map.getZoom());
         return {
-            color: 'green', // Adjust line color as needed
-            weight: 2, // Adjust line width as needed
-            opacity: 0.8 // Adjust line opacity as needed
+            color: 'green',
+            weight: size / 10, // Adjust line width based on size
+            opacity: 0.8
         };
     }
 }).addTo(map);
 
+
+// Listen for zoom events and update marker and line sizes
+map.on('zoomend', function () {
+    var zoom = map.getZoom();
+    nycsoLayer.eachLayer(function (layer) {
+        layer.setRadius(calculateSize(zoom));
+    });
+    powerplantsLayer.eachLayer(function (layer) {
+        layer.setRadius(calculateSize(zoom));
+    });
+    nygaspipelinesLayer.setStyle({
+        weight: calculateSize(zoom) / 10 // Adjust line width based on size
+    });
+});
 
 
 // Load and add the NYC GeoJSON layer
