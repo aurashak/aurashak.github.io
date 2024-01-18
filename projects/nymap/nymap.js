@@ -1,20 +1,18 @@
-var map = L.map('map').setView([40.7128, -74.0060], 10);
-
+var map = L.map('map').setView([39.9042, 116.4074], 10); // Beijing, China coordinates
 
 L.control.scale().addTo(map);
 
 
 
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
+    style: function (feature) {
+        return {
             fillColor: 'red',
             color: 'black',
             weight: 1,
             opacity: 1,
-            fillOpacity: 1, // Adjust fill opacity as needed
-            radius: 6 // Adjust circle radius as needed
-        });
+            fillOpacity: 0.5 // Adjust fill opacity as needed
+        };
     }
 }).addTo(map);
 
@@ -22,19 +20,15 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
-            radius: 200,
+            radius: 20,
             fillColor: 'black',
             color: 'black',
-            weight: 0.5,
+            weight: 0,
             opacity: 1,
             fillOpacity: 0.5
         });
     }
 }).addTo(map);
-
-
-
-
 
     
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
