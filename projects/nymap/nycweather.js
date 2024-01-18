@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update the ticker with current weather information
       const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.textContent = `Temperature: ${temperatureCelsius}°C (${temperatureFahrenheit}°F), Humidity: ${humidity}%, Weather: ${description}`;
+      weatherInfo.innerHTML = `<span>🌡️ Temperature: ${temperatureCelsius}°C (${temperatureFahrenheit}°F)</span>, <span>💧 Humidity: ${humidity}%</span>, <span>🌦️ Weather: ${description}</span>`;
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update the ticker with forecast information
       const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.textContent += `, Forecast (Next Day): Rain: ${rain} mm, Sunrise: ${sunrise}, Sunset: ${sunset}`;
+      weatherInfo.innerHTML += `<br><span>🌧️ Forecast (Next Day): Rain: ${rain} mm</span>, <span>🌄 Sunrise: ${sunrise}</span>, <span>🌅 Sunset: ${sunset}</span>`;
     })
     .catch((error) => {
       console.error('Error:', error);
