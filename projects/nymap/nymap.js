@@ -97,9 +97,9 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 // Create a layer group for base layers including "Satellite" and "OpenStreetMap"
 var baseLayers = {
-    "Satellite": satelliteLayer,
     "OpenStreetMap": openstreetmapLayer,
-    "Turn Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
+    "Satellite": satelliteLayer,
+    "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
 };
 
 // Create a layer control with baseLayers
@@ -111,6 +111,7 @@ var layerControl = L.control.layers(baseLayers, null, {
 openstreetmapLayer.addTo(map);
 
 
+var airpollutionLayer; // Declare the air pollution layer variable at a higher scope
 
 // Function to add air pollution data as a layer
 function addairpollutionLayer() {
@@ -149,7 +150,7 @@ function addairpollutionLayer() {
             };
 
             // Create a GeoJSON layer with the air pollution feature
-            var airpollutionLayer = L.geoJSON(airpollutionFeature, {
+            airpollutionLayer = L.geoJSON(airpollutionFeature, {
                 pointToLayer: function (feature, latlng) {
                     var airQualityColor = airQualityLevels[feature.properties.airQualityIndex];
                     return L.circleMarker(latlng, {
@@ -169,7 +170,7 @@ function addairpollutionLayer() {
             });
 
             // Add the air pollution layer to the map
-            airPollutionLayer.addTo(map);
+            airpollutionLayer.addTo(map);
         })
         .catch(function (error) {
             console.error('Error fetching air pollution data:', error);
@@ -178,7 +179,6 @@ function addairpollutionLayer() {
 
 // Call the function to add the air pollution layer
 addairpollutionLayer();
-
 
 
 
