@@ -82,7 +82,6 @@ var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipeline
 // Add the combined group to the map
 powerplantsandpipelinesGroup.addTo(map);
 
-
 // Load and add the NYC GeoJSON layer
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     style: function (feature) {
@@ -131,13 +130,79 @@ turnOffLayersControl.onAdd = function (map) {
     return div;
 };
 
-// Add both the layer control and the turn off button to a container
-var controlContainer = L.DomUtil.create('div', 'control-container');
-controlContainer.appendChild(layerControl.getContainer());
-controlContainer.appendChild(turnOffLayersControl.getContainer());
-
 // Add the combined control container to the map
-map.addControl(L.control.container({ top: true, right: true }).setContent(controlContainer));
+map.addControl(turnOffLayersControl);
+
+
+
+
+// Function to add air pollution data as a layer
+function addairpollutionLayer() {
+    // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
+    var apiKey = '7aac7c91785ec3578082ffc8aac1c88a';
+    var city = 'New York'; // Replace with the city of your choice
+    var apiUrl = `https://api.openweathermap.org/data/2.5/air_pollution?q=${city}&appid=${apiKey}`;
+
+    fetch(apiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // Extract air pollution data from the API response
+            var airQualityIndex = data.list[0].main.aqi;
+
+            // Define air quality levels and corresponding colors
+            var airQualityLevels = {
+                1: 'green',
+                2: 'yellow',
+                3: 'orange',
+                4: 'red',
+                5: 'purple'
+            };
+
+            // Create a GeoJSON feature with the air pollution data
+            var airpollutionFeature = {
+                type: 'Feature',
+                properties: {
+                    airQualityIndex: airQualityIndex
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [40.7128, -74.0060] // Replace with the coordinates of your desired location
+                }
+            };
+
+            // Create a GeoJSON layer with the air pollution feature
+            var airpollutionLayer = L.geoJSON(airpollutionFeature, {
+                pointToLayer: function (feature, latlng) {
+                    var airQualityColor = airQualityLevels[feature.properties.airQualityIndex];
+                    return L.circleMarker(latlng, {
+                        radius: 10,
+                        fillColor: airQualityColor,
+                        color: 'black',
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.7
+                    });
+                },
+                onEachFeature: function (feature, layer) {
+                    var airQualityIndex = feature.properties.airQualityIndex;
+                    var airQualityColor = airQualityLevels[airQualityIndex];
+                    layer.bindPopup(`Air Quality Index: ${airQualityIndex}<br>Category: ${airQualityColor}`);
+                }
+            });
+
+            // Add the air pollution layer to the map
+            airPollutionLayer.addTo(map);
+        })
+        .catch(function (error) {
+            console.error('Error fetching air pollution data:', error);
+        });
+}
+
+// Call the function to add the air pollution layer
+addairpollutionLayer();
+
 
 
 
@@ -186,6 +251,15 @@ document.getElementById('powerplantsandpipelines').addEventListener('click', fun
             map.removeLayer(satelliteLayer);
         } else {
             map.addLayer(satelliteLayer);
+        }
+    });
+
+
+    document.getElementById('airpollution').addEventListener('click', function() {
+        if (map.hasLayer(airpollutionLayer)) {
+            map.removeLayer(airpollutionLayer);
+        } else {
+            map.addLayer(airpollutionLayer);
         }
     });
 
