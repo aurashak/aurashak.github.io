@@ -1,6 +1,7 @@
 var map = L.map('map').setView([40.7128, -74.0060], 10);
 
 
+L.control.scale().addTo(map);
 
 
 
@@ -21,8 +22,8 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
-            radius: 20,
-            fillColor: 'yellow',
+            radius: 200,
+            fillColor: 'black',
             color: 'black',
             weight: 0.5,
             opacity: 1,
