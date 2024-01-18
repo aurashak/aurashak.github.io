@@ -1,7 +1,4 @@
-var southWest = L.latLng(40.4774, -74.2591); // Southwest corner (Lower left)
-var northEast = L.latLng(41.4846, -73.6917); // Northeast corner (Upper right)
-var bounds = L.latLngBounds(southWest, northEast);
-
+var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordinates
 
 L.control.scale().addTo(map);
 
