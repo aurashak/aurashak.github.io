@@ -2,17 +2,6 @@ var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordi
 
 L.control.scale().addTo(map);
 
-var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'blue',
-            color: 'black',
-            weight: 0,
-            opacity: 0,
-            fillOpacity: 0.5
-        };
-    }
-}).addTo(map);
 
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
     style: function (feature) {
@@ -74,6 +63,19 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
         };
     }
 }).addTo(map);
+
+var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'blue',
+            color: 'black',
+            weight: 0,
+            opacity: 0,
+            fillOpacity: 0.3
+        };
+    }
+}).addTo(map).bringToBack(); // Bring floodplain layer to the back
+
 
 // Rest of your code...
 
