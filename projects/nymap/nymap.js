@@ -13,25 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         maxBoundsViscosity: 1.0 // Make the map bounce back when dragged outside the bounds
     });
 
-    // Define the base layers (OpenStreetMap, Satellite, and Surface Temperature)
-    var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-    var satellite = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
-        attribution: '© <a href="https://s2maps.eu/">Sentinel-2 cloudless by EOX IT Services GmbH</a>'
-    });
-
-    var surfaceTemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z', {
-        attribution: 'Surface Temperature data © NASA Worldview',
-        minZoom: 10,
-        maxZoom: 12
-    });
-
-    // Add the base layers to the map
-    openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
-
-    
 
 // Load and add the 100 year floodplain GeoJSON layer
     var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
@@ -100,20 +81,44 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         }
 }).addTo(map);
 
+// Load and add the NYC GeoJSON layer
+var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
+    style: function (feature) {
+        return {
+            color: 'black', // Line color
+            weight: 12,      // Line width
+            opacity: 0.7    // Line opacity
+        };
+    }
+}).addTo(map);
+
+
 
 // Load and add the NYC GeoJSON layer
-    var nycwasteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycwaste.geojson', {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-                radius: 3,
-                fillColor: 'green',
-                color: 'black',
-                weight: 1,
-                opacity: 0.5,
-                fillOpacity: 0.5
-            });
-        }
-    }).addTo(map);
+var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
+    style: function (feature) {
+        return {
+        };
+    }
+}).addTo(map);
+
+var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    style: function (feature) {
+        return {
+        };
+    }
+}).addTo(map);
+
+
+var surfacetemperatureLayer = L.tileLayer('https://wvs.earthdata.nasa.gov/wms/wms?service=WMS&request=GetMap&layers=MODIS_Terra_Land_Surface_Temperature&width=512&height=512&bbox={bbox-epsg-3857}&format=image/png&transparent=true&time=2023-01-01T00:00:00Z',
+{
+    style: function (feature) {
+        return {
+        };
+    }
+}).addTo(map);
+
+
 
 
 document.getElementById('toggle-floodplain').addEventListener('click', function() {
@@ -148,15 +153,41 @@ document.getElementById('toggle-floodplain').addEventListener('click', function(
         }
     });
 
-    document.getElementById('toggle-nycwaste').addEventListener('click', function() {
-        if (map.hasLayer(nycwasteLayer)) {
-            map.removeLayer(nycwasteLayer);
+    document.getElementById('toggle-openstreetmap').addEventListener('click', function() {
+        if (map.hasLayer(openstreetmapLayer)) {
+            map.removeLayer(openstreetmapLayer);
         } else {
-            map.addLayer(nycwasteLayer);
+            map.addLayer(openstreetmapLayer);
         }
     });
 
-    
+    document.getElementById('toggle-satellite').addEventListener('click', function() {
+        if (map.hasLayer(satelliteLayer)) {
+            map.removeLayer(satetlliteLayer);
+        } else {
+            map.addLayer(satelliteLayer);
+        }
+    });
+
+    document.getElementById('toggle-surfacetemperature').addEventListener('click', function() {
+        if (map.hasLayer(surfacetemperatureLayer)) {
+            map.removeLayer(surfacetemperatureLayer);
+        } else {
+            map.addLayer(surfacetemperatureLayer);
+        }
+    });
+
+    document.getElementById('toggle-c').addEventListener('click', function() {
+        if (map.hasLayer(nyccountiesLayer)) {
+            map.removeLayer(nyccountiesLayer);
+        } else {
+            map.addLayer(nyccountiesLayer);
+        }
+    });
+
+
+    // Add the base layers to the map
+    openStreetMap.addTo(map); // By default, start with OpenStreetMap as the visible layer
 
     // Add a scale control to the map
     L.control.scale().addTo(map);
