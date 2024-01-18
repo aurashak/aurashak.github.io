@@ -119,7 +119,8 @@ turnOffLayersControl.onAdd = function (map) {
 // Create a layer group for base layers including "Satellite" and "OpenStreetMap"
 var baseLayers = {
     "Satellite": satelliteLayer,
-    "OpenStreetMap": openstreetmapLayer
+    "OpenStreetMap": openstreetmapLayer,
+    "Off": turnOffLayersControl
 };
 
 // Create a layer control with baseLayers
