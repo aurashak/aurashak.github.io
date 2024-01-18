@@ -46,7 +46,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             weight: 0.25,
             opacity: 0.7,
             fillOpacity: 0.5
-        };
+        });
     }
 }).addTo(map);
 
@@ -60,9 +60,10 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             weight: 0.25,
             opacity: 0.7,
             fillOpacity: 0.5
-        };
+        });
     }
 }).addTo(map);
+
 
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
     style: function (feature) {
