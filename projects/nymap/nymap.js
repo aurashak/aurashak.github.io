@@ -23,9 +23,9 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         return {
             fillColor: 'black',
             color: 'black',
-            weight: 0,
-            opacity: 1,
-            fillOpacity: 0.5
+            weight: 20,
+            opacity: 0.9,
+            fillOpacity: 0
         };
     }
 }).addTo(map);
