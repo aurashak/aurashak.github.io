@@ -38,11 +38,11 @@ openstreetmapLayer.addTo(map);
 
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
-    var initialSize = 10;
-    var minSize = 5;
+    var initialSize = 6;
+    var minSize = 3;
 
     // Calculate the size based on zoom level with a minimum size
-    var size = initialSize - (zoom - 10) * 5;
+    var size = initialSize - (zoom - 5) * 5;
     return Math.max(size, minSize);
 }
 
@@ -120,7 +120,7 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'green',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -148,7 +148,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'white',
+            fillColor: 'black',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -198,7 +198,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
         var size = calculateMarkerSize(map.getZoom());
         return {
             color: 'purple',
-            weight: 5,
+            weight: 3,
             opacity: 0.6
         };
     }
@@ -246,7 +246,7 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'gold',
+            fillColor: 'red',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -269,7 +269,7 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'black',
+            fillColor: 'grey',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -296,7 +296,7 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'orange',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -323,7 +323,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'blue',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
