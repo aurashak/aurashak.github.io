@@ -61,8 +61,14 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }
 }).addTo(map);
 
-// Water layer
 
+
+
+
+// Create a LayerGroup for the Water layer group
+var waterLayerGroup = L.layerGroup();
+
+// Water layer - 100 Year Floodplain
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
@@ -74,6 +80,9 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
         };
     }
 }).addTo(map);
+
+// Add the 100 Year Floodplain layer to the waterLayerGroup
+waterLayerGroup.addLayer(floodplainLayer);
 
 document.getElementById('floodplain').addEventListener('click', function() {
     if (map.hasLayer(floodplainLayer)) {
@@ -97,6 +106,9 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
     }
 }).addTo(map);
 
+// Add the NYC Special Overlays layer to the waterLayerGroup
+waterLayerGroup.addLayer(nycsoLayer);
+
 document.getElementById('nycso').addEventListener('click', function() {
     if (map.hasLayer(nycsoLayer)) {
         map.removeLayer(nycsoLayer);
@@ -104,6 +116,19 @@ document.getElementById('nycso').addEventListener('click', function() {
         map.addLayer(nycsoLayer);
     }
 });
+
+// Add the waterLayerGroup to the map
+waterLayerGroup.addTo(map);
+
+document.getElementById('waterLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(waterLayerGroup)) {
+        map.removeLayer(waterLayerGroup);
+    } else {
+        map.addLayer(waterLayerGroup);
+    }
+});
+
+
 
 // Air group
 
