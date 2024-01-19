@@ -110,12 +110,13 @@ document.getElementById('nycso').addEventListener('click', function() {
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '☁️', // Emoji for air quality site
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'green',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -130,16 +131,16 @@ document.getElementById('aqisite').addEventListener('click', function() {
 
 // Energy group
 
-// Energy group
 var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'black',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -155,12 +156,13 @@ document.getElementById('majoroilstorage').addEventListener('click', function() 
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '⚡', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: '#013220',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -197,12 +199,13 @@ document.getElementById('nygaspipelines').addEventListener('click', function() {
 var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '🗑️', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'purple',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -218,12 +221,13 @@ document.getElementById('wastetransferfacility').addEventListener('click', funct
 var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '🚾', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'red',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -239,12 +243,13 @@ document.getElementById('wastewatertreatment').addEventListener('click', functio
 var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/inactivesolidwastelandfill.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'grey',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -260,12 +265,13 @@ document.getElementById('inactivesolidwastelandfill').addEventListener('click', 
 var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/recyclingfacility.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '♻️', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'orange',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -283,12 +289,13 @@ document.getElementById('recyclingfacility').addEventListener('click', function(
 var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/chemicalstorage.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'custom-div-icon',
-                html: '🧪', // Emoji for major oil storage
-                iconSize: [size, size]
-            })
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'blue',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
         });
     }
 }).addTo(map);
@@ -311,17 +318,17 @@ function setLegendSymbol(layerId, color, emoji) {
 }
 
 // Set the legend symbol colors and emojis for each layer
-setLegendSymbol('airpollution', 'green', '🌬️'); // Emoji for air quality site
-setLegendSymbol('aqisite', 'white', '☁️'); // Emoji for air quality site
-setLegendSymbol('chemicalstorage', 'blue', '🧪'); // Emoji for chemical storage
-setLegendSymbol('recyclingfacility', 'orange', '♻️'); // Emoji for recycling facility
-setLegendSymbol('nycso', 'brown', '🚽'); // Emoji for NYC Special Operations
-setLegendSymbol('nygaspipelines', 'purple', '🔍'); // Emoji for gas pipelines
-setLegendSymbol('powerplants', '#013220', '⚡'); // Emoji for power plants
-setLegendSymbol('wastewatertreatment', 'red', '🚾'); // Emoji for wastewater treatment
-setLegendSymbol('wastetransferfacility', 'purple', '🗑️'); // Emoji for waste transfer facility
-setLegendSymbol('majoroilstorage', 'black', '🛢️'); // Emoji for major oil storage
-setLegendSymbol('floodplain', '#ADD8E6', '🌊'); // Emoji for floodplain
+setLegendSymbol('airpollution', 'green',); // Emoji for air quality site
+setLegendSymbol('aqisite', 'white',); // Emoji for air quality site
+setLegendSymbol('chemicalstorage', 'blue',); // Emoji for chemical storage
+setLegendSymbol('recyclingfacility', 'orange',); // Emoji for recycling facility
+setLegendSymbol('nycso', 'brown',); // Emoji for NYC Special Operations
+setLegendSymbol('nygaspipelines', 'purple',); // Emoji for gas pipelines
+setLegendSymbol('powerplants', '#013220',); // Emoji for power plants
+setLegendSymbol('wastewatertreatment', 'red'); // Emoji for wastewater treatment
+setLegendSymbol('wastetransferfacility', 'purple'); // Emoji for waste transfer facility
+setLegendSymbol('majoroilstorage', 'black',); // Emoji for major oil storage
+setLegendSymbol('floodplain', '#ADD8E6',); // Emoji for floodplain
 
 
 
