@@ -183,10 +183,10 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 
 
 document.getElementById('powerplants').addEventListener('click', function() {
-    if (map.hasLayer(powerplants)) {
-        map.removeLayer(powerplants);
+    if (map.hasLayer(powerplantsLayer)) {
+        map.removeLayer(powerplantsLayer);
     } else {
-        map.addLayer(powerplants);
+        map.addLayer(powerplantsLayer);
     }
 });
 
@@ -205,10 +205,10 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 
 
 document.getElementById('nygaspipelines').addEventListener('click', function() {
-    if (map.hasLayer(nygaspipeline)) {
-        map.removeLayer(nygaspipeline);
+    if (map.hasLayer(nygaspipelineLayer)) {
+        map.removeLayer(nygaspipelineLayer);
     } else {
-        map.addLayer(nygaspipeline);
+        map.addLayer(nygaspipelineLayer);
     }
 });
 
@@ -339,37 +339,4 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById('airpollution').addEventListener('click', function() {
-    if (map.hasLayer(airpollutionLayer)) {
-        map.removeLayer(airpollutionLayer);
-    } else {
-        map.addLayer(airpollutionLayer);
-    }
-});
 
