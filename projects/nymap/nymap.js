@@ -258,6 +258,10 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
 
 // Waste group
 
+// Create a LayerGroup for the Waste layer group
+var wasteLayerGroup = L.layerGroup();
+
+
 var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
@@ -270,10 +274,7 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
-
-// Add the NYC Special Overlays layer to the waterLayerGroup
-wasteLayerGroup.addLayer(wastetransferfacilityLayer);
+}).addTo(wasteLayerGroup);
 
 document.getElementById('wastetransferfacility').addEventListener('click', function() {
     if (map.hasLayer(wastetransferfacilityLayer)) {
@@ -295,10 +296,8 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+}).addTo(wasteLayerGroup);
 
-// Add the NYC Special Overlays layer to the waterLayerGroup
-wasteLayerGroup.addLayer(wastewatertreatmentLayer);
 
 document.getElementById('wastewatertreatment').addEventListener('click', function() {
     if (map.hasLayer(wastewatertreatmentLayer)) {
@@ -320,10 +319,8 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+}).addTo(wasteLayerGroup);
 
-// Add the NYC Special Overlays layer to the waterLayerGroup
-wasteLayerGroup.addLayer(inactivesolidwastelandfillLayer);
 
 document.getElementById('inactivesolidwastelandfill').addEventListener('click', function() {
     if (map.hasLayer(inactivesolidwastelandfillLayer)) {
@@ -345,10 +342,8 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+}).addTo(wasteLayerGroup);
 
-// Add the NYC Special Overlays layer to the waterLayerGroup
-wasteLayerGroup.addLayer(recyclingfacilityLayer);
 
 document.getElementById('recyclingfacility').addEventListener('click', function() {
     if (map.hasLayer(recyclingfacilityLayer)) {
