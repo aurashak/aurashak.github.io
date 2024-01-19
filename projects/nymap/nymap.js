@@ -111,10 +111,9 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillOpacity: 0.5
         };
     }
-}).addTo(map);
+}).addTo(waterLayerGroup);
 
-// Add the 100 Year Floodplain layer to the waterLayerGroup
-waterLayerGroup.addLayer(floodplainLayer);
+
 
 document.getElementById('floodplain').addEventListener('click', function() {
     if (map.hasLayer(floodplainLayer)) {
@@ -136,10 +135,8 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+}).addTo(waterLayerGroup);
 
-// Add the NYC Special Overlays layer to the waterLayerGroup
-waterLayerGroup.addLayer(nycsoLayer);
 
 document.getElementById('nycso').addEventListener('click', function() {
     if (map.hasLayer(nycsoLayer)) {
@@ -182,7 +179,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+}).addTo(energyLayerGroup);
 
 // Add the NYC Special Overlays layer to the waterLayerGroup
 energyLayerGroup.addLayer(majoroilstorageLayer);
@@ -207,10 +204,8 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+}).addTo(energyLayerGroup);
 
-// Add the NYC Special Overlays layer to the waterLayerGroup
-energyLayerGroup.addLayer(powerplantsLayer);
 
 document.getElementById('powerplants').addEventListener('click', function() {
     if (map.hasLayer(powerplantsLayer)) {
@@ -229,10 +224,8 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             opacity: 0.6
         };
     }
-}).addTo(map);
+}).addTo(energyLayerGroup);
 
-// Add the NYC Special Overlays layer to the waterLayerGroup
-energyLayerGroup.addLayer(nygaspipelinesLayer);
 
 document.getElementById('nygaspipelines').addEventListener('click', function() {
     if (map.hasLayer(nygaspipelinesLayer)) {
