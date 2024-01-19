@@ -42,7 +42,7 @@ function calculateMarkerSize(zoom) {
     var minSize = 3;
 
     // Calculate the size based on zoom level with a minimum size
-    var size = initialSize - (zoom - 5) * 5;
+    var size = initialSize - (zoom - 3) * 5;
     return Math.max(size, minSize);
 }
 
@@ -70,7 +70,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             color: 'black',
             weight: 0,
             opacity: 0,
-            fillOpacity: 0.8
+            fillOpacity: 0.5
         };
     }
 }).addTo(map);
