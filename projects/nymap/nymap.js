@@ -236,11 +236,6 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
     }
 });
 
-// Create a layer group containing powerplantsLayer and nygaspipelinesLayer
-var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipelinesLayer]);
-
-// Add the combined group to the map
-powerplantsandpipelinesGroup.addTo(map);
 
 
 
@@ -252,14 +247,22 @@ document.getElementById('floodplain').addEventListener('click', function() {
     }
 });
 
-// Event listener for layer toggling
-document.getElementById('powerplantsandpipelines').addEventListener('click', function() {
-    if (map.hasLayer(powerplantsandpipelinesGroup)) {
-        map.removeLayer(powerplantsandpipelinesGroup);
+document.getElementById('nygaspipelines').addEventListener('click', function() {
+    if (map.hasLayer(nygaspipeline)) {
+        map.removeLayer(nygaspipeline);
     } else {
-        map.addLayer(powerplantsandpipelinesGroup);
+        map.addLayer(nygaspipeline);
     }
 });
+
+document.getElementById('powerplants').addEventListener('click', function() {
+    if (map.hasLayer(powerplants)) {
+        map.removeLayer(powerplants);
+    } else {
+        map.addLayer(powerplants);
+    }
+});
+
 
 document.getElementById('nycso').addEventListener('click', function() {
     if (map.hasLayer(nycsoLayer)) {
