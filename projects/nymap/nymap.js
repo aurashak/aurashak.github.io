@@ -2,6 +2,40 @@ var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordi
 
 L.control.scale().addTo(map);
 
+
+
+// Load and add the NYC GeoJSON layer
+var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
+    style: function (feature) {
+        return {};
+    }
+});
+
+var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    style: function (feature) {
+        return {};
+    }
+});
+
+// Create a layer group for base layers including "Satellite" and "OpenStreetMap"
+var baseLayers = {
+    "OpenStreetMap": openstreetmapLayer,
+    "Satellite": satelliteLayer,
+    "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
+};
+
+// Create a layer control with baseLayers
+var layerControl = L.control.layers(baseLayers, null, {
+    position: 'topright' // Position the control in the top right corner
+}).addTo(map);
+
+// Set OpenStreetMap as the default base layer
+openstreetmapLayer.addTo(map);
+
+
+
+
+
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
     var initialSize = 10;
@@ -11,6 +45,10 @@ function calculateMarkerSize(zoom) {
     var size = initialSize - (zoom - 10) * 5;
     return Math.max(size, minSize);
 }
+
+
+
+
 
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
     style: function (feature) {
@@ -24,6 +62,8 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }
 }).addTo(map);
 
+
+
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
@@ -35,6 +75,8 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
         };
     }
 }).addTo(map);
+
+
 
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -49,6 +91,8 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
         });
     }
 }).addTo(map);
+
+
 
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -81,35 +125,6 @@ var powerplantsandpipelinesGroup = L.layerGroup([powerplantsLayer, nygaspipeline
 
 // Add the combined group to the map
 powerplantsandpipelinesGroup.addTo(map);
-
-// Load and add the NYC GeoJSON layer
-var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
-    style: function (feature) {
-        return {};
-    }
-});
-
-var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    style: function (feature) {
-        return {};
-    }
-});
-
-// Create a layer group for base layers including "Satellite" and "OpenStreetMap"
-var baseLayers = {
-    "OpenStreetMap": openstreetmapLayer,
-    "Satellite": satelliteLayer,
-    "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
-};
-
-// Create a layer control with baseLayers
-var layerControl = L.control.layers(baseLayers, null, {
-    position: 'topright' // Position the control in the top right corner
-}).addTo(map);
-
-// Set OpenStreetMap as the default base layer
-openstreetmapLayer.addTo(map);
-
 
 
 
