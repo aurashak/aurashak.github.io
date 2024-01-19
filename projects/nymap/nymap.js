@@ -38,7 +38,7 @@ openstreetmapLayer.addTo(map);
 
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
-    var initialSize = 6;
+    var initialSize = 8;
     var minSize = 3;
 
     // Calculate the size based on zoom level with a minimum size
@@ -171,7 +171,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'gold',
+            fillColor: '#013220',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
