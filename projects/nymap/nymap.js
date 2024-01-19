@@ -62,9 +62,6 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 }).addTo(map);
 
 
-
-
-
 // Create a layer group to hold the layers
 var layerGroup = L.layerGroup();
 
