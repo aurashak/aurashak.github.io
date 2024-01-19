@@ -310,6 +310,7 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 
 function setLegendSymbol(layerId, color, shape) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
+    
     if (legendSymbol) {
         if (shape === 'circle') {
             // Create a circle SVG element
@@ -317,6 +318,9 @@ function setLegendSymbol(layerId, color, shape) {
         } else if (shape === 'line') {
             // Create a line SVG element
             legendSymbol.innerHTML = `<svg width="20" height="20"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
+        } else if (shape === 'polygon') {
+            // Create a polygon SVG element (example polygon with 5 points)
+            legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="10,2 2,18 18,18 14,10 6,10" fill="${color}" /></svg>`;
         }
     }
 }
@@ -333,7 +337,7 @@ setLegendSymbol('wastewatertreatment', 'red', 'circle'); // Circle for wastewate
 setLegendSymbol('wastetransferfacility', 'purple', 'circle'); // Circle for waste transfer facility
 setLegendSymbol('majoroilstorage', 'black', 'circle'); // Circle for major oil storage
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle'); // Circle for major oil storage
-setLegendSymbol('floodplain', '#ADD8E6', 'line'); // Line for floodplain
+setLegendSymbol('floodplain', '#ADD8E6', 'polygon'); // Line for floodplain
 
 
 
