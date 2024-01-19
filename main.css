@@ -206,10 +206,12 @@ h3 {
 .switch-label {display: inline-block; vertical-align: middle; }
 .switch { display: inline-block; vertical-align: middle; }
 .switch-input { display: none; }
-.switch-track { width: 40px; height: 20px; background-color: red; border-radius: 20px; position: relative;}
+.switch-track { width: 40px; height: 20px; background-color: #ccc; border-radius: 20px; position: relative;}
 .switch-thumb { width: 18px; height: 18px; background-color: #007BFF; border-radius: 50%; position: absolute; top: 50%; transform: translateY(-50%); transition: left 0.3s ease; }
 .switch-input:checked + .switch-track {background-color: #66c2ff;}
 .switch-input:checked + .switch-track .switch-thumb {left: 20px; }
+.switch-label-on-off { display: inline-block; margin-left: 10px; font-weight: bold; color: #333; }
+
 
 .switch-input-b:checked + .switch-track {background-color: #000;}
 .switch-thumb-b { width: 18px; height: 18px; background-color: red; border-radius: 50%; position: absolute; top: 50%; transform: translateY(-50%); transition: left 0.3s ease; }
