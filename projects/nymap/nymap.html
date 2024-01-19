@@ -21,91 +21,130 @@
         <div class="container">
             <div class="title">NY Environmental Map</div>
         </div>
-        <div class="container">
+        <div class="containers">
             <div class="description">This map aggregates environmental data about New York City using open source methods of data and graphic information systems.</div>
         </div>
 
-    <div class="mapcontainer">
-        <div class="nymapsection">
-            <div class="ticker-container">
-                <marquee behavior="scroll" direction="left" scrollamount="4">
-                    <span id="weather-info"><div id="openweathermap-widget-19"></div>
-                </marquee>
+
+        <div class="mapcontainer">
+
+
+            <div class="nymapsection">
+                <div class="ticker-container">
+                    <marquee behavior="scroll" direction="left" scrollamount="4">
+                        <span id="weather-info">
+                            <div id="openweathermap-widget-19"></div>
+                        </span>
+                    </marquee>
+                </div>
             </div>
-        </div>
-    
 
-    
+        
+            <div class="columns-container">
 
-        <div class="columns-container">
-        <div class="containercolumn">
-            <div class="mapsectionleft">
+                <div class="containercolumn">
 
-                <div class="mapsectionleft">Air</div>
+                    <div class="mapsectionleft">Air</div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Air Quality</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="airpollution">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">AQI Site</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="aqisite">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+                        <div class="mapsectionleft">Water</div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Combined Sewer Overflow</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="nycso">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Coastal Flooding</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="floodplain">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Wastewater Treatment Facility</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="wastewatertreatment">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
 
-                <div class="mapsectionleft">
-                <label class="switch-label">Air Quality</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="airpollution">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Waste Transfer Station</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="wastetransferstation">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+
+
+                        <div class="mapsectionleft">Energy</div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Chemical Storage</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="chemicalstorage">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+                        <div class="mapsectionleft">
+                            <label class="switch-label">Major Oil Storage</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="majoroilstorage">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+
                     </div>
-                </label>
-            </div>
 
-
-
-
-
-
-
-            <div class="mapsectionleft">Water</div>
-
-
-            <div class="mapsectionleft">
-                <label class="switch-label">Combined Sewer Overflow</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="nycso">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-    
-            <div class="mapsectionleft">
-                <label class="switch-label">Coastal Flooding</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="floodplain">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-    
-            <div class="mapsectionleft">Energy</div>
-
-            <div class="mapsectionleft">
-                <label class="switch-label">Powerplants & Gas Pipelines</label>
-                <label class="switch">
-                    <input type="checkbox" class="switch-input" id="powerplantsandpipelines">
-                    <div class="switch-track">
-                        <div class="switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
+                </div>
             
             
-         
-       
-             
-        </div>
-        <div class="containercolumntwo">
-            <div id="map"></div>
-        </div>
-    </div>
-    </div>
+                <div class="containercolumntwo">
+                    <div id="map"></div>
+                </div>
 
-
+            </div>
+            
+        </div>
+        
  
     
         <div class="notesdescription">
