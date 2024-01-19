@@ -255,8 +255,26 @@ energyLayerGroup.addTo(map);
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(energyLayerGroup)) {
         map.removeLayer(energyLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(majoroilstorageLayer);
+        map.removeLayer(powerplantsLayer);
+        map.removeLayer(nygaspipelinesLayer);
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('majoroilstorage').checked = false;
+        document.getElementById('powerplants').checked = false;
+        document.getElementById('nygaspipelines').checked = false;
     } else {
         map.addLayer(energyLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('majoroilstorage').checked) {
+            map.addLayer(majoroilstorageLayer);
+        }
+        if (document.getElementById('powerplants').checked) {
+            map.addLayer(powerplantsLayer);
+        }
+        if (document.getElementById('nygaspipelines').checked) {
+            map.addLayer(nygaspipelinesLayer);
+        }
     }
 });
 
