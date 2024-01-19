@@ -468,8 +468,17 @@ marquee {
   }
   
 
-
 /* Add margin to separate the legend symbol from the label */
 .legend-symbol {
     margin-right: 10px; /* Adjust the margin as needed */
+    background: none; /* Remove the background */
+}
+
+/* Apply the box shadow to the .symbol class */
+.symbol {
+    width: 20px; /* Adjust the width and height of the symbol */
+    height: 20px; /* Adjust the width and height of the symbol */
+    background-color: #your-symbol-color; /* Set the symbol's background color */
+    border-radius: 50%; /* Make it a circle (if needed) */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a small box shadow to the symbol */
 }
