@@ -342,3 +342,23 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 
+// Define a function to set the legend symbol color
+function setLegendSymbolColor(layerId, color) {
+    const legendSymbol = document.getElementById(`legend-${layerId}`);
+    if (legendSymbol) {
+        legendSymbol.style.backgroundColor = color;
+    }
+}
+
+// Set the legend symbol colors for each layer
+setLegendSymbolColor('airpollution', 'green'); // Change 'green' to the actual color
+setLegendSymbolColor('aqisite', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('chemicalstorage', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('recyclingfacility', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('nycso', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('nygaspipelines', 'blue'); // Change 'blue' to the actual colorv
+setLegendSymbolColor('powerplants', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('wastewatertreatment', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('wastetransferfacility', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('majoroilstorage', 'blue'); // Change 'blue' to the actual color
+setLegendSymbolColor('floodplain', 'blue'); // Change 'blue' to the actual color
