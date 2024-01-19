@@ -21,30 +21,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update the ticker with current weather information
       const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.innerHTML = `<span>🌡️ Temperature: ${temperatureCelsius}°C (${temperatureFahrenheit}°F)</span> <span>💧 Humidity: ${humidity}%</span> <span>🌦️ Weather: ${description}</span>`;
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+      weatherInfo.innerHTML = `<span>Temp: ${temperatureCelsius}°C (${temperatureFahrenheit}°F)</span> <span>Humidity: ${humidity}%</span> <span>Weather: ${description}</span>`;
 
-  // Fetch forecast data for the next day
-  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+      // Fetch high and low temperature data for the day
+      const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}&units=metric&exclude=hourly,minutely`;
+      
+      fetch(oneCallUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          // Extract high and low temperature data for the day
+          const dailyWeather = data.daily[0];
+          const highTemperatureCelsius = dailyWeather.temp.max;
+          const lowTemperatureCelsius = dailyWeather.temp.min;
+          const highTemperatureFahrenheit = (highTemperatureCelsius * 9/5) + 32;
+          const lowTemperatureFahrenheit = (lowTemperatureCelsius * 9/5) + 32;
 
-  fetch(forecastUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      // Handle the forecast data here and update your ticker with the relevant information
-      console.log(data);
-
-      // Assuming you want the forecast for the next day (index 8 corresponds to the next day)
-      const nextDayForecast = data.list[8];
-      const rain = nextDayForecast.rain ? nextDayForecast.rain['3h'] : 0;
-      const sunrise = new Date(data.city.sunrise * 1000).toLocaleTimeString();
-      const sunset = new Date(data.city.sunset * 1000).toLocaleTimeString();
-
-      // Update the ticker with forecast information
-      const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.innerHTML += ` | <span>🌧️ Forecast (Next Day): Rain: ${rain} mm</span>, <span>🌄 Sunrise: ${sunrise}</span>, <span>🌅 Sunset: ${sunset}</span>`;
+          // Update the ticker with high and low temperature information
+          weatherInfo.innerHTML += `<span>Hi: ${highTemperatureCelsius}°C (${highTemperatureFahrenheit}°F)</span> <span>Lo: ${lowTemperatureCelsius}°C (${lowTemperatureFahrenheit}°F)</span>`;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     })
     .catch((error) => {
       console.error('Error:', error);
