@@ -323,7 +323,7 @@ function setLegendSymbol(layerId, color, shape) {
 
 
 // Set the legend symbol shapes and colors for each layer
-setLegendSymbol('aqisite', 'white', 'circle'); // Circle for air quality site
+setLegendSymbol('aqisite', 'green', 'circle'); // Circle for air quality site
 setLegendSymbol('chemicalstorage', 'blue', 'circle'); // Circle for chemical storage
 setLegendSymbol('recyclingfacility', 'orange', 'circle'); // Circle for recycling facility
 setLegendSymbol('nycso', 'brown', 'circle'); // Circle for NYC Special Operations
