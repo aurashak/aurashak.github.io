@@ -37,15 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
           const lowTemperatureFahrenheit = (lowTemperatureCelsius * 9/5) + 32;
 
           // Update the ticker with high and low temperature information
-          weatherInfo.innerHTML += `<span>Hi: ${highTemperatureCelsius}°C (${highTemperatureFahrenheit}°F)</span> <span>Lo: ${lowTemperatureCelsius}°C (${lowTemperatureFahrenheit}°F)</span>`;
+          weatherInfo.innerHTML += ` <span>Hi: ${highTemperatureCelsius}°C (${highTemperatureFahrenheit}°F)</span> <span>Lo: ${lowTemperatureCelsius}°C (${lowTemperatureFahrenheit}°F)</span>`;
+          
+          // Add CSS styles to display all items in one line
+          weatherInfo.style.display = 'flex';
+          weatherInfo.style.flexDirection = 'row';
+          weatherInfo.style.flexWrap = 'nowrap';
         })
         .catch((error) => {
           console.error('Error:', error);
         });
     })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-
-  // ... Your existing code ...
 });
