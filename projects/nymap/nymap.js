@@ -113,7 +113,7 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
         return L.marker(latlng, {
             icon: L.divIcon({
                 className: 'custom-div-icon',
-                html: '🌬️', // Emoji for air quality site
+                html: '☁️', // Emoji for air quality site
                 iconSize: [size, size]
             })
         });
@@ -158,7 +158,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         return L.marker(latlng, {
             icon: L.divIcon({
                 className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
+                html: '⚡', // Emoji for major oil storage
                 iconSize: [size, size]
             })
         });
@@ -200,7 +200,7 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
         return L.marker(latlng, {
             icon: L.divIcon({
                 className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
+                html: '🗑️', // Emoji for major oil storage
                 iconSize: [size, size]
             })
         });
@@ -221,7 +221,7 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
         return L.marker(latlng, {
             icon: L.divIcon({
                 className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
+                html: '🚾', // Emoji for major oil storage
                 iconSize: [size, size]
             })
         });
@@ -263,7 +263,7 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
         return L.marker(latlng, {
             icon: L.divIcon({
                 className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
+                html: '♻️', // Emoji for major oil storage
                 iconSize: [size, size]
             })
         });
@@ -286,7 +286,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         return L.marker(latlng, {
             icon: L.divIcon({
                 className: 'custom-div-icon',
-                html: '🛢️', // Emoji for major oil storage
+                html: '🧪', // Emoji for major oil storage
                 iconSize: [size, size]
             })
         });
