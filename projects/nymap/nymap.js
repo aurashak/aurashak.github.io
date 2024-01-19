@@ -152,8 +152,21 @@ waterLayerGroup.addTo(map);
 document.getElementById('waterLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(waterLayerGroup)) {
         map.removeLayer(waterLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(floodplainLayer);
+        map.removeLayer(nycsoLayer);
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('floodplain').checked = false;
+        document.getElementById('nycso').checked = false;
     } else {
         map.addLayer(waterLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('floodplain').checked) {
+            map.addLayer(floodplainLayer);
+        }
+        if (document.getElementById('nycso').checked) {
+            map.addLayer(nycsoLayer);
+        }
     }
 });
 
