@@ -320,7 +320,8 @@ function setLegendSymbol(layerId, color, shape) {
             legendSymbol.innerHTML = `<svg width="20" height="20"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
         } else if (shape === 'polygon') {
             // Create a polygon SVG element (example polygon with 5 points)
-            legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="10,2 2,18 18,18 14,10 6,10" fill="${color}" /></svg>`;
+            legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="2,2 2,18 18,18 18,2" fill="${color}" />
+            </svg>`;
         }
     }
 }
