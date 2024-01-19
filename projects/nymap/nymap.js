@@ -178,7 +178,8 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             fillOpacity: 0.5
         });
     }
-});
+}).addTo(map);
+
 
 
 
@@ -201,7 +202,8 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             opacity: 0.6
         };
     }
-});
+}).addTo(map);
+
 
 
 document.getElementById('nygaspipelines').addEventListener('click', function() {
