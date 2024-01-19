@@ -1,34 +1,59 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // ... Your existing code ...
 
-  const apiKey = '7aac7c91785ec3578082ffc8aac1c88a';
-  const city = 'New York';
+const apiKey = ' 	QHQrYMKYdGlBqiGiogmYgbSHiAQyVbjo';
 
-  // Fetch current weather data
-  const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+// Define the NOAA API endpoints for the data you need
+const currentConditionsEndpoint = 'https://www.ncdc.noaa.gov/cdo-web/webservices/v2/currentconditions';
+const forecastEndpoint = 'https://www.ncdc.noaa.gov/cdo-web/webservices/v2/forecast';
 
-  fetch(currentWeatherUrl)
+// Function to fetch current weather conditions
+function fetchCurrentWeather() {
+  const apiUrl = `${currentConditionsEndpoint}?stationId=YOUR_STATION_ID_HERE`;
+  fetch(apiUrl, {
+    headers: {
+      'token': apiKey,
+    },
+  })
     .then((response) => response.json())
     .then((data) => {
-      // Handle the current weather data here and update your ticker
-      console.log(data);
-
-      // Extract relevant data
-      const temperatureCelsius = data.main.temp;
-      const temperatureFahrenheit = (temperatureCelsius * 9/5) + 32;
-      const humidity = data.main.humidity;
-      const description = data.weather[0].description;
-
-      // Update the ticker with current weather information
-      const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.innerHTML = `<span>Temp: ${temperatureCelsius}°C (${temperatureFahrenheit}°F)</span> <span>Humidity: ${humidity}%</span> <span>Weather: ${description}</span>`;
-      
-      // Add CSS styles to display all items in one line
-      weatherInfo.style.display = 'flex';
-      weatherInfo.style.flexDirection = 'row';
-      weatherInfo.style.flexWrap = 'nowrap';
+      // Process and display current weather data
+      const currentWeather = data.results[0]; // Assuming you only need the first result
+      console.log('Current Weather:', currentWeather);
+      const temperature = currentWeather.temperature;
+      const humidity = currentWeather.humidity;
+      const sunrise = currentWeather.sunrise;
+      const sunset = currentWeather.sunset;
+      // Display this information in your UI
     })
     .catch((error) => {
-      console.error('Error:', error);
+      console.error('Error fetching current weather:', error);
     });
-});
+}
+
+// Function to fetch emergency broadcast information
+function fetchEmergencyBroadcast() {
+  const apiUrl = `${forecastEndpoint}?point=YOUR_LATITUDE,YOUR_LONGITUDE_HERE&format=json`;
+  fetch(apiUrl, {
+    headers: {
+      'token': apiKey,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Process and display emergency broadcast information
+      const forecastData = data.properties.periods;
+      const emergencyBroadcast = forecastData.filter((item) => item.name === 'EMERGENCY BROADCAST');
+      if (emergencyBroadcast.length > 0) {
+        console.log('Emergency Broadcast:', emergencyBroadcast[0].detailedForecast);
+        // Display this information in your UI
+      } else {
+        console.log('No emergency broadcast information available.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching emergency broadcast:', error);
+    });
+}
+
+// Call the functions to fetch data
+fetchCurrentWeather();
+fetchEmergencyBroadcast();
