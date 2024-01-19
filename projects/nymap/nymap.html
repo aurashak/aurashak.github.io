@@ -30,7 +30,43 @@
             <div class="nymapsection">
                 <div class="ticker-container">
                     <marquee behavior="scroll" direction="left" scrollamount="4">
-                        <span id="weather-info">
+
+
+
+
+                        <div class="weather-row" id="weather-info">
+                            <div class="weather-item">
+                              <span class="weather-label">Current Temp:</span>
+                              <span class="weather-value" id="current-temp"></span>
+                            </div>
+                            <div class="weather-item">
+                              <span class="weather-label">High/Low:</span>
+                              <span class="weather-value" id="high-low-temp"></span>
+                            </div>
+                            <div class="weather-item">
+                              <span class="weather-label">Humidity:</span>
+                              <span class="weather-value" id="humidity-percent"></span>
+                            </div>
+                            <div class="weather-item">
+                              <span class="weather-label">Sunrise:</span>
+                              <span class="weather-value" id="sunrise-time"></span>
+                            </div>
+                            <div class="weather-item">
+                              <span class="weather-label">Sunset:</span>
+                              <span class="weather-value" id="sunset-time"></span>
+                            </div>
+                            <div class="weather-item">
+                              <span class="weather-label">Date:</span>
+                              <span class="weather-value" id="date"></span>
+                            </div>
+                            <div class="weather-item">
+                              <span class="weather-label">High Tide/Low Tide:</span>
+                              <span class="weather-value" id="tide-times"></span>
+                            </div>
+                          </div>
+                          
+
+
                             <div id="openweathermap-widget-19"></div>
                         </span>
                     </marquee>
@@ -96,10 +132,27 @@
                             </label>
                         </div>
 
+
+
+                        <div class="sectionlefttitle">Waste</div>
+
+
+                        <div class="sectionleft">
+                            <label class="switch-label">Recycling Facility</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="recyclingfacility">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+
+
+
                         <div class="sectionleft">
                             <label class="switch-label">Waste Transfer Station</label>
                             <label class="switch">
-                                <input type="checkbox" class="switch-input" id="wastetransferstation">
+                                <input type="checkbox" class="switch-input" id="wastetransferfacility">
                                 <div class="switch-track">
                                     <div class="switch-thumb"></div>
                                 </div>

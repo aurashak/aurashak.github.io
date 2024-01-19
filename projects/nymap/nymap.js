@@ -157,7 +157,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 }).addTo(map);
 
-document.getElementById('majorroilstorage').addEventListener('click', function() {
+document.getElementById('majoroilstorage').addEventListener('click', function() {
     if (map.hasLayer(majoroilstorageLayer)) {
         map.removeLayer(majoroilstorageLayer);
     } else {
@@ -205,10 +205,10 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 
 
 document.getElementById('nygaspipelines').addEventListener('click', function() {
-    if (map.hasLayer(nygaspipelineLayer)) {
-        map.removeLayer(nygaspipelineLayer);
+    if (map.hasLayer(nygaspipelinesLayer)) {
+        map.removeLayer(nygaspipelinesLayer);
     } else {
-        map.addLayer(nygaspipelineLayer);
+        map.addLayer(nygaspipelinesLayer);
     }
 });
 
