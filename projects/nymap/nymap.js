@@ -61,11 +61,8 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }
 }).addTo(map);
 
+// Water layer
 
-// Create a layer group to hold the layers
-var layerGroup = L.layerGroup();
-
-// Water layer - 100 Year Floodplain
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
@@ -76,12 +73,16 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillOpacity: 0.5
         };
     }
+}).addTo(map);
+
+document.getElementById('floodplain').addEventListener('click', function() {
+    if (map.hasLayer(floodplainLayer)) {
+        map.removeLayer(floodplainLayer);
+    } else {
+        map.addLayer(floodplainLayer);
+    }
 });
 
-// Add the 100 Year Floodplain layer to the layer group
-layerGroup.addLayer(floodplainLayer);
-
-// Water layer - NYC Special Overlays
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
@@ -94,40 +95,15 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             fillOpacity: 0.5
         });
     }
-});
+}).addTo(map);
 
-// Add the NYC Special Overlays layer to the layer group
-layerGroup.addLayer(nycsoLayer);
-
-// Add the layer group to the map
-layerGroup.addTo(map);
-
-// Add event listeners to toggle individual layers
-document.getElementById('floodplainToggle').addEventListener('click', function() {
-    if (map.hasLayer(floodplainLayer)) {
-        map.removeLayer(floodplainLayer);
-    } else {
-        map.addLayer(floodplainLayer);
-    }
-});
-
-document.getElementById('nycsoToggle').addEventListener('click', function() {
+document.getElementById('nycso').addEventListener('click', function() {
     if (map.hasLayer(nycsoLayer)) {
         map.removeLayer(nycsoLayer);
     } else {
         map.addLayer(nycsoLayer);
     }
 });
-
-// Add event listener to toggle the entire layer group on/off
-document.getElementById('waterLayerToggle').addEventListener('click', function() {
-    if (map.hasLayer(layerGroup)) {
-        map.removeLayer(layerGroup);
-    } else {
-        map.addLayer(layerGroup);
-    }
-});
-
 
 // Air group
 
