@@ -308,23 +308,24 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-// Define a function to set the legend symbol color
-function setLegendSymbolColor(layerId, color) {
+// Define a function to set the legend symbol color and emoji
+function setLegendSymbol(layerId, color, emoji) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
     if (legendSymbol) {
         legendSymbol.style.backgroundColor = color;
+        legendSymbol.innerHTML = emoji; // Set emoji as inner HTML
     }
 }
 
-// Set the legend symbol colors for each layer
-setLegendSymbolColor('airpollution', 'green'); // Change 'green' to the actual color
-setLegendSymbolColor('aqisite', '🌬️'); // Emoji for air quality site
-setLegendSymbolColor('chemicalstorage', '🧪'); // Emoji for chemical storage
-setLegendSymbolColor('recyclingfacility', '♻️'); // Emoji for recycling facility
-setLegendSymbolColor('nycso', '🚔'); // Emoji for NYC Special Operations
-setLegendSymbolColor('nygaspipelines', '🔍'); // Emoji for gas pipelines
-setLegendSymbolColor('powerplants', '⚡'); // Emoji for power plants
-setLegendSymbolColor('wastewatertreatment', '🌊'); // Emoji for wastewater treatment
-setLegendSymbolColor('wastetransferfacility', '🗑️'); // Emoji for waste transfer facility
-setLegendSymbolColor('majoroilstorage', '🛢️'); // Emoji for major oil storage
-setLegendSymbolColor('floodplain', '🌊'); // Emoji for floodplain
+// Set the legend symbol colors and emojis for each layer
+setLegendSymbol('airpollution', 'green', '🌬️'); // Emoji for air quality site
+setLegendSymbol('aqisite', 'white', '🌬️'); // Emoji for air quality site
+setLegendSymbol('chemicalstorage', 'blue', '🧪'); // Emoji for chemical storage
+setLegendSymbol('recyclingfacility', 'orange', '♻️'); // Emoji for recycling facility
+setLegendSymbol('nycso', 'brown', '🚔'); // Emoji for NYC Special Operations
+setLegendSymbol('nygaspipelines', 'purple', '🔍'); // Emoji for gas pipelines
+setLegendSymbol('powerplants', '#013220', '⚡'); // Emoji for power plants
+setLegendSymbol('wastewatertreatment', 'red', '🌊'); // Emoji for wastewater treatment
+setLegendSymbol('wastetransferfacility', 'purple', '🗑️'); // Emoji for waste transfer facility
+setLegendSymbol('majoroilstorage', 'black', '🛢️'); // Emoji for major oil storage
+setLegendSymbol('floodplain', '#ADD8E6', '🌊'); // Emoji for floodplain
