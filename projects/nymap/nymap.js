@@ -77,7 +77,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 }).addTo(map);
 
 document.getElementById('majoroilstorage').addEventListener('click', function() {
-    if (map hasLayer(majoroilstorageLayer)) {
+    if (map.hasLayer(majoroilstorageLayer)) {
         map.removeLayer(majoroilstorageLayer);
     } else {
         map.addLayer(majoroilstorageLayer);
