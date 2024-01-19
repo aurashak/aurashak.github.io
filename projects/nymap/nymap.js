@@ -64,6 +64,9 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 
 
 
+
+// Water layer
+
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         return {
@@ -76,6 +79,14 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
     }
 }).addTo(map);
 
+
+document.getElementById('floodplain').addEventListener('click', function() {
+    if (map.hasLayer(floodplainLayer)) {
+        map.removeLayer(floodplainLayer);
+    } else {
+        map.addLayer(floodplainLayer);
+    }
+});
 
 
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
@@ -94,6 +105,16 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
 
 
 
+document.getElementById('nycso').addEventListener('click', function() {
+    if (map.hasLayer(nycsoLayer)) {
+        map.removeLayer(nycsoLayer);
+    } else {
+        map.addLayer(nycsoLayer);
+    }
+});
+
+// Air group
+
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
@@ -109,14 +130,97 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 }).addTo(map);
 
 
+document.getElementById('aqisite').addEventListener('click', function() {
+    if (map.hasLayer(aqisiteLayer)) {
+        map.removeLayer(aqisiteLayer);
+    } else {
+        map.addLayer(aqisiteLayer);
+    }
+});
 
 
-var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/chemicalstorage.geojson', {
+
+// Energy group
+
+
+var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'white',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(map);
+
+document.getElementById('majorroilstorage').addEventListener('click', function() {
+    if (map.hasLayer(majoroilstorageLayer)) {
+        map.removeLayer(majoroilstorageLayer);
+    } else {
+        map.addLayer(majoroilstorageLayer);
+    }
+});
+
+
+var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'gold',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        });
+    }
+});
+
+
+
+document.getElementById('powerplants').addEventListener('click', function() {
+    if (map.hasLayer(powerplants)) {
+        map.removeLayer(powerplants);
+    } else {
+        map.addLayer(powerplants);
+    }
+});
+
+
+
+var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
+    style: function (feature) {
+        var size = calculateMarkerSize(map.getZoom());
+        return {
+            color: 'purple',
+            weight: 5,
+            opacity: 0.6
+        };
+    }
+});
+
+
+document.getElementById('nygaspipelines').addEventListener('click', function() {
+    if (map.hasLayer(nygaspipeline)) {
+        map.removeLayer(nygaspipeline);
+    } else {
+        map.addLayer(nygaspipeline);
+    }
+});
+
+// Waste group
+
+
+var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'purple',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -126,7 +230,36 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 }).addTo(map);
 
 
+document.getElementById('wastetransferfacility').addEventListener('click', function() {
+    if (map.hasLayer(wastetransferfacilityLayer)) {
+        map.removeLayer(wastetransferfacilityLayer);
+    } else {
+        map.addLayer(wastetransferfacilityLayer);
+    }
+});
 
+
+var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'gold',
+            color: 'black',
+            weight: 0.25,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(map);
+
+document.getElementById('wastewatertreatment').addEventListener('click', function() {
+    if (map.hasLayer(wastewatertreatmentLayer)) {
+        map.removeLayer(wastewatertreatmentLayer);
+    } else {
+        map.addLayer(wastewatertreatmentLayer);
+    }
+});
 
 
 var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/inactivesolidwastelandfill.geojson', {
@@ -145,20 +278,13 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
 
 
 
-
-var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'white',
-            color: 'black',
-            weight: 0.25,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
+document.getElementById('inactivesolidwastelandfill').addEventListener('click', function() {
+    if (map.hasLayer(inactivesolidwastelandfillLayer)) {
+        map.removeLayer(inactivesolidwastelandfillLayer);
+    } else {
+        map.addLayer(inactivesolidwastelandfillLayer);
     }
-}).addTo(map);
+});
 
 
 
@@ -178,13 +304,24 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
 }).addTo(map);
 
 
+document.getElementById('recyclingfacility').addEventListener('click', function() {
+    if (map.hasLayer(recyclingfacilityLayer)) {
+        map.removeLayer(recyclingfacilityLayer);
+    } else {
+        map.addLayer(recyclingfacilityLayer);
+    }
+});
 
-var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
+
+// Other
+
+
+var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/chemicalstorage.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'purple',
+            fillColor: 'brown',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -192,94 +329,6 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
         });
     }
 }).addTo(map);
-
-
-var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'gold',
-            color: 'black',
-            weight: 0.25,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-}).addTo(map);
-
-
-
-var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'gold',
-            color: 'black',
-            weight: 0.25,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-});
-
-
-var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
-    style: function (feature) {
-        var size = calculateMarkerSize(map.getZoom());
-        return {
-            color: 'purple',
-            weight: 5,
-            opacity: 0.6
-        };
-    }
-});
-
-
-
-
-document.getElementById('floodplain').addEventListener('click', function() {
-    if (map.hasLayer(floodplainLayer)) {
-        map.removeLayer(floodplainLayer);
-    } else {
-        map.addLayer(floodplainLayer);
-    }
-});
-
-document.getElementById('nygaspipelines').addEventListener('click', function() {
-    if (map.hasLayer(nygaspipeline)) {
-        map.removeLayer(nygaspipeline);
-    } else {
-        map.addLayer(nygaspipeline);
-    }
-});
-
-document.getElementById('powerplants').addEventListener('click', function() {
-    if (map.hasLayer(powerplants)) {
-        map.removeLayer(powerplants);
-    } else {
-        map.addLayer(powerplants);
-    }
-});
-
-
-document.getElementById('nycso').addEventListener('click', function() {
-    if (map.hasLayer(nycsoLayer)) {
-        map.removeLayer(nycsoLayer);
-    } else {
-        map.addLayer(nycsoLayer);
-    }
-});
-
-
-document.getElementById('aqisite').addEventListener('click', function() {
-    if (map.hasLayer(aqisiteLayer)) {
-        map.removeLayer(aqisiteLayer);
-    } else {
-        map.addLayer(aqisiteLayer);
-    }
-});
 
 
 document.getElementById('chemicalstorage').addEventListener('click', function() {
@@ -291,49 +340,23 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 
-document.getElementById('inactivesolidwastelandfill').addEventListener('click', function() {
-    if (map.hasLayer(inactivesolidwastelandfillLayer)) {
-        map.removeLayer(inactivesolidwastelandfillLayer);
-    } else {
-        map.addLayer(inactivesolidwastelandfillLayer);
-    }
-});
 
 
-document.getElementById('majorroilstorage').addEventListener('click', function() {
-    if (map.hasLayer(majoroilstorageLayer)) {
-        map.removeLayer(majoroilstorageLayer);
-    } else {
-        map.addLayer(majoroilstorageLayer);
-    }
-});
 
 
-document.getElementById('wastetransferfacility').addEventListener('click', function() {
-    if (map.hasLayer(wastetransferfacilityLayer)) {
-        map.removeLayer(wastetransferfacilityLayer);
-    } else {
-        map.addLayer(wastetransferfacilityLayer);
-    }
-});
 
 
-document.getElementById('wastewatertreatment').addEventListener('click', function() {
-    if (map.hasLayer(wastewatertreatmentLayer)) {
-        map.removeLayer(wastewatertreatmentLayer);
-    } else {
-        map.addLayer(wastewatertreatmentLayer);
-    }
-});
 
 
-document.getElementById('recyclingfacility').addEventListener('click', function() {
-    if (map.hasLayer(recyclingfacilityLayer)) {
-        map.removeLayer(recyclingfacilityLayer);
-    } else {
-        map.addLayer(recyclingfacilityLayer);
-    }
-});
+
+
+
+
+
+
+
+
+
 
 
 
