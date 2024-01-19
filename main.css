@@ -210,9 +210,13 @@ h3 {
 .switch-input:checked + .switch-track {background-color: #00951e;}
 .switch-input:checked + .switch-track .switch-thumb {left: 20px; }
 
+.switch-label-b {  display: inline-block;  vertical-align: middle; }
+.switch-b { display: inline-block; vertical-align: middle;}
+.switch-input-b { display: none; }
 .switch-track-b { width: 40px; height: 20px; background-color: #ccc; border-radius: 20px; position: relative;}
 .switch-thumb-b { width: 18px; height: 18px; background-color: #00336a; border-radius: 50%; position: absolute; top: 50%; transform: translateY(-50%); transition: left 0.3s ease; }
 .switch-input-b:checked + .switch-track {background-color: #00661a;}
+.switch-input-b:checked + .switch-track .switch-thumb {left: 20px; }
 
 
 
