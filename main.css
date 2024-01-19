@@ -114,13 +114,13 @@ h3 {
     flex-direction: row; /* Stack items vertically */
     border-bottom: 2px solid black;
     padding: 5px 10px;
+    background-color: #e6e6e6;
     font-size: 15px; 
 }
 
 .sectionlefttitle {
     flex-direction: row; /* Stack items vertically */
     border-bottom: 2px solid black;
-    background-color: #e6e6e6;
     padding: 10px 10px;
     font-weight: bold;
     font-size: 15px;
