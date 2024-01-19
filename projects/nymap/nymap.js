@@ -90,13 +90,13 @@ document.getElementById('majoroilstorage').addEventListener('click', function() 
 
 // Set the legend symbol colors and emojis for each layer
 setLegendSymbol('airpollution', 'green', '🌬️'); // Emoji for air quality site
-setLegendSymbol('aqisite', 'white', '🌬️'); // Emoji for air quality site
+setLegendSymbol('aqisite', 'white', '☁️'); // Emoji for air quality site
 setLegendSymbol('chemicalstorage', 'blue', '🧪'); // Emoji for chemical storage
 setLegendSymbol('recyclingfacility', 'orange', '♻️'); // Emoji for recycling facility
-setLegendSymbol('nycso', 'brown', '🚔'); // Emoji for NYC Special Operations
+setLegendSymbol('nycso', 'brown', '🚽'); // Emoji for NYC Special Operations
 setLegendSymbol('nygaspipelines', 'purple', '🔍'); // Emoji for gas pipelines
 setLegendSymbol('powerplants', '#013220', '⚡'); // Emoji for power plants
-setLegendSymbol('wastewatertreatment', 'red', '🌊'); // Emoji for wastewater treatment
+setLegendSymbol('wastewatertreatment', 'red', '🚾'); // Emoji for wastewater treatment
 setLegendSymbol('wastetransferfacility', 'purple', '🗑️'); // Emoji for waste transfer facility
 setLegendSymbol('majoroilstorage', 'black', '🛢️'); // Emoji for major oil storage
 setLegendSymbol('floodplain', '#ADD8E6', '🌊'); // Emoji for floodplain
