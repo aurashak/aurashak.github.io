@@ -78,8 +78,7 @@ h3 {
 }
 
 .containercolumntwo {
-    width: 70%; /* Set width to 70% */
-    max-width: 70%; /* Limit the width to 70% */
+    width: 100%; /* Limit the width to 70% */
     height: auto; /* Let it adjust its height based on content */
     flex-grow: 0; /* Prevent it from growing in heighat */
     border-bottom: 2px solid black;
