@@ -38,8 +38,8 @@ openstreetmapLayer.addTo(map);
 
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
-    var initialSize = 8;
-    var minSize = 3;
+    var initialSize = 9;
+    var minSize = 5;
 
     // Calculate the size based on zoom level with a minimum size
     var size = initialSize - (zoom - 3) * 5;
