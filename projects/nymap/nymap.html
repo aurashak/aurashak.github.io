@@ -68,138 +68,173 @@
 
                     <div class="sectionlefttitle">Air</div>
         
-                        <!-- Switch for "Air Quality" -->
-<div class="sectionleft">
-    <label class="switch-label">Air Quality</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="airpollution">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                        <div class="sectionleft">
+                            <label class="switch-label">Air Quality</label>
+                            <label class="switch" style="margin-left: auto;">
+                                <input type="checkbox" class="switch-input" id="airpollution">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+        
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
+                            <span class="legend-symbol" id="legend-aqisite"></span>
+                            <label class="switch-label">AQI Site</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="aqisite">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        
+                        
+        
+                        <div class="sectionlefttitle">Water</div>
+        
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
 
-<!-- Switch for "AQI Site" -->
-<div class="sectionleft">
-    <label class="switch-label">AQI Site</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="aqisite">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                            <span class="legend-symbol" id="legend-nycso"></span>
 
-<!-- Section title "Water" -->
-<div class="sectionlefttitle">Water</div>
+                            <label class="switch-label">Combined Sewer Overflow</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="nycso">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        
+        
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
 
-<!-- Switch for "Combined Sewer Overflow" -->
-<div class="sectionleft">
-    <label class="switch-label">Combined Sewer Overflow</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="nycso">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                            <div class="legend-symbol" id="legend-floodplain"></div>
 
-<!-- Switch for "Coastal Flooding" -->
-<div class="sectionleft">
-    <label class="switch-label">Coastal Flooding</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="floodplain">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                            <label class="switch-label">Coastal Flooding</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="floodplain">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        
 
-<!-- Switch for "Wastewater Treatment Facility" -->
-<div class="sectionleft">
-    <label class="switch-label">Wastewater Treatment Facility</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="wastewatertreatment">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
 
-<!-- Section title "Waste" -->
-<div class="sectionlefttitle">Waste</div>
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
 
-<!-- Switch for "Solid Waste Landfill" -->
-<div class="sectionleft">
-    <label class="switch-label">Solid Waste Landfill</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="inactivesolidwastelandfill">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                            <span class="legend-symbol" id="legend-wastewatertreatment"></span>
 
-<!-- Switch for "Waste Transfer Station" -->
-<div class="sectionleft">
-    <label class="switch-label">Waste Transfer Station</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="wastetransferfacility">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                            <label class="switch-label">Wastewater Treatment Facility</label>
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" id="wastewatertreatment">
+                                <div class="switch-track">
+                                    <div class="switch-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        
 
-<!-- Section title "Energy" -->
-<div class="sectionlefttitle">Energy</div>
 
-<!-- Switch for "Natural Gas Pipelines" -->
-<div class="sectionleft">
-    <label class="switch-label">Natural Gas Pipelines</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="nygaspipelines">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
+                        <div class="sectionlefttitle">Waste</div>
 
-<!-- Switch for "Powerplants" -->
-<div class="sectionleft">
-    <label class="switch-label">Powerplants</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="powerplants">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
 
-<!-- Section title "Other" -->
-<div class="sectionlefttitle">Other</div>
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
 
-<!-- Switch for "Chemical Storage" -->
-<div class="sectionleft">
-    <label class="switch-label">Chemical Storage</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="switch-input" id="chemicalstorage">
-        <div class="switch-track">
-            <div class="switch-thumb"></div>
-        </div>
-    </label>
-    <div style="display: flex; justify-content: flex-end;"></div>
-</div>
-</div>
+                            <div class="legend-symbol" id="legend-inactivesolidwastelandfill"></div>
+                                <label class="switch-label">Solid Waste Landfill</label>
+                                <label class="switch" style="margin-left: auto;">
+                                    <input type="checkbox" class="switch-input" id="inactivesolidwastelandfill">
+                                    <div class="switch-track">
+                                        <div class="switch-thumb"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+            
+                        
+
+
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
+
+                            <div class="legend-symbol" id="legend-wastetransferfacility"></div>
+                                <label class="switch-label">Waste Transfer Station</label>
+                                <label class="switch" style="margin-left: auto;">
+                                    <input type="checkbox" class="switch-input" id="wastetransferfacility">
+                                    <div class="switch-track">
+                                        <div class="switch-thumb"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="sectionlefttitle">Energy</div>
+        
+                      
+                        <div class="sectionleft">
+                            <div class="legend-symbol" id="legend-nygaspipelines"></div>
+                            <div style="display: flex; justify-content: flex-end;">
+                                <label class="switch-label">Natural Gas Pipelines</label>
+                                <label class="switch" style="margin-left: auto;">
+                                    <input type="checkbox" class="switch-input" id="nygaspipelines">
+                                    <div class="switch-track">
+                                        <div class="switch-thumb"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        
+
+
+                
+
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
+
+                            <div class="legend-symbol" id="legend-powerplants"></div>
+                                <label class="switch-label">Powerplants</label>
+                                <label class="switch" style="margin-left: auto;">
+                                    <input type="checkbox" class="switch-input" id="powerplants">
+                                    <div class="switch-track">
+                                        <div class="switch-thumb"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+
+
+
+                        <div class="sectionlefttitle">Other</div>
+
+                        <div class="sectionleft">
+                            <div style="display: flex; justify-content: flex-end;">
+
+                            <div class="legend-symbol" id="legend-chemicalstorage"></div>
+                                <label class="switch-label">Chemical Storage</label>
+                                <label class="switch" style="margin-left: auto;">
+                                    <input type="checkbox" class="switch-input" id="chemicalstorage">
+                                    <div class="switch-track">
+                                        <div class="switch-thumb"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
                         
                         
                     </div>
