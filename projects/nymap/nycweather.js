@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update the ticker with current weather information
       const weatherInfo = document.getElementById('weather-info');
-      weatherInfo.innerHTML = `<span>🌡️ Temperature: ${temperatureCelsius}°C (${temperatureFahrenheit}°F)</span>, <span>💧 Humidity: ${humidity}%</span>, <span>🌦️ Weather: ${description}</span>`;
+      weatherInfo.innerHTML = `<span>🌡️ Temperature: ${temperatureCelsius}°C (${temperatureFahrenheit}°F)</span> <span>💧 Humidity: ${humidity}%</span> <span>🌦️ Weather: ${description}</span>`;
     })
     .catch((error) => {
       console.error('Error:', error);
