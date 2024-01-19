@@ -134,7 +134,7 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'black',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -151,7 +151,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'white',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -179,12 +179,12 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
 
 
 
-var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
+var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'purple',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -194,12 +194,12 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetra
 }).addTo(map);
 
 
-var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
+var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'brown',
+            fillColor: 'gold',
             color: 'black',
             weight: 0.25,
             opacity: 0.7,
@@ -333,13 +333,7 @@ document.getElementById('recyclingfacility').addEventListener('click', function(
 });
 
 
-document.getElementById('nycso').addEventListener('click', function() {
-    if (map.hasLayer(nycsoLayer)) {
-        map.removeLayer(nycsoLayer);
-    } else {
-        map.addLayer(nycsoLayer);
-    }
-});
+
 
 
 
