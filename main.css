@@ -105,7 +105,7 @@ h3 {
     
 .nymapsection {
     background-color: pink;
-    padding: 10px 0px;
+    padding: 10px 20px;
     border-bottom: 2px solid black;
 }
 
@@ -446,16 +446,15 @@ marquee {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
+    background-color: none;
+    padding: 0px;
   }
   
   .weather-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5px;
+    margin: 0px;
   }
   
   .weather-label {
@@ -463,7 +462,7 @@ marquee {
   }
   
   .weather-value {
-    margin-top: 5px;
+    margin-top: 0px;
     font-size: 18px;
   }
   
