@@ -70,6 +70,7 @@ h3 {
 
 .containercolumn {
     width: 30%;
+    max-width: 450px;
     border-right: 2px solid black;
     height: auto; /* Let it adjust its height based on content */
     flex-grow: 0; /* Prevent it from growing in height */
