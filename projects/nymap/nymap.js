@@ -308,29 +308,22 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-
-
-function setLegendSymbol(id, borderColor, fillColor, symbolType, shape) {
-    var legendSymbol = document.getElementById("legend-" + id);
-    if (shape === 'circle') {
-        // Create a circle SVG element
-        legendSymbol.innerHTML = `<svg width="20" height="20"><circle cx="10" cy="10" r="8" fill="${fillColor}" stroke="${borderColor}" stroke-width="2" /></svg>`;
-    } else {
-        if (symbolType === 'line') {
-            legendSymbol.style.border = '2px solid ' + borderColor;
-            legendSymbol.style.backgroundColor = 'transparent';
-        } else if (symbolType === 'polygon') {
-            legendSymbol.style.backgroundColor = fillColor;
-            legendSymbol.style.border = '2px solid ' + borderColor;
+function setLegendSymbol(layerId, color, shape) {
+    const legendSymbol = document.getElementById(`legend-${layerId}`);
+    if (legendSymbol) {
+        if (shape === 'circle') {
+            // Create a circle SVG element
+            legendSymbol.innerHTML = `<svg width="20" height="20"><circle cx="10" cy="10" r="8" fill="${color}" /></svg>`;
+        } else if (shape === 'line') {
+            // Create a line SVG element
+            legendSymbol.innerHTML = `<svg width="20" height="20"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
         }
     }
 }
 
 
-
-
 // Set the legend symbol shapes and colors for each layer
-setLegendSymbol('aqisite', 'green', 'circle'); // Circle for air quality site
+setLegendSymbol('aqisite', 'white', 'circle'); // Circle for air quality site
 setLegendSymbol('chemicalstorage', 'blue', 'circle'); // Circle for chemical storage
 setLegendSymbol('recyclingfacility', 'orange', 'circle'); // Circle for recycling facility
 setLegendSymbol('nycso', 'brown', 'circle'); // Circle for NYC Special Operations
@@ -340,7 +333,7 @@ setLegendSymbol('wastewatertreatment', 'red', 'circle'); // Circle for wastewate
 setLegendSymbol('wastetransferfacility', 'purple', 'circle'); // Circle for waste transfer facility
 setLegendSymbol('majoroilstorage', 'black', 'circle'); // Circle for major oil storage
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle'); // Circle for major oil storage
-setLegendSymbol('floodplain', '#ADD8E6', 'polygon'); // Line for floodplain
+setLegendSymbol('floodplain', '#ADD8E6', 'line'); // Line for floodplain
 
 
 
