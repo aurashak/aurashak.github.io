@@ -467,3 +467,9 @@ marquee {
     font-size: 18px;
   }
   
+
+
+/* Add margin to separate the legend symbol from the label */
+.legend-symbol {
+    margin-right: 10px; /* Adjust the margin as needed */
+}
