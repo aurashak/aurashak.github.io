@@ -119,10 +119,10 @@ h3 {
 .sectionlefttitle {
     flex-direction: row; /* Stack items vertically */
     border-bottom: 2px solid black;
-    background-color: green;
+    background-color: #e6e6e6;
     padding: 10px 10px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .mapsectionright {
@@ -440,3 +440,30 @@ marquee {
     font-weight: bold; /* Bold text for active layers */
     color: #0074D9; /* Change text color for active layers */
 }
+
+
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .weather-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+  }
+  
+  .weather-label {
+    font-weight: bold;
+  }
+  
+  .weather-value {
+    margin-top: 5px;
+    font-size: 18px;
+  }
+  
