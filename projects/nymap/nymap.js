@@ -21,13 +21,15 @@ var baseLayers = {
     "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
 };
 
-
-
 var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
 
 openstreetmapLayer.addTo(map);
+
+
+
+
 
 // Function to calculate marker size based on zoom level
 function calculateMarkerSize(zoom) {
@@ -96,7 +98,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
     }
 }).addTo(waterLayerGroup);
 
-// NYC Special Operations Layer
+// NYC CSO Layer
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
@@ -111,8 +113,15 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
     }
 }).addTo(waterLayerGroup);
 
+
+
+
 // Energy Layer Group
 var energyLayerGroup = L.layerGroup();
+
+// Add the wasteLayerGroup to the map
+energyLayerGroup.addTo(map);
+
 
 // Major Oil Storage Layer
 var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
@@ -156,8 +165,15 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
     }
 }).addTo(energyLayerGroup);
 
+
+
+
 // Waste Layer Group
 var wasteLayerGroup = L.layerGroup();
+
+// Add the wasteLayerGroup to the map
+wasteLayerGroup.addTo(map);
+
 
 // Waste Transfer Facility Layer
 var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
@@ -219,6 +235,8 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
     }
 }).addTo(wasteLayerGroup);
 
+
+
 // Chemical Storage Layer
 var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/chemicalstorage.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -233,6 +251,8 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         });
     }
 });
+
+
 
 // Set the legend symbol shapes and colors for each layer
 setLegendSymbol('aqisite', 'green', 'circle');
