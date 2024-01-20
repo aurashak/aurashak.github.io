@@ -35,7 +35,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             fillOpacity: .8
         };
     }
-}).addTo(map);
+});
 nyccountiesLayer.bringToBack(); // Move the NYC Counties Layer to the back
 
 // Oceans Layer
@@ -50,9 +50,6 @@ var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/worl
         };
     }
 });
-
-// Add the Oceans Layer below the base layers
-atlanticoceanLayer.addTo(map);
 atlanticoceanLayer.bringToBack(); // Move the Oceans Layer to the back
 
 // Base Map Layers
