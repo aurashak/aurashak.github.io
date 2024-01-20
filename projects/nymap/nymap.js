@@ -259,7 +259,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 
 // Create a layer group for air quality markers
-const airQualityLayer = L.layerGroup();
+airQualityLayer.addTo(map);
 
 // Replace 'YOUR_API_TOKEN' with your actual AQICN API token
 const apiToken = 'babc945d5af70ef9e270d8f91dc09e224b8d1aaa';
