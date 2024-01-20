@@ -62,7 +62,7 @@ h3 {
     border: 1px solid black;
     flex-grow: 1; /* Allow it to grow and fill the available space */
     margin: 20px;
-    min-height: calc(100vh - 50px); /* Adjusted min-height to account for top and bottom margins */
+    min-height: 90vh; /* Adjusted min-height to account for top and bottom margins */
 }
 .columns-container {
     display: flex;
