@@ -36,35 +36,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         };
     }
 }).addTo(map);
-
-// Base Map Layers
-var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
-    style: function (feature) {
-        return {};
-    }
-});
-
-var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    style: function (feature) {
-        return {};
-    }
-});
-
-var baseLayers = {
-    "OpenStreetMap": openstreetmapLayer,
-    "Satellite": satelliteLayer,
-    "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
-};
-
-var layerControl = L.control.layers(baseLayers, null, {
-    position: 'topright' // Position the control in the top right corner
-}).addTo(map);
-
-// Add the NYC Counties Layer below the base layers
-nyccountiesLayer.addTo(map);
 nyccountiesLayer.bringToBack(); // Move the NYC Counties Layer to the back
-
-openstreetmapLayer.addTo(map);
 
 // Oceans Layer
 var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/world/atlanticocean.json', {
@@ -82,6 +54,34 @@ var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/worl
 // Add the Oceans Layer below the base layers
 atlanticoceanLayer.addTo(map);
 atlanticoceanLayer.bringToBack(); // Move the Oceans Layer to the back
+
+// Base Map Layers
+var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
+    style: function (feature) {
+        return {};
+    }
+});
+
+var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    style: function (feature) {
+        return {};
+    }
+});
+
+openstreetmapLayer.addTo(map);
+
+
+var baseLayers = {
+    "OpenStreetMap": openstreetmapLayer,
+    "Satellite": satelliteLayer,
+    "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
+};
+
+var layerControl = L.control.layers(baseLayers, null, {
+    position: 'topright' // Position the control in the top right corner
+}).addTo(map);
+
+
 
 
 
