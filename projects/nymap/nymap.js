@@ -428,7 +428,7 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 // Set the legend symbol shapes and colors for each layer
-setLegendSymbol('aqisite', 'green', 'circle');
+setLegendSymbol('airQuality', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
