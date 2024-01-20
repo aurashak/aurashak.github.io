@@ -302,6 +302,7 @@ document.getElementById('wastetransferfacility').addEventListener('click', funct
     }
 });
 
+
 var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
@@ -372,16 +373,41 @@ document.getElementById('recyclingfacility').addEventListener('click', function(
 });
 
 
-// Add the waterLayerGroup to the map
-wasteLayerGroup.addTo(map);
+
 
 document.getElementById('wasteLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(wasteLayerGroup)) {
         map.removeLayer(wasteLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(wastetransferfacilityLayer);
+        map.removeLayer(wastewatertreatmentLayer);
+        map.removeLayer(inactivesolidwastelandfillLayer);
+        map.removeLayer(recyclingfacilityLayer);
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('wastetransferfacility').checked = false;
+        document.getElementById('wastewatertreatment').checked = false;
+        document.getElementById('inactivesolidwastelandfill').checked = false;
+        document.getElementById('recyclingfacility').checked = false;
     } else {
         map.addLayer(wasteLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('wastetransferfacility').checked) {
+            map.addLayer(wastetransferfacilityLayer);
+        }
+        if (document.getElementById('wastewatertreatment').checked) {
+            map.addLayer(wastewatertreatmentLayer);
+        }
+        if (document.getElementById('inactivesolidwastelandfill').checked) {
+            map.addLayer(inactivesolidwastelandfillLayer);
+        }
+        if (document.getElementById('recyclingfacility').checked) {
+            map.addLayer(recyclingfacilityLayer);
+        }
     }
 });
+
+
+
 
 
 // Other
@@ -400,6 +426,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
+// For "chemicalstorage" layer
 document.getElementById('chemicalstorage').addEventListener('click', function() {
     if (map.hasLayer(chemicalstorageLayer)) {
         map.removeLayer(chemicalstorageLayer);
@@ -420,11 +447,11 @@ function setLegendSymbol(layerId, color, shape) {
             legendSymbol.innerHTML = `<svg width="20" height="20"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
         } else if (shape === 'polygon') {
             // Create a polygon SVG element (example polygon with 5 points)
-            legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="2,2 2,18 18,18 18,2" fill="${color}" />
-            </svg>`;
+            legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="2,2 2,18 18,18 18,2" fill="${color}" /></svg>`;
         }
     }
 }
+
 
 
 // Set the legend symbol shapes and colors for each layer

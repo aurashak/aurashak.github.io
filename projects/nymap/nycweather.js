@@ -57,3 +57,30 @@ function fetchEmergencyBroadcast() {
 // Call the functions to fetch data
 fetchCurrentWeather();
 fetchEmergencyBroadcast();
+
+
+
+
+// Replace 'YOUR_API_KEY' with your actual API key
+const apiKey = 'bolehawk73';
+
+// Define the URL for the AQS API endpoint
+const apiUrl = `https://aqs.epa.gov/data/api/dailyData/byCounty`;
+
+// Make an API request using the Fetch API or another HTTP library
+fetch(apiUrl, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`,
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    // Process the air quality data and add it as a layer on your Leaflet map
+    console.log(data);
+    // Implement map integration and layer creation here
+  })
+  .catch((error) => {
+    console.error('Error fetching air quality data:', error);
+  });
