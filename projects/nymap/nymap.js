@@ -479,3 +479,59 @@ function setLegendSymbol(layerId, color, shape) {
         }
     }
 }
+
+
+
+
+// Replace 'YOUR_API_TOKEN' with your actual AQICN API token
+const apiToken = 'babc945d5af70ef9e270d8f91dc09e224b8d1aaa';
+
+// Define the AQICN API endpoint
+const apiUrl = `https://api.waqi.info/map/bounds/?token=${apiToken}&latlng=40.4774,-74.2591,40.9176,-73.7004`;
+
+// Make an API request to retrieve air quality data
+fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+        // Process the air quality data and display it on the map
+        const stations = data.data;
+        stations.forEach((station) => {
+            const lat = station.lat;
+            const lon = station.lon;
+            const aqi = station.aqi;
+
+            // Create a custom marker based on AQI value
+            const marker = L.circleMarker([lat, lon], {
+                radius: 10,
+                fillColor: getColor(aqi), // Define a function to set marker color based on AQI
+                color: '#000',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8,
+            });
+
+            // Add a popup with AQI information
+            marker.bindPopup(`AQI: ${aqi}`);
+            marker.addTo(map);
+        });
+    })
+    .catch((error) => {
+        console.error('Error fetching air quality data:', error);
+    });
+
+// Define a function to set marker color based on AQI value
+function getColor(aqi) {
+    if (aqi <= 50) {
+        return 'green'; // Good
+    } else if (aqi <= 100) {
+        return 'yellow'; // Moderate
+    } else if (aqi <= 150) {
+        return 'orange'; // Unhealthy for Sensitive Groups
+    } else if (aqi <= 200) {
+        return 'red'; // Unhealthy
+    } else if (aqi <= 300) {
+        return 'purple'; // Very Unhealthy
+    } else {
+        return 'maroon'; // Hazardous
+    }
+}

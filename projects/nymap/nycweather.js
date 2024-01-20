@@ -80,7 +80,8 @@ const epaApiKey = 'bolehawk73';
 const apiUrl = '/epa-api'; // Route defined in the proxy server
 
 // Make an API request for air quality data
-fetch(epaApiUrl, {
+const apiUrl = '/epa-api'; // Route defined in the proxy server
+fetch(apiUrl, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
