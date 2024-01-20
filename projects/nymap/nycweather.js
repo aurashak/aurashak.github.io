@@ -15,6 +15,7 @@ function fetchCurrentWeather() {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log('Current Weather Data:', data); // Log the entire data for debugging
       // Process and display current weather data
       const currentWeather = data.results[0]; // Assuming you only need the first result
       console.log('Current Weather:', currentWeather);
@@ -43,6 +44,7 @@ function fetchEmergencyBroadcast() {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log('Emergency Broadcast Data:', data); // Log the entire data for debugging
       // Process and display emergency broadcast information
       const forecastData = data.properties.periods;
       const emergencyBroadcast = forecastData.find((item) => item.name === 'EMERGENCY BROADCAST');
@@ -64,7 +66,6 @@ function fetchEmergencyBroadcast() {
 // Call the functions to fetch NOAA data
 fetchCurrentWeather();
 fetchEmergencyBroadcast();
-
 
 
 
