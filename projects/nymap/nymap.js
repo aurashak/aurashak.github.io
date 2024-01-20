@@ -21,6 +21,8 @@ var baseLayers = {
     "Off": L.layerGroup([]) // Create an empty layer group for "Turn Off"
 };
 
+
+
 var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
@@ -42,11 +44,11 @@ function calculateMarkerSize(zoom) {
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
     style: function (feature) {
         return {
-            fillColor: 'black',
+            fillColor: 'grey',
             color: 'black',
             weight: 0.5,
             opacity: 0.5,
-            fillOpacity: 0
+            fillOpacity: .8
         };
     }
 }).addTo(map);
@@ -68,6 +70,9 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 // Water Layer Group
 var waterLayerGroup = L.layerGroup();
+
+// Add the waterLayerGroup to the map
+waterLayerGroup.addTo(map);
 
 // 100 Year Floodplain Layer
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
