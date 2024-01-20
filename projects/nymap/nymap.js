@@ -131,9 +131,6 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
 // Energy Layer Group
 var energyLayerGroup = L.layerGroup();
 
-// Add the wasteLayerGroup to the map
-energyLayerGroup.addTo(map);
-
 
 // Major Oil Storage Layer
 var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
@@ -182,10 +179,6 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 
 // Waste Layer Group
 var wasteLayerGroup = L.layerGroup();
-
-// Add the wasteLayerGroup to the map
-wasteLayerGroup.addTo(map);
-
 
 // Waste Transfer Facility Layer
 var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
