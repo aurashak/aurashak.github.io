@@ -279,9 +279,6 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
 
 // Waste group
 
-// Create a LayerGroup for the Waste layer group
-var wasteLayerGroup = L.layerGroup();
-
 
 var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson', {
     pointToLayer: function (feature, latlng) {
