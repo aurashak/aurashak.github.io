@@ -7,7 +7,7 @@ const forecastEndpoint = 'https://www.ncdc.noaa.gov/cdo-web/webservices/v2/forec
 
 // Function to fetch current weather conditions
 function fetchCurrentWeather() {
-  const apiUrl = `${currentConditionsEndpoint}?stationId=KWO35`;
+  const apiUrl = '/noaa-api'; // Route defined in the proxy server
   fetch(apiUrl, {
     headers: {
       'token': noaaApiKey,
@@ -77,7 +77,7 @@ fetchEmergencyBroadcast();
 const epaApiKey = 'bolehawk73';
 
 // Define the URL for the EPA AQS API endpoint
-const epaApiUrl = `https://aqs.epa.gov/data/api/dailyData/byCounty`;
+const apiUrl = '/epa-api'; // Route defined in the proxy server
 
 // Make an API request for air quality data
 fetch(epaApiUrl, {
