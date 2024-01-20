@@ -56,30 +56,6 @@ h3 {
     margin: 20px;
 }
 
-/* Remove the height from .mapcontainer and use flex-grow to fill available space */
-.mapcontainer {
-    background: white;
-    border: 1px solid black;
-    flex-grow: 1; /* Allow it to grow and fill the available space */
-    margin: 20px;
-    min-height: 90vh; /* Adjusted min-height to account for top and bottom margins */
-}
-.columns-container {
-    display: flex;
-    border: red solid 1px;
-        overflow: visible;
-
-}
-
-.containercolumn {
-    border-right: 1px solid black;
-    overflow: visible;
-    min-height: 50vh;
-}
-
-.containercolumntwo {
-flex-grow: 1;}
-
 
 #map {
     min-height: 100%;
@@ -89,11 +65,6 @@ flex-grow: 1;}
 
 /* Other styles for nymapsection, containercolumn, and containercolumntwo as needed */
 
-.mapsection, .mapsectionleft, .mapsectionright, .nymapsection {
-    font-size: 20px;
-    color: #000000;
-    font-weight: 400;
-}
 
 .mapsection {
     border-bottom: 1px solid black;
@@ -120,17 +91,6 @@ flex-grow: 1;}
     font-weight: bold;
     font-size: 15px;
 }
-
-.mapsectionright {
-    flex-direction: row; /* Stack items vertically */
-}
-
-.mapsection a:link {    color: black;}
-.mapsection a:visited {color: black;}
-.mapsection a:hover {border-bottom: 2px solid black;}
-.mapsection:last-child {margin-bottom: 0;}
-.mapsection:first-child {border-top: none;}
-.mapsectionleft:first-child {border-top: none;}
 
 .title, .bodytitle, .subtitle, .subbodytitle {
     font-size: 25px;
