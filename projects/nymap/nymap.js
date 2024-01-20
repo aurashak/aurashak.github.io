@@ -7,7 +7,7 @@ var bounds = L.latLngBounds(
 // Create and configure the map with the specified bounds
 var map = L.map('map', {
     maxBounds: bounds,     // Set maxBounds to limit zooming out
-    maxBoundsViscosity: 1.0, // Elastic effect on exceeding bounds
+    maxBoundsViscosity: 0.2, // Elastic effect on exceeding bounds
     minZoom: 5              // Minimum zoom level
 }).setView([40.7128, -74.0060], 10); // New York City coordinates
 
