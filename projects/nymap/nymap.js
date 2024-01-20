@@ -87,22 +87,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
-// Air Quality Site Layer
-var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'green',
-            color: 'black',
-            weight: 0.25,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-});
-
-
 
 
 // Water Layer Group
@@ -290,13 +274,7 @@ document.getElementById('floodplain').addEventListener('click', function() {
 });
 
 
-document.getElementById('aqisite').addEventListener('click', function() {
-    if (map.hasLayer(aqisiteLayer)) {
-        map.removeLayer(aqisiteLayer);
-    } else {
-        map.addLayer(aqisiteLayer);
-    }
-});
+
 
 document.getElementById('majoroilstorage').addEventListener('click', function() {
     if (map.hasLayer(majoroilstorageLayer)) {
