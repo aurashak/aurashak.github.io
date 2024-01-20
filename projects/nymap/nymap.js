@@ -481,7 +481,8 @@ function setLegendSymbol(layerId, color, shape) {
 }
 
 
-
+// Create a layer group for air quality markers
+const airQualityLayer = L.layerGroup();
 
 // Replace 'YOUR_API_TOKEN' with your actual AQICN API token
 const apiToken = 'babc945d5af70ef9e270d8f91dc09e224b8d1aaa';
@@ -503,10 +504,10 @@ fetch(apiUrl)
             // Create a custom marker based on AQI value
             const marker = L.circleMarker([lat, lon], {
                 radius: 10,
-                fillColor: getColor(aqi), // Define a function to set marker color based on AQI
-                color: '#000',
-                weight: 1,
-                opacity: 1,
+                fillColor: getColor(aqi),
+                color: 'transparent', // Set marker border color to transparent
+                weight: 0, // Set marker border weight to 0
+                opacity: 0.7, // Adjust marker opacity as desired
                 fillOpacity: 0.8,
             });
 
@@ -518,6 +519,9 @@ fetch(apiUrl)
     .catch((error) => {
         console.error('Error fetching air quality data:', error);
     });
+
+
+
 
 // Define a function to set marker color based on AQI value
 function getColor(aqi) {
@@ -535,3 +539,13 @@ function getColor(aqi) {
         return 'maroon'; // Hazardous
     }
 }
+
+
+// Implement the click event listener to toggle the layer group
+document.getElementById('airQuality').addEventListener('click', function() {
+    if (map.hasLayer(airQualityLayer)) {
+        map.removeLayer(airQualityLayer);
+    } else {
+        map.addLayer(airQualityLayer);
+    }
+});
