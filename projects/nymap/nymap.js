@@ -60,7 +60,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 
 
 // Oceans Layer
-var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/world/atlanticocean.geojson', {
+var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/world/atlanticocean.json', {
     style: function (feature) {
         return {
             fillColor: 'blue',
