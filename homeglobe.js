@@ -18,6 +18,8 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     backgroundColor: Cesium.Color.WHITE // Set background color to white
 });
 
+viewer.scene.backgroundColor = Cesium.Color.WHITE;
+viewer.scene.globe.backgroundColor = Cesium.Color.WHITE;
 
 viewer.imageryLayers.get(0).brightness = 1.2;
 viewer.imageryLayers.get(0).contrast = 1.2;
