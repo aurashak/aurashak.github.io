@@ -398,7 +398,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+});
 
 document.getElementById('chemicalstorage').addEventListener('click', function() {
     if (map.hasLayer(chemicalstorageLayer)) {
