@@ -73,20 +73,7 @@ var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/worl
 }).addTo(map);
 
 
-// Create a layer group for counties and oceans layers
-var overlayLayers = {
-    "NYC Counties": nyccountiesLayer,
-    "Oceans": atlanticoceanLayer
-};
 
-// Add overlay layers to the map (they are initially hidden)
-L.control.layers(null, overlayLayers, {
-    position: 'topright' // Position the control in the top right corner
-}).addTo(map);
-
-// Initially, hide the overlay layers
-nyccountiesLayer.remove();
-oceansLayer.remove();
 
 // Air Quality Site Layer
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
