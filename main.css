@@ -3,7 +3,11 @@ html, body {
     color: #000;
     background: #fff;
     font-family: Arial, sans-serif;
-    overflow: visible;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    
+    margin: 0;
 }
 
 a:link { text-decoration: none; pointer-events: auto; }
@@ -33,7 +37,6 @@ h3 {
     font-size: 20px;
     text-align: center;
     color: black;
-    margin: 10px 30px 30px 30px;
 }
 
 .navigation a:link {color: black;}
@@ -43,69 +46,39 @@ h3 {
 
 .container {
     width: 100%;
-    margin: 0px;
     position: relative; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.homecontainer {
-    width: 40%;
-height: 60vh;
-    margin: 30px auto;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f0f0; /* Add a background color if needed */
-    border: 1px solid grey;
-}
-
-/* Add graticule lines using the ::before pseudo-element */
-.homecontainer::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(90deg, transparent, transparent 1px, #ccc 1px, #ccc 2px);
-    opacity: 0.3; /* Adjust the opacity as needed */
-}
-
+/* Remove the height from .mapcontainer and use flex-grow to fill available space */
 .mapcontainer {
     background: white;
     border: 1px solid black;
-    width: 100%;
-    margin: 0px;
-    height: auto;
-    display: flex;
-    flex-direction: column; /* Stack child elements vertically */
+    flex-grow: 1; /* Allow it to grow and fill the available space */
+    margin: 10px;
+    min-height: calc(100vh - 50px); /* Adjusted min-height to account for top and bottom margins */
 }
-
 .columns-container {
     display: flex;
-    width: 100%; /* Make it full width */
+    border: red solid 1px;
+        overflow: visible;
+
 }
 
 .containercolumn {
-    width: 30%;
-    max-width: 450px;
-    border-right: 2px solid black;
-    height: auto; /* Let it adjust its height based on content */
-    flex-grow: 0; /* Prevent it from growing in height */
     border-right: 1px solid black;
+    overflow: visible;
+    min-height: 50vh;
 }
 
 .containercolumntwo {
-    width: 100%; /* Limit the width to 70% */
-    height: auto; /* Let it adjust its height based on content */
-    flex-grow: 0; /* Prevent it from growing in heighat */
-    border-bottom: 1px solid black;
-}
+flex-grow: 1;}
+
 
 #map {
-    height: 100%;
-    width: 100%; /* Set width to 100% */
+    min-height: 100%;
 }
 
 /* Other styles for nymapsection, containercolumn, and containercolumntwo as needed */
