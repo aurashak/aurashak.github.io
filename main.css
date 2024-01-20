@@ -54,23 +54,28 @@ h3 {
 .navigation a:visited {color: black;}
 
 .container {
-    position: relative; 
-    align-items: center;
-    justify-content: center;
-    border: 1px green solid;
-    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mapcolumnleft {
+    flex: 30%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+.mapcolumnright {
+    flex: 70%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
 }
 
 #map {
     min-height: 100%;
 }
 
-.mapsection {
-    border-bottom: 1px solid black;
-    font-size: 15px;
-}
-    
-.sectionleft {
+.mapsectionleft {
     flex-direction: row; /* Stack items vertically */
     border-bottom: 1px solid black;
     padding: 5px 10px;
@@ -87,6 +92,8 @@ h3 {
 }
 
 .title { 
+    font-size: 20px;
+    padding: 20px;
 }
 
 .subtitle {
@@ -157,12 +164,6 @@ h3 {
     position: absolute;
     bottom: 0;
     left: 0;
-}
-
-h3 {
-    font-size: 20px; 
-    font-weight: bold;
-    color: #333; 
 }
 
 
