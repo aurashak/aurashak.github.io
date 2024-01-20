@@ -1,4 +1,3 @@
-/* Reset some default browser styles */
 html, body, div, p {
     margin: 0;
     padding: 0;
@@ -11,12 +10,15 @@ body {
     font-family: Arial, sans-serif; /* Set the default font family */
 }
 
+/* Create a container with margin */
+.container {
+    margin: 20px;
+}
+
 /* Create a full-size box that resizes with the browser */
 .full-size-box {
-    width: calc(100% - 40px); /* Subtract 40px for the combined margins */
-    height: calc(100vh - 40px); /* Subtract 40px for the combined margins */
+    width: 100%;
+    height: 100vh;
     background-color: #f0f0f0;
     border: 1px solid #000;
 }
-
-/* Add additional styles as needed for your content */
