@@ -39,7 +39,7 @@ h3 {
 }
 
 .navigation a:link {color: black;}
-.navigation a:hover {color: black; border-bottom: 2px solid black;}
+.navigation a:hover {color: black;}
 .navigation a:active{color: black;}
 .navigation a:visited {color: black;}
 
@@ -200,90 +200,6 @@ h3 {
 
 .notesdescription ul li {
     list-style-type: disc;
-}
-
-/* Regular Switch Styles */
-.switch-label {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.switch {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.switch-input {
-    display: none;
-}
-
-.switch-track {
-    width: 40px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 20px;
-    position: relative;
-}
-
-.switch-thumb {
-    width: 18px;
-    height: 18px;
-    background-color: #007BFF;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: left 0.3s ease;
-}
-
-.switch-input:checked + .switch-track {
-    background-color: #00951e;
-}
-
-.switch-input:checked + .switch-track .switch-thumb {
-    left: 20px;
-}
-
-/* Switch Styles with "-b" Class */
-.switch-label-b {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.switch-b {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.switch-input-b {
-    display: none;
-}
-
-.switch-track-b {
-    width: 40px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 20px;
-    position: relative;
-}
-
-.switch-thumb-b {
-    width: 18px;
-    height: 18px;
-    background-color: #00336a;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: left 0.3s ease;
-}
-
-.switch-input-b:checked + .switch-track-b {
-    background-color: #00661a;
-}
-
-.switch-input-b:checked + .switch-track-b .switch-thumb-b {
-    left: 20px;
 }
 
 
