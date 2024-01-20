@@ -81,7 +81,7 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
             fillOpacity: 0.5
         });
     }
-}).addTo(map);
+});
 
 
 
