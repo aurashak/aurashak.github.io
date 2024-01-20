@@ -146,8 +146,6 @@ document.getElementById('nycso').addEventListener('click', function() {
     }
 });
 
-// Add the waterLayerGroup to the map
-waterLayerGroup.addTo(map);
 
 document.getElementById('waterLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(waterLayerGroup)) {
@@ -249,8 +247,7 @@ document.getElementById('nygaspipelines').addEventListener('click', function() {
 });
 
 
-// Add the waterLayerGroup to the map
-energyLayerGroup.addTo(map);
+
 
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(energyLayerGroup)) {
