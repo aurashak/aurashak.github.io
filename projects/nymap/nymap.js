@@ -2,6 +2,30 @@
 var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordinates
 L.control.scale().addTo(map);
 
+// Function to calculate marker size based on zoom level
+function calculateMarkerSize(zoom) {
+    // Define the initial and minimum sizes
+    var initialSize = 9;
+    var minSize = 5;
+
+    // Calculate the size based on zoom level with a minimum size
+    var size = initialSize - (zoom - 3) * 5;
+    return Math.max(size, minSize);
+}
+
+// NYC Counties Layer (Initially hidden)
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'grey',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: .8
+        };
+    }
+});
+
 // Base Map Layers
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     style: function (feature) {
@@ -25,38 +49,11 @@ var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
 
+// Add the NYC Counties Layer below the base layers
+nyccountiesLayer.addTo(map);
+nyccountiesLayer.bringToBack(); // Move the NYC Counties Layer to the back
+
 openstreetmapLayer.addTo(map);
-
-
-
-
-
-// Function to calculate marker size based on zoom level
-function calculateMarkerSize(zoom) {
-    // Define the initial and minimum sizes
-    var initialSize = 9;
-    var minSize = 5;
-
-    // Calculate the size based on zoom level with a minimum size
-    var size = initialSize - (zoom - 3) * 5;
-    return Math.max(size, minSize);
-}
-
-
-
-
-// NYC Counties Layer
-var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'grey',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.5,
-            fillOpacity: .8
-        };
-    }
-}).addTo(map);
 
 
 // Oceans Layer
