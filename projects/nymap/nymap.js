@@ -1,7 +1,7 @@
 // Define the bounds for the New York City Tri-State area
 var bounds = L.latLngBounds(
     L.latLng(40.2374, -74.2591), // Southwest corner (bottom-left)
-    L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
+    L.latLng(41.0000, -73.5020)  // Northeast corner (top-right)
 );
 
 // Create and configure the map with the specified bounds
