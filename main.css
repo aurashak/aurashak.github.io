@@ -85,6 +85,11 @@ flex-grow: 1;}
     min-height: 100%;
 }
 
+#map2 {
+    min-height: 100%;
+}
+
+
 /* Other styles for nymapsection, containercolumn, and containercolumntwo as needed */
 
 .mapsection, .mapsectionleft, .mapsectionright, .nymapsection {
