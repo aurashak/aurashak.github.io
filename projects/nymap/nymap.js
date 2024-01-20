@@ -1,4 +1,12 @@
-var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordinates
+// Define the bounding box for the NYC tri-state area
+var southWest = L.latLng(40.4774, -74.2591); // Southwest coordinates (lower-left)
+var northEast = L.latLng(41.3241, -73.2277); // Northeast coordinates (upper-right)
+var bounds = L.latLngBounds(southWest, northEast);
+
+var map = L.map('map', {
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0, // Restrict dragging outside bounds smoothly
+}).setView([40.7128, -74.0060], 10); // New York City coordinates
 
 L.control.scale().addTo(map);
 
