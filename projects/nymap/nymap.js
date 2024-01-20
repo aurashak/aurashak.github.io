@@ -1,15 +1,17 @@
 // Define the bounds for the New York City Tri-State area
 var bounds = L.latLngBounds(
-    L.latLng(40.2374, -74.2591), // Southwest corner (bottom-left)
-    L.latLng(41.0000, -73.5020)  // Northeast corner (top-right)
+    L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
+    L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
 );
 
 // Create and configure the map with the specified bounds
 var map = L.map('map', {
-    maxBounds: bounds,     // Set maxBounds to limit zooming out
-    maxBoundsViscosity: 0, // Elastic effect on exceeding bounds
-    minZoom: 5              // Minimum zoom level
+    maxBounds: bounds,          // Set maxBounds to limit zooming out
+    maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
+    minZoom: 7,                // Minimum zoom level
+    maxZoom: 16                // Maximum zoom level (adjust as needed)
 }).setView([40.7128, -74.0060], 10); // New York City coordinates
+
 
 L.control.scale().addTo(map);
 
