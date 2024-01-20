@@ -34,8 +34,23 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             opacity: 0.5,
             fillOpacity: .8
         };
+    },
+    pointToLayer: function (feature, latlng) {
+        // Get the county name from the 'NAME' property
+        var countyName = feature.properties.NAME;
+
+        // Create a label marker with the county name as the label
+        return L.marker(latlng, {
+            icon: L.divIcon({
+                className: 'leaflet-div-label',
+                html: countyName, // Use the 'NAME' property as the label
+                iconSize: [100, 40] // Adjust the size of the label marker
+            })
+        });
     }
 });
+
+
 
 
 // Base Map Layers
