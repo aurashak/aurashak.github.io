@@ -1,5 +1,16 @@
-// Create and configure the map
-var map = L.map('map').setView([40.7128, -74.0060], 10); // New York City coordinates
+// Define the bounds for the New York City Tri-State area
+var bounds = L.latLngBounds(
+    L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
+    L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
+);
+
+// Create and configure the map with the specified bounds
+var map = L.map('map', {
+    maxBounds: bounds,     // Set maxBounds to limit zooming out
+    maxBoundsViscosity: 1.0, // Elastic effect on exceeding bounds
+    minZoom: 7              // Minimum zoom level
+}).setView([40.7128, -74.0060], 10); // New York City coordinates
+
 L.control.scale().addTo(map);
 
 // Function to calculate marker size based on zoom level
@@ -24,7 +35,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             fillOpacity: .8
         };
     }
-});
+}).addTo(map);
 
 // Base Map Layers
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
@@ -55,7 +66,6 @@ nyccountiesLayer.bringToBack(); // Move the NYC Counties Layer to the back
 
 openstreetmapLayer.addTo(map);
 
-
 // Oceans Layer
 var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/world/atlanticocean.json', {
     style: function (feature) {
@@ -67,7 +77,13 @@ var atlanticoceanLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/worl
             fillOpacity: .8
         };
     }
-}).addTo(map);
+});
+
+// Add the Oceans Layer below the base layers
+atlanticoceanLayer.addTo(map);
+atlanticoceanLayer.bringToBack(); // Move the Oceans Layer to the back
+
+
 
 
 
