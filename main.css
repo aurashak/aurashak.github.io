@@ -1,24 +1,423 @@
-html, body, div, p {
-    margin: 0;
-    padding: 0;
-}
 
-/* Apply a margin of 20px to the body */
-body {
-    margin: 20px;
-    background-color: #fff; /* Set background color for the body */
-    font-family: Arial, sans-serif; /* Set the default font family */
-}
-
-/* Create a container with margin */
-.container {
-    margin: 20px;
-}
-
-/* Create a full-size box that resizes with the browser */
-.full-size-box {
+html, body {
+    color: #000;
+    background: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
     width: 100%;
-    height: 100vh;
-    background-color: #f0f0f0;
-    border: 1px solid #000;
+    height: 100%;
+    
+    margin: 0;
+}
+
+a:link { text-decoration: none; pointer-events: auto; }
+a:visited { color: black;}
+a:hover { border-bottom: 2px solid color; }
+a:active { color: black}
+
+/* Apply pointer-events: none; to overlays to let clicks pass through */
+.boxes-container, .third-row, .fourth-row {
+    pointer-events: none;
+}
+
+h3 {
+    font-size: 20px; 
+    font-weight: bold;
+    color: #333; 
+}
+
+
+.header {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 20px 20px ;
+    
+}
+
+.navigation {
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    margin: 0 30px;
+    padding: 5px 10px;
+}
+
+.navigation a:link {color: black;}
+.navigation a:hover {color: black;}
+.navigation a:active{color: black;}
+.navigation a:visited {color: black;}
+
+.container {
+    width: 100%;
+    position: relative; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Remove the height from .mapcontainer and use flex-grow to fill available space */
+.mapcontainer {
+    background: white;
+    border: 1px solid black;
+    flex-grow: 1; /* Allow it to grow and fill the available space */
+    margin: 20px;
+    min-height: calc(100vh - 50px); /* Adjusted min-height to account for top and bottom margins */
+}
+.columns-container {
+    display: flex;
+    border: red solid 1px;
+        overflow: visible;
+
+}
+
+.containercolumn {
+    border-right: 1px solid black;
+    overflow: visible;
+    min-height: 50vh;
+}
+
+.containercolumntwo {
+flex-grow: 1;}
+
+
+#map {
+    min-height: 100%;
+}
+
+/* Other styles for nymapsection, containercolumn, and containercolumntwo as needed */
+
+.mapsection, .mapsectionleft, .mapsectionright, .nymapsection {
+    font-size: 20px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.mapsection {
+    border-bottom: 1px solid black;
+    font-size: 15px;
+}
+    
+.nymapsection {
+    border-bottom: 1px solid black;
+    font-size: 15px;
+}
+
+.sectionleft {
+    flex-direction: row; /* Stack items vertically */
+    border-bottom: 1px solid black;
+    padding: 5px 10px;
+    font-size: 15px; 
+}
+
+.sectionlefttitle {
+    flex-direction: row; /* Stack items vertically */
+    border-bottom: 1px solid black;
+    background-color: #e6e6e6;
+    padding: 10px 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.mapsectionright {
+    flex-direction: row; /* Stack items vertically */
+}
+
+.mapsection a:link {    color: black;}
+.mapsection a:visited {color: black;}
+.mapsection a:hover {border-bottom: 2px solid black;}
+.mapsection:last-child {margin-bottom: 0;}
+.mapsection:first-child {border-top: none;}
+.mapsectionleft:first-child {border-top: none;}
+
+.title, .bodytitle, .subtitle, .subbodytitle {
+    font-size: 25px;
+    color: #000000;
+    font-weight: bold;
+    position: relative;
+    display: block;
+}
+
+.title { 
+    background: #fff; 
+    width; 100%;
+    padding: 10px 20px;
+}
+
+.subtitle {
+    font-size: 20px;
+}
+
+.subtitle a:link {}
+.subtitle a:visited {}
+.subtitle a:hover {border-bottom: none; background: red; }
+
+.subbodytitle { background: none; }
+
+.description {
+        font-size: 20px;
+        font-weight: 400;
+        background: none;
+        display: block;
+        position: relative;
+        text-align: left;
+    max-width: 800px;
+    padding: 5px 20px;
+    }
+
+.description a:link { color: black; }
+.description a:visited { color: black; }
+.description a:hover { border-bottom: 2px solid black; }
+
+
+.notesdescription {
+    justify-content: left;
+    width: 100%;
+    font-size: 13px;
+    color: #000000;
+    border-radius: 2px;
+    margin: 40px 100px 30px 100px;
+}
+
+.notesdescription a:link, a:visited, a:hover {color: black; text-decoration: underline}
+
+
+.notesdescription ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.notesdescription ul li {
+    list-style-type: disc;
+}
+
+
+
+#cesiumContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    color: black;
+    background-color: #ffffff91;
+    border: 0 solid black;
+    width: 45px;
+}
+
+.cesium-button,
+.cesium-button:hover,
+.cesium-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    fill: black;
+    border: 0 solid #444;
+    box-shadow: none;
+}
+
+.cesium-viewer-geocoderContainer .cesium-button:hover,
+.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
+    color: #edffff;
+    fill: #edffff;
+}
+
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    color: #fff;
+    font-size: 0;
+}
+.cesium-viewer-bottom {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.footer {
+    background-color: none; 
+    color: #7c7c7c; 
+    text-align: left; 
+  }
+
+.footer a {color: #888888; text-decoration: none;}
+.footer a:hover {text-decoration: none; }
+
+
+
+.button {
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-right-radius: 2px;
+    color: black;
+
+}
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    color: black;
+}
+
+/* Style the scale control */
+.leaflet-control-scale {
+    background-color: rgba(255, 255, 255, 0.7); /* Background color */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 5px; /* Border radius */
+    padding: 5px; /* Padding around the scale bar */
+    font-size: 12px; /* Font size */
+}
+
+
+.coords-box {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: rgb(0, 0, 0);
+    padding: 10px; 
+    border-radius: 5px; 
+    top: 20px;
+    right: 20px; 
+    z-index: 2; 
+}
+
+
+#cesiumContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    color: black;
+    background-color: #ffffff91;
+    border: 0 solid black;
+    width: 45px;
+}
+
+.cesium-button,
+.cesium-button:hover,
+.cesium-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    fill: black;
+    border: 0 solid #444;
+    box-shadow: none;
+}
+
+.cesium-viewer-geocoderContainer .cesium-button:hover,
+.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
+    color: #edffff;
+    fill: #edffff;
+}
+
+.cesium-viewer .cesium-widget-credits {
+    display: inline;
+    position: static;
+    color: #fff;
+    font-size: 0;
+}
+
+.cesium-viewer-bottom {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-right:5px
+}
+
+.controls-container button {
+    background-color: #bfbfbf;
+    color: black;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+
+.ticker-container {
+    letter-spacing: 1px;
+    font-style: oblique;
+}
+
+marquee {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/* Styling for the layer control box */
+.leaflet-control-layers {
+    background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+    border: 2px solid #ccc; /* Border color and width */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the box */
+    font-family: Arial, sans-serif; /* Font family */
+    font-size: 14px; /* Font size */
+    max-width: 250px; /* Maximum width of the box */
+}
+
+/* Styling for the layer control headings */
+.leaflet-control-layers h4 {
+    margin-top: 0; /* Remove top margin for headings */
+    font-weight: bold; /* Bold text for headings */
+}
+
+/* Styling for the layer control labels */
+.leaflet-control-layers label {
+    display: block; /* Display labels as block elements */
+    margin-bottom: 5px; /* Margin between labels */
+}
+
+/* Styling for the layer control switches */
+.leaflet-control-layers input[type="checkbox"] {
+    margin-right: 5px; /* Margin between the checkbox and label */
+}
+
+/* Styling for the checked checkboxes (active layers) */
+.leaflet-control-layers input[type="checkbox"]:checked + label {
+    font-weight: bold; /* Bold text for active layers */
+    color: #0074D9; /* Change text color for active layers */
+}
+
+
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: none;
+    padding: 0px;
+  }
+  
+  .weather-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+  }
+  
+  .weather-label {
+    font-weight: bold;
+  }
+  
+  .weather-value {
+    margin-top: 0px;
+    font-size: 18px;
+  }
+  
+
+
+/* Add margin to separate the legend symbol from the label */
+.legend-symbol {
+    margin-right: 10px; /* Adjust the margin as needed */
 }
