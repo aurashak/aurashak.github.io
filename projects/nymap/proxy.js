@@ -11,7 +11,7 @@ app.get('/noaa-api', async (req, res) => {
       'https://www.ncdc.noaa.gov/cdo-web/webservices/v2/currentconditions', // NOAA API URL
       {
         headers: {
-          'token': 'YOUR_NOAA_API_KEY', // Replace with your actual NOAA API key
+          'token': 'QHQrYMKYdGlBqiGiogmYgbSHiAQyVbjo', // Replace with your actual NOAA API key
         },
       }
     );
@@ -30,7 +30,7 @@ app.get('/epa-api', async (req, res) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_EPA_API_KEY', // Replace with your actual EPA API key
+          'Authorization': 'Bearer bolehawk73', // Replace with your actual EPA API key
         },
       }
     );

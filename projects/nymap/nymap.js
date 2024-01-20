@@ -68,7 +68,7 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 });
 
 openstreetmapLayer.addTo(map);
-
+openstreetmapLayer.bringToFront(); // Bring the openstreetmapLayer to the front
 
 var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
