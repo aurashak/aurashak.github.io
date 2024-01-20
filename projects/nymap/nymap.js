@@ -59,6 +59,20 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 }).addTo(map);
 
 
+// Oceans Layer
+var oceansLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/world/oceans.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'blue',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: .8
+        };
+    }
+}).addTo(map);
+
+
 
 
 // Air Quality Site Layer
@@ -251,6 +265,184 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         });
     }
 });
+
+
+
+
+document.getElementById('nycso').addEventListener('click', function() {
+    if (map.hasLayer(nycsoLayer)) {
+        map.removeLayer(nycsoLayer);
+    } else {
+        map.addLayer(nycsoLayer);
+    }
+});
+
+
+document.getElementById('floodplain').addEventListener('click', function() {
+    if (map.hasLayer(floodplainLayer)) {
+        map.removeLayer(floodplainLayer);
+    } else {
+        map.addLayer(floodplainLayer);
+    }
+});
+
+
+document.getElementById('aqisite').addEventListener('click', function() {
+    if (map.hasLayer(aqisiteLayer)) {
+        map.removeLayer(aqisiteLayer);
+    } else {
+        map.addLayer(aqisiteLayer);
+    }
+});
+
+document.getElementById('majoroilstorage').addEventListener('click', function() {
+    if (map.hasLayer(majoroilstorageLayer)) {
+        map.removeLayer(majoroilstorageLayer);
+    } else {
+        map.addLayer(majoroilstorageLayer);
+    }
+});
+
+
+document.getElementById('powerplants').addEventListener('click', function() {
+    if (map.hasLayer(powerplantsLayer)) {
+        map.removeLayer(powerplantsLayer);
+    } else {
+        map.addLayer(powerplantsLayer);
+    }
+});
+
+document.getElementById('nygaspipelines').addEventListener('click', function() {
+    if (map.hasLayer(nygaspipelinesLayer)) {
+        map.removeLayer(nygaspipelinesLayer);
+    } else {
+        map.addLayer(nygaspipelinesLayer);
+    }
+});
+
+
+document.getElementById('wastetransferfacility').addEventListener('click', function() {
+    if (map.hasLayer(wastetransferfacilityLayer)) {
+        map.removeLayer(wastetransferfacilityLayer);
+    } else {
+        map.addLayer(wastetransferfacilityLayer);
+    }
+});
+
+document.getElementById('wastewatertreatment').addEventListener('click', function() {
+    if (map.hasLayer(wastewatertreatmentLayer)) {
+        map.removeLayer(wastewatertreatmentLayer);
+    } else {
+        map.addLayer(wastewatertreatmentLayer);
+    }
+});
+
+document.getElementById('inactivesolidwastelandfill').addEventListener('click', function() {
+    if (map.hasLayer(inactivesolidwastelandfillLayer)) {
+        map.removeLayer(inactivesolidwastelandfillLayer);
+    } else {
+        map.addLayer(inactivesolidwastelandfillLayer);
+    }
+});
+
+document.getElementById('wasteLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(wasteLayerGroup)) {
+        map.removeLayer(wasteLayerGroup);
+    } else {
+        map.addLayer(wasteLayerGroup);
+    }
+});
+
+document.getElementById('chemicalstorage').addEventListener('click', function() {
+    if (map.hasLayer(chemicalstorageLayer)) {
+        map.removeLayer(chemicalstorageLayer);
+    } else {
+        map.addLayer(chemicalstorageLayer);
+    }
+});
+
+
+document.getElementById('energyLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(energyLayerGroup)) {
+        map.removeLayer(energyLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(majoroilstorageLayer);
+        map.removeLayer(powerplantsLayer);
+        map.removeLayer(nygaspipelinesLayer);
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('majoroilstorage').checked = false;
+        document.getElementById('powerplants').checked = false;
+        document.getElementById('nygaspipelines').checked = false;
+    } else {
+        map.addLayer(energyLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('majoroilstorage').checked) {
+            map.addLayer(majoroilstorageLayer);
+        }
+        if (document.getElementById('powerplants').checked) {
+            map.addLayer(powerplantsLayer);
+        }
+        if (document.getElementById('nygaspipelines').checked) {
+            map.addLayer(nygaspipelinesLayer);
+        }
+    }
+});
+
+
+document.getElementById('waterLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(waterLayerGroup)) {
+        map.removeLayer(waterLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(floodplainLayer);
+        map.removeLayer(nycsoLayer);
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('floodplain').checked = false;
+        document.getElementById('nycso').checked = false;
+    } else {
+        map.addLayer(waterLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('floodplain').checked) {
+            map.addLayer(floodplainLayer);
+        }
+        if (document.getElementById('nycso').checked) {
+            map.addLayer(nycsoLayer);
+        }
+    }
+});
+
+
+// Toggle Waste Layer Group
+document.getElementById('wasteLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(wasteLayerGroup)) {
+        map.removeLayer(wasteLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(wastetransferfacilityLayer);
+        map.removeLayer(wastewatertreatmentLayer);
+        map.removeLayer(inactivesolidwastelandfillLayer);
+        map.removeLayer(recyclingfacilityLayer);
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('wastetransferfacility').checked = false;
+        document.getElementById('wastewatertreatment').checked = false;
+        document.getElementById('inactivesolidwastelandfill').checked = false;
+        document.getElementById('recyclingfacility').checked = false;
+    } else {
+        map.addLayer(wasteLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('wastetransferfacility').checked) {
+            map.addLayer(wastetransferfacilityLayer);
+        }
+        if (document.getElementById('wastewatertreatment').checked) {
+            map.addLayer(wastewatertreatmentLayer);
+        }
+        if (document.getElementById('inactivesolidwastelandfill').checked) {
+            map.addLayer(inactivesolidwastelandfillLayer);
+        }
+        if (document.getElementById('recyclingfacility').checked) {
+            map.addLayer(recyclingfacilityLayer);
+        }
+    }
+});
+
 
 
 
