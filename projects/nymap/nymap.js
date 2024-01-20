@@ -96,8 +96,6 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 // Water Layer Group
 var waterLayerGroup = L.layerGroup();
 
-// Add the waterLayerGroup to the map
-waterLayerGroup.addTo(map);
 
 // 100 Year Floodplain Layer
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
