@@ -336,11 +336,11 @@ document.getElementById('inactivesolidwastelandfill').addEventListener('click', 
     }
 });
 
-document.getElementById('recyclingfacilityGroup').addEventListener('click', function() {
-    if (map.hasLayer(recyclingfacilityLayerGroup)) {
-        map.removeLayer(recyclingfacilityLayerGroup);
+document.getElementById('recyclingfacility').addEventListener('click', function() {
+    if (map.hasLayer(recyclingfacilityLayer)) {
+        map.removeLayer(recyclingfacilityLayer);
     } else {
-        map.addLayer(recyclingfacilityLayerGroup);
+        map.addLayer(recyclingfacilityLayer);
     }
 });
 
