@@ -3,8 +3,8 @@ html, body {
     background: #fff;
     font-family: Arial, sans-serif;
     font-size: 15px;
-    overflow: visible;
-height: 100%;
+    overflow: hidden;
+    height: 100%;
     margin: 0;
 }
 
@@ -36,8 +36,11 @@ h3 {
     display: flex;
     position: relative;
     justify-content: center;
-    margin: 20px 20px ;
-    
+    margin: 0px ;
+    background: grey;
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
 }
 
 .navigation {
@@ -64,11 +67,12 @@ h3 {
             display: grid;
             grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
             border: 2px solid blue;
-            margin: 10px;
+            margin-top: 200px;
+          height: 100vh;
         }
 
         .nymapcolumnleft {
-            border: 1px solid black;
+            border: 10px solid black;
             font-size: 15px;
             margin: 10px;
         }
@@ -76,16 +80,16 @@ h3 {
         .nymapcolumnright {
             border-bottom: 1px solid black;
             font-size: 15px;
-            border: 1px solid red;
+            border: 10px solid red;
             margin: 10px;
         }
 
 
  .nymaptitle {
-            border-bottom: 1px solid black;
             font-size: 15px;
-            border: 1px solid red;
-            margin: 10px;
+            border: 2px solid red;
+            margin-top: 40px;
+     position: fixed;
         }
 
 
