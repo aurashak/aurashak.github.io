@@ -87,18 +87,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
-// Create the mini-map
-const miniMap = new L.Control.MiniMap(
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }), {
-        toggleDisplay: true, // Display the mini-map
-        minimized: false,    // Mini-map is initially expanded
-    }
-);
-
-// Add the mini-map to the main map
-miniMap.addTo(mainMap);s
 
 
 
@@ -304,6 +292,7 @@ fetch(apiUrl)
 
             // Add a popup with AQI information
             marker.bindPopup(`AQI: ${aqi}`);
+            marker.addTo(map);
         });
     })
     .catch((error) => {
