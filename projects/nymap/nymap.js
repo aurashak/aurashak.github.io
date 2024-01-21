@@ -87,6 +87,29 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
+// Initialize the search control
+var searchControl = L.control.geosearch({
+    position: 'topright',
+    placeholder: 'Search for a location', // Placeholder text in the input field
+  });
+  
+  // Add the search control to the map
+  searchControl.addTo(map);
+
+  
+
+  // Listen for a result event
+searchControl.on('results', function (data) {
+    if (data.results.length > 0) {
+      // Assuming the first result is the most relevant one
+      var result = data.results[0];
+  
+      // Update the map's view to the selected location
+      map.setView([result.latlng.lat, result.latlng.lng], 12);
+    }
+  });
+  
+
 
 
 
