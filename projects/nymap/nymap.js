@@ -260,42 +260,10 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 
 
+// ... (previous code)
+
 // Create a layer group for air quality markers
 const airQualityLayer = L.layerGroup();
-
-// Replace 'YOUR_API_TOKEN' with your actual AQICN API token
-const apiToken = 'babc945d5af70ef9e270d8f91dc09e224b8d1aaa';
-
-// Define the AQICN API endpoint
-const apiUrl = `https://api.waqi.info/map/bounds/?token=${apiToken}&latlng=40.4774,-74.2591,40.9176,-73.7004`;
-
-// Make an API request to retrieve air quality data
-fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-        // Process the air quality data and display it on the map
-        const stations = data.data;
-        stations.forEach((station) => {
-            const lat = station.lat;
-            const lon = station.lon;
-            const aqi = station.aqi;
-
-            // Create a custom marker based on AQI value
-            const marker = L.circleMarker([lat, lon], {
-                radius: 10,
-                fillColor: getColor(aqi),
-                color: 'transparent', // Set marker border color to transparent
-                weight: 0, // Set marker border weight to 0
-                opacity: 0.7, // Adjust marker opacity as desired
-                fillOpacity: 0.8,
-            });
-
-        });
-    })
-    .catch((error) => {
-        console.error('Error fetching air quality data:', error);
-    });
-
 
 // Define a function to set marker color based on AQI value
 function getColor(aqi) {
@@ -313,6 +281,42 @@ function getColor(aqi) {
         return 'maroon'; // Hazardous
     }
 }
+
+// Define a function to create and add air quality markers to the layer group
+function addAirQualityMarkers(stations) {
+    stations.forEach((station) => {
+        const lat = station.lat;
+        const lon = station.lon;
+        const aqi = station.aqi;
+
+        // Create a custom marker based on AQI value
+        const marker = L.circleMarker([lat, lon], {
+            radius: 10,
+            fillColor: getColor(aqi),
+            color: 'transparent',
+            weight: 0,
+            opacity: 0.7,
+            fillOpacity: 0.8,
+        });
+
+        // Add the marker to the airQualityLayer
+        marker.addTo(airQualityLayer);
+    });
+}
+
+// Make an API request to retrieve air quality data and add markers
+fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+        // Process the air quality data and display it on the map
+        const stations = data.data;
+        addAirQualityMarkers(stations);
+    })
+    .catch((error) => {
+        console.error('Error fetching air quality data:', error);
+    });
+
+// ... (continue with the rest of your code)
 
 
 
