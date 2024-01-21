@@ -244,6 +244,20 @@ header a:active { color: black}
     height: 85vh;
 }
 
+#cesiumContainer1 {
+    height: 400px; /* Adjust the height and other styles as needed */
+    background-color: #ff0000; /* Background color for the first Cesium container */
+}
+
+#cesiumContainer2 {
+    height: 600px; /* Adjust the height and other styles as needed */
+    background-color: #00ff00; /* Background color for the second Cesium container */
+}
+
+/* You can add more styles as per your requirements */
+
+
+
 .cesium-viewer .cesium-geocoder-input,
 .cesium-viewer .cesium-geocoder-input:focus,
 .cesium-viewer .cesium-geocoder-input:hover {
