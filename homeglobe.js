@@ -43,10 +43,19 @@ function rotateGlobe() {
 var spinRate = 0.0003;
 var isRotating = true; // To keep track of the rotation state
 
-var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+function toggleRotation() {
+    isRotating = !isRotating;
+    if (isRotating) {
+        rotateGlobe();
+    }
+}
 
+// Add an event listener to toggle rotation when clicking on the canvas
+handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+handler.setInputAction(function() {
+    toggleRotation();
+}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 // Define variables to keep track of layer visibility
 var osmLayerVisible = true; // OpenStreetMap
 var sentinelLayerVisible = true; // Sentinel-2
-
