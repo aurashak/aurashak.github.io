@@ -560,3 +560,33 @@ searchControl.on('results', function (data) {
     }
   });
   
+
+
+
+
+  // Function to add pop-up markers to a layer
+function addPopupsToLayer(layer, data) {
+    layer.eachLayer(function (marker) {
+        // Customize the pop-up content based on the layer's data
+        const popupContent = `<strong>${data.title}</strong><br>${data.description}`;
+        marker.bindPopup(popupContent);
+    });
+}
+
+// Call the function for each layer with the corresponding data
+addPopupsToLayer(airQualityLayer, {
+    title: 'Air Quality',
+    description: 'This is the air quality layer description.'
+});
+
+addPopupsToLayer(chemicalstorageLayer, {
+    title: 'Chemical Storage',
+    description: 'This is the chemical storage layer description.'
+});
+
+addPopupsToLayer(majoroilstorageLayer, {
+    title: 'Major Oil Storage',
+    description: 'This is the major oil storage layer description.'
+});
+
+// Add more layers and data as needed for other layers
