@@ -95,9 +95,9 @@ function getTypeFromProperties(properties) {
     }
 }
 
+// Function to show updating coordinates
 function showCoordinates(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (cartesian) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
@@ -106,28 +106,20 @@ function showCoordinates(movement) {
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
-        pickedObjects.forEach(function(pickedObject) {
-            if (Cesium.defined(pickedObject) && pickedObject.id && pickedObject.id.properties) {
-                var properties = pickedObject.id.properties;
-                var type = getTypeFromProperties(properties);
-                var name = properties.name;
-
-                if (name) {
-                    hoverText += `<br>${type}: ${name}`;
-                } else {
-                    hoverText += `<br>${type}: N/A`;
-                }
-            }
-        });
-
         coordsBox.innerHTML = hoverText;
-        coordsBox.style.display = 'block';
     }
 }
 
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Additionally, you may want to set up an event listener for when the mouse leaves the globe
+// to set the coordsBox to the default text
+viewer.scene.canvas.addEventListener('mouseleave', function() {
+    coordsBox.innerHTML = defaultText;
+});
+
 
 
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
