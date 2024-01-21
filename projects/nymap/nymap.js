@@ -418,6 +418,16 @@ document.getElementById('airQuality').addEventListener('click', function() {
     }
 });
 
+// Add the following code to turn off the "Air Quality" layer when the checkbox is unchecked
+document.getElementById('airQuality').addEventListener('change', function() {
+    if (!this.checked) {
+        if (map.hasLayer(airQualityLayer)) {
+            map.removeLayer(airQualityLayer);
+            console.log('airQualityLayer turned off'); // Debugging statement
+        }
+    }
+});
+
 
 
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
