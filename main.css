@@ -161,7 +161,39 @@ header a:active { color: black}
       
         }
 
- 
+        .placeidtitle {
+            font-size: 15px;
+            margin-top: 0px;
+            position: relative;
+            padding: 10px;
+    background: lightgrey;
+    border:1px solid black;
+        }
+
+
+        .placeidcontainer {
+            display: grid;
+            grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+            border: 1px solid black;
+            margin-top: 0px;
+            background: none;
+            height: calc(100% - 135px); /* Set the container height to 100% minus 30px */  
+        }
+
+        .placeidcolumnleft {
+            font-size: 15px;
+            margin: 0px;
+            background: rgb(238, 238, 238);
+        }
+
+        .placeidcolumnright {
+            font-size: 15px;
+            border-left: 1px solid black;
+            margin: 0px;
+        }
+
+
+
 
 
 #map {
