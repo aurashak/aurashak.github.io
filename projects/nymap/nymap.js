@@ -290,8 +290,6 @@ fetch(apiUrl)
                 fillOpacity: 0.8,
             });
 
-            // Add a popup with AQI information
-            marker.bindPopup(`AQI: ${aqi}`);
         });
     })
     .catch((error) => {
