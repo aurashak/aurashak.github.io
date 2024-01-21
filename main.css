@@ -6,6 +6,8 @@ html, body {
     overflow: visible;
     height: 100%;
     margin: 0;
+    background: beige;
+
 }
 
 a:link { text-decoration: none; pointer-events: auto; }
@@ -42,8 +44,8 @@ h3 {
     display: flex;
     justify-content: left;
     margin: 0px ;
-    width: 100%;
-    border: 2px solid black;
+    padding: 10px 0px;
+        border-bottom:1px solid black;
 }
 
 .navigation {
@@ -70,23 +72,23 @@ h3 {
 
 .nymaptitle {
             font-size: 15px;
-            border: 2px solid grey;
             margin-top: 0px;
             position: relative;
             padding: 10px;
+    background: lightgrey;
+    border-bottom:1px solid black;
         }
 
  .nymapcontainer {
             display: grid;
             grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
-            border: 2px solid blue;
+            border: 1px solid black;
             margin-top: 0px;
             background: none;
-            height: calc(100% - 170px); /* Set the container height to 100% minus 30px */  
+            height: calc(100% - 135px); /* Set the container height to 100% minus 30px */  
         }
 
         .nymapcolumnleft {
-            border: px solid black;
             font-size: 15px;
             margin: 0px;
             background: rgb(238, 238, 238);
@@ -94,12 +96,12 @@ h3 {
 
         .nymapcolumnright {
             font-size: 15px;
-            border: 1px solid red;
+            border-left: 1px solid black;
             margin: 0px;
         }
 
   .columnlefttitle {
-            border: 1px solid black;
+            border-bottom: 1px solid black;
             font-size: 15px;
             margin: 0px;
             padding: 5px 10px;
