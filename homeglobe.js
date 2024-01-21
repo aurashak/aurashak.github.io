@@ -10,7 +10,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     selectionIndicator: false,
     timeline: false,
     navigationHelpButton: false,
-    skyBox = false,
+    skyBox: false,
     fullscreenButton: false,
     animation: false,
     shouldAnimate: true, // You can keep animation true if needed
