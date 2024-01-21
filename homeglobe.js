@@ -12,7 +12,6 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
-    imageryProvider: false, // Turn off the default imagery provider
     shouldAnimate: true, // You can keep animation true if needed
 });
 
