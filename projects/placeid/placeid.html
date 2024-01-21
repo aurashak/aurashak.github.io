@@ -13,11 +13,9 @@
     
     <body>
 
-        <div class="container">
-            <div class="top-row">
-                <div class="top-box"><a href="https://aurashak.github.io">Home</a></div>
-                <div class="top-box"><a href="https://aurashak.github.io">Contact</a></div>
-            </div>
+        <div class="header">
+            <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
+            <div class="navigation"><a href="https://aurashak.github.io">About</a></div>
         </div>
 
         <div class="container">
@@ -25,54 +23,116 @@
             <div class="description">This project seeks to build a database of social and physical lboundaries in the world. It allows for  global exploration of social and physical geograpahy. Explore the globe below.</div>
         </div>
   
-        <div class="mapcontainer">
-        <div class="mapsection">
-            <div class="ticker-container">AP News Information
-                <marquee behavior="scroll" direction="left" scrollamount="4">
-                    <div id="ap-news-ticker"></div>
-                    
-                </marquee>
-            </div>
+
+
+        <div class="nymaptitle">
+            <h1>Place Identification</h1>
+            <h3>This map aggregates political data about New York City using open source methods of data and graphic information systems.<br>See here for documentation.<h3>
         </div>
 
-            <div class="containercolumn">
-                <div class="mapsectionleft">
-                    <div class="coords-box"></div>
+
+    <div class="nymapcontainer">
+
+        <div class="nymapcolumnleft">
+
+
+
+      
+
+
+
+            <div class="columnlefttitle">Air  ☁️</div>
+
+            <div class="mapsectionleft">
+                <div style="display: flex; align-items: center;">
+                    <div class="legend-symbol" id="legend-airQuality"></div>
+                    <label class="switch-label">Air Quality Monitoriing Sites</label>
+                    <label class="switch" style="margin-left: auto;">
+                        <input type="checkbox" class="switch-input" id="airQuality">
+                        <div class="switch-track">
+                            <div class="switch-thumb"></div>
+                        </div>
+                    </label>
                 </div>
-        
-                <div class="mapsectionleft">
-                </div>
-        
-                <div class="mapsectionleft">
-                </div>
-        
-                <div class="mapsectionleft">
-                </div>
-        
-                <div class="mapsectionleft">
-                </div>
-    
-                <div class="mapsectionleft">
-                </div>
-    
-                <div class="mapsectionleft">
-                </div>
-    
-                </div><div class="containerrow">
-                    <div id="cesiumContainer" style="height: 600px;"></div>   
             </div>
-        </div>
-        </div>
+            
     
+            <div class="columnlefttitle">
+        
+            </div>
                 
     
+    
+            <div class="mapsectionleft">
+             
+            </div>
+                
+                
+    
+            <div class="mapsectionleft">
+          
+            </div>
+    
+    
+            <div class="columnlefttitle">
+               
+            </div>                    
+    
+    
+            <div class="mapsectionleft">
+               
+            </div>
+                
+    
+            <div class="mapsectionleft">
+             
+            </div>
+                
+    
+            <div class="mapsectionleft">
+                
+            </div>
+                    
+                
+                <div class="mapsectionleft">
+                    
+                </div>
+                
+    
+                <div class="columnlefttitle">
+                   
+                </div>
+    
+    
+    
+            
+                <div class="columnlefttitle">Other</div>
+    
+            
+                <div class="mapsectionleft">
+                    <div style="display: flex; align-items: center;">
+                        <div class="legend-symbol" id="legend-chemicalstorage"></div>
+                        <label class="switch-label">Chemical Storage</label>
+                        <label class="switch" style="margin-left: auto;">
+                            <input type="checkbox" class="switch-input" id="chemicalstorage">
+                            <div class="switch-track">
+                                <div class="switch-thumb"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
 
-   
-        <div class="container">
-            <div class="notesdescription"><h3>Notes</h3><br>This globe is built using <a href="https://aurashak.github.io">Cesium</a><br><br><li>Data sources include:</li><li>list information for data</li><li>list information for data</li><li>list information for data</li>
+
+            <div class="nymapcolumnright">
+                <div id="cesiumContainer"></div>   
+            </div>
+    
         </div>
-
-
+    
+    
+       
         <script src="https://aurashak.github.io/projects/placeid/placeid.js"></script>
         <script src="https://aurashak.github.io/projects/placeid/apnewsticker.js"></script>
 
