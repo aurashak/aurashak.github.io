@@ -3,7 +3,7 @@ html, body {
     background: #fff;
     font-family: Arial, sans-serif;
     font-size: 15px;
-    overflow: hidden;
+    overflow: visible;
     height: 100%;
     margin: 0;
 }
@@ -34,13 +34,10 @@ h3 {
 
 .header {
     display: flex;
-    position: relative;
     justify-content: center;
     margin: 0px ;
     background: grey;
-    position: fixed;
     width: 100%;
-    overflow: hidden;
 }
 
 .navigation {
@@ -67,8 +64,17 @@ h3 {
             display: grid;
             grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
             border: 2px solid blue;
-            margin-top: 200px;
-          height: 100vh;
+            margin-top: 0px;
+          background: yellow;
+            height: calc(100% - 210px); /* Set the container height to 100% minus 30px */  
+        }
+
+.nymaptitle {
+            font-size: 15px;
+            border: 2px solid red;
+            margin-top: 0px;
+            position: relative;
+     width: 99.8%;
         }
 
         .nymapcolumnleft {
@@ -85,12 +91,7 @@ h3 {
         }
 
 
- .nymaptitle {
-            font-size: 15px;
-            border: 2px solid red;
-            margin-top: 40px;
-     position: fixed;
-        }
+ 
 
 
 #map {
@@ -115,22 +116,12 @@ h3 {
 }
 
 .title { 
-    font-size: 20px;
-    padding: 20px;
 }
 
 .subtitle {
 }
 
 .description {
-    font-size: 20px;
-    font-weight: 400;
-    background: none;
-    display: block;
-    position: relative;
-    text-align: left;
-    max-width: 800px;
-    padding: 5px 20px;
 }
 
 .description a:link { color: black; }
