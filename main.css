@@ -8,9 +8,9 @@ html, body {
     margin: 0;
 }
 
-a:link { }
+a:link {text-decoration: none; }
 a:visited { color: black;}
-a:hover { }
+a:hover {text-decoration: underline; }
 a:active { color: black}
 
 
@@ -113,13 +113,10 @@ header a:active { color: black}
 
 }
 
-.homesubtitle a:link {
-    color: black;
-}
-
-.homesubtitle a:hover { border-bottom: 5px;}
-.homesubtitle a:active { border-bottom:none;}
-.homesubtitle a:visited { border-bottom: none;}
+.homesubtitle a:link {color: black;}
+.homesubtitle a:hover {   color: black;}
+.homesubtitle a:active {   color: black;}
+.homesubtitle a:visited {  color: black; }
 
 .nymaptitle {
             font-size: 15px;
@@ -228,7 +225,7 @@ header a:active { color: black}
 
 .description a:link { color: black; }
 .description a:visited { color: black; }
-.description a:hover { border-bottom: 2px solid black; }
+.description a:hover {  }
 
 
 
@@ -240,7 +237,6 @@ header a:active { color: black}
 
 
 #cesiumContainer {
-    /*! width: 100vh; */
     height: 85vh;
 }
 
