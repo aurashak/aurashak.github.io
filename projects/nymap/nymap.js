@@ -407,14 +407,17 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 
-// Implement the click event listener to toggle the layer group
 document.getElementById('airQuality').addEventListener('click', function() {
+    console.log('Clicked on airQuality'); // Debugging statement
     if (map.hasLayer(airQualityLayer)) {
         map.removeLayer(airQualityLayer);
+        console.log('airQualityLayer removed'); // Debugging statement
     } else {
         map.addLayer(airQualityLayer);
+        console.log('airQualityLayer added'); // Debugging statement
     }
 });
+
 
 
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
