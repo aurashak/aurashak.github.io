@@ -104,10 +104,10 @@ h3 {
             border-bottom: 1px solid black;
             font-size: 15px;
             margin: 0px;
-            padding: 5px 10px;
+            padding: 10px;
             font-weight: bold;
             background: rgb(96, 96, 96);
-            color: #eeeeee;
+            color: fff;
             border-bottom: 1px solid black;
       
         }
@@ -378,8 +378,6 @@ h3 {
 
 
 
-
-
 /* Styles for Switch Mechanism */
 .switch-label {
     font-size: 15px;
@@ -388,7 +386,7 @@ h3 {
 
 .switch-label-b {
     font-size: 15px;
-    color: #333;
+    color: #fff;
 }
 
 .switch-input {
@@ -416,7 +414,20 @@ h3 {
 }
 
 .switch-thumb {
-    background-color: #0073e6;
+    background: linear-gradient(135deg, #0073e6, #0056b3);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    transition: 0.2s;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.switch-thumb-b {
+    background-color: #66B2FF; /* Light blue color */
     border-radius: 50%;
     height: 20px;
     width: 20px;
@@ -426,15 +437,15 @@ h3 {
     transition: 0.2s;
 }
 
-.switch-thumb-b {
-    background-color: #0073e6;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    transition: 0.2s;
+
+
+/* Add this style to change the track color to green when checked */
+.switch-input:checked + .switch-track {
+    background-color: #4caf50; /* Green color */
+}
+
+.switch-input-b:checked + .switch-track-b {
+    background-color: #4caf50; /* Green color */
 }
 
 .switch-input:checked + .switch-track .switch-thumb {
@@ -444,3 +455,5 @@ h3 {
 .switch-input-b:checked + .switch-track-b .switch-thumb-b {
     left: 16px;
 }
+
+
