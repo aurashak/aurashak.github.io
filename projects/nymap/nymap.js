@@ -304,6 +304,10 @@ function addAirQualityMarkers(stations) {
     });
 }
 
+// Add the airQualityLayer to the map
+map.addLayer(airQualityLayer);
+
+
 // Make an API request to retrieve air quality data and add markers
 fetch(apiUrl)
     .then((response) => response.json())
