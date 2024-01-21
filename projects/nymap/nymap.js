@@ -1,7 +1,7 @@
-// Define the bounds for the New York City Tri-State area
+// Define the bounds for the New York City area
 var bounds = L.latLngBounds(
     L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
-    L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
+    L.latLng(40.9176, -73.7004)  // Northeast corner (top-right)
 );
 
 // Create and configure the map with the specified bounds
@@ -11,6 +11,7 @@ var map = L.map('map', {
     minZoom: 7,                // Minimum zoom level
     maxZoom: 16                // Maximum zoom level (adjust as needed)
 }).setView([40.7128, -74.0060], 10); // New York City coordinates
+
 
 
 L.control.scale().addTo(map);
@@ -572,12 +573,6 @@ function addPopupsToLayer(layer, data) {
         marker.bindPopup(popupContent);
     });
 }
-
-// Call the function for each layer with the corresponding data
-addPopupsToLayer(airQualityLayer, {
-    title: 'Air Quality',
-    description: 'This is the air quality layer description.'
-});
 
 addPopupsToLayer(chemicalstorageLayer, {
     title: 'Chemical Storage',
