@@ -46,7 +46,7 @@ h3 {
     border: 1px solid black;
     position: relative; /* Add this line */
     z-index: 1; /* Add this line */
-        background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 header a:link { text-decoration: none; pointer-events: auto; }
@@ -54,13 +54,11 @@ header a:visited { color: black;}
 header a:hover { border-bottom: 2px solid color; }
 header a:active { color: black}
 
-
 .navigation {
     font-size: 20px;
     text-align: left;
     color: black;
     margin: 0px 30px 0px 10px;
-
 }
 
 .navigation a:link {color: black;}
@@ -68,10 +66,9 @@ header a:active { color: black}
 .navigation a:active{color: black;}
 .navigation a:visited {color: black;}
 
-   
  .container {
-     display: block;
-        }
+    display: block;
+}
 
 
 .homecontainer {
@@ -99,7 +96,6 @@ header a:active { color: black}
     padding: 5px 10px;
     background: rgba(255, 255, 255, 0.5);
     display: inline-block;
-
 }
 
 .homesubtitle {
@@ -110,8 +106,7 @@ header a:active { color: black}
     max-width: 800px;
     padding: 5px 10px;
     display: inline-block;
-            background: rgba(255, 255, 255, 0.5);
-
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .homesubtitle a:link {color: black;}
@@ -120,76 +115,76 @@ header a:active { color: black}
 .homesubtitle a:visited {  color: black; }
 
 .nymaptitle {
-            font-size: 15px;
-            margin-top: 0px;
-            position: relative;
-            padding: 10px;
+    font-size: 15px;
+    margin-top: 0px;
+    position: relative;
+    padding: 10px;
     background: lightgrey;
     border:1px solid black;
-        }
+}
 
  .nymapcontainer {
-            display: grid;
-            grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
-            border: 1px solid black;
-            margin-top: 0px;
-            background: none;
-            height: calc(100% - 135px);   
-        }
+    display: grid;
+    grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+    border: 1px solid black;
+    margin-top: 0px;
+    background: none;
+    height: calc(100% - 135px);   
+}
 
-        .nymapcolumnleft {
-            font-size: 15px;
-            margin: 0px;
-            background: rgb(238, 238, 238);
-        }
+.nymapcolumnleft {
+    font-size: 15px;
+    margin: 0px;
+    background: rgb(238, 238, 238);
+}
 
-        .nymapcolumnright {
-            font-size: 15px;
-            border-left: 1px solid black;
-            margin: 0px;
-        }
+.nymapcolumnright {
+    font-size: 15px;
+    border-left: 1px solid black;
+    margin: 0px;
+}
 
   .columnlefttitle {
-            border-bottom: 1px solid black;
-            font-size: 15px;
-            margin: 0px;
-            padding: 10px;
-            font-weight: bold;
-            background: rgb(96, 96, 96);
-            color: #fff;
-            border-bottom: 1px solid black;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    margin: 0px;
+    padding: 10px;
+    font-weight: bold;
+    background: rgb(96, 96, 96);
+    color: #fff;
+    border-bottom: 1px solid black;
       
-        }
+}
 
-        .placeidtitle {
-            font-size: 15px;
-            margin-top: 0px;
-            position: relative;
-            padding: 10px;
+.placeidtitle {
+    font-size: 15px;
+    margin-top: 0px;
+    position: relative;
+    padding: 10px;
     background: lightgrey;
     border:1px solid black;
-        }
+}
 
 
-        .placeidcontainer {
-            display: grid;
-            grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
-            border: 1px solid black;
-       }
+.placeidcontainer {
+    display: grid;
+    grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+    border: 1px solid black;
+}
 
-        .placeidcolumnleft {
-            font-size: 15px;
-            margin: 0px;
-            background: rgb(238, 238, 238);
-        }
+.placeidcolumnleft {
+    font-size: 15px;
+    margin: 0px;
+    background: rgb(238, 238, 238);
+}
 
-        .placeidcolumnright {
-            font-size: 15px;
-            border-left: 1px solid black;
-            margin: 0px;
-            width: 100%;
+.placeidcolumnright {
+    font-size: 15px;
+    border-left: 1px solid black;
+    margin: 0px;
+    width: 100%;
             /*! height: 0%; */
-        }
+}
 
 
 
@@ -251,9 +246,6 @@ header a:active { color: black}
     background-color: red; /* Background color for the second Cesium container */
 }
 
-/* You can add more styles as per your requirements */
-
-
 
 .cesium-viewer .cesium-geocoder-input,
 .cesium-viewer .cesium-geocoder-input:focus,
@@ -293,38 +285,6 @@ header a:active { color: black}
     left: 0;
 }
 
-
-
-
-
-
-
-.button {
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.leaflet-touch .leaflet-bar a:first-child {
-    border-top-right-radius: 2px;
-    color: black;
-
-}
-.leaflet-touch .leaflet-bar a:last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    color: black;
-}
-
-/* Style the scale control */
-.leaflet-control-scale {
-    background-color: rgba(255, 255, 255, 0.7); /* Background color */
-    border: 1px solid #ccc; /* Border style */
-    border-radius: 5px; /* Border radius */
-    padding: 5px; /* Padding around the scale bar */
-    font-size: 12px; /* Font size */
-}
 
 
 .coords-box {
@@ -390,6 +350,36 @@ header a:active { color: black}
 }
 
 
+
+
+.button {
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-right-radius: 2px;
+    color: black;
+
+}
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    color: black;
+}
+
+/* Style the scale control */
+.leaflet-control-scale {
+    background-color: rgba(255, 255, 255, 0.7); /* Background color */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 5px; /* Border radius */
+    padding: 5px; /* Padding around the scale bar */
+    font-size: 12px; /* Font size */
+}
+
+
 /* Styling for the layer control box */
 .leaflet-control-layers {
     background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
@@ -424,35 +414,6 @@ header a:active { color: black}
     color: #0074D9; /* Change text color for active layers */
 }
 
-
-
-
-
-
-.weather-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: none;
-    padding: 0px;
-  }
-  
-  .weather-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0px;
-  }
-  
-  .weather-label {
-    font-weight: bold;
-  }
-  
-  .weather-value {
-    margin-top: 0px;
-    font-size: 18px;
-  }
-  
 
 
 
