@@ -520,10 +520,10 @@ function setLegendSymbol(layerId, color, shape) {
     if (legendSymbol) {
         if (shape === 'circle') {
             // Create a circle SVG element
-            legendSymbol.innerHTML = `<svg width="20" height="20"><circle cx="10" cy="10" r="8" fill="${color}" /></svg>`;
+            legendSymbol.innerHTML = `<svg width="50" height="50"><circle cx="10" cy="10" r="8" fill="${color}" /></svg>`;
         } else if (shape === 'line') {
             // Create a line SVG element
-            legendSymbol.innerHTML = `<svg width="20" height="20"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
+            legendSymbol.innerHTML = `<svg width="50" height="50"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
         } else if (shape === 'polygon') {
             // Create a polygon SVG element (example polygon with 5 points)
             legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="2,2 2,18 18,18 18,2" fill="${color}" /></svg>`;
