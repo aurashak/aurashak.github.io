@@ -530,6 +530,8 @@ function setLegendSymbol(layerId, color, shape) {
         }
     }
     
+}
+
 
 
 
