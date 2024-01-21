@@ -10,7 +10,8 @@ var map = L.map('map', {
     maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
     minZoom: 7,                // Minimum zoom level
     maxZoom: 16                // Maximum zoom level (adjust as needed)
-}).setView([40.7128, -74.0060], 10); // New York City coordinates
+}).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
+
 
 
 L.control.scale().addTo(map);
