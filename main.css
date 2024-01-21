@@ -45,7 +45,7 @@ h3 {
     justify-content: left;
     margin: 0px ;
     padding: 10px 0px;
-        border-bottom:1px solid black;
+        border:1px solid black;
 }
 
 .navigation {
@@ -68,7 +68,24 @@ h3 {
             margin: 10px;
         }
 
-     
+        .hometitle {
+            font-size: 15px;
+            margin-top: 0px;
+            position: relative;
+            padding: 10px;
+    background: lightgrey;
+    border:1px solid black;
+        }
+
+        .homesubtitle {
+            font-size: 15px;
+            margin-top: 0px;
+            position: relative;
+            padding: 10px;
+    background: lightgrey;
+    border:1px solid black;
+        }
+
 
 .nymaptitle {
             font-size: 15px;
@@ -76,7 +93,7 @@ h3 {
             position: relative;
             padding: 10px;
     background: lightgrey;
-    border-bottom:1px solid black;
+    border:1px solid black;
         }
 
  .nymapcontainer {
