@@ -12,8 +12,8 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
-    backgroundColor: Cesium.Color.WHITE // Set background color to white
-
+    imageryProvider: false, // Turn off the default imagery provider
+    shouldAnimate: true, // You can keep animation true if needed
 });
 
 viewer.scene.backgroundColor = Cesium.Color.WHITE;
