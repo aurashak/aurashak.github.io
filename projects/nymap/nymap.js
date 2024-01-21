@@ -1,7 +1,7 @@
 // Define the bounds for the New York City Tri-State area
 var bounds = L.latLngBounds(
     L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
-    L.latLng(40.8815, -73.3913)  // Northeast corner (top-right)
+    L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
 );
 
 // Create and configure the map with the specified bounds
@@ -290,6 +290,9 @@ fetch(apiUrl)
                 fillOpacity: 0.8,
             });
 
+            // Add a popup with AQI information
+            marker.bindPopup(`AQI: ${aqi}`);
+        });
     })
     .catch((error) => {
         console.error('Error fetching air quality data:', error);
