@@ -152,7 +152,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: '#013220',
+            fillColor: '#FFC0CB',
             color: 'black',
             weight: 0.5,
             opacity: 0.7,
@@ -510,7 +510,7 @@ setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
-setLegendSymbol('powerplants', '#013220', 'circle');
+setLegendSymbol('powerplants', '#FFC0CB', 'circle');
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
 setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
