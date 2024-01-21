@@ -81,6 +81,7 @@ header a:active { color: black}
     width: 100%;
     height: 100%;
     z-index: 0; /* Send it to the back */
+    background: red;
 }
 
 
@@ -133,7 +134,7 @@ header a:active { color: black}
             border: 1px solid black;
             margin-top: 0px;
             background: none;
-            height: calc(100% - 135px); /* Set the container height to 100% minus 30px */  
+            height: calc(100% - 135px);   
         }
 
         .nymapcolumnleft {
@@ -242,12 +243,12 @@ header a:active { color: black}
 
 #cesiumContainer1 {
     height: 100vh; /* Adjust the height and other styles as needed */
-    background-color: none; /* Background color for the first Cesium container */
+    background-color: rede; /* Background color for the first Cesium container */
 }
 
 #cesiumContainer2 {
     height: 85vh; /* Adjust the height and other styles as needed */
-    background-color: none; /* Background color for the second Cesium container */
+    background-color: red; /* Background color for the second Cesium container */
 }
 
 /* You can add more styles as per your requirements */
