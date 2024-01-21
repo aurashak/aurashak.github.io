@@ -46,15 +46,19 @@ h3 {
     border: 1px solid black;
     position: relative; /* Add this line */
     z-index: 1; /* Add this line */
-    background: rgba(255, 255, 255, 0.5);
-
 }
+
+header a:link { text-decoration: none; pointer-events: auto; }
+header a:visited { color: black;}
+header a:hover { border-bottom: 2px solid color; }
+header a:active { color: black}
+
 
 .navigation {
     font-size: 20px;
     text-align: left;
     color: black;
-    margin: 0 10px;
+    margin: 0px 30px 0px 10px;
 
 }
 
@@ -84,7 +88,6 @@ h3 {
 .homesubtitle {
     position: relative;
     z-index: 1; /* Bring them above the background */
-    display: inline-block; /* Add this line */
 }
 
 .hometitle {
@@ -93,7 +96,6 @@ h3 {
     margin-left: 50px;
     font-weight: bold;
     padding: 0px;
-    background: rgba(255, 255, 255, 0.5);
 }
 
 .homesubtitle {
@@ -103,19 +105,9 @@ h3 {
     font-weight: bold;
     max-width: 800px;
     padding: 0px;
-    background: rgba(255, 255, 255, 0.5);
 }
 
 
-.homesubtitle a:link,
-.homesubtitle a:visited {
-    color: inherit; /* Inherit the color from the parent container */
-    text-decoration: underline; /* Underline the links */
-}
-
-.homesubtitle a:hover {
-    color: red; /* Change the color when hovering over the links */
-}
 
 .nymaptitle {
             font-size: 15px;
