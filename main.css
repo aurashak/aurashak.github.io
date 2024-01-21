@@ -6,7 +6,6 @@ html, body {
     overflow: visible;
     height: 100%;
     margin: 0;
-    background: beige;
 
 }
 
@@ -61,29 +60,30 @@ h3 {
 .navigation a:active{color: black;}
 .navigation a:visited {color: black;}
 
-      .container {
+   
+ .container {
             display: grid;
-            grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
-            border: 2px solid blue;
             margin: 10px;
         }
 
+
         .hometitle {
-            font-size: 15px;
-            margin-top: 0px;
-            position: relative;
-            padding: 10px;
-    background: lightgrey;
-    border:1px solid black;
+            font-size: 55px;
+            margin-top: 30px;
+            margin-left: 50px;
+       font-weight:  bold;
+            padding: 0px;
+            display: block;
         }
 
-        .homesubtitle {
-            font-size: 15px;
-            margin-top: 0px;
-            position: relative;
-            padding: 10px;
-    background: lightgrey;
-    border:1px solid black;
+       .homesubtitle {
+            font-size: 30px;
+            margin-top: 10px;
+            margin-left: 80px;
+       font-weight:  bold;
+           max-width: 800px;
+            padding: 0px;
+            display: block;
         }
 
 
