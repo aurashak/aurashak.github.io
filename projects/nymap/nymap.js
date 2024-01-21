@@ -89,6 +89,22 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
+// AQI sites
+var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'green',
+            color: 'black',
+            weight: 0,
+            opacity: 0.0,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(waterLayerGroup);
+
+
 
 
 
@@ -260,68 +276,6 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 
 
-// ... (previous code)
-
-// Create a layer group for air quality markers
-const airQualityLayer = L.layerGroup();
-
-// Define a function to set marker color based on AQI value
-function getColor(aqi) {
-    if (aqi <= 50) {
-        return 'green'; // Good
-    } else if (aqi <= 100) {
-        return 'yellow'; // Moderate
-    } else if (aqi <= 150) {
-        return 'orange'; // Unhealthy for Sensitive Groups
-    } else if (aqi <= 200) {
-        return 'red'; // Unhealthy
-    } else if (aqi <= 300) {
-        return 'purple'; // Very Unhealthy
-    } else {
-        return 'maroon'; // Hazardous
-    }
-}
-
-// Define a function to create and add air quality markers to the layer group
-function addAirQualityMarkers(stations) {
-    stations.forEach((station) => {
-        const lat = station.lat;
-        const lon = station.lon;
-        const aqi = station.aqi;
-
-        // Create a custom marker based on AQI value
-        const marker = L.circleMarker([lat, lon], {
-            radius: 10,
-            fillColor: getColor(aqi),
-            color: 'transparent',
-            weight: 0,
-            opacity: 0.7,
-            fillOpacity: 0.8,
-        });
-
-        // Add the marker to the airQualityLayer
-        marker.addTo(airQualityLayer);
-    });
-}
-
-// Add the airQualityLayer to the map
-map.addLayer(airQualityLayer);
-
-
-// Make an API request to retrieve air quality data and add markers
-fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-        // Process the air quality data and display it on the map
-        const stations = data.data;
-        addAirQualityMarkers(stations);
-    })
-    .catch((error) => {
-        console.error('Error fetching air quality data:', error);
-    });
-
-// ... (continue with the rest of your code)
-
 
 
 
@@ -413,11 +367,11 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 
-document.getElementById('airQuality').addEventListener('click', function() {
-    if (map.hasLayer(airQualityLayer)) {
-        map.removeLayer(airQualityLayer);
+document.getElementById('aqisite').addEventListener('click', function() {
+    if (map.hasLayer(aqisiteLayer)) {
+        map.removeLayer(aqisiteLayer);
     } else {
-        map.addLayer(airQualityLayer);
+        map.addLayer(aqisiteLayer);
     }
 });
 
@@ -508,7 +462,7 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 // Set the legend symbol shapes and colors for each layer
-setLegendSymbol('airQuality', 'green', 'circle');
+setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
