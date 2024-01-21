@@ -94,8 +94,10 @@ header a:active { color: black}
     margin-left: 50px;
     font-weight: bold;
     padding: 5px 10px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.7); /* Add box shadow here */
     display: inline-block;
+    border: 1px solid black;
 }
 
 .homesubtitle {
@@ -106,7 +108,9 @@ header a:active { color: black}
     max-width: 800px;
     padding: 5px 10px;
     display: inline-block;
-    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid black;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.7); /* Add box shadow here */
 }
 
 .homesubtitle a:link {color: black;}
