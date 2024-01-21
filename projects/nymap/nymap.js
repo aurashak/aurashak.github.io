@@ -90,7 +90,7 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 // AQI sites
-var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
+var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
@@ -102,7 +102,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.
             fillOpacity: 0.5
         });
     }
-}).addTo(waterLayerGroup);
+}).addTo(map);
 
 
 
