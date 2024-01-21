@@ -5,7 +5,7 @@ var bounds = L.latLngBounds(
 );
 
 // Create and configure the map with the specified bounds
-var map = L.map('map', {
+var map = L.map('nymap', {
     maxBounds: bounds,          // Set maxBounds to limit zooming out
     maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
     minZoom: 7,                // Minimum zoom level
