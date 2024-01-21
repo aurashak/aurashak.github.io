@@ -292,7 +292,6 @@ fetch(apiUrl)
 
             // Add a popup with AQI information
             marker.bindPopup(`AQI: ${aqi}`);
-            marker.addTo(map);
         });
     })
     .catch((error) => {
