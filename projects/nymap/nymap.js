@@ -519,17 +519,16 @@ function setLegendSymbol(layerId, color, shape) {
     
     if (legendSymbol) {
         if (shape === 'circle') {
-            // Create a circle SVG element with a larger size
-            legendSymbol.innerHTML = `<svg width="30" height="30"><circle cx="15" cy="15" r="12" fill="${color}" /></svg>`;
+            // Create a circle SVG element with a slightly smaller size
+            legendSymbol.innerHTML = `<svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>`;
         } else if (shape === 'line') {
-            // Create a line SVG element with a larger size
-            legendSymbol.innerHTML = `<svg width="30" height="30"><line x1="3" y1="15" x2="27" y2="15" stroke="${color}" stroke-width="6" /></svg>`;
+            // Create a line SVG element with a slightly smaller size
+            legendSymbol.innerHTML = `<svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>`;
         } else if (shape === 'polygon') {
-            // Create a polygon SVG element (example polygon with 5 points) with a larger size
-            legendSymbol.innerHTML = `<svg width="30" height="30"><polygon points="3,3 3,27 27,27 27,3" fill="${color}" /></svg>`;
+            // Create a polygon SVG element (example polygon with 5 points) with a slightly smaller size
+            legendSymbol.innerHTML = `<svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>`;
         }
-    }
-    
+    }    
 }
 
 
