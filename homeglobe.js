@@ -3,8 +3,6 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 var viewer = new Cesium.Viewer('cesiumContainer1', {
     baseLayerPicker: false,
-    imageryProvider: false,
-
     geocoder: false,
     homeButton: false,
     infoBox: false,
@@ -13,16 +11,13 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     timeline: false,
     navigationHelpButton: false,
     fullscreenButton: false,
-    animation: false,
-    skyBox: false, // Remove the skybox
-    skyAtmosphere: false, // Remove the atmosphere
-    scene3DOnly: true, // Set 3D scene mode
+    animation: false
     backgroundColor: Cesium.Color.WHITE // Set background color to white
+
 });
 
 viewer.scene.backgroundColor = Cesium.Color.WHITE;
 viewer.scene.globe.backgroundColor = Cesium.Color.WHITE;
-
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -35,7 +30,6 @@ viewer.camera.setView({
 
 
 viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
-
 
 
 // Function to rotate the globe slowly
@@ -52,21 +46,7 @@ var isRotating = true; // To keep track of the rotation state
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 
-
 // Define variables to keep track of layer visibility
 var osmLayerVisible = true; // OpenStreetMap
 var sentinelLayerVisible = true; // Sentinel-2
-
-// Function to toggle OpenStreetMap layer
-function toggleOSMLayer() {
-    osmLayerVisible = !osmLayerVisible;
-    viewer.imageryLayers.get(0).show = osmLayerVisible;
-}
-
-// Function to toggle Sentinel-2 layer
-function toggleSentinelLayer() {
-    sentinelLayerVisible = !sentinelLayerVisible;
-    // Replace 'Sentinel-2' with the name of the layer you want to toggle (if it's not the first layer)
-    viewer.imageryLayers.get(1).show = sentinelLayerVisible;
-}
 
