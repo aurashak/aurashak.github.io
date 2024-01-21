@@ -38,9 +38,16 @@
         <div class="columnlefttitle">Air  ☁️</div>
 
         <div class="mapsectionleft">
-            <input type="checkbox" id="airQualityToggle" checked>
-            <label for="airQualityToggle">Air Quality</label>
-            
+            <div style="display: flex; align-items: center;">
+                <div class="legend-symbol" id="legend-airQuality"></div>
+                <label class="switch-label">Air Quality Monitoriing Sites</label>
+                <label class="switch" style="margin-left: auto;">
+                    <input type="checkbox" class="switch-input" id="airQuality">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
+            </div>
         </div>
         
 
