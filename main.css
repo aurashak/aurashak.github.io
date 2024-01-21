@@ -46,6 +46,7 @@ h3 {
     border: 1px solid black;
     position: relative; /* Add this line */
     z-index: 1; /* Add this line */
+        background: rgba(255, 255, 255, 0.5);
 }
 
 header a:link { text-decoration: none; pointer-events: auto; }
@@ -69,8 +70,7 @@ header a:active { color: black}
 
    
  .container {
-            display: grid;
-            margin: 10px;
+     display: inline-block;
         }
 
 
@@ -95,7 +95,10 @@ header a:active { color: black}
     margin-top: 30px;
     margin-left: 50px;
     font-weight: bold;
-    padding: 0px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+
 }
 
 .homesubtitle {
@@ -104,10 +107,17 @@ header a:active { color: black}
     margin-left: 80px;
     font-weight: bold;
     max-width: 800px;
-    padding: 0px;
+    padding: 5px 10px;
+    display: inline-block;
+            background: rgba(255, 255, 255, 0.5);
+
 }
 
+.homesubtitle a:link {
+    color: red;
+}
 
+.homesubtitle a:hover {color: red}
 
 .nymaptitle {
             font-size: 15px;
