@@ -41,7 +41,7 @@ function rotateGlobe() {
 }
 
 // Slow down the rotation
-var spinRate = 0.0003;
+var spinRate = 0.001; // Increase the spin rate for a faster rotation
 var isRotating = true; // To keep track of the rotation state
 
 function toggleRotation() {
@@ -50,6 +50,12 @@ function toggleRotation() {
         rotateGlobe();
     }
 }
+
+
+// Inside your code, add the following line at the end to continuously rotate the globe
+setInterval(rotateGlobe, 10); // Adjust the interval as needed for the desired rotation speed
+
+
 
 // Add an event listener to toggle rotation when clicking on the canvas
 handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -60,3 +66,5 @@ handler.setInputAction(function() {
 // Define variables to keep track of layer visibility
 var osmLayerVisible = true; // OpenStreetMap
 var sentinelLayerVisible = true; // Sentinel-2
+
+
