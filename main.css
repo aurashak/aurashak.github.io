@@ -1,4 +1,4 @@
-html, body {
+body {
     color: #000;
     background: #fff;
     font-family: Arial, sans-serif;
@@ -6,7 +6,6 @@ html, body {
     overflow: visible;
     height: 100%;
     margin: 0;
-
 }
 
 a:link { text-decoration: none; pointer-events: auto; }
@@ -42,9 +41,11 @@ h3 {
 .header {
     display: flex;
     justify-content: left;
-    margin: 0px ;
+    margin: 0px;
     padding: 10px 0px;
-        border:1px solid black;
+    border: 1px solid black;
+    position: relative; /* Add this line */
+    z-index: 1; /* Add this line */
 }
 
 .navigation {
@@ -90,6 +91,8 @@ h3 {
     margin-left: 50px;
     font-weight: bold;
     padding: 0px;
+    background: rgba(255, 255, 255, 0.5);
+
 }
 
 .homesubtitle {
@@ -99,7 +102,10 @@ h3 {
     font-weight: bold;
     max-width: 800px;
     padding: 0px;
+    background: rgba(255, 255, 255, 0.5);
+
 }
+
 
 
 
