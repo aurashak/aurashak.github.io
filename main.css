@@ -372,3 +372,73 @@ h3 {
 .legend-symbol {
     margin-right: 10px; /* Adjust the margin as needed */
 }
+
+
+
+
+
+
+/* Styles for Switch Mechanism */
+.switch-label {
+    font-size: 15px;
+    color: #333;
+}
+
+.switch-label-b {
+    font-size: 15px;
+    color: #333;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-input-b {
+    display: none;
+}
+
+.switch-track {
+    background-color: #ccc;
+    border-radius: 15px;
+    height: 12px;
+    width: 30px;
+    position: relative;
+}
+
+.switch-track-b {
+    background-color: #ccc;
+    border-radius: 15px;
+    height: 12px;
+    width: 30px;
+    position: relative;
+}
+
+.switch-thumb {
+    background-color: #0073e6;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    transition: 0.2s;
+}
+
+.switch-thumb-b {
+    background-color: #0073e6;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    transition: 0.2s;
+}
+
+.switch-input:checked + .switch-track .switch-thumb {
+    left: 16px;
+}
+
+.switch-input-b:checked + .switch-track-b .switch-thumb-b {
+    left: 16px;
+}
