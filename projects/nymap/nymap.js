@@ -290,10 +290,6 @@ fetch(apiUrl)
                 fillOpacity: 0.8,
             });
 
-            // Add a popup with AQI information
-            marker.bindPopup(`AQI: ${aqi}`);
-            marker.addTo(map);
-        });
     })
     .catch((error) => {
         console.error('Error fetching air quality data:', error);
@@ -409,23 +405,10 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 
 
 document.getElementById('airQuality').addEventListener('click', function() {
-    console.log('Clicked on airQuality'); // Debugging statement
     if (map.hasLayer(airQualityLayer)) {
         map.removeLayer(airQualityLayer);
-        console.log('airQualityLayer removed'); // Debugging statement
     } else {
         map.addLayer(airQualityLayer);
-        console.log('airQualityLayer added'); // Debugging statement
-    }
-});
-
-// Add the following code to turn off the "Air Quality" layer when the checkbox is unchecked
-document.getElementById('airQuality').addEventListener('change', function() {
-    if (!this.checked) {
-        if (map.hasLayer(airQualityLayer)) {
-            map.removeLayer(airQualityLayer);
-            console.log('airQualityLayer turned off'); // Debugging statement
-        }
     }
 });
 
