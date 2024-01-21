@@ -1,12 +1,28 @@
-        // Create a map centered at 125th street in Manhattan
-        var map = L.map('map').setView([40.811550, -73.952370], 15);
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqeXV6OHV0In0.1ypymm-PTaV5y0Igl5fKzQ';
 
-        // Add OpenStreetMap tiles to the map
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            maxZoom: 19
-        }).addTo(map);
+const map = new mapboxgl.Map({
+    container: 'mtsmap',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-74.006, 40.7128], // New York City coordinates
+    zoom: 15,
+    pitch: 45, // Set pitch to view in 3D
+    bearing: 0, // Set bearing to control the map's rotation
+});
 
-        // Add a marker for 125th street
-        var marker = L.marker([40.811550, -73.952370]).addTo(map);
-        marker.bindPopup("<b>125th Street</b>").openPopup();
+// Add 3D building layer
+map.on('load', () => {
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': ['get', 'height'],
+            'fill-extrusion-base': ['get', 'min_height'],
+            'fill-extrusion-opacity': 0.6,
+        },
+    });
+});
