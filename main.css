@@ -1,4 +1,4 @@
-body {
+html, body {
     color: #000;
     background: #fff;
     font-family: Arial, sans-serif;
@@ -47,7 +47,6 @@ h3 {
     position: relative; /* Add this line */
     z-index: 1; /* Add this line */
 }
-
 .navigation {
     font-size: 20px;
     text-align: left;
@@ -62,22 +61,21 @@ h3 {
 .navigation a:visited {color: black;}
 
    
-/* Add this CSS code to your existing stylesheet */
+ .container {
+            display: grid;
+            margin: 10px;
+        }
+
+
 .homecontainer {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Send it to the background */
+    z-index: 0; /* Send it to the back */
 }
 
-.container {
-    display: grid;
-    margin: 10px;
-    position: relative;
-    z-index: 1; /* Bring it above the background */
-}
 
 .hometitle,
 .homesubtitle {
@@ -91,8 +89,6 @@ h3 {
     margin-left: 50px;
     font-weight: bold;
     padding: 0px;
-    background: rgba(255, 255, 255, 0.5);
-
 }
 
 .homesubtitle {
@@ -102,10 +98,7 @@ h3 {
     font-weight: bold;
     max-width: 800px;
     padding: 0px;
-    background: rgba(255, 255, 255, 0.5);
-
 }
-
 
 
 
