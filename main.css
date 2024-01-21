@@ -61,30 +61,46 @@ h3 {
 .navigation a:visited {color: black;}
 
    
- .container {
-            display: grid;
-            margin: 10px;
-        }
+/* Add this CSS code to your existing stylesheet */
+.homecontainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Send it to the background */
+}
 
+.container {
+    display: grid;
+    margin: 10px;
+    position: relative;
+    z-index: 1; /* Bring it above the background */
+}
 
-        .hometitle {
-            font-size: 55px;
-            margin-top: 30px;
-            margin-left: 50px;
-       font-weight:  bold;
-            padding: 0px;
-            display: block;
-        }
+.hometitle,
+.homesubtitle {
+    position: relative;
+    z-index: 1; /* Bring them above the background */
+}
 
-       .homesubtitle {
-            font-size: 30px;
-            margin-top: 10px;
-            margin-left: 80px;
-       font-weight:  bold;
-           max-width: 800px;
-            padding: 0px;
-            display: block;
-        }
+.hometitle {
+    font-size: 55px;
+    margin-top: 30px;
+    margin-left: 50px;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.homesubtitle {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 80px;
+    font-weight: bold;
+    max-width: 800px;
+    padding: 0px;
+}
+
 
 
 .nymaptitle {
