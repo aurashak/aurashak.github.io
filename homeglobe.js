@@ -23,8 +23,6 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
 viewer.scene.backgroundColor = Cesium.Color.WHITE;
 viewer.scene.globe.backgroundColor = Cesium.Color.WHITE;
 
-viewer.imageryLayers.get(0).brightness = 1.2;
-viewer.imageryLayers.get(0).contrast = 1.2;
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
