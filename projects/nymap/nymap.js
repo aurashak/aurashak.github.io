@@ -18,7 +18,7 @@ L.control.scale().addTo(map);
 // Function to calculate marker size based on zoom level
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
-    var initialSize = 9;
+    var initialSize = 10;
     var minSize = 5;
 
     // Calculate the size based on zoom level with a minimum size
@@ -116,7 +116,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             radius: size,
             fillColor: 'brown',
             color: 'black',
-            weight: 0.25,
+            weight: 0,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -138,7 +138,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
             radius: size,
             fillColor: 'black',
             color: 'black',
-            weight: 0.25,
+            weight: 0,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -153,7 +153,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             radius: size,
             fillColor: '#013220',
             color: 'black',
-            weight: 0.25,
+            weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -186,7 +186,7 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
             radius: size,
             fillColor: 'purple',
             color: 'black',
-            weight: 0.25,
+            weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -201,7 +201,7 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
             radius: size,
             fillColor: 'red',
             color: 'black',
-            weight: 0.25,
+            weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -216,7 +216,7 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
             radius: size,
             fillColor: 'grey',
             color: 'black',
-            weight: 0.25,
+            weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -231,7 +231,7 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
             radius: size,
             fillColor: 'orange',
             color: 'black',
-            weight: 0.25,
+            weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -248,7 +248,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
             radius: size,
             fillColor: 'blue',
             color: 'black',
-            weight: 0.25,
+            weight: 0,
             opacity: 0.7,
             fillOpacity: 0.5
         });
@@ -519,18 +519,17 @@ function setLegendSymbol(layerId, color, shape) {
     
     if (legendSymbol) {
         if (shape === 'circle') {
-            // Create a circle SVG element
-            legendSymbol.innerHTML = `<svg width="50" height="50"><circle cx="10" cy="10" r="8" fill="${color}" /></svg>`;
+            // Create a circle SVG element with a larger size
+            legendSymbol.innerHTML = `<svg width="30" height="30"><circle cx="15" cy="15" r="12" fill="${color}" /></svg>`;
         } else if (shape === 'line') {
-            // Create a line SVG element
-            legendSymbol.innerHTML = `<svg width="50" height="50"><line x1="2" y1="10" x2="18" y2="10" stroke="${color}" stroke-width="4" /></svg>`;
+            // Create a line SVG element with a larger size
+            legendSymbol.innerHTML = `<svg width="30" height="30"><line x1="3" y1="15" x2="27" y2="15" stroke="${color}" stroke-width="6" /></svg>`;
         } else if (shape === 'polygon') {
-            // Create a polygon SVG element (example polygon with 5 points)
-            legendSymbol.innerHTML = `<svg width="20" height="20"><polygon points="2,2 2,18 18,18 18,2" fill="${color}" /></svg>`;
+            // Create a polygon SVG element (example polygon with 5 points) with a larger size
+            legendSymbol.innerHTML = `<svg width="30" height="30"><polygon points="3,3 3,27 27,27 27,3" fill="${color}" /></svg>`;
         }
     }
-}
-
+    
 
 
 
