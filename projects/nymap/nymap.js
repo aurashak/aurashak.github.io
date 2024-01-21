@@ -153,7 +153,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: '#013220',
+            fillColor: '#FFC0CB',
             color: 'black',
             weight: 0.5,
             opacity: 0.7,
