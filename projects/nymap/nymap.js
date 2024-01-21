@@ -263,6 +263,9 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 // Create a layer group for air quality markers
 const airQualityLayer = L.layerGroup();
 
+// Define the layer type for the Air Quality layer
+const airQualityLayerType = 'Air Quality';
+
 // Replace 'YOUR_API_TOKEN' with your actual AQICN API token
 const apiToken = 'babc945d5af70ef9e270d8f91dc09e224b8d1aaa';
 
@@ -293,12 +296,14 @@ fetch(apiUrl)
             // Add a popup with AQI information
             marker.bindPopup(`AQI: ${aqi}`);
             marker.addTo(map);
+
+            // Set the layer type for the marker
+            marker.layerType = airQualityLayerType;
         });
     })
     .catch((error) => {
         console.error('Error fetching air quality data:', error);
     });
-
 
 // Define a function to set marker color based on AQI value
 function getColor(aqi) {
@@ -316,7 +321,6 @@ function getColor(aqi) {
         return 'maroon'; // Hazardous
     }
 }
-
 
 
 
