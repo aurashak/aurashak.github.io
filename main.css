@@ -241,12 +241,12 @@ header a:active { color: black}
 }
 
 #cesiumContainer1 {
-    height: 400px; /* Adjust the height and other styles as needed */
+    height: 100vh; /* Adjust the height and other styles as needed */
     background-color: #ff0000; /* Background color for the first Cesium container */
 }
 
 #cesiumContainer2 {
-    height: 600px; /* Adjust the height and other styles as needed */
+    height: 85vh; /* Adjust the height and other styles as needed */
     background-color: #00ff00; /* Background color for the second Cesium container */
 }
 
