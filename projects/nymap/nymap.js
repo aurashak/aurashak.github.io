@@ -408,16 +408,17 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 
-document.getElementById('airQuality').addEventListener('click', function() {
-    console.log('Clicked on airQuality'); // Debugging statement
-    if (map.hasLayer(airQualityLayer)) {
-        map.removeLayer(airQualityLayer);
-        console.log('airQualityLayer removed'); // Debugging statement
-    } else {
+// Event listener for the Air Quality toggle button
+document.getElementById('airQuality').addEventListener('change', function () {
+    if (this.checked) {
         map.addLayer(airQualityLayer);
-        console.log('airQualityLayer added'); // Debugging statement
+        console.log('airQualityLayer added');
+    } else {
+        map.removeLayer(airQualityLayer);
+        console.log('airQualityLayer removed');
     }
 });
+
 
 
 
