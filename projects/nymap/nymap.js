@@ -1,7 +1,7 @@
-// Define the bounds for the New York City area
+// Define the bounds for the New York City Tri-State area
 var bounds = L.latLngBounds(
     L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
-    L.latLng(40.9176, -73.7004)  // Northeast corner (top-right)
+    L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
 );
 
 // Create and configure the map with the specified bounds
@@ -11,7 +11,6 @@ var map = L.map('map', {
     minZoom: 7,                // Minimum zoom level
     maxZoom: 16                // Maximum zoom level (adjust as needed)
 }).setView([40.7128, -74.0060], 10); // New York City coordinates
-
 
 
 L.control.scale().addTo(map);
@@ -153,7 +152,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: '#FFC0CB',
+            fillColor: '#013220',
             color: 'black',
             weight: 0.5,
             opacity: 0.7,
@@ -256,7 +255,6 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         });
     }
 });
-
 
 
 
@@ -409,17 +407,16 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 
-// Event listener for the Air Quality toggle button
-document.getElementById('airQuality').addEventListener('change', function () {
-    if (this.checked) {
-        map.addLayer(airQualityLayer);
-        console.log('airQualityLayer added');
-    } else {
+document.getElementById('airQuality').addEventListener('click', function() {
+    console.log('Clicked on airQuality'); // Debugging statement
+    if (map.hasLayer(airQualityLayer)) {
         map.removeLayer(airQualityLayer);
-        console.log('airQualityLayer removed');
+        console.log('airQualityLayer removed'); // Debugging statement
+    } else {
+        map.addLayer(airQualityLayer);
+        console.log('airQualityLayer added'); // Debugging statement
     }
 });
-
 
 
 
@@ -513,7 +510,7 @@ setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
-setLegendSymbol('powerplants', '#FFC0CB', 'circle');
+setLegendSymbol('powerplants', '#013220', 'circle');
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
 setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
