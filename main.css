@@ -114,10 +114,12 @@ header a:active { color: black}
 }
 
 .homesubtitle a:link {
-    color: red;
+    color: black;
 }
 
-.homesubtitle a:hover {color: red}
+.homesubtitle a:hover { border-bottom: 5px;}
+.homesubtitle a:active { border-bottom: 5px;}
+.homesubtitle a:visited { border-bottom: 5px;}
 
 .nymaptitle {
             font-size: 15px;
