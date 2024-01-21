@@ -4,7 +4,7 @@ html, body {
     font-family: Arial, sans-serif;
     font-size: 15px;
     overflow: visible;
-    width: 100%;
+height: 100%;
     margin: 0;
 }
 
@@ -53,27 +53,41 @@ h3 {
 .navigation a:active{color: black;}
 .navigation a:visited {color: black;}
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    border: 2px solid blue;
-    margin: 10px;
-}
+      .container {
+            display: grid;
+            grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+            border: 2px solid blue;
+            margin: 10px;
+        }
 
-.mapcolumnleft {
-    flex: 30%;
-    border: 1px solid black;
-    font-size: 15px;
-   margin: 10px;
-}
+      .nymapcontainer {
+            display: grid;
+            grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+            border: 2px solid blue;
+            margin: 10px;
+        }
 
-.mapcolumnright {
-    flex: 70%;
-    border-bottom: 1px solid black;
-    font-size: 15px;
-    border: 1px solid red;
-    margin: 10px;
-}
+        .nymapcolumnleft {
+            border: 1px solid black;
+            font-size: 15px;
+            margin: 10px;
+        }
+
+        .nymapcolumnright {
+            border-bottom: 1px solid black;
+            font-size: 15px;
+            border: 1px solid red;
+            margin: 10px;
+        }
+
+
+ .nymaptitle {
+            border-bottom: 1px solid black;
+            font-size: 15px;
+            border: 1px solid red;
+            margin: 10px;
+        }
+
 
 #map {
     min-height: 100%;
@@ -84,6 +98,7 @@ h3 {
     border-bottom: 1px solid black;
     padding: 5px 10px;
     font-size: 15px; 
+    
 }
 
 .sectionlefttitle {
