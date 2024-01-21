@@ -8,9 +8,9 @@ html, body {
     margin: 0;
 }
 
-a:link { text-decoration: none; pointer-events: auto; }
+a:link { }
 a:visited { color: black;}
-a:hover { border-bottom: 2px solid color; }
+a:hover { }
 a:active { color: black}
 
 
@@ -118,8 +118,8 @@ header a:active { color: black}
 }
 
 .homesubtitle a:hover { border-bottom: 5px;}
-.homesubtitle a:active { border-bottom: 5px;}
-.homesubtitle a:visited { border-bottom: 5px;}
+.homesubtitle a:active { border-bottom:none;}
+.homesubtitle a:visited { border-bottom: none;}
 
 .nymaptitle {
             font-size: 15px;
