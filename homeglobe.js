@@ -16,8 +16,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     shouldAnimate: true, // You can keep animation true if needed
 });
 
-viewer.scene.backgroundColor = new Cesium.Color(0, 0, 0, 0); // Transparent background
-viewer.scene.globe.backgroundColor = new Cesium.Color(0, 0, 0, 0); // Transparent globe background
+
 
 
 viewer.camera.setView({
