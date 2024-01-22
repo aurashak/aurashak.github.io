@@ -232,8 +232,8 @@ loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Col
 var countryNamesBox = document.getElementById('countryNamesBox');
 countryNamesBox.style.display = 'none'; // Hide initially
 
-// A Set to keep track of added country names
-var addedCountryNames = new Set();
+// An array to store unique country names
+var uniqueCountryNames = [];
 
 // Function to show country names from the countries.geojson layer
 function showCountryNames() {
@@ -246,9 +246,9 @@ function showCountryNames() {
             if (entity.properties && entity.properties.ADMIN) { // Use "ADMIN" for country name
                 var countryName = entity.properties.ADMIN;
 
-                // Check if the country name is already added to the set
-                if (!addedCountryNames.has(countryName)) {
-                    addedCountryNames.add(countryName); // Add to the set to prevent duplicates
+                // Check if the country name is not already in the uniqueCountryNames array
+                if (uniqueCountryNames.indexOf(countryName) === -1) {
+                    uniqueCountryNames.push(countryName); // Add to the array to prevent duplicates
 
                     // Get the geometry of the entity
                     var geometry = entity.polygon || entity.multiPolygon;
@@ -317,3 +317,5 @@ function calculateCentroid(coordinates) {
 
 // Call the function to show country names
 showCountryNames();
+
+
