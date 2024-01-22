@@ -3,13 +3,13 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqe
 const map = new mapboxgl.Map({
     container: 'mtsmap',
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-74.008, 40.726], // Centered around the West Side of Manhattan and the Hudson River
-    zoom: 30, // Zoom in for a close-up view
+    center: [-73.954, 40.812], // Centered around the West Side of Manhattan and the Hudson River
+    zoom: 50, // Zoom in for a close-up view
     pitch: 45, // Set pitch to 45 for a 3D perspective
     bearing: -20, // Set bearing for a view from the East Hudson River
     maxBounds: [
         [-74.0479, 40.7074], // Lower Manhattan's southwest corner
-        [-73.9067, 40.7876]  // Upper Manhattan's northeast corner
+        [-73.9667, 40.8876]  // Upper Manhattan's northeast corner
     ],
     maxZoom: 13, // Limit the maximum zoom level
 });
