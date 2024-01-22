@@ -1,5 +1,21 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqeXV6OHV0In0.1ypymm-PTaV5y0Igl5fKzQ';
 
+// Define the building layer source and layer
+const buildingLayer = {
+    id: 'buildings-layer',
+    type: 'fill-extrusion',
+    source: 'buildings',
+    'source-layer': 'building',
+    filter: ['==', 'extrude', 'true'],
+    minzoom: 15,
+    paint: {
+        'fill-extrusion-color': '#aaa',
+        'fill-extrusion-height': ['get', 'height'],
+        'fill-extrusion-base': ['get', 'min_height'],
+        'fill-extrusion-opacity': 0.6,
+    },
+};
+
 // Define sources and layers for your default style
 const defaultStyle = {
     version: 8,
@@ -32,20 +48,8 @@ const defaultStyle = {
                 'line-width': 2,
             },
         },
-        {
-            id: 'buildings-layer',
-            type: 'fill-extrusion',
-            source: 'buildings',
-            'source-layer': 'building',
-            filter: ['==', 'extrude', 'true'],
-            minzoom: 15,
-            paint: {
-                'fill-extrusion-color': '#aaa',
-                'fill-extrusion-height': ['get', 'height'],
-                'fill-extrusion-base': ['get', 'min_height'],
-                'fill-extrusion-opacity': 0.6,
-            },
-        },
+        // Include the building layer here
+        buildingLayer,
         {
             id: 'water-layer',
             type: 'fill',
@@ -81,7 +85,14 @@ const map = new mapboxgl.Map({
 
 // Function to toggle between map styles
 function toggleMapStyle(style) {
+    // Remove the building layer
+    map.removeLayer('buildings-layer');
+    
+    // Set the new map style
     map.setStyle(style);
+    
+    // Re-add the building layer
+    map.addLayer(buildingLayer);
 }
 
 // Add event listener for the Satellite toggle button
@@ -101,7 +112,7 @@ document.getElementById('osmToggle').addEventListener('change', function() {
         // Set the map style to OpenStreetMap
         toggleMapStyle('mapbox://styles/mapbox/streets-v11');
     } else {
-        // Set the map style to the default style
+        // Set the map style back to the default style
         toggleMapStyle(defaultStyle);
     }
 });
