@@ -75,101 +75,6 @@ function toggleSentinelLayer() {
 
 
 
-function getTypeFromProperties(properties) {
-    // Assuming 'ADMIN' is the property name for country names in the GeoJSON data
-    return properties.ADMIN || 'Unknown';
-}
-
-// Load and style the countries GeoJSON layer
-var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/world/countries.geojson';
-
-Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function (dataSource) {
-    dataSource.entities.values.forEach(function (entity) {
-        // Assuming you want to display country names as labels
-        entity.label = {
-            text: getTypeFromProperties(entity.properties),
-            font: '16px sans-serif',
-            showBackground: true,
-            backgroundColor: Cesium.Color.BLACK.withAlpha(0.7),
-            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-            verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        };
-    });
-
-    viewer.dataSources.add(dataSource);
-}).otherwise(function (error) {
-    console.error('Error loading GeoJSON data:', error);
-});
-
-
-
-// Function to show country names in the countryNamesBox div
-function showCountryNames(dataSource) {
-    var countryNamesBox = document.getElementById('countryNamesBox');
-    if (!countryNamesBox) {
-        console.error("countryNamesBox not found.");
-        return;
-    }
-    
-
-    var countryNames = [];
-    dataSource.entities.values.forEach(function (entity) {
-        var countryName = getTypeFromProperties(entity.properties);
-        countryNames.push(countryName);
-    });
-
-    // Update the content of the countryNamesBox div
-    countryNamesBox.innerHTML = countryNames.join('<br>');
-}
-
-// Assuming the countries GeoJSON data source is already loaded in viewer.dataSources
-var countriesDataSource = viewer.dataSources.get(0); // Modify this index if needed
-
-if (countriesDataSource) {
-    // Call the showCountryNames function to display country names in the countryNamesBox div
-    showCountryNames(countriesDataSource);
-} else {
-    console.error('Countries GeoJSON data source not found.');
-}
-
-
-
-// Function to show updating coordinates
-function showCoordinates(movement) {
-    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-
-    if (cartesian) {
-        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-
-        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
-        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
-
-        coordsBox.innerHTML = hoverText;
-    }
-}
-
-viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-// Additionally, you may want to set up an event listener for when the mouse leaves the globe
-// to set the coordsBox to the default text
-viewer.scene.canvas.addEventListener('mouseleave', function() {
-    coordsBox.innerHTML = defaultText;
-});
-
-
-// Additionally, you may want to set up an event listener for when the mouse leaves the globe
-// to set the coordsBox to the default text
-viewer.scene.canvas.addEventListener('mouseleave', function() {
-    coordsBox.innerHTML = defaultText;
-    coordsBox.style.display = 'block';
-});
-
-
-
-
 
 
 
@@ -274,6 +179,104 @@ loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK
 loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.WHITE, lakesHeight); // For lakes
 loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.BLUE, true); // For rivers
 loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
+
+
+
+
+
+
+function getTypeFromProperties(properties) {
+    // Assuming 'ADMIN' is the property name for country names in the GeoJSON data
+    return properties.ADMIN || 'Unknown';
+}
+
+// Load and style the countries GeoJSON layer
+var countriesGeojsonUrl = 'https://aurashak.github.io/geojson/world/countries.geojson';
+
+Cesium.GeoJsonDataSource.load(countriesGeojsonUrl).then(function (dataSource) {
+    dataSource.entities.values.forEach(function (entity) {
+        // Assuming you want to display country names as labels
+        entity.label = {
+            text: getTypeFromProperties(entity.properties),
+            font: '16px sans-serif',
+            showBackground: true,
+            backgroundColor: Cesium.Color.BLACK.withAlpha(0.7),
+            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+            verticalOrigin: Cesium.VerticalOrigin.CENTER,
+        };
+    });
+
+    viewer.dataSources.add(dataSource);
+}).otherwise(function (error) {
+    console.error('Error loading GeoJSON data:', error);
+});
+
+
+
+// Function to show country names in the countryNamesBox div
+function showCountryNames(dataSource) {
+    var countryNamesBox = document.getElementById('countryNamesBox');
+    if (!countryNamesBox) {
+        console.error("countryNamesBox not found.");
+        return;
+    }
+    
+
+    var countryNames = [];
+    dataSource.entities.values.forEach(function (entity) {
+        var countryName = getTypeFromProperties(entity.properties);
+        countryNames.push(countryName);
+    });
+
+    // Update the content of the countryNamesBox div
+    countryNamesBox.innerHTML = countryNames.join('<br>');
+}
+
+// Assuming the countries GeoJSON data source is already loaded in viewer.dataSources
+var countriesDataSource = viewer.dataSources.get(0); // Modify this index if needed
+
+if (countriesDataSource) {
+    // Call the showCountryNames function to display country names in the countryNamesBox div
+    showCountryNames(countriesDataSource);
+} else {
+    console.error('Countries GeoJSON data source not found.');
+}
+
+
+
+
+// Function to show updating coordinates
+function showCoordinates(movement) {
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+
+        coordsBox.innerHTML = hoverText;
+    }
+}
+
+viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Additionally, you may want to set up an event listener for when the mouse leaves the globe
+// to set the coordsBox to the default text
+viewer.scene.canvas.addEventListener('mouseleave', function() {
+    coordsBox.innerHTML = defaultText;
+});
+
+
+// Additionally, you may want to set up an event listener for when the mouse leaves the globe
+// to set the coordsBox to the default text
+viewer.scene.canvas.addEventListener('mouseleave', function() {
+    coordsBox.innerHTML = defaultText;
+    coordsBox.style.display = 'block';
+});
 
 
 
