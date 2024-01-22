@@ -13,7 +13,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     skyBox: false,
     fullscreenButton: false,
     animation: false,
-    shouldAnimate: true, // You can keep animation true if needed
+    shouldAnimate: true,
 });
 
 viewer.scene.backgroundColor = Cesium.Color.WHITE;
@@ -28,20 +28,55 @@ viewer.camera.setView({
     }
 });
 
-viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
+viewer.camera.percentageChanged = 0.01;
 
-// Set the rotation speed
-var spinRate = Cesium.Math.toRadians(0.2); // Adjust the speed as needed
+var spinRate = Cesium.Math.toRadians(0.2);
 
-// Function to rotate the globe automatically
 function rotateGlobe() {
     viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, spinRate);
-    requestAnimationFrame(rotateGlobe); // Continue rotation in the next frame
+    requestAnimationFrame(rotateGlobe);
 }
 
-// Start automatic rotation
 rotateGlobe();
 
-// Define variables to keep track of layer visibility
-var osmLayerVisible = true; // OpenStreetMap
-var sentinelLayerVisible = true; // Sentinel-2
+var osmLayerVisible = true;
+var sentinelLayerVisible = true;
+
+// Load the GeoJSON file containing country boundaries
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/countries.geojson';
+
+// Create an array of country entities from the GeoJSON data
+var countryEntities = [];
+
+Cesium.GeoJsonDataSource.load(countryBoundariesGeojsonUrl).then(function (dataSource) {
+    viewer.dataSources.add(dataSource);
+
+    dataSource.entities.values.forEach(function (entity) {
+        entity.polygon.outline = true;
+        entity.polygon.outlineColor = Cesium.Color.BLACK;
+        entity.polygon.outlineWidth = 2.0;
+        entity.polygon.extrudedHeight = 0.0; // Adjust this height as needed
+        entity.polygon.material = Cesium.Color.TRANSPARENT;
+        countryEntities.push(entity);
+    });
+
+    var currentIndex = 0;
+
+    function animateCountryBoundaries() {
+        if (currentIndex < countryEntities.length) {
+            // Hide all countries except the current one
+            countryEntities.forEach(function (country, index) {
+                country.show = (index === currentIndex);
+            });
+
+            currentIndex++;
+
+            // Schedule the next animation frame
+            setTimeout(animateCountryBoundaries, 2000); // Adjust the interval as needed
+        }
+    }
+
+    animateCountryBoundaries(); // Start the animation loop
+}).otherwise(function (error) {
+    console.error('Error loading GeoJSON data:', error);
+});
