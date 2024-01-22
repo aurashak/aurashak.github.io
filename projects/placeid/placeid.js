@@ -238,13 +238,20 @@ function showFeatureInfo(movement) {
             }
         });
 
-        // Display the information in a designated HTML element
-        infoBox.innerHTML = featureInfo;
+        // Display the oceans information in the designated HTML element with the specific ID
+        var oceansInfoBox = document.getElementById('oceansInfoBox');
+        if (oceansInfoBox) {
+            oceansInfoBox.innerHTML = featureInfo;
+        }
     } else {
         // Clear the information when no feature is under the cursor
-        infoBox.innerHTML = defaultText;
+        var oceansInfoBox = document.getElementById('oceansInfoBox');
+        if (oceansInfoBox) {
+            oceansInfoBox.innerHTML = defaultText;
+        }
     }
 }
+
 
 
 
