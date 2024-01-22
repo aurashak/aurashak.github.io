@@ -228,7 +228,6 @@ loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.
 loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
 
-
 // Add this code to update the country names box
 var countryNamesBox = document.getElementById('countryNamesBox');
 countryNamesBox.style.display = 'none'; // Hide initially
@@ -239,27 +238,28 @@ function showCountryNames() {
     Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/world/countries.geojson').then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.properties && entity.properties.ADMIN) { // Use "ADMIN" for country name
-                // Get the coordinates of the MultiPolygon
-                var coordinates = entity.geometry.coordinates;
-                
-                // Calculate the centroid of the MultiPolygon
-                var centroid = calculateCentroid(coordinates);
-                
-                // Create a label entity to display the country name
-                viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(centroid[0], centroid[1]),
-                    label: {
-                        text: entity.properties.ADMIN, // Use "ADMIN" for country name
-                        fillColor: Cesium.Color.WHITE,
-                        outlineColor: Cesium.Color.BLACK,
-                        outlineWidth: 2,
-                        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-                        verticalOrigin: Cesium.VerticalOrigin.CENTER
-                    }
-                });
+                // Get the geometry of the entity
+                var geometry = entity.polygon || entity.multiPolygon;
+                if (geometry) {
+                    var coordinates = getCoordinates(geometry);
+                    var centroid = calculateCentroid(coordinates);
 
-                // Update the country names box with the name of the country
-                countryNamesBox.innerHTML += entity.properties.ADMIN + '<br>'; // Use "ADMIN" for country name
+                    // Create a label entity to display the country name
+                    viewer.entities.add({
+                        position: Cesium.Cartesian3.fromDegrees(centroid[0], centroid[1]),
+                        label: {
+                            text: entity.properties.ADMIN, // Use "ADMIN" for country name
+                            fillColor: Cesium.Color.WHITE,
+                            outlineColor: Cesium.Color.BLACK,
+                            outlineWidth: 2,
+                            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+                            verticalOrigin: Cesium.VerticalOrigin.CENTER
+                        }
+                    });
+
+                    // Update the country names box with the name of the country
+                    countryNamesBox.innerHTML += entity.properties.ADMIN + '<br>'; // Use "ADMIN" for country name
+                }
             }
         });
 
@@ -270,7 +270,18 @@ function showCountryNames() {
     });
 }
 
-// Function to calculate the centroid of a MultiPolygon
+// Function to get coordinates from geometry (handles both Polygon and MultiPolygon)
+function getCoordinates(geometry) {
+    if (geometry.type === 'Polygon') {
+        return [geometry.coordinates];
+    } else if (geometry.type === 'MultiPolygon') {
+        return geometry.coordinates;
+    } else {
+        return [];
+    }
+}
+
+// Function to calculate the centroid of a Polygon or MultiPolygon
 function calculateCentroid(coordinates) {
     // Your centroid calculation logic here
     // For simplicity, you can use the average of coordinates for each polygon
