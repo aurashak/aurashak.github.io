@@ -4,7 +4,7 @@ const map = new mapboxgl.Map({
     container: 'mtsmap',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [-73.9529, 40.8116], // Centered around 125th Street
-    zoom: 15, // Closer zoom level
+    zoom: 6, // Closer zoom level
     pitch: 0, // Set pitch to 0 for a flat perspective (facing east)
     bearing: 0, // Set bearing to 0 for no rotation
     maxBounds: [
