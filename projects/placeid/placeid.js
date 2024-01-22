@@ -236,7 +236,7 @@ countryNamesBox.style.display = 'none'; // Hide initially
 // Function to show country names from the countries.geojson layer
 function showCountryNames() {
     // Load the countries.geojson layer
-    Cesium.GeoJsonDataSource.load('path/to/countries.geojson').then(function(dataSource) {
+    Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/countries.geojson').then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.properties && entity.properties.ADMIN) { // Use "ADMIN" for country name
                 // Get the centroid of the country
