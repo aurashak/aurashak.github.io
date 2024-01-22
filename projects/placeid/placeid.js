@@ -44,7 +44,7 @@ var isRotating = true; // To keep track of the rotation state
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-var defaultText = 'Latitude & Longitude';
+var defaultText = 'Latitude & Longitudes';
 var coordsBox = document.getElementById('coordsBox');
 coordsBox.innerHTML = defaultText;
 coordsBox.style.display = 'block';
@@ -214,11 +214,15 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
+
+
+
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (Cesium.defined(pickedObjects)) {
+        var uniqueNames = new Set(); // Create a Set to store unique names
         var allWaterInfo = ''; // Initialize an empty string to store all water bodies' information
 
         pickedObjects.forEach(function (pickedObject) {
@@ -231,7 +235,11 @@ function showFeatureInfo(movement) {
                 // Check if the file being picked is the oceans file
                 if (properties.featurecla && properties.name) {
                     var featureName = properties.name.getValue();
-                    allWaterInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
+                    // Check if the name is not already in the Set
+                    if (!uniqueNames.has(featureName)) {
+                        allWaterInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
+                        uniqueNames.add(featureName); // Add the name to the Set
+                    }
 
                     // Add additional properties
                     var additionalProperties = ['Sea', 'reef', 'Bay', 'Gulf', 'strait', 'Channel', 'Sound', 'fjord', 'lagoon', 'inlet'];
@@ -246,7 +254,11 @@ function showFeatureInfo(movement) {
                 // Check if the file being picked is the lakes file
                 if (properties.featurecla && properties.featurecla.getValue() === 'Lake' && properties.name) {
                     var lakeName = properties.name.getValue();
-                    allWaterInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
+                    // Check if the name is not already in the Set
+                    if (!uniqueNames.has(lakeName)) {
+                        allWaterInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
+                        uniqueNames.add(lakeName); // Add the name to the Set
+                    }
                 }
 
                 // You can add similar checks for other GeoJSON files and their properties here
@@ -266,7 +278,6 @@ function showFeatureInfo(movement) {
         }
     }
 }
-
 
 
 
