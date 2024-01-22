@@ -246,30 +246,21 @@ function showFeatureInfo(movement) {
 
         // Display the oceans information in the designated HTML element with the specific ID
         var oceansInfoBox = document.getElementById('oceansInfoBox');
-        if (oceansInfoBox) {
+        var lakesInfoBox = document.getElementById('lakesInfoBox');
+        if (oceansInfoBox && lakesInfoBox) {
             oceansInfoBox.innerHTML = featureInfo;
+            lakesInfoBox.innerHTML = featureInfo;
         }
     } else {
         // Clear the information when no feature is under the cursor
         var oceansInfoBox = document.getElementById('oceansInfoBox');
-        if (oceansInfoBox) {
+        var lakesInfoBox = document.getElementById('lakesInfoBox');
+        if (oceansInfoBox && lakesInfoBox) {
             oceansInfoBox.innerHTML = defaultText;
+            lakesInfoBox.innerHTML = defaultText;
         }
-
-          // Display the oceans information in the designated HTML element with the specific ID
-          var lakesInfoBox = document.getElementById('lakesInfoBox');
-          if (lakesInfoBox) {
-              lakesInfoBox.innerHTML = featureInfo;
-          }
-      } else {
-          // Clear the information when no feature is under the cursor
-          var lakesInfoBox = document.getElementById('lakesInfoBox');
-          if (lakesInfoBox) {
-              lakesInfoBox.innerHTML = defaultText;
-          }
     }
 }
-
 
 
 
