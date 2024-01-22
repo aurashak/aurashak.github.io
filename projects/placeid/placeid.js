@@ -214,38 +214,46 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
+// Create HTML elements to display feature information for each feature type
+var infoBoxes = {};
 
-// Create an HTML element to display feature information
-var infoBox = document.createElement('div');
-infoBox.id = 'infoBox';
-infoBox.style.position = 'absolute';
-infoBox.style.bottom = '10px';
-infoBox.style.left = '10px';
-infoBox.style.padding = '10px';
-infoBox.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-infoBox.style.color = 'green';
-infoBox.style.display = 'block';
-document.body.appendChild(infoBox);
+// Define feature types
+var featureTypes = [
+    'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Gulf', 'reef',
+    'country', 'continent', 'region_un'
+];
 
+// Convert feature types to lowercase for case-insensitive matching
+var lowercaseFeatureTypes = featureTypes.map(function (type) {
+    return type.toLowerCase();
+});
 
+// Create separate info boxes for each feature type
+featureTypes.forEach(function (featureType) {
+    var infoBox = document.createElement('div');
+    infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
+    infoBox.style.position = 'absolute';
+    infoBox.style.bottom = '10px';
+    infoBox.style.left = '10px';
+    infoBox.style.padding = '10px';
+    infoBox.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    infoBox.style.color = 'white';
+    infoBox.style.display = 'none'; // Initially hide the info box
+    document.body.appendChild(infoBox);
 
-// Define global variables to store information
-var uniqueWaterNames = new Set(); // Create a Set to store unique water body names
-var uniquePoliticalNames = new Set(); // Create a Set to store unique political boundary names
-var uniqueLandNames = new Set(); // Create a Set to store unique land geography names
+    // Store the info box in the dictionary
+    infoBoxes[featureType.toLowerCase()] = infoBox; // Use lowercase feature type as the key
+});
 
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
-    // Clear the previous information
-    uniqueWaterNames.clear();
-    uniquePoliticalNames.clear();
-    uniqueLandNames.clear();
+    // Clear all previous information
+    for (var key in infoBoxes) {
+        infoBoxes[key].innerHTML = '';
+        infoBoxes[key].style.display = 'none'; // Hide all info boxes
+    }
 
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
-
-    var waterInfo = ''; // Initialize an empty string to store water bodies' information
-    var politicalInfo = ''; // Initialize an empty string to store political boundaries information
-    var landInfo = ''; // Initialize an empty string to store land geography information
 
     if (Cesium.defined(pickedObjects)) {
         pickedObjects.forEach(function (pickedObject) {
@@ -254,103 +262,75 @@ function showFeatureInfo(movement) {
             // Check if the picked object is an entity with properties
             if (entity && entity.properties) {
                 var properties = entity.properties;
+                var featureType = properties.featurecla && properties.featurecla.getValue();
 
-                // Check if the file being picked is the oceans, lakes, or rivers file
-                if (properties.featurecla && properties.name) {
-                    var featureName = properties.name.getValue();
-                    var featureType = properties.featurecla.getValue();
+                if (featureType) {
+                    // Convert feature type to lowercase for case-insensitive matching
+                    featureType = featureType.toLowerCase();
 
-                    // Check if the name is not already in the respective Set
-                    if (featureType === 'River' || featureType === 'Lake Centerline' || featureType === 'Canal' || featureType === 'Ocean' || featureType === 'Sea' || featureType === 'Strait' || featureType === 'Bay' || featureType === 'Sound' || featureType === 'Channel' || featureType === 'Gulf' || featureType === 'Reef') {
+                    // Get the corresponding info box for this feature type
+                    var infoBox = infoBoxes[featureType];
+
+                    // Check if the info box exists
+                    if (infoBox) {
+                        var featureName = properties.name && properties.name.getValue();
+
                         // Customize the title based on the property type
                         var title = '';
                         switch (featureType) {
-                            case 'River':
+                            case 'river':
                                 title = 'River Name:';
                                 break;
-                            case 'Lake Centerline':
+                            case 'lake centerline':
                                 title = 'Lake Name:';
                                 break;
-                            case 'Canal':
+                            case 'canal':
                                 title = 'Canal Name:';
                                 break;
-                            case 'Ocean':
+                            case 'ocean':
                                 title = 'Ocean Name:';
                                 break;
-                            case 'Sea':
+                            case 'sea':
                                 title = 'Sea Name:';
                                 break;
-                            case 'Strait':
+                            case 'strait':
                                 title = 'Strait Name:';
                                 break;
-                            case 'Bay':
+                            case 'bay':
                                 title = 'Bay Name:';
                                 break;
-                            case 'Sound':
+                            case 'sound':
                                 title = 'Sound Name:';
                                 break;
-                            case 'Channel':
+                            case 'channel':
                                 title = 'Channel Name:';
                                 break;
-                            case 'Gulf':
+                            case 'gulf':
                                 title = 'Gulf Name:';
                                 break;
-                            case 'Reef':
+                            case 'reef':
                                 title = 'Reef Name:';
                                 break;
-                            default:
-                                title = 'Name:';
-                        }
-
-                        // Construct the information string with the customized title
-                        waterInfo += '<b>' + title + ' ' + featureName + '</b><br>';
-                        uniqueWaterNames.add(featureName); // Add the name to the Set
-                    } else if (featureType === 'Country' || featureType === 'Region_UN' || featureType === 'Continent') {
-                        // Customize the title based on the property type
-                        var title = '';
-                        switch (featureType) {
-                            case 'Country':
+                            case 'country':
                                 title = 'Country Name:';
                                 break;
-                            case 'Region_UN':
-                                title = 'Region Name:';
-                                break;
-                            case 'Continent':
+                            case 'continent':
                                 title = 'Continent Name:';
+                                break;
+                            case 'region_un':
+                                title = 'Region Name:';
                                 break;
                             default:
                                 title = 'Name:';
                         }
 
                         // Construct the information string with the customized title
-                        politicalInfo += '<b>' + title + ' ' + featureName + '</b><br>';
-                        uniquePoliticalNames.add(featureName); // Add the name to the Set
-                    } else {
-                        // Add other property types to land geography information
-                        landInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
-                        uniqueLandNames.add(featureName); // Add the name to the Set
+                        infoBox.innerHTML += '<b>' + title + ' ' + featureName + '</b><br>';
+                        infoBox.style.display = 'block'; // Show the info box
                     }
                 }
             }
         });
-    }
-
-    // Display water bodies' information in the designated HTML element with the specific ID
-    var waterInfoBox = document.getElementById('waterInfoBox');
-    if (waterInfoBox) {
-        waterInfoBox.innerHTML = waterInfo;
-    }
-
-    // Display political boundaries information in the designated HTML element with the specific ID
-    var politicalInfoBox = document.getElementById('politicalInfoBox');
-    if (politicalInfoBox) {
-        politicalInfoBox.innerHTML = politicalInfo;
-    }
-
-    // Display land geography information in the designated HTML element with the specific ID
-    var landInfoBox = document.getElementById('landInfoBox');
-    if (landInfoBox) {
-        landInfoBox.innerHTML = landInfo;
     }
 }
 
