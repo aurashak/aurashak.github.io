@@ -86,8 +86,8 @@ function getTypeFromProperties(properties) {
 
 
 
-// Function to show updating coordinates
-function showCoordinates(movement) {
+// Function to show updating coordinates and country names on hover
+function showCoordinatesAndCountryNames(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
 
     if (cartesian) {
@@ -98,6 +98,17 @@ function showCoordinates(movement) {
         var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
 
         coordsBox.innerHTML = hoverText;
+
+        var pickedObject = viewer.scene.pick(movement.endPosition);
+        if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id) && pickedObject.id.properties && pickedObject.id.properties.ADMIN) {
+            var countryName = pickedObject.id.properties.ADMIN;
+            // Update the country names box with the name of the hovered country
+            countryNamesBox.innerHTML = countryName;
+            countryNamesBox.style.display = 'block';
+        } else {
+            // Hide the country names box if not hovering over a country
+            countryNamesBox.style.display = 'none';
+        }
     }
 }
 
