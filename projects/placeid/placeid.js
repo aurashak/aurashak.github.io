@@ -346,6 +346,7 @@ viewer.scene.canvas.addEventListener('mouseleave', function () {
     if (!isMouseOverFeature) {
         for (var key in infoBoxes) {
             if (infoBoxes.hasOwnProperty(key)) {
+                infoBoxes[key].innerHTML = ''; // Clear the info box content
                 infoBoxes[key].style.display = 'none';
             }
         }
