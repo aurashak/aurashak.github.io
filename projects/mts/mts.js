@@ -8,8 +8,19 @@ const defaultStyle = {
             type: 'vector',
             url: 'mapbox://mapbox.mapbox-streets-v8',
         },
+        'osm': {
+            type: 'raster',
+            url: 'mapbox://mapbox.streets',
+        },
     },
     layers: [
+        {
+            id: 'osm-layer',
+            type: 'raster',
+            source: 'osm',
+            minzoom: 0,
+            maxzoom: 22,
+        },
         {
             id: 'buildings-layer',
             type: 'fill-extrusion',
