@@ -232,13 +232,7 @@ var lowercaseFeatureTypes = featureTypes.map(function (type) {
 featureTypes.forEach(function (featureType) {
     var infoBox = document.createElement('div');
     infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
-    infoBox.style.position = 'absolute';
-    infoBox.style.bottom = '10px';
-    infoBox.style.left = '10px';
-    infoBox.style.padding = '10px';
-    infoBox.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    infoBox.style.color = 'white';
-    infoBox.style.display = 'none'; // Initially hide the info box
+    infoBox.classList.add('infobox'); // Add the CSS class to the info box
     document.body.appendChild(infoBox);
 
     // Store the info box in the dictionary
