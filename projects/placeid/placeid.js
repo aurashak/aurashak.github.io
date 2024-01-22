@@ -340,15 +340,19 @@ function showFeatureInfo(movement) {
 viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
-// to clear the infoBox
+// to clear the info boxes
 viewer.scene.canvas.addEventListener('mouseleave', function () {
-    // Check the flag before clearing the info boxes
-    if (!isMouseOverFeature) {
-        for (var key in infoBoxes) {
-            if (infoBoxes.hasOwnProperty(key)) {
-                infoBoxes[key].innerHTML = ''; // Clear the info box content
-                infoBoxes[key].style.display = 'none';
-            }
+    // Clear the content of all info boxes
+    for (var key in infoBoxes) {
+        if (infoBoxes.hasOwnProperty(key)) {
+            infoBoxes[key].innerHTML = '';
+        }
+    }
+
+    // Hide all info boxes
+    for (var key in infoBoxes) {
+        if (infoBoxes.hasOwnProperty(key)) {
+            infoBoxes[key].style.display = 'none';
         }
     }
 });
