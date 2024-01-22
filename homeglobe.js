@@ -59,11 +59,11 @@ Cesium.GeoJsonDataSource.load(countryBoundariesGeojsonUrl).then(function (dataSo
 
     dataSource.entities.values.forEach(function (entity) {
         entity.polygon.outline = true;
-        entity.polygon.outlineColor = Cesium.Color.BLACK;
+        entity.polygon.outlineColor = Cesium.Color.RED;
         entity.polygon.outlineWidth = 2.0;
         
         // Adjust the extrudedHeight to make the countries visible over the satellite layer
-        entity.polygon.extrudedHeight = 100; // Adjust this height as needed
+        entity.polygon.extrudedHeight = 100000; // Adjust this height as needed
         
         entity.polygon.material = Cesium.Color.TRANSPARENT;
         countryEntities.push(entity);
