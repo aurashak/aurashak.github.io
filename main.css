@@ -628,9 +628,9 @@ input:checked + .slider:before {
 
 
 .infobox {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    position: relative;
+    bottom: 0px;
+    left: 0px;
     padding: 10px;
     background-color: rgba(213, 11, 11, 0.7);
     color: white;
