@@ -8,7 +8,7 @@ const map = new mapboxgl.Map({
     pitch: 45, // Set pitch to 45 for a 3D perspective
     bearing: -260, // Set bearing for a view from the East Hudson River
 
-    maxZoom: 13, // Limit the maximum zoom level
+    maxZoom: 22, // Limit the maximum zoom level
 });
 
 // Add 3D building layer
