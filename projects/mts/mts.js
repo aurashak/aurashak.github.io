@@ -24,6 +24,16 @@ const map = new mapboxgl.Map({
         },
         layers: [
             {
+                id: 'streets-layer',
+                type: 'line',
+                source: 'streets',
+                'source-layer': 'road',
+                paint: {
+                    'line-color': '#888',
+                    'line-width': 2,
+                },
+            },
+            {
                 id: 'buildings-layer',
                 type: 'fill-extrusion',
                 source: 'buildings',
@@ -67,4 +77,3 @@ const map = new mapboxgl.Map({
 
 // Add zoom and rotation controls
 map.addControl(new mapboxgl.NavigationControl());
-
