@@ -238,7 +238,7 @@ function showCountryNames() {
     // Load the countries.geojson layer
     Cesium.GeoJsonDataSource.load('path/to/countries.geojson').then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
-            if (entity.properties && entity.properties.name) {
+            if (entity.properties && entity.properties.ADMIN) { // Use "ADMIN" for country name
                 // Get the centroid of the country
                 var centroid = entity.polygon.computeCenter();
                 
@@ -251,7 +251,7 @@ function showCountryNames() {
                 viewer.entities.add({
                     position: Cesium.Cartesian3.fromDegrees(longitude, latitude),
                     label: {
-                        text: entity.properties.name,
+                        text: entity.properties.ADMIN, // Use "ADMIN" for country name
                         fillColor: Cesium.Color.WHITE,
                         outlineColor: Cesium.Color.BLACK,
                         outlineWidth: 2,
@@ -261,7 +261,7 @@ function showCountryNames() {
                 });
 
                 // Update the country names box with the name of the country
-                countryNamesBox.innerHTML += entity.properties.name + '<br>';
+                countryNamesBox.innerHTML += entity.properties.ADMIN + '<br>'; // Use "ADMIN" for country name
             }
         });
 
