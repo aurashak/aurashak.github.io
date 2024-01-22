@@ -84,6 +84,17 @@ function toggleMapStyle(style) {
     map.setStyle(style);
 }
 
+// Add event listener for the Satellite toggle button
+document.getElementById('satelliteToggle').addEventListener('change', function() {
+    if (this.checked) {
+        // Set the map style to the Satellite imagery
+        toggleMapStyle('mapbox://styles/mapbox/satellite-v9');
+    } else {
+        // Set the map style back to the default style
+        toggleMapStyle(defaultStyle);
+    }
+});
+
 // Add event listener for the OSM toggle button
 document.getElementById('osmToggle').addEventListener('change', function() {
     if (this.checked) {
