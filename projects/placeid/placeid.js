@@ -216,72 +216,6 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
-
-// Function to show information when hovering over features
-function showFeatureInfo(movement) {
-    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
-
-    if (Cesium.defined(pickedObjects)) {
-        var uniqueNames = new Set(); // Create a Set to store unique names
-        var allWaterInfo = ''; // Initialize an empty string to store all water bodies' information
-
-        pickedObjects.forEach(function (pickedObject) {
-            var entity = pickedObject.id;
-
-            // Check if the picked object is an entity with properties
-            if (entity && entity.properties) {
-                var properties = entity.properties;
-
-                // Check if the file being picked is the oceans file
-                if (properties.featurecla && properties.name) {
-                    var featureName = properties.name.getValue();
-                    // Check if the name is not already in the Set
-                    if (!uniqueNames.has(featureName)) {
-                        allWaterInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
-                        uniqueNames.add(featureName); // Add the name to the Set
-                    }
-
-                    // Add additional properties
-                    var additionalProperties = ['Sea', 'reef', 'Bay', 'Gulf', 'strait', 'Channel', 'Sound', 'fjord', 'lagoon', 'inlet'];
-                    additionalProperties.forEach(function (prop) {
-                        if (properties[prop]) {
-                            var propValue = properties[prop].getValue();
-                            allWaterInfo += '<b>' + prop + ': ' + propValue + '</b><br>';
-                        }
-                    });
-                }
-
-                // Check if the file being picked is the lakes file
-                if (properties.featurecla && properties.featurecla.getValue() === 'Lake' && properties.name) {
-                    var lakeName = properties.name.getValue();
-                    // Check if the name is not already in the Set
-                    if (!uniqueNames.has(lakeName)) {
-                        allWaterInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
-                        uniqueNames.add(lakeName); // Add the name to the Set
-                    }
-                }
-
-                // You can add similar checks for other GeoJSON files and their properties here
-            }
-        });
-
-        // Display all the water bodies' information in the designated HTML element with the specific ID
-        var waterInfoBox = document.getElementById('waterInfoBox');
-        if (waterInfoBox) {
-            waterInfoBox.innerHTML = allWaterInfo;
-        }
-    } else {
-        // Clear the information when no feature is under the cursor
-        var waterInfoBox = document.getElementById('waterInfoBox');
-        if (waterInfoBox) {
-            waterInfoBox.innerHTML = defaultText;
-        }
-    }
-}
-
-
-
-
 // Create an HTML element to display feature information
 var infoBox = document.createElement('div');
 infoBox.id = 'infoBox';
@@ -294,6 +228,69 @@ infoBox.style.color = 'white';
 infoBox.style.display = 'block';
 document.body.appendChild(infoBox);
 
+// Function to show information when hovering over features
+function showFeatureInfo(movement) {
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
+    var uniqueWaterNames = new Set(); // Create a Set to store unique water body names
+    var uniquePoliticalNames = new Set(); // Create a Set to store unique political boundary names
+    var uniqueLandNames = new Set(); // Create a Set to store unique land geography names
+
+    var waterInfo = ''; // Initialize an empty string to store water bodies' information
+    var politicalInfo = ''; // Initialize an empty string to store political boundaries information
+    var landInfo = ''; // Initialize an empty string to store land geography information
+
+    if (Cesium.defined(pickedObjects)) {
+        pickedObjects.forEach(function (pickedObject) {
+            var entity = pickedObject.id;
+
+            // Check if the picked object is an entity with properties
+            if (entity && entity.properties) {
+                var properties = entity.properties;
+
+                // Check if the file being picked is the oceans, lakes, or rivers file
+                if (properties.featurecla && properties.name) {
+                    var featureName = properties.name.getValue();
+                    var featureType = properties.featurecla.getValue();
+
+                 // Check if the name is not already in the respective Set
+if (!uniqueWaterNames.has(featureName) && (featureType === 'River' || featureType === 'Lake Centerline' || featureType === 'Canal' || featureType === 'Ocean' || featureType === 'Sea' || featureType === 'Strait' || featureType === 'Bay' || featureType === 'Sound' || featureType === 'Channel' || featureType === 'Gulf' || featureType === 'Reef')) {
+    waterInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+    uniqueWaterNames.add(featureName); // Add the name to the Set
+} else if (!uniquePoliticalNames.has(featureName)) {
+    politicalInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+    uniquePoliticalNames.add(featureName); // Add the name to the Set
+} else if (!uniqueLandNames.has(featureName)) {
+    landInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+    uniqueLandNames.add(featureName); // Add the name to the Set
+}
+
+                // You can add similar checks for other GeoJSON files and their properties here
+            }
+        });
+    }
+
+    // Display water bodies' information in the designated HTML element with the specific ID
+    var waterInfoBox = document.getElementById('waterInfoBox');
+    if (waterInfoBox) {
+        waterInfoBox.innerHTML = waterInfo;
+    }
+
+    // Display political boundaries information in the designated HTML element with the specific ID
+    var politicalInfoBox = document.getElementById('politicalInfoBox');
+    if (politicalInfoBox) {
+        politicalInfoBox.innerHTML = politicalInfo;
+    }
+
+    // Display land geography information in the designated HTML element with the specific ID
+    var landInfoBox = document.getElementById('landInfoBox');
+    if (landInfoBox) {
+        landInfoBox.innerHTML = landInfo;
+    }
+}
+
+// ... (rest of the code)
+
+
 // Add the event listener for mouse movement
 viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
@@ -303,4 +300,3 @@ viewer.scene.canvas.addEventListener('mouseleave', function () {
     infoBox.innerHTML = defaultText;
     infoBox.style.display = 'block';
 });
-
