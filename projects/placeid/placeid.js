@@ -321,13 +321,25 @@ function showFeatureInfo(movement) {
                         // Construct the information string with the customized title
                         infoBox.innerHTML = '<b>' + title + ' ' + featureName + '</b><br>';
                         infoBox.style.display = 'block'; // Show the info box
+
+                         // Set the flag to true since the mouse is over a feature
+                         isMouseOverFeature = true;
                     }
                 }
             }
         });
     }
-}
 
+    
+ // Check if the mouse is not over any feature and hide all info boxes
+ if (!isMouseOverFeature) {
+    for (var key in infoBoxes) {
+        if (infoBoxes.hasOwnProperty(key)) {
+            infoBoxes[key].style.display = 'none';
+        }
+    }
+}
+}
 
 
 
