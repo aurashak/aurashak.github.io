@@ -3,15 +3,15 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqe
 const map = new mapboxgl.Map({
     container: 'mtsmap',
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-73.9529, 40.8116], // Centered around 125th Street
-    zoom: 6, // Closer zoom level
-    pitch: 0, // Set pitch to 0 for a flat perspective (facing east)
-    bearing: 0, // Set bearing to 0 for no rotation
+    center: [-74.008, 40.726], // Centered around the West Side of Manhattan and the Hudson River
+    zoom: 15, // Zoom in for a close-up view
+    pitch: 45, // Set pitch to 45 for a 3D perspective
+    bearing: -20, // Set bearing for a view from the East Hudson River
     maxBounds: [
-        [-74.0479, 40.7876], // Upper Manhattan's southwest corner
-        [-73.9107, 40.8692]  // Upper Manhattan's northeast corner
+        [-74.0479, 40.7074], // Lower Manhattan's southwest corner
+        [-73.9067, 40.7876]  // Upper Manhattan's northeast corner
     ],
-    maxZoom: 11, // Limit the maximum zoom level
+    maxZoom: 18, // Limit the maximum zoom level
 });
 
 // Add 3D building layer
