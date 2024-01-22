@@ -222,7 +222,7 @@ function showFeatureInfo(movement) {
     if (Cesium.defined(pickedObjects)) {
         var oceansInfo = '';
         var lakesInfo = '';
-        
+
         pickedObjects.forEach(function (pickedObject) {
             var entity = pickedObject.id;
 
@@ -234,6 +234,15 @@ function showFeatureInfo(movement) {
                 if (properties.featurecla && properties.featurecla.getValue() === 'Ocean' && properties.name) {
                     var featureName = properties.name.getValue();
                     oceansInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
+
+                    // Add additional properties
+                    var additionalProperties = ['Sea', 'reef', 'Bay', 'Gulf', 'strait', 'Channel', 'Sound', 'fjord', 'lagoon', 'inlet'];
+                    additionalProperties.forEach(function (prop) {
+                        if (properties[prop]) {
+                            var propValue = properties[prop].getValue();
+                            oceansInfo += '<b>' + prop + ': ' + propValue + '</b><br>';
+                        }
+                    });
                 }
 
                 // Check if the file being picked is the lakes file
@@ -263,6 +272,7 @@ function showFeatureInfo(movement) {
         }
     }
 }
+
 
 
 
