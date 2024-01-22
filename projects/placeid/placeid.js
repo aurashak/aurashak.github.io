@@ -227,18 +227,14 @@ function showFeatureInfo(movement) {
             // Check if the picked object is an entity with properties
             if (entity && entity.properties) {
                 var properties = entity.properties;
-                var featureName = properties.getName(); // Adjust this based on your GeoJSON data structure
 
-                // Add information for the feature to the featureInfo string
-                featureInfo += '<b>' + featureName + '</b><br>';
+                // Check if the file being picked is the oceans file
+                if (properties.featurecla && properties.featurecla.getValue() === 'Ocean' && properties.name) {
+                    var featureName = properties.name.getValue();
+                    featureInfo += '<b>' + featureName + '</b><br>';
+                }
 
-                // Loop through properties and add them to featureInfo
-                properties.propertyNames.forEach(function (propertyName) {
-                    var propertyValue = properties[propertyName].getValue();
-                    featureInfo += propertyName + ': ' + propertyValue + '<br>';
-                });
-
-                featureInfo += '<br>';
+                // You can add similar checks for other GeoJSON files and their properties here
             }
         });
 
@@ -249,6 +245,7 @@ function showFeatureInfo(movement) {
         infoBox.innerHTML = defaultText;
     }
 }
+
 
 
 // Create an HTML element to display feature information
