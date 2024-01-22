@@ -214,14 +214,12 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
-
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (Cesium.defined(pickedObjects)) {
-        var oceansInfo = '';
-        var lakesInfo = '';
+        var allWaterInfo = ''; // Initialize an empty string to store all water bodies' information
 
         pickedObjects.forEach(function (pickedObject) {
             var entity = pickedObject.id;
@@ -231,16 +229,16 @@ function showFeatureInfo(movement) {
                 var properties = entity.properties;
 
                 // Check if the file being picked is the oceans file
-                if (properties.featurecla && properties.featurecla.getValue() === 'Ocean' && properties.name) {
+                if (properties.featurecla && properties.name) {
                     var featureName = properties.name.getValue();
-                    oceansInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
+                    allWaterInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
 
                     // Add additional properties
                     var additionalProperties = ['Sea', 'reef', 'Bay', 'Gulf', 'strait', 'Channel', 'Sound', 'fjord', 'lagoon', 'inlet'];
                     additionalProperties.forEach(function (prop) {
                         if (properties[prop]) {
                             var propValue = properties[prop].getValue();
-                            oceansInfo += '<b>' + prop + ': ' + propValue + '</b><br>';
+                            allWaterInfo += '<b>' + prop + ': ' + propValue + '</b><br>';
                         }
                     });
                 }
@@ -248,27 +246,23 @@ function showFeatureInfo(movement) {
                 // Check if the file being picked is the lakes file
                 if (properties.featurecla && properties.featurecla.getValue() === 'Lake' && properties.name) {
                     var lakeName = properties.name.getValue();
-                    lakesInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
+                    allWaterInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
                 }
 
                 // You can add similar checks for other GeoJSON files and their properties here
             }
         });
 
-        // Display the oceans information in the designated HTML element with the specific ID
-        var oceansInfoBox = document.getElementById('oceansInfoBox');
-        var lakesInfoBox = document.getElementById('lakesInfoBox');
-        if (oceansInfoBox && lakesInfoBox) {
-            oceansInfoBox.innerHTML = oceansInfo;
-            lakesInfoBox.innerHTML = lakesInfo;
+        // Display all the water bodies' information in the designated HTML element with the specific ID
+        var waterInfoBox = document.getElementById('waterInfoBox');
+        if (waterInfoBox) {
+            waterInfoBox.innerHTML = allWaterInfo;
         }
     } else {
         // Clear the information when no feature is under the cursor
-        var oceansInfoBox = document.getElementById('oceansInfoBox');
-        var lakesInfoBox = document.getElementById('lakesInfoBox');
-        if (oceansInfoBox && lakesInfoBox) {
-            oceansInfoBox.innerHTML = defaultText;
-            lakesInfoBox.innerHTML = defaultText;
+        var waterInfoBox = document.getElementById('waterInfoBox');
+        if (waterInfoBox) {
+            waterInfoBox.innerHTML = defaultText;
         }
     }
 }
