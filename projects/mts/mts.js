@@ -13,6 +13,14 @@ const map = new mapboxgl.Map({
                 type: 'vector',
                 url: 'mapbox://mapbox.mapbox-streets-v8',
             },
+            'water': {
+                type: 'vector',
+                url: 'mapbox://mapbox.mapbox-streets-v8',
+            },
+            'parks': {
+                type: 'vector',
+                url: 'mapbox://mapbox.mapbox-streets-v8',
+            },
         },
         layers: [
             {
@@ -29,11 +37,29 @@ const map = new mapboxgl.Map({
                     'fill-extrusion-opacity': 0.6,
                 },
             },
+            {
+                id: 'water-layer',
+                type: 'fill',
+                source: 'water',
+                'source-layer': 'water',
+                paint: {
+                    'fill-color': '#4D90D1',
+                },
+            },
+            {
+                id: 'parks-layer',
+                type: 'fill',
+                source: 'parks',
+                'source-layer': 'park',
+                paint: {
+                    'fill-color': '#8CC084',
+                },
+            },
         ],
     },
     center: [-73.957611, 40.822583], // Centered around the West Side of Manhattan and the Hudson River
     zoom: 16, // Zoom in for a close-up view
-    pitch: 45, // Set pitch to 45 for a 3D perspective
+    pitch: 30, // Adjust the pitch to a lower angle (e.g., 30 degrees)
     bearing: -260, // Set bearing for a view from the East Hudson River
     minZoom: 16,
     maxZoom: 20, // Limit the maximum zoom level
