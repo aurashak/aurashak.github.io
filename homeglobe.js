@@ -28,33 +28,19 @@ viewer.camera.setView({
     }
 });
 
-
 viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
-
-
-// Function to rotate the globe automatically
-function rotateGlobe() {
-    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, spinRate);
-}
 
 // Set the rotation speed
 var spinRate = Cesium.Math.toRadians(0.2); // Adjust the speed as needed
 
-// Start automatic rotation
-rotateGlobe();
-
-function toggleRotation() {
-    isRotating = !isRotating;
-    if (isRotating) {
-        rotateGlobe();
-    }
+// Function to rotate the globe automatically
+function rotateGlobe() {
+    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, spinRate);
+    requestAnimationFrame(rotateGlobe); // Continue rotation in the next frame
 }
 
-// Add an event listener to toggle rotation when clicking on the canvas
-handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-handler.setInputAction(function() {
-    toggleRotation();
-}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+// Start automatic rotation
+rotateGlobe();
 
 // Define variables to keep track of layer visibility
 var osmLayerVisible = true; // OpenStreetMap
