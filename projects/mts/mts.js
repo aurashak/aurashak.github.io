@@ -6,7 +6,7 @@ const map = new mapboxgl.Map({
     center: [-73.954, 40.812], // Centered around the West Side of Manhattan and the Hudson River
     zoom: 70, // Zoom in for a close-up view
     pitch: 45, // Set pitch to 45 for a 3D perspective
-    bearing: 50, // Set bearing for a view from the East Hudson River
+    bearing: 20, // Set bearing for a view from the East Hudson River
     maxBounds: [
         [-74.0479, 40.7074], // Lower Manhattan's southwest corner
         [-73.9667, 40.8876]  // Upper Manhattan's northeast corner
