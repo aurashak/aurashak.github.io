@@ -7,10 +7,7 @@ const map = new mapboxgl.Map({
     zoom: 22, // Zoom in for a close-up view
     pitch: 45, // Set pitch to 45 for a 3D perspective
     bearing: -260, // Set bearing for a view from the East Hudson River
-    maxBounds: [
-        [-74.0479, 40.7074], // Lower Manhattan's southwest corner
-        [-73.9667, 40.8876]  // Upper Manhattan's northeast corner
-    ],
+
     maxZoom: 13, // Limit the maximum zoom level
 });
 
