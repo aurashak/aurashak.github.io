@@ -3,10 +3,12 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqe
 const map = new mapboxgl.Map({
     container: 'mtsmap',
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-74.006, 40.7128], // New York City coordinates
-    zoom: 15,
+    bounds: [
+        [-74.0479, 40.7876], // Upper Manhattan's southwest corner
+        [-73.9107, 40.8692]  // Upper Manhattan's northeast corner
+    ],
     pitch: 45, // Set pitch to view in 3D
-    bearing: 0, // Set bearing to control the map's rotation
+    bearing: -90, // Set bearing to view from west to east
 });
 
 // Add 3D building layer
