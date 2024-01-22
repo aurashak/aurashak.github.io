@@ -214,40 +214,15 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
-// Create HTML elements to display feature information for each feature type
-var infoBoxes = {};
-
-// Define feature types
-var featureTypes = [
-    'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Gulf', 'reef',
-    'Country', 'Continent', 'Region_UN' // Make sure these names match your GeoJSON properties
-];
-
-// Convert feature types to lowercase for case-insensitive matching
-var lowercaseFeatureTypes = featureTypes.map(function (type) {
-    return type.toLowerCase();
-});
-
-// Create separate info boxes for each feature type
-featureTypes.forEach(function (featureType) {
-    var infoBox = document.createElement('div');
-    infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
-    infoBox.classList.add('infobox'); // Add the CSS class to the info box
-    
-    // Append the info box to the corresponding div element
-    var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox'); // Get the parent div by ID
-    if (parentDiv) {
-        parentDiv.appendChild(infoBox);
-    }
-
-    // Store the info box in the dictionary
-    infoBoxes[featureType.toLowerCase()] = infoBox; // Use lowercase feature type as the key
-});
-
+// Flag to check if the mouse is over any feature
+var isMouseOverFeature = false;
 
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
+
+    // Reset the flag when the mouse is not over any feature
+    isMouseOverFeature = false;
 
     if (Cesium.defined(pickedObjects)) {
         pickedObjects.forEach(function (pickedObject) {
@@ -331,24 +306,18 @@ function showFeatureInfo(movement) {
     }
 
     
- // Check if the mouse is not over any feature and hide all info boxes
- if (!isMouseOverFeature) {
-    for (var key in infoBoxes) {
-        if (infoBoxes.hasOwnProperty(key)) {
-            infoBoxes[key].style.display = 'none';
-        }
-    }
-}
-}
-
-
-
-// Add the event listener for mouse movement
+ // Add the event listener for mouse movement
 viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
 // to clear the infoBox
 viewer.scene.canvas.addEventListener('mouseleave', function () {
-    infoBox.innerHTML = defaultText;
-    infoBox.style.display = 'block';
+    // Check the flag before clearing the info boxes
+    if (!isMouseOverFeature) {
+        for (var key in infoBoxes) {
+            if (infoBoxes.hasOwnProperty(key)) {
+                infoBoxes[key].style.display = 'none';
+            }
+        }
+    }
 });
