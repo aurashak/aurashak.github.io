@@ -616,3 +616,20 @@ input:checked + .slider:before {
 }
 
 /* Additional styles can be added based on your design preferences */
+
+
+
+
+
+
+/* Custom CSS Class */
+.infoBox{
+    /* Your styles go here */
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 10px;
+    border: 10px solid #ff0000;
+    font-size: 16px;
+    margin: 10px;
+    /* Add more styles as needed */
+}
