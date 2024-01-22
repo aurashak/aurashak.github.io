@@ -43,7 +43,7 @@ var osmLayerVisible = true;
 var sentinelLayerVisible = true;
 
 // Load the GeoJSON file containing country boundaries
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/countries.geojson';
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
 
 // Create an array of country entities from the GeoJSON data
 var countryEntities = [];
