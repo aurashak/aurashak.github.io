@@ -32,10 +32,6 @@ const defaultStyle = {
             type: 'vector',
             url: 'mapbox://mapbox.mapbox-streets-v8',
         },
-        'parks': {
-            type: 'vector',
-            url: 'mapbox://mapbox.mapbox-streets-v8',
-        },
     },
     layers: [
         {
@@ -57,15 +53,6 @@ const defaultStyle = {
             'source-layer': 'water',
             paint: {
                 'fill-color': '#4D90D1',
-            },
-        },
-        {
-            id: 'parks-layer',
-            type: 'fill',
-            source: 'parks',
-            'source-layer': 'park',
-            paint: {
-                'fill-color': '#8CC084',
             },
         },
     ],
