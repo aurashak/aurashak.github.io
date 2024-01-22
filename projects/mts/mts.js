@@ -70,26 +70,17 @@ const map = new mapboxgl.Map({
     maxZoom: 20, // Limit the maximum zoom level
 });
 
-// Function to toggle between map styles
-function toggleMapStyle(style) {
-    // Remove the building layer
-    map.removeLayer('buildings-layer');
-    
-    // Set the new map style
-    map.setStyle(style);
-    
-    // Re-add the building layer
-    map.addLayer(buildingLayer);
-}
+// Add zoom and rotation controls
+map.addControl(new mapboxgl.NavigationControl());
 
 // Add event listener for the Satellite toggle button
 document.getElementById('satelliteToggle').addEventListener('change', function() {
     if (this.checked) {
         // Set the map style to the Satellite imagery
-        toggleMapStyle('mapbox://styles/mapbox/satellite-v9');
+        map.setStyle('mapbox://styles/mapbox/satellite-v9');
     } else {
         // Set the map style back to the default style
-        toggleMapStyle(defaultStyle);
+        map.setStyle(defaultStyle);
     }
 });
 
@@ -97,12 +88,9 @@ document.getElementById('satelliteToggle').addEventListener('change', function()
 document.getElementById('osmToggle').addEventListener('change', function() {
     if (this.checked) {
         // Set the map style to OpenStreetMap
-        toggleMapStyle('mapbox://styles/mapbox/streets-v11');
+        map.setStyle('mapbox://styles/mapbox/streets-v11');
     } else {
         // Set the map style back to the default style
-        toggleMapStyle(defaultStyle);
+        map.setStyle(defaultStyle);
     }
 });
-
-// Add zoom and rotation controls
-map.addControl(new mapboxgl.NavigationControl());
