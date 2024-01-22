@@ -214,6 +214,36 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
+// Create HTML elements to display feature information for each feature type
+var infoBoxes = {};
+
+// Define feature types
+var featureTypes = [
+    'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Gulf', 'reef',
+    'Country', 'Continent', 'Region_UN' // Make sure these names match your GeoJSON properties
+];
+
+// Convert feature types to lowercase for case-insensitive matching
+var lowercaseFeatureTypes = featureTypes.map(function (type) {
+    return type.toLowerCase();
+});
+
+// Create separate info boxes for each feature type
+featureTypes.forEach(function (featureType) {
+    var infoBox = document.createElement('div');
+    infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
+    infoBox.classList.add('infobox'); // Add the CSS class to the info box
+    
+    // Append the info box to the corresponding div element
+    var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox'); // Get the parent div by ID
+    if (parentDiv) {
+        parentDiv.appendChild(infoBox);
+    }
+
+    // Store the info box in the dictionary
+    infoBoxes[featureType.toLowerCase()] = infoBox; // Use lowercase feature type as the key
+});
+
 // Flag to check if the mouse is over any feature
 var isMouseOverFeature = false;
 
@@ -297,16 +327,16 @@ function showFeatureInfo(movement) {
                         infoBox.innerHTML = '<b>' + title + ' ' + featureName + '</b><br>';
                         infoBox.style.display = 'block'; // Show the info box
 
-                         // Set the flag to true since the mouse is over a feature
-                         isMouseOverFeature = true;
+                        // Set the flag to true since the mouse is over a feature
+                        isMouseOverFeature = true;
                     }
                 }
             }
         });
     }
+}
 
-    
- // Add the event listener for mouse movement
+// Add the event listener for mouse movement
 viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
