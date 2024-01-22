@@ -215,7 +215,6 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
-
 // Create an HTML element to display feature information
 var infoBox = document.createElement('div');
 infoBox.id = 'infoBox';
@@ -252,17 +251,18 @@ function showFeatureInfo(movement) {
                     var featureName = properties.name.getValue();
                     var featureType = properties.featurecla.getValue();
 
-                 // Check if the name is not already in the respective Set
-if (!uniqueWaterNames.has(featureName) && (featureType === 'River' || featureType === 'Lake Centerline' || featureType === 'Canal' || featureType === 'Ocean' || featureType === 'Sea' || featureType === 'Strait' || featureType === 'Bay' || featureType === 'Sound' || featureType === 'Channel' || featureType === 'Gulf' || featureType === 'Reef')) {
-    waterInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
-    uniqueWaterNames.add(featureName); // Add the name to the Set
-} else if (!uniquePoliticalNames.has(featureName)) {
-    politicalInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
-    uniquePoliticalNames.add(featureName); // Add the name to the Set
-} else if (!uniqueLandNames.has(featureName)) {
-    landInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
-    uniqueLandNames.add(featureName); // Add the name to the Set
-}
+                    // Check if the name is not already in the respective Set
+                    if (!uniqueWaterNames.has(featureName) && (featureType === 'River' || featureType === 'Lake Centerline' || featureType === 'Canal' || featureType === 'Ocean' || featureType === 'Sea' || featureType === 'Strait' || featureType === 'Bay' || featureType === 'Sound' || featureType === 'Channel' || featureType === 'Gulf' || featureType === 'Reef')) {
+                        waterInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+                        uniqueWaterNames.add(featureName); // Add the name to the Set
+                    } else if (!uniquePoliticalNames.has(featureName)) {
+                        politicalInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+                        uniquePoliticalNames.add(featureName); // Add the name to the Set
+                    } else if (!uniqueLandNames.has(featureName)) {
+                        landInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+                        uniqueLandNames.add(featureName); // Add the name to the Set
+                    }
+                }
 
                 // You can add similar checks for other GeoJSON files and their properties here
             }
@@ -288,7 +288,7 @@ if (!uniqueWaterNames.has(featureName) && (featureType === 'River' || featureTyp
     }
 }
 
-// ... (rest of the code)
+
 
 
 // Add the event listener for mouse movement
