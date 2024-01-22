@@ -12,6 +12,11 @@ var map = L.map('nymap', {
     maxZoom: 16                // Maximum zoom level (adjust as needed)
 }).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
 
+
+var map = L.map('nyminimap').setView([51.505, -0.09], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+
 // Create the WorldMiniMap control
 var miniMap = new L.Control.worldMiniMap({
     position: 'bottomright', // Customize the position
