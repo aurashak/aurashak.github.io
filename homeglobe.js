@@ -44,6 +44,12 @@ var sentinelLayerVisible = true;
 
 // Load the GeoJSON file containing country boundaries
 var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/northamerica.json';
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamerica.json';
+var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceana.json';
+
 
 // Create an array of country entities from the GeoJSON data
 var countryEntities = [];
@@ -57,7 +63,7 @@ Cesium.GeoJsonDataSource.load(countryBoundariesGeojsonUrl).then(function (dataSo
         entity.polygon.outlineWidth = 2.0;
         
         // Adjust the extrudedHeight to make the countries visible over the satellite layer
-        entity.polygon.extrudedHeight = 100000; // Adjust this height as needed
+        entity.polygon.extrudedHeight = 100; // Adjust this height as needed
         
         entity.polygon.material = Cesium.Color.TRANSPARENT;
         countryEntities.push(entity);
