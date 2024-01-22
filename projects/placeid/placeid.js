@@ -232,33 +232,46 @@ loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Col
 var countryNamesBox = document.getElementById('countryNamesBox');
 countryNamesBox.style.display = 'none'; // Hide initially
 
+// A Set to keep track of added country names
+var addedCountryNames = new Set();
+
 // Function to show country names from the countries.geojson layer
 function showCountryNames() {
+    // Clear the content of countryNamesBox
+    countryNamesBox.innerHTML = '';
+
     // Load the countries.geojson layer
     Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/world/countries.geojson').then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.properties && entity.properties.ADMIN) { // Use "ADMIN" for country name
-                // Get the geometry of the entity
-                var geometry = entity.polygon || entity.multiPolygon;
-                if (geometry) {
-                    var coordinates = getCoordinates(geometry);
-                    var centroid = calculateCentroid(coordinates);
+                var countryName = entity.properties.ADMIN;
 
-                    // Create a label entity to display the country name
-                    viewer.entities.add({
-                        position: Cesium.Cartesian3.fromDegrees(centroid[0], centroid[1]),
-                        label: {
-                            text: entity.properties.ADMIN, // Use "ADMIN" for country name
-                            fillColor: Cesium.Color.WHITE,
-                            outlineColor: Cesium.Color.BLACK,
-                            outlineWidth: 2,
-                            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-                            verticalOrigin: Cesium.VerticalOrigin.CENTER
-                        }
-                    });
+                // Check if the country name is already added to the set
+                if (!addedCountryNames.has(countryName)) {
+                    addedCountryNames.add(countryName); // Add to the set to prevent duplicates
 
-                    // Update the country names box with the name of the country
-                    countryNamesBox.innerHTML += entity.properties.ADMIN + '<br>'; // Use "ADMIN" for country name
+                    // Get the geometry of the entity
+                    var geometry = entity.polygon || entity.multiPolygon;
+                    if (geometry) {
+                        var coordinates = getCoordinates(geometry);
+                        var centroid = calculateCentroid(coordinates);
+
+                        // Create a label entity to display the country name
+                        viewer.entities.add({
+                            position: Cesium.Cartesian3.fromDegrees(centroid[0], centroid[1]),
+                            label: {
+                                text: countryName, // Use "ADMIN" for country name
+                                fillColor: Cesium.Color.WHITE,
+                                outlineColor: Cesium.Color.BLACK,
+                                outlineWidth: 2,
+                                horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+                                verticalOrigin: Cesium.VerticalOrigin.CENTER
+                            }
+                        });
+
+                        // Update the country names box with the name of the country
+                        countryNamesBox.innerHTML += countryName + '<br>'; // Use "ADMIN" for country name
+                    }
                 }
             }
         });
