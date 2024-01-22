@@ -493,5 +493,9 @@ function setLegendSymbol(layerId, color, shape) {
 }
 
 
-
+// Create a mini map
+var miniMap = new L.Control.MiniMap(openstreetmapLayer, {
+    toggleDisplay: true,
+    minimized: false
+}).addTo(map);
 
