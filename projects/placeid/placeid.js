@@ -214,3 +214,62 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 
 
 
+
+// Function to show information when hovering over features
+function showFeatureInfo(movement) {
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
+
+    if (Cesium.defined(pickedObjects)) {
+        var featureInfo = '';
+        pickedObjects.forEach(function (pickedObject) {
+            var entity = pickedObject.id;
+
+            // Check if the picked object is an entity with properties
+            if (entity && entity.properties) {
+                var properties = entity.properties;
+                var featureName = properties.getName(); // Adjust this based on your GeoJSON data structure
+
+                // Add information for the feature to the featureInfo string
+                featureInfo += '<b>' + featureName + '</b><br>';
+
+                // Loop through properties and add them to featureInfo
+                properties.propertyNames.forEach(function (propertyName) {
+                    var propertyValue = properties[propertyName].getValue();
+                    featureInfo += propertyName + ': ' + propertyValue + '<br>';
+                });
+
+                featureInfo += '<br>';
+            }
+        });
+
+        // Display the information in a designated HTML element
+        infoBox.innerHTML = featureInfo;
+    } else {
+        // Clear the information when no feature is under the cursor
+        infoBox.innerHTML = defaultText;
+    }
+}
+
+
+// Create an HTML element to display feature information
+var infoBox = document.createElement('div');
+infoBox.id = 'infoBox';
+infoBox.style.position = 'absolute';
+infoBox.style.bottom = '10px';
+infoBox.style.left = '10px';
+infoBox.style.padding = '10px';
+infoBox.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+infoBox.style.color = 'white';
+infoBox.style.display = 'block';
+document.body.appendChild(infoBox);
+
+// Add the event listener for mouse movement
+viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Additionally, you may want to set up an event listener for when the mouse leaves the globe
+// to clear the infoBox
+viewer.scene.canvas.addEventListener('mouseleave', function () {
+    infoBox.innerHTML = defaultText;
+    infoBox.style.display = 'block';
+});
+
