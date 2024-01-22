@@ -57,6 +57,7 @@ map.on('load', function () {
             'text-field': ['get', 'name'], // You can customize this to show different labels
             'text-size': 12,
         },
+        'source-layer': 'place-label', // Specify the source-layer for labels
     });
 });
 
