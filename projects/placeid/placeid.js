@@ -212,3 +212,43 @@ loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Col
 
 
 
+// Mini map viewer
+var miniMapViewer = new Cesium.Viewer('miniMapContainer', {
+    // Mini map viewer configuration options here
+    imageryProvider: Cesium.createWorldImagery({
+        style: Cesium.IonWorldImageryStyle.AERIAL,
+    }),
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: false,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    skyBox: false,
+    fullscreenButton: false,
+    animation: false,
+    shouldAnimate: true, // You can keep animation true if needed
+});
+
+// Synchronize the cameras between the main viewer and the mini map viewer
+miniMapViewer.scene.camera.flyTo({
+    destination: mainViewer.scene.camera.position,
+    orientation: mainViewer.scene.camera.orientation,
+});
+
+mainViewer.camera.changed.addEventListener(function () {
+    miniMapViewer.scene.camera.flyTo({
+        destination: mainViewer.scene.camera.position,
+        orientation: mainViewer.scene.camera.orientation,
+    });
+});
+
+// CSS to position and style the mini map container
+var miniMapContainer = document.getElementById('miniMapContainer');
+miniMapContainer.style.position = 'absolute';
+miniMapContainer.style.bottom = '10px';
+miniMapContainer.style.left = '10px';
+miniMapContainer.style.width = '300px'; // Adjust the width as needed
+miniMapContainer.style.height = '200px'; // Adjust the height as needed
