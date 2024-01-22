@@ -1,5 +1,4 @@
 var mainViewer;
-var miniMapViewer;
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
@@ -41,58 +40,7 @@ function setUpSynchronization() {
     var spinRate = 0.0003;
     var isRotating = true; // To keep track of the rotation state
 
-    // Mini map viewer
-    miniMapViewer = new Cesium.Viewer('miniMapContainer', {
-        imageryProvider: Cesium.createWorldImagery({
-            style: Cesium.IonWorldImageryStyle.AERIAL,
-        }),
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: false,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        skyBox: false,
-        fullscreenButton: false,
-        animation: false,
-        shouldAnimate: true
-    });
-
-    // Synchronize the cameras between the main viewer and the mini map viewer
-    mainViewer.readyPromise.then(function () {
-        miniMapViewer.scene.camera.flyTo({
-            destination: mainViewer.scene.camera.position,
-            orientation: mainViewer.scene.camera.orientation,
-        });
-
-        mainViewer.camera.changed.addEventListener(function () {
-            miniMapViewer.scene.camera.flyTo({
-                destination: mainViewer.scene.camera.position,
-                orientation: mainViewer.scene.camera.orientation,
-            });
-        });
-
-        // CSS to position and style the mini map container
-        var miniMapContainer = document.getElementById('miniMapContainer');
-        miniMapContainer.style.position = 'absolute';
-        miniMapContainer.style.bottom = '10px';
-        miniMapContainer.style.left = '10px';
-        miniMapContainer.style.width = '300px'; // Adjust the width as needed
-        miniMapContainer.style.height = '200px'; 
-    });
-
-    // Call the setup function when mainViewer is ready
-    mainViewer.readyPromise.then(function () {
-        // Additional setup if needed when mainViewer is ready
-    });
-}
-
-// Call the setup function when mainViewer is ready
-mainViewer.readyPromise.then(function () {
-    setUpSynchronization();
-});
+   
 
 // Define heights for different layer types
 var continentHeight = 500; // Adjust as needed
