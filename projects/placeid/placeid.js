@@ -85,9 +85,23 @@ function getTypeFromProperties(properties) {
 
 
 
+// Function to show updating coordinates
+function showCoordinates(movement) {
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+
+        coordsBox.innerHTML = hoverText;
+    }
+}
 
 // Function to show updating coordinates and country names on hover
-function showCoordinatesAndCountryNames(movement) {
+function showCountryNames(movement) {
     var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
 
     if (cartesian) {
@@ -112,7 +126,11 @@ function showCoordinatesAndCountryNames(movement) {
     }
 }
 
+viewer.screenSpaceEventHandler.setInputAction(showCountryNames, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+
+
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
