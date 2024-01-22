@@ -16,11 +16,6 @@ mainViewer = new Cesium.Viewer('cesiumContainer2', {
     animation: false
 });
 
-mainViewer.readyPromise.then(function () {
-    // Your code to execute after the viewer is ready
-});
-
-
 mainViewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
@@ -43,27 +38,27 @@ function rotateGlobe() {
 var spinRate = 0.0003;
 var isRotating = true; // To keep track of the rotation state
 
-// Mini map viewer
-miniMapViewer = new Cesium.Viewer('miniMapContainer', {
-    imageryProvider: Cesium.createWorldImagery({
-        style: Cesium.IonWorldImageryStyle.AERIAL,
-    }),
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: false,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    skyBox: false,
-    fullscreenButton: false,
-    animation: false,
-    shouldAnimate: true
-});
+// Function to set up synchronization when mainViewer is ready
+function setUpSynchronization() {
+    miniMapViewer = new Cesium.Viewer('miniMapContainer', {
+        imageryProvider: Cesium.createWorldImagery({
+            style: Cesium.IonWorldImageryStyle.AERIAL,
+        }),
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: false,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        skyBox: false,
+        fullscreenButton: false,
+        animation: false,
+        shouldAnimate: true
+    });
 
-// Synchronize the cameras between the main viewer and the mini map viewer
-mainViewer.readyPromise.then(function () {
+    // Synchronize the cameras between the main viewer and the mini map viewer
     miniMapViewer.scene.camera.flyTo({
         destination: mainViewer.scene.camera.position,
         orientation: mainViewer.scene.camera.orientation,
@@ -75,15 +70,36 @@ mainViewer.readyPromise.then(function () {
             orientation: mainViewer.scene.camera.orientation,
         });
     });
+
+    // CSS to position and style the mini map container
+    var miniMapContainer = document.getElementById('miniMapContainer');
+    miniMapContainer.style.position = 'absolute';
+    miniMapContainer.style.bottom = '10px';
+    miniMapContainer.style.left = '10px';
+    miniMapContainer.style.width = '300px'; // Adjust the width as needed
+    miniMapContainer.style.height = '200px'; 
+}
+
+// Call the setup function when mainViewer is ready
+mainViewer.readyPromise.then(function () {
+    setUpSynchronization();
 });
 
-// CSS to position and style the mini map container
-var miniMapContainer = document.getElementById('miniMapContainer');
-miniMapContainer.style.position = 'absolute';
-miniMapContainer.style.bottom = '10px';
-miniMapContainer.style.left = '10px';
-miniMapContainer.style.width = '300px'; // Adjust the width as needed
-miniMapContainer.style.height = '200px'; 
+mainViewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
+
+// Function to rotate the globe slowly
+function rotateGlobe() {
+    if (isRotating) {
+        mainViewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+    }
+}
+
+// Slow down the rotation
+var spinRate = 0.0003;
+var isRotating = true; // To keep track of the rotation state
+
+
+
 
 
 
