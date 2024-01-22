@@ -71,38 +71,20 @@ function toggleSentinelLayer() {
 
 
 
-// Create a GeoJsonDataSource for countries
-var countriesDataSource = new Cesium.GeoJsonDataSource('countries');
-viewer.dataSources.add(countriesDataSource);
 
-// Load the countries GeoJSON data
-countriesDataSource.load('https://aurashak.github.io/geojson/world/countries.geojson').then(function () {
-    // You can add any specific styling or other configuration for the countries here if needed
 
-    // Function to determine the type based on properties
-    function getTypeFromProperties(properties) {
-        switch (properties.featurecla) {
-            default:
-                return properties.featurecla || 'Unknown';
-        }
+
+
+function getTypeFromProperties(properties) {
+    switch (properties.featurecla) {
+
+        default:
+            return properties.featurecla || 'Unknown';
     }
+}
 
-    // Example: Access the entities in the data source
-    var entities = countriesDataSource.entities.values;
 
-    // Iterate through the entities and collect data
-    for (var i = 0; i < entities.length; i++) {
-        var entity = entities[i];
-        var countryName = entity.properties.ADMIN;
-        var countryType = getTypeFromProperties(entity.properties);
 
-        // Do something with the collected data, for example, log it
-        console.log('Country Name: ' + countryName);
-        console.log('Country Type: ' + countryType);
-    }
-}).otherwise(function (error) {
-    console.error('Error loading countries GeoJSON:', error);
-});
 
 // Function to show updating coordinates
 function showCoordinates(movement) {
@@ -119,37 +101,7 @@ function showCoordinates(movement) {
     }
 }
 
-// Function to show updating coordinates and country names on hover
-function showCountryNames(movement) {
-    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
-
-    if (cartesian) {
-        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-
-        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
-        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
-        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
-
-        coordsBox.innerHTML = hoverText;
-
-        var pickedObject = viewer.scene.pick(movement.endPosition);
-        if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id) && pickedObject.id.properties && pickedObject.id.properties.ADMIN) {
-            var countryName = pickedObject.id.properties.ADMIN;
-            // Update the country names box with the name of the hovered country
-            countryNamesBox.innerHTML = countryName;
-            countryNamesBox.style.display = 'block';
-        } else {
-            // Hide the country names box if not hovering over a country
-            countryNamesBox.style.display = 'none';
-        }
-    }
-}
-
-viewer.screenSpaceEventHandler.setInputAction(showCountryNames, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
-
 
 handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
@@ -276,26 +228,4 @@ loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.
 loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
 
-// Add this code to update the country names box
-var countryNamesBox = document.getElementById('countryNamesBox');
-countryNamesBox.style.display = 'none'; // Hide initially
 
-// Function to show country names when the mouse hovers over a country
-function showCountryNamesOnHover() {
-    // Mouse move event listener
-    viewer.screenSpaceEventHandler.setInputAction(function(movement) {
-        var pickedObject = viewer.scene.pick(movement.endPosition);
-        if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id) && pickedObject.id.properties && pickedObject.id.properties.ADMIN) {
-            var countryName = pickedObject.id.properties.ADMIN;
-            // Update the country names box with the name of the hovered country
-            countryNamesBox.innerHTML = countryName;
-            countryNamesBox.style.display = 'block';
-        } else {
-            // Hide the country names box if not hovering over a country
-            countryNamesBox.style.display = 'none';
-        }
-    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-}
-
-// Call the function to show country names on hover
-showCountryNamesOnHover();
