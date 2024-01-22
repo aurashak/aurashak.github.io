@@ -16,8 +16,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     shouldAnimate: true, // You can keep animation true if needed
 });
 
-
-
+viewer.scene.backgroundColor = Cesium.Color.RED;
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
