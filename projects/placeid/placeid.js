@@ -239,17 +239,15 @@ function showCountryNames() {
     Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/world/countries.geojson').then(function(dataSource) {
         dataSource.entities.values.forEach(function(entity) {
             if (entity.properties && entity.properties.ADMIN) { // Use "ADMIN" for country name
-                // Get the centroid of the country
-                var centroid = entity.polygon.computeCenter();
+                // Get the coordinates of the MultiPolygon
+                var coordinates = entity.geometry.coordinates;
                 
-                // Convert the centroid coordinates to degrees
-                var cartographic = Cesium.Cartographic.fromCartesian(centroid);
-                var longitude = Cesium.Math.toDegrees(cartographic.longitude);
-                var latitude = Cesium.Math.toDegrees(cartographic.latitude);
+                // Calculate the centroid of the MultiPolygon
+                var centroid = calculateCentroid(coordinates);
                 
                 // Create a label entity to display the country name
                 viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude),
+                    position: Cesium.Cartesian3.fromDegrees(centroid[0], centroid[1]),
                     label: {
                         text: entity.properties.ADMIN, // Use "ADMIN" for country name
                         fillColor: Cesium.Color.WHITE,
@@ -270,6 +268,27 @@ function showCountryNames() {
     }).otherwise(function(error){
         console.error('Error loading countries.geojson:', error);
     });
+}
+
+// Function to calculate the centroid of a MultiPolygon
+function calculateCentroid(coordinates) {
+    // Your centroid calculation logic here
+    // For simplicity, you can use the average of coordinates for each polygon
+    var sumLat = 0;
+    var sumLon = 0;
+    var totalPoints = 0;
+    
+    coordinates.forEach(function(polygon) {
+        polygon.forEach(function(ring) {
+            ring.forEach(function(point) {
+                sumLat += point[1];
+                sumLon += point[0];
+                totalPoints++;
+            });
+        });
+    });
+
+    return [sumLon / totalPoints, sumLat / totalPoints];
 }
 
 // Call the function to show country names
