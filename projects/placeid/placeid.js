@@ -247,12 +247,6 @@ featureTypes.forEach(function (featureType) {
 
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
-    // Clear all previous information
-    for (var key in infoBoxes) {
-        infoBoxes[key].innerHTML = '';
-        infoBoxes[key].style.display = 'none'; // Hide all info boxes
-    }
-
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (Cesium.defined(pickedObjects)) {
@@ -325,14 +319,14 @@ function showFeatureInfo(movement) {
                         }
 
                         // Construct the information string with the customized title
-                        infoBox.innerHTML += '<b>' + title + ' ' + featureName + '</b><br>';
-                        infoBox.style.display = 'block'; // Show the info box
+                        infoBox.innerHTML = '<b>' + title + ' ' + featureName + '</b><br>';
                     }
                 }
             }
         });
     }
 }
+
 
 
 
