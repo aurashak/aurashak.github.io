@@ -59,7 +59,7 @@ const map = new mapboxgl.Map({
     },
     center: [-73.957611, 40.822583], // Centered around the West Side of Manhattan and the Hudson River
     zoom: 16, // Zoom in for a close-up view
-    pitch: 30, // Adjust the pitch to a lower angle (e.g., 30 degrees)
+    pitch: 75, // Adjust the pitch to a lower angle (e.g., 30 degrees)
     bearing: -260, // Set bearing for a view from the East Hudson River
     minZoom: 16,
     maxZoom: 20, // Limit the maximum zoom level
