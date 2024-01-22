@@ -252,19 +252,76 @@ function showFeatureInfo(movement) {
                     var featureType = properties.featurecla.getValue();
 
                     // Check if the name is not already in the respective Set
-                    if (!uniqueWaterNames.has(featureName) && (featureType === 'River' || featureType === 'Lake Centerline' || featureType === 'Canal' || featureType === 'Ocean' || featureType === 'Sea' || featureType === 'Strait' || featureType === 'Bay' || featureType === 'Sound' || featureType === 'Channel' || featureType === 'Gulf' || featureType === 'Reef')) {
-                        waterInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+                    if (featureType === 'River' || featureType === 'Lake Centerline' || featureType === 'Canal' || featureType === 'Ocean' || featureType === 'Sea' || featureType === 'Strait' || featureType === 'Bay' || featureType === 'Sound' || featureType === 'Channel' || featureType === 'Gulf' || featureType === 'Reef') {
+                        // Customize the title based on the property type
+                        var title = '';
+                        switch (featureType) {
+                            case 'River':
+                                title = 'River Name:';
+                                break;
+                            case 'Lake Centerline':
+                                title = 'Lake Name:';
+                                break;
+                            case 'Canal':
+                                title = 'Canal Name:';
+                                break;
+                            case 'Ocean':
+                                title = 'Ocean Name:';
+                                break;
+                            case 'Sea':
+                                title = 'Sea Name:';
+                                break;
+                            case 'Strait':
+                                title = 'Strait Name:';
+                                break;
+                            case 'Bay':
+                                title = 'Bay Name:';
+                                break;
+                            case 'Sound':
+                                title = 'Sound Name:';
+                                break;
+                            case 'Channel':
+                                title = 'Channel Name:';
+                                break;
+                            case 'Gulf':
+                                title = 'Gulf Name:';
+                                break;
+                            case 'Reef':
+                                title = 'Reef Name:';
+                                break;
+                            default:
+                                title = 'Name:';
+                        }
+
+                        // Construct the information string with the customized title
+                        waterInfo += '<b>' + title + ' ' + featureName + '</b><br>';
                         uniqueWaterNames.add(featureName); // Add the name to the Set
-                    } else if (!uniquePoliticalNames.has(featureName)) {
-                        politicalInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
+                    } else if (featureType === 'Country' || featureType === 'Region_UN' || featureType === 'Continent') {
+                        // Customize the title based on the property type
+                        var title = '';
+                        switch (featureType) {
+                            case 'Country':
+                                title = 'Country Name:';
+                                break;
+                            case 'Region_UN':
+                                title = 'Region Name:';
+                                break;
+                            case 'Continent':
+                                title = 'Continent Name:';
+                                break;
+                            default:
+                                title = 'Name:';
+                        }
+
+                        // Construct the information string with the customized title
+                        politicalInfo += '<b>' + title + ' ' + featureName + '</b><br>';
                         uniquePoliticalNames.add(featureName); // Add the name to the Set
-                    } else if (!uniqueLandNames.has(featureName)) {
+                    } else {
+                        // Add other property types to land geography information
                         landInfo += '<b>' + featureType + ' Name: ' + featureName + '</b><br>';
                         uniqueLandNames.add(featureName); // Add the name to the Set
                     }
                 }
-
-                // You can add similar checks for other GeoJSON files and their properties here
             }
         });
     }
