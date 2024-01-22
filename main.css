@@ -192,7 +192,13 @@ header a:active { color: black}
             /*! height: 0%; */
 }
 
-
+.idsectionleft {
+    flex-direction: row; /* Stack items vertically */
+    border-bottom: 1px solid black;
+    padding: 5px 10px;
+    font-size: 15px; 
+    height: 75px;
+}
 
 
 
