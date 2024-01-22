@@ -32,16 +32,16 @@ viewer.camera.setView({
 viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
 
 
-// Function to rotate the globe slowly
+// Function to rotate the globe automatically
 function rotateGlobe() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
-    }
+    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, spinRate);
 }
 
-// Slow down the rotation
-var spinRate = 0.0003;
-var isRotating = true; // To keep track of the rotation state
+// Set the rotation speed
+var spinRate = Cesium.Math.toRadians(0.2); // Adjust the speed as needed
+
+// Start automatic rotation
+rotateGlobe();
 
 function toggleRotation() {
     isRotating = !isRotating;
