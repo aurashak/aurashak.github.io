@@ -12,6 +12,13 @@ var map = L.map('nymap', {
     maxZoom: 16                // Maximum zoom level (adjust as needed)
 }).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
 
+// Create the WorldMiniMap control
+var miniMap = new L.Control.worldMiniMap({
+    position: 'bottomright', // Customize the position
+});
+
+// Add the control to your map
+miniMap.addTo(map);
 
 
 L.control.scale().addTo(map);
@@ -492,10 +499,4 @@ function setLegendSymbol(layerId, color, shape) {
     }    
 }
 
-
-// Create a mini map
-var miniMap = new L.Control.MiniMap(openstreetmapLayer, {
-    toggleDisplay: true,
-    minimized: false
-}).addTo(map);
 
