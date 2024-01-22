@@ -16,6 +16,11 @@ mainViewer = new Cesium.Viewer('cesiumContainer2', {
     animation: false
 });
 
+mainViewer.readyPromise.then(function () {
+    // Your code to execute after the viewer is ready
+});
+
+
 mainViewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
