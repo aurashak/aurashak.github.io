@@ -16,7 +16,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     shouldAnimate: true, // You can keep animation true if needed
 });
 
-viewer.scene.backgroundColor = Cesium.Color.RED;
+viewer.scene.backgroundColor = Cesium.Color.fromAlpha(Cesium.Color.RED, 0.1); // 0.5 is the alpha value (range: 0 to 1)
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
