@@ -116,9 +116,9 @@ header a:active { color: black}
 }
 
 .homesubtitle a:link {color: black;}
-.homesubtitle a:hover {       padding: 5px 10px; background: gold; text-decoration: none;}
-.homesubtitle a:active {   background-color: green;}
-.homesubtitle a:visited {  color: purple; }
+.homesubtitle a:hover {      }
+.homesubtitle a:active {   }
+.homesubtitle a:visited {   }
 
 .nymaptitle {
     font-size: 15px;
