@@ -234,6 +234,12 @@ function showFeatureInfo(movement) {
                     featureInfo += '<b>' + featureName + '</b><br>';
                 }
 
+                // Check if the file being picked is the lakes file
+                if (properties.featurecla && properties.featurecla.getValue() === 'Lake' && properties.name) {
+                    var lakeName = properties.name.getValue();
+                    featureInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
+                }
+
                 // You can add similar checks for other GeoJSON files and their properties here
             }
         });
@@ -249,6 +255,18 @@ function showFeatureInfo(movement) {
         if (oceansInfoBox) {
             oceansInfoBox.innerHTML = defaultText;
         }
+
+          // Display the oceans information in the designated HTML element with the specific ID
+          var lakesInfoBox = document.getElementById('lakesInfoBox');
+          if (lakesInfoBox) {
+              lakesInfoBox.innerHTML = featureInfo;
+          }
+      } else {
+          // Clear the information when no feature is under the cursor
+          var lakesInfoBox = document.getElementById('lakesInfoBox');
+          if (lakesInfoBox) {
+              lakesInfoBox.innerHTML = defaultText;
+          }
     }
 }
 
