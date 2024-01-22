@@ -21,7 +21,7 @@ L.control.scale().addTo(map);
 // Function to calculate marker size based on zoom level
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
-    var initialSize = 10;
+    var initialSize = 13;
     var minSize = 5;
 
     // Calculate the size based on zoom level with a minimum size
