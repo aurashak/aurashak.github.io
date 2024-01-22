@@ -233,11 +233,17 @@ featureTypes.forEach(function (featureType) {
     var infoBox = document.createElement('div');
     infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
     infoBox.classList.add('infobox'); // Add the CSS class to the info box
-    document.body.appendChild(infoBox);
+    
+    // Append the info box to the corresponding div element
+    var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox'); // Get the parent div by ID
+    if (parentDiv) {
+        parentDiv.appendChild(infoBox);
+    }
 
     // Store the info box in the dictionary
     infoBoxes[featureType.toLowerCase()] = infoBox; // Use lowercase feature type as the key
 });
+
 
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
