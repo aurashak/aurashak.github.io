@@ -71,19 +71,38 @@ function toggleSentinelLayer() {
 
 
 
+// Create a GeoJsonDataSource for countries
+var countriesDataSource = new Cesium.GeoJsonDataSource('countries');
+viewer.dataSources.add(countriesDataSource);
 
+// Load the countries GeoJSON data
+countriesDataSource.load('URL_TO_WORLD_COUNTRIES.GeoJSON').then(function () {
+    // You can add any specific styling or other configuration for the countries here if needed
 
-
-
-function getTypeFromProperties(properties) {
-    switch (properties.featurecla) {
-
-        default:
-            return properties.featurecla || 'Unknown';
+    // Function to determine the type based on properties
+    function getTypeFromProperties(properties) {
+        switch (properties.featurecla) {
+            default:
+                return properties.featurecla || 'Unknown';
+        }
     }
-}
 
+    // Example: Access the entities in the data source
+    var entities = countriesDataSource.entities.values;
 
+    // Iterate through the entities and collect data
+    for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+        var countryName = entity.properties.ADMIN;
+        var countryType = getTypeFromProperties(entity.properties);
+
+        // Do something with the collected data, for example, log it
+        console.log('Country Name: ' + countryName);
+        console.log('Country Type: ' + countryType);
+    }
+}).otherwise(function (error) {
+    console.error('Error loading countries GeoJSON:', error);
+});
 
 // Function to show updating coordinates
 function showCoordinates(movement) {
