@@ -54,7 +54,6 @@ function createGrid() {
 
 createGrid(); // Call the function to create the grid
 
-viewer.scene.backgroundColor = Cesium.Color.BLUE.withAlpha(0.01); // A very low alpha value
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
