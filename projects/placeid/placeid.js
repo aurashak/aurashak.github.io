@@ -222,17 +222,26 @@ infoBox.style.position = 'absolute';
 infoBox.style.bottom = '10px';
 infoBox.style.left = '10px';
 infoBox.style.padding = '10px';
-infoBox.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-infoBox.style.color = 'white';
+infoBox.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+infoBox.style.color = 'green';
 infoBox.style.display = 'block';
 document.body.appendChild(infoBox);
 
+
+
+// Define global variables to store information
+var uniqueWaterNames = new Set(); // Create a Set to store unique water body names
+var uniquePoliticalNames = new Set(); // Create a Set to store unique political boundary names
+var uniqueLandNames = new Set(); // Create a Set to store unique land geography names
+
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
+    // Clear the previous information
+    uniqueWaterNames.clear();
+    uniquePoliticalNames.clear();
+    uniqueLandNames.clear();
+
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
-    var uniqueWaterNames = new Set(); // Create a Set to store unique water body names
-    var uniquePoliticalNames = new Set(); // Create a Set to store unique political boundary names
-    var uniqueLandNames = new Set(); // Create a Set to store unique land geography names
 
     var waterInfo = ''; // Initialize an empty string to store water bodies' information
     var politicalInfo = ''; // Initialize an empty string to store political boundaries information
