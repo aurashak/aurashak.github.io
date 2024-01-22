@@ -220,7 +220,9 @@ function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
     if (Cesium.defined(pickedObjects)) {
-        var featureInfo = '';
+        var oceansInfo = '';
+        var lakesInfo = '';
+        
         pickedObjects.forEach(function (pickedObject) {
             var entity = pickedObject.id;
 
@@ -231,13 +233,13 @@ function showFeatureInfo(movement) {
                 // Check if the file being picked is the oceans file
                 if (properties.featurecla && properties.featurecla.getValue() === 'Ocean' && properties.name) {
                     var featureName = properties.name.getValue();
-                    featureInfo += '<b>' + featureName + '</b><br>';
+                    oceansInfo += '<b>Ocean Name: ' + featureName + '</b><br>';
                 }
 
                 // Check if the file being picked is the lakes file
                 if (properties.featurecla && properties.featurecla.getValue() === 'Lake' && properties.name) {
                     var lakeName = properties.name.getValue();
-                    featureInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
+                    lakesInfo += '<b>Lake Name: ' + lakeName + '</b><br>';
                 }
 
                 // You can add similar checks for other GeoJSON files and their properties here
@@ -248,8 +250,8 @@ function showFeatureInfo(movement) {
         var oceansInfoBox = document.getElementById('oceansInfoBox');
         var lakesInfoBox = document.getElementById('lakesInfoBox');
         if (oceansInfoBox && lakesInfoBox) {
-            oceansInfoBox.innerHTML = featureInfo;
-            lakesInfoBox.innerHTML = featureInfo;
+            oceansInfoBox.innerHTML = oceansInfo;
+            lakesInfoBox.innerHTML = lakesInfo;
         }
     } else {
         // Clear the information when no feature is under the cursor
@@ -261,6 +263,7 @@ function showFeatureInfo(movement) {
         }
     }
 }
+
 
 
 
