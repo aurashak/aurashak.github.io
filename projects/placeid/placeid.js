@@ -1,7 +1,9 @@
+var mainViewer;
+var miniMapViewer;
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
-var viewer = new Cesium.Viewer('cesiumContainer2', {
+mainViewer = new Cesium.Viewer('cesiumContainer2', {    
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
@@ -14,10 +16,7 @@ var viewer = new Cesium.Viewer('cesiumContainer2', {
     animation: false
 });
 
-viewer.imageryLayers.get(0).brightness = 1.2;
-viewer.imageryLayers.get(0).contrast = 1.2;
-
-viewer.camera.setView({
+mainViewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
         heading: Cesium.Math.toRadians(0.0),
@@ -26,21 +25,62 @@ viewer.camera.setView({
     }
 });
 
-
-viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
-
-
+mainViewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
 
 // Function to rotate the globe slowly
 function rotateGlobe() {
     if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+        mainViewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
     }
 }
 
 // Slow down the rotation
 var spinRate = 0.0003;
 var isRotating = true; // To keep track of the rotation state
+
+// Mini map viewer
+miniMapViewer = new Cesium.Viewer('miniMapContainer', {
+    imageryProvider: Cesium.createWorldImagery({
+        style: Cesium.IonWorldImageryStyle.AERIAL,
+    }),
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: false,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    skyBox: false,
+    fullscreenButton: false,
+    animation: false,
+    shouldAnimate: true
+});
+
+// Synchronize the cameras between the main viewer and the mini map viewer
+mainViewer.readyPromise.then(function () {
+    miniMapViewer.scene.camera.flyTo({
+        destination: mainViewer.scene.camera.position,
+        orientation: mainViewer.scene.camera.orientation,
+    });
+
+    mainViewer.camera.changed.addEventListener(function () {
+        miniMapViewer.scene.camera.flyTo({
+            destination: mainViewer.scene.camera.position,
+            orientation: mainViewer.scene.camera.orientation,
+        });
+    });
+});
+
+// CSS to position and style the mini map container
+var miniMapContainer = document.getElementById('miniMapContainer');
+miniMapContainer.style.position = 'absolute';
+miniMapContainer.style.bottom = '10px';
+miniMapContainer.style.left = '10px';
+miniMapContainer.style.width = '300px'; // Adjust the width as needed
+miniMapContainer.style.height = '200px'; 
+
+
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
@@ -211,44 +251,3 @@ loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.
 loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
 
-
-// Mini map viewer
-var miniMapViewer = new Cesium.Viewer('miniMapContainer', {
-    // Mini map viewer configuration options here
-    imageryProvider: Cesium.createWorldImagery({
-        style: Cesium.IonWorldImageryStyle.AERIAL,
-    }),
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: false,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    skyBox: false,
-    fullscreenButton: false,
-    animation: false,
-    shouldAnimate: true, // You can keep animation true if needed
-});
-
-// Synchronize the cameras between the main viewer and the mini map viewer
-miniMapViewer.scene.camera.flyTo({
-    destination: mainViewer.scene.camera.position,
-    orientation: mainViewer.scene.camera.orientation,
-});
-
-mainViewer.camera.changed.addEventListener(function () {
-    miniMapViewer.scene.camera.flyTo({
-        destination: mainViewer.scene.camera.position,
-        orientation: mainViewer.scene.camera.orientation,
-    });
-});
-
-// CSS to position and style the mini map container
-var miniMapContainer = document.getElementById('miniMapContainer');
-miniMapContainer.style.position = 'absolute';
-miniMapContainer.style.bottom = '10px';
-miniMapContainer.style.left = '10px';
-miniMapContainer.style.width = '300px'; // Adjust the width as needed
-miniMapContainer.style.height = '200px'; // Adjust the height as needed
