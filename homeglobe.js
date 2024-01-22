@@ -1,6 +1,22 @@
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
+
+// Show the loading spinner
+var loadingSpinner = document.getElementById('loadingSpinner');
+loadingSpinner.style.display = 'block';
+
+// Initialize the Cesium viewer
+var viewer = new Cesium.Viewer('cesiumContainer1', {
+    // ... your viewer configuration ...
+});
+
+// Hide the loading spinner when the globe is ready
+viewer.scene.globe.readyPromise.then(function() {
+    loadingSpinner.style.display = 'none';
+});
+
+
 var viewer = new Cesium.Viewer('cesiumContainer1', {
     baseLayerPicker: false,
     geocoder: false,
