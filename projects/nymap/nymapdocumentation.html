@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NY Map</title>
+    <title>NY Map Documentation</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 </head>
 <body>
         <div class="header">
@@ -20,35 +19,90 @@
 
         <div class="mapcontainer">
 
-        <div class="nymapsection">
-            <div class="title">NY Environmental Map</div>
-            <div class="description">This map aggregates environmental data about New York City using open source methods of data and graphic information systems.</div>
-        </div>
+            <h1>Creating a Map of the New York City Tri-State Area</h1>
 
-        <div class="nymapsection">
-            <div class="notesdescription">
-                <b>Sources:</b><br>
-                Powerplants: <a href="https://data.gis.ny.gov/datasets/21c2ab88012444f69d20fbb1550e8937/explore?location=41.296346%2C-74.396782%2C8.53">NYS GIS Clearing house</a><br>
-                Gas pipelines: Source here<br>
-                NY Borough boundaries, floodplains, sewer outfalls: <a href="NYC OPEN DATA LINK">NYC Open Data</a><br>
-                Streets and buildings: <a href="NYC OPEN DATA LINK">Open Street Maps</a><br>
-                Satellite: <a href="">Copernicius Sentinal-2</a><br>
-                Weather ticker: Open Weather API<br>
-                This map uses leaflet.<br>
-            </div> 
+            <p>This code defines and configures a map of the New York City (NYC) Tri-State area using the Leaflet library. It sets specific bounds for the map, ensuring that users cannot zoom out beyond a certain level or pan beyond the defined area. The map is centered at the coordinates of New York City with an initial zoom level of 12.</p>
+            
+            <pre><code>
+            &lt;!-- Define the bounds for the New York City Tri-State area --&gt;
+            var bounds = L.latLngBounds(
+                L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
+                L.latLng(41.4754, -73.3913)  // Northeast corner (top-right)
+            );
+            
+            &lt;!-- Create and configure the map with the specified bounds --&gt;
+            var map = L.map('nymap', {
+                maxBounds: bounds,          // Set maxBounds to limit zooming out
+                maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
+                minZoom: 7,                // Minimum zoom level
+                maxZoom: 16                // Maximum zoom level (adjust as needed)
+            }).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
+            </code></pre>
+            
+            <p>A scale control is added to the map to provide users with information about distances on the map.</p>
+            
+            <h2>Marker Size Based on Zoom Level</h2>
+            
+            <p>The code defines a function called <strong>calculateMarkerSize(zoom)</strong> that calculates the size of markers on the map based on the current zoom level. The marker size decreases as the zoom level increases, ensuring that markers don't become too large when zoomed in.</p>
+            
+            <h2>NYC Counties Layer</h2>
+            
+            <p>This layer represents the counties in the NYC area. It loads GeoJSON data and styles it with gray fill colors, black borders, and a semi-transparent appearance. Additionally, it adds label markers to display county names.</p>
+            
+            <pre><code>
+            var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+                style: function (feature) {
+                    return {
+                        fillColor: 'grey',
+                        color: 'black',
+                        weight: 0.5,
+                        opacity: 0.5,
+                        fillOpacity: .8
+                    };
+                },
+                pointToLayer: function (feature, latlng) {
+                    // Get the county name from the 'NAME' property
+                    var countyName = feature.properties.NAME;
+            
+                    // Create a label marker with the county name as the label
+                    return L.marker(latlng, {
+                        icon: L.divIcon({
+                            className: 'leaflet-div-label',
+                            html: countyName, // Use the 'NAME' property as the label
+                            iconSize: [100, 40] // Adjust the size of the label marker
+                        })
+                    });
+                }
+            });
+            </code></pre>
+            
+            <h2>Base Map Layers</h2>
+            
+            <p>This section defines base map layers including OpenStreetMap and a satellite layer. Users can switch between these base maps using a control.</p>
+            
+            <h2>Layer Control</h2>
+            
+            <p>A layer control is added to the map to allow users to toggle different layers on and off. It includes base maps and the previously defined NYC Counties Layer.</p>
+            
+            <h2>Layer Groups for Environmental Data</h2>
+            
+            <p>The code defines layer groups for various environmental data categories: AQI sites, water-related layers (100 Year Floodplain and NYC CSO), energy-related layers (Major Oil Storage, Power Plants, NY Gas Pipelines), and waste-related layers (Waste Transfer Facility, Wastewater Treatment, Inactive Solid Waste Landfill, Recycling Facility, Chemical Storage).</p>
+            
+            <h2>Toggle Buttons for Layer Groups</h2>
+            
+            <p>The code includes event listeners for toggle buttons that allow users to show/hide specific layers or groups of layers on the map.</p>
+            
+            <h2>Legend Symbols</h2>
+            
+            <p>Finally, the code includes a function <strong>setLegendSymbol</strong> to set legend symbols for each layer or group of layers. These symbols represent the layers on the legend with different shapes and colors.</p>
+            
         </div>
 
         
             
  
     
-  
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <script src="https://aurashak.github.io/projects/nymap/nymap.js"></script>
-    <script src="https://aurashak.github.io/projects/nymap/nycweather.js"></script>
 
 </body>
 </html>
