@@ -31,11 +31,11 @@ const map = new mapboxgl.Map({
             },
         ],
     },
-    center: [-73.954, 40.812], // Centered around the West Side of Manhattan and the Hudson River
-    zoom: 18, // Zoom in for a close-up view
+    center: [-73.957611, 40.822583], // Centered around the West Side of Manhattan and the Hudson River
+    zoom: 16, // Zoom in for a close-up view
     pitch: 45, // Set pitch to 45 for a 3D perspective
     bearing: -260, // Set bearing for a view from the East Hudson River
-    minZoom: 17,
+    minZoom: 16,
     maxZoom: 20, // Limit the maximum zoom level
 });
 
