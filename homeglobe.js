@@ -1,22 +1,6 @@
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
-
-// Show the loading spinner
-var loadingSpinner = document.getElementById('loadingSpinner');
-loadingSpinner.style.display = 'block';
-
-// Initialize the Cesium viewer
-var viewer = new Cesium.Viewer('cesiumContainer1', {
-    // ... your viewer configuration ...
-});
-
-// Hide the loading spinner when the globe is ready
-viewer.scene.globe.readyPromise.then(function() {
-    loadingSpinner.style.display = 'none';
-});
-
-
 var viewer = new Cesium.Viewer('cesiumContainer1', {
     baseLayerPicker: false,
     geocoder: false,
@@ -32,9 +16,8 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     shouldAnimate: true, // You can keep animation true if needed
 });
 
-
-
-viewer.scene.backgroundColor = Cesium.Color.WHITE.withAlpha(0.01); // A very low alpha value
+viewer.scene.backgroundColor = Cesium.Color.WHITE;
+viewer.scene.globe.backgroundColor = Cesium.Color.WHITE;
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -57,7 +40,7 @@ function rotateGlobe() {
 }
 
 // Slow down the rotation
-var spinRate = 0.001; // Increase the spin rate for a faster rotation
+var spinRate = 0.0003;
 var isRotating = true; // To keep track of the rotation state
 
 function toggleRotation() {
@@ -66,12 +49,6 @@ function toggleRotation() {
         rotateGlobe();
     }
 }
-
-
-// Inside your code, add the following line at the end to continuously rotate the globe
-setInterval(rotateGlobe, 10); // Adjust the interval as needed for the desired rotation speed
-
-
 
 // Add an event listener to toggle rotation when clicking on the canvas
 handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -82,5 +59,3 @@ handler.setInputAction(function() {
 // Define variables to keep track of layer visibility
 var osmLayerVisible = true; // OpenStreetMap
 var sentinelLayerVisible = true; // Sentinel-2
-
-
