@@ -67,6 +67,14 @@ function toggleSentinelLayer() {
 }
 
 
+
+
+
+
+
+
+
+
 function getTypeFromProperties(properties) {
     switch (properties.featurecla) {
 
@@ -74,6 +82,9 @@ function getTypeFromProperties(properties) {
             return properties.featurecla || 'Unknown';
     }
 }
+
+
+
 
 // Function to show updating coordinates
 function showCoordinates(movement) {
@@ -101,13 +112,19 @@ viewer.scene.canvas.addEventListener('mouseleave', function() {
 });
 
 
-
 // Additionally, you may want to set up an event listener for when the mouse leaves the globe
 // to set the coordsBox to the default text
 viewer.scene.canvas.addEventListener('mouseleave', function() {
     coordsBox.innerHTML = defaultText;
     coordsBox.style.display = 'block';
 });
+
+
+
+
+
+
+
 
 
 // Define heights for different layer types
@@ -212,3 +229,48 @@ loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Col
 
 
 
+// Add this code to update the country names box
+var countryNamesBox = document.getElementById('countryNamesBox');
+countryNamesBox.style.display = 'none'; // Hide initially
+
+// Function to show country names from the countries.geojson layer
+function showCountryNames() {
+    // Load the countries.geojson layer
+    Cesium.GeoJsonDataSource.load('path/to/countries.geojson').then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
+            if (entity.properties && entity.properties.name) {
+                // Get the centroid of the country
+                var centroid = entity.polygon.computeCenter();
+                
+                // Convert the centroid coordinates to degrees
+                var cartographic = Cesium.Cartographic.fromCartesian(centroid);
+                var longitude = Cesium.Math.toDegrees(cartographic.longitude);
+                var latitude = Cesium.Math.toDegrees(cartographic.latitude);
+                
+                // Create a label entity to display the country name
+                viewer.entities.add({
+                    position: Cesium.Cartesian3.fromDegrees(longitude, latitude),
+                    label: {
+                        text: entity.properties.name,
+                        fillColor: Cesium.Color.WHITE,
+                        outlineColor: Cesium.Color.BLACK,
+                        outlineWidth: 2,
+                        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+                        verticalOrigin: Cesium.VerticalOrigin.CENTER
+                    }
+                });
+
+                // Update the country names box with the name of the country
+                countryNamesBox.innerHTML += entity.properties.name + '<br>';
+            }
+        });
+
+        // Show the country names box
+        countryNamesBox.style.display = 'block';
+    }).otherwise(function(error){
+        console.error('Error loading countries.geojson:', error);
+    });
+}
+
+// Call the function to show country names
+showCountryNames();
