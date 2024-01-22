@@ -1,5 +1,4 @@
-
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmE0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
 var viewer = new Cesium.Viewer('cesiumContainer1', {
     baseLayerPicker: false,
@@ -42,50 +41,65 @@ rotateGlobe();
 var osmLayerVisible = true;
 var sentinelLayerVisible = true;
 
-// Load the GeoJSON file containing country boundaries
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/northamerica.json';
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/southamerica.json';
-var countryBoundariesGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceana.json';
-
+// Load an array of GeoJSON files containing country boundaries
+var countryBoundariesGeojsonUrls = [
+    'https://aurashak.github.io/geojson/world/africa.json',
+    'https://aurashak.github.io/geojson/world/europe.json',
+    'https://aurashak.github.io/geojson/world/asia.json',
+    'https://aurashak.github.io/geojson/world/northamerica.json',
+    'https://aurashak.github.io/geojson/world/southamerica.json',
+    'https://aurashak.github.io/geojson/world/oceana.json'
+];
 
 // Create an array of country entities from the GeoJSON data
 var countryEntities = [];
 
-Cesium.GeoJsonDataSource.load(countryBoundariesGeojsonUrl).then(function (dataSource) {
-    viewer.dataSources.add(dataSource);
+// Load and process each GeoJSON file sequentially
+function loadCountryBoundaries(index) {
+    if (index < countryBoundariesGeojsonUrls.length) {
+        Cesium.GeoJsonDataSource.load(countryBoundariesGeojsonUrls[index]).then(function (dataSource) {
+            viewer.dataSources.add(dataSource);
 
-    dataSource.entities.values.forEach(function (entity) {
-        entity.polygon.outline = true;
-        entity.polygon.outlineColor = Cesium.Color.RED;
-        entity.polygon.outlineWidth = 2.0;
-        
-        // Adjust the extrudedHeight to make the countries visible over the satellite layer
-        entity.polygon.extrudedHeight = 100000; // Adjust this height as needed
-        
-        entity.polygon.material = Cesium.Color.TRANSPARENT;
-        countryEntities.push(entity);
-    });
+            dataSource.entities.values.forEach(function (entity) {
+                entity.polygon.outline = true;
+                entity.polygon.outlineColor = Cesium.Color.RED;
+                entity.polygon.outlineWidth = 2.0;
 
-    var currentIndex = 0;
+                // Adjust the extrudedHeight to make the countries visible over the satellite layer
+                entity.polygon.extrudedHeight = 100000; // Adjust this height as needed
 
-    function animateCountryBoundaries() {
-        if (currentIndex < countryEntities.length) {
-            // Hide all countries except the current one
-            countryEntities.forEach(function (country, index) {
-                country.show = (index === currentIndex);
+                entity.polygon.material = Cesium.Color.TRANSPARENT;
+                countryEntities.push(entity);
             });
 
-            currentIndex++;
-
-            // Schedule the next animation frame
-            setTimeout(animateCountryBoundaries, 2000); // Adjust the interval as needed
-        }
+            // Schedule the loading of the next GeoJSON file
+            loadCountryBoundaries(index + 1);
+        }).otherwise(function (error) {
+            console.error('Error loading GeoJSON data:', error);
+        });
+    } else {
+        // All GeoJSON files have been loaded, start the animation loop
+        animateCountryBoundaries(0);
     }
+}
 
-    animateCountryBoundaries(); // Start the animation loop
-}).otherwise(function (error) {
-    console.error('Error loading GeoJSON data:', error);
-});
+// Start loading the GeoJSON files
+loadCountryBoundaries(0);
+
+var currentIndex = 0;
+
+function animateCountryBoundaries(index) {
+    if (index < countryEntities.length) {
+        // Hide all countries except the current one
+        countryEntities.forEach(function (country, i) {
+            country.show = (i === index);
+        });
+
+        currentIndex = index;
+
+        // Schedule the next animation frame
+        setTimeout(function () {
+            animateCountryBoundaries((index + 1) % countryEntities.length);
+        }, 2000); // Adjust the interval as needed
+    }
+}
