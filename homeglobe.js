@@ -16,43 +16,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     shouldAnimate: true, // You can keep animation true if needed
 });
 
-// Create a function to add a grid to the scene
-function createGrid() {
-    var gridSpacing = 0.1; // Adjust the spacing between grid lines
-    var gridColor = Cesium.Color.WHITE;
 
-    for (var lon = -180; lon < 180; lon += gridSpacing) {
-        var positions = [];
-        for (var lat = -90; lat <= 90; lat++) {
-            positions.push(Cesium.Cartesian3.fromDegrees(lon, lat));
-        }
-
-        viewer.entities.add({
-            polyline: {
-                positions: positions,
-                width: 1,
-                material: gridColor,
-            },
-        });
-    }
-
-    for (var lat = -90; lat < 90; lat += gridSpacing) {
-        var positions = [];
-        for (var lon = -180; lon <= 180; lon++) {
-            positions.push(Cesium.Cartesian3.fromDegrees(lon, lat));
-        }
-
-        viewer.entities.add({
-            polyline: {
-                positions: positions,
-                width: 1,
-                material: gridColor,
-            },
-        });
-    }
-}
-
-createGrid(); // Call the function to create the grid
 
 viewer.scene.backgroundColor = Cesium.Color.BLUE.withAlpha(0.01); // A very low alpha value
 
