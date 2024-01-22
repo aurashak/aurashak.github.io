@@ -76,7 +76,7 @@ var countriesDataSource = new Cesium.GeoJsonDataSource('countries');
 viewer.dataSources.add(countriesDataSource);
 
 // Load the countries GeoJSON data
-countriesDataSource.load('URL_TO_WORLD_COUNTRIES.GeoJSON').then(function () {
+countriesDataSource.load('https://aurashak.github.io/geojson/world/countries.geojson').then(function () {
     // You can add any specific styling or other configuration for the countries here if needed
 
     // Function to determine the type based on properties
