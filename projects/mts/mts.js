@@ -4,7 +4,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqe
 
 // Create a new Mapbox map instance
 var map = new mapboxgl.Map({
-    container: 'map', // HTML element ID where the map will be displayed
+    container: 'mtsmap', // HTML element ID where the map will be displayed
     style: 'mapbox://styles/mapbox/streets-v11', // Map style URL
     center: [-74.006, 40.7128], // Initial map center coordinates (longitude, latitude)
     zoom: 12 // Initial zoom level
