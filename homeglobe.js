@@ -14,8 +14,6 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     animation: false
 });
 
-
-
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
@@ -25,27 +23,58 @@ viewer.camera.setView({
     }
 });
 
+viewer.camera.percentageChanged = 0.01;
 
-viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
-
-
-
-// Function to rotate the globe slowly
-function rotateGlobe() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
-    }
-}
-
-// Slow down the rotation
 var spinRate = 0.0003;
-var isRotating = true; // To keep track of the rotation state
+var isRotating = true;
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-
 var sentinelLayerVisible = true; // Sentinel-2
 
+// Function to create a toggle switch for the "Grid" layer
+function createGridToggleSwitch() {
+  const gridToggleSwitch = document.createElement("label");
+  gridToggleSwitch.classList.add("toggle-switch");
 
+  const gridToggleInput = document.createElement("input");
+  gridToggleInput.type = "checkbox";
+  gridToggleInput.checked = true; // Set the initial state to "on"
+  gridToggleInput.addEventListener("change", () => {
+    // Toggle the visibility of the grid layer based on the checkbox state
+    if (gridLayer) {
+      gridLayer.show = gridToggleInput.checked;
+    }
+  });
 
+  const gridToggleSlider = document.createElement("span");
+  gridToggleSlider.classList.add("toggle-slider");
 
+  gridToggleSwitch.appendChild(gridToggleInput);
+  gridToggleSwitch.appendChild(gridToggleSlider);
+
+  const gridToggleLabel = document.createElement("span");
+  gridToggleLabel.textContent = "Grid";
+  gridToggleSwitch.appendChild(gridToggleLabel);
+
+  // Append the toggle switch to the "toolbar" div
+  const toolbar = document.getElementById("toolbar");
+  toolbar.appendChild(gridToggleSwitch);
+}
+
+// Function to setup the layers
+function setupLayers() {
+  const imageryLayers = viewer.imageryLayers;
+
+  // Assuming you have these layers defined elsewhere
+  // ...
+
+  // Extract the "Grid" and "OpenStreetMaps" layers (make sure "imageryLayers" is defined)
+  gridLayer = imageryLayers.getByName("Grid");
+  openStreetMapsLayer = imageryLayers.getByName("OpenStreetMaps");
+
+  // Create the toggle switch for the "Grid" layer
+  createGridToggleSwitch();
+}
+
+setupLayers();
