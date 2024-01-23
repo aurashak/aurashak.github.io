@@ -258,23 +258,25 @@ header a:active { color: black}
 }
 
 
+/* Common styles for input and buttons */
 .cesium-viewer .cesium-geocoder-input,
 .cesium-viewer .cesium-geocoder-input:focus,
-.cesium-viewer .cesium-geocoder-input:hover {
-    color: black;
-    background-color: #ffffff91;
-    border: 0 solid black;
-    width: 45px;
-}
-
+.cesium-viewer .cesium-geocoder-input:hover,
 .cesium-button,
 .cesium-button:hover,
 .cesium-button:active {
     background-color: rgba(255, 255, 255, 0.5);
     color: black;
-    fill: black;
     border: 0 solid #444;
     box-shadow: none;
+}
+
+/* Geocoder-specific styles */
+.cesium-viewer .cesium-geocoder-input,
+.cesium-viewer .cesium-geocoder-input:focus,
+.cesium-viewer .cesium-geocoder-input:hover {
+    background-color: #ffffff91;
+    width: 45px;
 }
 
 .cesium-viewer-geocoderContainer .cesium-button:hover,
@@ -283,21 +285,23 @@ header a:active { color: black}
     fill: #edffff;
 }
 
+/* Credits and bottom bar */
 .cesium-viewer .cesium-widget-credits {
     display: inline;
     position: static;
     color: #fff;
     font-size: 0;
 }
+
 .cesium-viewer-bottom {
     display: none;
     position: absolute;
     bottom: 0;
     left: 0;
+    padding-right: 5px;
 }
 
-
-
+/* Coords box */
 .coords-box {
     background: gold;
     padding: 10px;
@@ -306,47 +310,7 @@ header a:active { color: black}
     position: relative;
 }
 
-
-.cesium-viewer .cesium-geocoder-input,
-.cesium-viewer .cesium-geocoder-input:focus,
-.cesium-viewer .cesium-geocoder-input:hover {
-    color: black;
-    background-color: #ffffff91;
-    border: 0 solid black;
-    width: 45px;
-}
-
-.cesium-button,
-.cesium-button:hover,
-.cesium-button:active {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: black;
-    fill: black;
-    border: 0 solid #444;
-    box-shadow: none;
-}
-
-.cesium-viewer-geocoderContainer .cesium-button:hover,
-.cesium-viewer-geocoderContainer .cesium-geocoder-input:hover {
-    color: #edffff;
-    fill: #edffff;
-}
-
-.cesium-viewer .cesium-widget-credits {
-    display: inline;
-    position: static;
-    color: #fff;
-    font-size: 0;
-}
-
-.cesium-viewer-bottom {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding-right:5px
-}
-
+/* Controls container button */
 .controls-container button {
     background-color: #bfbfbf;
     color: black;
