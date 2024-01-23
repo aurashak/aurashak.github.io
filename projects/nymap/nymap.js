@@ -22,7 +22,7 @@ L.control.scale().addTo(map);
 function calculateMarkerSize(zoom) {
     // Define the initial and minimum sizes
     var initialSize = 13;
-    var minSize = 5;
+    var minSize = 6;
 
     // Calculate the size based on zoom level with a minimum size
     var size = initialSize - (zoom - 3) * 5;
@@ -192,7 +192,17 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
     }
 }).addTo(energyLayerGroup);
 
-
+// NY Transmission Lines Layer
+var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
+    style: function (feature) {
+        var size = calculateMarkerSize(map.getZoom());
+        return {
+            color: 'orange',
+            weight: 3,
+            opacity: 0.6
+        };
+    }
+}).addTo(energyLayerGroup);
 
 
 // Waste Layer Group
@@ -377,6 +387,15 @@ document.getElementById('aqisite').addEventListener('click', function() {
     }
 });
 
+document.getElementById('electrictransmissionlines').addEventListener('click', function() {
+    if (map.hasLayer(electrictransmissionlinesLayer)) {
+        map.removeLayer(electrictransmissionlinesLayer);
+    } else {
+        map.addLayer(electrictransmissionlinesLayer);
+    }
+});
+
+
 
 
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
@@ -386,10 +405,14 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
         map.removeLayer(majoroilstorageLayer);
         map.removeLayer(powerplantsLayer);
         map.removeLayer(nygaspipelinesLayer);
+        map.removeLayer(electrictransmissionlinesLayer);
+
         // Reset the individual layer toggle buttons to off state
         document.getElementById('majoroilstorage').checked = false;
         document.getElementById('powerplants').checked = false;
         document.getElementById('nygaspipelines').checked = false;
+        document.getElementById('electrictransmissionlines').checked = false;
+
     } else {
         map.addLayer(energyLayerGroup);
         // If the group toggle is turned on, turn on individual layers if they were previously checked
@@ -401,6 +424,9 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
         }
         if (document.getElementById('nygaspipelines').checked) {
             map.addLayer(nygaspipelinesLayer);
+        }
+        if (document.getElementById('electrictransmissionlines').checked) {
+            map.addLayer(electrictransmissionlinesLayer);
         }
     }
 });
@@ -464,6 +490,7 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 // Set the legend symbol shapes and colors for each layer
+setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
