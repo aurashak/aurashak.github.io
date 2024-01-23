@@ -131,6 +131,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
     }
 });
 
+opacitySlidider.addTo(waterLayerGroup);
 floodplainLayer.addTo(waterLayerGroup);
 floodplainLayer.addTo(map);
 
