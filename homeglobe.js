@@ -35,68 +35,29 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
 // Later in your code, you can change the background color to white again
 viewer.scene.backgroundColor = Cesium.Color.WHITE;
 
-// Load the Sentinel-2 imagery layer
-var sentinel2Layer = viewer.imageryLayers.addImageryProvider(
-    new Cesium.IonImageryProvider({ assetId: 3954 }) // Asset ID for Sentinel-2 imagery
-);
+// Flag to track the current imagery layer
+var isSentinel2Visible = true;
 
-// Load the GeoJSON file
-var geoJsonUrl = 'https://aurashak.github.io/geojson/aboutaurash.geojson';
-var dataSourcePromise = Cesium.CzmlDataSource.load(geoJsonUrl);
-
-dataSourcePromise.then(function (dataSource) {
-    // Add the GeoJSON data to the viewer
-    viewer.dataSources.add(dataSource);
-
-    // Get the entities from the data source
-    var entities = dataSource.entities.values;
-
-    // Define a pink circle marker style
-    var pinkCircleStyle = new Cesium.IconStyle({
-        url: 'https://aurashak.github.io/images/homeglobe/pinkmarker.png', // Replace with the path to your pink circle marker image
-        color: Cesium.Color.PINK, // Set the marker color to pink
-        scale: 0.5, // Adjust the marker size as needed
-        height: 50000 // Set the height value (in meters) to position the markers above the satellite imagery
-    });
-
-    // Loop through the entities and apply the style
-    entities.forEach(function (entity) {
-        entity.billboard = pinkCircleStyle;
-    });
-
-    // Make the active imagery layer a subscriber of the viewModel
-    function subscribeLayerParameter(name) {
-        Cesium.knockout
-            .getObservable(viewModel, name)
-            .subscribe(function (newValue) {
-                if (viewer.imageryLayers.length > 0) {
-                    const layer = viewer.imageryLayers.get(0);
-                    layer[name] = newValue;
-                }
-            });
+// Function to toggle between Sentinel-2 and OpenStreetMap layers
+function toggleImageryLayer() {
+    if (isSentinel2Visible) {
+        // Remove Sentinel-2 layer and add OpenStreetMap layer
+        viewer.imageryLayers.remove(sentinel2Layer);
+        viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
+            url : 'https://a.tile.openstreetmap.org/'
+        }));
+    } else {
+        // Remove OpenStreetMap layer and add Sentinel-2 layer
+        viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assuming OpenStreetMap is the second layer added
+        viewer.imageryLayers.addImageryProvider(
+            new Cesium.IonImageryProvider({ assetId: 3954 })
+        );
     }
-    subscribeLayerParameter("brightness");
-    subscribeLayerParameter("contrast");
-    subscribeLayerParameter("hue");
-    subscribeLayerParameter("saturation");
-    subscribeLayerParameter("gamma");
+    
+    // Toggle the flag
+    isSentinel2Visible = !isSentinel2Visible;
+}
 
-    // Make the viewModel react to base layer changes
-    function updateViewModel() {
-        if (viewer.imageryLayers.length > 0) {
-            const layer = viewer.imageryLayers.get(0);
-            viewModel.brightness = layer.brightness;
-            viewModel.contrast = layer.contrast;
-            viewModel.hue = layer.hue;
-            viewModel.saturation = layer.saturation;
-            viewModel.gamma = layer.gamma;
-        }
-    }
-    viewer.imageryLayers.layerAdded.addEventListener(updateViewModel);
-    viewer.imageryLayers.layerRemoved.addEventListener(updateViewModel);
-    viewer.imageryLayers.layerMoved.addEventListener(updateViewModel);
-    updateViewModel();
-});
 
 // Set the initial rotation rate
 var spinRate = 0.0003;
