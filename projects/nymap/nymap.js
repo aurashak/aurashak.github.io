@@ -202,8 +202,14 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup to each marker with information from the GeoJSON properties
+        var popupContent = "Name: " + feature.properties.NAME + "<br>Capacity: " + feature.properties.CAPACITY_MW + " MW";
+        layer.bindPopup(popupContent);
     }
 }).addTo(energyLayerGroup);
+
 
 // NY Gas Pipelines Layer
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
