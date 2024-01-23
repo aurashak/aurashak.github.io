@@ -14,6 +14,11 @@ var viewer = new Cesium.Viewer('cesiumContainer2', {
     animation: false
 });
 
+var geocoder = new Cesium.Geocoder('geocoderContainer', {
+    // Geocoder options here
+});
+
+
 viewer.imageryLayers.get(0).brightness = 1.2;
 viewer.imageryLayers.get(0).contrast = 1.2;
 
@@ -73,9 +78,6 @@ function toggleSentinelLayer() {
 
 
 
-var geocoder = new Cesium.Geocoder('geocoderContainer', {
-    // Geocoder options here
-});
 
 
 
