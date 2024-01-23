@@ -107,6 +107,28 @@ map.addLayer({
     });
 
 
+        // Add a GeoJSON source to the map
+        map.addSource('wastewatertreatment-source', {
+            type: 'geojson',
+            data: 'https://aurashak.github.io/geojson/nyc/aqisite.geojson'
+        });
+        
+        // Add a layer for brown circle markers
+        map.addLayer({
+            id: 'aqisite-circle-layer',
+            type: 'circle',
+            source: 'aqisite-source',
+            paint: {
+                'circle-radius': 15, // Adjust the circle radius as needed
+                'circle-color': 'red', // Set the circle color to brown
+                'circle-opacity': 0.7
+            }
+        });
+    
+
+        
+
+
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
 
