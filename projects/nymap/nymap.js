@@ -220,10 +220,16 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             weight: 3,
             opacity: 0.6
         };
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup to each feature with information from the GeoJSON properties
+        var popupContent = "Pipeline Name: " + feature.properties.NAME;
+        layer.bindPopup(popupContent);
     }
 }).addTo(energyLayerGroup);
 
-// NY Transmission Lines Layer
+
+// Electric Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
         var size = calculateMarkerSize(map.getZoom());
@@ -232,6 +238,11 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
             weight: 3,
             opacity: 0.6
         };
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup to each feature with information from the GeoJSON properties
+        var popupContent = "Line Name: " + feature.properties.NAME;
+        layer.bindPopup(popupContent);
     }
 }).addTo(energyLayerGroup);
 
