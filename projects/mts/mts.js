@@ -141,21 +141,6 @@ map.addLayer({
     });
 
 
-// Add 100yearfloodplain layer as a polygon
-map.addSource('100yearfloodplain', {
-    type: 'geojson',
-    data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
-});
-
-map.addLayer({
-    'id': '100yearfloodplain-layer',
-    'type': 'fill', // Change to 'fill' to display as a polygon
-    'source': '100yearfloodplain',
-    'paint': {
-        'fill-color': 'blue',
-        'fill-opacity': 0.7
-    }
-});
 
 
 });
