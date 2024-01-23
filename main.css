@@ -542,3 +542,9 @@ header a:active { color: black}
 
 
 
+#cesiumsearchInput {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+}
