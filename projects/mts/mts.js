@@ -8,7 +8,7 @@ var map = new mapboxgl.Map({
     bearing: -260,
     minZoom: 16,
     maxZoom: 20,
-    style: 'mapbox://styles/mapbox/light-v10', // Use any base style you prefer
+    style: 'mapbox://styles/mapbox/light-v11', // Use any base style you prefer
     center: [-73.957611, 40.822583],
 });
 
