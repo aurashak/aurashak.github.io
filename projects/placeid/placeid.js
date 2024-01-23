@@ -109,8 +109,8 @@ function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer, isC
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 } else if (isCitiesLayer) {
-                    entity.polygon.material = color.withAlpha(1);
-                    entity.polygon.outline = true;
+                    entity.polygon.material = color.withAlpha(0.1);
+                    entity.polygon.outline = false;
                     entity.polygon.outlineColor = outlineColor;
                     entity.polygon.extrudedHeight = height;
                 } else {
@@ -220,7 +220,7 @@ var infoBoxes = {};
 // Define feature types
 var featureTypes = [
     'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Gulf', 'reef',
-    'Country', 'Continent', 'Region_UN' // Make sure these names match your GeoJSON properties
+    'country', 'continent', 'region_un' // Make sure these names match your GeoJSON properties
 ];
 
 // Convert feature types to lowercase for case-insensitive matching
