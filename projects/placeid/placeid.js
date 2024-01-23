@@ -286,6 +286,16 @@ function showFeatureInfo(movement) {
                     if (infoBox) {
                         var featureName = properties.name && properties.name.getValue();
 
+                        // Determine the group to which the feature belongs
+                        var groupDiv;
+                        if (waterGroup.includes(featureType)) {
+                            groupDiv = document.getElementById('waterInfoBox');
+                        } else if (politicalGroup.includes(featureType)) {
+                            groupDiv = document.getElementById('politicalInfoBox');
+                        } else if (physicalGroup.includes(featureType)) {
+                            groupDiv = document.getElementById('physicalInfoBox');
+                        }
+
                         // Customize the title based on the property type
                         var title = '';
 
@@ -301,8 +311,12 @@ function showFeatureInfo(movement) {
                         }
 
                         // Construct the information string with the customized title
-                        infoBox.innerHTML = '<b>' + title + ' ' + featureName + '</b><br>';
-                        infoBox.style.display = 'block'; // Show the info box
+                        var featureInfo = '<b>' + title + ' ' + featureName + '</b><br>';
+                        
+                        // Append the feature information to the corresponding group div
+                        if (groupDiv) {
+                            groupDiv.innerHTML += featureInfo;
+                        }
 
                         // Set the flag to true since the mouse is over a feature
                         isMouseOverFeature = true;
@@ -317,10 +331,10 @@ function showFeatureInfo(movement) {
         for (var key in infoBoxes) {
             if (infoBoxes.hasOwnProperty(key)) {
                 infoBoxes[key].innerHTML = '';
-                infoBoxes[key].style.display = 'none';
             }
         }
     }
 }
+
 
 
