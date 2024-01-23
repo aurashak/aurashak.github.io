@@ -14,8 +14,8 @@ var map = new mapboxgl.Map({
 
 // Define the bounds as an array of coordinates [southwest, northeast]
 var bounds = [
-    [-73.961, 40.820], // Southwest corner with a slight expansion
-    [-73.954, 40.825]  // Northeast corner with a slight expansion
+    [-73.964, 40.816], // Southwest corner with a slight expansion
+    [-73.951, 40.828]  // Northeast corner with a slight expansion
 ];
 // Set the maximum bounds for the map
 map.setMaxBounds(bounds);
