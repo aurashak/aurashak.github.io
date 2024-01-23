@@ -278,46 +278,46 @@ function showFeatureInfo(movement) {
                         var title = '';
                         switch (featureType) {
                             case 'name':
-                                title = 'River Name:';
+                                title = 'River:';
                                 break;
                             case 'canal':
-                                title = 'Canal Name:';
+                                title = 'Canal:';
                                 break;
                             case 'lake':
-                                title = 'Lakes Name:';
+                                title = 'Lake:';
                                 break;
                             case 'ocean':
-                                title = 'Ocean Name:';
+                                title = 'Ocean:';
                                 break;
                             case 'sea':
-                                title = 'Sea Name:';
+                                title = 'Sea:';
                                 break;
                             case 'strait':
-                                title = 'Strait Name:';
+                                title = 'Strait:';
                                 break;
                             case 'bay':
-                                title = 'Bay Name:';
+                                title = 'Bay:';
                                 break;
                             case 'sound':
-                                title = 'Sound Name:';
+                                title = 'Sound:';
                                 break;
                             case 'channel':
-                                title = 'Channel Name:';
+                                title = 'Channel:';
                                 break;
                             case 'gulf':
-                                title = 'Gulf Name:';
+                                title = 'Gulf:';
                                 break;
                             case 'reef':
-                                title = 'Reef Name:';
+                                title = 'Reef:';
                                 break;
                             case 'country':
-                                title = 'Country Name:';
+                                title = 'Country:';
                                 break;
                             case 'continent':
-                                title = 'Continent Name:';
+                                title = 'Continent:';
                                 break;
                             case 'region_un':
-                                title = 'Region Name:';
+                                title = 'Region:';
                                 break;
                             default:
                                 title = 'Name:';
@@ -347,23 +347,6 @@ viewer.scene.canvas.addEventListener('mouseenter', function () {
             if (infoBoxes.hasOwnProperty(key)) {
                 infoBoxes[key].style.display = 'none';
             }
-        }
-    }
-});
-
-// Add the event listener for mouse leave
-viewer.scene.canvas.addEventListener('mouseleave', function () {
-    // Clear the content of all info boxes
-    for (var key in infoBoxes) {
-        if (infoBoxes.hasOwnProperty(key)) {
-            infoBoxes[key].innerHTML = '';
-        }
-    }
-
-    // Hide all info boxes
-    for (var key in infoBoxes) {
-        if (infoBoxes.hasOwnProperty(key)) {
-            infoBoxes[key].style.display = 'none';
         }
     }
 });
