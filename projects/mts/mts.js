@@ -18,6 +18,12 @@ var bounds = [
     [-73.956, 40.824]  // Northeast corner
 ];
 
+// Set the maximum bounds for the map
+map.setMaxBounds(bounds);
+
+// Optionally, you can set the behavior when users try to pan outside the bounds
+map.setMinZoom(15); // Set the minimum zoom level to prevent zooming out beyond the bounds
+map.setPanOptions({ animate: true }); // Enable smooth animated panning when the user tries to pan outside bounds
 
 
 // Add 3D buildings layer
