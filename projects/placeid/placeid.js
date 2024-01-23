@@ -219,7 +219,7 @@ var infoBoxes = {};
 
 // Define feature types
 var featureTypes = [
-    'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Gulf', 'reef',
+    'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef',
     'country', 'continent', 'region_un' // Make sure these names match your GeoJSON properties
 ];
 
@@ -285,6 +285,9 @@ function showFeatureInfo(movement) {
                                 break;
                             case 'canal':
                                 title = 'Canal Name:';
+                                break;
+                            case 'lake':
+                                title = 'Lakes Name:';
                                 break;
                             case 'ocean':
                                 title = 'Ocean Name:';
@@ -367,3 +370,4 @@ viewer.scene.canvas.addEventListener('mouseleave', function () {
         }
     }
 });
+
