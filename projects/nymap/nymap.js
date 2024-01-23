@@ -287,17 +287,18 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 // Evacuation zones Layer
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'red',  // Set the fill color to red
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'red',
             color: 'black',
-            weight: 0.5,       // Adjust the border weight as needed
+            weight: 0,
             opacity: 0,
             fillOpacity: 0.5
-        };
+        });
     }
 });
-
 
 
 
