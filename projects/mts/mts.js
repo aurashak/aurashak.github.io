@@ -15,7 +15,7 @@ var map = new mapboxgl.Map({
 // Define the bounds as an array of coordinates [southwest, northeast]
 var bounds = [
     [-73.964, 40.816], // Southwest corner with a slight expansion
-    [-73.951, 40.828]  // Northeast corner with a slight expansion
+    [-73.951, 40.825]  // Northeast corner with a slight expansion
 ];
 // Set the maximum bounds for the map
 map.setMaxBounds(bounds);
@@ -52,29 +52,23 @@ map.on('load', function () {
 
 
 
-// Add a single layer
-map.on('load', function () {
-    // Add nycso layer
-    map.addSource('nycso', {
-        type: 'geojson',
-        data: 'https://aurashak.github.io/geojson/nyc/nycso.geojson'
-    });
 
-    map.addLayer({
-        'id': 'nycso-layer',
-        'type': 'circle',
-        'source': 'nycso',
-        'paint': {
-            'circle-color': 'brown',
-            'circle-radius': 6,
-            'circle-opacity': 0.7
-        }
-    });
+    // Add a GeoJSON source to the map
+map.addSource('nycso-source', {
+    type: 'geojson',
+    data: 'https://aurashak.github.io/geojson/nyc/nycso.geojson'
+});
 
-
-
-
-
+// Add a layer for brown circle markers
+map.addLayer({
+    id: 'nycso-circle-layer',
+    type: 'circle',
+    source: 'nycso-source',
+    paint: {
+        'circle-radius': 5, // Adjust the circle radius as needed
+        'circle-color': 'brown', // Set the circle color to brown
+        'circle-opacity': 0.7
+    }
 });
 
 
