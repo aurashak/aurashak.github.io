@@ -285,6 +285,20 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
+// Evacuation zones Layer
+var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'red',
+            color: 'black',
+            weight: 0,
+            opacity: 0,
+            fillOpacity: 0.5
+        });
+    }
+});
 
 
 
@@ -396,6 +410,14 @@ document.getElementById('electrictransmissionlines').addEventListener('click', f
 });
 
 
+document.getElementById('evacuationzones').addEventListener('click', function() {
+    if (map.hasLayer(evacuationzoneslinesLayer)) {
+        map.removeLayer(evacuationzonesLayer);
+    } else {
+        map.addLayer(evacuationzonesLayer);
+    }
+});
+
 
 
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
@@ -490,6 +512,7 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 // Set the legend symbol shapes and colors for each layer
+setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
