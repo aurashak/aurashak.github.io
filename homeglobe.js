@@ -11,9 +11,11 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     timeline: false,
     navigationHelpButton: false,
     fullscreenButton: false,
-    animation: false
+    animation: false,
+    skyBox: false, // Disable the skybox
+    skyAtmosphere: false, // Disable the sky atmosphere
+    backgroundColor: Cesium.Color.WHITE // Set the background color to white
 });
-
 
 
 viewer.camera.setView({
@@ -25,27 +27,34 @@ viewer.camera.setView({
     }
 });
 
+viewer.camera.percentageChanged = 0.01;
 
-viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
-
-
-
-// Function to rotate the globe slowly
-function rotateGlobe() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
-    }
-}
-
-// Slow down the rotation
 var spinRate = 0.0003;
-var isRotating = true; // To keep track of the rotation state
+var isRotating = true;
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
+var sentinelLayerVisible = true;
 
-var sentinelLayerVisible = true; // Sentinel-2
+// Function to add the GeoJSON layer to the globe
+function addGeoJsonLayer() {
+    var dataSourcePromise = Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/world/cities.geojson');
+    dataSourcePromise.then(function(dataSource) {
+        viewer.dataSources.add(dataSource);
 
+        // Adjust the appearance and style of the GeoJSON entities if needed
+        var entities = dataSource.entities.values;
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+            entity.point = new Cesium.PointGraphics({
+                pixelSize: 10,
+                color: Cesium.Color.RED
+            });
+        }
+    }).otherwise(function(error) {
+        console.error(error);
+    });
+}
 
-
-
+// Call the function to add the GeoJSON layer
+addGeoJsonLayer();
