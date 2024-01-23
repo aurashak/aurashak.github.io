@@ -12,6 +12,19 @@ var map = new mapboxgl.Map({
     center: [-73.957611, 40.822583],
 });
 
+// Define the bounds as an array of coordinates [southwest, northeast]
+var bounds = [
+    [-73.959, 40.821], // Southwest corner
+    [-73.956, 40.824]  // Northeast corner
+];
+
+// Set the map's bounds to the defined bounding box
+map.fitBounds(bounds, {
+    padding: 20, // Adjust the padding as needed
+    maxZoom: 20, // Optional: set the maximum zoom level
+});
+
+
 // Add 3D buildings layer
 map.on('load', function () {
     map.addSource('nyc-buildings', {
