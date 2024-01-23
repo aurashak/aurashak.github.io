@@ -73,30 +73,6 @@ function toggleSentinelLayer() {
 
 
 
-var searchInput = document.getElementById('cesiumsearchInput');
-searchInput.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        var location = searchInput.value;
-        searchLocation(location);
-    }
-});
-
-function searchLocation(location) {
-    // Use your preferred geocoding service or API to convert the location to coordinates.
-    // For this example, we'll assume you have a function called 'geocodeLocation' that returns coordinates.
-
-    // Replace 'geocodeLocation' with your actual geocoding logic.
-    var coordinates = geocodeLocation(location);
-
-    if (coordinates) {
-        viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, 15000000)
-        });
-    } else {
-        alert('Location not found.');
-    }
-}
-
 
 
 
@@ -396,3 +372,30 @@ viewer.scene.canvas.addEventListener('mouseenter', function () {
     }
 });
 
+
+
+
+var viewer = new Cesium.Viewer('cesiumContainer2', {
+    // Other viewer options...
+});
+
+// Add the Cesium.SearchBox widget to the viewer
+var searchWidget = new Cesium.SearchBox('cesiumsearchInput', {
+    viewer: viewer
+});
+
+// Subscribe to the search completed event
+searchWidget.viewModel.searchResults.resultsContainer.addEventListener('click', function (e) {
+    var result = searchWidget.viewModel.searchResults.get(e.target);
+    if (result) {
+        // Get the selected location's coordinates
+        var coordinates = result.destination;
+        
+        if (coordinates) {
+            // Fly to the selected location
+            viewer.camera.flyTo({
+                destination: coordinates
+            });
+        }
+    }
+});
