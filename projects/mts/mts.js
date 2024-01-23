@@ -58,26 +58,7 @@ map.on('load', function () {
 
 
 
-    // Add a GeoJSON source to the map
-map.addSource('nycso-source', {
-    type: 'geojson',
-    data: 'https://aurashak.github.io/geojson/nyc/nycso.geojson'
-});
-
-// Add a layer for brown circle markers
-map.addLayer({
-    id: 'nycso-circle-layer',
-    type: 'circle',
-    source: 'nycso-source',
-    paint: {
-        'circle-radius': 5, // Adjust the circle radius as needed
-        'circle-color': 'brown', // Set the circle color to brown
-        'circle-opacity': 0.7
-    }
-});
-
-
-
+    
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
 
