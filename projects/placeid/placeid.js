@@ -26,16 +26,21 @@ viewer.camera.setView({
     }
 });
 
-viewer.camera.percentageChanged = 0.01;
 
+viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
+
+
+
+// Function to rotate the globe slowly
 function rotateGlobe() {
     if (isRotating) {
         viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
     }
 }
 
+// Slow down the rotation
 var spinRate = 0.0003;
-var isRotating = true;
+var isRotating = true; // To keep track of the rotation state
 
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
@@ -44,28 +49,49 @@ var coordsBox = document.getElementById('coordsBox');
 coordsBox.innerHTML = defaultText;
 coordsBox.style.display = 'block';
 
-var osmLayerVisible = true;
-var sentinelLayerVisible = true;
+// Define variables to keep track of layer visibility
+var osmLayerVisible = true; // OpenStreetMap
+var sentinelLayerVisible = true; // Sentinel-2
 
+// Function to toggle OpenStreetMap layer
 function toggleOSMLayer() {
     osmLayerVisible = !osmLayerVisible;
     viewer.imageryLayers.get(0).show = osmLayerVisible;
 }
 
+// Function to toggle Sentinel-2 layer
 function toggleSentinelLayer() {
     sentinelLayerVisible = !sentinelLayerVisible;
+    // Replace 'Sentinel-2' with the name of the layer you want to toggle (if it's not the first layer)
     viewer.imageryLayers.get(1).show = sentinelLayerVisible;
 }
 
-var continentHeight = 500;
-var oceansHeight = 500;
-var lakesHeight = 700;
-var regionsHeight = 600;
-var citiesHeight = 800;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Define heights for different layer types
+var continentHeight = 500; // Adjust as needed
+var oceansHeight = 500; // Adjust as needed
+var lakesHeight = 700; // Adjust as needed
+var regionsHeight = 600; // Adjust as needed
+var citiesHeight = 800; // Adjust as needed
+
+
+// Function to load and style a GeoJSON layer
 function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer, isCountryLayer, isOceanLayer, isRegionsLayer, isCitiesLayer) {
-    Cesium.GeoJsonDataSource.load(url).then(function (dataSource) {
-        dataSource.entities.values.forEach(function (entity) {
+    Cesium.GeoJsonDataSource.load(url).then(function(dataSource) {
+        dataSource.entities.values.forEach(function(entity) {
             if (entity.polygon) {
                 if (isRegionsLayer) {
                     entity.polygon.material = color.withAlpha(0.01);
@@ -100,8 +126,8 @@ function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer, isC
                 entity.polyline.width = 10;
                 entity.polyline.clampToGround = true;
                 entity.polyline.arcType = Cesium.ArcType.GEODESIC;
-                entity.polyline.positions = new Cesium.CallbackProperty(function () {
-                    var cartographicPositions = entity.polyline.positions.getValue().map(function (position) {
+                entity.polyline.positions = new Cesium.CallbackProperty(function() {
+                    var cartographicPositions = entity.polyline.positions.getValue().map(function(position) {
                         var cartographic = Cesium.Cartographic.fromCartesian(position);
                         return Cesium.Cartesian3.fromDegrees(
                             Cesium.Math.toDegrees(cartographic.longitude),
@@ -115,12 +141,19 @@ function loadAndStyleGeoJson(url, color, outlineColor, height, isRiverLayer, isC
         });
 
         viewer.dataSources.add(dataSource);
-    }).otherwise(function (error) {
+    }).otherwise(function(error){
         console.error('Error loading GeoJSON data:', error);
     });
 }
 
-var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson';
+
+
+
+
+
+// URLs to the GeoJSON data
+var oceansGeojsonUrl = 'https://aurashak.github.io/geojson/world/oceans.geojson'; 
+
 var europeGeojsonUrl = 'https://aurashak.github.io/geojson/world/europe.json';
 var asiaGeojsonUrl = 'https://aurashak.github.io/geojson/world/asia.json';
 var africaGeojsonUrl = 'https://aurashak.github.io/geojson/world/africa.json';
@@ -133,72 +166,116 @@ var regionsGeojsonUrl = 'https://aurashak.github.io/geojson/world/regions.geojso
 var riversGeojsonUrl = 'https://aurashak.github.io/geojson/world/rivers.geojson';
 var citiesGeojsonUrl = 'https://aurashak.github.io/geojson/world/cities.geojson';
 
-loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true);
-loadAndStyleGeoJson(regionsGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, regionsHeight, false, false, false, true);
-loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true);
-loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.WHITE, lakesHeight);
-loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.BLUE, true);
+// Load and style the layers
+loadAndStyleGeoJson(oceansGeojsonUrl, Cesium.Color.RED.withAlpha(1), Cesium.Color.WHITE, oceansHeight, false, false, true); // For oceans
+loadAndStyleGeoJson(regionsGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, regionsHeight, false, false, false, true); // For regions
+loadAndStyleGeoJson(europeGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Europe
+loadAndStyleGeoJson(asiaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Asia, set isCountryLayer to true
+loadAndStyleGeoJson(africaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Africa, set isCountryLayer to true
+loadAndStyleGeoJson(oceanaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Oceania, set isCountryLayer to true
+loadAndStyleGeoJson(northamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For North America, set isCountryLayer to true
+loadAndStyleGeoJson(southamericaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For South America, set isCountryLayer to true
+loadAndStyleGeoJson(antarcticaGeojsonUrl, Cesium.Color.KHAKI, Cesium.Color.BLACK, continentHeight, false, true); // For Antarctica
+loadAndStyleGeoJson(lakesGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.WHITE, lakesHeight); // For lakes
+loadAndStyleGeoJson(riversGeojsonUrl, Cesium.Color.BLUE.withAlpha(0.01), Cesium.Color.BLUE, true); // For rivers
 loadAndStyleGeoJson(citiesGeojsonUrl, Cesium.Color.BLUE.withAlpha(1), Cesium.Color.BLUE, citiesHeight, false, false, false, false, true);
 
+
+
+
+
+
+// Function to show updating coordinates
+function showCoordinates(movement) {
+    var cartesian = viewer.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(2);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(2);
+        var hoverText = 'Latitude: ' + latitudeString + '°, Longitude: ' + longitudeString + '°';
+
+        coordsBox.innerHTML = hoverText;
+    }
+}
+
+viewer.screenSpaceEventHandler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+handler.setInputAction(showCoordinates, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+
+// Additionally, you may want to set up an event listener for when the mouse leaves the globe
+// to set the coordsBox to the default text
+viewer.scene.canvas.addEventListener('mouseleave', function() {
+    coordsBox.innerHTML = defaultText;
+    coordsBox.style.display = 'block';
+});
+
+
+
+// Create HTML elements to display feature information for each feature type
 var infoBoxes = {};
 
+// Define feature types
 var featureTypes = [
     'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef',
-    'country', 'continent', 'region_un'
+    'country', 'continent', 'region_un' // Make sure these names match your GeoJSON properties
 ];
 
+// Convert feature types to lowercase for case-insensitive matching
 var lowercaseFeatureTypes = featureTypes.map(function (type) {
     return type.toLowerCase();
 });
 
+// Create separate info boxes for each feature type
 featureTypes.forEach(function (featureType) {
     var infoBox = document.createElement('div');
-    infoBox.id = featureType + 'InfoBox';
-    infoBox.classList.add('infobox');
-
-    var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox');
+    infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
+    infoBox.classList.add('infobox'); // Add the CSS class to the info box
+    
+    // Append the info box to the corresponding div element
+    var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox'); // Get the parent div by ID
     if (parentDiv) {
         parentDiv.appendChild(infoBox);
     }
 
-    infoBoxes[featureType.toLowerCase()] = infoBox;
+    // Store the info box in the dictionary
+    infoBoxes[featureType.toLowerCase()] = infoBox; // Use lowercase feature type as the key
 });
 
+// Flag to check if the mouse is over any feature
 var isMouseOverFeature = false;
 
+// Function to show information when hovering over features
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
-    for (var key in infoBoxes) {
-        if (infoBoxes.hasOwnProperty(key)) {
-            infoBoxes[key].innerHTML = '';
-        }
-    }
-
+    // Reset the flag when the mouse is not over any feature
     isMouseOverFeature = false;
 
     if (Cesium.defined(pickedObjects)) {
         pickedObjects.forEach(function (pickedObject) {
             var entity = pickedObject.id;
 
+            // Check if the picked object is an entity with properties
             if (entity && entity.properties) {
                 var properties = entity.properties;
                 var featureType = properties.featurecla && properties.featurecla.getValue();
 
                 if (featureType) {
+                    // Convert feature type to lowercase for case-insensitive matching
                     featureType = featureType.toLowerCase();
+
+                    // Get the corresponding info box for this feature type
                     var infoBox = infoBoxes[featureType];
 
+                    // Check if the info box exists
                     if (infoBox) {
                         var featureName = properties.name && properties.name.getValue();
-                        var title = '';
 
+                        // Customize the title based on the property type
+                        var title = '';
                         switch (featureType) {
                             case 'river':
                                 title = 'River Name:';
@@ -249,33 +326,17 @@ function showFeatureInfo(movement) {
                                 title = 'Name:';
                         }
 
+                        // Construct the information string with the customized title
                         infoBox.innerHTML = '<b>' + title + ' ' + featureName + '</b><br>';
-                        infoBox.style.display = 'block';
+                        infoBox.style.display = 'block'; // Show the info box
+
+                        // Set the flag to true since the mouse is over a feature
                         isMouseOverFeature = true;
                     }
                 }
             }
         });
     }
-
-    if (!isMouseOverFeature) {
-        for (var key in infoBoxes) {
-            if (infoBoxes.hasOwnProperty(key)) {
-                infoBoxes[key].style.display = 'none';
-            }
-        }
-    }
 }
 
-viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-viewer.scene.canvas.addEventListener('mouseleave', function () {
-    for (var key in infoBoxes) {
-        if (infoBoxes.hasOwnProperty(key)) {
-            infoBoxes[key].innerHTML = '';
-            infoBoxes[key].style.display = 'none';
-        }
-    }
-
-    isMouseOverFeature = false;
-});
