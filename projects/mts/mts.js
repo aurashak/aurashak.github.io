@@ -138,7 +138,7 @@ map.addLayer({
     type: 'fill', // Use 'fill' for polygons
     source: '100yearfloodplain-source',
     paint: {
-        'fill-color': 'green', // Set the polygon fill color to green
+        'fill-color': 'blue', // Set the polygon fill color to green
         'fill-opacity': 0.7
     }
 });
