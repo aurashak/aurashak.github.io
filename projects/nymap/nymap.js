@@ -115,10 +115,8 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 var waterLayerGroup = L.layerGroup();
 
 
-// Get the opacity slider and water layer group (containing floodplain and nycso)
+// Get the opacity slider and floodplain layer
 var opacitySlider = document.getElementById('opacity-slider');
-var waterLayerGroup = L.layerGroup();
-
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         var opacityValue = parseFloat(opacitySlider.value);
@@ -132,20 +130,15 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
     }
 });
 
-floodplainLayer.addTo(waterLayerGroup);
+floodplainLayer.addTo(map);
 
 // Add an event listener to the opacity slider
 opacitySlider.addEventListener('input', function () {
     var opacityValue = parseFloat(opacitySlider.value);
 
-    // Update the fillOpacity of all layers within the waterLayerGroup
-    waterLayerGroup.eachLayer(function (layer) {
-        if (layer.setStyle) {
-            // Check if the layer has setStyle method (e.g., floodplainLayer)
-            layer.setStyle({
-                fillOpacity: opacityValue
-            });
-        }
+    // Update the fillOpacity of the floodplain layer
+    floodplainLayer.setStyle({
+        fillOpacity: opacityValue
     });
 });
 
