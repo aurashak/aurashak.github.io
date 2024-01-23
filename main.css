@@ -285,25 +285,6 @@ header a:active { color: black}
     fill: #edffff;
 }
 
-.geocoder-container {
-    /* Add your desired styles here */
-    border: 1px solid #ccc;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* You can customize these styles as needed */
-}
-
-.geocodercontainer {
-    /* Add your desired styles here */
-    border: 1px solid #ccc;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* You can customize these styles as needed */
-}
 
 
 /* Credits and bottom bar */
