@@ -219,7 +219,7 @@ var infoBoxes = {};
 
 // Define feature types
 var featureTypes = [
-    'River', 'Lake Centerline', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef',
+    'name', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef',
     'country', 'continent', 'region_un' // Make sure these names match your GeoJSON properties
 ];
 
@@ -277,11 +277,8 @@ function showFeatureInfo(movement) {
                         // Customize the title based on the property type
                         var title = '';
                         switch (featureType) {
-                            case 'river':
+                            case 'name':
                                 title = 'River Name:';
-                                break;
-                            case 'lake centerline':
-                                title = 'Lake Name:';
                                 break;
                             case 'canal':
                                 title = 'Canal Name:';
