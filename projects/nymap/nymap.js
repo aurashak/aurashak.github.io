@@ -411,7 +411,7 @@ document.getElementById('electrictransmissionlines').addEventListener('click', f
 
 
 document.getElementById('evacuationzones').addEventListener('click', function() {
-    if (map.hasLayer(evacuationzoneslinesLayer)) {
+    if (map.hasLayer(evacuationzonesLayer)) {
         map.removeLayer(evacuationzonesLayer);
     } else {
         map.addLayer(evacuationzonesLayer);
