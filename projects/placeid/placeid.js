@@ -3,7 +3,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 var viewer = new Cesium.Viewer('cesiumContainer2', {
     baseLayerPicker: false,
-    geocoder: false,
+    geocoder: true,
     homeButton: false,
     infoBox: false,
     sceneModePicker: false,
@@ -373,29 +373,3 @@ viewer.scene.canvas.addEventListener('mouseenter', function () {
 });
 
 
-
-
-var viewer = new Cesium.Viewer('cesiumContainer2', {
-    // Other viewer options...
-});
-
-// Add the Cesium.SearchBox widget to the viewer
-var searchWidget = new Cesium.SearchBox('cesiumsearchInput', {
-    viewer: viewer
-});
-
-// Subscribe to the search completed event
-searchWidget.viewModel.searchResults.resultsContainer.addEventListener('click', function (e) {
-    var result = searchWidget.viewModel.searchResults.get(e.target);
-    if (result) {
-        // Get the selected location's coordinates
-        var coordinates = result.destination;
-        
-        if (coordinates) {
-            // Fly to the selected location
-            viewer.camera.flyTo({
-                destination: coordinates
-            });
-        }
-    }
-});
