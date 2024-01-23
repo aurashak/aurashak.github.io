@@ -21,10 +21,6 @@ var bounds = [
 // Set the maximum bounds for the map
 map.setMaxBounds(bounds);
 
-// Optionally, you can set the behavior when users try to pan outside the bounds
-map.setMinZoom(15); // Set the minimum zoom level to prevent zooming out beyond the bounds
-map.setPanOptions({ animate: true }); // Enable smooth animated panning when the user tries to pan outside bounds
-
 
 // Add 3D buildings layer
 map.on('load', function () {
@@ -58,7 +54,26 @@ map.on('load', function () {
 
 
 
-    
+    // Add a GeoJSON source to the map
+map.addSource('nycso-source', {
+    type: 'geojson',
+    data: 'https://aurashak.github.io/geojson/nyc/nycso.geojson'
+});
+
+// Add a layer for brown circle markers
+map.addLayer({
+    id: 'nycso-circle-layer',
+    type: 'circle',
+    source: 'nycso-source',
+    paint: {
+        'circle-radius': 5, // Adjust the circle radius as needed
+        'circle-color': 'brown', // Set the circle color to brown
+        'circle-opacity': 0.7
+    }
+});
+
+
+
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
 
