@@ -459,47 +459,6 @@ header a:active { color: black}
 
 
 
-#cesiumsearchInput {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 9999;
-}
-
-
-
-
-
-
-#toolbar {
-    background-color: #f0f0f0; /* Background color for the toolbar */
-    padding: 10px; /* Add padding to the toolbar content */
-    border: 1px solid #ccc; /* Add a border around the toolbar */
-    border-radius: 5px; /* Rounded corners for the toolbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the toolbar */
-}
-
-#toolbar button {
-    background-color: #007bff; /* Button background color */
-    color: #fff; /* Button text color */
-    padding: 5px 10px; /* Padding around the button text */
-    border: none; /* Remove button border */
-    border-radius: 3px; /* Rounded corners for buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    margin-right: 5px; /* Add spacing between buttons */
-}
-
-#toolbar button:hover {
-    background-color: #0056b3; /* Button background color on hover */
-}
-
-#toolbar input[type="range"] {
-    width: 100%; /* Make the range input span the full width of the toolbar */
-}
-
-/* Customize other toolbar elements as needed */
-
-
 
 
 
@@ -528,7 +487,26 @@ header a:active { color: black}
 
 
 
+/* Add your desired styles here */
+.slider-container {
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+}
 
+.slider {
+    width: 100%;
+}
+
+
+
+
+#cesiumsearchInput {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+}
 
 
 
@@ -1751,3 +1729,37 @@ header a:active { color: black}
     overflow-x:hidden
   }
   
+
+
+
+#toolbar {
+    background-color: #f0f0f0; /* Background color for the toolbar */
+    padding: 10px; /* Add padding to the toolbar content */
+    border: 1px solid #ccc; /* Add a border around the toolbar */
+    border-radius: 5px; /* Rounded corners for the toolbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the toolbar */
+}
+
+#toolbar button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 5px 10px; /* Padding around the button text */
+    border: none; /* Remove button border */
+    border-radius: 3px; /* Rounded corners for buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin-right: 5px; /* Add spacing between buttons */
+}
+
+#toolbar button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+}
+
+#toolbar input[type="range"] {
+    width: 100%; /* Make the range input span the full width of the toolbar */
+}
+
+/* Customize other toolbar elements as needed */
+
+
+
+
