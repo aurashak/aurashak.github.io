@@ -219,8 +219,7 @@ var infoBoxes = {};
 
 // Define feature types
 var featureTypes = [
-    'name', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef',
-    'country', 'continent', 'region_un' // Make sure these names match your GeoJSON properties
+    'name', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef', 'subregiono', 'continent', 'region_un', 'Island', 'Island Group', 'NAME', 'Coast', 'Range/mtn', 'Pen/cap', 'Desert', 'Plateu', 'Depression', 'Plain', 'Delta',  // Make sure these names match your GeoJSON properties
 ];
 
 // Convert feature types to lowercase for case-insensitive matching
@@ -316,6 +315,27 @@ function showFeatureInfo(movement) {
                             case 'continent':
                                 title = 'Continent:';
                                 break;
+                                case 'plain':
+                                    title = 'Plain:';
+                                    break;
+                                    case 'plateau':
+                                        title = 'Plateau:';
+                                        break;
+                                        case 'delta':
+                                            title = 'Delta:';
+                                            break;
+                                            case 'range/mtn':
+                                                title = 'Mtn Range:';
+                                                break;
+                                        case 'desert':
+                                            title = 'Desert:';
+                                            break;
+                                            case 'coast':
+                                                title = 'Coast:';
+                                                break;
+                                                case 'subregion':
+                                                    title = 'Subregion:';
+                                                    break;
                             case 'region_un':
                                 title = 'Region:';
                                 break;
