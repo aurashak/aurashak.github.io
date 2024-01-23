@@ -125,23 +125,23 @@ map.addLayer({
             }
         });
     
-  // Add a GeoJSON source to the map
-  map.addSource('100yearflooddplain-source', {
+// Add a GeoJSON source to the map
+map.addSource('100yearfloodplain-source', {
     type: 'geojson',
     data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
 });
 
-// Add a layer for brown circle markers
+// Add a layer for the polygon
 map.addLayer({
-    id: '100yearfloodplain-circle-layer',
-    type: 'circle',
+    id: '100yearfloodplain-polygon-layer',
+    type: 'fill', // Use 'fill' for polygons
     source: '100yearfloodplain-source',
     paint: {
-        'circle-radius': 12, // Adjust the circle radius as needed
-        'circle-color': 'green', // Set the circle color to brown
-        'circle-opacity': 0.7
+        'fill-color': 'green', // Set the polygon fill color to green
+        'fill-opacity': 0.7
     }
 });
+
 
         
 
