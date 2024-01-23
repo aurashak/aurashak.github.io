@@ -1,6 +1,3 @@
-// Add an event listener for the DOMContentLoaded event
-document.addEventListener('DOMContentLoaded', function() {
-
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
@@ -16,11 +13,6 @@ var viewer = new Cesium.Viewer('cesiumContainer2', {
     fullscreenButton: false,
     animation: false
 });
-
-var geocoder = new Cesium.Geocoder('geocoderContainer', {
-    // Geocoder options here
-});
-
 
 viewer.imageryLayers.get(0).brightness = 1.2;
 viewer.imageryLayers.get(0).contrast = 1.2;
@@ -365,18 +357,19 @@ function showFeatureInfo(movement) {
     }
 }
 
- // Add the event listener for mouse movement
-    viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+// Add the event listener for mouse movement
+viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
-    // Add the event listener for mouse hover
-    viewer.scene.canvas.addEventListener('mouseenter', function () {
-        // Check the flag before displaying the info boxes
-        if (!isMouseOverFeature) {
-            for (var key in infoBoxes) {
-                if (infoBoxes.hasOwnProperty(key)) {
-                    infoBoxes[key].style.display = 'none';
-                }
+// Add the event listener for mouse hover
+viewer.scene.canvas.addEventListener('mouseenter', function () {
+    // Check the flag before displaying the info boxes
+    if (!isMouseOverFeature) {
+        for (var key in infoBoxes) {
+            if (infoBoxes.hasOwnProperty(key)) {
+                infoBoxes[key].style.display = 'none';
             }
         }
-    });
+    }
 });
+
+
