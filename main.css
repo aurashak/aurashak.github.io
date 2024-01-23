@@ -201,6 +201,19 @@ header a:active { color: black}
     height: 35px;
 }
 
+.coords-box {
+    flex-direction: row; /* Stack items vertically */
+    border-bottom: 1px solid black;
+    padding: 5px 10px;
+    font-size: 15px; 
+    background: gold;
+    font-weight: bold;
+    font-size: 20px;
+    height: 45px;
+}
+
+
+
 
 
 #nymap {
