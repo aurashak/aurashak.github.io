@@ -233,7 +233,7 @@ featureTypes.forEach(function (featureType) {
     var infoBox = document.createElement('div');
     infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
     infoBox.classList.add('infobox'); // Add the CSS class to the info box
-    
+
     // Append the info box to the corresponding div element
     var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox'); // Get the parent div by ID
     if (parentDiv) {
@@ -250,6 +250,13 @@ var isMouseOverFeature = false;
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
+
+    // Clear all info boxes
+    for (var key in infoBoxes) {
+        if (infoBoxes.hasOwnProperty(key)) {
+            infoBoxes[key].innerHTML = '';
+        }
+    }
 
     // Reset the flag when the mouse is not over any feature
     isMouseOverFeature = false;
@@ -337,6 +344,30 @@ function showFeatureInfo(movement) {
             }
         });
     }
+
+    // Check the flag before hiding info boxes
+    if (!isMouseOverFeature) {
+        for (var key in infoBoxes) {
+            if (infoBoxes.hasOwnProperty(key)) {
+                infoBoxes[key].style.display = 'none';
+            }
+        }
+    }
 }
 
+// Add the event listener for mouse movement
+viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
+// Add the event listener for mouse leave
+viewer.scene.canvas.addEventListener('mouseleave', function () {
+    // Clear all info boxes and hide them
+    for (var key in infoBoxes) {
+        if (infoBoxes.hasOwnProperty(key)) {
+            infoBoxes[key].innerHTML = '';
+            infoBoxes[key].style.display = 'none';
+        }
+    }
+
+    // Reset the flag
+    isMouseOverFeature = false;
+});
