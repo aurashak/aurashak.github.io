@@ -73,7 +73,7 @@ function toggleSentinelLayer() {
 
 
 
-var searchInput = document.getElementById('searchInput');
+var searchInput = document.getElementById('cesiumsearchInput');
 searchInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         var location = searchInput.value;
