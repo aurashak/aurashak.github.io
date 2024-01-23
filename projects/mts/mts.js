@@ -6,12 +6,17 @@ var map = new mapboxgl.Map({
     zoom: 16,
     pitch: 75,
     bearing: -260,
-    minZoom: 16,
+    minZoom: 15,
     maxZoom: 20,
     style: 'mapbox://styles/mapbox/light-v10', // Use any base style you prefer
     center: [-73.957611, 40.822583],
 });
 
+// Define the bounds as an array of coordinates [southwest, northeast]
+var bounds = [
+    [-73.959, 40.821], // Southwest corner
+    [-73.956, 40.824]  // Northeast corner
+];
 
 
 
@@ -46,8 +51,5 @@ map.on('load', function () {
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
 
-    // Add a marker to the map
-    var marker = new mapboxgl.Marker()
-        .setLngLat([-74.006, 40.7128]) // Marker coordinates (longitude, latitude)
-        .addTo(map);
+  
 });
