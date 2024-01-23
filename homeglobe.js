@@ -63,11 +63,37 @@ function addGeoJsonLayer() {
                 pixelSize: 10,
                 color: Cesium.Color.RED
             });
+
         }
+
+           // Function to create a blip at a random city
+           function createRandomBlip() {
+            var randomIndex = Math.floor(Math.random() * entities.length);
+            var randomCity = entities[randomIndex];
+            
+            // Create a temporary blip entity
+            var blip = viewer.entities.add({
+                position: randomCity.position.clone(),
+                point: {
+                    pixelSize: 20,
+                    color: Cesium.Color.BLUE
+                }
+            });
+
+            // Remove the blip entity after a random interval between 1-10 seconds
+            var randomInterval = Math.random() * 9000 + 1000; // Random interval between 1-10 seconds
+            setTimeout(function() {
+                viewer.entities.remove(blip);
+            }, randomInterval);
+        }
+
+        // Create blips at random intervals
+        setInterval(createRandomBlip, 10000); // Create a blip every 10 seconds
     }).otherwise(function(error) {
         console.error(error);
     });
 }
+
 
 // Call the function to add the GeoJSON layer
 addGeoJsonLayer();
