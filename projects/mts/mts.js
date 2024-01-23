@@ -65,7 +65,7 @@ map.addLayer({
     type: 'circle',
     source: 'nycso-source',
     paint: {
-        'circle-radius': 5, // Adjust the circle radius as needed
+        'circle-radius': 10, // Adjust the circle radius as needed
         'circle-color': 'brown', // Set the circle color to brown
         'circle-opacity': 0.7
     }
@@ -82,10 +82,30 @@ map.addLayer({
     'source': 'nygaspipelines',
     'paint': {
         'line-color': 'brown', // Set line color
-        'line-width': 2, // Set line width as needed
+        'line-width': 10, // Set line width as needed
         'line-opacity': 0.7
     }
 });
+
+
+    // Add a GeoJSON source to the map
+    map.addSource('wastewatertreatment-source', {
+        type: 'geojson',
+        data: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson'
+    });
+    
+    // Add a layer for brown circle markers
+    map.addLayer({
+        id: 'wastewatertreatment-circle-layer',
+        type: 'circle',
+        source: 'wastewatertreatment-source',
+        paint: {
+            'circle-radius': 15, // Adjust the circle radius as needed
+            'circle-color': 'red', // Set the circle color to brown
+            'circle-opacity': 0.7
+        }
+    });
+
 
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
