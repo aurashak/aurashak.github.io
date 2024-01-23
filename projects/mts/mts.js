@@ -109,7 +109,7 @@ map.addLayer({
 
 
         // Add a GeoJSON source to the map
-        map.addSource('wastewatertreatment-source', {
+        map.addSource('aqisite-source', {
             type: 'geojson',
             data: 'https://aurashak.github.io/geojson/nyc/aqisite.geojson'
         });
