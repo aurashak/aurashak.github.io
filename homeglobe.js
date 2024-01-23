@@ -1,6 +1,7 @@
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmE0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
 
-var viewer = new Cesium.Viewer('cesiumContainer1', {
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
+
+var viewer = new Cesium.Viewer('cesiumContainer2', {
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
@@ -9,14 +10,11 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     selectionIndicator: false,
     timeline: false,
     navigationHelpButton: false,
-    skyBox: false,
     fullscreenButton: false,
-    animation: false,
-    shouldAnimate: true,
+    animation: false
 });
 
-viewer.scene.backgroundColor = Cesium.Color.WHITE;
-viewer.scene.globe.backgroundColor = Cesium.Color.WHITE;
+
 
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
@@ -27,16 +25,27 @@ viewer.camera.setView({
     }
 });
 
-viewer.camera.percentageChanged = 0.01;
 
-var spinRate = Cesium.Math.toRadians(0.2);
+viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
 
+
+
+// Function to rotate the globe slowly
 function rotateGlobe() {
-    viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, spinRate);
-    requestAnimationFrame(rotateGlobe);
+    if (isRotating) {
+        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+    }
 }
 
-rotateGlobe();
+// Slow down the rotation
+var spinRate = 0.0003;
+var isRotating = true; // To keep track of the rotation state
 
-var sentinelLayerVisible = true;
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+
+var sentinelLayerVisible = true; // Sentinel-2
+
+
+
 
