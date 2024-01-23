@@ -176,6 +176,7 @@ header a:active { color: black}
     display: grid;
     grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
     border: 1px solid black;
+    height: calc(100% - 140px);
 }
 
 .placeidcolumnleft {
