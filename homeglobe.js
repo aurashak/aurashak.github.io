@@ -18,23 +18,36 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
 });
 
 
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
-    orientation: {
-        heading: Cesium.Math.toRadians(0.0),
-        pitch: Cesium.Math.toRadians(-90.0),
-        roll: 0.0
-    }
-});
 
-viewer.camera.percentageChanged = 0.01;
 
+// Later in your code, you can change the background color to white again
+viewer.scene.backgroundColor = Cesium.Color.WHITE;
+
+
+// Set the initial rotation rate
 var spinRate = 0.0003;
+
+// Flag to track rotation state
 var isRotating = true;
 
-var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+// Function to start or stop the rotation on mouse click
+function toggleRotation() {
+    isRotating = !isRotating;
+}
 
-var sentinelLayerVisible = true;
+// Create a click event handler to toggle rotation on mouse click
+var clickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+clickHandler.setInputAction(toggleRotation, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+// Function to update the globe rotation
+function updateRotation() {
+    if (isRotating) {
+        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+    }
+}
+
+// Add a render loop to continuously update the rotation
+viewer.scene.postRender.addEventListener(updateRotation);
 
 // Function to add the GeoJSON layer to the globe
 function addGeoJsonLayer() {
@@ -42,7 +55,7 @@ function addGeoJsonLayer() {
     dataSourcePromise.then(function(dataSource) {
         viewer.dataSources.add(dataSource);
 
-        // Adjust the appearance and style of the GeoJSON entities if needed
+        // Adjust the appearance and style of the GeoJSON entities
         var entities = dataSource.entities.values;
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
