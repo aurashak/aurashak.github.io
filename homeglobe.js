@@ -5,46 +5,13 @@ const viewModel = {
     hue: 0,
     saturation: 0,
     gamma: 0,
-  };
-  // Convert the viewModel members into knockout observables.
-  Cesium.knockout.track(viewModel);
-  
-  // Bind the viewModel to the DOM elements of the UI that call for it.
-  const toolbar = document.getElementById("toolbar");
-  Cesium.knockout.applyBindings(viewModel, toolbar);
-  
-  // Make the active imagery layer a subscriber of the viewModel.
-  function subscribeLayerParameter(name) {
-    Cesium.knockout
-      .getObservable(viewModel, name)
-      .subscribe(function (newValue) {
-        if (imageryLayers.length > 0) {
-          const layer = imageryLayers.get(0);
-          layer[name] = newValue;
-        }
-      });
-  }
-  subscribeLayerParameter("brightness");
-  subscribeLayerParameter("contrast");
-  subscribeLayerParameter("hue");
-  subscribeLayerParameter("saturation");
-  subscribeLayerParameter("gamma");
-  
-  // Make the viewModel react to base layer changes.
-  function updateViewModel() {
-    if (imageryLayers.length > 0) {
-      const layer = imageryLayers.get(0);
-      viewModel.brightness = layer.brightness;
-      viewModel.contrast = layer.contrast;
-      viewModel.hue = layer.hue;
-      viewModel.saturation = layer.saturation;
-      viewModel.gamma = layer.gamma;
-    }
-  }
-  imageryLayers.layerAdded.addEventListener(updateViewModel);
-  imageryLayers.layerRemoved.addEventListener(updateViewModel);
-  imageryLayers.layerMoved.addEventListener(updateViewModel);
+};
+// Convert the viewModel members into knockout observables.
+Cesium.knockout.track(viewModel);
 
+// Bind the viewModel to the DOM elements of the UI that call for it.
+const toolbar = document.getElementById("toolbar");
+Cesium.knockout.applyBindings(viewModel, toolbar);
 
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0YjAwYzZhZi1hMWY1LTRhYTgtODYwNi05NGEzOWJjYmU0ZWMiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDQxMzQ3OTd9.6JFFAQdUv-HD2IO8V-vcWbk2jn1dsivyu1qrgA1q67c';
@@ -65,21 +32,13 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     backgroundColor: Cesium.Color.WHITE // Set the background color to white
 });
 
-
-
-
 // Later in your code, you can change the background color to white again
 viewer.scene.backgroundColor = Cesium.Color.WHITE;
-
 
 // Load the Sentinel-2 imagery layer
 var sentinel2Layer = viewer.imageryLayers.addImageryProvider(
     new Cesium.IonImageryProvider({ assetId: 3954 }) // Asset ID for Sentinel-2 imagery
 );
-
-
-
-
 
 // Load the GeoJSON file
 var geoJsonUrl = 'https://aurashak.github.io/geojson/aboutaurash.geojson';
@@ -104,6 +63,39 @@ dataSourcePromise.then(function (dataSource) {
     entities.forEach(function (entity) {
         entity.billboard = pinkCircleStyle;
     });
+
+    // Make the active imagery layer a subscriber of the viewModel
+    function subscribeLayerParameter(name) {
+        Cesium.knockout
+            .getObservable(viewModel, name)
+            .subscribe(function (newValue) {
+                if (viewer.imageryLayers.length > 0) {
+                    const layer = viewer.imageryLayers.get(0);
+                    layer[name] = newValue;
+                }
+            });
+    }
+    subscribeLayerParameter("brightness");
+    subscribeLayerParameter("contrast");
+    subscribeLayerParameter("hue");
+    subscribeLayerParameter("saturation");
+    subscribeLayerParameter("gamma");
+
+    // Make the viewModel react to base layer changes
+    function updateViewModel() {
+        if (viewer.imageryLayers.length > 0) {
+            const layer = viewer.imageryLayers.get(0);
+            viewModel.brightness = layer.brightness;
+            viewModel.contrast = layer.contrast;
+            viewModel.hue = layer.hue;
+            viewModel.saturation = layer.saturation;
+            viewModel.gamma = layer.gamma;
+        }
+    }
+    viewer.imageryLayers.layerAdded.addEventListener(updateViewModel);
+    viewer.imageryLayers.layerRemoved.addEventListener(updateViewModel);
+    viewer.imageryLayers.layerMoved.addEventListener(updateViewModel);
+    updateViewModel();
 });
 
 // Set the initial rotation rate
@@ -130,4 +122,3 @@ function updateRotation() {
 
 // Add a render loop to continuously update the rotation
 viewer.scene.postRender.addEventListener(updateRotation);
-
