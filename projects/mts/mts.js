@@ -119,12 +119,29 @@ map.addLayer({
             type: 'circle',
             source: 'aqisite-source',
             paint: {
-                'circle-radius': 15, // Adjust the circle radius as needed
-                'circle-color': 'red', // Set the circle color to brown
+                'circle-radius': 12, // Adjust the circle radius as needed
+                'circle-color': 'green', // Set the circle color to brown
                 'circle-opacity': 0.7
             }
         });
     
+  // Add a GeoJSON source to the map
+  map.addSource('100yearflooddplain-source', {
+    type: 'geojson',
+    data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
+});
+
+// Add a layer for brown circle markers
+map.addLayer({
+    id: '100yearfloodplain-circle-layer',
+    type: 'circle',
+    source: '100yearfloodplain-source',
+    paint: {
+        'circle-radius': 12, // Adjust the circle radius as needed
+        'circle-color': 'green', // Set the circle color to brown
+        'circle-opacity': 0.7
+    }
+});
 
         
 
