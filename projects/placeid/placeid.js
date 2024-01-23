@@ -73,6 +73,9 @@ function toggleSentinelLayer() {
 
 
 
+var geocoder = new Cesium.Geocoder('geocoderContainer', {
+    // Geocoder options here
+});
 
 
 
