@@ -250,8 +250,7 @@ var isMouseOverFeature = false;
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
 
-    // Reset the flag when the mouse is not over any feature
-    isMouseOverFeature = false;
+
 
     if (Cesium.defined(pickedObjects)) {
         pickedObjects.forEach(function (pickedObject) {
@@ -349,25 +348,13 @@ function showFeatureInfo(movement) {
 
                         // Set the flag to true since the mouse is over a feature
                         isMouseOverFeature = true;
+
+                            // Reset the flag when the mouse is not over any feature
+                            isMouseOverFeature = false;
                     }
                 }
             }
         });
     }
 }
-
-// Add the event listener for mouse movement
-viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-// Add the event listener for mouse hover
-viewer.scene.canvas.addEventListener('mouseenter', function () {
-    // Check the flag before displaying the info boxes
-    if (!isMouseOverFeature) {
-        for (var key in infoBoxes) {
-            if (infoBoxes.hasOwnProperty(key)) {
-                infoBoxes[key].style.display = 'none';
-            }
-        }
-    }
-});
 
