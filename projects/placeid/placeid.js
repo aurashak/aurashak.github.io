@@ -73,6 +73,29 @@ function toggleSentinelLayer() {
 
 
 
+var searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        var location = searchInput.value;
+        searchLocation(location);
+    }
+});
+
+function searchLocation(location) {
+    // Use your preferred geocoding service or API to convert the location to coordinates.
+    // For this example, we'll assume you have a function called 'geocodeLocation' that returns coordinates.
+
+    // Replace 'geocodeLocation' with your actual geocoding logic.
+    var coordinates = geocodeLocation(location);
+
+    if (coordinates) {
+        viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, 15000000)
+        });
+    } else {
+        alert('Location not found.');
+    }
+}
 
 
 
