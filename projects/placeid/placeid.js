@@ -222,6 +222,11 @@ var featureTypes = [
     'name', 'Canal', 'Ocean', 'Sea', 'strait', 'Bay', 'Sound', 'Channel', 'Lake', 'Gulf', 'reef', 'subregiono', 'continent', 'region_un', 'Island', 'Island Group', 'NAME', 'Coast', 'Range/mtn', 'Pen/cap', 'Desert', 'Plateu', 'Depression', 'Plain', 'Delta',  // Make sure these names match your GeoJSON properties
 ];
 
+// Separate the feature types into three groups: Water, Political, Physical
+var waterGroup = ['Ocean', 'Gulf', 'Channel', 'Strait', 'Sea', 'River', 'Lake', 'Bay', 'Canal', 'NAME', 'Sound', 'Reef'];
+var politicalGroup = ['Country', 'Continent', 'NAME', 'Region', 'subregion'];
+var physicalGroup = ['Range/mtn', 'Coast', 'Desert', 'Plateu', 'Island', 'Island Group', 'Pen/cap', 'Depression', 'Delta', 'Plain'];
+
 // Convert feature types to lowercase for case-insensitive matching
 var lowercaseFeatureTypes = featureTypes.map(function (type) {
     return type.toLowerCase();
@@ -233,8 +238,16 @@ featureTypes.forEach(function (featureType) {
     infoBox.id = featureType + 'InfoBox'; // Use feature type as part of the ID
     infoBox.classList.add('infobox'); // Add the CSS class to the info box
     
-    // Append the info box to the corresponding div element
-    var parentDiv = document.getElementById(featureType.toLowerCase() + 'InfoBox'); // Get the parent div by ID
+    // Append the info box to the corresponding div element based on the group
+    var parentDiv;
+    if (waterGroup.includes(featureType)) {
+        parentDiv = document.getElementById('waterInfoBox');
+    } else if (politicalGroup.includes(featureType)) {
+        parentDiv = document.getElementById('politicalInfoBox');
+    } else if (physicalGroup.includes(featureType)) {
+        parentDiv = document.getElementById('physicalInfoBox');
+    }
+
     if (parentDiv) {
         parentDiv.appendChild(infoBox);
     }
@@ -275,72 +288,16 @@ function showFeatureInfo(movement) {
 
                         // Customize the title based on the property type
                         var title = '';
-                        switch (featureType) {
-                            case 'name':
-                                title = 'River:';
-                                break;
-                            case 'canal':
-                                title = 'Canal:';
-                                break;
-                            case 'lake':
-                                title = 'Lake:';
-                                break;
-                            case 'ocean':
-                                title = 'Ocean:';
-                                break;
-                            case 'sea':
-                                title = 'Sea:';
-                                break;
-                            case 'strait':
-                                title = 'Strait:';
-                                break;
-                            case 'bay':
-                                title = 'Bay:';
-                                break;
-                            case 'sound':
-                                title = 'Sound:';
-                                break;
-                            case 'channel':
-                                title = 'Channel:';
-                                break;
-                            case 'gulf':
-                                title = 'Gulf:';
-                                break;
-                            case 'reef':
-                                title = 'Reef:';
-                                break;
-                            case 'country':
-                                title = 'Country:';
-                                break;
-                            case 'continent':
-                                title = 'Continent:';
-                                break;
-                                case 'plain':
-                                    title = 'Plain:';
-                                    break;
-                                    case 'plateau':
-                                        title = 'Plateau:';
-                                        break;
-                                        case 'delta':
-                                            title = 'Delta:';
-                                            break;
-                                            case 'range/mtn':
-                                                title = 'Mtn Range:';
-                                                break;
-                                        case 'desert':
-                                            title = 'Desert:';
-                                            break;
-                                            case 'coast':
-                                                title = 'Coast:';
-                                                break;
-                                                case 'subregion':
-                                                    title = 'Subregion:';
-                                                    break;
-                            case 'region_un':
-                                title = 'Region:';
-                                break;
-                            default:
-                                title = 'Name:';
+
+                        // Determine the group to which the feature belongs
+                        if (waterGroup.includes(featureType)) {
+                            title = 'Water Feature:';
+                        } else if (politicalGroup.includes(featureType)) {
+                            title = 'Political Feature:';
+                        } else if (physicalGroup.includes(featureType)) {
+                            title = 'Physical Feature:';
+                        } else {
+                            title = 'Name:';
                         }
 
                         // Construct the information string with the customized title
@@ -354,20 +311,16 @@ function showFeatureInfo(movement) {
             }
         });
     }
-}
 
-// Add the event listener for mouse movement
-viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-// Add the event listener for mouse hover
-viewer.scene.canvas.addEventListener('mouseenter', function () {
-    // Check the flag before displaying the info boxes
+    // Check the flag before hiding info boxes
     if (!isMouseOverFeature) {
         for (var key in infoBoxes) {
             if (infoBoxes.hasOwnProperty(key)) {
+                infoBoxes[key].innerHTML = '';
                 infoBoxes[key].style.display = 'none';
             }
         }
     }
-});
+}
+
 
