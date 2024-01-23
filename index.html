@@ -36,21 +36,9 @@
     </div>
 
 <div class="container">
-    <div id="toolbar">
-        <label for="brightness">Brightness:</label>
-        <input id="brightness" type="range" min="-1" max="1" step="0.1" data-bind="value: brightness">
-    
-        <label for="contrast">Contrast:</label>
-        <input id="contrast" type="range" min="-1" max="1" step="0.1" data-bind="value: contrast">
-    
-        <label for="hue">Hue:</label>
-        <input id="hue" type="range" min="-1" max="1" step="0.1" data-bind="value: hue">
-    
-        <label for="saturation">Saturation:</label>
-        <input id="saturation" type="range" min="-1" max="1" step="0.1" data-bind="value: saturation">
-    
-        <label for="gamma">Gamma:</label>
-        <input id="gamma" type="range" min="0.1" max="3" step="0.1" data-bind="value: gamma">
+    <div class="slider-container">
+        <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
+        <p>Value: <span id="sliderValue">50</span></p>
     </div>
 </div>
 

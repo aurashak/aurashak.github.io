@@ -59,6 +59,17 @@ function toggleImageryLayer() {
 }
 
 
+// Get the slider element and its value display element
+var slider = document.getElementById("mySlider");
+var sliderValueDisplay = document.getElementById("sliderValue");
+
+// Update the value display when the slider value changes
+slider.addEventListener("input", function() {
+    sliderValueDisplay.textContent = slider.value;
+});
+
+
+
 // Set the initial rotation rate
 var spinRate = 0.0003;
 
