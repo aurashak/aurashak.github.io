@@ -52,23 +52,112 @@ map.on('load', function () {
 
 
 
+// Add a single layer
+map.on('load', function () {
+    // Add nycso layer
+    map.addSource('nycso', {
+        type: 'geojson',
+        data: 'https://aurashak.github.io/geojson/nyc/nycso.geojson'
+    });
 
-    // Add a GeoJSON source to the map
-map.addSource('nycso-source', {
+    map.addLayer({
+        'id': 'nycso-layer',
+        'type': 'circle',
+        'source': 'nycso',
+        'paint': {
+            'circle-color': 'brown',
+            'circle-radius': 6,
+            'circle-opacity': 0.7
+        }
+    });
+
+// Add nygaspipelines layer as a line
+map.addSource('nygaspipelines', {
     type: 'geojson',
-    data: 'https://aurashak.github.io/geojson/nyc/nycso.geojson'
+    data: 'https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson'
 });
 
-// Add a layer for brown circle markers
 map.addLayer({
-    id: 'nycso-circle-layer',
-    type: 'circle',
-    source: 'nycso-source',
-    paint: {
-        'circle-radius': 5, // Adjust the circle radius as needed
-        'circle-color': 'brown', // Set the circle color to brown
-        'circle-opacity': 0.7
+    'id': 'nygaspipelines-layer',
+    'type': 'line', // Change to 'line' to display as a line
+    'source': 'nygaspipelines',
+    'paint': {
+        'line-color': 'purple', // Set line color to brown
+        'line-width': 2, // Set line width as needed
+        'line-opacity': 0.7
     }
+});
+
+
+    // Add nycwaste layer
+    map.addSource('nycwaste', {
+        type: 'geojson',
+        data: 'https://aurashak.github.io/geojson/nyc/nycwaste.geojson'
+    });
+
+    map.addLayer({
+        'id': 'nycwaste-layer',
+        'type': 'circle',
+        'source': 'nycwaste',
+        'paint': {
+            'circle-color': 'orange',
+            'circle-radius': 6,
+            'circle-opacity': 0.7
+        }
+    });
+
+    // Add wastewatertreatment layer
+    map.addSource('wastewatertreatment', {
+        type: 'geojson',
+        data: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson'
+    });
+
+    map.addLayer({
+        'id': 'wastewatertreatment-layer',
+        'type': 'circle',
+        'source': 'wastewatertreatment',
+        'paint': {
+            'circle-color': 'red',
+            'circle-radius': 6,
+            'circle-opacity': 0.7
+        }
+    });
+
+    // Add wastetransferfacility layer
+    map.addSource('wastetransferfacility', {
+        type: 'geojson',
+        data: 'https://aurashak.github.io/geojson/nyc/wastetransferfacility.geojson'
+    });
+
+    map.addLayer({
+        'id': 'wastetransferfacility-layer',
+        'type': 'circle',
+        'source': 'wastetransferfacility',
+        'paint': {
+            'circle-color': 'yellow',
+            'circle-radius': 6,
+            'circle-opacity': 0.7
+        }
+    });
+
+
+// Add 100yearfloodplain layer as a polygon
+map.addSource('100yearfloodplain', {
+    type: 'geojson',
+    data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
+});
+
+map.addLayer({
+    'id': '100yearfloodplain-layer',
+    'type': 'fill', // Change to 'fill' to display as a polygon
+    'source': '100yearfloodplain',
+    'paint': {
+        'fill-color': 'blue',
+        'fill-opacity': 0.7
+    }
+});
+
+
 });
 
 
