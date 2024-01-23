@@ -14,6 +14,8 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     animation: false
 });
 
+
+
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.0707383, 40.7117244, 15000000),
     orientation: {
@@ -23,10 +25,27 @@ viewer.camera.setView({
     }
 });
 
-// Function to create the grid layer and add it to the viewer
-function setupGridLayer() {
-    const gridLayer = new Cesium.GridImageryProvider();
-    viewer.imageryLayers.add(gridLayer, 1.0, false);
+
+viewer.camera.percentageChanged = 0.01; // Adjust this threshold as needed
+
+
+
+// Function to rotate the globe slowly
+function rotateGlobe() {
+    if (isRotating) {
+        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+    }
 }
 
-setupGridLayer(); // Call the function to set up the grid layer
+// Slow down the rotation
+var spinRate = 0.0003;
+var isRotating = true; // To keep track of the rotation state
+
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+
+var sentinelLayerVisible = true; // Sentinel-2
+
+
+
+
