@@ -23,58 +23,10 @@ viewer.camera.setView({
     }
 });
 
-viewer.camera.percentageChanged = 0.01;
-
-var spinRate = 0.0003;
-var isRotating = true;
-
-var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-
-var sentinelLayerVisible = true; // Sentinel-2
-
-// Function to create a toggle switch for the "Grid" layer
-function createGridToggleSwitch() {
-  const gridToggleSwitch = document.createElement("label");
-  gridToggleSwitch.classList.add("toggle-switch");
-
-  const gridToggleInput = document.createElement("input");
-  gridToggleInput.type = "checkbox";
-  gridToggleInput.checked = true; // Set the initial state to "on"
-  gridToggleInput.addEventListener("change", () => {
-    // Toggle the visibility of the grid layer based on the checkbox state
-    if (gridLayer) {
-      gridLayer.show = gridToggleInput.checked;
-    }
-  });
-
-  const gridToggleSlider = document.createElement("span");
-  gridToggleSlider.classList.add("toggle-slider");
-
-  gridToggleSwitch.appendChild(gridToggleInput);
-  gridToggleSwitch.appendChild(gridToggleSlider);
-
-  const gridToggleLabel = document.createElement("span");
-  gridToggleLabel.textContent = "Grid";
-  gridToggleSwitch.appendChild(gridToggleLabel);
-
-  // Append the toggle switch to the "toolbar" div
-  const toolbar = document.getElementById("toolbar");
-  toolbar.appendChild(gridToggleSwitch);
+// Function to create the grid layer and add it to the viewer
+function setupGridLayer() {
+    const gridLayer = new Cesium.GridImageryProvider();
+    viewer.imageryLayers.add(gridLayer, 1.0, false);
 }
 
-// Function to setup the layers
-function setupLayers() {
-  const imageryLayers = viewer.imageryLayers;
-
-  // Assuming you have these layers defined elsewhere
-  // ...
-
-  // Extract the "Grid" and "OpenStreetMaps" layers (make sure "imageryLayers" is defined)
-  gridLayer = imageryLayers.getByName("Grid");
-  openStreetMapsLayer = imageryLayers.getByName("OpenStreetMaps");
-
-  // Create the toggle switch for the "Grid" layer
-  createGridToggleSwitch();
-}
-
-setupLayers();
+setupGridLayer(); // Call the function to set up the grid layer
