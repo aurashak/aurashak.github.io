@@ -48,7 +48,7 @@ dataSourcePromise.then(function (dataSource) {
     var pinkCircleStyle = new Cesium.IconStyle({
         url: 'path/to/pink-circle-marker.png', // Replace with the path to your pink circle marker image
         color: Cesium.Color.PINK, // Set the marker color to pink
-        scale: 0.5 // Adjust the marker size as needed
+        scale: 0.5, // Adjust the marker size as needed
         height: 50000 // Set the height value (in meters) to position the markers above the satellite imagery
     });
 
