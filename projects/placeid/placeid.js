@@ -358,3 +358,18 @@ function showFeatureInfo(movement) {
     }
 }
 
+// Add the event listener for mouse movement
+viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Add the event listener for mouse hover
+viewer.scene.canvas.addEventListener('mouseenter', function () {
+    // Check the flag before displaying the info boxes
+    if (!isMouseOverFeature) {
+        for (var key in infoBoxes) {
+            if (infoBoxes.hasOwnProperty(key)) {
+                infoBoxes[key].style.display = 'none';
+            }
+        }
+    }
+});
+
