@@ -120,9 +120,9 @@ var waterLayerGroup = L.layerGroup();
 
 
 // Get the floodplain checkbox, opacity slider, and floodplain layer
-var floodplainCheckbox = document.getElementById('floodplain');
 var opacitySlider = document.getElementById('opacity-slider');
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+
     style: function (feature) {
         var opacityValue = parseFloat(opacitySlider.value);
         return {
