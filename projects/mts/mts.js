@@ -23,22 +23,25 @@ map.setMaxBounds(bounds);
 // Wait for the style to load before adding sources and layers
 map.on('style.load', function () {
 
-    // Add a GeoJSON source to the map for 100-year floodplain
-    map.addSource('100yearfloodplain-source', {
-        type: 'geojson',
-        data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
-    });
+  
+  
 
-    // Add a layer for the polygon for 100-year floodplain
-    map.addLayer({
-        id: '100yearfloodplain-polygon-layer',
-        type: 'fill',
-        source: '100yearfloodplain-source',
-        paint: {
-            'fill-color': 'blue',
-            'fill-opacity': 0.5
-        }
-    });
+// Add a GeoJSON source to the map for 100-year floodplain
+map.addSource('100yearfloodplain-source', {
+    type: 'geojson',
+    data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
+});
+
+// Add a layer for the polygon for 100-year floodplain
+map.addLayer({
+    id: '100yearfloodplain-polygon-layer',
+    type: 'fill',
+    source: '100yearfloodplain-source',
+    paint: {
+        'fill-color': 'blue',
+        'fill-opacity': 0.5
+    }
+});
 
     // Add a GeoJSON source to the map for wastewater treatment
     map.addSource('wastewatertreatment-source', {
@@ -76,6 +79,8 @@ map.on('style.load', function () {
         }
     });
 
+    
+
     // Add a GeoJSON source to the map for gas pipelines
     map.addSource('nygaspipelines', {
         type: 'geojson',
@@ -112,103 +117,82 @@ map.on('style.load', function () {
         }
     });
 
-    // Add the GeoJSON source for 3D buildings
-    map.addSource('buildings', {
-        type: 'geojson',
-        data: 'https://aurashak.github.io/geojson/nyc/mtszoning.geojson',
+
+
+      // Add 3D buildings layer
+      map.addSource('nyc-buildings', {
+        'type': 'vector',
+        'url': 'mapbox://mapbox.mapbox-streets-v8'
     });
 
-    // Add a layer for 3D buildings
     map.addLayer({
-        id: '3d-buildings',
-        source: 'buildings',
-        type: 'fill-extrusion',
-        minzoom: 14,
-        paint: {
-            'fill-extrusion-color': [
-                'match',
-                ['get', 'overlay'], // Property containing zoning classification
-                'C2-5', '#ff0000', // Color for C2-5 zoning class
-                'R2', '#00ff00',   // Color for R2 zoning class
-                'R3', '#0000ff',   // Color for R3 zoning class
-                'default-color',   // Default color for other zoning classes
-            ],
-            'fill-extrusion-height': 100, // Adjust the height as needed
-            'fill-extrusion-base': 0,
-            'fill-extrusion-opacity': 0.6,
-        },
-    });
-
-    // Get the unique values of the "overlay" property from the GeoJSON data
-    var uniqueOverlays = [...new Set(map.getSource('buildings')._data.features.map(feature => feature.properties.overlay))];
-
-    // Create a legend (optional)
-    var legend = document.getElementById('legend');
-
-    uniqueOverlays.forEach(function (overlay) {
-        // You can assign colors to each zoning district as desired
-        var color = getRandomColor(); // Replace this with your color logic
-
-        var item = document.createElement('div');
-        item.className = 'legend-item';
-        item.innerHTML = '<span class="legend-color" style="background: ' + color + '"></span>' + overlay;
-        legend.appendChild(item);
-    });
-
-    // Function to generate random colors (you can replace this with your color logic)
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
+        'id': '3d-buildings',
+        'source': 'nyc-buildings',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': {
+                'type': 'identity',
+                'property': 'height'
+            },
+            'fill-extrusion-base': {
+                'type': 'identity',
+                'property': 'min_height'
+            },
+            'fill-extrusion-opacity': 1
         }
-        return color;
-    }
+    });
 
-    // Update the map with new data (optional)
-    map.on('click', function (e) {
-        var features = map.queryRenderedFeatures(e.point, {
-            layers: ['3d-buildings'],
+
+// Get the unique values of the "overlay" property from the GeoJSON data
+var uniqueOverlays = [...new Set(map.getSource('buildings')._data.features.map(feature => feature.properties.overlay))];
+
+// Create a legend (optional)
+var legend = document.getElementById('legend');
+
+uniqueOverlays.forEach(function (overlay) {
+    // You can assign colors to each zoning district as desired
+    var color = getRandomColor(); // Replace this with your color logic
+
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = '<span class="legend-color" style="background: ' + color + '"></span>' + overlay;
+    legend.appendChild(item);
+});
+
+        // Function to toggle layer visibility based on switch state
+        function toggleLayer(layerId, isChecked) {
+            if (isChecked) {
+                map.setLayoutProperty(layerId, 'visibility', 'visible');
+            } else {
+                map.setLayoutProperty(layerId, 'visibility', 'none');
+            }
+        }
+    
+        // Add event listeners to switches
+        document.getElementById('wastewatertreatment-switch').addEventListener('change', function () {
+            toggleLayer('wastewatertreatment-circle-layer', this.checked);
+        });
+    
+        document.getElementById('aqisite-switch').addEventListener('change', function () {
+            toggleLayer('aqisite-circle-layer', this.checked);
+        });
+    
+        document.getElementById('100yearfloodplain-switch').addEventListener('change', function () {
+            toggleLayer('100yearfloodplain-polygon-layer', this.checked);
+        });
+    
+        document.getElementById('nygaspipelines-switch').addEventListener('change', function () {
+            toggleLayer('nygaspipelines-layer', this.checked);
+        });
+    
+        document.getElementById('nycso-switch').addEventListener('change', function () {
+            toggleLayer('nycso-circle-layer', this.checked);
         });
 
-        if (!features.length) {
-            return;
-        }
-
-        var zoningClassification = features[0].properties.overlay;
-        // You can use zoningClassification for further actions or display
-        console.log('Zoning Classification:', zoningClassification);
-    });
-
-    // Function to toggle layer visibility based on switch state
-    function toggleLayer(layerId, isChecked) {
-        if (isChecked) {
-            map.setLayoutProperty(layerId, 'visibility', 'visible');
-        } else {
-            map.setLayoutProperty(layerId, 'visibility', 'none');
-        }
-    }
-
-    // Add event listeners to switches
-    document.getElementById('wastewatertreatment-switch').addEventListener('change', function () {
-        toggleLayer('wastewatertreatment-circle-layer', this.checked);
-    });
-
-    document.getElementById('aqisite-switch').addEventListener('change', function () {
-        toggleLayer('aqisite-circle-layer', this.checked);
-    });
-
-    document.getElementById('100yearfloodplain-switch').addEventListener('change', function () {
-        toggleLayer('100yearfloodplain-polygon-layer', this.checked);
-    });
-
-    document.getElementById('nygaspipelines-switch').addEventListener('change', function () {
-        toggleLayer('nygaspipelines-layer', this.checked);
-    });
-
-    document.getElementById('nycso-switch').addEventListener('change', function () {
-        toggleLayer('nycso-circle-layer', this.checked);
-    });
 
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
