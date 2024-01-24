@@ -3,20 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var miniIllustration = document.getElementById('miniIllustration');
     var largerIllustration = document.getElementById('largerIllustration');
 
-    // Add mouseover event listener to the mini illustration
-    miniIllustration.addEventListener('mouseover', function () {
-        console.log('Mouseover event triggered.');
-    });
+    // Get the button element
+    var triggerButton = document.getElementById('triggerButton');
 
-    // Add mousemove event listener to the mini illustration
-    miniIllustration.addEventListener('mousemove', function (event) {
-        console.log('Mousemove event triggered.');
-        console.log('Mouse X:', event.clientX);
-        console.log('Mouse Y:', event.clientY);
-    });
-
-    // Add click event listener to the mini illustration
-    miniIllustration.addEventListener('click', function () {
-        console.log('Click event triggered.');
+    // Add click event listener to the button
+    triggerButton.addEventListener('click', function () {
+        // Set a fixed position on the larger illustration
+        largerIllustration.style.objectPosition = '100% 100%';
     });
 });
