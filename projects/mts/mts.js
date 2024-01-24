@@ -23,22 +23,7 @@ map.setMaxBounds(bounds);
 // Wait for the style to load before adding sources and layers
 map.on('style.load', function () {
 
-    // Add a custom water layer
-    map.addSource('water-source', {
-        type: 'geojson',
-        data: 'https://aurashak.github.io/geojson/nyc/water.geojson'
-    });
-
-    map.addLayer({
-        'id': 'water-layer',
-        'source': 'water-source',
-        'type': 'fill',
-        'paint': {
-            'fill-color': '#ADD8E6',
-            'fill-opacity': 0.7
-        }
-    });
-
+  
     // Add 3D buildings layer
     map.addSource('nyc-buildings', {
         'type': 'vector',
@@ -66,7 +51,7 @@ map.on('style.load', function () {
         }
     });
 
-    
+
 
     // Add a GeoJSON source to the map for wastewater treatment
     map.addSource('wastewatertreatment-source', {
