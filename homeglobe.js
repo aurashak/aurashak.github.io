@@ -18,9 +18,9 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 var viewer = new Cesium.Viewer('cesiumContainer1', {
     baseLayerPicker: false,
-    geocoder: false,
+    geocoder: true,
     homeButton: false,
-    infoBox: false,
+    infoBox: true,
     sceneModePicker: false,
     selectionIndicator: false,
     timeline: false,
