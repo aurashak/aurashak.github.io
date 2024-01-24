@@ -79,6 +79,7 @@ header a:active { color: black}
     max-width: 800px;
     padding: 5px 10px;
     display: block;
+    line-height: 1.6;
 }
 
 .aboutcontainer a:link { text-decoration: underline; color: black; }
