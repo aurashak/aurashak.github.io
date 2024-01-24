@@ -24,32 +24,7 @@ map.setMaxBounds(bounds);
 map.on('style.load', function () {
 
   
-    // Add 3D buildings layer
-    map.addSource('nyc-buildings', {
-        'type': 'vector',
-        'url': 'mapbox://mapbox.mapbox-streets-v8'
-    });
-
-    map.addLayer({
-        'id': '3d-buildings',
-        'source': 'nyc-buildings',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 15,
-        'paint': {
-            'fill-extrusion-color': '#aaa',
-            'fill-extrusion-height': {
-                'type': 'identity',
-                'property': 'height'
-            },
-            'fill-extrusion-base': {
-                'type': 'identity',
-                'property': 'min_height'
-            },
-            'fill-extrusion-opacity': 0.6
-        }
-    });
+  
 
 
 
@@ -144,6 +119,35 @@ map.on('style.load', function () {
 
 
 
+      // Add 3D buildings layer
+      map.addSource('nyc-buildings', {
+        'type': 'vector',
+        'url': 'mapbox://mapbox.mapbox-streets-v8'
+    });
+
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'nyc-buildings',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': {
+                'type': 'identity',
+                'property': 'height'
+            },
+            'fill-extrusion-base': {
+                'type': 'identity',
+                'property': 'min_height'
+            },
+            'fill-extrusion-opacity': 0.6
+        }
+    });
+
+    
+
         // Function to toggle layer visibility based on switch state
         function toggleLayer(layerId, isChecked) {
             if (isChecked) {
@@ -173,7 +177,7 @@ map.on('style.load', function () {
         document.getElementById('nycso-switch').addEventListener('change', function () {
             toggleLayer('nycso-circle-layer', this.checked);
         });
-        
+
 
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
