@@ -22,9 +22,25 @@ viewer.scene.backgroundColor = Cesium.Color.WHITE;
 // Flag to track the current imagery layer
 var isSentinel2Visible = true;
 
-// Function to toggle between Sentinel-2 and OpenStreetMap layers
-function toggleImageryLayer() {
-    if (isSentinel2Visible) {
+// Get the layer slider element and its value display element
+var layerSlider = document.getElementById("layerSlider");
+var layerValueDisplay = document.getElementById("layerValue");
+
+// Update the value display when the layer slider value changes
+layerSlider.addEventListener("input", function () {
+    if (layerSlider.value === "0") {
+        layerValueDisplay.textContent = "OpenStreetMap";
+    } else {
+        layerValueDisplay.textContent = "Sentinel-2";
+    }
+
+    // Call the function to toggle layers based on the slider value
+    toggleImageryLayer(parseInt(layerSlider.value));
+});
+
+// Modify the existing toggleImageryLayer function to accept a parameter for layer selection
+function toggleImageryLayer(layer) {
+    if (layer === 0) {
         // Remove Sentinel-2 layer and add OpenStreetMap layer
         viewer.imageryLayers.remove(sentinel2Layer);
         viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
@@ -37,9 +53,6 @@ function toggleImageryLayer() {
             new Cesium.IonImageryProvider({ assetId: 3954 })
         );
     }
-
-    // Toggle the flag
-    isSentinel2Visible = !isSentinel2Visible;
 }
 
 
