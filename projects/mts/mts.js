@@ -147,10 +147,10 @@ map.addLayer({
     });
 
 
+// ...
 
 // Wait for the style to load before adding sources and layers
 map.on('style.load', function () {
-
     // ...
 
     // Function to toggle layer visibility based on switch state
@@ -161,6 +161,13 @@ map.on('style.load', function () {
             map.setLayoutProperty(layerId, 'visibility', 'none');
         }
     }
+
+    // Initialize the switches to the "off" position
+    document.getElementById('wastewatertreatment-switch').checked = false;
+    document.getElementById('aqisite-switch').checked = false;
+    document.getElementById('100yearfloodplain-switch').checked = false;
+    document.getElementById('nygaspipelines-switch').checked = false;
+    document.getElementById('nycso-switch').checked = false;
 
     // Add event listeners to switches
     document.getElementById('wastewatertreatment-switch').addEventListener('change', function () {
@@ -204,6 +211,7 @@ function createLegendSymbol(layerId, legendId) {
         }
     }
 }
+
 
 
     // Add navigation control (zoom in/out buttons)
