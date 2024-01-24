@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOMContentLoaded event fired.');
     // Get the mini and larger illustrations
     var miniIllustration = document.getElementById('miniIllustration');
     var largerIllustration = document.getElementById('largerIllustration');
