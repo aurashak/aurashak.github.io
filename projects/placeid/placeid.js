@@ -245,11 +245,15 @@ featureTypes.forEach(function (featureType) {
 // Flag to check if the mouse is over any feature
 var isMouseOverFeature = true;
 
-// Function to show information when hovering over features
+var popup = document.createElement('div');
+popup.id = 'popup';
+document.body.appendChild(popup);
+popup.style.display = 'none';
+
+
+
 function showFeatureInfo(movement) {
     var pickedObjects = viewer.scene.drillPick(movement.endPosition);
-
-
 
     if (Cesium.defined(pickedObjects)) {
         pickedObjects.forEach(function (pickedObject) {
@@ -274,101 +278,43 @@ function showFeatureInfo(movement) {
                         // Customize the title based on the property type
                         var title = '';
                         switch (featureType) {
-                            case 'name':
-                                title = 'River:';
-                                break;
-                            case 'canal':
-                                title = 'Canal:';
-                                break;
-                            case 'lake':
-                                title = 'Lake:';
-                                break;
-                            case 'ocean':
-                                title = 'Ocean:';
-                                break;
-                            case 'sea':
-                                title = 'Sea:';
-                                break;
-                            case 'strait':
-                                title = 'Strait:';
-                                break;
-                            case 'bay':
-                                title = 'Bay:';
-                                break;
-                            case 'sound':
-                                title = 'Sound:';
-                                break;
-                            case 'channel':
-                                title = 'Channel:';
-                                break;
-                            case 'gulf':
-                                title = 'Gulf:';
-                                break;
-                            case 'reef':
-                                title = 'Reef:';
-                                break;
-                            case 'country':
-                                title = 'Country:';
-                                break;
-                            case 'continent':
-                                title = 'Continent:';
-                                break;
-                                case 'plain':
-                                    title = 'Plain:';
-                                    break;
-                                    case 'plateau':
-                                        title = 'Plateau:';
-                                        break;
-                                        case 'delta':
-                                            title = 'Delta:';
-                                            break;
-                                            case 'range/mtn':
-                                                title = 'Mtn Range:';
-                                                break;
-                                        case 'desert':
-                                            title = 'Desert:';
-                                            break;
-                                            case 'coast':
-                                                title = 'Coast:';
-                                                break;
-                                                case 'subregion':
-                                                    title = 'Subregion:';
-                                                    break;
-                            case 'region_un':
-                                title = 'Region:';
-                                break;
+                            // ...
+                            // Your existing code for customizing the title
+                            // ...
                             default:
                                 title = 'Name:';
                         }
 
                         // Construct the information string with the customized title
-                        infoBox.innerHTML = '<b>' + title + ' ' + featureName + '</b><br>';
-                        infoBox.style.display = 'block'; // Show the info box
+                        var infoText = '<b>' + title + ' ' + featureName + '</b><br>';
+
+                        // Update the pop-up content with the information
+                        popup.innerHTML = infoText;
+                        popup.style.display = 'block'; // Show the pop-up
 
                         // Set the flag to true since the mouse is over a feature
                         isMouseOverFeature = true;
-
-                            // Reset the flag when the mouse is not over any feature
-                            isMouseOverFeature = false;
                     }
                 }
             }
         });
+    } else {
+        // If no feature is hovered, hide the pop-up and reset the flag
+        popup.style.display = 'none';
+        isMouseOverFeature = false;
     }
 }
+
 
 // Add the event listener for mouse movement
 viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 // Add the event listener for mouse hover
-viewer.scene.canvas.addEventListener('mouseenter', function () {
-    // Check the flag before displaying the info boxes
-    if (!isMouseOverFeature) {
-        for (var key in infoBoxes) {
-            if (infoBoxes.hasOwnProperty(key)) {
-                infoBoxes[key].style.display = 'none';
-            }
-        }
+viewer.scene.canvas.addEventListener('mousemove', function (event) {
+    if (isMouseOverFeature) {
+        // Calculate the position of the pop-up next to the mouse
+        popup.style.left = (event.clientX + 10) + 'px';
+        popup.style.top = (event.clientY + 10) + 'px';
     }
 });
 
