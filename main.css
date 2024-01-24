@@ -517,8 +517,11 @@ header a:active { color: black}
 /* Add your desired styles here */
 .slider-container {
     width: 300px;
-    margin: 50px auto;
+    margin: 50px;
     text-align: center;
+    position: relative;
+    z-index: 10;
+
 }
 
 .slider {
