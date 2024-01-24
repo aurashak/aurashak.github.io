@@ -8,7 +8,7 @@ html, body {
     margin: 0;
 }
 
-a:link {text-decoration: none; }
+a:link {text-decoration: underline; }
 a:visited { color: black;}
 a:hover {text-decoration: underline; }
 a:active { color: black}
@@ -61,10 +61,10 @@ header a:active { color: black}
     margin: 0px 30px 0px 10px;
 }
 
-.navigation a:link {color: black;}
-.navigation a:hover {color: black;}
-.navigation a:active{color: black;}
-.navigation a:visited {color: black;}
+.navigation a:link { text-decoration: none; color: black;}
+.navigation a:hover {text-decoration: none; color: black;}
+.navigation a:active {text-decoration: none; color: black;}
+.navigation a:visited { text-decoration: none; color: black;}
 
  .container {
     display: block;
@@ -81,6 +81,10 @@ header a:active { color: black}
     display: block;
 }
 
+.aboutcontainer a:link { text-decoration: underline; color: black; }
+.aboutcontainer a:visited { color: black; }
+.aboutcontainer a:hover { text-decoration: underline; }
+.aboutcontainer a:active { color: black; }
 
 
 
