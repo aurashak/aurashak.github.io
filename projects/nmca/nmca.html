@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NMCA</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <script src="https://aurashak.github.io/projects/nmca/nmca.js"></script>
 
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
 </head>
@@ -31,18 +30,27 @@
 </div>
 
 
+
+
+
+
 <div class="placeidcontainer">
     <div class="mapcolumnleft">
-        <div class="mapsectionleft">
-            <img src="https://aurashak.github.io/projects/nmca/nmcasmall.png" id="miniIllustration" alt="Mini Illustration" style="width: 100%;">
+        <div class="hyperlinks">
+            <a href="#" onclick="zoomTo(0.5, 0.5)">Zoom Point 1</a>
+            <a href="#" onclick="zoomTo(0.8, 0.2)">Zoom Point 2</a>
+            <!-- Add more hyperlinks as needed -->
         </div>
+        
     </div>
 
     <div class="mapcolumnright">
-        <img src="https://aurashak.github.io/projects/nmca/nmcalarge.png" id="largerIllustration" alt="Larger Illustration" style="width: 100%;">
-    </div>
+        <div class="zoom-container">
+            <img src="https://aurashak.github.io/projects/nmca/nmcalarge.png" alt="Large Image" id="zoomImage">
+        </div>
 </div>
 
+<script src="https://aurashak.github.io/projects/nmca/nmca.js"></script>
 
 </body>
 </html>
