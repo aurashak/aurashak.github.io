@@ -115,10 +115,14 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 var waterLayerGroup = L.layerGroup();
 
 
+
+
+
+
 // Get the floodplain checkbox, opacity slider, and floodplain layer
-var floodplainCheckbox = document.getElementById('floodplain');
 var opacitySlider = document.getElementById('opacity-slider');
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+
     style: function (feature) {
         var opacityValue = parseFloat(opacitySlider.value);
         return {
@@ -129,7 +133,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillOpacity: opacityValue // Set fillOpacity based on the slider value
         };
     }
-}).addTo(map);
+}).addTo(waterLayerGroup);
 
 // Add an event listener to the opacity slider
 opacitySlider.addEventListener('input', function () {
@@ -143,14 +147,10 @@ opacitySlider.addEventListener('input', function () {
     });
 });
 
-// Add an event listener to the floodplain checkbox
-floodplainCheckbox.addEventListener('change', function () {
-    if (floodplainCheckbox.checked) {
-        map.addLayer(floodplainLayer);
-    } else {
-        map.removeLayer(floodplainLayer);
-    }
-});
+
+
+
+
 
 
 // NYC CSO Layer
