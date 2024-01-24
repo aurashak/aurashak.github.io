@@ -3,13 +3,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var miniIllustration = document.getElementById('miniIllustration');
     var largerIllustration = document.getElementById('largerIllustration');
 
+    // Add mouseover event listener to the mini illustration
+    miniIllustration.addEventListener('mouseover', function () {
+        console.log('Mouseover event triggered.');
+    });
+
     // Add mousemove event listener to the mini illustration
     miniIllustration.addEventListener('mousemove', function (event) {
-        // Calculate the position of the mouse relative to the mini illustration
-        var mouseX = event.offsetX / miniIllustration.width;
-        var mouseY = event.offsetY / miniIllustration.height;
+        console.log('Mousemove event triggered.');
+        console.log('Mouse X:', event.clientX);
+        console.log('Mouse Y:', event.clientY);
+    });
 
-        // Set the corresponding position on the larger illustration
-        largerIllustration.style.objectPosition = mouseX * 100 + '% ' + mouseY * 100 + '%';
+    // Add click event listener to the mini illustration
+    miniIllustration.addEventListener('click', function () {
+        console.log('Click event triggered.');
     });
 });
