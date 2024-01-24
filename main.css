@@ -71,6 +71,18 @@ header a:active { color: black}
 }
 
 
+.aboutcontainer {
+    font-size: 30px;
+    margin-top: 40px;
+    margin-left: 100px;
+    max-width: 800px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+
+
 .homecontainer {
     position: fixed;
     top: 0;
@@ -142,6 +154,7 @@ header a:active { color: black}
     font-size: 15px;
     margin: 0px;
     background: rgb(238, 238, 238);
+    
 }
 
 .nymapcolumnright {
@@ -225,6 +238,7 @@ header a:active { color: black}
     border-bottom: 1px solid black;
     padding: 5px 10px;
     font-size: 15px; 
+
 }
 
 .sectionlefttitle {
@@ -344,27 +358,17 @@ header a:active { color: black}
 
 
 .legend {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
 }
 
 .legend-symbol {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
+ margin-right: 10px;
+
 }
 
 .legend-label {
@@ -377,6 +381,7 @@ header a:active { color: black}
 .switch-label {
     font-size: 15px;
     color: #333;
+
 }
 
 .switch-label-b {
