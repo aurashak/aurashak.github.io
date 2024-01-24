@@ -116,7 +116,11 @@ var waterLayerGroup = L.layerGroup();
 
 
 
-// Get the opacity slider and floodplain layer
+
+
+
+// Get the floodplain checkbox, opacity slider, and floodplain layer
+var floodplainCheckbox = document.getElementById('floodplain');
 var opacitySlider = document.getElementById('opacity-slider');
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
@@ -129,7 +133,31 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillOpacity: opacityValue // Set fillOpacity based on the slider value
         };
     }
-}).addTo(waterLayerGroup);
+}).addTo(map);
+
+// Add an event listener to the opacity slider
+opacitySlider.addEventListener('input', function () {
+    var opacityValue = parseFloat(opacitySlider.value);
+
+    // Update the fillOpacity of the floodplain layer
+    floodplainLayer.eachLayer(function (layer) {
+        layer.setStyle({
+            fillOpacity: opacityValue
+        });
+    });
+});
+
+// Add an event listener to the floodplain checkbox
+floodplainCheckbox.addEventListener('change', function () {
+    if (floodplainCheckbox.checked) {
+        map.addLayer(floodplainLayer);
+    } else {
+        map.removeLayer(floodplainLayer);
+    }
+});
+
+
+
 
 
 
@@ -320,11 +348,11 @@ document.getElementById('nycso').addEventListener('click', function() {
 });
 
 
-document.getElementById('opacity').addEventListener('click', function() {
-    if (map.hasLayer(opacitySlider)) {
-        map.removeLayer(opacitySlider);
+document.getElementById('floodplain').addEventListener('click', function() {
+    if (map.hasLayer(floodplainLayer)) {
+        map.removeLayer(floodplainLayer);
     } else {
-        map.addLayer(opacitySlider);
+        map.addLayer(floodplainLayer);
     }
 });
 
@@ -458,22 +486,20 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
     }
 });
 
+
 document.getElementById('waterLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(waterLayerGroup)) {
-        // If the group toggle is turned off, turn off individual layers and hide the opacity slider container
         map.removeLayer(waterLayerGroup);
-        map.removeLayer(opacitySlider);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(floodplainLayer);
         map.removeLayer(nycsoLayer);
-        document.getElementById('opacity-slider-container').style.display = 'none';
         // Reset the individual layer toggle buttons to off state
-        document.getElementById('opacity').checked = false;
+        document.getElementById('floodplain').checked = false;
         document.getElementById('nycso').checked = false;
     } else {
-        // If the group toggle is turned on, turn on the waterLayerGroup and show the opacity slider container
         map.addLayer(waterLayerGroup);
-        document.getElementById('opacity-slider-container').style.display = 'block';
-        // If the individual layer toggle buttons were previously checked, add the respective layers
-        if (document.getElementById('opacity').checked) {
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('floodplain').checked) {
             map.addLayer(floodplainLayer);
         }
         if (document.getElementById('nycso').checked) {
