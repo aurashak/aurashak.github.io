@@ -20,31 +20,33 @@ var bounds = [
 // Set the maximum bounds for the map
 map.setMaxBounds(bounds);
 
-// Add water layer
-map.addSource('water-source', {
-    type: 'vector',
-    url: 'mapbox://mapbox.mapbox-streets-v8',
-    'tiles': [
-        'https://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
-        'https://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
-        'https://c.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
-        'https://d.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf'
-    ]
-});
+// Wait for the style to load before adding sources and layers
+map.on('style.load', function () {
 
-map.addLayer({
-    'id': 'water-layer',
-    'source': 'water-source',
-    'source-layer': 'water',
-    'type': 'fill',
-    'paint': {
-        'fill-color': '#ADD8E6',
-        'fill-opacity': 0.7
-    }
-});
+    // Add water layer
+    map.addSource('water-source', {
+        type: 'vector',
+        url: 'mapbox://mapbox.mapbox-streets-v8',
+        'tiles': [
+            'https://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
+            'https://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
+            'https://c.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
+            'https://d.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf'
+        ]
+    });
 
-// Add 3D buildings layer
-map.on('load', function () {
+    map.addLayer({
+        'id': 'water-layer',
+        'source': 'water-source',
+        'source-layer': 'water',
+        'type': 'fill',
+        'paint': {
+            'fill-color': '#ADD8E6',
+            'fill-opacity': 0.7
+        }
+    });
+
+    // Add 3D buildings layer
     map.addSource('nyc-buildings', {
         'type': 'vector',
         'url': 'mapbox://mapbox.mapbox-streets-v8'
