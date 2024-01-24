@@ -75,7 +75,7 @@ map.on('style.load', function () {
     });
 
 
-    
+
 
     // Add a GeoJSON source to the map for wastewater treatment
     map.addSource('wastewatertreatment-source', {
@@ -215,10 +215,39 @@ createLegendSymbol('nycso-circle-layer', 'legend-nycso');
 // Function to create legend symbols based on layer styling
 function createLegendSymbol(layerId, legendId) {
     const layer = map.getLayer(layerId);
-    if (layer) {
-        const color = layer.paint['circle-color'] || layer.paint['fill-color'] || layer.paint['line-color'];
+
+    if (layer && layer.type === 'circle') {
+        const color = layer.paint['circle-color'];
+        if (color) {
+            document.getElementById(legendId).style.background = color;
+        }
+    } else if (layer && layer.type === 'fill') {
+        const color = layer.paint['fill-color'];
+        if (color) {
+            document.getElementById(legendId).style.background = color;
+        }
+    } else if (layer && layer.type === 'line') {
+        const color = layer.paint['line-color'];
         if (color) {
             document.getElementById(legendId).style.background = color;
         }
     }
+}
+
+
+// Add compass control
+map.addControl(new mapboxgl.CompassControl(), 'top-left');
+
+
+// Add scale bar
+map.on('move', updateScale);
+
+function updateScale() {
+    const maxWidth = 100; // Maximum width in pixels for the scale bar
+    const metersPerPixel = (Math.cos((map.getCenter().lat * Math.PI) / 180) * 2 * Math.PI * 6371000) / Math.pow(2, map.getZoom() + 8);
+
+    const width = Math.min(maxWidth, metersPerPixel * map.getCanvas().width);
+    const scale = metersPerPixel < 1 ? ' meters' : ' km';
+
+    document.getElementById('scale').innerHTML = width.toFixed() + scale;
 }
