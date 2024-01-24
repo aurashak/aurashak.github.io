@@ -115,44 +115,10 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 var waterLayerGroup = L.layerGroup();
 
 
-// Declare the floodplainLayer variable outside the event listener
-var floodplainLayer;
-
-document.getElementById('waterLayerGroup').addEventListener('click', function() {
-    var floodplainCheckbox = document.getElementById('floodplain');
-    var nycsoCheckbox = document.getElementById('nycso');
-    var opacitySlider = document.getElementById('opacity-slider');
-
-    if (map.hasLayer(waterLayerGroup)) {
-        map.removeLayer(waterLayerGroup);
-        // If the group toggle is turned off, turn off individual layers as well
-        map.removeLayer(floodplainLayer);
-        map.removeLayer(nycsoLayer);
-        // Reset the individual layer toggle buttons to off state
-        floodplainCheckbox.checked = false;
-        nycsoCheckbox.checked = false;
-    } else {
-        map.addLayer(waterLayerGroup);
-        // If the group toggle is turned on, turn on individual layers if they were previously checked
-        if (floodplainCheckbox.checked) {
-            map.addLayer(floodplainLayer);
-        }
-        if (nycsoCheckbox.checked) {
-            map.addLayer(nycsoLayer);
-        }
-    }
-
-    // Update the fillOpacity of the floodplain layer based on the slider value
-    var opacityValue = parseFloat(opacitySlider.value);
-    floodplainLayer.eachLayer(function (layer) {
-        layer.setStyle({
-            fillOpacity: opacityValue
-        });
-    });
-});
-
-// Initialize the floodplainLayer outside the event listener
-floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+// Get the floodplain checkbox, opacity slider, and floodplain layer
+var floodplainCheckbox = document.getElementById('floodplain');
+var opacitySlider = document.getElementById('opacity-slider');
+var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
         var opacityValue = parseFloat(opacitySlider.value);
         return {
@@ -160,12 +126,31 @@ floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100year
             color: 'black',
             weight: 0,
             opacity: 0,
-            fillOpacity: opacityValue
+            fillOpacity: opacityValue // Set fillOpacity based on the slider value
         };
     }
-}).addTo(waterLayerGroup);
+}).addTo(map);
 
+// Add an event listener to the opacity slider
+opacitySlider.addEventListener('input', function () {
+    var opacityValue = parseFloat(opacitySlider.value);
 
+    // Update the fillOpacity of the floodplain layer
+    floodplainLayer.eachLayer(function (layer) {
+        layer.setStyle({
+            fillOpacity: opacityValue
+        });
+    });
+});
+
+// Add an event listener to the floodplain checkbox
+floodplainCheckbox.addEventListener('change', function () {
+    if (floodplainCheckbox.checked) {
+        map.addLayer(floodplainLayer);
+    } else {
+        map.removeLayer(floodplainLayer);
+    }
+});
 
 
 // NYC CSO Layer
@@ -217,14 +202,8 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             opacity: 0.7,
             fillOpacity: 0.5
         });
-    },
-    onEachFeature: function (feature, layer) {
-        // Add a popup to each marker with information from the GeoJSON properties
-        var popupContent = "Name: " + feature.properties.NAME + "<br>Capacity: " + feature.properties.CAPACITY_MW + " MW";
-        layer.bindPopup(popupContent);
     }
 }).addTo(energyLayerGroup);
-
 
 // NY Gas Pipelines Layer
 var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson', {
@@ -235,16 +214,10 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             weight: 3,
             opacity: 0.6
         };
-    },
-    onEachFeature: function (feature, layer) {
-        // Add a popup to each feature with information from the GeoJSON properties
-        var popupContent = "Pipeline Name: " + feature.properties.NAME;
-        layer.bindPopup(popupContent);
     }
 }).addTo(energyLayerGroup);
 
-
-// Electric Transmission Lines Layer
+// NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
         var size = calculateMarkerSize(map.getZoom());
@@ -253,11 +226,6 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
             weight: 3,
             opacity: 0.6
         };
-    },
-    onEachFeature: function (feature, layer) {
-        // Add a popup to each feature with information from the GeoJSON properties
-        var popupContent = "Line Name: " + feature.properties.NAME;
-        layer.bindPopup(popupContent);
     }
 }).addTo(energyLayerGroup);
 
