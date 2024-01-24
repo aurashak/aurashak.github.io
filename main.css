@@ -51,8 +51,8 @@ h3 {
 
 header a:link { text-decoration: none; pointer-events: auto; }
 header a:visited { color: black;}
-header a:hover { border-bottom: 2px solid color; }
-header a:active { color: black}
+header a:hover { text-decoration: underline; color: black}
+header a:active { text-decoration: underline; color: black;}
 
 .navigation {
     font-size: 20px;
@@ -1822,4 +1822,39 @@ header a:active { color: black}
     background-color: white;
     padding: 10px;
     border: 1px solid #ccc;
+}
+
+
+
+
+
+
+
+.zoom-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#zoomImage {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.hyperlinks {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+}
+
+.hyperlinks a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
