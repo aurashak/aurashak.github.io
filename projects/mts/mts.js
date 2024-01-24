@@ -235,8 +235,6 @@ function createLegendSymbol(layerId, legendId) {
 }
 
 
-// Add compass control
-map.addControl(new mapboxgl.CompassControl(), 'top-left');
 
 
 // Add scale bar
