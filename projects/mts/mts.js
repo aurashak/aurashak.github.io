@@ -148,37 +148,62 @@ map.addLayer({
 
 
 
+// Wait for the style to load before adding sources and layers
+map.on('style.load', function () {
 
+    // ...
 
-        // Function to toggle layer visibility based on switch state
-        function toggleLayer(layerId, isChecked) {
-            if (isChecked) {
-                map.setLayoutProperty(layerId, 'visibility', 'visible');
-            } else {
-                map.setLayoutProperty(layerId, 'visibility', 'none');
-            }
+    // Function to toggle layer visibility based on switch state
+    function toggleLayer(layerId, isChecked) {
+        if (isChecked) {
+            map.setLayoutProperty(layerId, 'visibility', 'visible');
+        } else {
+            map.setLayoutProperty(layerId, 'visibility', 'none');
         }
-    
-        // Add event listeners to switches
-        document.getElementById('wastewatertreatment-switch').addEventListener('change', function () {
-            toggleLayer('wastewatertreatment-circle-layer', this.checked);
-        });
-    
-        document.getElementById('aqisite-switch').addEventListener('change', function () {
-            toggleLayer('aqisite-circle-layer', this.checked);
-        });
-    
-        document.getElementById('100yearfloodplain-switch').addEventListener('change', function () {
-            toggleLayer('100yearfloodplain-polygon-layer', this.checked);
-        });
-    
-        document.getElementById('nygaspipelines-switch').addEventListener('change', function () {
-            toggleLayer('nygaspipelines-layer', this.checked);
-        });
-    
-        document.getElementById('nycso-switch').addEventListener('change', function () {
-            toggleLayer('nycso-circle-layer', this.checked);
-        });
+    }
+
+    // Add event listeners to switches
+    document.getElementById('wastewatertreatment-switch').addEventListener('change', function () {
+        toggleLayer('wastewatertreatment-circle-layer', this.checked);
+    });
+
+    document.getElementById('aqisite-switch').addEventListener('change', function () {
+        toggleLayer('aqisite-circle-layer', this.checked);
+    });
+
+    document.getElementById('100yearfloodplain-switch').addEventListener('change', function () {
+        toggleLayer('100yearfloodplain-polygon-layer', this.checked);
+    });
+
+    document.getElementById('nygaspipelines-switch').addEventListener('change', function () {
+        toggleLayer('nygaspipelines-layer', this.checked);
+    });
+
+    document.getElementById('nycso-switch').addEventListener('change', function () {
+        toggleLayer('nycso-circle-layer', this.checked);
+    });
+
+    // Create legend symbols based on layer styling
+    createLegendSymbol('wastewatertreatment-circle-layer', 'legend-wastewatertreatment');
+    createLegendSymbol('aqisite-circle-layer', 'legend-aqisite');
+    createLegendSymbol('100yearfloodplain-polygon-layer', 'legend-100yearfloodplain');
+    createLegendSymbol('nygaspipelines-layer', 'legend-nygaspipelines');
+    createLegendSymbol('nycso-circle-layer', 'legend-nycso');
+
+    // Add navigation control (zoom in/out buttons)
+    map.addControl(new mapboxgl.NavigationControl());
+});
+
+// Function to create legend symbols based on layer styling
+function createLegendSymbol(layerId, legendId) {
+    const layer = map.getLayer(layerId);
+    if (layer) {
+        const color = layer.paint['circle-color'] || layer.paint['fill-color'] || layer.paint['line-color'];
+        if (color) {
+            document.getElementById(legendId).style.background = color;
+        }
+    }
+}
 
 
     // Add navigation control (zoom in/out buttons)
