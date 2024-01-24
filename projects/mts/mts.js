@@ -198,6 +198,15 @@ map.on('style.load', function () {
     map.addControl(new mapboxgl.NavigationControl());
 });
 
+
+// Call createLegendSymbol function for each layer
+createLegendSymbol('wastewatertreatment-circle-layer', 'legend-wastewatertreatment');
+createLegendSymbol('aqisite-circle-layer', 'legend-aqisite');
+createLegendSymbol('100yearfloodplain-polygon-layer', 'legend-100yearfloodplain');
+createLegendSymbol('nygaspipelines-layer', 'legend-nygaspipelines');
+createLegendSymbol('nycso-circle-layer', 'legend-nycso');
+
+
 // Function to create legend symbols based on layer styling
 function createLegendSymbol(layerId, legendId) {
     const layer = map.getLayer(layerId);
