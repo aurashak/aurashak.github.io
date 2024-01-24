@@ -1798,3 +1798,12 @@ x
 
 
 
+#scale {
+    position: absolute;
+    bottom: 40px;
+    right: 10px;
+    background-color: white;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+}
