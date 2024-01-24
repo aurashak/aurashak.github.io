@@ -164,103 +164,6 @@ header a:active { color: black}
 }
 
 
-
-
-
-
-
-.nymaptitle {
-    font-size: 15px;
-    margin-top: 0px;
-    position: relative;
-    padding: 10px;
-    background: lightgrey;
-    border:1px solid black;
-}
-
- .nymapcontainer {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    border: 1px solid black;
-    margin-top: 0px;
-    background: none;
-    height: calc(100% - 135px);   
-}
-
-
-
-.nymapcolumnright {
-    font-size: 15px;
-    border-left: 1px solid black;
-    margin: 0px;
-}
-
-  .columnlefttitle {
-    border-bottom: 1px solid black;
-    font-size: 15px;
-    margin: 0px;
-    padding: 10px;
-    font-weight: bold;
-    background: rgb(96, 96, 96);
-    color: #fff;
-    border-bottom: 1px solid black;
-      
-}
-
-.placeidtitle {
-    font-size: 15px;
-    margin-top: 0px;
-    position: relative;
-    padding: 10px;
-    background: lightgrey;
-    border:1px solid black;
-}
-
-
-.placeidcontainer {
-    display: grid;
-    grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
-    border: 1px solid black;
-    height: calc(100% - 140px);
-}
-
-
-
-.placeidcolumnright {
-    font-size: 15px;
-    border-left: 1px solid black;
-    margin: 0px;
-    width: 100%;
-            /*! height: 0%; */
-}
-
-.idsectionleft {
-    flex-direction: row; /* Stack items vertically */
-    border-bottom: 1px solid black;
-    padding: 5px 10px;
-    font-size: 15px; 
-    height: 35px;
-}
-
-.coords-box {
-    flex-direction: row; /* Stack items vertically */
-    border-bottom: 1px solid black;
-    padding: 5px 10px;
-    font-size: 15px; 
-    background: gold;
-    font-weight: bold;
-    font-size: 20px;
-    height: 45px;
-}
-
-
-
-
-
-#nymap {
-    min-height: 100%;
-}
-
 .mapsectionleft {
     flex-direction: row; /* Stack items vertically */
     border-bottom: 1px solid black;
@@ -294,6 +197,63 @@ header a:active { color: black}
 
 
 
+
+
+
+
+ .nymapcontainer {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    border: 1px solid black;
+    margin-top: 0px;
+    background: none;
+    height: calc(100% - 135px);   
+}
+
+
+
+  .columnlefttitle {
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    margin: 0px;
+    padding: 10px;
+    font-weight: bold;
+    background: rgb(96, 96, 96);
+    color: #fff;
+    border-bottom: 1px solid black;
+      
+}
+
+
+.placeidcontainer {
+    display: grid;
+    grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+    border: 1px solid black;
+    height: calc(100% - 140px);
+}
+
+
+
+.coords-box {
+    flex-direction: row; /* Stack items vertically */
+    border-bottom: 1px solid black;
+    padding: 5px 10px;
+    font-size: 15px; 
+    background: gold;
+    font-weight: bold;
+    font-size: 20px;
+    height: 45px;
+}
+
+
+
+
+
+#nymap {
+    min-height: 100%;
+}
+
+x
 
 
 
