@@ -243,7 +243,7 @@ featureTypes.forEach(function (featureType) {
 });
 
 // Flag to check if the mouse is over any feature
-var isMouseOverFeature = false;
+var isMouseOverFeature = true;
 
 // Function to show information when hovering over features
 function showFeatureInfo(movement) {
