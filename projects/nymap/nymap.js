@@ -486,7 +486,7 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
     }
 });
 
-
+if (false) {
 document.getElementById('waterLayerGroup').addEventListener('click', function() {
     if (map.hasLayer(waterLayerGroup)) {
         map.removeLayer(waterLayerGroup);
@@ -507,7 +507,7 @@ document.getElementById('waterLayerGroup').addEventListener('click', function() 
         }
     }
 });
-
+}
 
 // Toggle Waste Layer Group
 document.getElementById('wasteLayerGroup').addEventListener('click', function() {
