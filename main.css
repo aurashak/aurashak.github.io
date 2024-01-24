@@ -149,6 +149,16 @@ header a:active { color: black}
 }
 
 
+.mapdescription {
+    font-size: 30px;
+    margin-top: 0px;
+    position: relative;
+    padding: 10px;
+}
+
+
+
+
 .mapcolumnleft {
     font-size: 15px;
     margin: 0px;
