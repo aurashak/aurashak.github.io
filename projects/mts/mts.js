@@ -23,26 +23,19 @@ map.setMaxBounds(bounds);
 // Wait for the style to load before adding sources and layers
 map.on('style.load', function () {
 
-    // Add water layer
+    // Add a custom water layer
     map.addSource('water-source', {
-        type: 'vector',
-        url: 'mapbox://mapbox.mapbox-streets-v8',
-        'tiles': [
-            'https://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
-            'https://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
-            'https://c.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
-            'https://d.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf'
-        ]
+        type: 'geojson',
+        data: 'https://aurashak.github.io/geojson/nyc/water.geojson'
     });
 
     map.addLayer({
         'id': 'water-layer',
         'source': 'water-source',
-        'source-layer': 'water',
         'type': 'fill',
         'paint': {
             'fill-color': '#ADD8E6',
-            'fill-opacity': 1
+            'fill-opacity': 0.7
         }
     });
 
@@ -69,9 +62,11 @@ map.on('style.load', function () {
                 'type': 'identity',
                 'property': 'min_height'
             },
-            'fill-extrusion-opacity': 1
+            'fill-extrusion-opacity': 0.6
         }
     });
+
+    
 
     // Add a GeoJSON source to the map for wastewater treatment
     map.addSource('wastewatertreatment-source', {
