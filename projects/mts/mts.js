@@ -142,6 +142,39 @@ map.on('style.load', function () {
         }
     });
 
+
+
+        // Function to toggle layer visibility based on switch state
+        function toggleLayer(layerId, isChecked) {
+            if (isChecked) {
+                map.setLayoutProperty(layerId, 'visibility', 'visible');
+            } else {
+                map.setLayoutProperty(layerId, 'visibility', 'none');
+            }
+        }
+    
+        // Add event listeners to switches
+        document.getElementById('wastewatertreatment-switch').addEventListener('change', function () {
+            toggleLayer('wastewatertreatment-circle-layer', this.checked);
+        });
+    
+        document.getElementById('aqisite-switch').addEventListener('change', function () {
+            toggleLayer('aqisite-circle-layer', this.checked);
+        });
+    
+        document.getElementById('100yearfloodplain-switch').addEventListener('change', function () {
+            toggleLayer('100yearfloodplain-polygon-layer', this.checked);
+        });
+    
+        document.getElementById('nygaspipelines-switch').addEventListener('change', function () {
+            toggleLayer('nygaspipelines-layer', this.checked);
+        });
+    
+        document.getElementById('nycso-switch').addEventListener('change', function () {
+            toggleLayer('nycso-circle-layer', this.checked);
+        });
+        
+
     // Add navigation control (zoom in/out buttons)
     map.addControl(new mapboxgl.NavigationControl());
 });
