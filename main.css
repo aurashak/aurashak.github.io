@@ -343,11 +343,33 @@ header a:active { color: black}
 
 
 
-
-.legend-symbol {
-    margin-right: 10px; /* Adjust the margin as needed */
+.legend {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-symbol {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.legend-label {
+    white-space: nowrap;
+}
 
 
 
