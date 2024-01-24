@@ -168,7 +168,10 @@ header a:active { color: black}
 
 }
 
-
+.mapdescription a:link { text-decoration: underline; color: black;}
+.mapdescription a:hover {text-decoration: none; color: black;}
+.mapdescription a:active {text-decoration: none; color: black;}
+.mapdescription a:visited { text-decoration: none; color: black;}
 
 
 .mapcolumnleft {
@@ -1810,4 +1813,15 @@ x
     padding: 5px 10px;
     border: 1px solid #ccc;
     font-size: 12px;
+}
+
+
+#toolbarContainer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
