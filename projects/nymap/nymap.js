@@ -115,11 +115,14 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 var waterLayerGroup = L.layerGroup();
 
 
+// Declare the floodplainLayer variable outside the event listener
+var floodplainLayer;
+
 document.getElementById('waterLayerGroup').addEventListener('click', function() {
     var floodplainCheckbox = document.getElementById('floodplain');
     var nycsoCheckbox = document.getElementById('nycso');
-    var opacitySlider = document.getElementById('opacity-slider'); // Add this line
-    
+    var opacitySlider = document.getElementById('opacity-slider');
+
     if (map.hasLayer(waterLayerGroup)) {
         map.removeLayer(waterLayerGroup);
         // If the group toggle is turned off, turn off individual layers as well
@@ -138,7 +141,7 @@ document.getElementById('waterLayerGroup').addEventListener('click', function() 
             map.addLayer(nycsoLayer);
         }
     }
-    
+
     // Update the fillOpacity of the floodplain layer based on the slider value
     var opacityValue = parseFloat(opacitySlider.value);
     floodplainLayer.eachLayer(function (layer) {
@@ -147,6 +150,21 @@ document.getElementById('waterLayerGroup').addEventListener('click', function() 
         });
     });
 });
+
+// Initialize the floodplainLayer outside the event listener
+floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
+    style: function (feature) {
+        var opacityValue = parseFloat(opacitySlider.value);
+        return {
+            fillColor: '#ADD8E6',
+            color: 'black',
+            weight: 0,
+            opacity: 0,
+            fillOpacity: opacityValue
+        };
+    }
+}).addTo(waterLayerGroup);
+
 
 
 
