@@ -140,9 +140,10 @@ header a:active { color: black}
 
 
 .maptitle {
-    font-size: 15px;
+    font-size: 30px;
     margin-top: 0px;
     position: relative;
+    font-weight: bold;
     padding: 10px;
     background: lightgrey;
     border:1px solid black;
@@ -150,7 +151,7 @@ header a:active { color: black}
 
 
 .mapdescription {
-    font-size: 30px;
+    font-size: 20px;
     margin-top: 0px;
     position: relative;
     padding: 10px;
