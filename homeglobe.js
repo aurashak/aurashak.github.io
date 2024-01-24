@@ -38,23 +38,27 @@ layerSlider.addEventListener("input", function () {
     toggleImageryLayer(parseInt(layerSlider.value));
 });
 
+// Define the sentinel2Layer variable
+var sentinel2Layer;
+
 // Modify the existing toggleImageryLayer function to accept a parameter for layer selection
 function toggleImageryLayer(layer) {
     if (layer === 0) {
         // Remove Sentinel-2 layer and add OpenStreetMap layer
-        viewer.imageryLayers.remove(sentinel2Layer);
+        if (sentinel2Layer) {
+            viewer.imageryLayers.remove(sentinel2Layer);
+        }
         viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
             url: 'https://a.tile.openstreetmap.org/'
         }));
     } else {
         // Remove OpenStreetMap layer and add Sentinel-2 layer
         viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assuming OpenStreetMap is the second layer added
-        viewer.imageryLayers.addImageryProvider(
+        sentinel2Layer = viewer.imageryLayers.addImageryProvider(
             new Cesium.IonImageryProvider({ assetId: 3954 })
         );
     }
 }
-
 
 // Set the initial rotation rate
 var spinRate = 0.0003;
@@ -80,4 +84,3 @@ function updateRotation() {
 
 // Add a render loop to continuously update the rotation
 viewer.scene.postRender.addEventListener(updateRotation);
-
