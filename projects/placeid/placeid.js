@@ -373,3 +373,54 @@ viewer.scene.canvas.addEventListener('mouseenter', function () {
 });
 
 
+// Create an HTML element for displaying information
+var infoBox = document.createElement('div');
+infoBox.id = 'infoBox';
+infoBox.classList.add('infobox');
+document.body.appendChild(infoBox);
+
+// Function to show information when hovering over features
+function showFeatureInfo(movement) {
+    var pickedObjects = viewer.scene.drillPick(movement.endPosition);
+
+    if (Cesium.defined(pickedObjects)) {
+        pickedObjects.forEach(function (pickedObject) {
+            var entity = pickedObject.id;
+
+            // Check if the picked object is an entity with properties
+            if (entity && entity.properties) {
+                var properties = entity.properties;
+                var featureName = properties.name && properties.name.getValue();
+
+                if (featureName) {
+                    // Construct the information string
+                    var infoText = 'Feature Name: ' + featureName;
+
+                    // Update the HTML element with the information
+                    infoBox.innerHTML = infoText;
+                    infoBox.style.display = 'block'; // Show the info box
+
+                    // Position the info box next to the mouse cursor
+                    infoBox.style.left = (movement.endPosition.x + 10) + 'px';
+                    infoBox.style.top = (movement.endPosition.y + 10) + 'px';
+                }
+            }
+        });
+    }
+}
+
+// Add the event listener for mouse movement
+viewer.screenSpaceEventHandler.setInputAction(showFeatureInfo, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Add the event listener for mouse hover (mouseenter)
+viewer.scene.canvas.addEventListener('mouseenter', function () {
+    infoBox.style.display = 'none'; // Hide the info box initially
+});
+
+// Add the event listener for mouse leave (mouseleave)
+viewer.scene.canvas.addEventListener('mouseleave', function () {
+    infoBox.style.display = 'none'; // Hide the info box when the mouse leaves the canvas
+});
+
+
+
