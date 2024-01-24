@@ -51,6 +51,28 @@ map.on('load', function () {
     });
     
 
+   // Add water layer
+   map.addSource('water-source', {
+    type: 'vector',
+    url: 'mapbox://mapbox.mapbox-streets-v8',
+    'tiles': [
+        'https://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
+        'https://b.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
+        'https://c.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf',
+        'https://d.tiles.mapbox.com/v4/mapbox.mapbox-streets-v8/1/0/0.vector.pbf'
+    ]
+});
+
+map.addLayer({
+    'id': 'water-layer',
+    'source': 'water-source',
+    'source-layer': 'water',
+    'type': 'fill',
+    'paint': {
+        'fill-color': '#ADD8E6', // Set water color
+        'fill-opacity': 0.7
+    }
+});
 
 
 
