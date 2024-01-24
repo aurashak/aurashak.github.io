@@ -26,7 +26,22 @@ map.on('style.load', function () {
   
   
 
+// Add a GeoJSON source to the map for 100-year floodplain
+map.addSource('100yearfloodplain-source', {
+    type: 'geojson',
+    data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
+});
 
+// Add a layer for the polygon for 100-year floodplain
+map.addLayer({
+    id: '100yearfloodplain-polygon-layer',
+    type: 'fill',
+    source: '100yearfloodplain-source',
+    paint: {
+        'fill-color': 'blue',
+        'fill-opacity': 0.5
+    }
+});
 
     // Add a GeoJSON source to the map for wastewater treatment
     map.addSource('wastewatertreatment-source', {
@@ -42,7 +57,7 @@ map.on('style.load', function () {
         paint: {
             'circle-radius': 15,
             'circle-color': 'red',
-            'circle-opacity': 1
+            'circle-opacity': 0.8
         }
     });
 
@@ -60,26 +75,11 @@ map.on('style.load', function () {
         paint: {
             'circle-radius': 12,
             'circle-color': 'green',
-            'circle-opacity': 1
+            'circle-opacity': 0.8
         }
     });
 
-    // Add a GeoJSON source to the map for 100-year floodplain
-    map.addSource('100yearfloodplain-source', {
-        type: 'geojson',
-        data: 'https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson'
-    });
-
-    // Add a layer for the polygon for 100-year floodplain
-    map.addLayer({
-        id: '100yearfloodplain-polygon-layer',
-        type: 'fill',
-        source: '100yearfloodplain-source',
-        paint: {
-            'fill-color': 'blue',
-            'fill-opacity': 1
-        }
-    });
+    
 
     // Add a GeoJSON source to the map for gas pipelines
     map.addSource('nygaspipelines', {
@@ -95,7 +95,7 @@ map.on('style.load', function () {
         'paint': {
             'line-color': 'brown',
             'line-width': 10,
-            'line-opacity': 1
+            'line-opacity': 0.8
         }
     });
 
@@ -113,7 +113,7 @@ map.on('style.load', function () {
         paint: {
             'circle-radius': 10,
             'circle-color': 'brown',
-            'circle-opacity': 1
+            'circle-opacity': 0.8
         }
     });
 
@@ -142,11 +142,11 @@ map.on('style.load', function () {
                 'type': 'identity',
                 'property': 'min_height'
             },
-            'fill-extrusion-opacity': 0.6
+            'fill-extrusion-opacity': 1
         }
     });
 
-    
+
 
         // Function to toggle layer visibility based on switch state
         function toggleLayer(layerId, isChecked) {
