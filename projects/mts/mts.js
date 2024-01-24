@@ -43,6 +43,40 @@ map.on('style.load', function () {
         }
     });
 
+
+    // Add 3D buildings layer (Keep this layer always visible)
+    map.addSource('nyc-buildings', {
+        'type': 'vector',
+        'url': 'mapbox://mapbox.mapbox-streets-v8'
+    });
+
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'nyc-buildings',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': {
+                'type': 'identity',
+                'property': 'height'
+            },
+            'fill-extrusion-base': {
+                'type': 'identity',
+                'property': 'min_height'
+            },
+            'fill-extrusion-opacity': 1
+        },
+        layout: {
+            'visibility': 'visible' // Always visible
+        }
+    });
+
+
+    
+
     // Add a GeoJSON source to the map for wastewater treatment
     map.addSource('wastewatertreatment-source', {
         type: 'geojson',
@@ -127,36 +161,7 @@ map.on('style.load', function () {
         }
     });
 
-    // Add 3D buildings layer (Keep this layer always visible)
-    map.addSource('nyc-buildings', {
-        'type': 'vector',
-        'url': 'mapbox://mapbox.mapbox-streets-v8'
-    });
-
-    map.addLayer({
-        'id': '3d-buildings',
-        'source': 'nyc-buildings',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 15,
-        'paint': {
-            'fill-extrusion-color': '#aaa',
-            'fill-extrusion-height': {
-                'type': 'identity',
-                'property': 'height'
-            },
-            'fill-extrusion-base': {
-                'type': 'identity',
-                'property': 'min_height'
-            },
-            'fill-extrusion-opacity': 1
-        },
-        layout: {
-            'visibility': 'visible' // Always visible
-        }
-    });
-
+    
     // Function to toggle layer visibility based on switch state
     function toggleLayer(layerId, isChecked) {
         if (isChecked) {
