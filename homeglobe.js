@@ -23,16 +23,19 @@ viewer.scene.backgroundColor = Cesium.Color.WHITE;
 var isSentinel2Visible = true;
 
 // Get the layer slider element and its value display element
-var opacitySlider = document.getElementById("opacitySlider");
-var opacityValueDisplay = document.getElementById("opacityValue");
+var layerSlider = document.getElementById("layerSlider");
+var layerValueDisplay = document.getElementById("layerValue");
 
-// Update the value display when the opacity slider value changes
-opacitySlider.addEventListener("input", function () {
-    var opacityValue = parseFloat(opacitySlider.value) / 100.0;
-    opacityValueDisplay.textContent = opacitySlider.value;
-    
-    // Call the function to update layer opacity based on the slider value
-    updateLayerOpacity(opacityValue);
+// Update the value display when the layer slider value changes
+layerSlider.addEventListener("input", function () {
+    if (layerSlider.value === "0") {
+        layerValueDisplay.textContent = "OpenStreetMap";
+    } else {
+        layerValueDisplay.textContent = "Sentinel-2";
+    }
+
+    // Call the function to toggle layers based on the slider value
+    toggleImageryLayer(parseInt(layerSlider.value));
 });
 
 // Define the sentinel2Layer variable
@@ -54,16 +57,6 @@ function toggleImageryLayer(layer) {
         sentinel2Layer = viewer.imageryLayers.addImageryProvider(
             new Cesium.IonImageryProvider({ assetId: 3954 })
         );
-        
-        // Set initial opacity
-        updateLayerOpacity(1.0);
-    }
-}
-
-// Function to update layer opacity
-function updateLayerOpacity(opacity) {
-    if (sentinel2Layer) {
-        sentinel2Layer.alpha = opacity;
     }
 }
 
