@@ -3,12 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var miniIllustration = document.getElementById('miniIllustration');
     var largerIllustration = document.getElementById('largerIllustration');
 
-    // Get the button element
-    var triggerButton = document.getElementById('triggerButton');
+    // Add mousemove event listener to the mini illustration
+    miniIllustration.addEventListener('mousemove', function (event) {
+        // Calculate the position of the mouse relative to the mini illustration
+        var mouseX = event.offsetX / miniIllustration.width;
+        var mouseY = event.offsetY / miniIllustration.height;
 
-    // Add click event listener to the button
-    triggerButton.addEventListener('click', function () {
-        // Set a fixed position on the larger illustration
-        largerIllustration.style.objectPosition = '100% 100%';
+        // Set the corresponding position on the larger illustration
+        largerIllustration.style.objectPosition = mouseX * 100 + '% ' + mouseY * 100 + '%';
     });
 });
