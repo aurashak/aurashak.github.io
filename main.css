@@ -70,8 +70,9 @@ header a:active { color: black}
     display: block;
 }
 
-
-
+.mapheader {
+    display: block;
+}
 .aboutcontainer {
     font-size: 20px;
     margin-top: 40px;
