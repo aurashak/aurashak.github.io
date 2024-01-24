@@ -147,21 +147,6 @@ map.addLayer({
     });
 
 
-// Get the unique values of the "overlay" property from the GeoJSON data
-var uniqueOverlays = [...new Set(map.getSource('buildings')._data.features.map(feature => feature.properties.overlay))];
-
-// Create a legend (optional)
-var legend = document.getElementById('legend');
-
-uniqueOverlays.forEach(function (overlay) {
-    // You can assign colors to each zoning district as desired
-    var color = getRandomColor(); // Replace this with your color logic
-
-    var item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = '<span class="legend-color" style="background: ' + color + '"></span>' + overlay;
-    legend.appendChild(item);
-});
 
         // Function to toggle layer visibility based on switch state
         function toggleLayer(layerId, isChecked) {
