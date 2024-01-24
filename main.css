@@ -133,6 +133,42 @@ header a:active { color: black}
 .homesubtitle a:active {   }
 .homesubtitle a:visited {   }
 
+
+
+
+
+
+
+.maptitle {
+    font-size: 15px;
+    margin-top: 0px;
+    position: relative;
+    padding: 10px;
+    background: lightgrey;
+    border:1px solid black;
+}
+
+
+.mapcolumnleft {
+    font-size: 15px;
+    margin: 0px;
+    background: rgb(238, 238, 238);
+}
+
+
+.mapcolumnright {
+    font-size: 15px;
+    border-left: 1px solid black;
+    margin: 0px;
+    width: 100%;
+}
+
+
+
+
+
+
+
 .nymaptitle {
     font-size: 15px;
     margin-top: 0px;
@@ -151,12 +187,7 @@ header a:active { color: black}
     height: calc(100% - 135px);   
 }
 
-.nymapcolumnleft {
-    font-size: 15px;
-    margin: 0px;
-    background: rgb(238, 238, 238);
-    
-}
+
 
 .nymapcolumnright {
     font-size: 15px;
@@ -193,11 +224,7 @@ header a:active { color: black}
     height: calc(100% - 140px);
 }
 
-.placeidcolumnleft {
-    font-size: 15px;
-    margin: 0px;
-    background: rgb(238, 238, 238);
-}
+
 
 .placeidcolumnright {
     font-size: 15px;
