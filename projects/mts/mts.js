@@ -42,7 +42,7 @@ map.on('style.load', function () {
         'type': 'fill',
         'paint': {
             'fill-color': '#ADD8E6',
-            'fill-opacity': 0.7
+            'fill-opacity': 1
         }
     });
 
@@ -69,7 +69,7 @@ map.on('style.load', function () {
                 'type': 'identity',
                 'property': 'min_height'
             },
-            'fill-extrusion-opacity': 0.6
+            'fill-extrusion-opacity': 1
         }
     });
 
@@ -87,7 +87,7 @@ map.on('style.load', function () {
         paint: {
             'circle-radius': 15,
             'circle-color': 'red',
-            'circle-opacity': 0.7
+            'circle-opacity': 1
         }
     });
 
@@ -105,7 +105,7 @@ map.on('style.load', function () {
         paint: {
             'circle-radius': 12,
             'circle-color': 'green',
-            'circle-opacity': 0.7
+            'circle-opacity': 1
         }
     });
 
@@ -122,7 +122,7 @@ map.on('style.load', function () {
         source: '100yearfloodplain-source',
         paint: {
             'fill-color': 'blue',
-            'fill-opacity': 0.7
+            'fill-opacity': 1
         }
     });
 
@@ -140,7 +140,7 @@ map.on('style.load', function () {
         'paint': {
             'line-color': 'brown',
             'line-width': 10,
-            'line-opacity': 0.7
+            'line-opacity': 1
         }
     });
 
@@ -158,7 +158,7 @@ map.on('style.load', function () {
         paint: {
             'circle-radius': 10,
             'circle-color': 'brown',
-            'circle-opacity': 0.7
+            'circle-opacity': 1
         }
     });
 
