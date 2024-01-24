@@ -34,37 +34,40 @@
         <div class="homesubtitle" style="font-size: 25px; font-weight: bold; margin-left: 50px;"><a href="https://aurashak.github.io/projects/nymap/nymap.html">New York City Environmental Map</a></div><br>
         <div class="homesubtitle" style="font-size: 25px; font-weight: bold; margin-left: 50px;"><a href="https://aurashak.github.io/projects/placeid/placeid.html">Place Identification</a></div><br>
         <div class="homesubtitle" style="font-size: 25px; font-weight: bold; margin-left: 50px;"><a href="https://aurashak.github.io/projects/mts/mts.html">Marine Transfer Station</a></div><br>
+        <div class="homesubtitle" style="font-size: 25px; font-weight: bold; margin-left: 50px;"><a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a></div><br>
+
     </div>
 
 
 <div class="container">
-    <div id="toolbar" style="position: absolute; top: 10px; left: 10px; z-index: 1;">
-        <label>Slider:</label>
-        <input type="range" min="0" max="100" step="1" value="50" id="mySlider">
-        <span id="sliderValue">50</span>
-        <br>
-        <label>Brightness:</label>
-        <input type="range" min="-1" max="1" step="0.1" value="0" id="brightnessSlider">
-        <br>
-        <label>Contrast:</label>
-        <input type="range" min="-1" max="1" step="0.1" value="0" id="contrastSlider">
-        <br>
-        <label>Hue:</label>
-        <input type="range" min="-1" max="1" step="0.1" value="0" id="hueSlider">
-        <br>
-        <label>Saturation:</label>
-        <input type="range" min="-1" max="1" step="0.1" value="0" id="saturationSlider">
-        <br>
-        <label>Gamma:</label>
-        <input type="range" min="0" max="2" step="0.1" value="0" id="gammaSlider">
-        <br>
+    <div id="toolbarContainer" style="position: absolute; top: 10px; left: 10px; z-index: 1;">
+        <div id="toolbar">
+            <label>Slider:</label>
+            <input type="range" min="0" max="100" step="1" value="50" id="mySlider">
+            <span id="sliderValue">50</span>
+            <br>
+            <label>Brightness:</label>
+            <input type="range" min="-1" max="1" step="0.1" value="0" id="brightnessSlider">
+            <br>
+            <label>Contrast:</label>
+            <input type="range" min="-1" max="1" step="0.1" value="0" id="contrastSlider">
+            <br>
+            <label>Hue:</label>
+            <input type="range" min="-1" max="1" step="0.1" value="0" id="hueSlider">
+            <br>
+            <label>Saturation:</label>
+            <input type="range" min="-1" max="1" step="0.1" value="0" id="saturationSlider">
+            <br>
+            <label>Gamma:</label>
+            <input type="range" min="0" max="2" step="0.1" value="0" id="gammaSlider">
+            <br>
+        </div>
     </div>
 </div>
 
 
     <div class="homecontainer">
         <div id="cesiumContainer1" class="cesium-container"></div>
-        <div id="toolbar"></div>
     </div>
 
 
@@ -72,6 +75,7 @@
 
 
 <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
+<script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
 <script src="https://aurashak.github.io/homeglobe.js"></script>
 
 </body>
