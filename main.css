@@ -815,6 +815,9 @@ header a:active { text-decoration: underline; color: black;}
 
 
 
+#zoomImageContainer {
+    overflow: hidden;
+}
 
 
 
