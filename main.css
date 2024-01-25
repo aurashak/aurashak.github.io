@@ -483,6 +483,53 @@ header a:active { text-decoration: underline; color: black;}
 
 
 
+/* Styles for Switch Mechanism */
+.homeswitch-label {
+
+}
+
+
+.homeswitch-input {
+    display: none;
+}
+
+
+.homeswitch-track {
+    background-color: #ccc;
+    border-radius: 15px;
+    height: 12px;
+    width: 30px;
+    position: relative;
+}
+
+
+
+.homeswitch-thumb {
+    background: linear-gradient(135deg, #0073e6, #0056b3);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    transition: 0.2s;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Add this style to change the track color to green when checked */
+.homeswitch-input:checked + .switch-track {
+    background-color: #4caf50; /* Green color */
+}
+
+
+.homeswitch-input:checked + .switch-track .switch-thumb {
+    left: 16px;
+}
+
+
+
 
 
 #mtsmap {
