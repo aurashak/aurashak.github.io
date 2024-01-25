@@ -1967,13 +1967,8 @@ header a:active { text-decoration: underline; color: black;}
     }
     
     #resetZoomBtn {
-        margin-top: 10px;
-        cursor: pointer;
-        padding: 5px;
-        background-color: #0073e6;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
+       
+        
     }
     
   
