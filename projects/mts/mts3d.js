@@ -18,8 +18,7 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
 });
 
-       
-// Set up bounds for camera movement
+ // Set up bounds for camera movement
 var westBound = Cesium.Math.toRadians(-74.0015);
 var eastBound = Cesium.Math.toRadians(-73.9465);
 var southBound = Cesium.Math.toRadians(40.8090);
@@ -30,7 +29,7 @@ viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
 // Set the panning limits
-viewer.scene.screenSpaceCameraController.maximumTranslateFactor = 5000.0;
+viewer.scene.screenSpaceCameraController.maximumTranslate = 5000.0;
 
 // Create a ScreenSpaceEventHandler to handle camera movement
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -79,6 +78,7 @@ handler.setInputAction(function (movement) {
 handler.setInputAction(function () {
     handler.lastMousePosition = undefined;
 }, Cesium.ScreenSpaceEventType.LEFT_UP);
+
 
 
 
