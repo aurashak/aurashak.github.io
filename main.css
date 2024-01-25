@@ -235,6 +235,8 @@ header a:active { text-decoration: underline; color: black;}
     border: 1px solid black;
     margin-top: 0px;
     background: none;
+    height: calc(100% - 290px);
+
 }
 
 
