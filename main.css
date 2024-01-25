@@ -1849,15 +1849,9 @@ header a:active { text-decoration: underline; color: black;}
     transition: transform 0.5s ease;
 }
 
-Certainly! Here's a simple button styling for your hyperlinks:
-
-css
 
 .hyperlinks {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1;
+    position: relative;
 }
 
 .hyperlinks a {
