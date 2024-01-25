@@ -35,5 +35,14 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
 
 
+// Set bounds around the map
+var westLongitude = -74.0015;
+var eastLongitude = -73.9465;
+var southLatitude = 40.8090;
+var northLatitude = 40.8330;
+
+viewer.camera.viewBoundingRectangle(
+    Cesium.Rectangle.fromDegrees(westLongitude, southLatitude, eastLongitude, northLatitude)
+);
 
 
