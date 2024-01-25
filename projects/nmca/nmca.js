@@ -6,49 +6,29 @@ function handleGridClick(event) {
     const clickedX = (event.clientX - gridImageRect.left) / gridImageRect.width;
     const clickedY = (event.clientY - gridImageRect.top) / gridImageRect.height;
 
-    // Determine the clicked quadrant
-    const clickedQuadrant = determineQuadrant(clickedX, clickedY);
-
-    // Zoom to the selected quadrant on the larger image
-    zoomToQuadrant(clickedQuadrant);
+    // Zoom to the selected area on the larger image
+    zoomToCoordinates(clickedX, clickedY);
 }
 
-function determineQuadrant(x, y) {
-    if (x < 0.33) {
-        if (y < 0.33) return 1;
-        else if (y < 0.67) return 4;
-        else return 7;
-    } else if (x < 0.67) {
-        if (y < 0.33) return 2;
-        else if (y < 0.67) return 5;
-        else return 8;
-    } else {
-        if (y < 0.33) return 3;
-        else if (y < 0.67) return 6;
-        else return 9;
-    }
-}
-
-function zoomToQuadrant(quadrant) {
+function zoomToCoordinates(x, y) {
     const zoomImage = document.getElementById('zoomImage');
     const container = document.getElementById('zoomImageContainer');
     const containerRect = container.getBoundingClientRect();
 
-    const centerX = ((quadrant - 1) % 3 + 0.5) / 3;
-    const centerY = Math.floor((quadrant - 1) / 3 + 0.5) / 3;
-
-    const offsetX = (centerX - 0.5) * containerRect.width;
-    const offsetY = (centerY - 0.5) * containerRect.height;
-
-    const dx = containerRect.width / 2 - offsetX;
-    const dy = containerRect.height / 2 - offsetY;
+    const offsetX = x * zoomImage.width - containerRect.width / 2;
+    const offsetY = y * zoomImage.height - containerRect.height / 2;
 
     const scaleFactor = 2; // Adjust the scale factor as needed
 
-    zoomImage.style.transform = `scale(${scaleFactor}) translate(${dx / scaleFactor}px, ${dy / scaleFactor}px)`;
+    zoomImage.style.transform = `scale(${scaleFactor}) translate(${-offsetX}px, ${-offsetY}px)`;
+
+    // Update the container size after zooming
+    const newWidth = containerRect.width / scaleFactor;
+    const newHeight = containerRect.height / scaleFactor;
+
+    container.style.width = `${newWidth}px`;
+    container.style.height = `${newHeight}px`;
 }
-
-
 
 function updateGridOverlay() {
     const gridImage = document.getElementById('gridImage');
@@ -76,3 +56,10 @@ function updateGridOverlay() {
         gridImageOverlay.appendChild(horizontalLine);
     }
 }
+
+// Call the updateGridOverlay function initially and whenever the window is resized
+updateGridOverlay();
+window.addEventListener('resize', updateGridOverlay);
+
+// Attach click event to the gridImage
+document.getElementById('gridImage').addEventListener('click', handleGridClick);
