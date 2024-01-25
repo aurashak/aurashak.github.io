@@ -68,8 +68,9 @@ var southBound = Cesium.Math.toRadians(40.8090);
 var northBound = Cesium.Math.toRadians(40.8330);
 
 // Set minimum and maximum zoom distances
-viewer.camera.minimumZoomDistance = 200.0;
-viewer.camera.maximumZoomDistance = 1000.0;
+viewer.scene.camera.minimumZoom = 200.0;
+viewer.scene.camera.maximumZoom = 1000.0;
+
 
 // Create a ScreenSpaceEventHandler to handle camera movement
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
