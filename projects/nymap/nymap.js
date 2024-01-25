@@ -20,14 +20,15 @@ L.control.scale().addTo(map);
 
 // Function to calculate marker size based on zoom level
 function calculateMarkerSize(zoom) {
-    // Define the initial and minimum sizes
-    var initialSize = 13;
+    // Define the updated initial and minimum sizes
+    var initialSize = 16; // Adjust this value to make markers bigger
     var minSize = 6;
 
     // Calculate the size based on zoom level with a minimum size
     var size = initialSize - (zoom - 3) * 5;
     return Math.max(size, minSize);
 }
+
 
 // NYC Counties Layer (Initially hidden)
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
