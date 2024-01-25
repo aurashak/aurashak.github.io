@@ -55,3 +55,67 @@ var viewer = new Cesium.Viewer('mtsmap', {
                 roll: Cesium.Math.toRadians(0)
             }
         });
+
+
+
+
+
+
+
+
+        
+        // Set up bounds for camera movement
+var westBound = Cesium.Math.toRadians(-74.0015);
+var eastBound = Cesium.Math.toRadians(-73.9465);
+var southBound = Cesium.Math.toRadians(40.8090);
+var northBound = Cesium.Math.toRadians(40.8330);
+
+// Create a ScreenSpaceEventHandler to handle camera movement
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+// Listen for left mouse down event
+handler.setInputAction(function (movement) {
+    handler.lastMousePosition = new Cesium.Cartesian2(movement.endPosition.x, movement.endPosition.y);
+}, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
+// Listen for mouse move event
+handler.setInputAction(function (movement) {
+    if (handler.lastMousePosition) {
+        var mousePosition = new Cesium.Cartesian2(movement.endPosition.x, movement.endPosition.y);
+        var offset = new Cesium.Cartesian2(
+            mousePosition.x - handler.lastMousePosition.x,
+            mousePosition.y - handler.lastMousePosition.y
+        );
+
+        // Convert the pixel offset to degrees
+        var camera = viewer.scene.camera;
+        var ellipsoid = viewer.scene.globe.ellipsoid;
+        var moveAmount = camera.pickEllipsoid(handler.lastMousePosition, ellipsoid);
+        if (moveAmount) {
+            moveAmount = ellipsoid.cartesianToCartographic(moveAmount);
+            moveAmount = Cesium.Cartesian3.fromDegrees(
+                Cesium.Math.toDegrees(moveAmount.longitude) + Cesium.Math.toDegrees(offset.x),
+                Cesium.Math.toDegrees(moveAmount.latitude) + Cesium.Math.toDegrees(offset.y),
+                0.0
+            );
+
+            // Check if the new position is within bounds
+            if (
+                moveAmount.longitude > westBound &&
+                moveAmount.longitude < eastBound &&
+                moveAmount.latitude > southBound &&
+                moveAmount.latitude < northBound
+            ) {
+                camera.position = moveAmount;
+                camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+            }
+        }
+
+        handler.lastMousePosition = mousePosition;
+    }
+}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+// Listen for left mouse up event
+handler.setInputAction(function () {
+    handler.lastMousePosition = undefined;
+}, Cesium.ScreenSpaceEventType.LEFT_UP);
