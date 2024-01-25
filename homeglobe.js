@@ -25,6 +25,8 @@ window.onload = function() {
         });
     }
     
+    // Initial state: Load OpenStreetMap layer
+    toggleImageryLayer(0);
 
     // Later in your code, you can change the background color to white again
     viewer.scene.backgroundColor = Cesium.Color.WHITE;
