@@ -32,22 +32,22 @@ layerSwitch.addEventListener("change", function () {
 var sentinel2Layer;
 
 function toggleImageryLayer(layer) {
+    // Clear all existing layers
+    viewer.imageryLayers.removeAll();
+
     if (layer === 0) {
-        // Remove Sentinel-2 layer and add OpenStreetMap layer
-        if (sentinel2Layer) {
-            viewer.imageryLayers.remove(sentinel2Layer);
-        }
+        // Add OpenStreetMap layer
         viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
             url: 'https://a.tile.openstreetmap.org/'
         }));
     } else {
-        // Remove OpenStreetMap layer and add Sentinel-2 layer
-        viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assuming OpenStreetMap is the second layer added
-        sentinel2Layer = viewer.imageryLayers.addImageryProvider(
+        // Add Sentinel-2 layer
+        viewer.imageryLayers.addImageryProvider(
             new Cesium.IonImageryProvider({ assetId: 3954 })
         );
     }
 }
+
 
 
 // Set the initial rotation rate
