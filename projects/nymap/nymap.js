@@ -341,13 +341,18 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 
 
-document.getElementById('nycso').addEventListener('click', function() {
+document.getElementById('nycso').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nycso').checked) {
+            return;
+        }
         map.removeLayer(nycsoLayer);
     } else {
         map.addLayer(nycsoLayer);
     }
 });
+
 
 
 document.getElementById('floodplain').addEventListener('click', function() {
