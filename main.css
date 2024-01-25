@@ -93,10 +93,15 @@ header a:active { text-decoration: underline; color: black;}
 .aboutcontainer a:active { color: black; }
 
 
+.hometoolbar {
+    position: relative;
+    width: 400px;
+    z-index: 10; /* Send it to the back */
+}
 
 
 .homecontainer {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
