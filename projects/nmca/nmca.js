@@ -48,3 +48,35 @@ function zoomToQuadrant(quadrant) {
     zoomImage.style.transform = `scale(${scaleFactor}) translate(${dx / scaleFactor}px, ${dy / scaleFactor}px)`;
 }
 
+
+
+function updateGridOverlay() {
+    const gridImage = document.getElementById('gridImage');
+    const gridImageOverlay = document.getElementById('gridImageOverlay');
+
+    const columns = 3;
+    const rows = 3;
+
+    const columnWidth = 100 / columns;
+    const rowHeight = gridImage.clientHeight / rows;
+
+    gridImageOverlay.innerHTML = '';
+
+    for (let i = 1; i < columns; i++) {
+        const verticalLine = document.createElement('div');
+        verticalLine.className = 'gridline vertical';
+        verticalLine.style.left = `${i * columnWidth}%`;
+        gridImageOverlay.appendChild(verticalLine);
+    }
+
+    for (let i = 1; i < rows; i++) {
+        const horizontalLine = document.createElement('div');
+        horizontalLine.className = 'gridline horizontal';
+        horizontalLine.style.top = `${i * rowHeight}px`;
+        gridImageOverlay.appendChild(horizontalLine);
+    }
+}
+
+// Call the updateGridOverlay function initially and whenever the window is resized
+updateGridOverlay();
+window.addEventListener('resize', updateGridOverlay);
