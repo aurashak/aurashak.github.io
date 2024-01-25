@@ -714,7 +714,7 @@ header a:active { text-decoration: underline; color: black;}
 
     .navigation {
         font-size: 16px;
-        margin: 0;
+        margin-right: 4px;
     }
 
     .container {
