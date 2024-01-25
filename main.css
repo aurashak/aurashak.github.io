@@ -272,7 +272,7 @@ header a:active { text-decoration: underline; color: black;}
     display: grid;
     grid-template-columns: 30% 70%;
     border: 1px solid black;
-    height: calc(100% - 320px);
+    height: calc(100% - 200px);
 
 }
 
