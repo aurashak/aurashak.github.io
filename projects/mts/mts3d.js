@@ -28,9 +28,7 @@ var northBound = Cesium.Math.toRadians(40.8330);
 
 // Set minimum and maximum zoom distances
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
-
-
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1200.0;
 
 // Create a ScreenSpaceEventHandler to handle camera movement
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -39,15 +37,6 @@ var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 handler.setInputAction(function (movement) {
     handler.lastMousePosition = movement.startPosition ? movement.startPosition.clone() : undefined;
 }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
-
-
-
-
-
-
-
-
-
 
 // Listen for mouse move event
 handler.setInputAction(function (movement) {
@@ -117,7 +106,7 @@ function toggleSatellite() {
 
         // Set the camera to focus slightly further west, facing east, and at a closer zoom
         viewer.scene.camera.setView({
-            destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 300.0), // Adjusted coordinates and altitude
+            destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0), // Adjusted coordinates and altitude
             orientation: {
                 heading: Cesium.Math.toRadians(90),  // Rotate to face east
                 pitch: Cesium.Math.toRadians(-25),   // Lower the pitch angle
