@@ -600,7 +600,7 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
             map.addLayer(inactivesolidwastelandfillLayer);
         }
         if (document.getElementById('nycso').checked) {
-            map.addLayer(nycsosLayer);
+            map.addLayer(nycsoLayer);
         }
         if (document.getElementById('recyclingfacility').checked) {
             map.addLayer(recyclingfacilityLayer);
