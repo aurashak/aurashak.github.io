@@ -11,73 +11,71 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
+    skyBox: false, // Disable the skybox
+    skyAtmosphere: false, // Disable the sky atmosphere
+    backgroundColor: Cesium.Color.WHITE // Set the background color to white
 });
-
-// Add Earth at Night layer
-const earthAtNight = Cesium.ImageryLayer.fromProviderAsync(
-    Cesium.IonImageryProvider.fromAssetId(3812)
-);
-earthAtNight.splitDirection = Cesium.SplitDirection.LEFT;
-viewer.imageryLayers.add(earthAtNight);
 
 window.onload = function() {
     var osmLayerSwitch = document.getElementById("osmLayerSwitch");
-    var earthAtNightSwitch = document.getElementById("earthAtNightSwitch");
 
-    if (osmLayerSwitch && earthAtNightSwitch) {
+    if (osmLayerSwitch) {
         osmLayerSwitch.addEventListener("change", function () {
             toggleImageryLayer(osmLayerSwitch.checked ? 1 : 0);
         });
-
-        earthAtNightSwitch.addEventListener("change", function () {
-            toggleEarthAtNightLayer(earthAtNightSwitch.checked);
-        });
     }
-
-    // Initial state: Load OpenStreetMap layer and turn Earth at Night off
+    
+    // Initial state: Load OpenStreetMap layer
     toggleImageryLayer(0);
-    toggleEarthAtNightLayer(false);
 
+    // Later in your code, you can change the background color to white again
     viewer.scene.backgroundColor = Cesium.Color.WHITE;
+
+    // Flag to track the current imagery layer
     var isSentinel2Visible = true;
+
+    // Define the sentinel2Layer variable
     var sentinel2Layer;
 
     function toggleImageryLayer(layer) {
+        // Clear all existing layers
         viewer.imageryLayers.removeAll();
 
         if (layer === 0) {
+            // Add OpenStreetMap layer
             viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
                 url: 'https://a.tile.openstreetmap.org/'
             }));
         } else {
+            // Add Sentinel-2 layer
             viewer.imageryLayers.addImageryProvider(
                 new Cesium.IonImageryProvider({ assetId: 3954 })
             );
         }
     }
 
-    function toggleEarthAtNightLayer(isVisible) {
-        earthAtNight.show = isVisible;
-    }
-
+    // Set the initial rotation rate
     var spinRate = 0.0003;
+
+    // Flag to track rotation state
     var isRotating = true;
 
+    // Function to start or stop the rotation on mouse click
     function toggleRotation() {
         isRotating = !isRotating;
     }
 
+    // Create a click event handler to toggle rotation on mouse click
     var clickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
     clickHandler.setInputAction(toggleRotation, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
+    // Function to update the globe rotation
     function updateRotation() {
         if (isRotating) {
             viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
         }
     }
 
+    // Add a render loop to continuously update the rotation
     viewer.scene.postRender.addEventListener(updateRotation);
 };
