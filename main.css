@@ -269,8 +269,10 @@ header a:active { text-decoration: underline; color: black;}
 
 .placeidcontainer {
     display: grid;
-    grid-template-columns: 30% 70%; /* Adjust the column widths as needed */
+    grid-template-columns: 30% 70%;
     border: 1px solid black;
+    height: calc(100% - 320px);
+
 }
 
 
@@ -1887,6 +1889,7 @@ header a:active { text-decoration: underline; color: black;}
 .zoom-container {
     position: relative;
     overflow: hidden;
+    height: 100%;
 
 }
 
