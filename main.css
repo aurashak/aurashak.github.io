@@ -775,6 +775,40 @@ header a:active { text-decoration: underline; color: black;}
 
 
 
+#opacity-slider-container {
+    display: flex;
+    align-items: center;
+}
+
+#opacity-slider-label {
+    margin-right: 10px;
+}
+
+#opacity-slider {
+    width: 100px;
+}
+
+#opacity-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+#opacity-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+
+
+
+
 
 
 
