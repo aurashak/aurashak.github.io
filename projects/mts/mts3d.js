@@ -76,8 +76,9 @@ var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
 // Listen for left mouse down event
 handler.setInputAction(function (movement) {
-    handler.lastMousePosition = movement.startPosition.clone();
+    handler.lastMousePosition = movement.startPosition ? movement.startPosition.clone() : undefined;
 }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
 
 // Listen for mouse move event
 handler.setInputAction(function (movement) {
