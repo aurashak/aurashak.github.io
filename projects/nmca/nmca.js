@@ -1,26 +1,3 @@
-// Coordinates of each grid area on the larger image
-const gridAreas = [
-    { x: 0.1, y: 0.1 },
-    { x: 0.4, y: 0.1 },
-    { x: 0.7, y: 0.1 },
-    // Add more grid areas as needed
-];
-
-// Define the zoomTo function
-function zoomTo(x, y) {
-    const zoomImage = document.getElementById('zoomImage');
-    const container = document.getElementById('zoomImageContainer');
-    const containerRect = container.getBoundingClientRect();
-
-    const offsetX = (x - 0.5) * containerRect.width;
-    const offsetY = (y - 0.5) * containerRect.height;
-
-    const dx = containerRect.width / 2 - offsetX;
-    const dy = containerRect.height / 2 - offsetY;
-
-    zoomImage.style.transform = `scale(2) translate(${dx}px, ${dy}px)`;
-}
-
 function handleGridClick(event) {
     const gridImage = document.getElementById('gridImage');
     const gridImageRect = gridImage.getBoundingClientRect();
@@ -29,24 +6,42 @@ function handleGridClick(event) {
     const clickedX = (event.clientX - gridImageRect.left) / gridImageRect.width;
     const clickedY = (event.clientY - gridImageRect.top) / gridImageRect.height;
 
-    // Find the closest grid area
-    const closestGridArea = findClosestGridArea(clickedX, clickedY);
+    // Determine the clicked quadrant
+    const clickedQuadrant = determineQuadrant(clickedX, clickedY);
 
-    // Zoom to the selected grid area on the larger image
-    zoomTo(closestGridArea.x, closestGridArea.y);
+    // Zoom to the selected quadrant on the larger image
+    zoomToQuadrant(clickedQuadrant);
 }
 
-function findClosestGridArea(clickedX, clickedY) {
-    let closestArea;
-    let minDistance = Number.MAX_VALUE;
-
-    for (const area of gridAreas) {
-        const distance = Math.sqrt((clickedX - area.x) ** 2 + (clickedY - area.y) ** 2);
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestArea = area;
-        }
+function determineQuadrant(x, y) {
+    if (x < 0.33) {
+        if (y < 0.33) return 1;
+        else if (y < 0.67) return 4;
+        else return 7;
+    } else if (x < 0.67) {
+        if (y < 0.33) return 2;
+        else if (y < 0.67) return 5;
+        else return 8;
+    } else {
+        if (y < 0.33) return 3;
+        else if (y < 0.67) return 6;
+        else return 9;
     }
+}
 
-    return closestArea;
+function zoomToQuadrant(quadrant) {
+    const zoomImage = document.getElementById('zoomImage');
+    const container = document.getElementById('zoomImageContainer');
+    const containerRect = container.getBoundingClientRect();
+
+    const centerX = ((quadrant - 1) % 3 + 0.5) / 3;
+    const centerY = Math.floor((quadrant - 1) / 3 + 0.5) / 3;
+
+    const offsetX = (centerX - 0.5) * containerRect.width;
+    const offsetY = (centerY - 0.5) * containerRect.height;
+
+    const dx = containerRect.width / 2 - offsetX;
+    const dy = containerRect.height / 2 - offsetY;
+
+    zoomImage.style.transform = `scale(2) translate(${dx}px, ${dy}px)`;
 }
