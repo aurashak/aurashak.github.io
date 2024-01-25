@@ -15,10 +15,7 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
     backgroundColor: Cesium.Color.WHITE, 
 
-    screenSpaceCameraController: {
-        minimumZoomDistance: 200.0, // Set minimum zoom distance (in meters)
-        maximumZoomDistance: 1000.0 // Set maximum zoom distance (in meters)
-    }
+
 });
 
        
@@ -64,11 +61,15 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
 
 
-        // Set up bounds for camera movement
+// Set up bounds for camera movement
 var westBound = Cesium.Math.toRadians(-74.0015);
 var eastBound = Cesium.Math.toRadians(-73.9465);
 var southBound = Cesium.Math.toRadians(40.8090);
 var northBound = Cesium.Math.toRadians(40.8330);
+
+// Set minimum and maximum zoom distances
+viewer.scene.camera.minimumZoomDistance = 200.0;
+viewer.scene.camera.maximumZoomDistance = 1000.0;
 
 // Create a ScreenSpaceEventHandler to handle camera movement
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
