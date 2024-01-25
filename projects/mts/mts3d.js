@@ -28,7 +28,7 @@ var northBound = Cesium.Math.toRadians(40.8330);
 
 // Set minimum and maximum zoom distances
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1200.0;
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
 // Create a ScreenSpaceEventHandler to handle camera movement
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -77,6 +77,7 @@ handler.setInputAction(function (movement) {
 handler.setInputAction(function () {
     handler.lastMousePosition = undefined;
 }, Cesium.ScreenSpaceEventType.LEFT_UP);
+
 
 
 
