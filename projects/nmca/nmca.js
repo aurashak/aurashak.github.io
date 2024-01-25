@@ -1,48 +1,39 @@
-let isDragging = false;
-let offsetX, offsetY;
+// Coordinates of each grid area on the larger image
+const gridAreas = [
+    { x: 0.1, y: 0.1 },
+    { x: 0.4, y: 0.1 },
+    { x: 0.7, y: 0.1 },
+    // Add more grid areas as needed
+];
 
-function startDrag(e) {
-    isDragging = true;
-    offsetX = e.clientX;
-    offsetY = e.clientY;
-    document.getElementById('zoomImage').style.cursor = 'grabbing';
+function handleGridClick(event) {
+    const gridImage = document.getElementById('gridImage');
+    const gridImageRect = gridImage.getBoundingClientRect();
+
+    // Calculate the clicked coordinates relative to the gridImage
+    const clickedX = (event.clientX - gridImageRect.left) / gridImageRect.width;
+    const clickedY = (event.clientY - gridImageRect.top) / gridImageRect.height;
+
+    // Find the closest grid area
+    const closestGridArea = findClosestGridArea(clickedX, clickedY);
+
+    // Zoom to the selected grid area on the larger image
+    zoomTo(closestGridArea.x, closestGridArea.y);
 }
 
-function stopDrag() {
-    isDragging = false;
-    document.getElementById('zoomImage').style.cursor = 'grab';
-}
+function findClosestGridArea(clickedX, clickedY) {
+    let closestArea;
+    let minDistance = Number.MAX_VALUE;
 
-function drag(e) {
-    if (isDragging) {
-        const zoomImage = document.getElementById('zoomImage');
-        const dx = e.clientX - offsetX;
-        const dy = e.clientY - offsetY;
-        offsetX = e.clientX;
-        offsetY = e.clientY;
-
-        zoomImage.style.transform = `translate(${dx}px, ${dy}px) ${zoomImage.style.transform}`;
+    for (const area of gridAreas) {
+        const distance = Math.sqrt((clickedX - area.x) ** 2 + (clickedY - area.y) ** 2);
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestArea = area;
+        }
     }
+
+    return closestArea;
 }
 
-function zoomTo(x, y) {
-    const zoomImage = document.getElementById('zoomImage');
-    zoomImage.style.transform = `scale(2) translate(${(x - 0.5) * 100}%, ${(y - 0.5) * 100}%)`;
-}
-
-function resetZoom() {
-    const zoomImage = document.getElementById('zoomImage');
-    zoomImage.style.transform = 'none';
-}
-
-document.getElementById('zoomImage').addEventListener('wheel', function (e) {
-    e.preventDefault();
-    const zoomImage = document.getElementById('zoomImage');
-    const currentTransform = getComputedStyle(zoomImage).transform;
-    const currentScale = parseFloat(currentTransform.split(',')[3]) || 1;
-
-    if (e.deltaY > 0 || currentScale < 1) {
-        const scale = e.deltaY > 0 ? 0.9 : 1.1;
-        zoomImage.style.transform = `scale(${scale}) ${currentTransform}`;
-    }
-});
+// Rest of your existing zoomTo and other functions

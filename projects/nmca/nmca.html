@@ -36,11 +36,25 @@
 <div class="placeidcontainer">
     
     <div class="mapcolumnleft">
+
+
+        <div class="mapsectionleft">
+                <!-- Smaller Image of the Grid -->
+                <div id="gridImage" onclick="handleGridClick(event)" style="position: absolute; top: 0; left: 0; width: 100%; height: auto; cursor: pointer;">
+                    <img src="https://aurashak.github.io/projects/nmca/nmcasmall.png" alt="Grid Image" style="width: 100%; height: auto;">
+                </div>
+        </div>
+        
+
         
         <div class="mapsectionleft">
             <a href="#" id="resetZoomBtn" onclick="resetZoom()">Reset Zoom</a>
         </div>
         
+
+
+
+
     <div class="mapsectionleft">
         <div class="hyperlinks">
             <a href="#" onclick="zoomTo(0.5, 0.5)">Typology 1: Low-rise</a>
@@ -63,9 +77,9 @@
     </div>
 
     <div class="mapcolumnright">
-        <div class="zoom-container">
-            <img src="https://aurashak.github.io/projects/nmca/nmcalarge.png" alt="Large Image" id="zoomImage">
-        </div>
+        <div id="zoomImageContainer" style="position: relative;">
+            <img id="zoomImage" src="https://aurashak.github.io/projects/nmca/nmcalarge.png" alt="Zoomable Image" style="width: 100%; height: auto;">
+        </div> 
     </div>
 
 </div>
