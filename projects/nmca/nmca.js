@@ -58,7 +58,7 @@ function updateGridOverlay() {
     const rows = 3;
 
     const columnWidth = 100 / columns;
-    const rowHeight = gridImage.clientHeight / rows;
+    const rowHeight = gridImage.offsetHeight / rows; // Use offsetHeight instead of clientHeight
 
     gridImageOverlay.innerHTML = '';
 
@@ -76,7 +76,3 @@ function updateGridOverlay() {
         gridImageOverlay.appendChild(horizontalLine);
     }
 }
-
-// Call the updateGridOverlay function initially and whenever the window is resized
-updateGridOverlay();
-window.addEventListener('resize', updateGridOverlay);
