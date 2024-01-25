@@ -17,15 +17,15 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
-var defaultImageryProvider = viewer.imageryLayers.get(0).imageryProvider;
+var defaultImageryProvider = viewer.imageryLayers.get(0).imageryProvider
 var satelliteLayer = Cesium.createWorldImagery();
 
 // Set the camera to focus slightly further west and facing east
 viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0030, 40.8159, 1500.0),
+    destination: Cesium.Cartesian3.fromDegrees(-74.0015, 40.8167, 1500.0), 
     orientation: {
-        heading: Cesium.Math.toRadians(90),  // Rotate to face east
-        pitch: Cesium.Math.toRadians(-45),
+        heading: Cesium.Math.toRadians(90),  
+        pitch: Cesium.Math.toRadians(-65),   
         roll: Cesium.Math.toRadians(0)
     }
 });
@@ -34,7 +34,9 @@ viewer.camera.setView({
 function toggleSatellite() {
     var checkbox = document.getElementById('toggleSatellite');
     if (checkbox.checked) {
-        viewer.imageryLayers.addImageryProvider(satelliteLayer);
+        viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+            url: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        }));
     } else {
         viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assumes satellite layer is at index 1
     }
