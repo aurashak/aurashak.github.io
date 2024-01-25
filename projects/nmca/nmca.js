@@ -6,6 +6,21 @@ const gridAreas = [
     // Add more grid areas as needed
 ];
 
+// Define the zoomTo function
+function zoomTo(x, y) {
+    const zoomImage = document.getElementById('zoomImage');
+    const container = document.getElementById('zoomImageContainer');
+    const containerRect = container.getBoundingClientRect();
+
+    const offsetX = (x - 0.5) * containerRect.width;
+    const offsetY = (y - 0.5) * containerRect.height;
+
+    const dx = containerRect.width / 2 - offsetX;
+    const dy = containerRect.height / 2 - offsetY;
+
+    zoomImage.style.transform = `scale(2) translate(${dx}px, ${dy}px)`;
+}
+
 function handleGridClick(event) {
     const gridImage = document.getElementById('gridImage');
     const gridImageRect = gridImage.getBoundingClientRect();
@@ -35,5 +50,3 @@ function findClosestGridArea(clickedX, clickedY) {
 
     return closestArea;
 }
-
-// Rest of your existing zoomTo and other functions
