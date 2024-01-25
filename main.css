@@ -1780,6 +1780,11 @@ header a:active { text-decoration: underline; color: black;}
 
 
 
+
+
+  
+
+
 #toolbar {
     background-color: #f0f0f0; /* Background color for the toolbar */
     padding: 10px; /* Add padding to the toolbar content */
@@ -1806,7 +1811,6 @@ header a:active { text-decoration: underline; color: black;}
     width: 100%; /* Make the range input span the full width of the toolbar */
 }
 
-/* Customize other toolbar elements as needed */
 
 
 
@@ -1821,16 +1825,6 @@ header a:active { text-decoration: underline; color: black;}
     font-size: 12px;
 }
 
-
-#toolbarContainer {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
 
 
 
