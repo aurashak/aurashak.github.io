@@ -42,7 +42,7 @@ document.getElementById('toggleSatellite').addEventListener('change', toggleSate
 
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
 viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.0015, 40.8167, 500.0), // Closer zoom (lower altitude)
+    destination: Cesium.Cartesian3.fromDegrees(-74.000130, 40.824301, 500.0), // Closer zoom (lower altitude)
     orientation: {
         heading: Cesium.Math.toRadians(90),  // Rotate to face east
         pitch: Cesium.Math.toRadians(-25),   // Lower the pitch angle
