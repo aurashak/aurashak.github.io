@@ -782,27 +782,36 @@ header a:active { text-decoration: underline; color: black;}
 
 #opacity-slider-label {
     margin-right: 10px;
+    font-size: 17px;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+
 }
 
 #opacity-slider {
-    width: 100px;
+    width: 60px;
+        align-items: center;
+    justify-content: center;
 }
 
 #opacity-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
+    width: 30px;
     height: 15px;
-    background: #4CAF50;
+    background: #181e62;
     cursor: pointer;
 }
 
 #opacity-slider::-moz-range-thumb {
-    width: 15px;
+    width: 30px;
     height: 15px;
-    background: #4CAF50;
+    background: #37a63b;
     cursor: pointer;
 }
+
+
 
 
 
@@ -1968,7 +1977,7 @@ header a:active { text-decoration: underline; color: black;}
     
     #resetZoomBtn {
        
-        
+
     }
     
   
