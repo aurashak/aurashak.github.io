@@ -21,31 +21,30 @@ var viewer = new Cesium.Viewer('mtsmap', {
     }
 });
 
-    // Later in your code, you can change the background color to white again
-    viewer.scene.backgroundColor = Cesium.Color.WHITE;
+        // Later in your code, you can change the background color to white again
+        viewer.scene.backgroundColor = Cesium.Color.WHITE;
 
-    
-var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+        var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
-// Function to toggle satellite layer
-function toggleSatellite() {
-    var checkbox = document.getElementById('toggleSatellite');
-    if (checkbox.checked) {
-        viewer.imageryLayers.addImageryProvider(Cesium.createWorldImagery());
-    } else {
-        viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assumes satellite layer is at index 1
-    }
-}
+        // Function to toggle satellite layer
+        function toggleSatellite() {
+            var checkbox = document.getElementById('toggleSatellite');
+            if (checkbox.checked) {
+                viewer.imageryLayers.addImageryProvider(Cesium.createWorldImagery());
+            } else {
+                viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assumes satellite layer is at index 1
+            }
+        }
 
-// Attach event listener to the checkbox
-document.getElementById('toggleSatellite').addEventListener('change', toggleSatellite);
+        // Attach event listener to the checkbox
+        document.getElementById('toggleSatellite').addEventListener('change', toggleSatellite);
 
-// Set the camera to focus slightly further west, facing east, and at a closer zoom
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.000130, 40.824301, 500.0), // Closer zoom (lower altitude)
-    orientation: {
-        heading: Cesium.Math.toRadians(90),  // Rotate to face east
-        pitch: Cesium.Math.toRadians(-25),   // Lower the pitch angle
-        roll: Cesium.Math.toRadians(0)
-    }
-});
+        // Set the camera to focus slightly further west, facing east, and at a closer zoom
+        viewer.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(-74.000130, 40.824301, 500.0), // Closer zoom (lower altitude)
+            orientation: {
+                heading: Cesium.Math.toRadians(90),  // Rotate to face east
+                pitch: Cesium.Math.toRadians(-25),   // Lower the pitch angle
+                roll: Cesium.Math.toRadians(0)
+            }
+        });
