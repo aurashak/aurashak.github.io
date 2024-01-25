@@ -17,13 +17,14 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
 });
 
 window.onload = function() {
-    var layerSwitch = document.getElementById("layerSwitch");
+    var osmLayerSwitch = document.getElementById("osmLayerSwitch");
 
-    if (layerSwitch) {
-        layerSwitch.addEventListener("change", function () {
-            toggleImageryLayer(layerSwitch.checked ? 1 : 0);
+    if (osmLayerSwitch) {
+        osmLayerSwitch.addEventListener("change", function () {
+            toggleImageryLayer(osmLayerSwitch.checked ? 1 : 0);
         });
     }
+    
 
     // Later in your code, you can change the background color to white again
     viewer.scene.backgroundColor = Cesium.Color.WHITE;
