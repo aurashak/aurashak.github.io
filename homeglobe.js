@@ -22,26 +22,15 @@ viewer.scene.backgroundColor = Cesium.Color.WHITE;
 // Flag to track the current imagery layer
 var isSentinel2Visible = true;
 
-// Get the layer slider element and its value display element
-var layerSlider = document.getElementById("layerSlider");
-var layerValueDisplay = document.getElementById("layerValue");
+var layerSwitch = document.getElementById("layerSwitch");
 
-// Update the value display when the layer slider value changes
-layerSlider.addEventListener("input", function () {
-    if (layerSlider.value === "0") {
-        layerValueDisplay.textContent = "OpenStreetMap";
-    } else {
-        layerValueDisplay.textContent = "Sentinel-2";
-    }
-
-    // Call the function to toggle layers based on the slider value
-    toggleImageryLayer(parseInt(layerSlider.value));
+layerSwitch.addEventListener("change", function () {
+    toggleImageryLayer(layerSwitch.checked ? 1 : 0);
 });
 
 // Define the sentinel2Layer variable
 var sentinel2Layer;
 
-// Modify the existing toggleImageryLayer function to accept a parameter for layer selection
 function toggleImageryLayer(layer) {
     if (layer === 0) {
         // Remove Sentinel-2 layer and add OpenStreetMap layer
@@ -59,6 +48,7 @@ function toggleImageryLayer(layer) {
         );
     }
 }
+
 
 // Set the initial rotation rate
 var spinRate = 0.0003;
