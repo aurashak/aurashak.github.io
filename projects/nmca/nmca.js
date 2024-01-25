@@ -35,10 +35,14 @@ function resetZoom() {
     zoomImage.style.transform = 'none';
 }
 
-// Add scroll zoom functionality
 document.getElementById('zoomImage').addEventListener('wheel', function (e) {
     e.preventDefault();
     const zoomImage = document.getElementById('zoomImage');
-    const scale = e.deltaY > 0 ? 0.9 : 1.1;
-    zoomImage.style.transform = `scale(${scale}) ${zoomImage.style.transform}`;
+    const currentTransform = getComputedStyle(zoomImage).transform;
+    const currentScale = parseFloat(currentTransform.split(',')[3]) || 1;
+
+    if (e.deltaY > 0 || currentScale < 1) {
+        const scale = e.deltaY > 0 ? 0.9 : 1.1;
+        zoomImage.style.transform = `scale(${scale}) ${currentTransform}`;
+    }
 });
