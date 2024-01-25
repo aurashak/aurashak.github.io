@@ -18,7 +18,6 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
-var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
 viewer.scene.camera.setView({
@@ -30,19 +29,20 @@ viewer.scene.camera.setView({
     },
 });
 
+
+
 // Set bounds around the map
 var westLongitude = -74.0015;
 var eastLongitude = -73.9465;
 var southLatitude = 40.8090;
 var northLatitude = 40.8330;
 
-// Use the postRender event to ensure the scene is ready
-viewer.scene.postRender.addEventListener(function () {
-    viewer.camera.viewBoundingRectangle(
-        Cesium.Rectangle.fromDegrees(westLongitude, southLatitude, eastLongitude, northLatitude)
-    );
-});
-
 // Set minimum and maximum zoom distances
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
+
+
+var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+
+
+
