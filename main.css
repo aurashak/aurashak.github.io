@@ -97,6 +97,13 @@ header a:active { text-decoration: underline; color: black;}
     position: relative;
     width: 400px;
     z-index: 10; /* Send it to the back */
+    margin-left: 50px;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+        box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.7); 
+    border: 1px solid black;
+
 }
 
 
@@ -1786,29 +1793,27 @@ header a:active { text-decoration: underline; color: black;}
 
 
 #toolbar {
-    background-color: #f0f0f0; /* Background color for the toolbar */
-    padding: 10px; /* Add padding to the toolbar content */
-    border: 1px solid #ccc; /* Add a border around the toolbar */
-    border-radius: 5px; /* Rounded corners for the toolbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the toolbar */
+    padding: 10px 10px; 
+    font-size: 17px;
+    font-weight: normal;
 }
 
 #toolbar button {
-    background-color: #007bff; /* Button background color */
-    color: #fff; /* Button text color */
-    padding: 5px 10px; /* Padding around the button text */
-    border: none; /* Remove button border */
-    border-radius: 3px; /* Rounded corners for buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    margin-right: 5px; /* Add spacing between buttons */
+    background-color: #007bff; 
+    color: #fff; 
+    padding: 5px 10px; 
+    border: none; 
+    border-radius: 3px; 
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 #toolbar button:hover {
-    background-color: #0056b3; /* Button background color on hover */
+    background-color: #0056b3; 
 }
 
 #toolbar input[type="range"] {
-    width: 100%; /* Make the range input span the full width of the toolbar */
+    width: 100%; 
 }
 
 
