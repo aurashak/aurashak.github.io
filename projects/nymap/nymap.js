@@ -366,8 +366,12 @@ document.getElementById('floodplain').addEventListener('click', function() {
 
 
 
-document.getElementById('majoroilstorage').addEventListener('click', function() {
+document.getElementById('majoroilstorage').addEventListener('change', function() {
     if (map.hasLayer(majoroilstorageLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('majoroilstorage').checked) {
+            return;
+        }
         map.removeLayer(majoroilstorageLayer);
     } else {
         map.addLayer(majoroilstorageLayer);
@@ -375,21 +379,31 @@ document.getElementById('majoroilstorage').addEventListener('click', function() 
 });
 
 
-document.getElementById('powerplants').addEventListener('click', function() {
+document.getElementById('powerplants').addEventListener('change', function() {
     if (map.hasLayer(powerplantsLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('powerplants').checked) {
+            return;
+        }
         map.removeLayer(powerplantsLayer);
     } else {
         map.addLayer(powerplantsLayer);
     }
 });
 
-document.getElementById('nygaspipelines').addEventListener('click', function() {
+
+document.getElementById('nygaspipelines').addEventListener('change', function() {
     if (map.hasLayer(nygaspipelinesLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nygaspipelines').checked) {
+            return;
+        }
         map.removeLayer(nygaspipelinesLayer);
     } else {
         map.addLayer(nygaspipelinesLayer);
     }
 });
+
 
 
 document.getElementById('wastetransferfacility').addEventListener('click', function() {
@@ -400,29 +414,44 @@ document.getElementById('wastetransferfacility').addEventListener('click', funct
     }
 });
 
-document.getElementById('wastewatertreatment').addEventListener('click', function() {
-    if (map.hasLayer(wastewatertreatmentLayer)) {
-        map.removeLayer(wastewatertreatmentLayer);
+document.getElementById('wastetransferfacility').addEventListener('change', function() {
+    if (map.hasLayer(wastetransferfacilityLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('wastetransferfacility').checked) {
+            return;
+        }
+        map.removeLayer(wastetransferfacilityLayer);
     } else {
-        map.addLayer(wastewatertreatmentLayer);
+        map.addLayer(wastetransferfacilityLayer);
     }
 });
 
-document.getElementById('inactivesolidwastelandfill').addEventListener('click', function() {
+
+document.getElementById('inactivesolidwastelandfill').addEventListener('change', function() {
     if (map.hasLayer(inactivesolidwastelandfillLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('inactivesolidwastelandfill').checked) {
+            return;
+        }
         map.removeLayer(inactivesolidwastelandfillLayer);
     } else {
         map.addLayer(inactivesolidwastelandfillLayer);
     }
 });
 
-document.getElementById('recyclingfacility').addEventListener('click', function() {
+
+document.getElementById('recyclingfacility').addEventListener('change', function() {
     if (map.hasLayer(recyclingfacilityLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('recyclingfacility').checked) {
+            return;
+        }
         map.removeLayer(recyclingfacilityLayer);
     } else {
         map.addLayer(recyclingfacilityLayer);
     }
 });
+
 
 document.getElementById('chemicalstorage').addEventListener('click', function() {
     if (map.hasLayer(chemicalstorageLayer)) {
@@ -441,13 +470,18 @@ document.getElementById('aqisite').addEventListener('click', function() {
     }
 });
 
-document.getElementById('electrictransmissionlines').addEventListener('click', function() {
+document.getElementById('electrictransmissionlines').addEventListener('change', function() {
     if (map.hasLayer(electrictransmissionlinesLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('electrictransmissionlines').checked) {
+            return;
+        }
         map.removeLayer(electrictransmissionlinesLayer);
     } else {
         map.addLayer(electrictransmissionlinesLayer);
     }
 });
+
 
 
 document.getElementById('evacuationzones').addEventListener('click', function() {
