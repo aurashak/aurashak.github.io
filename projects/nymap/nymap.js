@@ -536,6 +536,9 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
         if (document.getElementById('inactivesolidwastelandfill').checked) {
             map.addLayer(inactivesolidwastelandfillLayer);
         }
+        if (document.getElementById('nycso').checked) {
+            map.addLayer(nycsoLayer);
+        }
         if (document.getElementById('recyclingfacility').checked) {
             map.addLayer(recyclingfacilityLayer);
         }
