@@ -11,12 +11,18 @@ var viewer = new Cesium.Viewer('mtsmap', {
     timeline: false,
     scene3DOnly: true,
     sceneMode: Cesium.SceneMode.SCENE3D,
+    backgroundColor: Cesium.Color.WHITE, 
+
     screenSpaceCameraController: {
         minimumZoomDistance: 200.0, // Set minimum zoom distance (in meters)
         maximumZoomDistance: 1000.0 // Set maximum zoom distance (in meters)
     }
 });
 
+    // Later in your code, you can change the background color to white again
+    viewer.scene.backgroundColor = Cesium.Color.WHITE;
+
+    
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
 // Function to toggle satellite layer
