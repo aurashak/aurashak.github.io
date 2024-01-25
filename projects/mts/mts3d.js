@@ -15,11 +15,11 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D
 });
 
-// Set the camera to focus on the west side at 125th Street
+// Set the camera to focus on the east side at 125th Street and facing east
 viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-73.9530, 40.8159, 1500.0),
     orientation: {
-        heading: Cesium.Math.toRadians(0),
+        heading: Cesium.Math.toRadians(90),  // Rotate to face east
         pitch: Cesium.Math.toRadians(-45),
         roll: Cesium.Math.toRadians(0)
     }
