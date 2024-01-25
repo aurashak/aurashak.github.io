@@ -581,10 +581,12 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
         map.removeLayer(wastetransferfacilityLayer);
         map.removeLayer(wastewatertreatmentLayer);
         map.removeLayer(inactivesolidwastelandfillLayer);
+        map.removeLayer(nycsoLayer);
         map.removeLayer(recyclingfacilityLayer);
         // Reset the individual layer toggle buttons to off state
         document.getElementById('wastetransferfacility').checked = false;
         document.getElementById('wastewatertreatment').checked = false;
+        document.getElementById('nycso').checked = false;
         document.getElementById('inactivesolidwastelandfill').checked = false;
         document.getElementById('recyclingfacility').checked = false;
     } else {
