@@ -48,7 +48,7 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
         // Set the camera to focus slightly further west, facing east, and at a closer zoom
         viewer.scene.camera.setView({
-            destination: Cesium.Cartesian3.fromDegrees(-73.96356589415986, 40.82280149407267, 300.0), // Adjusted coordinates and altitude
+            destination: Cesium.Cartesian3.fromDegrees(-73.96939271724348, 40.82807915525164, 300.0), // Adjusted coordinates and altitude
             orientation: {
                 heading: Cesium.Math.toRadians(90),  // Rotate to face east
                 pitch: Cesium.Math.toRadians(-25),   // Lower the pitch angle
