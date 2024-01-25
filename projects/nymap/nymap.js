@@ -130,7 +130,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             fillOpacity: opacityValue // Set fillOpacity based on the slider value
         };
     }
-}).addTo(waterLayerGroup);
+});
 
 // Add an event listener to the opacity slider
 opacitySlider.addEventListener('input', function () {
