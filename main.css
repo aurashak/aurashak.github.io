@@ -97,7 +97,7 @@ header a:active { text-decoration: underline; color: black;}
     position: relative;
     width: 400px;
     z-index: 10; /* Send it to the back */
-    margin-left: 50px;
+    margin-left: 100px;
     margin-top: 30px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 3px;
