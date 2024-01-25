@@ -25,59 +25,33 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
 
 
-// Add Photorealistic 3D Tiles
-try {
-    async function loadPhotorealistic3DTiles() {
-        const tileset = await Cesium.createGooglePhotorealistic3DTileset();
-        viewer.scene.primitives.add(tileset);
 
-        // Point the camera at the Googleplex
+
+
+// Later in your code, you can change the background color to white again
+        viewer.scene.backgroundColor = Cesium.Color.WHITE;
+
+        var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+
+        // Function to toggle satellite layer
+        function toggleSatellite() {
+            var checkbox = document.getElementById('toggleSatellite');
+            if (checkbox.checked) {
+                viewer.imageryLayers.addImageryProvider(Cesium.createWorldImagery());
+            } else {
+                viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assumes satellite layer is at index 1
+            }
+        }
+
+        // Attach event listener to the checkbox
+        document.getElementById('toggleSatellite').addEventListener('change', toggleSatellite);
+
+        // Set the camera to focus slightly further west, facing east, and at a closer zoom
         viewer.scene.camera.setView({
-            destination: new Cesium.Cartesian3(
-                -2693797.551060477,
-                -4297135.517094725,
-                3854700.7470414364
-            ),
-            orientation: new Cesium.HeadingPitchRoll(
-                4.6550106925119925,
-                -0.2863894863138836,
-                1.3561760425773173e-7
-            ),
+            destination: Cesium.Cartesian3.fromDegrees(40.82280149407267, -73.96356589415986, 300.0), // Adjusted coordinates and altitude
+            orientation: {
+                heading: Cesium.Math.toRadians(90),  // Rotate to face east
+                pitch: Cesium.Math.toRadians(-25),   // Lower the pitch angle
+                roll: Cesium.Math.toRadians(0)
+            }
         });
-    }
-
-    loadPhotorealistic3DTiles();
-} catch (error) {
-    console.log(`Error loading Photorealistic 3D Tiles tileset: ${error}`);
-}
-
-
-
-
-var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
-
-// Function to toggle OSM layer
-function toggleOSMLayer() {
-    var checkbox = document.getElementById('toggleOSM');
-    if (checkbox.checked) {
-        viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
-            url: 'https://a.tile.openstreetmap.org/'
-        }));
-    } else {
-        viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assumes OSM layer is at index 1
-    }
-}
-
-
-// Attach event listener to the checkbox
-document.getElementById('toggleOSM').addEventListener('change', toggleOSMLayer);
-
-// Set the camera to focus slightly further west, facing east, and at a closer zoom
-viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(40.82280149407267, -73.96356589415986, 300.0),
-    orientation: {
-        heading: Cesium.Math.toRadians(90),
-        pitch: Cesium.Math.toRadians(-25),
-        roll: Cesium.Math.toRadians(0)
-    }
-});
