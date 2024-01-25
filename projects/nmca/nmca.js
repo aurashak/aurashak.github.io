@@ -43,5 +43,8 @@ function zoomToQuadrant(quadrant) {
     const dx = containerRect.width / 2 - offsetX;
     const dy = containerRect.height / 2 - offsetY;
 
-    zoomImage.style.transform = `scale(2) translate(${dx}px, ${dy}px)`;
+    const scaleFactor = 2; // Adjust the scale factor as needed
+
+    zoomImage.style.transform = `scale(${scaleFactor}) translate(${dx / scaleFactor}px, ${dy / scaleFactor}px)`;
 }
+
