@@ -1,6 +1,6 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZjljMGQ4MS0zNzJkLTQxMjItODk1OC03ZDkwM2VkYzYwMDUiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDYxNTcwNDJ9.9AcXXdl9PUpvx5y-XBR81kIHSjjfRbY6wDM-JPVPCZo';
 
-var viewer = new Cesium.Viewer('cesiumContainer', {
+var viewer = new Cesium.Viewer('mtsmap', {
     terrainProvider: Cesium.createWorldTerrain(),
     baseLayerPicker: false,
     geocoder: false,
