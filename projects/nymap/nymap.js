@@ -175,7 +175,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
             fillOpacity: 0.5
         });
     }
-}).addTo(waterLayerGroup);
+}).addTo(wasteLayerGroup);
 
 
 
