@@ -81,6 +81,7 @@ handler.setInputAction(function () {
 
 
 
+
 // Later in your code, you can change the background color to white again
         viewer.scene.backgroundColor = Cesium.Color.WHITE;
 
