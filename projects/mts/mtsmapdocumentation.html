@@ -22,11 +22,7 @@
 
     <div class="aboutcontainer">
 
-        <div class="maptitle">
- NY Map documentation        
-</div>
- 
-
+        <p><h1>135th Street Marine Transfer Station Map Documentation</h1><br>
 
         <p><h1>About</h1><br>
         <h3>This map seeks to provide a comprehensive overview of infrastructure dynamics in New York City. Toggling the map layers highlights concentrations of infrastructure, which can be correllated with impacts on nature, public health, economics, and more. </h3>        
@@ -38,9 +34,9 @@
        <li><h3><a href="https://aurashak.github.io/">NYS GIS Clearinghouse</a></h3></li>    
         <li><h3><a href="https://aurashak.github.io/">Open Street Maps</a></h3></li>    
         <li><h3><a href="https://aurashak.github.io/">Satellite</a></h3></li>    
-        <li><h3><a href="https://aurashak.github.io/">New York City Open Data</a></h3>   </li>     
-        <li> <h3><a href="https://aurashak.github.io/">Air Quality</a></h3>    </li>    
-            <li> <h3><a href="https://aurashak.github.io/">Air Quality</a></h3>    </li>    
+        <li><h3><a href="https://aurashak.github.io/">New York City Open Data</a></h3></li>     
+        <li> <h3><a href="https://aurashak.github.io/">Air Quality</a></h3></li>    
+        <li> <h3><a href="https://aurashak.github.io/">Air Quality</a></h3></li>    
 
     </div>
 
@@ -62,55 +58,9 @@
                             fillOpacity: .8
                         };
                     },
-                    pointToLayer: function (feature, latlng) {
-                        // Get the county name from the 'NAME' property
-                        var countyName = feature.properties.NAME;
-                
-                        // Create a label marker with the county name as the label
-                        return L.marker(latlng, {
-                            icon: L.divIcon({
-                                className: 'leaflet-div-label',
-                                html: countyName, // Use the 'NAME' property as the label
-                                iconSize: [100, 40] // Adjust the size of the label marker
-                            })
-                        });
-                    }
-                });
                 </code></pre>
 
-                <p><h1>Code example 2</h1><br>
-                    <h3>The Code structure for this website can be found at: 
-                        This map seeks to provide a comprehensive overview of infrastructure dynamics in New York City. Toggling the map layers highlights concentrations of infrastructure, which can be correllated with impacts on nature, public health, economics, and more. </h3>        
-                  
-                
-
-                        <pre><code>
-                            var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-                                style: function (feature) {
-                                    return {
-                                        fillColor: 'grey',
-                                        color: 'black',
-                                        weight: 0.5,
-                                        opacity: 0.5,
-                                        fillOpacity: .8
-                                    };
-                                },
-                                pointToLayer: function (feature, latlng) {
-                                    // Get the county name from the 'NAME' property
-                                    var countyName = feature.properties.NAME;
-                            
-                                    // Create a label marker with the county name as the label
-                                    return L.marker(latlng, {
-                                        icon: L.divIcon({
-                                            className: 'leaflet-div-label',
-                                            html: countyName, // Use the 'NAME' property as the label
-                                            iconSize: [100, 40] // Adjust the size of the label marker
-                                        })
-                                    });
-                                }
-                            });
-                            </code></pre>
-
+        
      <p><h1>Next Steps</h1><br>
         <h3>Seeking collaborators for the next steps</h3>
                 

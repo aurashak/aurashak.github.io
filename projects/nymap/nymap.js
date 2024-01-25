@@ -341,7 +341,7 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 
 
-document.getElementById('nycso').addEventListener('change', function() {
+document.getElementById('c').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
         // If the layer is already on, do nothing when switching left to right
         if (document.getElementById('nycso').checked) {
@@ -479,6 +479,18 @@ document.getElementById('electrictransmissionlines').addEventListener('change', 
         map.removeLayer(electrictransmissionlinesLayer);
     } else {
         map.addLayer(electrictransmissionlinesLayer);
+    }
+});
+
+document.getElementById('wastewatertreatment').addEventListener('change', function() {
+    if (map.hasLayer(wastewatertreatmentLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('wastewatertreatment').checked) {
+            return;
+        }
+        map.removeLayer(wastewatertreatmentLayer);
+    } else {
+        map.addLayer(wastewatertreatmentLayer);
     }
 });
 
