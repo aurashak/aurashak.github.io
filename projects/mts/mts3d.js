@@ -15,15 +15,31 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D
 });
 
-// Set the camera to focus on the east side at 125th Street and facing east
-viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-73.9530, 40.8159, 1500.0),
-    orientation: {
-        heading: Cesium.Math.toRadians(90),  // Rotate to face east
-        pitch: Cesium.Math.toRadians(-45),
-        roll: Cesium.Math.toRadians(0)
-    }
-});
+var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
-// Load 3D buildings in Upper Manhattan
-viewer.scene.primitives.add(Cesium.createOsmBuildings());
+        var defaultImageryProvider = viewer.imageryLayers.get(0).imageryProvider;
+        var satelliteLayer = Cesium.createWorldImagery();
+
+        // Set the camera to focus slightly further west
+        viewer.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(-74.0030, 40.8159, 1500.0),
+            orientation: {
+                heading: Cesium.Math.toRadians(0),
+                pitch: Cesium.Math.toRadians(-45),
+                roll: Cesium.Math.toRadians(0)
+            }
+        });
+
+        // Function to toggle satellite layer
+        function toggleSatellite() {
+            var checkbox = document.getElementById('toggleSatellite');
+            if (checkbox.checked) {
+                viewer.imageryLayers.addImageryProvider(satelliteLayer);
+            } else {
+                viewer.imageryLayers.remove(viewer.imageryLayers.get(1)); // Assumes satellite layer is at index 1
+            }
+        }
+
+        // Attach event listener to the checkbox
+        document.getElementById('toggleSatellite').addEventListener('change', toggleSatellite);
+   
