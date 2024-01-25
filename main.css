@@ -8,9 +8,9 @@ html, body {
     margin: 0;
 }
 
-a:link {text-decoration: underline; }
+a:link {text-decoration: none; }
 a:visited { color: black;}
-a:hover {text-decoration: underline; }
+a:hover {text-decoration: none; }
 a:active { color: black}
 
 
@@ -661,6 +661,33 @@ header a:active { text-decoration: underline; color: black;}
 
 
 
+#gridImageContainer {
+    position: relative;
+    overflow: hidden;
+}
+
+#gridImageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.gridline {
+    position: absolute;
+    background-color: black;
+}
+
+.horizontal {
+    height: 2px;
+    width: 100%;
+}
+
+.vertical {
+    height: 100%;
+    width: 2px;
+}
 
 
 
@@ -1979,10 +2006,15 @@ header a:active { text-decoration: underline; color: black;}
     }
     
     #resetZoomBtn {
-       
-
+    
     }
     
+
+
+
+
+
+
   
   .cesium-viewer-cesiumWidgetContainer {
     width:100%;
