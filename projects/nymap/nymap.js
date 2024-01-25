@@ -158,20 +158,7 @@ floodplainCheckbox.addEventListener('change', function () {
 
 
 
-// NYC CSO Layer
-var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'brown',
-            color: 'black',
-            weight: 0,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-}).addTo(wasteLayerGroup);
+
 
 
 
@@ -235,6 +222,9 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
 }).addTo(energyLayerGroup);
 
 
+
+
+
 // Waste Layer Group
 var wasteLayerGroup = L.layerGroup();
 
@@ -247,6 +237,21 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
             fillColor: 'purple',
             color: 'black',
             weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(wasteLayerGroup);
+
+// NYC CSO Layer
+var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'brown',
+            color: 'black',
+            weight: 0,
             opacity: 0.7,
             fillOpacity: 0.5
         });
