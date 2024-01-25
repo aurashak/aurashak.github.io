@@ -96,7 +96,7 @@ header a:active { text-decoration: underline; color: black;}
 
 
 .homecontainer {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
