@@ -112,10 +112,6 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
-// Water Layer Group
-var waterLayerGroup = L.layerGroup();
-
-
 
 
 
@@ -487,28 +483,39 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
     }
 });
 
+
+
+// Water Layer Group
+/*  var waterLayerGroup = L.layerGroup();  */
+
+// ...
+
+// Remove this block of code related to the water layer group
+/*
 if (false) {
-document.getElementById('waterLayerGroup').addEventListener('click', function() {
-    if (map.hasLayer(waterLayerGroup)) {
-        map.removeLayer(waterLayerGroup);
-        // If the group toggle is turned off, turn off individual layers as well
-        map.removeLayer(floodplainLayer);
-        map.removeLayer(nycsoLayer);
-        // Reset the individual layer toggle buttons to off state
-        document.getElementById('floodplain').checked = false;
-        document.getElementById('nycso').checked = false;
-    } else {
-        map.addLayer(waterLayerGroup);
-        // If the group toggle is turned on, turn on individual layers if they were previously checked
-        if (document.getElementById('floodplain').checked) {
-            map.addLayer(floodplainLayer);
+    document.getElementById('waterLayerGroup').addEventListener('click', function() {
+        if (map.hasLayer(waterLayerGroup)) {
+            map.removeLayer(waterLayerGroup);
+            // If the group toggle is turned off, turn off individual layers as well
+            map.removeLayer(floodplainLayer);
+            map.removeLayer(nycsoLayer);
+            // Reset the individual layer toggle buttons to off state
+            document.getElementById('floodplain').checked = false;
+            document.getElementById('nycso').checked = false;
+        } else {
+            map.addLayer(waterLayerGroup);
+            // If the group toggle is turned on, turn on individual layers if they were previously checked
+            if (document.getElementById('floodplain').checked) {
+                map.addLayer(floodplainLayer);
+            }
+            if (document.getElementById('nycso').checked) {
+                map.addLayer(nycsoLayer);
+            }
         }
-        if (document.getElementById('nycso').checked) {
-            map.addLayer(nycsoLayer);
-        }
-    }
-});
+    });
 }
+*/
+
 
 // Toggle Waste Layer Group
 document.getElementById('wasteLayerGroup').addEventListener('click', function() {
@@ -537,7 +544,7 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
             map.addLayer(inactivesolidwastelandfillLayer);
         }
         if (document.getElementById('nycso').checked) {
-            map.addLayer(nycsoLayer);
+            map.addLayer(nycsosLayer);
         }
         if (document.getElementById('recyclingfacility').checked) {
             map.addLayer(recyclingfacilityLayer);
