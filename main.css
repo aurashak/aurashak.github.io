@@ -522,12 +522,12 @@ header a:active { text-decoration: underline; color: black;}
 
 
 /* Add this style to change the track color to green when checked */
-.homeswitch-input:checked + .switch-track {
+.homeswitch-input:checked + .homeswitch-track {
     background-color: #4caf50; /* Green color */
 }
 
 
-.homeswitch-input:checked + .switch-track .switch-thumb {
+.homeswitch-input:checked + .homeswitch-track .homeswitch-thumb {
     left: 16px;
 }
 
