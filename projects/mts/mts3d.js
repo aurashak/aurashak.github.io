@@ -11,7 +11,7 @@ var viewer = new Cesium.Viewer('mtsmap', {
     navigationInstructionsInitiallyVisible: false,
     animation: false,
     timeline: false,
-    scene3DOnly: true,
+    scene3DOnly: false,
     sceneMode: Cesium.SceneMode.SCENE3D,
     backgroundColor: Cesium.Color.WHITE, 
 
@@ -63,7 +63,7 @@ var viewer = new Cesium.Viewer('mtsmap', {
 
 
 
-        
+
         // Set up bounds for camera movement
 var westBound = Cesium.Math.toRadians(-74.0015);
 var eastBound = Cesium.Math.toRadians(-73.9465);
