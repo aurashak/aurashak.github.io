@@ -16,61 +16,63 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     backgroundColor: Cesium.Color.WHITE // Set the background color to white
 });
 
-// Later in your code, you can change the background color to white again
-viewer.scene.backgroundColor = Cesium.Color.WHITE;
+window.onload = function() {
+    var layerSwitch = document.getElementById("layerSwitch");
 
-// Flag to track the current imagery layer
-var isSentinel2Visible = true;
-
-var layerSwitch = document.getElementById("layerSwitch");
-
-layerSwitch.addEventListener("change", function () {
-    toggleImageryLayer(layerSwitch.checked ? 1 : 0);
-});
-
-// Define the sentinel2Layer variable
-var sentinel2Layer;
-
-function toggleImageryLayer(layer) {
-    // Clear all existing layers
-    viewer.imageryLayers.removeAll();
-
-    if (layer === 0) {
-        // Add OpenStreetMap layer
-        viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
-            url: 'https://a.tile.openstreetmap.org/'
-        }));
-    } else {
-        // Add Sentinel-2 layer
-        viewer.imageryLayers.addImageryProvider(
-            new Cesium.IonImageryProvider({ assetId: 3954 })
-        );
+    if (layerSwitch) {
+        layerSwitch.addEventListener("change", function () {
+            toggleImageryLayer(layerSwitch.checked ? 1 : 0);
+        });
     }
-}
 
+    // Later in your code, you can change the background color to white again
+    viewer.scene.backgroundColor = Cesium.Color.WHITE;
 
+    // Flag to track the current imagery layer
+    var isSentinel2Visible = true;
 
-// Set the initial rotation rate
-var spinRate = 0.0003;
+    // Define the sentinel2Layer variable
+    var sentinel2Layer;
 
-// Flag to track rotation state
-var isRotating = true;
+    function toggleImageryLayer(layer) {
+        // Clear all existing layers
+        viewer.imageryLayers.removeAll();
 
-// Function to start or stop the rotation on mouse click
-function toggleRotation() {
-    isRotating = !isRotating;
-}
-
-// Create a click event handler to toggle rotation on mouse click
-var clickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-clickHandler.setInputAction(toggleRotation, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
-// Function to update the globe rotation
-function updateRotation() {
-    if (isRotating) {
-        viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+        if (layer === 0) {
+            // Add OpenStreetMap layer
+            viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({
+                url: 'https://a.tile.openstreetmap.org/'
+            }));
+        } else {
+            // Add Sentinel-2 layer
+            viewer.imageryLayers.addImageryProvider(
+                new Cesium.IonImageryProvider({ assetId: 3954 })
+            );
+        }
     }
-}
 
-// Add a render loop to continuously update the rotation
-viewer.scene.postRender.addEventListener(updateRotation);
+    // Set the initial rotation rate
+    var spinRate = 0.0003;
+
+    // Flag to track rotation state
+    var isRotating = true;
+
+    // Function to start or stop the rotation on mouse click
+    function toggleRotation() {
+        isRotating = !isRotating;
+    }
+
+    // Create a click event handler to toggle rotation on mouse click
+    var clickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    clickHandler.setInputAction(toggleRotation, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+    // Function to update the globe rotation
+    function updateRotation() {
+        if (isRotating) {
+            viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinRate);
+        }
+    }
+
+    // Add a render loop to continuously update the rotation
+    viewer.scene.postRender.addEventListener(updateRotation);
+};
