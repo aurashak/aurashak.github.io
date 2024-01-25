@@ -273,10 +273,22 @@ header a:active { text-decoration: underline; color: black;}
     grid-template-columns: 30% 70%;
     border: 1px solid black;
     height: calc(100% - 200px);
-
 }
 
 
+.nmcacontainer {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  border: 1px solid black;
+  height: calc(100% - 300px);
+}
+
+.nydisplacementmap {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  border: 1px solid black;
+  height: calc(100% - 300px);
+}
 
 .coords-box {
     flex-direction: row; /* Stack items vertically */
