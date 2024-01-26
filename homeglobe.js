@@ -79,35 +79,40 @@ window.onload = function() {
     // Add a render loop to continuously update the rotation
     viewer.scene.postRender.addEventListener(updateRotation);
 
-    // Add a button to spin the globe quickly and slow down progressively
+// Add a button to spin the globe quickly and slow down progressively
 var spinButton = document.createElement('button');
 spinButton.innerHTML = 'Spin Globe';
 spinButton.id = 'spinButton'; // Add an ID for easier styling
 spinButton.addEventListener('click', function() {
     spinGlobe();
 });
+document.body.appendChild(spinButton);
 
-    // Function to spin the globe quickly and slow down progressively
-    function spinGlobe() {
-        var initialSpinRate = 0.005;
-        var spinAcceleration = 0.0001;
+// Function to spin the globe quickly and slow down progressively
+function spinGlobe() {
+    var minSpinRate = 0.01; // Minimum spin rate for a more aggressive spin
+    var maxSpinRate = 0.1; // Maximum spin rate
+    var spinDirection = Math.random() > 0.5 ? 1 : -1; // Randomly choose the spin direction
 
-        function spinStep() {
-            if (isRotating) {
-                viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -initialSpinRate);
-                initialSpinRate -= spinAcceleration;
+    // Set a random initial spin rate
+    var initialSpinRate = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
 
-                if (initialSpinRate > 0) {
-                    requestAnimationFrame(spinStep);
-                } else {
-                    isRotating = false;
-                    initialSpinRate = 0.005; // Reset spin rate for the next spin
-                }
+    function spinStep() {
+        if (isRotating) {
+            viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinDirection * initialSpinRate);
+            initialSpinRate -= spinAcceleration;
+
+            if (initialSpinRate > 0) {
+                requestAnimationFrame(spinStep);
+            } else {
+                isRotating = false;
+                initialSpinRate = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
+                spinDirection = Math.random() > 0.5 ? 1 : -1; // Randomly choose the spin direction for the next spin
             }
         }
-
-        // Start the spinning
-        isRotating = true;
-        spinStep();
     }
-};
+
+    // Start the spinning
+    isRotating = true;
+    spinStep();
+}
