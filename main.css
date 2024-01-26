@@ -109,24 +109,21 @@ h3 {
 
 .coursenavigation a:link {
 text-decoration: none;
- 
+
 } 
 
 .coursenavigation a:hover {
   text-decoration: none;
-    background: lightgrey;
-
+  background: lightgrey;
 }
 
 
 .coursenavigation a:active {
   text-decoration: underline;
-
 }
 
 .coursenavigation a:visited {
   text-decoration: none;
-
 }
 
 
@@ -153,10 +150,10 @@ text-decoration: none;
   line-height: 1.6;
 }
 
-.aboutcontainer a:link { text-decoration: underline; color: black; }
+.aboutcontainer a:link { color: black; }
 .aboutcontainer a:visited { color: black; }
 .aboutcontainer a:hover { text-decoration: underline; }
-.aboutcontainer a:active { color: black; }
+.aboutcontainer a:active { }
 
 
 .hometoolbar {
@@ -217,6 +214,7 @@ padding: 0px 4px;
 .homesubtitle a:hover { text-decoration: underline;     }
 .homesubtitle a:active {   }
 .homesubtitle a:visited {   }
+
 
 
 
