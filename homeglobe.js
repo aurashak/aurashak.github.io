@@ -11,9 +11,9 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
-    skyBox: false, // Disable the skybox
-    skyAtmosphere: false, // Disable the sky atmosphere
-    backgroundColor: Cesium.Color.WHITE // Set the background color to white
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
 });
 
 window.onload = function() {
@@ -24,7 +24,7 @@ window.onload = function() {
             toggleImageryLayer(osmLayerSwitch.checked ? 1 : 0);
         });
     }
-    
+
     // Initial state: Load OpenStreetMap layer
     toggleImageryLayer(0);
 
@@ -78,4 +78,39 @@ window.onload = function() {
 
     // Add a render loop to continuously update the rotation
     viewer.scene.postRender.addEventListener(updateRotation);
+
+    // Add a button to spin the globe quickly and slow down progressively
+    var spinButton = document.createElement('button');
+    spinButton.innerHTML = 'Spin Globe';
+    spinButton.style.position = 'absolute';
+    spinButton.style.top = '10px';
+    spinButton.style.left = '10px';
+    spinButton.addEventListener('click', function() {
+        spinGlobe();
+    });
+    document.body.appendChild(spinButton);
+
+    // Function to spin the globe quickly and slow down progressively
+    function spinGlobe() {
+        var initialSpinRate = 0.005;
+        var spinAcceleration = 0.0001;
+
+        function spinStep() {
+            if (isRotating) {
+                viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -initialSpinRate);
+                initialSpinRate -= spinAcceleration;
+
+                if (initialSpinRate > 0) {
+                    requestAnimationFrame(spinStep);
+                } else {
+                    isRotating = false;
+                    initialSpinRate = 0.005; // Reset spin rate for the next spin
+                }
+            }
+        }
+
+        // Start the spinning
+        isRotating = true;
+        spinStep();
+    }
 };
