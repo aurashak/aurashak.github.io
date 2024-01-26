@@ -340,7 +340,7 @@ padding: 0px 4px;
 display: grid;
 grid-template-columns: 30% 70%;
 border: 1px solid black;
-height: calc(100% - 280px);
+height: calc(100% - 240px);
 }
 
 .nydisplacementmap {
@@ -362,6 +362,15 @@ height: calc(100% - 300px);
 }
 
 
+
+
+
+.nydismapiframe {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  border: none;
+}
 
 
 
