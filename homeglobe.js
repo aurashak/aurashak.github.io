@@ -82,6 +82,9 @@ window.onload = function() {
     // Add a button to spin the globe quickly and slow down progressively
     var spinButton = document.createElement('button');
     spinButton.innerHTML = 'Spin Globe';
+    spinButton.style.position = 'relative';
+    spinButton.style.top = '10px';
+    spinButton.style.left = '10px';
     spinButton.addEventListener('click', function() {
         spinGlobe();
     });
