@@ -88,6 +88,15 @@ spinButton.addEventListener('click', function() {
 });
 document.body.appendChild(spinButton);
 
+// Add a button to spin the globe quickly and slow down progressively
+var spinButton = document.createElement('button');
+spinButton.innerHTML = 'Spin Globe';
+spinButton.id = 'spinButton'; // Add an ID for easier styling
+spinButton.addEventListener('click', function() {
+    spinGlobe();
+});
+document.body.appendChild(spinButton);
+
 // Function to spin the globe quickly and slow down progressively
 function spinGlobe() {
     var minSpinRate = 0.01; // Minimum spin rate for a more aggressive spin
