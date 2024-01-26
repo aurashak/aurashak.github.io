@@ -38,33 +38,52 @@ h3 {
   margin: 0px;
 }
 
+
 .header {
   display: flex;
   justify-content: left;
   margin: 0px;
   padding: 10px 10px;
   border: 1px solid black;
-  position: relative; /* Add this line */
-  z-index: 1; /* Add this line */
+  position: relative;
+  z-index: 1;
   background: rgba(255, 255, 255, 0.5);
 }
-
-header a:link { text-decoration: none; pointer-events: auto; }
-header a:visited { color: black;}
-header a:hover { text-decoration: underline; color: black}
-header a:active { text-decoration: underline; color: black;}
 
 .navigation {
   font-size: 20px;
   text-align: left;
   color: black;
   margin: 0px 30px 0px 10px;
+  cursor: pointer;
 }
 
-.navigation a:link { text-decoration: none; color: black;}
-.navigation a:hover {text-decoration: none; color: black;}
-.navigation a:active {text-decoration: none; color: black;}
-.navigation a:visited { text-decoration: none; color: black;}
+.navigation:hover {
+  text-decoration: underline;
+}
+
+.hidden-projects {
+  display: none;
+  position: absolute;
+  top: 50px; /* Adjust the top position as needed */
+  left: 0;
+  background: white;
+  padding: 10px;
+  border: 1px solid black;
+  z-index: 2;
+}
+
+.hidden-projects a {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.hidden-projects a:hover {
+  text-decoration: underline;
+}
+
 
 .container {
   display: block;
