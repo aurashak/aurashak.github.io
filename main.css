@@ -58,6 +58,13 @@ h3 {
   cursor: pointer;
 }
 
+.navigation a:link {
+  text-decoration: none; 
+  color: black;
+
+}
+
+
 .navigation:hover {
   text-decoration: underline;
 
