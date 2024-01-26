@@ -569,10 +569,9 @@ margin-right: 10px;
 }
 
 
-
 /* Styles for Switch Mechanism */
 .homeswitch-label {
-
+ 
 }
 
 
@@ -583,9 +582,9 @@ margin-right: 10px;
 
 .homeswitch-track {
     background-color: #4294eb;
-    border-radius: 5px;
+    border-radius: 3px;
     height: 12px;
-    width: 30px;
+    width: 20px;
     position: relative;
 
 }
@@ -595,10 +594,10 @@ margin-right: 10px;
 .homeswitch-thumb {
     background: linear-gradient(to bottom right, #111111, rgb(22, 32, 43) 65.13%, #061f3b);
     border-radius: 3px;
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     position: absolute;
-    top: -4px;
+    top: -2px;
     left: -4px;
     transition: 0.2s;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -616,6 +615,8 @@ margin-right: 10px;
 .homeswitch-input:checked + .homeswitch-track .homeswitch-thumb {
     left: 16px;
 }
+
+
 
 
 
