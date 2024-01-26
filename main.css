@@ -85,6 +85,10 @@ h3 {
 }
 
 
+
+
+
+
 .container {
   display: block;
 }
@@ -143,35 +147,29 @@ h3 {
   z-index: 1; /* Bring them above the background */
 }
 
+
 .hometitle {
-  font-size: 55px;
+  font-size: 35px;
   margin-top: 30px;
   margin-left: 50px;
   font-weight: bold;
-  padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.7); 
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.6);
   display: inline-block;
-  border: 1px solid black;
 }
 
 .homesubtitle {
-  font-size: 30px;
-  margin-top: 20px;
-  margin-left: 100px;
-  font-weight: bold;
-  max-width: 800px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  display: inline-block;
-  border: 1px solid black;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.7); 
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 100px;
+    font-weight: bold;
+    max-width: 800px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.6);
+
 }
 
 .homesubtitle a:link {color: black;}
-.homesubtitle a:hover {      }
+.homesubtitle a:hover { text-decoration: underline;     }
 .homesubtitle a:active {   }
 .homesubtitle a:visited {   }
 
