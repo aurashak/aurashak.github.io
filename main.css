@@ -104,7 +104,7 @@ h3 {
   text-align: left;
   color: black;
   margin: 0px 30px 0px 0px;
-  cursor: pointer;
+  text-decoration: underline;
 }
 
 .coursenavigation a:link {
