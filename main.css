@@ -273,6 +273,11 @@ padding: 0px 4px;
 
 }
 
+.mapsectionleft a:link { color: black; text-decoration: underline;}
+.mapsectionleft a:hover { color: black; text-decoration: underline;}
+.mapsectionleft a:visited { color: black; text-decoration: underline;}
+.mapsectionleft a:active { color: black; text-decoration: underline;}
+
 .sectionlefttitle {
   flex-direction: row; /* Stack items vertically */
   border-bottom: 1px solid black;
