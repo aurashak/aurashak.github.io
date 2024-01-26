@@ -64,7 +64,7 @@ h3 {
 }
 
 .hidden-projects {
-
+  display: none; /* Initially hide the projects */
     font-size: 20px;
 }
 
