@@ -86,7 +86,6 @@ spinButton.id = 'spinButton'; // Add an ID for easier styling
 spinButton.addEventListener('click', function() {
     spinGlobe();
 });
-document.body.appendChild(spinButton);
 
     // Function to spin the globe quickly and slow down progressively
     function spinGlobe() {
