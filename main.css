@@ -656,7 +656,22 @@ margin-right: 10px;
 
 
 
+#spinButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db; /* Blue background color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+}
 
+#spinButton:hover {
+  background-color: #2980b9; /* Darker blue color on hover */
+}
 
 
 
