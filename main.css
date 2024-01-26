@@ -60,32 +60,26 @@ h3 {
 
 .navigation:hover {
   text-decoration: underline;
+
 }
 
 .hidden-projects {
-  display: none;
-  position: absolute;
-  top: 50px; /* Adjust the top position as needed */
-  left: 0;
-  background: white;
-  padding: 10px;
-  border: 1px solid black;
-  z-index: 2;
+
+    font-size: 20px;
 }
 
 .hidden-projects a {
-  display: block;
-  margin-bottom: 10px;
+  display: inline-block;
   text-decoration: none;
-  color: black;
+  color: black;            
+    margin-right: 10px;
+
+    
 }
 
 .hidden-projects a:hover {
   text-decoration: underline;
 }
-
-
-
 
 
 
