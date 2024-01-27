@@ -615,6 +615,8 @@ margin-right: 10px;
   height: 20px;
   width: 20px;
   position: absolute;
+  border: 0.25px solid rgb(23, 23, 96);
+
   top: -4px;
   left: -4px;
   transition: 0.2s;
@@ -687,7 +689,7 @@ margin-right: 10px;
   height: 20px;
   background-color: #ff3700;
   color: #fff;
-  border: 0.5px solid rgb(23, 23, 96);
+  border: 0.25px solid rgb(23, 23, 96);
   margin-left: 30px;
   position: relative;
   border-radius: 50%;
