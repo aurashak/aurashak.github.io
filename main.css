@@ -627,6 +627,20 @@ margin-right: 10px;
 }
 
 
+/* Add this to your existing CSS file or create a new one */
+.custom-marker {
+  cursor: pointer;
+}
+
+.marker-popup {
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+
+
 
 
 .hometoolbar {
