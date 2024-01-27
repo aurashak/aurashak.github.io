@@ -155,18 +155,25 @@ text-decoration: none;
 .aboutcontainer a:active { }
 
 
-.hometoolbar {
-  position: relative;
-  width: 100px;
-  z-index: 10; /* Send it to the back */
-  margin-left: 100px;
-  margin-top: 30px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 3px;
-      box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.7); 
-  border: 1px solid black;
-  padding: 10px 20px;
+.spin-button {
+  position: fixed; /* Change to fixed position */
+  top: 10px;
+  right: 10px; /* Adjusted to the upper right corner */
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
+.spin-button:hover {
+  background-color: #0056b3;
+}
+
+.spin-button:active {
+  background-color: #003366;
 }
 
 
