@@ -155,33 +155,6 @@ text-decoration: none;
 .aboutcontainer a:active { }
 
 
-.spin-button {
-  position: fixed; /* Change to fixed position */
-  top: 10px;
-  right: 10px; /* Adjusted to the upper right corner */
-  padding: 10px;
-  background-color: #f26608;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-align: center;
-}
-
-.spin-button:hover {
-  background-color: #0056b3;
-}
-
-.spin-button:active {
-  background-color: #003366;
-}
-
-.spin-button::before {
-  content: 'Spin';
-  display: block;
-  transform: rotate(-90deg); /* Rotate the text counterclockwise */
-}
 
 
 .homecontainer {
