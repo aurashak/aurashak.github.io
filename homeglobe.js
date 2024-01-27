@@ -108,6 +108,7 @@ function spinGlobe() {
     var minSpinRate = 0.01; // Minimum spin rate for a more aggressive spin
     var maxSpinRate = 0.1; // Maximum spin rate
     var spinAcceleration = 0.0001;
+    var decelerationFactor = 0.98; // Factor to gradually slow down the spin
 
     // Randomly choose the spin direction for each click
     var spinDirectionX = Math.random() > 0.5 ? 1 : -1;
@@ -122,10 +123,10 @@ function spinGlobe() {
             viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinDirectionX * initialSpinRateX);
             viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Y, spinDirectionY * initialSpinRateY);
 
-            initialSpinRateX -= spinAcceleration;
-            initialSpinRateY -= spinAcceleration;
+            initialSpinRateX *= decelerationFactor; // Gradually slow down the spin
+            initialSpinRateY *= decelerationFactor;
 
-            if (initialSpinRateX > 0 && initialSpinRateY > 0) {
+            if (initialSpinRateX > 0.001 && initialSpinRateY > 0.001) {
                 requestAnimationFrame(spinStep);
             } else {
                 isRotating = false;
@@ -145,5 +146,8 @@ function spinGlobe() {
     isRotating = true;
     spinStep();
 }
+
+// Set the button text to an empty string
+spinButton.textContent = '';
 
 };
