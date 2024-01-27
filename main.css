@@ -647,24 +647,26 @@ margin-right: 10px;
 
 
 
-/* Add your CSS styles for the spin button here */
 .spin-button {
-  position: fixed;
+  position: relative;
   top: 10px;
   left: 10px;
   padding: 10px;
   background-color: #007BFF;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%; /* Make the button round */
   cursor: pointer;
+  transition: background-color 0.3s; /* Add a smooth transition for the background color */
 }
 
 .spin-button:hover {
   background-color: #0056b3; /* Darker shade on hover */
 }
 
-
+.spin-button:active {
+  background-color: #003366; /* Darker shade when the button is pressed */
+}
 
 
 
