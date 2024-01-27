@@ -316,6 +316,9 @@ padding: 0px 4px;
     
 }
 
+#mtsmap {
+
+}
 
 .placeidcontainer {
   display: grid;
@@ -456,6 +459,41 @@ border: 1px solid black;
 
 
 
+
+
+.magnify-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Magnifying glass */
+.magnifying-glass {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: absolute;
+  display: none;
+  pointer-events: none; /* Allow interactions with the underlying image */
+}
+
+/* Styling for the magnified image */
+.magnified-image {
+  position: absolute;
+  width: 200px; /* Adjust the size of the magnified image as needed */
+  height: 200px;
+  border: 2px solid #000;
+  clip-path: circle(50% at 50% 50%);
+  transform: translate(-50%, -50%);
+  display: none;
+  background-size: 400% 400%; /* Adjust the background size for magnified image */
+}
+
+
+
+
+
+
 .legend {
 
 }
@@ -563,7 +601,6 @@ margin-right: 10px;
     display: none;
 }
 
-
 .homeswitch-track {
   background-color: #ccc;
   border-radius: 15px;
@@ -585,8 +622,6 @@ margin-right: 10px;
   transition: 0.2s;
 }
 
-
-
 /* Add this style to change the track color to green when checked */
 .homeswitch-input:checked + .homeswitch-track {
     background-color: #d21414; /* Green color */
@@ -600,12 +635,6 @@ margin-right: 10px;
 
 
 
-
-
-
-#mtsmap {
-
-}
 
 
 
@@ -643,25 +672,31 @@ margin-right: 10px;
 
 
 
+
+
+
+
+
+
 .hometoolbar {
   position: relative;
   padding: 10px;
 }
 
 
-
 .spin-button {
-  width: 25px; /* Adjust the width and height to make the button a circle */
+  width: 25px;
   height: 25px;
-  background-color: #007BFF;
+  background-color: #ff3700;
   color: #fff;
-  border: none;
+  border: 1px solid rgb(23, 23, 96);
   margin-left: 30px;
   position: relative;
-  border-radius: 50%; /* Make the button round */
+  border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease; /* Add smooth transitions */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add a box shadow for depth effect */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
 }
 
 .spin-button:hover {
@@ -672,25 +707,6 @@ margin-right: 10px;
   background-color: #003366; /* Darker shade when the button is pressed */
   box-shadow: 0 0 0 rgba(0, 0, 0, 0.3); /* Remove box shadow when pressed */
 }
-
-
-
-
-
-
-.mapboxgl-ctrl-bottom-left {
-  bottom: 0;
-  left: 0;
-  height: 0;
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -741,65 +757,6 @@ margin-right: 10px;
 
 
 
-.zoom-container {
-  position: relative;
-  overflow: hidden;
-}
-
-#zoomImage {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease;
-}
-
-
-.hyperlinks {
-  position: relative;
-}
-
-.hyperlinks a {
-
-}
-
-.hyperlinks a:hover {
-
-}
-
-
-
-#gridImageContainer {
-  position: relative;
-  overflow: hidden;
-}
-
-#gridImageOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-}
-
-.gridline {
-  position: absolute;
-  background-color: black;
-}
-
-.horizontal {
-  height: 2px;
-  width: 100%;
-}
-
-.vertical {
-  height: 100%;
-  width: 2px;
-}
-
-
-
-
-
-
 
 #opacity-slider-container {
   display: flex;
@@ -839,12 +796,6 @@ margin-right: 10px;
 }
 
 
-
-
-
-#zoomImageContainer {
-  overflow: hidden;
-}
 
 
 
@@ -2004,16 +1955,6 @@ span.cesium-projectionPicker-wrapper {
 .cesium-viewer {
       height: 100vh;
   }
-  
-  #resetZoomBtn {
-  
-  }
-  
-
-
-
-
-
 
 
 .cesium-viewer-cesiumWidgetContainer {
@@ -2102,6 +2043,11 @@ span.cesium-projectionPicker-wrapper {
   overflow-y:auto;
   overflow-x:hidden
 }
+
+
+
+
+
 
 
 
