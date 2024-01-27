@@ -2199,6 +2199,45 @@ span.cesium-projectionPicker-wrapper {
   #nymap {
       min-height: 100%;
   }
+
+  .hidden-projects {
+      font-size: 16px;
+  }
+
+  .hidden-projects a {
+      margin-right: 5px;
+  }
+
+  .courseheader {
+      flex-direction: column;
+  }
+
+  .coursenavigation {
+      font-size: 16px;
+      margin: 0px;
+      text-decoration: underline;
+  }
+
+  .coursenavigation a:link {
+      text-decoration: none;
+  }
+
+  .coursenavigation a:hover {
+      text-decoration: none;
+      background: lightgrey;
+  }
+
+  .coursenavigation a:active {
+      text-decoration: underline;
+  }
+
+  .coursenavigation a:visited {
+      text-decoration: none;
+  }
+
+}
+
+
 }
 
 
