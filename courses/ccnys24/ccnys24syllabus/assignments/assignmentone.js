@@ -134,3 +134,4 @@ function handleDrawingResult(cartesian, type) {
 
     // Perform any additional actions as needed
 }
+};
