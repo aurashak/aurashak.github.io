@@ -460,7 +460,6 @@ border: 1px solid black;
 
 
 
-
 .magnify-container {
   position: relative;
   display: inline-block;
@@ -468,8 +467,8 @@ border: 1px solid black;
 
 /* Magnifying glass */
 .magnifying-glass {
-  width: 100px;
-  height: 100px;
+  width: 150px; /* Adjust the size of the magnifying glass */
+  height: 150px;
   border: 2px solid #000;
   border-radius: 50%;
   position: absolute;
@@ -480,15 +479,14 @@ border: 1px solid black;
 /* Styling for the magnified image */
 .magnified-image {
   position: absolute;
-  width: 200px; /* Adjust the size of the magnified image as needed */
-  height: 200px;
+  width: 300px; /* Adjust the size of the magnified image */
+  height: 300px;
   border: 2px solid #000;
   clip-path: circle(50% at 50% 50%);
   transform: translate(-50%, -50%);
   display: none;
-  background-size: 400% 400%; /* Adjust the background size for magnified image */
+  background-size: 600% 600%; /* Adjust the background size for magnified image */
 }
-
 
 
 
