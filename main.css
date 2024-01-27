@@ -668,15 +668,14 @@ margin-right: 10px;
 
 
 .spin-button {
-  position: relative;
-  width: 100px; /* Adjust the width and height to make the button a circle */
-  height: 100px;
+  width: 50px; /* Adjust the width and height to make the button a circle */
+  height: 50px;
   background-color: #007BFF;
   color: #fff;
   border: none;
   border-radius: 50%; /* Make the button round */
   cursor: pointer;
-  overflow: hidden; /* Hide the overflowing text */
+  transition: transform 0.3s ease; /* Add a smooth transition for the transformation */
 }
 
 .spin-button:hover {
@@ -684,18 +683,9 @@ margin-right: 10px;
 }
 
 .spin-button:active {
+  transform: translateY(5px); /* Move the button down by 5 pixels when pressed */
   background-color: #003366; /* Darker shade when the button is pressed */
 }
-
-.spin-button::before {
-  content: 'Spin';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-90deg); /* Rotate the text counterclockwise and center it */
-  white-space: nowrap; /* Prevent text wrapping */
-}
-
 
 
 
