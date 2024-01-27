@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
 </head>
 <body>
@@ -54,9 +54,20 @@
     </div>
 
     <div class="aboutcontainer">
-  
-        <div id="assignmentonemap"></div>
-      </div>
+        <div id="assignmentonemap" class="assignmentonemap"></div>
+        <div id="userInputForm">
+            <h4>Add Your Marker</h4>
+            <form onsubmit="addUserMarker(); return false;">
+                <label for="markerDescription">Description:</label>
+                <input type="text" id="markerDescription" required>
+                
+                <label for="markerColor">Choose Marker Color:</label>
+                <input type="color" id="markerColor" value="#ff0000">
+                
+                <button type="submit">Add Marker</button>
+            </form>
+        </div>
+    </div>
   
       
     <br>
