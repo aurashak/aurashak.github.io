@@ -79,16 +79,29 @@ window.onload = function() {
     // Add a render loop to continuously update the rotation
     viewer.scene.postRender.addEventListener(updateRotation);
 
-    // Add a button to spin the globe quickly and slow down progressively
-    var spinButton = document.createElement('button');
-    spinButton.innerHTML = 'Spin Globe';
-    spinButton.style.position = 'relative';
-    spinButton.style.top = '10px';
-    spinButton.style.left = '10px';
-    spinButton.addEventListener('click', function() {
-        spinGlobe();
-    });
-    document.body.appendChild(spinButton);
+// Remove the JavaScript button creation code
+// var spinButton = document.createElement('button');
+// spinButton.innerHTML = 'Spin Globe';
+// spinButton.style.position = 'fixed';
+// spinButton.style.top = '10px';
+// spinButton.style.left = '10px';
+// spinButton.style.padding = '10px';
+// spinButton.style.backgroundColor = '#007BFF';
+// spinButton.style.color = '#fff';
+// spinButton.style.border = 'none';
+// spinButton.style.borderRadius = '5px';
+// spinButton.style.cursor = 'pointer';
+// spinButton.addEventListener('click', function() {
+//     spinGlobe();
+// });
+// document.body.appendChild(spinButton);
+
+// Instead, add a click event listener directly to the div
+var spinButton = document.getElementById('spinButton');
+spinButton.addEventListener('click', function() {
+    spinGlobe();
+});
+
 
 // Function to spin the globe quickly and slow down progressively
 function spinGlobe() {
