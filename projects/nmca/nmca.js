@@ -1,65 +1,39 @@
-function handleGridClick(event) {
-    const gridImage = document.getElementById('gridImage');
-    const gridImageRect = gridImage.getBoundingClientRect();
+document.addEventListener("DOMContentLoaded", function () {
+    const magnifyContainer = document.querySelector(".magnify-container");
+    const magnifyingGlass = document.querySelector(".magnifying-glass");
+    const magnifiedImage = document.querySelector(".magnified-image");
 
-    // Calculate the clicked coordinates relative to the gridImage
-    const clickedX = (event.clientX - gridImageRect.left) / gridImageRect.width;
-    const clickedY = (event.clientY - gridImageRect.top) / gridImageRect.height;
+    // Event listener for mouseover on the magnify container
+    magnifyContainer.addEventListener("mouseover", function (e) {
+      magnifyingGlass.style.display = "block";
+      magnifiedImage.style.display = "block";
+      updateMagnifiedImage(e);
+    });
 
-    // Zoom to the selected area on the larger image
-    zoomToCoordinates(clickedX, clickedY);
-}
+    // Event listener for mousemove on the magnify container
+    magnifyContainer.addEventListener("mousemove", function (e) {
+      updateMagnifiedImage(e);
+    });
 
-function zoomToCoordinates(x, y) {
-    const zoomImage = document.getElementById('zoomImage');
-    const container = document.getElementById('zoomImageContainer');
-    const containerRect = container.getBoundingClientRect();
+    // Event listener for mouseout on the magnify container
+    magnifyContainer.addEventListener("mouseout", function () {
+      magnifyingGlass.style.display = "none";
+      magnifiedImage.style.display = "none";
+    });
 
-    const offsetX = x * zoomImage.width - containerRect.width / 2;
-    const offsetY = y * zoomImage.height - containerRect.height / 2;
+    // Function to update the position of the magnifying glass and magnified image
+    function updateMagnifiedImage(e) {
+      const rect = magnifyContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    const scaleFactor = 2; // Adjust the scale factor as needed
+      // Calculate the position of the magnifying glass
+      magnifyingGlass.style.left = x - magnifyingGlass.clientWidth / 2 + "px";
+      magnifyingGlass.style.top = y - magnifyingGlass.clientHeight / 2 + "px";
 
-    zoomImage.style.transform = `scale(${scaleFactor}) translate(${-offsetX}px, ${-offsetY}px)`;
-
-    // Update the container size after zooming
-    const newWidth = containerRect.width / scaleFactor;
-    const newHeight = containerRect.height / scaleFactor;
-
-    container.style.width = `${newWidth}px`;
-    container.style.height = `${newHeight}px`;
-}
-
-function updateGridOverlay() {
-    const gridImage = document.getElementById('gridImage');
-    const gridImageOverlay = document.getElementById('gridImageOverlay');
-
-    const columns = 3;
-    const rows = 3;
-
-    const columnWidth = 100 / columns;
-    const rowHeight = gridImage.offsetHeight / rows; // Use offsetHeight instead of clientHeight
-
-    gridImageOverlay.innerHTML = '';
-
-    for (let i = 1; i < columns; i++) {
-        const verticalLine = document.createElement('div');
-        verticalLine.className = 'gridline vertical';
-        verticalLine.style.left = `${i * columnWidth}%`;
-        gridImageOverlay.appendChild(verticalLine);
+      // Calculate the position of the magnified image
+      magnifiedImage.style.left = x + "px";
+      magnifiedImage.style.top = y + "px";
+      magnifiedImage.style.backgroundPosition = -x * 2 + "px " + -y * 2 + "px";
     }
-
-    for (let i = 1; i < rows; i++) {
-        const horizontalLine = document.createElement('div');
-        horizontalLine.className = 'gridline horizontal';
-        horizontalLine.style.top = `${i * rowHeight}px`;
-        gridImageOverlay.appendChild(horizontalLine);
-    }
-}
-
-// Call the updateGridOverlay function initially and whenever the window is resized
-updateGridOverlay();
-window.addEventListener('resize', updateGridOverlay);
-
-// Attach click event to the gridImage
-document.getElementById('gridImage').addEventListener('click', handleGridClick);
+  });
