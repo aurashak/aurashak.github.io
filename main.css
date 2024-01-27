@@ -555,7 +555,7 @@ margin-right: 10px;
 
 /* Styles for Switch Mechanism */
 .homeswitch-label {
- 
+ margin-right: 14px;s
 }
 
 
@@ -636,20 +636,24 @@ margin-right: 10px;
   padding: 10px;
     z-index: 40;
   border: none;
+  background: rgba(255, 255, 255, 0.6);
+
 }
 
 
 
 .spin-button {
-  width: 50px; /* Adjust the width and height to make the button a circle */
-  height: 50px;
+  width: 20px; /* Adjust the width and height to make the button a circle */
+  height: 20px;
   background-color: #007BFF;
   color: #fff;
   border: none;
+  margin-left: 30px;
   position: relative;
   border-radius: 50%; /* Make the button round */
   cursor: pointer;
-  transition: transform 0.3s ease; /* Add a smooth transition for the transformation */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Add smooth transitions */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add a box shadow for depth effect */
 }
 
 .spin-button:hover {
@@ -659,6 +663,7 @@ margin-right: 10px;
 .spin-button:active {
   transform: translateY(5px); /* Move the button down by 5 pixels when pressed */
   background-color: #003366; /* Darker shade when the button is pressed */
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3); /* Remove box shadow when pressed */
 }
 
 
