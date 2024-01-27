@@ -108,24 +108,35 @@ function spinGlobe() {
     var minSpinRate = 0.01; // Minimum spin rate for a more aggressive spin
     var maxSpinRate = 0.1; // Maximum spin rate
     var spinAcceleration = 0.0001;
-    
-    // Randomly choose the spin direction for each click
-    var spinDirection = Math.random() > 0.5 ? 1 : -1;
 
-    // Set a random initial spin rate
-    var initialSpinRate = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
+    // Randomly choose the spin direction for each click
+    var spinDirectionX = Math.random() > 0.5 ? 1 : -1;
+    var spinDirectionY = Math.random() > 0.5 ? 1 : -1;
+
+    // Set random initial spin rates for X and Y axes
+    var initialSpinRateX = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
+    var initialSpinRateY = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
 
     function spinStep() {
         if (isRotating) {
-            viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinDirection * initialSpinRate);
-            initialSpinRate -= spinAcceleration;
+            viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Z, -spinDirectionX * initialSpinRateX);
+            viewer.scene.camera.rotate(Cesium.Cartesian3.UNIT_Y, spinDirectionY * initialSpinRateY);
 
-            if (initialSpinRate > 0) {
+            initialSpinRateX -= spinAcceleration;
+            initialSpinRateY -= spinAcceleration;
+
+            if (initialSpinRateX > 0 && initialSpinRateY > 0) {
                 requestAnimationFrame(spinStep);
             } else {
                 isRotating = false;
-                initialSpinRate = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
-                spinDirection = Math.random() > 0.5 ? 1 : -1; // Randomly choose the spin direction for the next spin
+
+                // Set random initial spin rates for X and Y axes for the next spin
+                initialSpinRateX = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
+                initialSpinRateY = minSpinRate + Math.random() * (maxSpinRate - minSpinRate);
+
+                // Randomly choose the spin direction for X and Y axes for the next spin
+                spinDirectionX = Math.random() > 0.5 ? 1 : -1;
+                spinDirectionY = Math.random() > 0.5 ? 1 : -1;
             }
         }
     }
@@ -134,4 +145,5 @@ function spinGlobe() {
     isRotating = true;
     spinStep();
 }
+
 };
