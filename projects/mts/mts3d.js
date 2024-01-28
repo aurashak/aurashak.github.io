@@ -18,9 +18,22 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
-// Set the camera to focus slightly further west, facing east, and at a closer zoom
+// Set the center point
+var centerLongitude = -73.97421308903137;
+var centerLatitude = 40.820382982431454;
+
+// Define the radius (in meters) for the half-mile radius
+var radius = 804.672; // Approximately 0.5 miles in meters
+
+// Calculate bounding box coordinates based on the radius
+var westLongitude = centerLongitude - Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
+var eastLongitude = centerLongitude + Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
+var southLatitude = centerLatitude - Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
+var northLatitude = centerLatitude + Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
+
+// Set the camera to focus on the specified bounding box
 viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
+    destination: Cesium.Rectangle.fromDegrees(westLongitude, southLatitude, eastLongitude, northLatitude),
     orientation: {
         heading: Cesium.Math.toRadians(90),
         pitch: Cesium.Math.toRadians(-25),
@@ -28,23 +41,9 @@ viewer.scene.camera.setView({
     },
 });
 
-// Set bounds around the map
-var westLongitude = -74.0015;
-var eastLongitude = -73.9465;
-var southLatitude = 40.8090;
-var northLatitude = 40.8330;
-
 // Set minimum and maximum zoom distances
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
+// Add OSM buildings
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
-
-// Listen for the tick event to control the camera pitch
-viewer.clock.onTick.addEventListener(function () {
-    var currentPitch = viewer.scene.camera.pitch;
-    var limitedPitch = Cesium.Math.clamp(currentPitch, Cesium.Math.toRadians(-25), Cesium.Math.toRadians(90));
-    
-    // Set the limited pitch value
-    viewer.scene.camera.pitch = limitedPitch;
-});
