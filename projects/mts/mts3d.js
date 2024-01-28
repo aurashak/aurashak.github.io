@@ -48,3 +48,29 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
 // Add OSM buildings
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+
+// Restrict panning to a half-mile area around the center
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+handler.setInputAction(function (movement) {
+    var pickedLocation = viewer.scene.pickPosition(movement.endPosition);
+    if (pickedLocation) {
+        var cartographic = Cesium.Cartographic.fromCartesian(pickedLocation);
+        if (
+            cartographic.longitude < westLongitude ||
+            cartographic.longitude > eastLongitude ||
+            cartographic.latitude < southLatitude ||
+            cartographic.latitude > northLatitude
+        ) {
+            // Reset the camera to stay within the desired bounds
+            viewer.scene.camera.flyTo({
+                destination: Cesium.Rectangle.fromDegrees(westLongitude, southLatitude, eastLongitude, northLatitude),
+                orientation: {
+                    heading: Cesium.Math.toRadians(90),
+                    pitch: Cesium.Math.toRadians(-25),
+                    roll: Cesium.Math.toRadians(0),
+                },
+                duration: 0.5,
+            });
+        }
+    }
+}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
