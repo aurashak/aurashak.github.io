@@ -23,7 +23,7 @@ var centerLongitude = -73.97421308903137;
 var centerLatitude = 40.820382982431454;
 
 // Define the radius (in meters) for the half-mile radius
-var radius = 804.672; // Approximately 0.5 miles in meters
+var radius = 1804.672; 
 
 // Calculate bounding box coordinates based on the radius
 var degreesPerMeter = 1.0 / (Math.PI / 180.0 * 6378137.0);
