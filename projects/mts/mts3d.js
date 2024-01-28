@@ -32,7 +32,8 @@ viewer.scene.camera.setView({
 });
 
 // Set minimum and maximum zoom distances
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1400.0;
+viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
 
 // Define bounds around the viewing area
 var westLongitude = -74.0015;
