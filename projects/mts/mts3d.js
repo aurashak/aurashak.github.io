@@ -26,10 +26,11 @@ var centerLatitude = 40.820382982431454;
 var radius = 804.672; // Approximately 0.5 miles in meters
 
 // Calculate bounding box coordinates based on the radius
-var westLongitude = centerLongitude - Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
-var eastLongitude = centerLongitude + Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
-var southLatitude = centerLatitude - Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
-var northLatitude = centerLatitude + Cesium.Math.toDegrees(radius / Cesium.EarthConstants.RADIUS);
+var degreesPerMeter = 1.0 / (Math.PI / 180.0 * 6378137.0);
+var westLongitude = centerLongitude - (radius * degreesPerMeter);
+var eastLongitude = centerLongitude + (radius * degreesPerMeter);
+var southLatitude = centerLatitude - (radius * degreesPerMeter);
+var northLatitude = centerLatitude + (radius * degreesPerMeter);
 
 // Set the camera to focus on the specified bounding box
 viewer.scene.camera.setView({
