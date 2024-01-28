@@ -69,7 +69,7 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycso.geoj
 });
 
 // Load the third GeoJSON data and add it as circle markers (green)
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/aqisites.geojson').then(function(dataSource3) {
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/aqisite.geojson').then(function(dataSource3) {
     viewer.dataSources.add(dataSource3);
 
     // Get the entities from the data source
