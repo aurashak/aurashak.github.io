@@ -41,6 +41,12 @@ var eastLongitude = -73.9465;
 var southLatitude = 40.8090;
 var northLatitude = 40.8330;
 
+// Calculate the center point
+var centerLongitude = (westLongitude + eastLongitude) / 2;
+var centerLatitude = (southLatitude + northLatitude) / 2;
+
+var centerPoint = Cesium.Cartesian3.fromDegrees(centerLongitude, centerLatitude);
+
 // Restrict camera to stay within the defined bounds
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = Cesium.Cartesian3.distance(
     centerPoint,
@@ -50,6 +56,16 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.Cartesian3
     centerPoint,
     Cesium.Cartesian3.fromDegrees(eastLongitude, northLatitude)
 );
+
+// Set the camera to focus on the center point
+viewer.scene.camera.setView({
+    destination: centerPoint,
+    orientation: {
+        heading: Cesium.Math.toRadians(90),
+        pitch: Cesium.Math.toRadians(-25),
+        roll: Cesium.Math.toRadians(0),
+    },
+});
 
 // Create a GeoJSON data source
 var geoJsonDataSource = new Cesium.GeoJsonDataSource();
