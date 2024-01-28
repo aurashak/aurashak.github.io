@@ -250,6 +250,9 @@ padding: 0px 4px;
     line-height: 1.4;
 }
 
+.mapcolumnleft a:link { color: black; text-decoration: underline;}
+  .mapcolumnleft a:hover { color: black; text-decoration: underline;}
+    .mapcolumnleft a:active { color: black; text-decoration: underline;}
 
 .mapcolumnright {
   flex: 1; /* Expand to fill the available space */
