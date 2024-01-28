@@ -18,7 +18,6 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
-
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
 viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
@@ -28,8 +27,6 @@ viewer.scene.camera.setView({
         roll: Cesium.Math.toRadians(0),
     },
 });
-
-
 
 // Set bounds around the map
 var westLongitude = -74.0015;
@@ -41,8 +38,13 @@ var northLatitude = 40.8330;
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
-
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
-
-
+// Listen for the tick event to control the camera pitch
+viewer.clock.onTick.addEventListener(function () {
+    var currentPitch = viewer.scene.camera.pitch;
+    var limitedPitch = Cesium.Math.clamp(currentPitch, Cesium.Math.toRadians(-25), Cesium.Math.toRadians(90));
+    
+    // Set the limited pitch value
+    viewer.scene.camera.pitch = limitedPitch;
+});
