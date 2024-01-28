@@ -1,7 +1,4 @@
-document.getElementById('popupImage').addEventListener('click', openImagePopup);
-
-function openImagePopup() {
-    const imageUrl = "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap_2022.png";
+function openImagePopup(imageUrl) {
     const newWindow = window.open("", "_blank");
     newWindow.document.write(`
         <html>
@@ -10,7 +7,7 @@ function openImagePopup() {
                 <link rel="stylesheet" href="styles.css">
             </head>
             <body>
-                <img src="${imageUrl}" alt="Pop-out Image" style="cursor: pointer;" onclick="window.close()">
+                <img src="${imageUrl}" alt="Pop-out Image" onclick="window.close()">
             </body>
         </html>
     `);
