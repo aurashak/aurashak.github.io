@@ -18,8 +18,6 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
-// Enable zoom controls
-viewer.extend(Cesium.viewerCesiumNavigationMixin);
 
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
