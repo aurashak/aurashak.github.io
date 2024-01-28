@@ -1,3 +1,7 @@
+document.querySelector('.img-container img').addEventListener('click', function(event) {
+    openImagePopup(event.target.src);
+});
+
 function openImagePopup(imageUrl) {
     const newWindow = window.open("", "_blank");
     newWindow.document.write(`
