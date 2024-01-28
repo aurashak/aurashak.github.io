@@ -244,9 +244,10 @@ padding: 0px 4px;
 
 
 .mapcolumnleft {
-    font-size: 15px;
+    font-size: 19px;
     margin: 0px;
     padding: 20px;
+    line-height: 1.2;
 }
 
 
