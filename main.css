@@ -82,7 +82,7 @@ h3 {
   display: inline-block;
   text-decoration: none;
   color: black;            
-    margin-right: 10px;
+    margin-right: 20px;
 
     
 }
@@ -513,13 +513,14 @@ border: 1px solid black;
 
 .legend-item {
   display: flex;
-  align-items: center;
 }
 
 .legend-symbol {
-margin-right: 10px;
-
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
 }
+
 
 .legend-label {
   white-space: nowrap;
