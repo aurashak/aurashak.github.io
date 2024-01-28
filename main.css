@@ -303,9 +303,15 @@ padding: 0px 4px;
 
 
 .mapcontainer {
-  display: flex;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: minmax(0, 350px) 1fr;
+  flex: 1; /* Expand to fill the available space */
+}
+
+
+.nymapcontainer {
+  display: grid;
+  grid-template-columns: minmax(0, 450px) 1fr;
   flex: 1; /* Expand to fill the available space */
 }
 
