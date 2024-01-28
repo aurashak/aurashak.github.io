@@ -285,19 +285,14 @@ padding: 0px 4px;
 
 
 
-
-
-
-
-.nymapcontainer {
+.mapcontainer {
   display: grid;
   grid-template-columns: 30% 70%;
   border: 1px solid black;
   margin-top: 0px;
-  background: none;
-  height: calc(100% - 273px);
-
 }
+
+
 
 
 
