@@ -291,6 +291,8 @@ padding: 0px 4px;
 
 .mapcontainer {
   display: flex;
+  display: grid;
+  grid-template-columns: 30% 70%;
   flex: 1; /* Expand to fill the available space */
 }
 
