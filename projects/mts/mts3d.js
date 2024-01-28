@@ -31,41 +31,7 @@ viewer.scene.camera.setView({
     },
 });
 
-// Set minimum and maximum zoom distances
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1400.0;
-viewer.scene.screenSpaceCameraController.minimumZoomDistance = 200.0;
 
-// Define bounds around the viewing area
-var westLongitude = -74.0015;
-var eastLongitude = -73.9465;
-var southLatitude = 40.8090;
-var northLatitude = 40.8330;
-
-// Calculate the center point
-var centerLongitude = (westLongitude + eastLongitude) / 2;
-var centerLatitude = (southLatitude + northLatitude) / 2;
-
-var centerPoint = Cesium.Cartesian3.fromDegrees(centerLongitude, centerLatitude);
-
-// Restrict camera to stay within the defined bounds
-viewer.scene.screenSpaceCameraController.minimumZoomDistance = Cesium.Cartesian3.distance(
-    centerPoint,
-    Cesium.Cartesian3.fromDegrees(westLongitude, southLatitude)
-);
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.Cartesian3.distance(
-    centerPoint,
-    Cesium.Cartesian3.fromDegrees(eastLongitude, northLatitude)
-);
-
-// Set the camera to focus on the center point
-viewer.scene.camera.setView({
-    destination: centerPoint,
-    orientation: {
-        heading: Cesium.Math.toRadians(90),
-        pitch: Cesium.Math.toRadians(-25),
-        roll: Cesium.Math.toRadians(0),
-    },
-});
 
 // Create a GeoJSON data source
 var geoJsonDataSource = new Cesium.GeoJsonDataSource();
