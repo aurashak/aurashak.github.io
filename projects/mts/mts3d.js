@@ -18,9 +18,8 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
-// Add zoom controls
-var zoomControl = new Cesium.ZoomControl(viewer.container);
-zoomControl.viewModel.duration = 0.5; // Set the duration of zoom animation
+// Enable zoom controls
+viewer.extend(Cesium.viewerCesiumNavigationMixin);
 
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
@@ -37,3 +36,18 @@ viewer.scene.camera.setView({
 // Set minimum and maximum zoom distances
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
+// Define bounds around the viewing area
+var westLongitude = -74.0015;
+var eastLongitude = -73.9465;
+var southLatitude = 40.8090;
+var northLatitude = 40.8330;
+
+// Restrict camera to stay within the defined bounds
+viewer.scene.screenSpaceCameraController.minimumZoomDistance = Cesium.Cartesian3.distance(
+    centerPoint,
+    Cesium.Cartesian3.fromDegrees(westLongitude, southLatitude)
+);
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.Cartesian3.distance(
+    centerPoint,
+    Cesium.Cartesian3.fromDegrees(eastLongitude, northLatitude)
+);
