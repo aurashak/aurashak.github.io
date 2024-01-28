@@ -18,6 +18,9 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
+// Add zoom controls
+var zoomControl = new Cesium.ZoomControl(viewer.container);
+zoomControl.viewModel.duration = 0.5; // Set the duration of zoom animation
 
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
@@ -32,5 +35,5 @@ viewer.scene.camera.setView({
 });
 
 // Set minimum and maximum zoom distances
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 700.0;
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 
