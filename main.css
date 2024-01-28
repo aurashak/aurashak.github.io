@@ -138,6 +138,13 @@ text-decoration: none;
 
 }
 
+.coursecontainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the height of the container to 100% of the viewport height */
+
+}
+
 .container {
   display: block;
 }
