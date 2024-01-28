@@ -3,7 +3,7 @@ html, body {
   background: #fff;
   font-family: Arial, sans-serif;
   font-size: 15px;
-  overflow: visible;
+  overflow: hidden; /* Hide scrollbars */
   height: 100%;
   margin: 0;
 }
@@ -41,12 +41,11 @@ h3 {
 .header {
   display: flex;
   justify-content: left;
-  margin: 0px;
+  margin: 0;
   padding: 10px 10px;
   border-bottom: 1px solid black;
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.6);
 
 }
 
@@ -132,9 +131,9 @@ text-decoration: none;
 
 
 .projectcontainer {
- position; fixed;
-  height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the height of the container to 100% of the viewport height */
 
 }
 
@@ -251,9 +250,10 @@ padding: 0px 4px;
 
 
 .mapcolumnright {
-  font-size: 15px;
+  flex: 1; /* Expand to fill the available space */
   border-left: 1px solid black;
-  margin: 0px;
+  margin: 0;
+  overflow: hidden; /* Hide overflow content */
 }
 
 
@@ -289,10 +289,8 @@ padding: 0px 4px;
 
 
 .mapcontainer {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  border: 1px solid black;
-  margin-top: 0px;
+  display: flex;
+  flex: 1; /* Expand to fill the available space */
 }
 
 
@@ -360,7 +358,8 @@ border: 1px solid black;
 
 
 #nymap {
-  min-height: 100%;
+  width: 100%; /* Make the map take up 100% of the width */
+  height: 100%; /* Make the map take up 100% of the height */
 }
 
 
