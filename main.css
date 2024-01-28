@@ -3,7 +3,7 @@ html, body {
   background: #fff;
   font-family: Arial, sans-serif;
   font-size: 15px;
-  overflow: hidden; /* Hide scrollbars */
+  overflow: auto; 
   height: 100%;
   margin: 0;
 }
