@@ -31,5 +31,6 @@ viewer.scene.camera.setView({
     },
 });
 
-
+// Set minimum and maximum zoom distances
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 700.0;
 
