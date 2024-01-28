@@ -108,7 +108,9 @@ h3 {
   text-align: left;
   color: black;
   margin: 0px 30px 0px 0px;
-  text-decoration: underline;
+  padding: 5px 10px;
+  background: lightgrey;
+  border-radius: 4px;
 }
 
 .coursenavigation a:link {
