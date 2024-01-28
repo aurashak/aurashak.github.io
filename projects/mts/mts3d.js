@@ -33,25 +33,20 @@ viewer.scene.camera.setView({
 
 
 
-// Create a GeoJSON data source
-var geoJsonDataSource = new Cesium.GeoJsonDataSource();
+// Load GeoJSON data and add it as a polyline to the map
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson').then(function(dataSource) {
+    viewer.dataSources.add(dataSource);
 
-// Load the GeoJSON file
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson')
-    .then(function(dataSource) {
-        // Add the GeoJSON data source to the viewer
-        viewer.dataSources.add(dataSource);
+    // Get the entities from the data source
+    var entities = dataSource.entities.values;
 
-        // Get the entities from the data source
-        var entities = dataSource.entities.values;
-
-        // Customize the appearance of each entity (line)
-        entities.forEach(function(entity) {
+    // Style the polyline
+    entities.forEach(function(entity) {
+        if (Cesium.defined(entity.polyline)) {
             entity.polyline.material = Cesium.Color.PURPLE;
-            entity.polyline.width = 5.0; // Set your desired line width here
-        });
-    })
-    .otherwise(function(error) {
-        // Handle the error loading GeoJSON
-        console.error(error);
+            entity.polyline.width = 5.0; // You can adjust the weight/width of the line as needed
+        }
     });
+}).otherwise(function(error) {
+    console.error(error);
+});
