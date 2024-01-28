@@ -50,3 +50,26 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.Cartesian3
     centerPoint,
     Cesium.Cartesian3.fromDegrees(eastLongitude, northLatitude)
 );
+
+// Create a GeoJSON data source
+var geoJsonDataSource = new Cesium.GeoJsonDataSource();
+
+// Load the GeoJSON file
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson')
+    .then(function(dataSource) {
+        // Add the GeoJSON data source to the viewer
+        viewer.dataSources.add(dataSource);
+
+        // Get the entities from the data source
+        var entities = dataSource.entities.values;
+
+        // Customize the appearance of each entity (line)
+        entities.forEach(function(entity) {
+            entity.polyline.material = Cesium.Color.PURPLE;
+            entity.polyline.width = 5.0; // Set your desired line width here
+        });
+    })
+    .otherwise(function(error) {
+        // Handle the error loading GeoJSON
+        console.error(error);
+    });
