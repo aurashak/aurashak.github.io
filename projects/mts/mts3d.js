@@ -19,6 +19,7 @@ var viewer = new Cesium.Viewer('mtsmap', {
 });
 
 
+
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
@@ -31,20 +32,36 @@ viewer.scene.camera.setView({
     },
 });
 
-
-
-// Load GeoJSON data and add it as a polyline to the map
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson').then(function(dataSource) {
-    viewer.dataSources.add(dataSource);
+// Load the first GeoJSON data and add it as a polyline to the map
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson').then(function(dataSource1) {
+    viewer.dataSources.add(dataSource1);
 
     // Get the entities from the data source
-    var entities = dataSource.entities.values;
+    var entities1 = dataSource1.entities.values;
 
     // Style the polyline
-    entities.forEach(function(entity) {
+    entities1.forEach(function(entity) {
         if (Cesium.defined(entity.polyline)) {
             entity.polyline.material = Cesium.Color.PURPLE;
             entity.polyline.width = 5.0; // You can adjust the weight/width of the line as needed
+        }
+    });
+}).otherwise(function(error) {
+    console.error(error);
+});
+
+// Load the second GeoJSON data and add it as circle markers to the map
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycso.geojson').then(function(dataSource2) {
+    viewer.dataSources.add(dataSource2);
+
+    // Get the entities from the data source
+    var entities2 = dataSource2.entities.values;
+
+    // Style the circle markers
+    entities2.forEach(function(entity) {
+        if (Cesium.defined(entity.point)) {
+            entity.point.color = Cesium.Color.BROWN.withAlpha(0.5); // Brown color with 50% transparency
+            entity.point.pixelSize = 10.0; // You can adjust the size of the circle as needed
         }
     });
 }).otherwise(function(error) {
