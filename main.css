@@ -129,7 +129,12 @@ text-decoration: none;
 }
 
 
-.projectcontainer {}
+.projectcontainer {
+ position; fixed;
+  height: 100%;
+  width: 100%;
+
+}
 
 .container {
   display: block;
@@ -189,10 +194,10 @@ text-decoration: none;
 }
 
 .homesubtitle {
-    font-size: 30px;
+    font-size: 20px;
     margin-top: 20px;
-    margin-left: 100px;
-    font-weight: bold;
+    margin-left: 50px;
+    font-weight: normal;
     max-width: 800px;
     display: inline-block;
     background: rgba(255, 255, 255, 0.6);
