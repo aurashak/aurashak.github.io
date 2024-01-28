@@ -19,20 +19,20 @@ var viewer = new Cesium.Viewer('mtsmap', {
 });
 
 // Set the center point
-var centerLongitude = -73.97421308903137;
-var centerLatitude = 40.820382982431454;
+var centerLongitude = -73.97056359001286;
+var centerLatitude = 40.8250740108766;
 
-// Define the radius (in meters) for the half-mile radius
-var radius = 1804.672; 
+// Define the radius (in meters) for the doubled area
+var radius = 1609.344; // Approximately 1 mile in meters (double the radius)
 
-// Calculate bounding box coordinates based on the radius
+// Calculate bounding box coordinates based on the doubled radius
 var degreesPerMeter = 1.0 / (Math.PI / 180.0 * 6378137.0);
 var westLongitude = centerLongitude - (radius * degreesPerMeter);
 var eastLongitude = centerLongitude + (radius * degreesPerMeter);
 var southLatitude = centerLatitude - (radius * degreesPerMeter);
 var northLatitude = centerLatitude + (radius * degreesPerMeter);
 
-// Set the camera to focus on the specified bounding box
+// Set the camera to focus on the specified bounding box with an initial zoom level of 500
 viewer.scene.camera.setView({
     destination: Cesium.Rectangle.fromDegrees(westLongitude, southLatitude, eastLongitude, northLatitude),
     orientation: {
@@ -40,6 +40,7 @@ viewer.scene.camera.setView({
         pitch: Cesium.Math.toRadians(-25),
         roll: Cesium.Math.toRadians(0),
     },
+    zoomToDistance: 500, // Set the initial zoom level to 500 meters
 });
 
 // Set minimum and maximum zoom distances
@@ -49,7 +50,7 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000.0;
 // Add OSM buildings
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
-// Restrict panning to a half-mile area around the center
+// Restrict panning to a doubled area around the center
 var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 handler.setInputAction(function (movement) {
     var pickedLocation = viewer.scene.pickPosition(movement.endPosition);
