@@ -67,3 +67,57 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycso.geoj
 }).otherwise(function(error) {
     console.error(error);
 });
+
+// Load the third GeoJSON data and add it as circle markers (green)
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/aqisites.geojson').then(function(dataSource3) {
+    viewer.dataSources.add(dataSource3);
+
+    // Get the entities from the data source
+    var entities3 = dataSource3.entities.values;
+
+    // Style the circle markers (green)
+    entities3.forEach(function(entity) {
+        if (Cesium.defined(entity.point)) {
+            entity.point.color = Cesium.Color.GREEN;
+            entity.point.pixelSize = 10.0;
+        }
+    });
+}).otherwise(function(error) {
+    console.error(error);
+});
+
+// Load the fourth GeoJSON data and add it as polygons (blue)
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson').then(function(dataSource4) {
+    viewer.dataSources.add(dataSource4);
+
+    // Get the entities from the data source
+    var entities4 = dataSource4.entities.values;
+
+    // Style the polygons (blue)
+    entities4.forEach(function(entity) {
+        if (Cesium.defined(entity.polygon)) {
+            entity.polygon.material = Cesium.Color.BLUE.withAlpha(0.5);
+            // Additional styling for the polygon if needed
+        }
+    });
+}).otherwise(function(error) {
+    console.error(error);
+});
+
+// Load the fifth GeoJSON data and add it as triangles (red)
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson').then(function(dataSource5) {
+    viewer.dataSources.add(dataSource5);
+
+    // Get the entities from the data source
+    var entities5 = dataSource5.entities.values;
+
+    // Style the triangles (red)
+    entities5.forEach(function(entity) {
+        if (Cesium.defined(entity.polygon)) {
+            entity.polygon.material = Cesium.Color.RED;
+            // Additional styling for the triangles if needed
+        }
+    });
+}).otherwise(function(error) {
+    console.error(error);
+});
