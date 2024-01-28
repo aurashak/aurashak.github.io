@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
 </head>
 <body>
+    <div class="projectcontainer">
 
     <div class="header">
         <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
@@ -28,98 +29,22 @@
 <div class="maptitle">
     135th Streeet Marine Transfer Station
 </div>   
-<div class="mapdescription" >
-    This map investigates the infrastructure along the West Harlem waterfront in New York City. This area includes a concentration of waste, energy, transportation, and other infrastructure. When completed, this model will be used to understand the long-term impacts that the infrastructure has had on the natural environment and communities of West Harlem. 
-        See <a href="https://aurashak.github.io/projects/mts/mtsmapdocumentation.html">here</a> for map documentation.
-    </div>
+    
 </div>
 
 
-<div class="nymapcontainer">
+<div class="mapcontainer">
     <div class="mapcolumnleft">
         
+        This map investigates the infrastructure along the West Harlem waterfront in New York City. This area includes a concentration of waste, energy, transportation, and other infrastructure. When completed, this model will be used to understand the long-term impacts that the infrastructure has had on the natural environment and communities of West Harlem. 
+        See <a href="https://aurashak.github.io/projects/mts/mtsmapdocumentation.html">here</a> for map documentation.
         
-        <div class="mapsectionleft">
-            <div style="display: flex; align-items: center;">
 
-            <div id="legend-wastewatertreatment" class="legend-symbol"></div>
-            <label class="switch-label">Wastewater Treatment</label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="switch-input" id="wastewatertreatment-switch">
-                <div class="switch-track">
-                    <div class="switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-
-    <div class="mapsectionleft">
-    <input type="checkbox" id="toggleSatellite"> Toggle Satellite
-</div>
-
-
-        <div class="mapsectionleft">
-            <div style="display: flex; align-items: center;">
-
-            <div id="legend-aqisite" class="legend-symbol"></div>
-            <label class="switch-label">AQI Sites</label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="switch-input" id="aqisite-switch">
-                <div class="switch-track">
-                    <div class="switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-
-        <div class="mapsectionleft">
-            <div style="display: flex; align-items: center;">
-
-            <div id="legend-100yearfloodplain" class="legend-symbol"></div>
-            <label class="switch-label" >100-Year Floodplain</label>
-            <label class="switch" style="margin-left: auto; ">
-                <input type="checkbox" class="switch-input" id="100yearfloodplain-switch">
-                <div class="switch-track">
-                    <div class="switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-
-        <div class="mapsectionleft">
-            <div style="display: flex; align-items: center;">
-
-            <div id="legend-nygaspipelines" class="legend-symbol"></div>
-            <label class="switch-label">Gas Pipelines</label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="switch-input" id="nygaspipelines-switch">
-                <div class="switch-track">
-                    <div class="switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-        
-        <div class="mapsectionleft">
-            <div style="display: flex; align-items: center;">
-
-            <div id="legend-nycso" class="legend-symbol"></div>
-            <label class="switch-label">NYC SO</label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="switch-input" id="nycso-switch">
-                <div class="switch-track">
-                    <div class="switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-        </div>
-        
-    </div>
 
     <div class="mapcolumnright">
         <div id="mtsmap"></div>
-
     </div>
+</div>
 </div>
 
 <script src="https://aurashak.github.io/projects/mts/mts3d.js"></script>
