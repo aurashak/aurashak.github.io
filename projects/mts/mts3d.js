@@ -79,8 +79,12 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/aqisite.ge
     // Style the circle markers (green)
     entities3.forEach(function(entity) {
         if (Cesium.defined(entity.point)) {
-            entity.point.color = Cesium.Color.GREEN;
+            // Set the color and pixelSize directly on the point
+            entity.point.color = new Cesium.Color.fromCssColorString('#00FF00'); // Green color
             entity.point.pixelSize = 10.0;
+
+            // Alternatively, use a ColorMaterialProperty for the material
+            entity.point.material = new Cesium.ColorMaterialProperty(Cesium.Color.GREEN);
         }
     });
 }).otherwise(function(error) {
