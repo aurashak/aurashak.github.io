@@ -317,7 +317,6 @@ padding: 0px 4px;
 
 
 .img-container {
-  height: 100vh; 
   display: flex;
   align-items: flex-start; 
   justify-content: center;
