@@ -573,14 +573,16 @@ border: 1px solid black;
   height: 12px;
   width: 30px;
   position: relative;
+    margin-right: 5px;
 }
 
 .switch-track-b {
-  background-color: #ccc;
-  border-radius: 15px;
-  height: 12px;
-  width: 30px;
-  position: relative;
+    background-color: #ccc;
+    border-radius: 15px;
+    height: 12px;
+    width: 30px;
+    position: relative;
+margin-right: 5px;
 }
 
 .switch-thumb {
