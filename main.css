@@ -301,10 +301,10 @@ padding: 0px 4px;
 
 
 
-#textbox {
-  padding: 10px; 
-  margin: 10px; 
-  background: #e3e3e3;
+.textbox {
+  padding: 15px; 
+  margin: 0px; 
+  background: #d0d0d0;
 }
 
 
