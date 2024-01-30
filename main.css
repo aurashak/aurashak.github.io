@@ -2139,11 +2139,14 @@ span.cesium-projectionPicker-wrapper {
       padding: 5px 10px;
   }
 
-  .nymapcontainer,
+
+ 
+    
   .placeidcontainer, 
   .nydisplacementmap, 
-  .nmcacontainer {
-      grid-template-columns: 100%;
+  .nmcacontainer, 
+  .mapcontainer {
+    grid-template-columns: 1fr; /* Change this to a single column for smaller screens */
   }
 
   .columnlefttitle {
