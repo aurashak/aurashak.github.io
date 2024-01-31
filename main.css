@@ -2092,6 +2092,7 @@ span.cesium-projectionPicker-wrapper {
 
   .container {
       display: block;
+      margin: 0px;
   }
 
   .mapheader {
@@ -2173,11 +2174,13 @@ span.cesium-projectionPicker-wrapper {
 
   .courseheader {
       flex-direction: column;
+            display: inline-block;
+
   }
 
   .coursenavigation {
       font-size: 16px;
-      margin: 0px;
+      margin: 5px 0;
       text-decoration: underline;
   }
 
