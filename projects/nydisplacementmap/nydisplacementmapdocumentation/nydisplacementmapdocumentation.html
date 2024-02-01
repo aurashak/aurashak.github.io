@@ -29,32 +29,54 @@
         <h1>NY Displacement Map Documentation</h1>
 
         <h3><b>1. Technology and Applications</b></h3>
-        <h3>Downlod QGIS and Photoshop.<br><img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/qgislogo.png" style="width: 50px;"> &nbsp &nbsp <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/pslogo.png" style="width: 50px;"><br><br></h3>
+        <h3>Downlod QGIS <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/qgislogo.png" style="width: 50px;"> and Photoshop <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/pslogo.png" style="width: 50px;">.<br> <br></h3>
 
         <h3><b>2. Sources of data</b></h3>
-        <h3>Download shapefile format from these websites<br>
-        <li><a href="https://aurashak.github.io/">NYS GIS Clearinghouse</a>: New York State county boundaries, New York State streets</li>   
-        <li><a href="https://aurashak.github.io/">New York City Open Data</a>: New York City borough boundaries, New York City streets, New York City hurricane evacuation zones</li>   
-        <li><a href="https://aurashak.github.io/">New Jersey Open Data</a>: NJ State boundary</li>   
-        <li><a href="https://www.geofabrik.de/data/shapefiles.html">Geofabrik</a>: NJ State and New York state roads and state boundaries</li>
-        <li><a href="https://www.geofabrik.de/data/shapefiles.html">US Census</a>: Per capita income data, average coost of housing data</h3></li>
-
+        <h3>Download the following files, in shapefile format, from these websites"<br>
+            <ul>
+        <li>From https://data.gis.ny.gov, download New York State county boundaries and New York State streets.</li>   
+        <li>From https://opendata.cityofnewyork.us, download NYC borough boundaries, NYC streets, NYC hurricane evacuation zones, and NYC projected floodplains.</li>   
+        <li>From https://www.geofabrik.de/data/shapefiles.html, download New Jersey and New York state roads and state boundaries.</li>
+        <li>From https://www.geofabrik.de/data/shapefiles.html, download data for per capita income and average cost of housing.</li></h3>
+            </ul>
         <Br>
 
-        <h1><b>3. Load shapefiles into QGIS</b></h1>
-        <h3>Open QGIS and load the shapefile layers<Br>Load each layer into QGIS and export individually.<br>Export individual layers as .png with a similar scale and with transparent backgrounds.  </h3>
+        <h1><b>3. Import shapefiles into QGIS</b></h1>
+        <h3> 
+            <ul>
+                <li>Open QGIS and import shapefiles</li>
+                <li>Adjust map projection for preferred perspective</li>
+                <li>Export individual layers with minimal styling and stark contrasting colors. Export outlines with no fill as separate layers. Export layers with the exact same scale and placement on page, use .png file extension and set a transparent backgrounds.</li>
+            </ul>
+        </h3>
         
             <h1><b>4. Import individual layers to Photoshop</b></h1>
-            <h3>Open Photoshop and load the .png layers exported from QGIS<Br>Adjust the opacity and coloring of each layer to identiy areas of most significant overlap<br>
-            
-            
-                <h3><img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/blank.png" style="width: 250px;">  <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/flooding.png" style="width: 250px;">  <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/housingincome.png" style="width: 250px;">
-                    
-                <Br><br>Circle those areas as displacement zones<br>Add other labels to map<br>Overlay grid and mapkey</h3>
-               <h3><img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/labels.png" style="width: 250px;">  <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/gridinfo.png" style="width: 250px;">  <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/circles.png" style="width: 250px;">  </h3>
+            <h3>Open Photoshop and load the .png images as individual layers. Begin with counties layer with outline and no fill:<Br>
+                <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/blank.png" style="width: 250px;"><br><br>
+
+                Add the flooding and hurricane evacuation zone layers:<Br>
+                    <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/flooding.png" style="width: 250px;"><br><br>
+
+                    Add the housing and income layers:<Br>
+                        <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/housingincome.png" style="width: 250px;">
+                        <br><br>
+
+                Adjust the opacity and coloring of each layer to identiy areas of most significant overlap<br>Circle those areas as displacement zones<br>
+                <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/circles.png" style="width: 250px;">
+                <br><br>
+                Add other labels to map<br>
+               <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/labels.png" style="width: 250px;">  
+               <br><br>
+               
+               Add the grid and scale information<br>
+               <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmapdocumentation/gridinfo.png" style="width: 250px;"> <br><br>   
+
+
+               Overlay grid and mapkey
+               <img src="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap/mapkey.png" style="width: 250px;"> <br><br>  </h3> 
 
                <h1><b>5. Compile all layers</b></h1>
-               <h3>Open Photoshop and load the .png layers exported from QGIS<Br>Adjust the opacity and coloring of each layer to identiy areas of most significant overlap<br>
+               <h3>Adjust spacing, sizing, and opacity for each layer. Combine everything so it is easily ledgible at respective distances. Emphasize critical information about displacement zones.<br></h3>
 
           
 <br>
