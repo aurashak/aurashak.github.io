@@ -30,16 +30,16 @@
 <div class="aboutcontainer">
 
 <h1>NY Environmental Infrastructure Map Documentation</h1>
-
+<br>
 <h3><b>1. Technology and Applications</b></h3>
-<h3>This interactive webmap uses Github &nbsp;<img src="https://aurashak.github.io/projects/nymap/nymapdocumentation/github.png" style="width: 50px;"> and Leaflet &nbsp; <img src="https://aurashak.github.io/projects/nymap/nymapdocumentation/leaflet.png" style="width: 100px;">.<br> <br></h3>
+<h3>This interactive webmap uses <a href="https://github.com">Github &nbsp;<img src="https://aurashak.github.io/projects/nymap/nymapdocumentation/github.png" style="width: 50px;"></a> and <a href="https://leaflet.org"'>Leaflet &nbsp; <img src="https://aurashak.github.io/projects/nymap/nymapdocumentation/leaflet.png" style="width: 100px;"></a>.<br> <br></h3>
 
 <h3><b>2. Download Geojson files</b></h3>
     <ul>
-<li>From <a hrerf="https://data.gis.ny.gov">https://data.gis.ny.gov</a>, download New York State waste water treatment plants, combined sewere overflow locations, inactive landfills, recycling facilities, power plants, waste transfer stations, energy transmission lines, and oil storage locations.</li>   
-<li>From <a href="https://opendata.cityofnewyork.us">https://opendata.cityofnewyork.us</a>, download NYC hurricane evacuation zones and NYC projected floodplains.</li>   
-<li>From <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform::natural-gas-pipelines/explore"> Homeland Infrastructure Foundation-Level Data (HIFLD)</a>, download natural gas pipelines.</li>
-<li>From <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-data.html">US Census Bureau</a>, download data for per capita income and average cost of housing.</li></h3>
+        <li>From <a hrerf="https://data.gis.ny.gov">https://data.gis.ny.gov</a>, download New York State waste water treatment plants, combined sewere overflow locations, inactive landfills, recycling facilities, power plants, waste transfer stations, energy transmission lines, and oil storage locations.</li>   
+        <li>From <a href="https://opendata.cityofnewyork.us">https://opendata.cityofnewyork.us</a>, download NYC hurricane evacuation zones and NYC projected floodplains.</li>   
+        <li>From <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform::natural-gas-pipelines/explore"> Homeland Infrastructure Foundation-Level Data (HIFLD)</a>, download natural gas pipelines.</li>
+        <li>From <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-data.html">US Census Bureau</a>, download data for per capita income and average cost of housing.</li></h3>
     </ul>
 <Br>
 
@@ -60,66 +60,60 @@ var map = L.map('nymap', {
 <h3><b>4. Add Open Street Maps as the base layer</b></h3>
 <h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block;">
-var map = L.map('map-container').setView([0, 0], 2);
+    <pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block;">
+        var map = L.map('map-container').setView([0, 0], 2);
 
-var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    // No style options here for custom styling
-});
+        var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            // No style options here for custom styling
+        });
 
-openstreetmapLayer.addTo(map);
+        openstreetmapLayer.addTo(map);
     </code></pre>
 
 
 <h3><b>5. Add geojson layers to appear over the OSM layer</b></h3>
 <h3> This geojson data is for the location of the Air Quality Monitoring Sites. Repeat this proces for other geojson layers of data. Convert circle markers to lines and polygons for other their respective data types.</h3>
+    <pre><code>
 
-<pre><code>
-
-// AQI sites
-var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'green',
-            color: 'black',
-            weight: 0,
-            opacity: 0.0,
-            fillOpacity: 0.5
+        // AQI sites
+        var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
+            pointToLayer: function (feature, latlng) {
+                var size = calculateMarkerSize(map.getZoom());
+                return L.circleMarker(latlng, {
+                    radius: size,
+                    fillColor: 'green',
+                    color: 'black',
+                    weight: 0,
+                    opacity: 0.0,
+                    fillOpacity: 0.5
+                });
+            }
         });
-    }
-});
-
-</code></pre>
-        
-
+    </code></pre>
        
 <h3><b>6. Create layer groups</b></h3>
 <h3>Create layer groups for how you want the content to be structured. This example is for the Energy layer group.</h3>
 
-<pre><code>
+    <pre><code>
+        // Energy Layer Group
+        var energyLayerGroup = L.layerGroup();
 
-// Energy Layer Group
-var energyLayerGroup = L.layerGroup();
 
-
-// Major Oil Storage Layer
-var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'black',
-            color: 'black',
-            weight: 0,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-}).addTo(energyLayerGroup);
-
-</code></pre>
+        // Major Oil Storage Layer
+        var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
+            pointToLayer: function (feature, latlng) {
+                var size = calculateMarkerSize(map.getZoom());
+                return L.circleMarker(latlng, {
+                    radius: size,
+                    fillColor: 'black',
+                    color: 'black',
+                    weight: 0,
+                    opacity: 0.7,
+                    fillOpacity: 0.5
+                });
+            }
+        }).addTo(energyLayerGroup);
+    </code></pre>
 
 
 
