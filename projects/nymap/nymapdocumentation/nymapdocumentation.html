@@ -50,7 +50,7 @@
 Create a javacript file and enter the following information. This code places the Leaflete map on the website and sets the initial location as New York City</h3>
 
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
 var map = L.map('nymap', {            
 }).setView([40.7128, -74.0060]); 
 </code></pre>
@@ -60,7 +60,7 @@ var map = L.map('nymap', {
 <h3><b>4. Add Open Street Maps as the base layer</b></h3>
 <h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
 var map = L.map('map-container').setView([0, 0], 2);
 
 var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
