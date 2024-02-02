@@ -50,16 +50,17 @@
 Create a javacript file and enter the following information. This code places the Leaflete map on the website and sets the initial location as New York City</h3>
 
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width=400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
 var map = L.map('nymap', {            
 }).setView([40.7128, -74.0060]); 
 </code></pre>
+<br>
 
                
 <h3><b>4. Add Open Street Maps as the base layer</b></h3>
 <h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width=400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
 var map = L.map('map-container').setView([0, 0], 2);
 
 var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -68,12 +69,13 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 openstreetmapLayer.addTo(map);
 </code></pre>
+<br>
 
 
 <h3><b>5. Add geojson layers to appear over the OSM layer</b></h3>
 <h3> This geojson data is for the location of the Air Quality Monitoring Sites. Repeat this proces for other geojson layers of data. Convert circle markers to lines and polygons for other their respective data types.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width=400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width: 400px;">
 // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
 pointToLayer: function (feature, latlng) {
@@ -89,11 +91,12 @@ return L.circleMarker(latlng, {
 }
 });
 </code></pre>
-       
+<br>
+
 <h3><b>6. Create layer groups</b></h3>
 <h3>Create layer groups for how you want the content to be structured. This example is for the Energy layer group.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width=400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width: 400px;">
 // Energy Layer Group
 var energyLayerGroup = L.layerGroup();
 
@@ -113,13 +116,14 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 }).addTo(energyLayerGroup);
 </code></pre>
+<br>
 
 
 
 <h3><b>7. Add event listeners for each layer</b></h3>
 <h3>Event listeners are necessary to toggle the layers on and off when the switches are pushed.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width=400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width: 400px;">
 document.getElementById('nycso').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
         // If the layer is already on, do nothing when switching left to right
@@ -132,14 +136,14 @@ document.getElementById('nycso').addEventListener('change', function() {
     }
 });
 </code></pre>
+<br>
 
 
 
 <h3><b>8. Create event listeners for each layer group</b></h3>
 <h3>Event listeners for each layer group will show or remove all layers in  a group when the group switch is toggled on or off.</h3>
 
-<pre><code>
-
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width: 400px;">
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
 if (map.hasLayer(energyLayerGroup)) {
     map.removeLayer(energyLayerGroup);
@@ -172,17 +176,15 @@ if (map.hasLayer(energyLayerGroup)) {
     }
 }
 });
-
-
 </code></pre>
-
+<br>
 
 
 
 <h3><b>9. Add the map legend function</b></h3>
 <h3>In order for the symbology for each layer to show in the map legend (the symbol beside each layer on the map website), add these functions.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width=400px;">
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
 // Set the legend symbol shapes and colors for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
@@ -216,7 +218,7 @@ if (shape === 'circle') {
 }    
 }
 </code></pre>
-
+<br>
 <h3><b>10. Next steps</b></h3>
 <h3>Additional layers of data are in the process of being added to this map. Those layers include real-time air quality data derived from the Googel Maps air quality API, surface temperature data derived from NASA Landsat sources, and land cover data. A submission form will also be added so viewers can add metadat, such as text, audio, and images describing sites shown on the map.</h3>
 
