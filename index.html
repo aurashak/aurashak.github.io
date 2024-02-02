@@ -11,62 +11,64 @@
 </head>
 <body>
 
-    <div class="header">
-        <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
-        <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
-        <div class="navigation" id="projectsLink">Projects</div>
-        <div class="hidden-projects" id="projectsList">
-            <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
-            <a href="https://aurashak.github.io/projects/mts/mts.html">MTS</a>
-            <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
-            <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
-        </div>
-    </div>
-    
-    
-    <div class="container">
-        <div class="hometitle">Aurash Khawarzad</div>
-    </div>
-
-    <div class="container">
-        <div class="homesubtitle"  >Geography / Geoinformatics / Cartography / Urban Planning / Urban Design / Public Policy</div>    
-    </div>
-
-    <div class="container">
-       <ul><div class="homesubtitle" ><a href="https://aurashak.github.io/projects/nymap/nymap.html"><b>New York City Environmental Map</a></b></div><br>
-       <div class="homesubtitle" ><a href="https://aurashak.github.io/projects/mts/mts.html"><b>Marine Transfer Station</a></b></div><br>
-       <div class="homesubtitle" ><a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html"><b>NY Displacement Map</a></b></div><Br>
-       <div class="homesubtitle" ><a href="https://aurashak.github.io/projects/nmca/nmca.html"><b>NMCA</a></b></div><br></ul>
-    </div>
-
-    <div class="container">        
-        <div class="homesubtitle" style="font-size: 18px; padding: 10px; border-radius: 8px; font-weight: normal;">
-        <div style="display: flex; align-items: center;">
-            <label class="homeswitch-label">Satellite</label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="homeswitch-input" id="osmLayerSwitch">
-                <div class="homeswitch-track">
-                    <div class="homeswitch-thumb"></div>
-                </div>
-            </label>
-        </div>
-        <br>
-        <div style="display: flex; align-items: center;">
-            <label class="homeswitch-label">Spin</label> <div id="spinButton" class="spin-button"></div>
-        </div>
+<div class="header">
+<div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
+<div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
+<div class="navigation" id="projectsLink">Projects</div>
+<div class="hidden-projects" id="projectsList">
+<a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
+<a href="https://aurashak.github.io/projects/mts/mts.html">MTS</a>
+<a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
+<a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
+</div>
+<div class="navigation"><a href="https://aurashak.github.io/about/about.html">Resources</a></div>
 
 </div>
 
 
-    <div class="homecontainer">
-        <div id="cesiumContainer1" class="cesium-container"></div>
-    </div>
+<div class="container">
+<div class="hometitle">Aurash Khawarzad</div>
+</div>
+
+<div class="container">
+<div class="homesubtitle"  >Geography / Geoinformatics / Cartography / Urban Planning / Urban Design / Public Policy</div>    
+</div>
+
+<div class="container">
+<ul><div class="homesubtitle" ><a href="https://aurashak.github.io/projects/nymap/nymap.html"><b>New York City Environmental Map</a></b></div><br>
+<div class="homesubtitle" ><a href="https://aurashak.github.io/projects/mts/mts.html"><b>Marine Transfer Station</a></b></div><br>
+<div class="homesubtitle" ><a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html"><b>NY Displacement Map</a></b></div><Br>
+<div class="homesubtitle" ><a href="https://aurashak.github.io/projects/nmca/nmca.html"><b>NMCA</a></b></div><br></ul>
+</div>
+
+<div class="container">        
+<div class="homesubtitle" style="font-size: 18px; padding: 10px; border-radius: 8px; font-weight: normal;">
+<div style="display: flex; align-items: center;">
+<label class="homeswitch-label">Satellite</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="homeswitch-input" id="osmLayerSwitch">
+<div class="homeswitch-track">
+<div class="homeswitch-thumb"></div>
+</div>
+</label>
+</div>
+<br>
+<div style="display: flex; align-items: center;">
+<label class="homeswitch-label">Spin</label> <div id="spinButton" class="spin-button"></div>
+</div>
+
+</div>
 
 
-    <div style="position: fixed; bottom: 10px; left: 10px; z-index: 9999; font-size: 12px; color: #e4e4e4;">
-        Globe made with <a href="https://cesium.com" style="color: #e4e4e4;">CesiumJS</a>
-    </div>
-    
+<div class="homecontainer">
+<div id="cesiumContainer1" class="cesium-container"></div>
+</div>
+
+
+<div style="position: fixed; bottom: 10px; left: 10px; z-index: 9999; font-size: 12px; color: #e4e4e4;">
+Globe made with <a href="https://cesium.com" style="color: #e4e4e4;">CesiumJS</a>
+</div>
+
 
 
 <script src="https://cesium.com/downloads/cesiumjs/releases/1.82/Build/Cesium/Cesium.js"></script>
