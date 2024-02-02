@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="https://aurashak.github.io/main.css">
+
+</head>
+<body>
+
+<div class="header">
+    <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
+    <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
+    <div class="navigation" id="projectsLink">Projects</div>
+    <div class="hidden-projects" id="projectsList">
+        <a href="https://aurashak.github.io/projects/placeid/placeid.html">Place ID</a>
+        <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
+        <a href="https://aurashak.github.io/projects/mts/mts.html">MTS</a>
+        <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
+        <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
+    </div>
+</div>
+    
+
+
+
+
+<div class="aboutcontainer">
+
+<h1>NY Environmental Infrastructure Map Documentation</h1>
+<br>
+<h3><b>1. Technology and Applications</b></h3>
+<h3>This interactive webmap uses <a href="https://github.com">Github</a> and <a href="https://leaflet.org">Leaflet</a>.<br> <br></h3>
+
+<h3><b>2. Download Geojson files</b></h3>
+    <ul>
+        <li>From <a hrerf="https://data.gis.ny.gov">https://data.gis.ny.gov</a>, download New York State waste water treatment plants, combined sewere overflow locations, inactive landfills, recycling facilities, power plants, waste transfer stations, energy transmission lines, and oil storage locations.</li>   
+        <li>From <a href="https://opendata.cityofnewyork.us">https://opendata.cityofnewyork.us</a>, download NYC hurricane evacuation zones and NYC projected floodplains.</li>   
+        <li>From <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform::natural-gas-pipelines/explore"> Homeland Infrastructure Foundation-Level Data (HIFLD)</a>, download natural gas pipelines.</li>
+        <li>From <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-data.html">US Census Bureau</a>, download data for per capita income and average cost of housing.</li></h3>
+    </ul>
+<Br>
+
+
+<h3><b>3. Set up Leaflet map</b></h3>
+<h3>Create a Github pages account and set up a repository to display you Leaflet map.
+<Br>
+Create a javacript file and enter the following information. This code places the Leaflete map on the website and sets the initial location as New York City</h3>
+
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
+var map = L.map('nymap', {            
+}).setView([40.7128, -74.0060]); 
+</code></pre>
+<br>
+
+               
+<h3><b>4. Add Open Street Maps as the base layer</b></h3>
+<h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
+var map = L.map('map-container').setView([0, 0], 2);
+
+var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // No style options here for custom styling
+});
+
+openstreetmapLayer.addTo(map);
+</code></pre>
+<br>
+
+
+<h3><b>5. Add geojson layers to appear over the OSM layer</b></h3>
+<h3> This geojson data is for the location of the Air Quality Monitoring Sites. Repeat this proces for other geojson layers of data. Convert circle markers to lines and polygons for other their respective data types.</h3>
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+// AQI sites
+var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
+pointToLayer: function (feature, latlng) {
+var size = calculateMarkerSize(map.getZoom());
+return L.circleMarker(latlng, {
+    radius: size,
+    fillColor: 'green',
+    color: 'black',
+    weight: 0,
+    opacity: 0.0,
+    fillOpacity: 0.5
+});
+}
+});
+</code></pre>
+<br>
+
+<h3><b>6. Create layer groups</b></h3>
+<h3>Create layer groups for how you want the content to be structured. This example is for the Energy layer group.</h3>
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+// Energy Layer Group
+var energyLayerGroup = L.layerGroup();
+
+
+// Major Oil Storage Layer
+var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/majoroilstorage.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'black',
+            color: 'black',
+            weight: 0,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(energyLayerGroup);
+</code></pre>
+<br>
+
+
+
+<h3><b>7. Add event listeners for each layer</b></h3>
+<h3>Event listeners are necessary to toggle the layers on and off when the switches are pushed.</h3>
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+document.getElementById('nycso').addEventListener('change', function() {
+    if (map.hasLayer(nycsoLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nycso').checked) {
+            return;
+        }
+        map.removeLayer(nycsoLayer);
+    } else {
+        map.addLayer(nycsoLayer);
+    }
+});
+</code></pre>
+<br>
+
+
+
+<h3><b>8. Create event listeners for each layer group</b></h3>
+<h3>Event listeners for each layer group will show or remove all layers in  a group when the group switch is toggled on or off.</h3>
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+document.getElementById('energyLayerGroup').addEventListener('click', function() {
+if (map.hasLayer(energyLayerGroup)) {
+    map.removeLayer(energyLayerGroup);
+    // If the group toggle is turned off, turn off individual layers as well
+    map.removeLayer(majoroilstorageLayer);
+    map.removeLayer(powerplantsLayer);
+    map.removeLayer(nygaspipelinesLayer);
+    map.removeLayer(electrictransmissionlinesLayer);
+
+    // Reset the individual layer toggle buttons to off state
+    document.getElementById('majoroilstorage').checked = false;
+    document.getElementById('powerplants').checked = false;
+    document.getElementById('nygaspipelines').checked = false;
+    document.getElementById('electrictransmissionlines').checked = false;
+
+} else {
+    map.addLayer(energyLayerGroup);
+    // If the group toggle is turned on, turn on individual layers if they were previously checked
+    if (document.getElementById('majoroilstorage').checked) {
+        map.addLayer(majoroilstorageLayer);
+    }
+    if (document.getElementById('powerplants').checked) {
+        map.addLayer(powerplantsLayer);
+    }
+    if (document.getElementById('nygaspipelines').checked) {
+        map.addLayer(nygaspipelinesLayer);
+    }
+    if (document.getElementById('electrictransmissionlines').checked) {
+        map.addLayer(electrictransmissionlinesLayer);
+    }
+}
+});
+</code></pre>
+<br>
+
+
+
+<h3><b>9. Add the map legend function</b></h3>
+<h3>In order for the symbology for each layer to show in the map legend (the symbol beside each layer on the map website), add these functions.</h3>
+
+<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block;">
+// Set the legend symbol shapes and colors for each layer
+setLegendSymbol('evacuationzones', 'red', 'polygon');
+setLegendSymbol('electrictransmissionlines', 'orange', 'line');
+setLegendSymbol('aqisite', 'green', 'circle');
+setLegendSymbol('chemicalstorage', 'blue', 'circle');
+setLegendSymbol('recyclingfacility', 'orange', 'circle');
+setLegendSymbol('nycso', 'brown', 'circle');
+setLegendSymbol('nygaspipelines', 'purple', 'line');
+setLegendSymbol('powerplants', '#FFC0CB', 'circle');
+setLegendSymbol('wastewatertreatment', 'red', 'circle');
+setLegendSymbol('wastetransferfacility', 'purple', 'circle');
+setLegendSymbol('majoroilstorage', 'black', 'circle');
+setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
+setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
+
+// Function to set legend symbols
+function setLegendSymbol(layerId, color, shape) {
+const legendSymbol = document.getElementById(`legend-${layerId}`);
+
+if (legendSymbol) {
+if (shape === 'circle') {
+    // Create a circle SVG element with a slightly smaller size
+    legendSymbol.innerHTML = `<svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>`;
+} else if (shape === 'line') {
+    // Create a line SVG element with a slightly smaller size
+    legendSymbol.innerHTML = `<svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>`;
+} else if (shape === 'polygon') {
+    // Create a polygon SVG element (example polygon with 5 points) with a slightly smaller size
+    legendSymbol.innerHTML = `<svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>`;
+}
+}    
+}
+</code></pre>
+<br>
+<h3><b>10. Next steps</b></h3>
+<h3>Additional layers of data are in the process of being added to this map. Those layers include real-time air quality data derived from the Googel Maps air quality API, surface temperature data derived from NASA Landsat sources, and land cover data. A submission form will also be added so viewers can add metadat, such as text, audio, and images describing sites shown on the map.</h3>
+
+</div>
+<Br><br>
+                                    
+<script src="https://aurashak.github.io/navigation.js"></script>
+
+</body>
+</html>
+  
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
