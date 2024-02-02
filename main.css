@@ -310,6 +310,13 @@ padding: 0px 4px;
 }
 
 
+.codebox {
+background: #e9e9e9;
+font: courier;
+font-size: 14;
+padding: 10px;
+display: inline-block;
+}
 
 .mapcontainer {
   display: grid;
