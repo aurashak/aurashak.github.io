@@ -68,21 +68,16 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 .navigation a:link {
   text-decoration: none; 
   color: black;
-
 }
 
 .navigation a:active{
   text-decoration: none; 
   color: black;
-  background-color: #ffe600ce;
-
 }
 
 .navigation a:selected {
   text-decoration: none; 
   color: black;
-  background-color: #ffe600ce;
-
 }
 
 .navigation a.current-page,
