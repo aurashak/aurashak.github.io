@@ -38,7 +38,7 @@ h3 {
 }
 
 h3 a:link { color: black; background-color: #ffe600ce;}
-
+h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600ce;}
 
 .header {
   display: flex;
@@ -236,7 +236,8 @@ padding: 0px 4px;
 }
 
 .homesubtitle a:link {color: black;}
-.homesubtitle a:hover { text-decoration: underline;     }
+.homesubtitle a:hover { text-decoration: underline;    background-color: #ffe600ce;
+   }
 .homesubtitle a:active {   }
 .homesubtitle a:visited {   }
 
