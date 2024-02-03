@@ -58,7 +58,10 @@ h3 a:link {text-decoration: underline;}
   color: black;
   margin: 0px 30px 0px 10px;
   cursor: pointer;
+  display: inline-block;
+
 }
+
 
 
 
