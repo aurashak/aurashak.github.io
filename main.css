@@ -440,6 +440,7 @@ border: 1px solid black;
 #nymap {
   width: 100%; /* Make the map take up 100% of the width */
   height: 100%; /* Make the map take up 100% of the height */
+  min-width: 300px;
 }
 
 
@@ -2199,6 +2200,7 @@ span.cesium-projectionPicker-wrapper {
 
   #nymap {
       min-height: 100%;
+      min-width: 300px;
   }
 
   .hidden-projects {
