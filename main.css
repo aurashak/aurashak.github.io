@@ -305,8 +305,9 @@ padding: 0px 4px;
 
 
 .textbox {
-  padding: 15px; 
+  padding: 20px; 
   margin: 0px; 
+  border-radius: 8px;
   background: #d0d0d0;
 }
 
