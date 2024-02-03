@@ -43,10 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (projectPages.includes(currentURL)) {
         projectsLink.classList.add("current-page");
     }
-    
 
     // Toggle the visibility of projectsList when clicking on projectsLink
-    const projectsLink = document.getElementById("projectsLink");
     const projectsList = document.getElementById("projectsList");
 
     projectsLink.addEventListener("click", function () {
