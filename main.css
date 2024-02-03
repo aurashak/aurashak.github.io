@@ -85,9 +85,10 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 
 }
 
-.navigation a.current-page {
-  background-color: #ffe600ce;
-
+.navigation a.current-page,
+.navigation #projectsLink.current-page {
+    background-color: yellow;
+    /* Add any other styling you want for the current page or button */
 }
 
 

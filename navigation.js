@@ -31,6 +31,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Highlight the "Projects" button when a project page is being viewed
+    const projectPages = [
+        "https://aurashak.github.io/projects/nymap/nymap.html",
+        "https://aurashak.github.io/projects/mts/mts.html",
+        "https://aurashak.github.io/projects/nmca/nmca.html",
+        "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html"
+    ];
+
+    const projectsLink = document.getElementById("projectsLink");
+    if (projectPages.includes(currentURL)) {
+        projectsLink.classList.add("current-page");
+    }
+    
+
     // Toggle the visibility of projectsList when clicking on projectsLink
     const projectsLink = document.getElementById("projectsLink");
     const projectsList = document.getElementById("projectsList");
