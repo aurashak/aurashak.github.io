@@ -20,12 +20,18 @@
 
 <div class="aboutcontainer">
 
-<h1>NY Environmental Infrastructure Map Documentation</h1>
+<h1 style="display: inline; background: #ffe600ce; ">NY Environmental Infrastructure Map Documentation</h1>
 <br>
-<h3><b>1. Technology and Applications</b></h3>
-<h3>This interactive webmap uses <a href="https://github.com">Github</a> and <a href="https://leafletjs.com">Leaflet</a>.<br> <br></h3>
 
-<h3><b>2. Download Geojson files</b></h3>
+<div class="textbox">
+
+<h3 style="display: inline; background: #ffe600ce; "><b>1. Technology and Applications</b></h3>
+<h3>This interactiv<h3 style="display: inline; background: #ffe600ce; ">e webmap uses <a href="https://github.com">Github</a> and <a href="https://leafletjs.com">Leaflet</a>.<br> <br></h3>
+</div>
+
+<div class="textbox">
+
+<h3 style="display: inline; background: #ffe600ce; "><b>2. Download Geojson files</b></h3>
     <ul>
         <li>From <a hrerf="https://data.gis.ny.gov">https://data.gis.ny.gov</a>, download New York State waste water treatment plants, combined sewere overflow locations, inactive landfills, recycling facilities, power plants, waste transfer stations, energy transmission lines, and oil storage locations.</li>   
         <li>From <a href="https://opendata.cityofnewyork.us">https://opendata.cityofnewyork.us</a>, download NYC hurricane evacuation zones and NYC projected floodplains.</li>   
@@ -34,8 +40,9 @@
     </ul>
 <Br>
 
+    <div class="textbox">
 
-<h3><b>3. Set up Leaflet map</b></h3>
+<h3 style="display: inline; background: #ffe600ce; "><b>3. Set up Leaflet map</b></h3>
 <h3>Create a Github pages account and set up a repository to display you Leaflet map.
 <Br>
 Create a javacript file and enter the following information. This code places the Leaflete map on the website and sets the initial location as New York City</h3>
@@ -45,11 +52,13 @@ Create a javacript file and enter the following information. This code places th
 var map = L.map('nymap', {            
 }).setView([40.7128, -74.0060]); 
 </code></pre>
+</div>
 
 <br>
 
-               
-<h3><b>4. Add Open Street Maps as the base layer</b></h3>
+<div class="textbox">
+
+<h3 style="display: inline; background: #ffe600ce; "><b>4. Add Open Street Maps as the base layer</b></h3>
 <h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
 
 <pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
@@ -61,10 +70,14 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 openstreetmapLayer.addTo(map);
 </code></pre>
+</div>
+
 <br>
 
+<div class="textbox">
 
-<h3><b>5. Add geojson layers to appear over the OSM layer</b></h3>
+
+<h3 style="display: inline; background: #ffe600ce; "><b>5. Add geojson layers to appear over the OSM layer</b></h3>
 <h3> This geojson data is for the location of the Air Quality Monitoring Sites. Repeat this proces for other geojson layers of data. Convert circle markers to lines and polygons for other their respective data types.</h3>
 
 <pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
@@ -83,9 +96,14 @@ return L.circleMarker(latlng, {
 }
 });
 </code></pre>
+</div>
+
 <br>
 
-<h3><b>6. Create layer groups</b></h3>
+<div class="textbox">
+
+
+<h3 style="display: inline; background: #ffe600ce; "><b>6. Create layer groups</b></h3>
 <h3>Create layer groups for how you want the content to be structured. This example is for the Energy layer group.</h3>
 
 <pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
@@ -108,11 +126,14 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 }).addTo(energyLayerGroup);
 </code></pre>
+</div>
+
 <br>
 
 
+<div class="textbox">
 
-<h3><b>7. Add event listeners for each layer</b></h3>
+<h3 style="display: inline; background: #ffe600ce; "><b>7. Add event listeners for each layer</b></h3>
 <h3>Event listeners are necessary to toggle the layers on and off when the switches are pushed.</h3>
 
 <pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
@@ -128,11 +149,14 @@ document.getElementById('nycso').addEventListener('change', function() {
     }
 });
 </code></pre>
+</div>
+
 <br>
 
+<div class="textbox">
 
 
-<h3><b>8. Create event listeners for each layer group</b></h3>
+<h3 style="display: inline; background: #ffe600ce; "><b>8. Create event listeners for each layer group</b></h3>
 <h3>Event listeners for each layer group will show or remove all layers in  a group when the group switch is toggled on or off.</h3>
 
 <pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
@@ -169,11 +193,14 @@ if (map.hasLayer(energyLayerGroup)) {
 }
 });
 </code></pre>
+</div>
+
 <br>
 
 
+<div class="textbox">
 
-<h3><b>9. Add the map legend function</b></h3>
+<h3 style="display: inline; background: #ffe600ce; "><b>9. Add the map legend function</b></h3>
 <h3>In order for the symbology for each layer to show in the map legend (the symbol beside each layer on the map website), add these functions.</h3>
 
 <pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
@@ -210,9 +237,15 @@ if (shape === 'circle') {
 }    
 }
 </code></pre>
+</div>
+
 <br>
-<h3><b>10. Next steps</b></h3>
+
+<div class="textbox">
+
+<h3 style="display: inline; background: #ffe600ce; "><b>10. Next steps</b></h3>
 <h3>Additional layers of data are in the process of being added to this map. Those layers include real-time air quality data derived from the Googel Maps air quality API, surface temperature data derived from NASA Landsat sources, and land cover data. A submission form will also be added so viewers can add metadat, such as text, audio, and images describing sites shown on the map.</h3>
+</div>
 
 </div>
 <Br><br>
