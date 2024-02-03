@@ -25,16 +25,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const projectsList = document.getElementById("projectsList");
 
     projectsLink.addEventListener("click", function () {
-        projectsList.style.display = (projectsList.style.display === "none" || projectsList.style.display === "") ? "block" : "none";
+        if (projectsList.style.display === "none" || projectsList.style.display === "") {
+            projectsList.style.display = "inline-block";
+        } else {
+            projectsList.style.display = "none";
+        }
 
-        if (projectsList.style.display === "block") {
+        if (projectsList.style.display === "inline-block") {
             positionHiddenProjectsList();
         }
     });
 
     // Adjust the position of the hidden projects list when resizing the window
     window.addEventListener("resize", function () {
-        if (projectsList.style.display === "block") {
+        if (projectsList.style.display === "inline-block") {
             positionHiddenProjectsList();
         }
     });
