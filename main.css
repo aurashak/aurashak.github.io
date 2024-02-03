@@ -71,6 +71,18 @@ h3 a:link { color: black; background-color: #ffe600ce;}
 
 }
 
+.navigation a:active{
+  text-decoration: none; 
+  color: black;
+
+}
+
+.navigation a:selected {
+  text-decoration: none; 
+  color: black;
+
+}
+
 
 .navigation:hover { color: black; background-color: #ffe600ce;}
 
@@ -92,7 +104,15 @@ h3 a:link { color: black; background-color: #ffe600ce;}
 
 }
 
+.hidden-projects a:active {
+  background-color: #ffe600ce;
 
+}
+
+.hidden-projects a:selected {
+  background-color: #ffe600ce;
+
+}
 
 
 
@@ -156,7 +176,7 @@ overflow: auto;
   display: block;
   background: #ffffff;
   border-bottom: 1px solid black;
-  padding: 10px 0px;
+  padding: 13px 0px;
 }
 
 .aboutcontainer {
