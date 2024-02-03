@@ -2184,7 +2184,8 @@ span.cesium-projectionPicker-wrapper {
   .placeidcontainer, 
   .nydisplacementmap, 
   .nmcacontainer, 
-  .mapcontainer {
+  .mapcontainer, 
+  .nymapcontainer {
     grid-template-columns: 1fr; /* Change this to a single column for smaller screens */
   }
 
