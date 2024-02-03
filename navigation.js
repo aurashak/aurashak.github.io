@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="navigation"><a href="https://aurashak.github.io/mappingresources.html">Mapping Resources</a></div>
     `;
 
-    // Find the element with the class "header" and append the navigation
+    // Append the navigation to the element with the class "header"
     const headerElement = document.querySelector(".header");
     if (headerElement) {
         headerElement.appendChild(navigation);
