@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     navigation.innerHTML = `
         <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
         <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
+        <div class="navigation"><a href="https://aurashak.github.io/mappingresources.html">Mapping Resources</a></div>
         <div class="navigation" id="projectsLink">Projects</div>
         <div class="hidden-projects" id="projectsList">
             <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
@@ -11,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
             <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
         </div>
-        <div class="navigation"><a href="https://aurashak.github.io/mappingresources.html">Mapping Resources</a></div>
     `;
 
     // Find the element with the class "header" and append the navigation
