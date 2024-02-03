@@ -78,7 +78,7 @@ h3 a:link {text-decoration: underline;}
 }
 
 .hidden-projects {
-  display: inline-block; /* Initially hide the projects */
+  display: none; /* Initially hide the projects */
   font-size: 20px;
 }
 
