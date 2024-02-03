@@ -26,11 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     projectsLink.addEventListener("click", function () {
         projectsList.style.display = (projectsList.style.display === "none" || projectsList.style.display === "") ? "block" : "none";
+
+        if (projectsList.style.display === "block") {
+            positionHiddenProjectsList();
+        }
     });
 
     // Adjust the position of the hidden projects list when resizing the window
     window.addEventListener("resize", function () {
-        if (projectsList.style.display !== "none") {
+        if (projectsList.style.display === "block") {
             positionHiddenProjectsList();
         }
     });
@@ -39,6 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function positionHiddenProjectsList() {
         const projectsLinkRect = projectsLink.getBoundingClientRect();
         projectsList.style.top = projectsLinkRect.bottom + "px";
-        projectsList.style.left = projectsLinkRect.left + "px";
+        projectsList.style.left = projectsLinkRect.right + "px"; // Use right instead of left
     }
 });
