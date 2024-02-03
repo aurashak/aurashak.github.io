@@ -21,13 +21,15 @@
 <div class="aboutcontainer">
 
 <h1 style="display: inline; background: #ffe600ce; ">NY Environmental Infrastructure Map Documentation</h1>
-<br>
+<br><br>
 
 <div class="textbox">
 
 <h3 style="display: inline; background: #ffe600ce; "><b>1. Technology and Applications</b></h3>
 <h3>This interactiv<h3 style="display: inline; background: #ffe600ce; ">e webmap uses <a href="https://github.com">Github</a> and <a href="https://leafletjs.com">Leaflet</a>.<br> <br></h3>
 </div>
+
+<Br>
 
 <div class="textbox">
 
@@ -38,6 +40,7 @@
         <li>From <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/geoplatform::natural-gas-pipelines/explore"> Homeland Infrastructure Foundation-Level Data (HIFLD)</a>, download natural gas pipelines.</li>
         <li>From <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-data.html">US Census Bureau</a>, download data for per capita income and average cost of housing.</li></h3>
     </ul>
+</div>
 <Br>
 
     <div class="textbox">
@@ -48,8 +51,8 @@
 Create a javacript file and enter the following information. This code places the Leaflete map on the website and sets the initial location as New York City</h3>
 
 
-<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
-var map = L.map('nymap', {            
+<pre>  <code style="font-size: 14px; background-color: #3e3e3e; color: #fff; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
+    var map = L.map('nymap', {            
 }).setView([40.7128, -74.0060]); 
 </code></pre>
 </div>
@@ -61,7 +64,7 @@ var map = L.map('nymap', {
 <h3 style="display: inline; background: #ffe600ce; "><b>4. Add Open Street Maps as the base layer</b></h3>
 <h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
 
-<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
+<pre>  <code style="font-size: 14px; background-color: #3e3e3e; color: #fff; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 var map = L.map('map-container').setView([0, 0], 2);
 
 var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -80,8 +83,8 @@ openstreetmapLayer.addTo(map);
 <h3 style="display: inline; background: #ffe600ce; "><b>5. Add geojson layers to appear over the OSM layer</b></h3>
 <h3> This geojson data is for the location of the Air Quality Monitoring Sites. Repeat this proces for other geojson layers of data. Convert circle markers to lines and polygons for other their respective data types.</h3>
 
-<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
-// AQI sites
+<pre>  <code style="font-size: 14px; background-color: #3e3e3e; color: #fff; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
+    // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
 pointToLayer: function (feature, latlng) {
 var size = calculateMarkerSize(map.getZoom());
@@ -106,8 +109,8 @@ return L.circleMarker(latlng, {
 <h3 style="display: inline; background: #ffe600ce; "><b>6. Create layer groups</b></h3>
 <h3>Create layer groups for how you want the content to be structured. This example is for the Energy layer group.</h3>
 
-<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
-// Energy Layer Group
+<pre>  <code style="font-size: 14px; background-color: #3e3e3e; color: #fff; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
+    // Energy Layer Group
 var energyLayerGroup = L.layerGroup();
 
 
@@ -159,8 +162,8 @@ document.getElementById('nycso').addEventListener('change', function() {
 <h3 style="display: inline; background: #ffe600ce; "><b>8. Create event listeners for each layer group</b></h3>
 <h3>Event listeners for each layer group will show or remove all layers in  a group when the group switch is toggled on or off.</h3>
 
-<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
-document.getElementById('energyLayerGroup').addEventListener('click', function() {
+<pre>  <code style="font-size: 14px; background-color: #3e3e3e; color: #fff; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
+    document.getElementById('energyLayerGroup').addEventListener('click', function() {
 if (map.hasLayer(energyLayerGroup)) {
     map.removeLayer(energyLayerGroup);
     // If the group toggle is turned off, turn off individual layers as well
@@ -203,8 +206,8 @@ if (map.hasLayer(energyLayerGroup)) {
 <h3 style="display: inline; background: #ffe600ce; "><b>9. Add the map legend function</b></h3>
 <h3>In order for the symbology for each layer to show in the map legend (the symbol beside each layer on the map website), add these functions.</h3>
 
-<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
-// Set the legend symbol shapes and colors for each layer
+<pre>  <code style="font-size: 14px; background-color: #3e3e3e; color: #fff; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
+    // Set the legend symbol shapes and colors for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
