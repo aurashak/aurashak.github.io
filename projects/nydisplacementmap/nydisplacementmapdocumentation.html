@@ -11,18 +11,33 @@
 <body>
 
 <div class="header">
+    <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
+    <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
+    <div class="navigation" id="projectsLink">Projects</div>
+    <div class="hidden-projects" id="projectsList">
+        <a href="https://aurashak.github.io/projects/placeid/placeid.html">Place ID</a>
+        <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
+        <a href="https://aurashak.github.io/projects/mts/mts.html">MTS</a>
+        <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
+        <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
+    </div>
+    <div class="navigation"><a href="https://aurashak.github.io/about/about.html">Resources</a></div>
 
 </div>
 
 
 <div class="aboutcontainer">
 
-<h1>NY Displacement Map Documentation</h1>
+<h1 style="display: inline; background: #ffe600ce; ">NY Displacement Map Documentation</h1>
 <br>
-<h3><b>1. Technology and Applications</b></h3>
+<div class="textbox">
+<h3 style="display: inline; background: #ffe600ce; "><b>1. Technology and Applications</b></h3>
 <h3>Downlod and install <a href="https://qgis.org">QGIS</a> and <a href="htts://adobe.com">Photoshop</a>.<br> <br></h3>
+</div>
 
-<h3><b>2. Sources of data</b></h3>
+<div class="textbox">
+
+<h3 style="display: inline; background: #ffe600ce; "><b>2. Sources of data</b></h3>
 <h3>Download the following files, in shapefile format, from these websites:<br>
     <ul>
 <li>From <a hrerf="https://data.gis.ny.gov">https://data.gis.ny.gov</a>, download New York State county boundaries and New York State streets.</li>   
@@ -30,9 +45,12 @@
 <li>From <a href="https://www.geofabrik.de/data/shapefiles.html">https://www.geofabrik.de/data/shapefiles.html</a>, download New Jersey and New York state roads and state boundaries.</li>
 <li>From <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-data.html">https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-data.html</a>, download data for per capita income and average cost of housing.</li></h3>
     </ul>
+</div>
 <Br>
 
-<h3><b>3. Import shapefiles into QGIS</b></h3>
+    <div class="textbox">
+
+    <h3 style="display: inline; background: #ffe600ce; "><b>3. Import shapefiles into QGIS</b></h3>
 <h3> 
 <ul>
 <li>Open QGIS and import shapefiles</li>
@@ -40,8 +58,12 @@
 <li>Export individual layers with minimal styling and stark contrasting colors. Export outlines with no fill as separate layers. Export layers with the exact same scale and placement on page, use .png file extension and set a transparent backgrounds.</li>
 </ul>
 </h3>
+</div>
 <Br>
-<h3><b>4. Import individual layers to Photoshop</b></h3>
+
+    <div class="textbox">
+
+    <h3 style="display: inline; background: #ffe600ce; "><b>4. Import individual layers to Photoshop</b></h3>
 <h3>Open Photoshop and load the .png images as individual layers. Begin with counties layer with outline and no fill:<Br>
 <img src="https://aurashak.github.io/images/blank.png" style="width: 250px;"><br><br>
 
@@ -75,6 +97,7 @@ Overlay grid and mapkey:<br>
 <h3>Adjust spacing, sizing, and opacity for each layer. Combine everything so it is easily ledgible at respective distances. Emphasize critical information about displacement zones:<br></h3>
 <img src="https://aurashak.github.io/images/nydisplacementmapthumb.png" style="width: 250px;"> <br><br>  
 
+</div>
 </div>
 <br>
 <br>
