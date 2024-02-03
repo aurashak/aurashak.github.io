@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Your navigation code goes here
+    // Create navigation elements
     const navigation = document.createElement("nav");
     navigation.innerHTML = `
         <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
@@ -13,16 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
         <div class="navigation"><a href="https://aurashak.github.io/mappingresources.html">Mapping Resources</a></div>
     `;
-    
-    // Append the navigation to the body or a specific element
-    document.body.appendChild(navigation);
 
+    // Find the element with the class "header" and append the navigation
+    const headerElement = document.querySelector(".header");
+    if (headerElement) {
+        headerElement.appendChild(navigation);
+    }
 
-    document.getElementById("projectsLink").addEventListener("click", function() {
-        var projectsList = document.getElementById("projectsList");
+    // Toggle the visibility of projectsList when clicking on projectsLink
+    const projectsLink = document.getElementById("projectsLink");
+    const projectsList = document.getElementById("projectsList");
+
+    projectsLink.addEventListener("click", function () {
         projectsList.style.display = (projectsList.style.display === "none" || projectsList.style.display === "") ? "block" : "none";
-
     });
 });
-
-
