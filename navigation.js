@@ -17,12 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Append the navigation to the body or a specific element
     document.body.appendChild(navigation);
 
-    // Toggle the visibility of the projectsList when clicking on projectsLink
-    const projectsLink = document.getElementById("projectsLink");
-    const projectsList = document.getElementById("projectsList");
 
-    projectsLink.addEventListener("click", function () {
-        projectsList.classList.toggle("hidden-projects");
+    document.getElementById("projectsLink").addEventListener("click", function() {
+        var projectsList = document.getElementById("projectsList");
+        projectsList.style.display = (projectsList.style.display === "none" || projectsList.style.display === "") ? "block" : "none";
+
     });
 });
 
