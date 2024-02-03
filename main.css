@@ -37,7 +37,7 @@ h3 {
   line-height: 1.6;
 }
 
-h3 a:link {text-decoration: underline;}
+h3 a:link { color: black; background-color: #ffe600ce;}
 
 
 .header {
@@ -262,9 +262,9 @@ padding: 0px 4px;
     line-height: 1.4;
 }
 
-.mapcolumnleft a:link { color: black; text-decoration: underline;}
-  .mapcolumnleft a:hover { color: black; text-decoration: underline;}
-    .mapcolumnleft a:active { color: black; text-decoration: underline;}
+.mapcolumnleft a:link { color: black; background-color: #ffe600ce;}
+  .mapcolumnleft a:hover { color: black; background-color: #ffe600ce;}
+    .mapcolumnleft a:active { color: black; background-color: #ffe600ce;}
 
 .mapcolumnright {
   flex: 1; /* Expand to fill the available space */
