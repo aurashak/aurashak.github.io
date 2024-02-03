@@ -11,16 +11,7 @@
 <body>
 
 <div class="header">
-    <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
-    <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
-    <div class="navigation" id="projectsLink">Projects</div>
-    <div class="hidden-projects" id="projectsList">
-        <a href="https://aurashak.github.io/projects/placeid/placeid.html">Place ID</a>
-        <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
-        <a href="https://aurashak.github.io/projects/mts/mts.html">MTS</a>
-        <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
-        <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
-    </div>
+
 </div>
     
 
@@ -32,7 +23,7 @@
 <h1>NY Environmental Infrastructure Map Documentation</h1>
 <br>
 <h3><b>1. Technology and Applications</b></h3>
-<h3>This interactive webmap uses <a href="https://github.com">Github</a> and <a href="https://leaflet.org">Leaflet</a>.<br> <br></h3>
+<h3>This interactive webmap uses <a href="https://github.com">Github</a> and <a href="https://leafletjs.com">Leaflet</a>.<br> <br></h3>
 
 <h3><b>2. Download Geojson files</b></h3>
     <ul>
@@ -50,17 +41,18 @@
 Create a javacript file and enter the following information. This code places the Leaflete map on the website and sets the initial location as New York City</h3>
 
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 var map = L.map('nymap', {            
 }).setView([40.7128, -74.0060]); 
 </code></pre>
+
 <br>
 
                
 <h3><b>4. Add Open Street Maps as the base layer</b></h3>
 <h3> This code adds Open Street Maps as the layer beneath the geojson layers that will be added later</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; width:400px;">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 var map = L.map('map-container').setView([0, 0], 2);
 
 var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -75,7 +67,7 @@ openstreetmapLayer.addTo(map);
 <h3><b>5. Add geojson layers to appear over the OSM layer</b></h3>
 <h3> This geojson data is for the location of the Air Quality Monitoring Sites. Repeat this proces for other geojson layers of data. Convert circle markers to lines and polygons for other their respective data types.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
 pointToLayer: function (feature, latlng) {
@@ -96,7 +88,7 @@ return L.circleMarker(latlng, {
 <h3><b>6. Create layer groups</b></h3>
 <h3>Create layer groups for how you want the content to be structured. This example is for the Energy layer group.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 // Energy Layer Group
 var energyLayerGroup = L.layerGroup();
 
@@ -123,7 +115,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 <h3><b>7. Add event listeners for each layer</b></h3>
 <h3>Event listeners are necessary to toggle the layers on and off when the switches are pushed.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 document.getElementById('nycso').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
         // If the layer is already on, do nothing when switching left to right
@@ -143,7 +135,7 @@ document.getElementById('nycso').addEventListener('change', function() {
 <h3><b>8. Create event listeners for each layer group</b></h3>
 <h3>Event listeners for each layer group will show or remove all layers in  a group when the group switch is toggled on or off.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; ">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 document.getElementById('energyLayerGroup').addEventListener('click', function() {
 if (map.hasLayer(energyLayerGroup)) {
     map.removeLayer(energyLayerGroup);
@@ -184,7 +176,7 @@ if (map.hasLayer(energyLayerGroup)) {
 <h3><b>9. Add the map legend function</b></h3>
 <h3>In order for the symbology for each layer to show in the map legend (the symbol beside each layer on the map website), add these functions.</h3>
 
-<pre><code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block;">
+<pre>  <code style="font-size: 14px; background-color: #d1d1d1; padding: 10px; border-radius: 5px; display: block; overflow: auto; max-width: 100%;">
 // Set the legend symbol shapes and colors for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
