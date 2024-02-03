@@ -72,10 +72,7 @@ h3 a:link { color: black; background-color: #ffe600ce;}
 }
 
 
-.navigation:hover {
-  text-decoration: underline;
-
-}
+.navigation:hover { color: black; background-color: #ffe600ce;}
 
 .hidden-projects {
   display: none; /* Initially hide the projects */
@@ -86,13 +83,13 @@ h3 a:link { color: black; background-color: #ffe600ce;}
     display: inline-block;
     text-decoration: none;
     color: black;
-    background-color: #ffe600ce;
     margin-right: 20px;
 
 }
 
 .hidden-projects a:hover {
-  text-decoration: underline;
+  background-color: #ffe600ce;
+
 }
 
 
