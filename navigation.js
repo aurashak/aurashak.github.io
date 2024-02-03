@@ -27,4 +27,18 @@ document.addEventListener("DOMContentLoaded", function () {
     projectsLink.addEventListener("click", function () {
         projectsList.style.display = (projectsList.style.display === "none" || projectsList.style.display === "") ? "block" : "none";
     });
+
+    // Adjust the position of the hidden projects list when resizing the window
+    window.addEventListener("resize", function () {
+        if (projectsList.style.display !== "none") {
+            positionHiddenProjectsList();
+        }
+    });
+
+    // Function to position the hidden projects list to the right of the "Projects" navigation item
+    function positionHiddenProjectsList() {
+        const projectsLinkRect = projectsLink.getBoundingClientRect();
+        projectsList.style.top = projectsLinkRect.bottom + "px";
+        projectsList.style.left = projectsLinkRect.left + "px";
+    }
 });
