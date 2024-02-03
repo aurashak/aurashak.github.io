@@ -83,10 +83,12 @@ h3 a:link {text-decoration: underline;}
 }
 
 .hidden-projects a {
-  display: inline-block;
-  text-decoration: none;
-  color: black;            
-  margin-right: 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    background-color: yellow;
+    margin-right: 20px;
+
 }
 
 .hidden-projects a:hover {
@@ -155,15 +157,14 @@ overflow: auto;
 
 .mapheader {
   display: block;
-  background: #e3e3e3;
+  background: #ffffff;
   border-bottom: 1px solid black;
   padding: 10px 0px;
 }
 
 .aboutcontainer {
   font-size: 20px;
-  margin-top: 40px;
-  margin-left: 50px;
+  margin: 40px auto;
   max-width: 800px;
   padding: 5px 10px;
   display: block;
