@@ -20,6 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
         headerElement.appendChild(navigation);
     }
 
+    // Get the current page URL
+    const currentURL = window.location.href;
+
+    // Highlight the active link in the navigation
+    const navigationLinks = navigation.querySelectorAll(".navigation a");
+    navigationLinks.forEach(link => {
+        if (link.href === currentURL) {
+            link.classList.add("current-page");
+        }
+    });
+
     // Toggle the visibility of projectsList when clicking on projectsLink
     const projectsLink = document.getElementById("projectsLink");
     const projectsList = document.getElementById("projectsList");
