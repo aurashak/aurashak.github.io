@@ -2184,6 +2184,7 @@ span.cesium-projectionPicker-wrapper {
       font-size: 18px;
       padding: 5px 10px;
       max-width: 600px;
+      margin: 10px;
   }
 
   .mapdescription {
