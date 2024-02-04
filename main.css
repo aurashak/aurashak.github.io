@@ -268,7 +268,8 @@ padding: 0px 4px;
   font-weight: bold;
   padding: 10px 20px;
   max-width: 900px;
-
+  display: inline-block;
+margin: 0px 20px;
 }
 
 
