@@ -2140,7 +2140,7 @@ span.cesium-projectionPicker-wrapper {
   }
 
   h3 {
-      font-size: 14px;
+      font-size: 16px;
   }
 
   .header {
@@ -2156,6 +2156,7 @@ span.cesium-projectionPicker-wrapper {
       display: block;
       margin: 0px;
   }
+
 
   .mapheader {
       padding: 5px 0;
