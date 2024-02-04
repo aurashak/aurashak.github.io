@@ -372,10 +372,10 @@ li a:visited {
 }
 
 .nymapbox {
-  padding: 3px; 
-  margin: 0px; 
-  border-radius: 4px;
-  background: #d0d0d0;
+  padding: 5px;
+  margin: 0px;
+  border-radius: 8px;
+  border: solid 1px black;
 }
 
 .codebox {
