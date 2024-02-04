@@ -2192,11 +2192,9 @@ span.cesium-projectionPicker-wrapper {
       max-width: 600px;
   }
 
-  .mapcolumnleft,
-  {
+  .mapcolumnleft { 
     font-size: 16px;
-    padding: 10px;
-}
+    padding: 10px; }
   
   .mapcolumnright {
       font-size: 16px;
