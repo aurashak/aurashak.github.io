@@ -2195,11 +2195,13 @@ span.cesium-projectionPicker-wrapper {
   .mapcolumnleft,
   {
     font-size: 16px;
+    padding: 10px;
 }
   
   .mapcolumnright {
       font-size: 16px;
       min-height: 400px;
+      padding: 10px;
   }
 
   .mapsectionleft {
