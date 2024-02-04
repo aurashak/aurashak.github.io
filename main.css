@@ -2150,7 +2150,7 @@ span.cesium-projectionPicker-wrapper {
 
   .navigation {
       font-size: 16px;
-      margin-right: 4px;
+      margin: 10px;
   }
 
   .container {
@@ -2182,7 +2182,7 @@ span.cesium-projectionPicker-wrapper {
 
   .maptitle {
       font-size: 18px;
-      padding: 5px 10px;
+      padding: 0px;
       max-width: 600px;
       margin: 10px;
   }
