@@ -2164,8 +2164,7 @@ span.cesium-projectionPicker-wrapper {
 
   .aboutcontainer {
       font-size: 16px;
-      margin-top: 20px;
-      margin-left: 20px;
+      margin: 10px;
   }
 
   .hometitle {
@@ -2181,13 +2180,13 @@ span.cesium-projectionPicker-wrapper {
   }
 
   .maptitle {
-      font-size: 14px;
+      font-size: 18px;
       padding: 5px 10px;
       max-width: 600px;
   }
 
   .mapdescription {
-      font-size: 14px;
+      font-size: 16px;
       padding: 5px 10px;
       line-height: 1.3;
       max-width: 600px;
@@ -2195,11 +2194,11 @@ span.cesium-projectionPicker-wrapper {
 
   .mapcolumnleft,
   {
-    font-size: 14px;
+    font-size: 16px;
 }
   
   .mapcolumnright {
-      font-size: 14px;
+      font-size: 16px;
       min-height: 400px;
   }
 
@@ -2209,7 +2208,9 @@ span.cesium-projectionPicker-wrapper {
   }
 
 
- 
+ .textbox {
+  font-size: 16px;
+ }
     
   .placeidcontainer, 
   .nydisplacementmap, 
