@@ -154,21 +154,26 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 
 .coursenavigation a:link {
 text-decoration: none;
+background-color: #ffe600ce;
 
 } 
 
 .coursenavigation a:hover {
   text-decoration: none;
-  background: lightgrey;
+  background-color: #ffe600ce;
 }
 
 
 .coursenavigation a:active {
   text-decoration: underline;
+  background-color: #ffe600ce;
+
 }
 
 .coursenavigation a:visited {
   text-decoration: none;
+  background-color: #ffe600ce;
+
 }
 
 
