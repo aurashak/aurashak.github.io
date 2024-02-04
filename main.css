@@ -38,6 +38,15 @@ h3 {
   margin: 0px;
 }
 
+h4 {
+  font-size: 20px;
+  font-weight: heavy;
+  max-width: 800px;
+  margin: 0px;
+  padding: 0px;
+}
+
+
 h3 a:link { color: black; background-color: #ffe600ce;}
 h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600ce;}
 
@@ -337,7 +346,7 @@ margin: 0px 20px;
 
 
 li {
-
+margin-right: 10px;
 }
 
 li a {
