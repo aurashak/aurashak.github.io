@@ -222,7 +222,7 @@ overflow: auto;
 .aboutcontainer a:active { }
 
 .largecontainer {
-  margin: 20px;
+  margin: 20px auto;
   max-width: 1300px;
   display: block;
 }
