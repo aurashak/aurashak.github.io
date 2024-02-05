@@ -380,6 +380,7 @@ li a:visited {
   max-width: 600px;
   border-radius: 4px;
   background: #eeeeee;
+  text-align: left;
 }
 
 .textbox a:link {
