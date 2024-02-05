@@ -32,7 +32,24 @@ viewer.scene.camera.setView({
     },
 });
 
+// Configure the clock for automatic rotation
+viewer.clock.clockRange = Cesium.ClockRange.UNBOUNDED; // Clock continues indefinitely
+viewer.clock.multiplier = 0.05; // Adjust the rotation speed (0.05 means a slow rotation)
 
+// Create a callback function to update the camera position during the rotation
+viewer.clock.onTick.addEventListener(function (clock) {
+    // Update the camera position here if needed
+    // For example, you can rotate the camera around a central point
+    var centralPoint = Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 0.0);
+    var rotationMatrix = Cesium.Matrix3.fromRotationZ(clock.currentTime.seconds);
+    var rotatedPosition = Cesium.Matrix3.multiplyByVector(rotationMatrix, centralPoint, new Cesium.Cartesian3());
+    viewer.scene.camera.lookAt(rotatedPosition, new Cesium.Cartesian3(0, 0, 0));
+});
+
+// Optionally, you can stop the rotation when the user interacts with the scene
+viewer.clock.onInput.addEventListener(function (clock, input) {
+    viewer.clock.multiplier = 0.0; // Stop rotation when user interacts
+});
 
 /*
 
