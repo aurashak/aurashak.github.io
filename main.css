@@ -140,7 +140,6 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 .courseheader {
   display: flex;
   justify-content: left;
-  margin: 0px;
   position: relative;
 }
 
@@ -148,11 +147,11 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
   font-size: 20px;
   text-align: left;
   color: black;
-  margin: 0px 30px 0px 0px;
   padding: 5px 10px;
+    margin-right: 20px;
   background: lightgrey;
   border-radius: 4px;
-  justify-content: center;
+  justify-content: left;
 }
 
 .coursenavigation a:link {
@@ -217,16 +216,21 @@ overflow: auto;
 
 
 .courseaboutcontainer {
-  font-size: 20px;
-  margin: 20px auto;
-  max-width: 800px;
-  padding: 5px 10px;
-  display: block;
-  text-align: center;
-  line-height: 1.6;
+    font-size: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 5px 10px;
+    display: block;
+    text-align: left;
+    line-height: 1.6;
+max-width: 800px;
 }
 
 
+.courseaboutcontainer a:link {   color: black; background-color: #ffe600ce;
+}
+
+.courseaboutcontainer a:hover { text-decoration: underline; }
 
 .aboutcontainer a:link {   color: black; background-color: #ffe600ce;
 }
