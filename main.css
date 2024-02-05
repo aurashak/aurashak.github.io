@@ -284,7 +284,7 @@ padding: 0px 4px;
   padding: 0px;
   max-width: 900px;
   display: inline-block;
-margin: 0px 20px;
+margin: 0px auto;
 background-color: #ffe600ce;
 
 }
@@ -374,7 +374,7 @@ li a:visited {
 
 .textbox {
   padding: 15px 20px; 
-  margin: 0px; 
+  margin: 0px auto; 
   max-width: 600px;
   border-radius: 4px;
   background: #eeeeee;
