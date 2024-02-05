@@ -475,6 +475,16 @@ display: inline-block;
 
 }
 
+#mtsmap .cesium-viewer {
+  max-height: 600px;
+      max-width: 1000px;
+   
+      margin: 20px auto;
+      border: 1px solid #383838;
+      border-radius: 5px;
+  
+  }
+  
 .placeidcontainer {
   display: grid;
   grid-template-columns: 30% 70%;
