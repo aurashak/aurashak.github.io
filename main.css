@@ -534,11 +534,18 @@ border: 1px solid black;
 }
 
 
-
 #scene-container {
   position: relative;
-  width: 100%; /* Make the map take up 100% of the width */
-  height: 100%; /* Make the map take up 100% of the height */
+  width: 100%;
+  height: 500px; /* Adjust the height as needed */
+  border: 1px solid black; /* Add a border for visibility */
+}
+
+#scene-container canvas {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Adjust the height as needed */
+  border: 1px solid black; /* Add a border for visibility */
 }
 
 
