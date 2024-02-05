@@ -435,6 +435,9 @@ display: inline-block;
   display: grid;
   grid-template-columns: minmax(0, 450px) 1fr;
   flex: 1; /* Expand to fill the available space */
+  margin: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
 }
 
 
