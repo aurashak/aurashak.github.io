@@ -156,7 +156,6 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 
 .coursenavigation a:link {
 text-decoration: none;
-background-color: #ffe600ce;
 
 } 
 
@@ -227,7 +226,7 @@ max-width: 800px;
 }
 
 
-.courseaboutcontainer a:link {   color: black; background-color: #ffe600ce;
+.courseaboutcontainer a:link {   color: black;
 }
 
 .courseaboutcontainer a:hover { text-decoration: underline; }
