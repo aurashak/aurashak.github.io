@@ -536,9 +536,9 @@ border: 1px solid black;
 
 
 #scene-container {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  width: 100%; /* Make the map take up 100% of the width */
+  height: 100%; /* Make the map take up 100% of the height */
 }
 
 
