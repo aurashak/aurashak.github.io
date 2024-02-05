@@ -542,12 +542,11 @@ border: 1px solid black;
 }
 
 #scene-container canvas {
-  position: relative;
-  width: 100%;
-  height: 500px; /* Adjust the height as needed */
-  border: 1px solid black; /* Add a border for visibility */
+  width: 100% !important;
+  height: 500px !important; /* Adjust the height as needed */
+  border: 1px solid black !important; /* Add a border for visibility */
+  /* Add any additional styles you want to override here */
 }
-
 
 
 #cesiumContainer {
