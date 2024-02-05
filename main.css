@@ -379,9 +379,18 @@ li a:visited {
   margin: 0px auto; 
   max-width: 600px;
   border-radius: 4px;
-  text-align: left;
   background: #eeeeee;
 }
+
+.textbox a:link {
+background-color: #ffe600ce;
+}
+
+.textbox a:hover {
+background-color: #ffe600ce;
+    text-decoration: underline;
+}
+
 
 .nymapbox {
   padding: 5px;
