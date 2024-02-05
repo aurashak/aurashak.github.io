@@ -152,6 +152,7 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
   padding: 5px 10px;
   background: lightgrey;
   border-radius: 4px;
+  justify-content: center;
 }
 
 .coursenavigation a:link {
@@ -205,6 +206,17 @@ overflow: auto;
 }
 
 .aboutcontainer {
+  font-size: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  line-height: 1.6;
+}
+
+
+.courseaboutcontainer {
   font-size: 20px;
   margin: 20px auto;
   max-width: 800px;
