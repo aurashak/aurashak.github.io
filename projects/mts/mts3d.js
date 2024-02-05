@@ -52,21 +52,15 @@ viewer.clock.onTick.addEventListener(function (clock) {
     }
 });
 
-// Listen for user interaction events to stop the rotation
-viewer.scene.screenSpaceCameraController.enableInputs = true;
-viewer.scene.screenSpaceCameraController.tiltEvent.addEventListener(function () {
-    userInteracted = true;
-});
-
-viewer.scene.screenSpaceCameraController.rotateEvent.addEventListener(function () {
-    userInteracted = true;
-});
-
-// Optionally, you can reset the user interaction flag when the rotation stops
-viewer.clock.onAnimationComplete.addEventListener(function () {
-    userInteracted = false;
-});
-
+// Check for user interaction every second and stop rotation if detected
+setInterval(function () {
+    var cameraPosition = viewer.scene.camera.positionWC;
+    if (userInteracted || !cameraPosition.equalsEpsilon(lastCameraPosition, Cesium.Math.EPSILON5)) {
+        userInteracted = true;
+        viewer.clock.multiplier = 0.0; // Stop rotation when user interacts
+    }
+    lastCameraPosition = cameraPosition.clone();
+}, 1000);
 
 /*
 
