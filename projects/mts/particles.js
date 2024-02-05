@@ -11,12 +11,13 @@ function init() {
     document.getElementById('scene-container').appendChild(renderer.domElement);
 
     const particleGeometry = new THREE.BufferGeometry();
-    const particleMaterial = new THREE.PointsMaterial({ color: 0x888888, size: 0.2 });
+    const particleMaterial = new THREE.PointsMaterial({ color: 0x888888, size: 0.2, opacity: 1, transparent: true });
 
     const particles = new THREE.Points(particleGeometry, particleMaterial);
 
     const particleCount = 1000;
     const positions = new Float32Array(particleCount * 3);
+    const opacities = new Float32Array(particleCount);
 
     // Set up particles around a vertical line to simulate smokestack
     for (let i = 0; i < particleCount * 3; i += 3) {
@@ -29,14 +30,28 @@ function init() {
         positions[i] = x;
         positions[i + 1] = y;
         positions[i + 2] = z;
+
+        opacities[i / 3] = 1; // Initial opacity
     }
 
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particleGeometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
 
     scene.add(particles);
 
     function animate() {
         requestAnimationFrame(animate);
+
+        // Dissipate particles over time
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3 + 2] += 0.05; // Move particles upwards
+
+            // Adjust opacity based on vertical position
+            opacities[i] = Math.max(0, 1 - positions[i * 3 + 2] / 20);
+        }
+
+        particleGeometry.attributes.position.needsUpdate = true;
+        particleGeometry.attributes.opacity.needsUpdate = true;
 
         // Rotate particles slightly for a dynamic look
         particles.rotation.z += 0.001;
