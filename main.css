@@ -548,6 +548,8 @@ border: 1px solid black;
   width: 100%; /* Make the map take up 100% of the width */
   height: 100%; /* Make the map take up 100% of the height */
   min-width: 300px;
+  border-radius: 5px;
+  margin: 20px;
 }
 
 
