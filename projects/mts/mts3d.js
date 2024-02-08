@@ -1,4 +1,6 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s';
+
+
 (async () => {
     var viewer = new Cesium.Viewer('mtsmap', {
         terrainProvider: Cesium.createWorldTerrain(),
@@ -18,13 +20,19 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
         sceneMode: Cesium.SceneMode.SCENE3D,
     });
 
-    /* var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings()); */
-
-    const tileset = viewer.scene.primitives.add(
-        await Cesium.Cesium3DTileset.fromIonAssetId({
-            assetId: 2275207,
-        })
-    );
+    // Check if fromIonAssetId is available
+    if (Cesium.Cesium3DTileset.fromIonAssetId) {
+        try {
+            const tileset = await Cesium.Cesium3DTileset.fromIonAssetId({
+                assetId: 2275207,
+            });
+            viewer.scene.primitives.add(tileset);
+        } catch (error) {
+            console.error(`Failed to load tileset: ${error}`);
+        }
+    } else {
+        console.error('The fromIonAssetId method is not available in this version of CesiumJS.');
+    }
 
     // Set the camera to focus slightly further west, facing east, and at a closer zoom
     viewer.scene.camera.setView({
@@ -36,6 +44,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
         },
     });
 })();
+
 
 
 /*
