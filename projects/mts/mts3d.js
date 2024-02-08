@@ -1,43 +1,27 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+const viewer = new Cesium.Viewer("cesiumContainer", {
+  // This is a global 3D Tiles tileset so disable the
+  // globe to prevent it from interfering with the data
+  globe: false,
+  // Disabling the globe means we need to manually
+  // re-enable the atmosphere
+  skyAtmosphere: new Cesium.SkyAtmosphere(),
+  // 2D and Columbus View are not currently supported
+  // for global 3D Tiles tilesets
+  sceneModePicker: false,
+  // Imagery layers are not currently supported for
+  // global 3D Tiles tilesets
+  baseLayerPicker: false,
+});
 
-const initializeCesium = async () => {
-    const viewer = new Cesium.Viewer("cesiumContainer", {
-        timeline: false,
-        animation: false,
-        sceneModePicker: false,
-        baseLayerPicker: false,
-        globe: false,
-    });
-
-    // Enable rendering the sky
-    viewer.scene.skyAtmosphere.show = true;
-
-    try {
-        const tileset = await Cesium.createGooglePhotorealistic3DTileset();
-        viewer.scene.primitives.add(tileset);
-    } catch (error) {
-        console.error(`Error loading Photorealistic 3D Tiles tileset: ${error}`);
-    }
-
-    // Point the camera at the Googleplex
-    viewer.scene.camera.setView({
-        destination: new Cesium.Cartesian3(
-            -2693797.551060477,
-            -4297135.517094725,
-            3854700.7470414364
-        ),
-        orientation: new Cesium.HeadingPitchRoll(
-            4.6550106925119925,
-            -0.2863894863138836,
-            1.3561760425773173e-7
-        ),
-    });
-};
-
-initializeCesium();
-
+try {
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+  viewer.scene.primitives.add(tileset);
+} catch (error) {
+  console.log(error);
+}
 
 
 /*     var viewer = new Cesium.Viewer('mtsmap', {
