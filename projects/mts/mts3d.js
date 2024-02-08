@@ -1,26 +1,6 @@
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s';
+// Grant CesiumJS access to your ion assets
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
-
-/*     var viewer = new Cesium.Viewer('mtsmap', {
-        terrainProvider: Cesium.createWorldTerrain(),
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
-        animation: false,
-        skyBox: false,
-        skyAtmosphere: false,
-        scene3DOnly: false,
-        sceneMode: Cesium.SceneMode.SCENE3D,
-    });
-
-    */
 
     const viewer = new Cesium.Viewer("cesiumContainer", {
         timeline: false,
@@ -57,6 +37,30 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
           1.3561760425773173e-7
         ),
       }); 
+
+
+
+/*     var viewer = new Cesium.Viewer('mtsmap', {
+        terrainProvider: Cesium.createWorldTerrain(),
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        animation: false,
+        skyBox: false,
+        skyAtmosphere: false,
+        scene3DOnly: false,
+        sceneMode: Cesium.SceneMode.SCENE3D,
+    });
+
+    */
+
+
 
 
 /*
