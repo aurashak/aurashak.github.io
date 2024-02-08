@@ -23,27 +23,23 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
     */
 
     const viewer = new Cesium.Viewer("mtsmap", {
-        // This is a global 3D Tiles tileset so disable the
-        // globe to prevent it from interfering with the data
+        // This is a global 3D Tiles tileset, so disable the globe
         globe: false,
-        // Disabling the globe means we need to manually
-        // re-enable the atmosphere
+        // Disabling the globe means we need to manually re-enable the atmosphere
         skyAtmosphere: new Cesium.SkyAtmosphere(),
-        // 2D and Columbus View are not currently supported
-        // for global 3D Tiles tilesets
+        // 2D and Columbus View are not currently supported for global 3D Tiles tilesets
         sceneModePicker: false,
-        // Imagery layers are not currently supported for
-        // global 3D Tiles tilesets
+        // Imagery layers are not currently supported for global 3D Tiles tilesets
         baseLayerPicker: false,
-      });
-
+    });
+    
     try {
         const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
         viewer.scene.primitives.add(tileset);
-      } catch (error) {
-        console.log(error);
-      }
-      
+    } catch (error) {
+        console.error(error);
+    }
+    
     // Set the camera to focus slightly further west, facing east, and at a closer zoom
     viewer.scene.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
@@ -53,7 +49,7 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
             roll: Cesium.Math.toRadians(0),
         },
     });
-
+    
 
 
 /*
