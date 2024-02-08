@@ -1,36 +1,28 @@
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s';
+// Grant CesiumJS access to your ion assets
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-var viewer = new Cesium.Viewer('mtsmap', {
-    globe: false,
-    terrainProvider: Cesium.createWorldTerrain(),
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    scene3DOnly: false,
-    sceneMode: Cesium.SceneMode.SCENE3D,
+const viewer = new Cesium.Viewer("cesiumContainer", {
+  // This is a global 3D Tiles tileset so disable the
+  // globe to prevent it from interfering with the data
+  globe: false,
+  // Disabling the globe means we need to manually
+  // re-enable the atmosphere
+  skyAtmosphere: new Cesium.SkyAtmosphere(),
+  // 2D and Columbus View are not currently supported
+  // for global 3D Tiles tilesets
+  sceneModePicker: false,
+  // Imagery layers are not currently supported for
+  // global 3D Tiles tilesets
+  baseLayerPicker: false,
 });
 
-async function loadTileset() {
-    try {
-        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-        viewer.scene.primitives.add(tileset);
-    } catch (error) {
-        console.log(error);
-    }
+try {
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+  viewer.scene.primitives.add(tileset);
+} catch (error) {
+  console.log(error);
 }
 
-loadTileset();
-
-var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
 viewer.scene.camera.setView({
