@@ -1,42 +1,58 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s';
 
 
-(async () => {
-    const viewer = new Cesium.Viewer("mtsmap", {
-        timeline: false,
-        animation: false,
-        sceneModePicker: false,
+
+/*     var viewer = new Cesium.Viewer('mtsmap', {
+        terrainProvider: Cesium.createWorldTerrain(),
         baseLayerPicker: false,
-        globe: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        animation: false,
+        skyBox: false,
+        skyAtmosphere: false,
+        scene3DOnly: false,
+        sceneMode: Cesium.SceneMode.SCENE3D,
     });
 
-    // Enable rendering the sky
-    viewer.scene.skyAtmosphere.show = true;
+    */
+
+    const viewer = new Cesium.Viewer("mtsmap", {
+        // This is a global 3D Tiles tileset so disable the
+        // globe to prevent it from interfering with the data
+        globe: false,
+        // Disabling the globe means we need to manually
+        // re-enable the atmosphere
+        skyAtmosphere: new Cesium.SkyAtmosphere(),
+        // 2D and Columbus View are not currently supported
+        // for global 3D Tiles tilesets
+        sceneModePicker: false,
+        // Imagery layers are not currently supported for
+        // global 3D Tiles tilesets
+        baseLayerPicker: false,
+      });
 
     try {
-        // Ensure you have the proper Cesium version that supports createGooglePhotorealistic3DTileset
-        const tileset = await Cesium.createGooglePhotorealistic3DTileset({
-            // You might need to provide additional options here
-        });
+        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
         viewer.scene.primitives.add(tileset);
-    } catch (error) {
-        console.error(`Error loading Photorealistic 3D Tiles tileset: ${error}`);
-    }
-
-    // Point the camera at the desired location
+      } catch (error) {
+        console.log(error);
+      }
+      
+    // Set the camera to focus slightly further west, facing east, and at a closer zoom
     viewer.scene.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(
-            -122.08414304885256,
-            37.421999529133494,
-            1000.0
-        ),
+        destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
         orientation: {
-            heading: Cesium.Math.toRadians(45),
-            pitch: Cesium.Math.toRadians(-30),
+            heading: Cesium.Math.toRadians(90),
+            pitch: Cesium.Math.toRadians(-25),
             roll: Cesium.Math.toRadians(0),
         },
     });
-})();
 
 
 
