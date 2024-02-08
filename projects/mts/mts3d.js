@@ -2,18 +2,7 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const viewer = new Cesium.Viewer("mtsmap", {
-    // This is a global 3D Tiles tileset so disable the
-    // globe to prevent it from interfering with the data
     globe: false,
-    // Disabling the globe means we need to manually
-    // re-enable the atmosphere
-    skyAtmosphere: new Cesium.SkyAtmosphere(),
-    // 2D and Columbus View are not currently supported
-    // for global 3D Tiles tilesets
-    sceneModePicker: false,
-    // Imagery layers are not currently supported for
-    // global 3D Tiles tilesets
-    baseLayerPicker: false,
   });
   
   try {
