@@ -138,18 +138,19 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 
 
 .courseheader {
-  display: flex;
   justify-content: left;
   position: relative;
+  
 }
 
 .coursenavigation {
   font-size: 20px;
   text-align: left;
+    display: inline-block;
   color: black;
   padding: 5px 10px;
-  margin-right: 20px;
-  background: rgb(237, 237, 237);
+margin: 13px 15px 0px 0px;  
+    background: rgb(237, 237, 237);
   border-radius: 4px;
   border: 1px solid black;
   justify-content: left;
