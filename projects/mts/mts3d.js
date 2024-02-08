@@ -2,27 +2,26 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const viewer = new Cesium.Viewer("mtsmap", {
-    // Configuration options for the viewer
-});
-
-try {
-    // Load Google Photorealistic 3D Tiles
-    const tileset = await Cesium.createGooglePhotorealistic3DTileset();
+    // This is a global 3D Tiles tileset so disable the
+    // globe to prevent it from interfering with the data
+    globe: false,
+    // Disabling the globe means we need to manually
+    // re-enable the atmosphere
+    skyAtmosphere: new Cesium.SkyAtmosphere(),
+    // 2D and Columbus View are not currently supported
+    // for global 3D Tiles tilesets
+    sceneModePicker: false,
+    // Imagery layers are not currently supported for
+    // global 3D Tiles tilesets
+    baseLayerPicker: false,
+  });
+  
+  try {
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
     viewer.scene.primitives.add(tileset);
-} catch (error) {
-    console.error(`Failed to load tileset: ${error}`);
-}
-
-// Set the camera to focus slightly further west, facing east, and at a closer zoom
-viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
-    orientation: {
-        heading: Cesium.Math.toRadians(90),
-        pitch: Cesium.Math.toRadians(-25),
-        roll: Cesium.Math.toRadians(0),
-    },
-});
-
+  } catch (error) {
+    console.log(error);
+  }
   
 /*     var viewer = new Cesium.Viewer('mtsmap', {
         terrainProvider: Cesium.createWorldTerrain(),
