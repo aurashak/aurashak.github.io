@@ -6,11 +6,8 @@ const viewer = new Cesium.Viewer("mtsmap", {
 });
 
 try {
-    // Replace with your actual assetId and make sure to set Cesium Ion access token
-    const tilesetUrl = Cesium.IonResource.fromAssetId(2275207).url;
-    const tileset = new Cesium.Cesium3DTileset({
-        url: tilesetUrl,
-    });
+    // Load Google Photorealistic 3D Tiles
+    const tileset = await Cesium.createGooglePhotorealistic3DTileset();
     viewer.scene.primitives.add(tileset);
 } catch (error) {
     console.error(`Failed to load tileset: ${error}`);
