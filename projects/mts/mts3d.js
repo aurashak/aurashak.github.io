@@ -1,6 +1,7 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 const viewer = new Cesium.Viewer("mtsmap", {
   // This is a global 3D Tiles tileset so disable the
   // globe to prevent it from interfering with the data
@@ -15,13 +16,14 @@ const viewer = new Cesium.Viewer("mtsmap", {
   // global 3D Tiles tilesets
   baseLayerPicker: false,
 });
-
 try {
-    const tileset = await Cesium.createGooglePhotorealistic3DTileset();
+    const tileset = await Cesium.IonResource.fromAssetId(2275207).fetch() // Replace with your asset ID
+        .then(resource => Cesium.Cesium3DTileset.fromResource(resource));
     viewer.scene.primitives.add(tileset);
-  } catch (error) {
-    console.log(`Failed to load tileset: ${error}`);
-  }
+} catch (error) {
+    console.error(`Failed to load tileset: ${error}`);
+}
+
   
   
 /*     var viewer = new Cesium.Viewer('mtsmap', {
