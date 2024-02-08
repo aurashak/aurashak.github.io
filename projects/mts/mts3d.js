@@ -1,56 +1,41 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s';
+(async () => {
+    var viewer = new Cesium.Viewer('mtsmap', {
+        terrainProvider: Cesium.createWorldTerrain(),
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        animation: false,
+        skyBox: false,
+        skyAtmosphere: false,
+        scene3DOnly: false,
+        sceneMode: Cesium.SceneMode.SCENE3D,
+    });
 
+    /* var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings()); */
 
-const viewer = new Cesium.Viewer("mtsmap", {
-    globe: false,
-});
+    const tileset = viewer.scene.primitives.add(
+        await Cesium.Cesium3DTileset.fromIonAssetId({
+            assetId: 2275207,
+        })
+    );
 
-const tileset = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId({
-        assetId: 2275207,
-    })
-);
-
-
-
-/*
-
-var viewer = new Cesium.Viewer('mtsmap', {
-    terrainProvider: Cesium.createWorldTerrain(),
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    scene3DOnly: false,
-    sceneMode: Cesium.SceneMode.SCENE3D,
-});
-
-
-
-var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
-
-// Set the camera to focus slightly further west, facing east, and at a closer zoom
-viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
-    orientation: {
-        heading: Cesium.Math.toRadians(90),
-        pitch: Cesium.Math.toRadians(-25),
-        roll: Cesium.Math.toRadians(0),
-    },
-});
-
-*/
-
-
-
+    // Set the camera to focus slightly further west, facing east, and at a closer zoom
+    viewer.scene.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
+        orientation: {
+            heading: Cesium.Math.toRadians(90),
+            pitch: Cesium.Math.toRadians(-25),
+            roll: Cesium.Math.toRadians(0),
+        },
+    });
+})();
 
 
 /*
