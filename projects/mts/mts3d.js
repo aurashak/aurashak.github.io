@@ -33,22 +33,24 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
         baseLayerPicker: false,
     });
     
-    try {
-        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-        viewer.scene.primitives.add(tileset);
-    } catch (error) {
-        console.error(error);
-    }
+    (async () => {
+        try {
+            const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+            viewer.scene.primitives.add(tileset);
+        } catch (error) {
+            console.error(error);
+        }
     
-    // Set the camera to focus slightly further west, facing east, and at a closer zoom
-    viewer.scene.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
-        orientation: {
-            heading: Cesium.Math.toRadians(90),
-            pitch: Cesium.Math.toRadians(-25),
-            roll: Cesium.Math.toRadians(0),
-        },
-    });
+        // Set the camera to focus slightly further west, facing east, and at a closer zoom
+        viewer.scene.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
+            orientation: {
+                heading: Cesium.Math.toRadians(90),
+                pitch: Cesium.Math.toRadians(-25),
+                roll: Cesium.Math.toRadians(0),
+            },
+        });
+    })();
     
 
 
