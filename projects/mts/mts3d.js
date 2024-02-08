@@ -19,14 +19,17 @@ var viewer = new Cesium.Viewer('mtsmap', {
     sceneMode: Cesium.SceneMode.SCENE3D,
 });
 
+async function loadTileset() {
+    try {
+        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+        viewer.scene.primitives.add(tileset);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-try {
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-    viewer.scene.primitives.add(tileset);
-  } catch (error) {
-    console.log(error);
-  }
-  
+loadTileset();
+
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
