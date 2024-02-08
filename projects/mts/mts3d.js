@@ -1,6 +1,7 @@
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s';
 
 var viewer = new Cesium.Viewer('mtsmap', {
+    globe: false,
     terrainProvider: Cesium.createWorldTerrain(),
     baseLayerPicker: false,
     geocoder: false,
@@ -19,7 +20,13 @@ var viewer = new Cesium.Viewer('mtsmap', {
 });
 
 
-
+try {
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+    viewer.scene.primitives.add(tileset);
+  } catch (error) {
+    console.log(error);
+  }
+  
 var osm3D = viewer.scene.primitives.add(Cesium.createOsmBuildings());
 
 // Set the camera to focus slightly further west, facing east, and at a closer zoom
