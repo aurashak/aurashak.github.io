@@ -5,15 +5,13 @@ const viewer = new Cesium.Viewer("mtsmap", {
     globe: false,
 });
 
+const tileset = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId({
+        assetId: 2275207,
+    })
+);
 
-try {
-    const tileset = await Cesium.createGooglePhotorealistic3DTileset();
-    viewer.scene.primitives.add(tileset);
-  } catch (error) {
-    console.log(`Failed to load tileset: ${error}`);
-  }
 
-  
 
 /*
 
