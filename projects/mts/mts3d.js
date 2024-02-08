@@ -2,44 +2,37 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 
 (async () => {
-    var viewer = new Cesium.Viewer('mtsmap', {
-        terrainProvider: Cesium.createWorldTerrain(),
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
+    const viewer = new Cesium.Viewer("mtsmap", {
         timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
         animation: false,
-        skyBox: false,
-        skyAtmosphere: false,
-        scene3DOnly: false,
-        sceneMode: Cesium.SceneMode.SCENE3D,
+        sceneModePicker: false,
+        baseLayerPicker: false,
+        globe: false,
     });
 
-    // Check if fromIonAssetId is available
-    if (Cesium.Cesium3DTileset.fromIonAssetId) {
-        try {
-            const tileset = await Cesium.Cesium3DTileset.fromIonAssetId({
-                assetId: 2275207,
-            });
-            viewer.scene.primitives.add(tileset);
-        } catch (error) {
-            console.error(`Failed to load tileset: ${error}`);
-        }
-    } else {
-        console.error('The fromIonAssetId method is not available in this version of CesiumJS.');
+    // Enable rendering the sky
+    viewer.scene.skyAtmosphere.show = true;
+
+    try {
+        // Ensure you have the proper Cesium version that supports createGooglePhotorealistic3DTileset
+        const tileset = await Cesium.createGooglePhotorealistic3DTileset({
+            // You might need to provide additional options here
+        });
+        viewer.scene.primitives.add(tileset);
+    } catch (error) {
+        console.error(`Error loading Photorealistic 3D Tiles tileset: ${error}`);
     }
 
-    // Set the camera to focus slightly further west, facing east, and at a closer zoom
+    // Point the camera at the desired location
     viewer.scene.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
+        destination: Cesium.Cartesian3.fromDegrees(
+            -122.08414304885256,
+            37.421999529133494,
+            1000.0
+        ),
         orientation: {
-            heading: Cesium.Math.toRadians(90),
-            pitch: Cesium.Math.toRadians(-25),
+            heading: Cesium.Math.toRadians(45),
+            pitch: Cesium.Math.toRadians(-30),
             roll: Cesium.Math.toRadians(0),
         },
     });
