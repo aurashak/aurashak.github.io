@@ -537,7 +537,7 @@ border: 1px solid black;
 
 
 .nydismapiframe {
-  width: 100vw;
+  width: 100vh;
   height: 100vh;
   background-color: white;
   border: none;
@@ -546,12 +546,10 @@ border: 1px solid black;
 
 
 #nymap {
-  /* width: 100%;  Make the map take up 100% of the width */
-  height: 100vh; /* Make the map take up 100% of the height */
+  height: 100%; /* Make the map take up 100% of the height */
   min-width: 300px;
   border-radius: 5px;
-  margin: 20px;
-  border: 1px solid grey;
+  margin: 0px;
 }
 
 
