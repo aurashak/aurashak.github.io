@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const projectPages = [
         "https://aurashak.github.io/projects/nymap/nymap.html",
         "https://aurashak.github.io/projects/nmca/nmca.html",
-        "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html"
+        "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html",
         "https://aurashak.github.io/misc/misc.html"
 
     ];
