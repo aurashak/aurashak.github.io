@@ -19,6 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
         headerElement.appendChild(navigation);
     }
 
+    // Add the language selector to the header
+    const languageSelector = document.createElement("div");
+    languageSelector.classList.add("language-selector");
+    languageSelector.innerHTML = `
+        <label for="language">Select Language:</label>
+        <select id="language" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <!-- Add more language options as needed -->
+        </select>
+    `;
+    headerElement.appendChild(languageSelector);
+
     // Get the current page URL
     const currentURL = window.location.href;
 
@@ -69,5 +82,31 @@ document.addEventListener("DOMContentLoaded", function () {
         const projectsLinkRect = projectsLink.getBoundingClientRect();
         projectsList.style.top = projectsLinkRect.top + "px";
         projectsList.style.left = projectsLinkRect.right + "px";
+    }
+
+
+    
+    // Translation feature
+    function changeLanguage() {
+        const selectedLanguage = document.getElementById('language').value;
+
+        // Fetch translations or update content based on selected language
+        // Example: You can use an object to store translations for different languages
+        const translations = {
+            'en': {
+                'welcomeMessage': 'Welcome to our website!',
+                // Add translations for each English text on your page
+            },
+            'es': {
+                'welcomeMessage': '¡Bienvenido a nuestro sitio web!',
+                // Add translations for each Spanish text on your page
+            },
+            // Add translations for more languages
+        };
+
+        // Update content based on the selected language
+        // Example: Update the welcome message
+        document.getElementById('welcome-message').innerText = translations[selectedLanguage]['welcomeMessage'];
+        // Update more elements as needed
     }
 });

@@ -671,35 +671,10 @@ border: 1px solid black;
 
 
 
-
-
-.magnify-container {
-  position: relative;
-  display: inline-block;
+.language-selector {
+  margin: 10px;
 }
 
-/* Magnifying glass */
-.magnifying-glass {
-  width: 150px; /* Adjust the size of the magnifying glass */
-  height: 150px;
-  border: 2px solid #000;
-  border-radius: 50%;
-  position: absolute;
-  display: none;
-  pointer-events: none; /* Allow interactions with the underlying image */
-}
-
-/* Styling for the magnified image */
-.magnified-image {
-  position: absolute;
-  width: 300px; /* Adjust the size of the magnified image */
-  height: 300px;
-  border: 2px solid #000;
-  clip-path: circle(50% at 50% 50%);
-  transform: translate(-50%, -50%);
-  display: none;
-  background-size: 600% 600%; /* Adjust the background size for magnified image */
-}
 
 
 
