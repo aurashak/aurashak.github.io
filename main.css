@@ -251,7 +251,7 @@ margin: 30px;
 .largemisccontainer {
   display: flex;
   flex-wrap: wrap;
-  margin: -10px; /* Adjust margin to counteract gaps */
+  margin: 30px; /* Adjust margin to counteract gaps */
 }
 
 .largemisccontainer img {
