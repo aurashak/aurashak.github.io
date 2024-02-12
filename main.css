@@ -248,6 +248,19 @@ max-width: 800px;
   display: block;
 }
 
+.largemisccontainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the gap between images as needed */
+}
+
+.largemisccontainer img {
+  max-width: 100%;
+  height: auto;
+  flex-grow: 1;
+}
+
+
 .logos-container {
   display: flex;
   flex-wrap: wrap;
