@@ -19,19 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
         headerElement.appendChild(navigation);
     }
 
-    // Add the language selector to the header
-    const languageSelector = document.createElement("div");
-    languageSelector.classList.add("language-selector");
-    languageSelector.innerHTML = `
-        <label for="language">Select Language:</label>
-        <select id="language" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <!-- Add more language options as needed -->
-        </select>
-    `;
-    headerElement.appendChild(languageSelector);
-
     // Get the current page URL
     const currentURL = window.location.href;
 
@@ -82,56 +69,5 @@ document.addEventListener("DOMContentLoaded", function () {
         const projectsLinkRect = projectsLink.getBoundingClientRect();
         projectsList.style.top = projectsLinkRect.top + "px";
         projectsList.style.left = projectsLinkRect.right + "px";
-    }
-
-    // Move changeLanguage function outside of the DOMContentLoaded event listener
-    function changeLanguage() {
-        const selectedLanguage = document.getElementById('language').value;
-
-        // Fetch translations or update content based on selected language
-        // Example: You can use an object to store translations for different languages
-        const translations = {
-            'en': {
-                'welcomeMessage': 'Welcome to our website!',
-                // Add translations for each English text on your page
-            },
-            'es': {
-                'welcomeMessage': '¡Bienvenido a nuestro sitio web!',
-                // Add translations for each Spanish text on your page
-            },
-            // Add translations for more languages
-        };
-
-        // Update content based on the selected language
-        // Example: Update the welcome message
-        const welcomeMessageElement = document.getElementById('welcome-message');
-        if (welcomeMessageElement) {
-            welcomeMessageElement.innerText = translations[selectedLanguage]['welcomeMessage'];
-        }
-        // Update more elements as needed
-    }
-
-    // Ensure that the language selector is present in the DOM before attempting to set its onchange attribute
-    const languageSelectorElement = document.getElementById('language');
-    if (languageSelectorElement) {
-        // Explicitly define the changeLanguage function in the global scope
-        window.changeLanguage = changeLanguage;
-
-        // Set the onchange attribute to the global changeLanguage function
-        languageSelectorElement.onchange = window.changeLanguage;
-    }
-
-    // Additional elements might need updating, replace 'your-element-id' with the actual IDs in your HTML
-    const additionalElement1 = document.getElementById('your-element-id-1');
-    const additionalElement2 = document.getElementById('your-element-id-2');
-
-    // Update additional elements based on the selected language
-    const selectedLanguage = document.getElementById('language').value;
-    if (additionalElement1) {
-        additionalElement1.innerText = translations[selectedLanguage]['additionalText1'];
-    }
-
-    if (additionalElement2) {
-        additionalElement2.innerText = translations[selectedLanguage]['additionalText2'];
     }
 });
