@@ -112,13 +112,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Ensure that the language selector is present in the DOM before attempting to set its onchange attribute
-    const languageSelector = document.getElementById('language');
-    if (languageSelector) {
+    const languageSelectorElement = document.getElementById('language');
+    if (languageSelectorElement) {
         // Explicitly define the changeLanguage function in the global scope
         window.changeLanguage = changeLanguage;
 
         // Set the onchange attribute to the global changeLanguage function
-        languageSelector.onchange = window.changeLanguage;
+        languageSelectorElement.onchange = window.changeLanguage;
     }
 
     // Additional elements might need updating, replace 'your-element-id' with the actual IDs in your HTML
