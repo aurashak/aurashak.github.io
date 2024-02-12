@@ -315,11 +315,14 @@ padding: 0px 4px;
   font-size: 30px;
   position: relative;
   font-weight: bold;
-  padding: 0px;
+  padding: 0px 10px;
   max-width: 900px;
+    border-radius: 8px;
+    border: 1px solid gray;
   display: inline-block;
-margin: 0px auto;
+margin: 30px auto 0 auto;
 background-color: #ffe600ce;
+    box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
 
 }
 
@@ -466,6 +469,8 @@ display: inline-block;
   margin: 20px;
   border: 1px solid grey;
   border-radius: 5px;
+        box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+
 }
 
 
