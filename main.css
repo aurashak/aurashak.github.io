@@ -251,15 +251,16 @@ max-width: 800px;
 .largemisccontainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Adjust the gap between images as needed */
+  margin: -10px; /* Adjust margin to counteract gaps */
 }
 
 .largemisccontainer img {
-  max-width: 100%;
-  height: auto;
-  flex: 1 0 calc(25% - 10px); /* Adjust the width based on 4 items per row */
+  max-width: calc(25% - 20px); /* Adjust width based on 4 items per row with 20px gap */
+  flex: 1;
+  box-sizing: border-box;
+  margin: 10px; /* Adjust margin to create gaps between images */
+  object-fit: contain;
 }
-
 
 .logos-container {
   display: flex;
