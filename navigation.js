@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="navigation" id="projectsLink">Projects</div>
         <div class="hidden-projects" id="projectsList">
             <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
-            <a href="https://aurashak.github.io/projects/mts/mts.html">MTS</a>
             <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
             <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
         </div>
@@ -34,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Highlight the "Projects" button when a project page is being viewed
     const projectPages = [
         "https://aurashak.github.io/projects/nymap/nymap.html",
-        "https://aurashak.github.io/projects/mts/mts.html",
         "https://aurashak.github.io/projects/nmca/nmca.html",
         "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html"
     ];
