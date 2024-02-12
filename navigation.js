@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
             <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
             <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
+            <a href="https://aurashak.github.io/misc/misc.html">Misc</a>
+
         </div>
     `;
 
@@ -35,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "https://aurashak.github.io/projects/nymap/nymap.html",
         "https://aurashak.github.io/projects/nmca/nmca.html",
         "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html"
+        "https://aurashak.github.io/misc/misc.html"
+
     ];
 
     const projectsLink = document.getElementById("projectsLink");
