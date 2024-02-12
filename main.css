@@ -249,17 +249,11 @@ max-width: 800px;
 }
 
 .largemisccontainer {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -10px; /* Adjust margin to counteract gaps */
+  display: inline;
 }
 
 .largemisccontainer img {
-  max-width: calc(25% - 20px); /* Adjust width based on 4 items per row with 20px gap */
-  flex: 1;
-  box-sizing: border-box;
-  margin: 10px; /* Adjust margin to create gaps between images */
-  object-fit: contain;
+  max-width: 25%; /* Adjust width based on 4 items per row with 20px gap */
 }
 
 .logos-container {
