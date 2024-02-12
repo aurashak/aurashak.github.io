@@ -20,7 +20,7 @@ h1 {
     color: #333;
     border-radius: 14px;
     padding: 0px 10px;
-    margin: 0px;
+    margin-top: 20px;
     display: inline-block;
     background-color: #ffe600ce;
     border: 1.4px gray solid;
@@ -2386,16 +2386,6 @@ span.cesium-projectionPicker-wrapper {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
