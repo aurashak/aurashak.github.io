@@ -15,13 +15,17 @@ a:active { color: black}
 
 
 h1 {
-  font-size: 25px; 
-  font-weight: bold;
-  color: #333; 
-  padding: 0px;
-  margin: 0px;
-  display: inline-block;
-  background-color: #ffe600ce;
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 14px;
+    padding: 0px 10px;
+    margin: 0px;
+    display: inline-block;
+    background-color: #ffe600ce;
+    border: 1.4px gray solid;
+    box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+
 }
 
 h2 {
@@ -53,14 +57,15 @@ h3 a:link { color: black; background-color: #ffe600ce;}
 h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600ce;}
 
 .header {
-  display: flex;
-  justify-content: left;
-  margin: 0;
-  padding: 10px 10px;
-  border-bottom: 1px solid black;
-  position: relative;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: left;
+    margin: 0;
+    padding: 10px 10px;
+    border-bottom: 1px solid black;
+    position: relative;
+    z-index: 1;
+    box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+    background: rgba(255, 255, 255, 0.6);
 
 }
 
@@ -207,13 +212,14 @@ overflow: auto;
 }
 
 .aboutcontainer {
-  font-size: 20px;
-  margin: 20px auto;
-  max-width: 800px;
-  padding: 5px 10px;
-  display: block;
-  text-align: center;
-  line-height: 1.6;
+    font-size: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 5px 10px;
+    display: block;
+    text-align: center;
+    line-height: 1.6;
+
 }
 
 
@@ -401,12 +407,15 @@ li a:visited {
 
 
 .textbox {
-  padding: 15px 20px; 
-  margin: 0px auto; 
-  max-width: 600px;
-  border-radius: 4px;
-  background: #eeeeee;
-  text-align: left;
+    padding: 15px 20px;
+    margin: 0px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    background: #eeeeee;
+    text-align: left;
+    border: 1px solid gray;
+    box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+
 }
 
 .textbox a:link {
