@@ -258,8 +258,34 @@ max-width: 800px;
   max-width: 100%;
   height: auto;
   flex-grow: 1;
+  box-sizing: border-box;
+  margin: 0;
 }
 
+/* Adjust the number of images per row based on screen width */
+@media (min-width: 600px) {
+  .largemisccontainer img {
+      flex: 0 0 calc(33.333% - 20px); /* Three images per row with 20px gap */
+  }
+}
+
+@media (min-width: 900px) {
+  .largemisccontainer img {
+      flex: 0 0 calc(25% - 20px); /* Four images per row with 20px gap */
+  }
+}
+
+@media (min-width: 1200px) {
+  .largemisccontainer img {
+      flex: 0 0 calc(20% - 20px); /* Five images per row with 20px gap */
+  }
+}
+
+@media (min-width: 1500px) {
+  .largemisccontainer img {
+      flex: 0 0 calc(16.666% - 20px); /* Six images per row with 20px gap */
+  }
+}
 
 .logos-container {
   display: flex;
