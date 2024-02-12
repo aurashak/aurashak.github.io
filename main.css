@@ -242,16 +242,16 @@ max-width: 800px;
 .aboutcontainer a:hover { text-decoration: underline; }
 .aboutcontainer a:active { }
 
-.largemisccontainer {
-  display: flex;
-  flex-wrap: wrap;
-margin: 30px;
+.largecontainer {
+  margin: 20px auto;
+  max-width: 1300px;
+  display: block;
 }
 
 .largemisccontainer {
   display: flex;
   flex-wrap: wrap;
-  margin: 30px; /* Adjust margin to counteract gaps */
+  margin: -10px; /* Adjust margin to counteract gaps */
 }
 
 .largemisccontainer img {
