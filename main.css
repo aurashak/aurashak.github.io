@@ -256,14 +256,19 @@ max-width: 800px;
 
 .largemisccontainer {
   display: inline;
+  border: 0.1px solid rgb(187, 187, 187); 
 }
 
 .smallmisccontainer {
   display: inline;
+  border: 0.1px solid rgb(187, 187, 187); 
+
 }
 
 .medmisccontainer {
   display: inline;
+  border: 0.1px solid rgb(187, 187, 187); 
+
 }
 
 .largemisccontainer img {
@@ -271,11 +276,11 @@ max-width: 800px;
 }
 
 .smallmisccontainer img {
-  max-width: 25%; /* Adjust width based on 4 items per row with 20px gap */
+  max-width: 15%; /* Adjust width based on 4 items per row with 20px gap */
 }
 
 .medmisccontainer img {
-  max-width: 50%; /* Adjust width based on 4 items per row with 20px gap */
+  max-width: 35%; /* Adjust width based on 4 items per row with 20px gap */
 }
 
 
