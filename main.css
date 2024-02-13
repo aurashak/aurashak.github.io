@@ -256,19 +256,19 @@ max-width: 800px;
 }
 
 .largemisccontainer {
-  display: inline;
+  display: inline-block;
   margin: 20px 0px;
 
 }
 
 .smallmisccontainer {
-  display: inline;
+  display: inline-block;
   margin: 20px 0px;
 
 }
 
 .medmisccontainer {
-  display: inline;
+  display: inline-block;
   margin: 20px 0px;
 
 }
