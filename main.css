@@ -252,24 +252,19 @@ max-width: 800px;
   margin: 20px auto;
   max-width: 1300px;
   display: block;
-  text-align: center;
-
 }
 
 .largemisccontainer {
   display: inline;
-  margin: 20px 0px;
 }
 
 .smallmisccontainer {
   display: inline;
-  margin: 20px 0px;
 
 }
 
 .medmisccontainer {
   display: inline;
-  margin: 20px 0px;
 
 }
 
@@ -280,13 +275,13 @@ max-width: 800px;
 }
 
 .smallmisccontainer img {
-  max-width: 20%;
+  max-width: 15%;
   border: 0.1px solid rgb(187, 187, 187); 
 
 }
 
 .medmisccontainer img {
-  max-width: 30%; 
+  max-width: 35%; /* Adjust width based on 4 items per row with 20px gap */
   border: 0.1px solid rgb(187, 187, 187); 
 
 }
