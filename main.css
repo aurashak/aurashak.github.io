@@ -248,13 +248,36 @@ max-width: 800px;
   display: block;
 }
 
+.misccontainer {
+  margin: 20px auto;
+  max-width: 1300px;
+  display: block;
+}
+
 .largemisccontainer {
   display: inline;
 }
 
+.smallmisccontainer {
+  display: inline;
+}
+
+.medmisccontainer {
+  display: inline;
+}
+
 .largemisccontainer img {
+  max-width: 100%; /* Adjust width based on 4 items per row with 20px gap */
+}
+
+.smallmisccontainer img {
   max-width: 25%; /* Adjust width based on 4 items per row with 20px gap */
 }
+
+.medmisccontainer img {
+  max-width: 50%; /* Adjust width based on 4 items per row with 20px gap */
+}
+
 
 .logos-container {
   display: flex;
