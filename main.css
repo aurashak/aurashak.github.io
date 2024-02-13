@@ -252,19 +252,24 @@ max-width: 800px;
   margin: 20px auto;
   max-width: 1300px;
   display: block;
+  text-align: center;
 }
 
 .largemisccontainer {
   display: inline;
+  margin: 20px 0px;
+
 }
 
 .smallmisccontainer {
   display: inline;
+  margin: 20px 0px;
 
 }
 
 .medmisccontainer {
   display: inline;
+  margin: 20px 0px;
 
 }
 
