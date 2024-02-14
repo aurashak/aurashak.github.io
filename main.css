@@ -244,7 +244,7 @@ max-width: 800px;
 
 .largecontainer {
   margin: 20px auto;
-  max-width: 1300px;
+  max-width: 1500px;
   display: block;
 }
 
@@ -257,19 +257,19 @@ max-width: 800px;
 
 .largemisccontainer {
   display: inline-block;
-  margin: 20px 0px;
+  margin: 50px 0px;
 
 }
 
 .smallmisccontainer {
   display: inline-block;
-  margin: 20px 0px;
+  margin: 50px 0px;
 
 }
 
 .medmisccontainer {
   display: inline-block;
-  margin: 20px 0px;
+  margin: 50px 0px;
 
 }
 
