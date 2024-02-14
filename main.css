@@ -249,10 +249,10 @@ max-width: 800px;
 }
 
 .misccontainer {
-  margin: 20px;
+  margin: 40px 0;
   max-width: 1300px;
   display: block;
-  text-align: center;
+margin: 0 auto;
 }
 
 .largemisccontainer {
