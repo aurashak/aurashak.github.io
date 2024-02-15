@@ -417,15 +417,13 @@ document.getElementById('wastetransferfacility').addEventListener('click', funct
 document.getElementById('wastetransferfacility').addEventListener('change', function() {
     if (map.hasLayer(wastetransferfacilityLayer)) {
         // If the layer is already on, do nothing when switching left to right
-        if (document.getElementById('wastetransferfacility').checked) {
-            return;
+        if (!document.getElementById('wastetransferfacility').checked) {
+            map.removeLayer(wastetransferfacilityLayer);
         }
-        map.removeLayer(wastetransferfacilityLayer);
     } else {
         map.addLayer(wastetransferfacilityLayer);
     }
 });
-
 
 document.getElementById('inactivesolidwastelandfill').addEventListener('change', function() {
     if (map.hasLayer(inactivesolidwastelandfillLayer)) {
