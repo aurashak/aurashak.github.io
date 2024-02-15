@@ -1,42 +1,21 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-// Immediately-invoked asynchronous function
-(async function () {
-    const viewer = new Cesium.Viewer("cesiumContainer", {
-        // This is a global 3D Tiles tileset so disable the
-        // globe to prevent it from interfering with the data
-        globe: false,
-        // Disabling the globe means we need to manually
-        // re-enable the atmosphere
-        skyAtmosphere: new Cesium.SkyAtmosphere(),
-        // 2D and Columbus View are not currently supported
-        // for global 3D Tiles tilesets
-        sceneModePicker: false,
-        // Imagery layers are not currently supported for
-        // global 3D Tiles tilesets
-        baseLayerPicker: false,
-    });
 
-    try {
-        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-        viewer.scene.primitives.add(tileset);
-    } catch (error) {
-        console.log(error);
-    }
-
-    // Set the camera to focus slightly further west, facing east, and at a closer zoom
-    viewer.scene.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(-73.97421308903137, 40.820382982431454, 500.0),
-        orientation: {
-            heading: Cesium.Math.toRadians(90),
-            pitch: Cesium.Math.toRadians(-25),
-            roll: Cesium.Math.toRadians(0),
-        },
-    });
-})();
-
-
+const viewer = new Cesium.Viewer('cesiumContainer', {
+    // Disable default terrain and imagery since we're using Photorealistic 3D Tiles
+    globe: false,
+    // Set your desired initial view of New York City
+    initialPosition: Cesium.Cartographic.fromDegrees(-74.0060, 40.7128, 1500),
+  });
+  
+  // Add Photorealistic 3D Tiles for New York City
+  const photorealisticTileset = viewer.scene.primitives.add(
+    new Cesium.Cesium3DTileset({
+      url: Cesium.IonResource.fromAssetId('cesiumion/assets/3882'),
+    })
+  );
+  
 
 /*
 
