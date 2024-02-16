@@ -105,7 +105,8 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 .hidden-projects {
   display: none; /* Initially hide the projects */
   font-size: 20px;
-  margin-left: 10px;
+  margin: 10px 10px 0px 10px;
+
 }
 
 .hidden-projects a.current-page {
