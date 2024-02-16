@@ -17,8 +17,7 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
 
 });
 
-// Load the Cesium Navigation plugin
-viewer.extend(Cesium.viewerCesiumNavigationMixin);
+
 
 
 window.onload = function() {
