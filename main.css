@@ -504,7 +504,7 @@ li a:visited {
     border-radius: 8px;
     background: #eeeeee;
     text-align: left;
-    border: 1px solid gray;
+    border: 0.8px solid gray;
     box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
 }
 
