@@ -1,15 +1,18 @@
-// imagepopout.js
-
 document.addEventListener('DOMContentLoaded', function () {
-    var fullScreen = document.getElementById('fullScreen');
-    var closeBtn = document.getElementById('closeBtn');
+  const imageContainer = document.querySelector('.image-container');
+  const fullScreen = document.getElementById('fullScreen');
+  
+  imageContainer.addEventListener('click', function (event) {
+      if (event.target.tagName === 'IMG') {
+          const imageUrl = event.target.src;
+          fullScreen.querySelector('img').src = imageUrl;
+          fullScreen.style.visibility = 'visible';
+          fullScreen.style.opacity = '1';
+      }
+  });
 
-    if (fullScreen && closeBtn) {
-        closeBtn.addEventListener('click', function () {
-            fullScreen.style.visibility = 'hidden';
-            fullScreen.style.opacity = '0';
-        });
-    } else {
-        console.error('Full screen element or close button not found.');
-    }
+  fullScreen.addEventListener('click', function () {
+      fullScreen.style.visibility = 'hidden';
+      fullScreen.style.opacity = '0';
+  });
 });
