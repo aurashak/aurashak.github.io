@@ -2380,8 +2380,13 @@ span.cesium-projectionPicker-wrapper {
       padding: 5px 10px;
   }
 
-.miscontainer {
+.misccontainer {
   margin: 20px 10px; 
+}
+
+.image-container {
+  width: 100%;
+margin: 10px; 
 }
 
 .image-container img {
