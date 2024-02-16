@@ -105,6 +105,7 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 .hidden-projects {
   display: none; /* Initially hide the projects */
   font-size: 20px;
+  margin-left: 10px;
 }
 
 .hidden-projects a.current-page {
@@ -2379,7 +2380,14 @@ span.cesium-projectionPicker-wrapper {
       padding: 5px 10px;
   }
 
+.miscontainer {
+  margin: 20px 10px; 
+}
 
+.image-container img {
+  width: 100%;
+margin: 10px; 
+}
  .textbox {
   font-size: 16px;
  }
@@ -2411,6 +2419,7 @@ span.cesium-projectionPicker-wrapper {
   .hidden-projects {
       font-size: 16px;
       margin-left: 10px;
+      margin-bottom: 5px;
   }
 
   .hidden-projects a {
