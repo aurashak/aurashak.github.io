@@ -1,19 +1,13 @@
-// Grant CesiumJS access to your ion assets
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+const viewer = new Cesium.Viewer('cesiumContainer');
 
-const viewer = new Cesium.Viewer("cesiumContainer", {
-    globe: false,
-  });
-
-  Cesium.createGooglePhotorealistic3DTileset()
-    .then((tileset) => {
-      viewer.scene.primitives.add(tileset);
+viewer.imageryLayers.addImageryProvider(
+  Cesium.IonProvider.fromAccessToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q')
+    .createImageryProvider({
+      assetId: '2275207'
     })
-    .catch((error) => {
-      console.log(`Failed to load tileset: ${error}`);
-    });
-  
+);
+
 
 /*
 
