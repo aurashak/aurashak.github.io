@@ -12,15 +12,6 @@ viewer.imageryLayers.addImageryProvider(
 
 
 
-const viewer = new Cesium.Viewer('cesiumContainer');
-
-viewer.imageryLayers.addImageryProvider(
-  Cesium.IonProvider.fromAccessToken('g2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q')
-    .createImageryProvider({
-      assetId: ''
-    })
-);
-
 
 /*
 
