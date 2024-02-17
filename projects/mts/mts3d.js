@@ -4,14 +4,15 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 const viewer = new Cesium.Viewer("cesiumContainer", {
     globe: false,
-});
+  });
 
-try {
-    const tileset = await Cesium.createGooglePhotorealistic3DTileset();
-    viewer.scene.primitives.add(tileset);
-  } catch (error) {
-    console.log(`Failed to load tileset: ${error}`);
-  }
+  Cesium.createGooglePhotorealistic3DTileset()
+    .then((tileset) => {
+      viewer.scene.primitives.add(tileset);
+    })
+    .catch((error) => {
+      console.log(`Failed to load tileset: ${error}`);
+    });
   
 
 /*
