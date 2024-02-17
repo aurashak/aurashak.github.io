@@ -1,10 +1,23 @@
+const viewer = new Cesium.Viewer('cesiumContainer');
+
+const ionToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MT'; // Replace with your actual token
+const tilesetId = '2275207'; // Replace with your actual tileset ID
+
+viewer.imageryLayers.addImageryProvider(
+  Cesium.IonProvider.fromAccessToken(ionToken)
+    .createImageryProvider({
+      assetId: tilesetId
+    })
+);
+
+
 
 const viewer = new Cesium.Viewer('cesiumContainer');
 
 viewer.imageryLayers.addImageryProvider(
-  Cesium.IonProvider.fromAccessToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q')
+  Cesium.IonProvider.fromAccessToken('g2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q')
     .createImageryProvider({
-      assetId: '2275207'
+      assetId: ''
     })
 );
 
