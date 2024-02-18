@@ -397,7 +397,7 @@ padding: 0px 4px;
   padding: 0px 10px;
   max-width: 900px;
   border-radius: 2px;
-  border: 1px solid gray;
+  border: 1px solid rgba(110, 110, 110, 0.3);
   display: inline-block;
   margin: 30px auto 0 auto;
   background-color: #ffe600ce;
@@ -504,7 +504,7 @@ li a:visited {
     border-radius: 2px;
     background: #eeeeee;
     text-align: left;
-    border: 0.8px solid gray;
+    border: 1px solid rgba(110, 110, 110, 0.3);
     box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
 }
 
