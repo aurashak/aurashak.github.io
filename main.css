@@ -352,6 +352,15 @@ padding: 0px 4px;
 
 
 
+
+
+
+
+
+
+
+
+
 .image-container {
   display: flex;
   flex-wrap: wrap;
@@ -385,6 +394,29 @@ padding: 0px 4px;
   max-width: 90%;
   max-height: 90%;
 }
+
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+
+
 
 
 
@@ -486,14 +518,14 @@ li a:visited {
 
 
 .imagebox {
-  padding: 15px 20px;
+  padding: 5px;
   margin: 0px auto;
   max-width: 700px;
   border-radius: 2px;
   background: #eeeeee;
   text-align: center;
-  border: 1px solid gray;
-  box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+  border: 1px solid rgba(110, 110, 110, 0.3);
+    box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
 }
 
 
