@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const fullScreen = document.getElementById('fullScreen');
     let currentIndex = 0;
 
-    function updateFullScreenImage(imageUrl) {
-        fullScreen.querySelector('img').src = imageUrl;
+    function updateFullScreenImage() {
+        fullScreen.querySelector('img').src = images[currentIndex].src;
     }
 
     function showFullScreen() {
@@ -17,21 +17,38 @@ document.addEventListener('DOMContentLoaded', function () {
         fullScreen.style.opacity = '0';
     }
 
+    function updateArrows() {
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+        leftArrow.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+        rightArrow.style.visibility = currentIndex === images.length - 1 ? 'hidden' : 'visible';
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateFullScreenImage();
+        updateArrows();
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateFullScreenImage();
+        updateArrows();
+    }
+
     document.addEventListener('keydown', function (event) {
         if (event.key === 'ArrowLeft') {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateFullScreenImage(images[currentIndex].src);
+            prevImage();
         } else if (event.key === 'ArrowRight') {
-            currentIndex = (currentIndex + 1) % images.length;
-            updateFullScreenImage(images[currentIndex].src);
+            nextImage();
         }
     });
 
     document.querySelector('.image-container').addEventListener('click', function (event) {
         if (event.target.tagName === 'IMG') {
-            const imageUrl = event.target.src;
             currentIndex = Array.from(images).indexOf(event.target);
-            updateFullScreenImage(imageUrl);
+            updateFullScreenImage();
+            updateArrows();
             showFullScreen();
         }
     });
@@ -39,4 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
     fullScreen.addEventListener('click', function () {
         hideFullScreen();
     });
+
+    // Initial update
+    updateFullScreenImage();
+    updateArrows();
 });
