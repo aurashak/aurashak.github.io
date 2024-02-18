@@ -24,13 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
         rightArrow.style.visibility = currentIndex === images.length - 1 ? 'hidden' : 'visible';
     }
 
-    function nextImage() {
+    function nextImage(event) {
+        event.stopPropagation();
         currentIndex = (currentIndex + 1) % images.length;
         updateFullScreenImage();
         updateArrows();
     }
 
-    function prevImage() {
+    function prevImage(event) {
+        event.stopPropagation();
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         updateFullScreenImage();
         updateArrows();
@@ -38,10 +40,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('keydown', function (event) {
         if (event.key === 'ArrowLeft') {
-            prevImage();
+            prevImage(event);
         } else if (event.key === 'ArrowRight') {
-            nextImage();
+            nextImage(event);
         }
+    });
+
+    document.querySelector('.left-arrow').addEventListener('click', function (event) {
+        prevImage(event);
+    });
+
+    document.querySelector('.right-arrow').addEventListener('click', function (event) {
+        nextImage(event);
     });
 
     document.querySelector('.image-container').addEventListener('click', function (event) {
