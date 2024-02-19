@@ -531,7 +531,6 @@ li a:visited {
 .textbox {
     padding: 15px 20px;
     margin: 0px auto;
-    max-width: 700px;
     border-radius: 2px;
     background: #eeeeee;
     text-align: left;
