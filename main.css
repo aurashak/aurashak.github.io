@@ -98,11 +98,16 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 .navigation a.current-page,
 .navigation #projectsLink.current-page {
     background-color: #ffe600ce;
-    /* Add any other styling you want for the current page or button */
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
 
-.navigation:hover { color: black; background-color: #ffe600ce;}
+.navigation:hover { 
+    color: black; 
+    background-color: #ffe600ce;
+      box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+
+}
 
 .hidden-projects {
   display: none; /* Initially hide the projects */
