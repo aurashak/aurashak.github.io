@@ -1,4 +1,21 @@
 
+// Grant CesiumJS access to your ion assets
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
+
+const viewer = new Cesium.Viewer("cesiumContainer");
+
+try {
+  const resource = await Cesium.IonResource.fromAssetId(2472722);
+  const entity = viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
+    model: {
+      uri: resource,
+    },
+  });
+  viewer.trackedEntity = entity;
+} catch (error) {
+  console.log(error);
+}
 
 
 
@@ -58,6 +75,12 @@ viewer.imageryLayers.addImageryProvider(
 })();
 
 */
+
+
+
+
+
+/*
 (async () => {
     // Replace 'YOUR_CESIUM_ION_TOKEN' with your actual Cesium Ion access token
     const cesiumIonToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MT';
@@ -84,6 +107,9 @@ viewer.imageryLayers.addImageryProvider(
       model: { uri: resource },
     });
   })();
+
+  */
+
 
 
 /*
