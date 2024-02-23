@@ -1,17 +1,6 @@
 
 
 
-// Create a Cesium Viewer
-const viewer = new Cesium.Viewer('cesiumContainer');
-
-// Use the Cesium viewer instance to add the 3D model
-const resource = await Cesium.IonResource.fromAssetId(2472722);
-const entity = viewer.entities.add({
-  model: { uri: resource },
-});
-
-
-
 
 
 
@@ -68,10 +57,9 @@ viewer.imageryLayers.addImageryProvider(
     });
 })();
 
+*/
 
-
-
-var viewer = new Cesium.Viewer('cesiumContainer1', {
+var viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
@@ -85,10 +73,17 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     skyBox: false,
     skyAtmosphere: false,
     backgroundColor: Cesium.Color.WHITE
+});
 
+// Use the Cesium viewer instance to add the 3D model
+const resource = await Cesium.IonResource.fromAssetId(2472722);
+const entity = viewer.entities.add({
+    model: { uri: resource },
 });
 
 
+
+/*
 
 // Load the first GeoJSON data and add it as a polyline to the map
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson').then(function(dataSource1) {
