@@ -3,38 +3,46 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 const initializeCesium = async () => {
   var viewer = new Cesium.Viewer('cesiumContainer', {
-    navigationInstructionsInitiallyVisible: false, // Hide initial navigation instructions
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
-  });
+    // Grant CesiumJS access to your ion assets
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-  try {
-    const resource = await Cesium.IonResource.fromAssetId(2472722);
-    const entity = viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
-      model: {
-        uri: resource,
-      },
-    });
-    viewer.trackedEntity = entity;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-initializeCesium();
-
+    const initializeCesium = async () => {
+      var viewer = new Cesium.Viewer('cesiumContainer', {
+        navigationInstructionsInitiallyVisible: false, // Hide initial navigation instructions
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        animation: false,
+        skyBox: false,
+        skyAtmosphere: false,
+        backgroundColor: Cesium.Color.WHITE
+      });
+  
+      // Set minimum and maximum zoom levels
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+  
+      try {
+        const resource = await Cesium.IonResource.fromAssetId(2472722);
+        const entity = viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
+          model: {
+            uri: resource,
+          },
+        });
+        viewer.trackedEntity = entity;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    initializeCesium();
 
 /*
 
