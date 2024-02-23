@@ -1,3 +1,22 @@
+
+
+
+// Create a Cesium Viewer
+const viewer = new Cesium.Viewer('cesiumContainer');
+
+// Use the Cesium viewer instance to add the 3D model
+const resource = await Cesium.IonResource.fromAssetId(2472722);
+const entity = viewer.entities.add({
+  model: { uri: resource },
+});
+
+
+
+
+
+
+/*
+
 const viewer = new Cesium.Viewer('cesiumContainer');
 
 const ionToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MT'; // Replace with your actual token
@@ -13,7 +32,6 @@ viewer.imageryLayers.addImageryProvider(
 
 
 
-/*
 
 // Immediately-invoked asynchronous function
 (async function () {
