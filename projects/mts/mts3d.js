@@ -58,28 +58,29 @@ viewer.imageryLayers.addImageryProvider(
 })();
 
 */
+(async () => {
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        animation: false,
+        skyBox: false,
+        skyAtmosphere: false,
+        backgroundColor: Cesium.Color.WHITE
+    });
 
-var viewer = new Cesium.Viewer('cesiumContainer', {
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
-});
-
-// Use the Cesium viewer instance to add the 3D model
-const resource = await Cesium.IonResource.fromAssetId(2472722);
-const entity = viewer.entities.add({
-    model: { uri: resource },
-});
+    // Use the Cesium viewer instance to add the 3D model
+    const resource = await Cesium.IonResource.fromAssetId(2472722);
+    const entity = viewer.entities.add({
+        model: { uri: resource },
+    });
+})();
 
 
 
