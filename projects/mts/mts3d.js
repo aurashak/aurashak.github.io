@@ -59,29 +59,31 @@ viewer.imageryLayers.addImageryProvider(
 
 */
 (async () => {
+    // Replace 'YOUR_CESIUM_ION_TOKEN' with your actual Cesium Ion access token
+    const cesiumIonToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MT';
+
     var viewer = new Cesium.Viewer('cesiumContainer', {
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
-        animation: false,
-        skyBox: false,
-        skyAtmosphere: false,
-        backgroundColor: Cesium.Color.WHITE
+      baseLayerPicker: false,
+      geocoder: false,
+      homeButton: false,
+      infoBox: true,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      animation: false,
+      skyBox: false,
+      skyAtmosphere: false,
+      backgroundColor: Cesium.Color.WHITE
     });
 
     // Use the Cesium viewer instance to add the 3D model
-    const resource = await Cesium.IonResource.fromAssetId(2472722);
+    const resource = await Cesium.IonResource.fromAssetId(2472722, { accessToken: cesiumIonToken });
     const entity = viewer.entities.add({
-        model: { uri: resource },
+      model: { uri: resource },
     });
-})();
-
+  })();
 
 
 /*
