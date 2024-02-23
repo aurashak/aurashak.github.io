@@ -445,6 +445,9 @@ background: none;
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
+.maptitle a:link {
+  color: black; 
+}
 
 .mapdescription {
   font-size: 20px;
