@@ -436,6 +436,7 @@ background: none;
   position: relative;
     line-height: 1;
   font-weight: bold;
+  padding: 0px 2px;
   max-width: 900px;
   color: black;
     border-radius: 1px;
