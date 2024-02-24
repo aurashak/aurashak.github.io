@@ -529,11 +529,11 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 });
 
 // Add an event listener to the remediationsites checkbox
-document.getElementById('remediationsites').addEventListener('change', function () {
-    if (document.getElementById('remediationsites').checked) {
-        map.addLayer(remediationsitesLayer);
-    } else {
+document.getElementById('remediationsites').addEventListener('click', function () {
+    if (map.hasLayer('remediationsites')) {
         map.removeLayer(remediationsitesLayer);
+    } else {
+        map.addLayer(remediationsitesLayer);
     }
 });
 
