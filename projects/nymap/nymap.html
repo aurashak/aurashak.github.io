@@ -27,7 +27,7 @@ NY Environmental Infrastructure Map
 <div class="mapcolumnleft">
 <div class="textbox" style="box-shadow: none;">
 
-    Toggle the map layers to see infrastructure systems. See <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a> for the map documentation.
+    Toggle the layers to see how systems of infrastructure overlap with demographics. See <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a> for the map documentation.
     </div>
     <Br>
 <div class="nymapboxcontainer">
@@ -35,7 +35,7 @@ NY Environmental Infrastructure Map
 <div class="nymapbox">
     <div style="display: flex; align-items: center;" class="legend-item">
         <div class="legend-symbol" id="legend-floodplain"></div>
-<label class="switch-label">Coastal Flooding</label>
+<label class="switch-label"><b>Coastal Flooding</b></label>
 <label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="floodplain">
 <div class="switch-track">
@@ -58,7 +58,7 @@ NY Environmental Infrastructure Map
         <div class="nymapbox">      
              <div style="display: flex; align-items: center;" class="legend-item">
 
-            <label class="switch-label">Average Income 💵</label>
+            <label class="switch-label"><b>Median Household Income</b> 💵</label>
             <label class="switch" style="margin-left: auto;">
                 <input type="checkbox" class="switch-input" id="avgIncomeLayer">
                 <div class="switch-track">
@@ -280,6 +280,23 @@ NY Environmental Infrastructure Map
 </label>
 </div></div>
 </div>
+
+
+<div class="nymapbox">
+
+    <!-- Remediation Sites -->
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <div class="legend-symbol" id="legend-remediationsites"></div>
+    <label class="switch-label">Remediation Sites</label>
+    <label class="switch" style="margin-left: auto;">
+    <input type="checkbox" class="switch-input" id="remediationsites">
+    <div class="switch-track">
+    <div class="switch-thumb"></div>
+    </div>
+    </label>
+    </div></div>
+    </div>
+    
 
 <br>
 

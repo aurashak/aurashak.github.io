@@ -330,6 +330,20 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 });
 
 
+var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'yellow',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: 0.5
+        };
+    },
+});
+
+
+
 
 
 
@@ -516,6 +530,13 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
+document.getElementById('remediationsites').addEventListener('click', function() {
+    if (map.hasLayer(remediationsitesLayer)) {
+        map.removeLayer(remediationsitesLayer);
+    } else {
+        map.addLayer(remediationsitesLayer);
+    }
+});
 
 document.getElementById('aqisite').addEventListener('click', function() {
     if (map.hasLayer(aqisiteLayer)) {
@@ -716,6 +737,7 @@ setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
+setLegendSymbol('remediationsites', 'yellow', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
 
 
