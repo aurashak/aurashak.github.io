@@ -667,25 +667,6 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-
-// Set the legend symbol shapes and colors for each layer
-setLegendSymbol('evacuationzones', 'red', 'polygon');
-setLegendSymbol('electrictransmissionlines', 'orange', 'line');
-setLegendSymbol('aqisite', 'green', 'circle');
-setLegendSymbol('chemicalstorage', 'blue', 'circle');
-setLegendSymbol('recyclingfacility', 'orange', 'circle');
-setLegendSymbol('nycso', 'brown', 'circle');
-setLegendSymbol('nygaspipelines', 'purple', 'line');
-setLegendSymbol('powerplants', '#FFC0CB', 'circle');
-setLegendSymbol('wastewatertreatment', 'red', 'circle');
-setLegendSymbol('wastetransferfacility', 'purple', 'circle');
-setLegendSymbol('majoroilstorage', 'black', 'circle');
-setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
-setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
-setLegendSymbol('avgIncome', {'0-30000': '#fee08b', '30000-60000': '#fdae61', '60000-90000': '#d73027', '90000-150000': '#4575b4', '150000-250000': '#313695'}, 'polygon');
-
-
-
 // Function to set legend symbols with support for multiple shapes and colors
 function setLegendSymbol(layerId, colors, shape) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
@@ -697,14 +678,12 @@ function setLegendSymbol(layerId, colors, shape) {
             for (const category in colors) {
                 const color = colors[category];
                 legendHTML += createLegendEntry(category, color, shape);
-                console.log(`Legend for ${layerId} - Category: ${category}, Color: ${color}, Shape: ${shape}`);
             }
             // Set the legend HTML
             legendSymbol.innerHTML = legendHTML;
         } else if (typeof colors === 'string') {
             // Set legend HTML for a single color and shape
             legendSymbol.innerHTML = createLegendEntry('', colors, shape);
-            console.log(`Legend for ${layerId} - Color: ${colors}, Shape: ${shape}`);
         }
     }
 }
@@ -722,6 +701,23 @@ function createLegendEntry(label, color, shape) {
             return ''; // Handle other shapes if needed
     }
 }
+
+// Set the legend symbol shapes and colors for each layer
+setLegendSymbol('evacuationzones', 'red', 'polygon');
+setLegendSymbol('electrictransmissionlines', 'orange', 'line');
+setLegendSymbol('aqisite', 'green', 'circle');
+setLegendSymbol('chemicalstorage', 'blue', 'circle');
+setLegendSymbol('recyclingfacility', 'orange', 'circle');
+setLegendSymbol('nycso', 'brown', 'circle');
+setLegendSymbol('nygaspipelines', 'purple', 'line');
+setLegendSymbol('powerplants', '#FFC0CB', 'circle');
+setLegendSymbol('wastewatertreatment', 'red', 'circle');
+setLegendSymbol('wastetransferfacility', 'purple', 'circle');
+setLegendSymbol('majoroilstorage', 'black', 'circle');
+setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
+setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
+setLegendSymbol('avgIncome', {'$0-$30k': '#fee08b', '$30k-$60k': '#fdae61', '$60k-$90k': '#d73027', '$90k-$150k': '#4575b4', '$150k-$250k': '#313695'}, 'polygon');
+
 
 
 
