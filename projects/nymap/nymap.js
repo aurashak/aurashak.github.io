@@ -89,6 +89,10 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
+var overlayLayers = {
+    "Remediation Sites": remediationsitesLayer,
+    // Add other overlay layers if needed
+};
 
 
 // AQI sites
@@ -528,15 +532,16 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-// Add an event listener to the remediationsites checkbox
 document.getElementById('remediationsites').addEventListener('click', function () {
+    console.log('Remediation Sites checkbox clicked');
     if (map.hasLayer(remediationsitesLayer)) {
+        console.log('Removing Remediation Sites layer');
         map.removeLayer(remediationsitesLayer);
     } else {
+        console.log('Adding Remediation Sites layer');
         map.addLayer(remediationsitesLayer);
     }
 });
-
 
 document.getElementById('aqisite').addEventListener('click', function() {
     if (map.hasLayer(aqisiteLayer)) {
