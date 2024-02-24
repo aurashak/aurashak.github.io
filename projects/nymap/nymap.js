@@ -716,13 +716,8 @@ setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
-setLegendSymbol('avgIncome', {
-    '$0-$30k': 'linear-gradient(to right, #fee08b, #fdae61)',
-    '$30k-$60k': 'linear-gradient(to right, #fdae61, #d73027)',
-    '$60k-$90k': 'linear-gradient(to right, #d73027, #4575b4)',
-    '$90k-$150k': 'linear-gradient(to right, #4575b4, #313695)',
-    '$150k-$250k': '#313695'
-  }, 'polygon');
+setLegendSymbol('avgIncome', {'$0-$30k': '#fee08b', '$30k-$60k': '#fdae61', '$60k-$90k': '#d73027', '$90k-$150k': '#4575b4', '$150k-$250k': '#313695'}, 'polygon');
+
 
 
 
