@@ -109,7 +109,6 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
-
 // NYC Average Income Layer
 var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycavgincome.geojson', {
     style: function (feature) {
@@ -162,12 +161,22 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         // You can add any additional actions or pop-up content here if needed
         layer.bindPopup("Census Tract: " + feature.properties.tract + "<br>Income: $" + feature.properties.income);
     }
-}).addTo(map);
+});
 
 // Add the new layer to the layer control
 layerControl.addOverlay(avgIncomeLayer, 'Average Household Income');
 
+// Get the average income checkbox and layer
+var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
 
+// Add an event listener to the average income checkbox
+avgIncomeCheckbox.addEventListener('change', function () {
+    if (avgIncomeCheckbox.checked) {
+        map.addLayer(avgIncomeLayer);
+    } else {
+        map.removeLayer(avgIncomeLayer);
+    }
+});
 
 
 
