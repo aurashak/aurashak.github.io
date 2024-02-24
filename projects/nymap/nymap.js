@@ -530,12 +530,13 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
 
 // Add an event listener to the remediationsites checkbox
 document.getElementById('remediationsites').addEventListener('click', function () {
-    if (map.hasLayer('remediationsites')) {
+    if (map.hasLayer(remediationsitesLayer)) {
         map.removeLayer(remediationsitesLayer);
     } else {
         map.addLayer(remediationsitesLayer);
     }
 });
+
 
 document.getElementById('aqisite').addEventListener('click', function() {
     if (map.hasLayer(aqisiteLayer)) {
