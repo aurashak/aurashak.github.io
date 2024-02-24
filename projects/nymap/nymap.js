@@ -684,6 +684,8 @@ setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('avgIncome', {'0-30000': '#fee08b', '30000-60000': '#fdae61', '60000-90000': '#d73027', '90000-150000': '#4575b4', '150000-250000': '#313695'});
 
+
+
 // Function to set legend symbols with support for multiple shapes and colors
 function setLegendSymbol(layerId, colors, shape) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
@@ -695,12 +697,14 @@ function setLegendSymbol(layerId, colors, shape) {
             for (const category in colors) {
                 const color = colors[category];
                 legendHTML += createLegendEntry(category, color, shape);
+                console.log(`Legend for ${layerId} - Category: ${category}, Color: ${color}, Shape: ${shape}`);
             }
             // Set the legend HTML
             legendSymbol.innerHTML = legendHTML;
         } else if (typeof colors === 'string') {
             // Set legend HTML for a single color and shape
             legendSymbol.innerHTML = createLegendEntry('', colors, shape);
+            console.log(`Legend for ${layerId} - Color: ${colors}, Shape: ${shape}`);
         }
     }
 }
@@ -718,6 +722,7 @@ function createLegendEntry(label, color, shape) {
             return ''; // Handle other shapes if needed
     }
 }
+
 
 
 
