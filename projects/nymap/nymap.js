@@ -108,66 +108,6 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
-// Function to get income category based on MHI value
-function getIncomeCategory(income) {
-    if (income <= 30000) {
-        return '0-30000';
-    } else if (income <= 60000) {
-        return '30000-60000';
-    } else if (income <= 90000) {
-        return '60000-90000';
-    } else if (income <= 150000) {
-        return '90000-150000';
-    } else {
-        return '150000-250000';
-    }
-}
-
-// NYC Average Income Layer
-var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycavgincome.geojson', {
-    style: function (feature) {
-        // Adjust styling based on income level
-        var income = feature.properties.MHI;
-        var category = getIncomeCategory(income);
-
-        // Define colors for each category
-        var categoryColors = {
-            '0-30000': '#fee08b',
-            '30000-60000': '#fdae61',
-            '60000-90000': '#d73027',
-            '90000-150000': '#4575b4',
-            '150000-250000': '#313695'
-        };
-
-        return {
-            fillColor: categoryColors[category],
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Income: $" + feature.properties.MHI);
-    }
-});
-
-// Add the new layer to the layer control
-layerControl.addOverlay(avgIncomeLayer, 'Average Household Income');
-
-// Get the average income checkbox and layer
-var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
-
-// Add an event listener to the average income checkbox
-avgIncomeCheckbox.addEventListener('change', function () {
-    if (avgIncomeCheckbox.checked) {
-        map.addLayer(avgIncomeLayer);
-    } else {
-        map.removeLayer(avgIncomeLayer);
-    }
-});
-
 
 // Get the floodplain checkbox, opacity slider, and floodplain layer
 var floodplainCheckbox = document.getElementById('floodplain');
@@ -388,6 +328,72 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         layer.bindPopup("Evacuation Zone Name: " + feature.properties.NAME);
     }
 });
+
+
+
+
+
+
+// Function to get income category based on MHI value
+function getIncomeCategory(income) {
+    if (income <= 30000) {
+        return '0-30000';
+    } else if (income <= 60000) {
+        return '30000-60000';
+    } else if (income <= 90000) {
+        return '60000-90000';
+    } else if (income <= 150000) {
+        return '90000-150000';
+    } else {
+        return '150000-250000';
+    }
+}
+
+// NYC Average Income Layer
+var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycavgincome.geojson', {
+    style: function (feature) {
+        // Adjust styling based on income level
+        var income = feature.properties.MHI;
+        var category = getIncomeCategory(income);
+
+        // Define colors for each category
+        var categoryColors = {
+            '0-30000': '#fee08b',
+            '30000-60000': '#fdae61',
+            '60000-90000': '#d73027',
+            '90000-150000': '#4575b4',
+            '150000-250000': '#313695'
+        };
+
+        return {
+            fillColor: categoryColors[category],
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Income: $" + feature.properties.MHI);
+    }
+});
+
+// Add the new layer to the layer control
+layerControl.addOverlay(avgIncomeLayer, 'Average Household Income');
+
+// Get the average income checkbox and layer
+var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
+
+// Add an event listener to the average income checkbox
+avgIncomeCheckbox.addEventListener('change', function () {
+    if (avgIncomeCheckbox.checked) {
+        map.addLayer(avgIncomeLayer);
+    } else {
+        map.removeLayer(avgIncomeLayer);
+    }
+});
+
 
 
 
