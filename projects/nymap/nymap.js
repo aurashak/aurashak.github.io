@@ -108,58 +108,48 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
+// Function to get income category based on MHI value
+function getIncomeCategory(income) {
+    if (income <= 30000) {
+        return '0-30000';
+    } else if (income <= 60000) {
+        return '30000-60000';
+    } else if (income <= 90000) {
+        return '60000-90000';
+    } else if (income <= 150000) {
+        return '90000-150000';
+    } else {
+        return '150000-250000';
+    }
+}
 
 // NYC Average Income Layer
 var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycavgincome.geojson', {
     style: function (feature) {
         // Adjust styling based on income level
-        var income = feature.properties.income;
+        var income = feature.properties.MHI;
+        var category = getIncomeCategory(income);
 
-        if (income <= 30000) {
-            return {
-                fillColor: '#fee08b',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            };
-        } else if (income <= 60000) {
-            return {
-                fillColor: '#fdae61',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            };
-        } else if (income <= 100000) {
-            return {
-                fillColor: '#d73027',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            };
-        } else if (income <= 150000) {
-            return {
-                fillColor: '#4575b4',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            };
-        } else {
-            return {
-                fillColor: '#313695',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            };
-        }
+        // Define colors for each category
+        var categoryColors = {
+            '0-30000': '#fee08b',
+            '30000-60000': '#fdae61',
+            '60000-90000': '#d73027',
+            '90000-150000': '#4575b4',
+            '150000-250000': '#313695'
+        };
+
+        return {
+            fillColor: categoryColors[category],
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
     },
     onEachFeature: function (feature, layer) {
         // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.tract + "<br>Income: $" + feature.properties.income);
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Income: $" + feature.properties.MHI);
     }
 });
 
@@ -177,8 +167,6 @@ avgIncomeCheckbox.addEventListener('change', function () {
         map.removeLayer(avgIncomeLayer);
     }
 });
-
-
 
 
 // Get the floodplain checkbox, opacity slider, and floodplain layer
