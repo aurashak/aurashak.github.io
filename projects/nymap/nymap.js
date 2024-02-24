@@ -329,7 +329,7 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
-
+// Remediation Sites Layer
 var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
     style: function (feature) {
         return {
@@ -339,15 +339,8 @@ var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
             opacity: 0.5,
             fillOpacity: 0.5
         };
-    },
-}).on('data:loaded', function (event) {
-    console.log('Remediation Sites GeoJSON loaded successfully!', event);
-}).on('data:loading', function (event) {
-    console.log('Loading Remediation Sites GeoJSON...', event);
-}).on('data:error', function (event) {
-    console.error('Error loading Remediation Sites GeoJSON:', event.error);
+    }
 });
-
 
 
 
@@ -535,11 +528,12 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-document.getElementById('remediationsites').addEventListener('click', function() {
-    if (map.hasLayer(remediationsitesLayer)) {
-        map.removeLayer(remediationsitesLayer);
-    } else {
+// Add an event listener to the remediationsites checkbox
+document.getElementById('remediationsites').addEventListener('change', function () {
+    if (document.getElementById('remediationsites').checked) {
         map.addLayer(remediationsitesLayer);
+    } else {
+        map.removeLayer(remediationsitesLayer);
     }
 });
 
