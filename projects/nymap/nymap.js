@@ -398,8 +398,6 @@ avgIncomeCheckbox.addEventListener('change', function () {
 
 
 
-
-
 document.getElementById('nycso').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
         // If the layer is already on, do nothing when switching left to right
@@ -684,7 +682,7 @@ setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
-setLegendSymbol('avgIncome', '#fee08b', 'polygon'); // Add this line for Average Income
+setLegendSymbol('avgIncome', {'0-30000': '#fee08b', '30000-60000': '#fdae61', '60000-90000': '#d73027', '90000-150000': '#4575b4', '150000-250000': '#313695'});
 
 // Function to set legend symbols
 function setLegendSymbol(layerId, color, shape) {
