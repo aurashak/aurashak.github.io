@@ -91,7 +91,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
-
 // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -110,6 +109,63 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
+
+// NYC Average Income Layer
+var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycavgincome.geojson', {
+    style: function (feature) {
+        // Adjust styling based on income level
+        var income = feature.properties.income;
+
+        if (income <= 30000) {
+            return {
+                fillColor: '#fee08b',
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            };
+        } else if (income <= 60000) {
+            return {
+                fillColor: '#fdae61',
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            };
+        } else if (income <= 100000) {
+            return {
+                fillColor: '#d73027',
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            };
+        } else if (income <= 150000) {
+            return {
+                fillColor: '#4575b4',
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            };
+        } else {
+            return {
+                fillColor: '#313695',
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            };
+        }
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Census Tract: " + feature.properties.tract + "<br>Income: $" + feature.properties.income);
+    }
+}).addTo(map);
+
+// Add the new layer to the layer control
+layerControl.addOverlay(avgIncomeLayer, 'Average Household Income');
 
 
 
@@ -625,6 +681,7 @@ setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
+setLegendSymbol('avgIncome', '#fee08b', 'polygon'); // Add this line for Average Income
 
 // Function to set legend symbols
 function setLegendSymbol(layerId, color, shape) {
