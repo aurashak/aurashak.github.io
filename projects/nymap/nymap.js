@@ -340,8 +340,13 @@ var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
             fillOpacity: 0.5
         };
     },
+}).on('data:loaded', function (event) {
+    console.log('Remediation Sites GeoJSON loaded successfully!', event);
+}).on('data:loading', function (event) {
+    console.log('Loading Remediation Sites GeoJSON...', event);
+}).on('data:error', function (event) {
+    console.error('Error loading Remediation Sites GeoJSON:', event.error);
 });
-
 
 
 
