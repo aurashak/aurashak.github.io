@@ -819,7 +819,7 @@ border: 1px solid black;
 
 .legend-symbol {
   margin-right: 10px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
 }
 
