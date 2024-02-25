@@ -25,7 +25,7 @@ const initializeCesium = async () => {
 
   try {
     // Code from Cesium code snippet 1 (3D Tileset)
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2474886);
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
     viewer.scene.primitives.add(tileset);
     await viewer.zoomTo(tileset);
 
