@@ -1,6 +1,7 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 const initializeCesium = async () => {
     var viewer = new Cesium.Viewer('cesiumContainer', {
       navigationInstructionsInitiallyVisible: false,
@@ -51,39 +52,33 @@ const initializeCesium = async () => {
           url: 'https://a.tile.openstreetmap.org/'
         })
       );
-
-      
-       // Bounding box around the asset
-       const boundingBoxEntity = viewer.entities.add({
+  
+      // Bounding box around the asset
+      const boundingBoxEntity = viewer.entities.add({
         rectangle: {
           coordinates: Cesium.Rectangle.fromDegrees(
-            // Add your bounding box coordinates here
-            west: YOUR_WEST_BOUND,
-            south: YOUR_SOUTH_BOUND,
-            east: YOUR_EAST_BOUND,
-            north: YOUR_NORTH_BOUND
+            YOUR_WEST_BOUND,
+            YOUR_SOUTH_BOUND,
+            YOUR_EAST_BOUND,
+            YOUR_NORTH_BOUND
           ),
           outline: true,
           outlineColor: Cesium.Color.RED,
           height: 0,
         },
       });
-
-
+  
       osmImagery.show = false; // Initially hide the OpenStreetMap layer
-  
-      // Toggle layers based on user input (you can implement this using switches or buttons)
-      // For example, to toggle Sentinel-2 layer:
-      // sentinelImagery.show = !sentinelImagery.show;
-  
-      // To toggle OpenStreetMap layer:
-      // osmImagery.show = !osmImagery.show;
     } catch (error) {
       console.log(error);
     }
   };
   
   initializeCesium();
+
+
+
+
 
 /*
 
