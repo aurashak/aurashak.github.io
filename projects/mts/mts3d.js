@@ -2,57 +2,48 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-    // Create a container div for Cesium
-    const cesiumContainer = document.getElementById('cesiumContainer');
-  
-    // Set the size of the container
-    cesiumContainer.style.width = '100%';
-    cesiumContainer.style.height = '100vh'; // Set your desired height
-  
-    // Create the Cesium viewer
-    var viewer = new Cesium.Viewer(cesiumContainer, {
-      navigationInstructionsInitiallyVisible: false,
-      baseLayerPicker: false,
-      geocoder: false,
-      homeButton: false,
-      infoBox: true,
-      sceneModePicker: false,
-      selectionIndicator: false,
-      timeline: false,
-      navigationHelpButton: false,
-      fullscreenButton: false,
-      animation: false,
-      skyBox: false,
-      skyAtmosphere: false,
-      backgroundColor: Cesium.Color.WHITE,
-    });
-  
-    // Set minimum and maximum zoom levels
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-  
-    try {
-      // Code from Cesium code snippet 1 (3D Tileset)
-      const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2474886);
-      viewer.scene.primitives.add(tileset);
-      await viewer.zoomTo(tileset);
-  
-      // Apply the default style if it exists
-      const extras = tileset.asset.extras;
-      if (
-        Cesium.defined(extras) &&
-        Cesium.defined(extras.ion) &&
-        Cesium.defined(extras.ion.defaultStyle)
-      ) {
-        tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-      }
-    } catch (error) {
-      console.log(error);
+  var viewer = new Cesium.Viewer('cesiumContainer', {
+    navigationInstructionsInitiallyVisible: false, // Hide initial navigation instructions
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
+  });
+
+  // Set minimum and maximum zoom levels
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+
+  try {
+    // Code from Cesium code snippet 1 (3D Tileset)
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2474886);
+    viewer.scene.primitives.add(tileset);
+    await viewer.zoomTo(tileset);
+
+    // Apply the default style if it exists
+    const extras = tileset.asset.extras;
+    if (
+      Cesium.defined(extras) &&
+      Cesium.defined(extras.ion) &&
+      Cesium.defined(extras.ion.defaultStyle)
+    ) {
+      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
-  };
-  
-  initializeCesium();
-  
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+initializeCesium();
 
 
 /*
