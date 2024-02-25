@@ -540,16 +540,33 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-document.getElementById('remediationsites').addEventListener('click', function () {
-    console.log('Remediation Sites checkbox clicked');
-    if (map.hasLayer(remediationsitesLayer)) {
-        console.log('Removing Remediation Sites layer');
-        map.removeLayer(remediationsitesLayer);
-    } else {
-        console.log('Adding Remediation Sites layer');
-        map.addLayer(remediationsitesLayer);
+// Remediation Sites Layer with Polygon Markers
+console.log('Loading Remediation Sites geoJSON data...');
+var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'yellow',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: 0.5
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Site Name: " + feature.properties.SITENAME);
+    },
+    success: function (data) {
+        console.log('Remediation Sites geoJSON data loaded successfully.');
+    },
+    error: function (error) {
+        console.error('Error loading Remediation Sites geoJSON data:', error);
     }
 });
+
+// Add the remediation sites layer to the map
+remediationsitesLayer.addTo(map);
+
 
 document.getElementById('aqisite').addEventListener('click', function() {
     if (map.hasLayer(aqisiteLayer)) {
