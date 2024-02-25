@@ -2,49 +2,69 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-  var viewer = new Cesium.Viewer('cesiumContainer', {
-    navigationInstructionsInitiallyVisible: false, // Hide initial navigation instructions
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
-  });
-
-  // Set minimum and maximum zoom levels
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
-  try {
-    // Code from Cesium code snippet 1 (3D Tileset)
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-    viewer.scene.primitives.add(tileset);
-    await viewer.zoomTo(tileset);
-
-    // Apply the default style if it exists
-    const extras = tileset.asset.extras;
-    if (
-      Cesium.defined(extras) &&
-      Cesium.defined(extras.ion) &&
-      Cesium.defined(extras.ion.defaultStyle)
-    ) {
-      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      navigationInstructionsInitiallyVisible: false,
+      baseLayerPicker: false,
+      geocoder: false,
+      homeButton: true,
+      infoBox: true,
+      sceneModePicker: true,
+      selectionIndicator: true,
+      timeline: true,
+      navigationHelpButton: true,
+      fullscreenButton: true,
+      animation: true,
+      skyBox: false,
+      skyAtmosphere: false,
+      backgroundColor: Cesium.Color.WHITE
+    });
+  
+    // Set minimum and maximum zoom levels
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+  
+    try {
+      // Code from Cesium code snippet 1 (3D Tileset)
+      const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+      viewer.scene.primitives.add(tileset);
+      await viewer.zoomTo(tileset);
+  
+      // Apply the default style if it exists
+      const extras = tileset.asset.extras;
+      if (
+        Cesium.defined(extras) &&
+        Cesium.defined(extras.ion) &&
+        Cesium.defined(extras.ion.defaultStyle)
+      ) {
+        tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+      }
+  
+      // Add Sentinel-2 satellite imagery
+      const sentinelImagery = viewer.imageryLayers.addImageryProvider(
+        new Cesium.IonImageryProvider({ assetId: 3954 })
+      );
+      sentinelImagery.show = false; // Initially hide the Sentinel-2 layer
+  
+      // Add OpenStreetMap imagery
+      const osmImagery = viewer.imageryLayers.addImageryProvider(
+        Cesium.createOpenStreetMapImageryProvider({
+          url: 'https://a.tile.openstreetmap.org/'
+        })
+      );
+      osmImagery.show = false; // Initially hide the OpenStreetMap layer
+  
+      // Toggle layers based on user input (you can implement this using switches or buttons)
+      // For example, to toggle Sentinel-2 layer:
+      // sentinelImagery.show = !sentinelImagery.show;
+  
+      // To toggle OpenStreetMap layer:
+      // osmImagery.show = !osmImagery.show;
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-initializeCesium();
-
+  };
+  
+  initializeCesium();
 
 /*
 
