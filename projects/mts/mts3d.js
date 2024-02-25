@@ -57,10 +57,10 @@ const initializeCesium = async () => {
       const boundingBoxEntity = viewer.entities.add({
         rectangle: {
           coordinates: Cesium.Rectangle.fromDegrees(
-            YOUR_WEST_BOUND,
-            YOUR_SOUTH_BOUND,
-            YOUR_EAST_BOUND,
-            YOUR_NORTH_BOUND
+            -73.97532,       
+40.80829,            
+-73.93855,            
+40.84229
           ),
           outline: true,
           outlineColor: Cesium.Color.RED,
@@ -75,8 +75,8 @@ const initializeCesium = async () => {
   };
   
   initializeCesium();
-
-
+  
+  
 
 
 
