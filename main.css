@@ -472,6 +472,8 @@ background: none;
     margin: 0px;
     padding: 20px;
     line-height: 1.4;
+    overflow: auto;
+    max-height: 85vh;
 }
 
 .mapcolumnleft a:link { color: black; background-color: #ffe600ce;}
