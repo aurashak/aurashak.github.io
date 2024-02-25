@@ -38,17 +38,9 @@ const initializeCesium = async () => {
     ) {
       tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
-      // Rotate the camera by 80 degrees
-      const rotationAngle = Cesium.Math.toRadians(80);
-      viewer.scene.camera.rotateRight(rotationAngle);
-  
-      // Load GeoJSON data
-      const geoJsonUrl = 'https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson';
-      const dataSource = Cesium.GeoJsonDataSource.load(geoJsonUrl);
-      viewer.dataSources.add(dataSource);
-    } catch (error) {
-      console.log(error);
-    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 initializeCesium();
