@@ -406,8 +406,6 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
     }
 });
 
-// Add the new layer to the layer control
-layerControl.addOverlay(avgIncomeLayer, 'Average Household Income');
 
 // Get the average income checkbox and layer
 var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
