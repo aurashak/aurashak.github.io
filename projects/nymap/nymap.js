@@ -333,19 +333,26 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
-// Remediation Sites Layer with Circle Markers
+// Remediation Sites Layer with Polygon Markers
 var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, {
-            radius: 8, // Adjust the radius as needed
+    style: function (feature) {
+        return {
             fillColor: 'yellow',
             color: 'black',
             weight: 0.5,
             opacity: 0.5,
             fillOpacity: 0.5
-        });
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Site Name: " + feature.properties.SITENAME);
     }
 });
+
+// Add the remediation sites layer to the map
+remediationsitesLayer.addTo(map);
+
 
 
 
