@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NY Map</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://aurashak.github.io/main.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    
+
+<div class="header">
+</div>
+
+
+<div class="aboutcontainer">
+    <div class="maptitle">
+NY Environmental Infrastructure Map
+</div>
+</div>
+
+
+<div class="nymapcontainer">
+<div class="mapcolumnleft">
+<div class="textbox" style="box-shadow: none;">
+
+    Toggle the layers to see how systems of infrastructure overlap with demographics. See <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a> for the map documentation.
+    </div>
+    <Br>
+<div class="nymapboxcontainer">
+
+<div class="nymapbox">
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <div class="legend-symbol" id="legend-floodplain"></div>
+<label class="switch-label"><b>Coastal Flooding</b></label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="floodplain">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+<div id="opacity-slider-container" style="margin-left: auto;">
+<label for="opacity-slider" id="opacity-slider-label">Opacity:</label>
+<input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.5">
+</div>
+</div>
+</div></div>
+<br>
+
+<div class="nymapboxcontainer">
+            <!-- Average Income -->
+
+
+
+        <div class="nymapbox">      
+             <div style="display: flex; align-items: center;" class="legend-item">
+
+            <label class="switch-label"><b>Median Household Income</b> 💵</label>
+            <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="avgIncomeLayer">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="nymapbox">
+        <div style="align-items: center;" class="legend-item">
+            <div class="legend-symbol" id="legend-avgIncome"></div>
+        </div>
+    </div>
+
+</div>
+<br>
+
+
+
+<div class="nymapboxcontainer">
+
+<div class="nymapbox">
+<!-- Waste -->
+<div style="display: flex; align-items: center;" class="legend-item">
+<label class="switch-label-b"><b>Waste</b> 🗑️</label>
+<label class="switch-b" style="margin-left: auto;">
+<input type="checkbox" class="switch-input-b" id="wasteLayerGroup">
+<div class="switch-track-b">
+<div class="switch-thumb-b"></div>
+</div>
+</label>
+</div></div>
+
+<div class="nymapbox">
+<!-- Waste Water Treatment -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-wastewatertreatment"></div>
+<label class="switch-label">Waste Water Treatment</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="wastewatertreatment">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div>
+</div>
+<div class="nymapbox">
+<!-- Combined Sewer Overflow -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-nycso"></div>
+<label class="switch-label">Combined Sewer Overflow</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="nycso">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div>
+</div>
+<div class="nymapbox">
+<!-- Inactive Landfill -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-inactivesolidwastelandfill"></div>
+<label class="switch-label">Inactive Landfill</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="inactivesolidwastelandfill">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+<div class="nymapbox">
+<!-- Recycling Facility -->
+<div style="display: flex; align-items: center;" class="legend-item">
+<div class="legend-symbol" id="legend-recyclingfacility"></div>
+<label class="switch-label">Recycling Facility</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="recyclingfacility">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+<div class="nymapbox">
+<!-- Waste Transfer Station -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-wastetransferfacility"></div>
+<label class="switch-label">Waste Transfer Station</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="wastetransferfacility">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div>
+</div></div>
+<br>
+<div class="nymapboxcontainer">
+
+<div class="nymapbox">
+
+<!-- Energy -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <label class="switch-label-b"><b>Energy</b>  🔋</label>
+<label class="switch-b" style="margin-left: auto;">
+<input type="checkbox" class="switch-input-b" id="energyLayerGroup">
+<div class="switch-track-b">
+<div class="switch-thumb-b"></div>
+</div>
+</label>
+</div>
+</div>
+
+<div class="nymapbox">
+
+<!-- Major Oil Storage -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-majoroilstorage"></div>
+<label class="switch-label">Major Oil Storage</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="majoroilstorage">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+
+
+<div class="nymapbox">
+
+<!-- Gas Pipelines -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-nygaspipelines"></div>
+<label class="switch-label">Gas Pipelines</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="nygaspipelines">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+<div class="nymapbox">
+
+<!-- Electric Transmission Lines -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-electrictransmissionlines"></div>
+<label class="switch-label">Electric Transmission Lines</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="electrictransmissionlines">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+<div class="nymapbox">
+
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-powerplants"></div>
+<label class="switch-label">Powerplants</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="powerplants">
+<div class="switch-track">
+    <div class="switch-thumb"></div>
+</div>
+</label>
+</div></div></div>
+
+
+
+<Br>
+    <div class="nymapboxcontainer">
+
+    <div class="nymapbox">
+
+    <div style="display: flex; align-items: center;" class="legend-item">
+        Other:
+</div></div>
+
+<div class="nymapbox">
+
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-chemicalstorage"></div>
+<label class="switch-label">Chemical Storage</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="chemicalstorage">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+<div class="nymapbox">
+
+<!-- Air Quality Monitoring Sites -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-aqisite"></div>
+<label class="switch-label">Air Quality Monitoring Sites</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="aqisite">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+<div class="nymapbox">
+
+<!-- Evacuation Zones -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-evacuationzones"></div>
+<label class="switch-label">Evacuation Zones</label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="evacuationzones">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+
+<div class="nymapbox">
+
+    <!-- Remediation Sites -->
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <div class="legend-symbol" id="legend-remediationsites"></div>
+    <label class="switch-label">Remediation Sites</label>
+    <label class="switch" style="margin-left: auto;">
+    <input type="checkbox" class="switch-input" id="remediationsites">
+    <div class="switch-track">
+    <div class="switch-thumb"></div>
+    </div>
+    </label>
+    </div></div>
+    </div>
+    
+
+<br>
+
+<div class="nymapboxcontainer">
+
+<div class="nymapbox">
+
+Surface temperature (pending)<br>
+
+Land cover (pending)<br>
+
+Submission form (pending)<Br>
+
+
+</div></div>
+
+</div>
+
+<div class="mapcolumnright">
+<div id="nymap"></div>
+</div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+<script src="https://aurashak.github.io/projects/nymap/nymap.js"></script>
+<script src="https://aurashak.github.io/navigation.js"></script>
+
+
+</body>
+</html>
