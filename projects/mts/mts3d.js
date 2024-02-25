@@ -47,7 +47,7 @@ const initializeCesium = async () => {
       viewer.scene.camera.rotateRight(rotationAngle);
   
       // Load GeoJSON data
-      const geoJsonUrl = 'https://aurashak.github.io/geojson/nyc/nycgaspipelines.geojson';
+      const geoJsonUrl = 'https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson';
       const dataSource = Cesium.GeoJsonDataSource.load(geoJsonUrl);
       viewer.dataSources.add(dataSource);
     } catch (error) {
