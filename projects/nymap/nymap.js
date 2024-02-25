@@ -89,12 +89,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
-var overlayLayers = {
-    "Remediation Sites": remediationsitesLayer,
-    // Add other overlay layers if needed
-};
-
-
 // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -333,20 +327,29 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
+
+
 // Remediation Sites Layer with Polygon Markers
+console.log('Loading Remediation Sites geoJSON data...');
 var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
     style: function (feature) {
         return {
-            fillColor: 'yellow',
+            fillColor: 'red',
             color: 'black',
             weight: 0.5,
-            opacity: 0.5,
-            fillOpacity: 0.5
+            opacity: 1,
+            fillOpacity: 1
         };
     },
     onEachFeature: function (feature, layer) {
         // You can add any additional actions or pop-up content here if needed
         layer.bindPopup("Site Name: " + feature.properties.SITENAME);
+    },
+    success: function (data) {
+        console.log('Remediation Sites geoJSON data loaded successfully.');
+    },
+    error: function (error) {
+        console.error('Error loading Remediation Sites geoJSON data:', error);
     }
 });
 
@@ -540,32 +543,7 @@ document.getElementById('chemicalstorage').addEventListener('click', function() 
     }
 });
 
-// Remediation Sites Layer with Polygon Markers
-console.log('Loading Remediation Sites geoJSON data...');
-var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'yellow',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.5,
-            fillOpacity: 0.5
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Site Name: " + feature.properties.SITENAME);
-    },
-    success: function (data) {
-        console.log('Remediation Sites geoJSON data loaded successfully.');
-    },
-    error: function (error) {
-        console.error('Error loading Remediation Sites geoJSON data:', error);
-    }
-});
 
-// Add the remediation sites layer to the map
-remediationsitesLayer.addTo(map);
 
 
 document.getElementById('aqisite').addEventListener('click', function() {
@@ -607,6 +585,22 @@ document.getElementById('evacuationzones').addEventListener('click', function() 
         map.removeLayer(evacuationzonesLayer);
     } else {
         map.addLayer(evacuationzonesLayer);
+    }
+});
+
+
+
+document.getElementById('remediationsites').addEventListener('change', function() {
+    if (map.hasLayer(remediationsitesLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('remediationsites').checked) {
+            return;
+        }
+        map.removeLayer(remediationsitesLayer);
+        console.log('Remediation Sites layer turned off.');
+    } else {
+        map.addLayer(remediationsitesLayer);
+        console.log('Remediation Sites layer turned on.');
     }
 });
 
