@@ -24,20 +24,27 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
   try {
-    const resource = await Cesium.IonResource.fromAssetId(2474886);
-    const entity = viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
-      model: {
-        uri: resource,
-      },
-    });
-    viewer.trackedEntity = entity;
+    // Code from Cesium code snippet 1 (3D Tileset)
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2474886);
+    viewer.scene.primitives.add(tileset);
+    await viewer.zoomTo(tileset);
+
+    // Apply the default style if it exists
+    const extras = tileset.asset.extras;
+    if (
+      Cesium.defined(extras) &&
+      Cesium.defined(extras.ion) &&
+      Cesium.defined(extras.ion.defaultStyle)
+    ) {
+      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
 initializeCesium();
+
 
 /*
 
