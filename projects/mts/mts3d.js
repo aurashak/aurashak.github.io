@@ -6,14 +6,14 @@ const initializeCesium = async () => {
       navigationInstructionsInitiallyVisible: false,
       baseLayerPicker: false,
       geocoder: false,
-      homeButton: true,
+      homeButton: false,
       infoBox: true,
-      sceneModePicker: true,
-      selectionIndicator: true,
-      timeline: true,
-      navigationHelpButton: true,
-      fullscreenButton: true,
-      animation: true,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      animation: false,
       skyBox: false,
       skyAtmosphere: false,
       backgroundColor: Cesium.Color.WHITE
@@ -21,7 +21,7 @@ const initializeCesium = async () => {
   
     // Set minimum and maximum zoom levels
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000;
   
     try {
       // Code from Cesium code snippet 1 (3D Tileset)
@@ -51,6 +51,25 @@ const initializeCesium = async () => {
           url: 'https://a.tile.openstreetmap.org/'
         })
       );
+
+      
+       // Bounding box around the asset
+       const boundingBoxEntity = viewer.entities.add({
+        rectangle: {
+          coordinates: Cesium.Rectangle.fromDegrees(
+            // Add your bounding box coordinates here
+            west: YOUR_WEST_BOUND,
+            south: YOUR_SOUTH_BOUND,
+            east: YOUR_EAST_BOUND,
+            north: YOUR_NORTH_BOUND
+          ),
+          outline: true,
+          outlineColor: Cesium.Color.RED,
+          height: 0,
+        },
+      });
+
+
       osmImagery.show = false; // Initially hide the OpenStreetMap layer
   
       // Toggle layers based on user input (you can implement this using switches or buttons)
