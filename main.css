@@ -701,6 +701,14 @@ border: 1px solid black;
   margin: 0px;
 }
 
+#testmap {
+  height: 100%; /* Make the map take up 100% of the height */
+  min-width: 300px;
+  border-radius: 2px;
+  margin: 0px;
+}
+
+
 
 #scene-container {
   position: relative;
