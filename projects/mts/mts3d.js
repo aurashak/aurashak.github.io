@@ -1,46 +1,43 @@
+// Grant CesiumJS access to your ion assets
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
   var viewer = new Cesium.Viewer('cesiumContainer', {
-    // Grant CesiumJS access to your ion assets
-    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
+    navigationInstructionsInitiallyVisible: false, // Hide initial navigation instructions
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
+  });
 
-    const initializeCesium = async () => {
-      var viewer = new Cesium.Viewer('cesiumContainer', {
-        navigationInstructionsInitiallyVisible: false, // Hide initial navigation instructions
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
-        animation: false,
-        skyBox: false,
-        skyAtmosphere: false,
-        backgroundColor: Cesium.Color.WHITE
-      });
-  
-      // Set minimum and maximum zoom levels
-      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-  
-      try {
-        const resource = await Cesium.IonResource.fromAssetId(2474886);
-        const entity = viewer.entities.add({
-          position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
-          model: {
-            uri: resource,
-          },
-        });
-        viewer.trackedEntity = entity;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    initializeCesium();
+  // Set minimum and maximum zoom levels
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+
+  try {
+    const resource = await Cesium.IonResource.fromAssetId(2474886);
+    const entity = viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
+      model: {
+        uri: resource,
+      },
+    });
+    viewer.trackedEntity = entity;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+initializeCesium();
 
 /*
 
