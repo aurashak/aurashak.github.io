@@ -11,3 +11,17 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 });
 
 openstreetmapLayer.addTo(map);
+
+// GeoJSON Layer - Remediation Sites
+var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'green', // Set your desired fill color
+            color: 'black',    // Set your desired border color
+            weight: 2,          // Set the border weight
+            opacity: 1          // Set the opacity
+        };
+    }
+});
+
+geojsonLayer.addTo(map);
