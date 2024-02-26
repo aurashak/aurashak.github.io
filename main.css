@@ -709,7 +709,7 @@ border: 1px solid black;
 }
 
 
-#testmapcontainer {
+.testmapcontainer {
   height: 600px; /* Make the map take up 100% of the height */
   min-width: 300px;
   border-radius: 2px;
