@@ -1,6 +1,8 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
+
 const initializeCesium = async () => {
   var viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -18,11 +20,16 @@ const initializeCesium = async () => {
     backgroundColor: Cesium.Color.WHITE
   });
 
+  console.log("Viewer initialized");
+
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
   const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
   const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+
+  console.log("3D Tileset loaded");
+
   await viewer.zoomTo(tileset);
 
   const extras = tileset.asset.extras;
@@ -30,8 +37,36 @@ const initializeCesium = async () => {
     tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
   }
 
+  console.log("Zoomed to 3D Tileset");
+
   // Remove the satellite imagery
   viewer.imageryLayers.removeAll();
+
+  console.log("Imagery layers removed");
+
+  // Load GeoJSON data and add it as an overlay
+  const geoJsonResource = await Cesium.IonResource.fromAssetId(2477200);
+  const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonResource);
+  viewer.dataSources.add(geoJsonDataSource);
+
+  console.log("GeoJSON overlay loaded");
+
+  // Optionally, you can style the GeoJSON overlay
+  const geoJsonEntity = geoJsonDataSource.entities.values[0]; // Assuming there is one entity in the GeoJSON
+  geoJsonEntity.point.color = Cesium.Color.YELLOW; // Example styling
+
+  console.log("GeoJSON entity styled");
+
+  // Set the camera to view both the 3D Tileset and the GeoJSON overlay
+  const boundingVolume = Cesium.BoundingVolume.union([
+    tileset.boundingVolume,
+    geoJsonEntity.boundingVolume
+  ]);
+
+  viewer.camera.viewBoundingVolume(boundingVolume, viewer.scene.globe.ellipsoid);
+  viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+
+  console.log("Camera set to view both 3D Tileset and GeoJSON overlay");
 };
 
 initializeCesium();
