@@ -728,12 +728,8 @@ border: 1px solid black;
 
 
 .switch-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   display: flex;
   flex-direction: column;
-  z-index: 100;
 }
 
 
