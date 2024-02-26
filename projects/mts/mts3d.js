@@ -46,12 +46,12 @@ const initializeCesium = async () => {
         color: Cesium.Color.PURPLE,
         type: 'LineString'
       },
-     /*  {
-        url: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson',
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtswastewatertreatment.geojson',
         color: Cesium.Color.GREEN,
         type: 'Point'
       },
-      */
+    
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtsrail.geojson',
         color: Cesium.Color.BLUE, // Adjust color as needed
