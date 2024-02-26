@@ -1,5 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
+
 const initializeCesium = async () => {
     var viewer = new Cesium.Viewer('cesiumContainer', {
       baseLayerPicker: false,
@@ -14,64 +15,75 @@ const initializeCesium = async () => {
       animation: false,
       skyBox: false,
       skyAtmosphere: false,
-      backgroundColor: Cesium.Color.WHITE
+      backgroundColor: Cesium.Color.WHITE,
     });
-
+  
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
+  
+    // Load OpenStreetMap Buildings layer
+    const osmBuildingsProvider = new Cesium.IonImageryProvider({ assetId: 3812 });
+  
+    // Add OpenStreetMap Buildings layer
+    viewer.imageryLayers.addImageryProvider(osmBuildingsProvider);
+  
     const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
     const tilesetPrimitive = viewer.scene.primitives.add(tileset);
     await viewer.zoomTo(tileset);
-
+  
     const extras = tileset.asset.extras;
     if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
       tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
-
+  
     // Remove the satellite imagery
     viewer.imageryLayers.removeAll();
-
+  
     const geoJsonLayers = [
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
         color: Cesium.Color.RED,
         type: 'Point',
-        switchId: 'mtscsoSwitch'
+        switchId: 'mtscsoSwitch',
       },
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtsgaspipelines.geojson',
         color: Cesium.Color.PURPLE,
         type: 'LineString',
-        switchId: 'mtsgaspipelinesSwitch'
+        switchId: 'mtsgaspipelinesSwitch',
       },
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtswastewatertreatment.geojson',
         color: Cesium.Color.GREEN,
         type: 'Point',
-        switchId: 'mtswastewatertreatmentSwitch'
+        switchId: 'mtswastewatertreatmentSwitch',
       },
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtsrail.geojson',
         color: Cesium.Color.BLUE,
         type: 'LineString',
-        switchId: 'mtsrailSwitch'
+        switchId: 'mtsrailSwitch',
       },
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtsstreets.geojson',
         color: Cesium.Color.ORANGE,
         type: 'LineString',
-        switchId: 'mtsstreetsSwitch'
-      }
+        switchId: 'mtsstreetsSwitch',
+      },
     ];
-
+  
     const switchIds = geoJsonLayers.map(layer => layer.switchId);
-
+  
     // Event listener for 3D Tileset switch
     document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
       tilesetPrimitive.show = event.target.checked;
     });
 
+      // Event listener for OSM Buildings switch
+      document.getElementById('osmBuildingsSwitch').addEventListener('change', (event) => {
+        osmBuildingsLayer.show = event.target.checked;
+      });
+  
     // Event listeners for GeoJSON switches
     switchIds.forEach(switchId => {
       document.getElementById(switchId).addEventListener('change', (event) => {
@@ -81,9 +93,9 @@ const initializeCesium = async () => {
       });
     });
   };
-
+  
   initializeCesium();
-
+  
 
   
 /*
