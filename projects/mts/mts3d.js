@@ -23,28 +23,29 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
   // Load 3D Tileset 1
-  const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-  const tilesetPrimitive1 = viewer.scene.primitives.add(tileset1);
-  await viewer.zoomTo(tileset1);
+const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+const tilesetPrimitive1 = viewer.scene.primitives.add(tileset1);
+await viewer.zoomTo(tileset1);
 
-  if (Cesium.defined(tileset1.asset) && Cesium.defined(tileset1.asset.extras)) {
-    const extras1 = tileset1.asset.extras;
-    if (Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
-      tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
-    }
+if (Cesium.defined(tileset1.asset) && Cesium.defined(tileset1.asset.extras)) {
+  const extras1 = tileset1.asset.extras;
+  if (Cesium.defined(extras1) && Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
+    tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
   }
+}
 
-  // Load 3D Tileset 2
-  const tileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(2477200);
-  const tilesetPrimitive2 = viewer.scene.primitives.add(tileset2);
-  await viewer.zoomTo(tileset2);
+// Load 3D Tileset 2
+const tileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(2477200);
+const tilesetPrimitive2 = viewer.scene.primitives.add(tileset2);
+await viewer.zoomTo(tileset2);
 
-  if (Cesium.defined(tileset2.asset) && Cesium.defined(tileset2.asset.extras)) {
-    const extras2 = tileset2.asset.extras;
-    if (Cesium.defined(extras2.ion) && Cesium.defined(extras2.ion.defaultStyle)) {
-      tileset2.style = new Cesium.Cesium3DTileStyle(extras2.ion.defaultStyle);
-    }
+if (Cesium.defined(tileset2.asset) && Cesium.defined(tileset2.asset.extras)) {
+  const extras2 = tileset2.asset.extras;
+  if (Cesium.defined(extras2) && Cesium.defined(extras2.ion) && Cesium.defined(extras2.ion.defaultStyle)) {
+    tileset2.style = new Cesium.Cesium3DTileStyle(extras2.ion.defaultStyle);
   }
+}
+
 
   // Remove the satellite imagery
   viewer.imageryLayers.removeAll();
