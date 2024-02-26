@@ -1,88 +1,29 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 const initializeCesium = async () => {
     var viewer = new Cesium.Viewer('cesiumContainer', {
-      navigationInstructionsInitiallyVisible: false,
-      baseLayerPicker: false,
-      geocoder: false,
-      homeButton: false,
-      infoBox: true,
-      sceneModePicker: false,
-      selectionIndicator: false,
-      timeline: false,
-      navigationHelpButton: false,
-      fullscreenButton: false,
-      animation: false,
-      skyBox: false,
-      skyAtmosphere: false,
-      backgroundColor: Cesium.Color.WHITE
+      // Your configuration options here
     });
-  
-    // Set minimum and maximum zoom levels
+
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000;
-  
+
     try {
-      // Code from Cesium code snippet 1 (3D Tileset)
       const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
       viewer.scene.primitives.add(tileset);
       await viewer.zoomTo(tileset);
-  
-      // Apply the default style if it exists
+
       const extras = tileset.asset.extras;
-      if (
-        Cesium.defined(extras) &&
-        Cesium.defined(extras.ion) &&
-        Cesium.defined(extras.ion.defaultStyle)
-      ) {
+      if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
         tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
       }
-  
-
-      /* 
-      // Add Sentinel-2 satellite imagery
-      const sentinelImagery = viewer.imageryLayers.addImageryProvider(
-        new Cesium.IonImageryProvider({ assetId: 3954 })
-      );
-      sentinelImagery.show = false; // Initially hide the Sentinel-2 layer
-  
-      // Add OpenStreetMap imagery
-      const osmImagery = viewer.imageryLayers.addImageryProvider(
-        Cesium.createOpenStreetMapImageryProvider({
-          url: 'https://a.tile.openstreetmap.org/'
-        })
-      );
-  
-      // Bounding box around the asset
-      const boundingBoxEntity = viewer.entities.add({
-        rectangle: {
-          coordinates: Cesium.Rectangle.fromDegrees(
-
-            -73.97532,       
-40.80829,            
--73.93855,            
-40.84229
-          ),
-          outline: true,
-          outlineColor: Cesium.Color.RED,
-          height: 0,
-        },
-      });
-  
-      osmImagery.show = false; // Initially hide the OpenStreetMap layer
-
-      */
-
-
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   initializeCesium();
-  
   
 
 
