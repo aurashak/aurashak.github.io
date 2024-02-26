@@ -85,27 +85,40 @@ const initializeCesium = async () => {
 
   const switchIds = geoJsonLayers.map(layer => layer.switchId);
 
-  // Event listener for 3D Tileset switch
-  document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
+   // Event listener for 3D Tileset switch
+   document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
     tilesetPrimitive1.show = event.target.checked;
-    tilesetPrimitive2.show = event.target.checked; // Add the second tileset visibility toggle
+    tilesetPrimitive2.show = event.target.checked;
   });
 
   // Event listeners for GeoJSON switches
   switchIds.forEach(switchId => {
-    document.getElementById(switchId).addEventListener('change', (event) => {
+    document.getElementById(switchId).addEventListener('change', async (event) => {
       const layer = geoJsonLayers.find(geoJsonLayer => geoJsonLayer.switchId === switchId);
-      const dataSource = Cesium.GeoJsonDataSource.load(layer.url, {
-        stroke: layer.color,
-        markerColor: layer.color,
-      });
-      viewer.dataSources.add(dataSource);
+
+      if (event.target.checked) {
+        // Load GeoJSON and add it to the viewer
+        try {
+          const dataSource = await Cesium.GeoJsonDataSource.load(layer.url, {
+            stroke: layer.color,
+            markerColor: layer.color,
+          });
+          viewer.dataSources.add(dataSource);
+        } catch (error) {
+          console.error('Error loading GeoJSON:', error);
+        }
+      } else {
+        // Remove GeoJSON if the switch is turned off
+        const dataSource = viewer.dataSources.getByName(layer.url)[0];
+        if (dataSource) {
+          viewer.dataSources.remove(dataSource, true);
+        }
+      }
     });
   });
 };
 
 initializeCesium();
-
 
 
 /*
