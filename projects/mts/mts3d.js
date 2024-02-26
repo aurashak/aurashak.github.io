@@ -50,6 +50,16 @@ const initializeCesium = async () => {
         url: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson',
         color: Cesium.Color.GREEN,
         type: 'Point'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtsrail.geojson',
+        color: Cesium.Color.BLUE, // Adjust color as needed
+        type: 'LineString'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtsstreets.geojson',
+        color: Cesium.Color.ORANGE, // Adjust color as needed
+        type: 'LineString'
       }
     ];
 
@@ -64,7 +74,6 @@ const initializeCesium = async () => {
         } else if (entity.polyline && layer.type === 'LineString') {
           entity.polyline.material = layer.color;
         } else if (entity.point && layer.type === 'Point') {
-          // Create separate billboards for red and green points
           const billboardImage = (layer.color === Cesium.Color.RED) ? 'path/to/red-point.png' : 'path/to/green-point.png';
           viewer.entities.add({
             position: entity.position.getValue(),
