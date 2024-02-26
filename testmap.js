@@ -12,33 +12,38 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 openstreetmapLayer.addTo(map);
 
-// GeoJSON Layer - Remediation Sites
-var geojsonLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
+// GeoJSON Layer - Remediation Sites (Polygons)
+var remediationSitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
     style: function (feature) {
         return {
-            fillColor: 'green', // Set your desired fill color
-            color: 'black',    // Set your desired border color
-            weight: 2,          // Set the border weight
-            opacity: 1          // Set the opacity
+            fillColor: 'green',
+            color: 'black',
+            weight: 2,
+            opacity: 1
         };
     }
 });
 
-geojsonLayer.addTo(map);
+remediationSitesLayer.addTo(map);
+
+// GeoJSON Layer - Streets (Lines)
+var streetsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/mtsstreets.geojson', {
+    style: function (feature) {
+        return {
+            color: 'blue',   // Set your desired line color
+            weight: 2,       // Set the line weight
+            opacity: 1       // Set the line opacity
+        };
+    }
+});
+
+streetsLayer.addTo(map);
 
 // Console log for debugging
-geojsonLayer.on('data:loaded', function () {
-    console.log('GeoJSON data loaded successfully.');
+remediationSitesLayer.on('data:loaded', function () {
+    console.log('Remediation sites GeoJSON data loaded successfully.');
 });
 
-geojsonLayer.on('data:loading', function () {
-    console.log('Loading GeoJSON data...');
-});
-
-geojsonLayer.on('data:progress', function (e) {
-    console.log('Loading progress:', e.processed, '/', e.total);
-});
-
-geojsonLayer.on('data:error', function (e) {
-    console.error('Error loading GeoJSON data:', e.error);
+streetsLayer.on('data:loaded', function () {
+    console.log('Streets GeoJSON data loaded successfully.');
 });
