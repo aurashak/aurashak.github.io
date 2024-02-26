@@ -18,6 +18,16 @@ const initializeCesium = async () => {
       if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
         tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
       }
+
+      // Remove the satellite imagery
+      viewer.imageryLayers.removeAll();
+
+      // Add OpenStreetMap imagery
+      const osmImagery = viewer.imageryLayers.addImageryProvider(
+        Cesium.createOpenStreetMapImageryProvider({
+          url: 'https://a.tile.openstreetmap.org/'
+        })
+      );
     } catch (error) {
       console.log(error);
     }
