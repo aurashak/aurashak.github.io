@@ -21,12 +21,7 @@ const initializeCesium = async () => {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
   
-    // Load OpenStreetMap Buildings layer
-    const osmBuildingsProvider = new Cesium.IonImageryProvider({ assetId: 3812 });
-  
-    // Add OpenStreetMap Buildings layer
-    viewer.imageryLayers.addImageryProvider(osmBuildingsProvider);
-  
+    // Load and add the 3D Tileset
     const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
     const tilesetPrimitive = viewer.scene.primitives.add(tileset);
     await viewer.zoomTo(tileset);
@@ -36,9 +31,25 @@ const initializeCesium = async () => {
       tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
   
-    // Remove the satellite imagery
+    // Remove all layers except for the 3D Tileset
     viewer.imageryLayers.removeAll();
+    viewer.dataSources.removeAll();
+
+    // Add OpenStreetMap Buildings layer initially
+    const osmBuildingsProvider = new Cesium.IonImageryProvider({ assetId: 3812 });
+    const osmBuildingsLayer = viewer.imageryLayers.addImageryProvider(osmBuildingsProvider);
   
+    // Event listener for 3D Tileset switch
+    document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
+      tilesetPrimitive.show = event.target.checked;
+    });
+
+    // Event listener for OSM Buildings switch
+    document.getElementById('osmBuildingsSwitch').addEventListener('change', (event) => {
+      osmBuildingsLayer.show = event.target.checked;
+    });
+
+    // Event listeners for GeoJSON switches
     const geoJsonLayers = [
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
@@ -71,31 +82,26 @@ const initializeCesium = async () => {
         switchId: 'mtsstreetsSwitch',
       },
     ];
-  
-    const switchIds = geoJsonLayers.map(layer => layer.switchId);
-  
-    // Event listener for 3D Tileset switch
-    document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
-      tilesetPrimitive.show = event.target.checked;
-    });
 
-      // Event listener for OSM Buildings switch
-      document.getElementById('osmBuildingsSwitch').addEventListener('change', (event) => {
-        osmBuildingsLayer.show = event.target.checked;
+    geoJsonLayers.forEach(layer => {
+      const dataSourcePromise = Cesium.GeoJsonDataSource.load(layer.url, {
+        stroke: layer.color,
+        markerSymbol: layer.type === 'Point' ? 'pin' : undefined,
       });
-  
-    // Event listeners for GeoJSON switches
-    switchIds.forEach(switchId => {
-      document.getElementById(switchId).addEventListener('change', (event) => {
-        const layer = geoJsonLayers.find(geoJsonLayer => geoJsonLayer.switchId === switchId);
-        const dataSource = viewer.dataSources.getByName(layer.url)[0];
-        dataSource.show = event.target.checked;
+      dataSourcePromise.then((dataSource) => {
+        dataSource.show = false; // Initially hide the layer
+        viewer.dataSources.add(dataSource);
+
+        // Event listener for GeoJSON switches
+        document.getElementById(layer.switchId).addEventListener('change', (event) => {
+          dataSource.show = event.target.checked;
+        });
       });
     });
-  };
-  
-  initializeCesium();
-  
+};
+
+initializeCesium();
+
 
   
 /*
