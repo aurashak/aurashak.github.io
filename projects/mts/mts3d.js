@@ -22,12 +22,6 @@ const initializeCesium = async () => {
       // Remove the satellite imagery
       viewer.imageryLayers.removeAll();
 
-      // Add OpenStreetMap imagery
-      const osmImagery = viewer.imageryLayers.addImageryProvider(
-        Cesium.createOpenStreetMapImageryProvider({
-          url: 'https://a.tile.openstreetmap.org/'
-        })
-      );
     } catch (error) {
       console.log(error);
     }
