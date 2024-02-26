@@ -1,6 +1,7 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 const initializeCesium = async () => {
   var viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -70,17 +71,12 @@ const initializeCesium = async () => {
       // Apply styling
       geoJsonDataSource.entities.values.forEach(entity => {
         if (entity.polygon && layer.type === 'Polygon') {
-          entity.polygon.material = new Cesium.ColorMaterialProperty(layer.color);
+          entity.polygon.material = Cesium.ColorMaterialProperty.fromColor(layer.color);
         } else if (entity.polyline && layer.type === 'LineString') {
-          entity.polyline.material = new Cesium.ColorMaterialProperty(layer.color);
+          entity.polyline.material = Cesium.ColorMaterialProperty.fromColor(layer.color);
         } else if (entity.point && layer.type === 'Point') {
-          const billboardImage = (layer.color === Cesium.Color.RED) ? 'path/to/red-point.png' : 'path/to/green-point.png';
-          entity.billboard = new Cesium.BillboardGraphics({
-            image: billboardImage,
-            color: layer.color,
-            scale: 1.0,
-            verticalOrigin: Cesium.VerticalOrigin.BOTTOM
-          });
+          entity.point.pixelSize = 10; // Adjust point size as needed
+          entity.point.color = Cesium.ColorMaterialProperty.fromColor(layer.color);
         }
       });
     });
@@ -90,6 +86,7 @@ const initializeCesium = async () => {
 };
 
 initializeCesium();
+
 
 
 
