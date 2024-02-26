@@ -65,20 +65,11 @@ const initializeCesium = async () => {
           entity.polyline.material = layer.color;
         } else if (entity.point && layer.type === 'Point') {
           // Create separate billboards for red and green points
+          const billboardImage = (layer.color === Cesium.Color.RED) ? 'path/to/red-point.png' : 'path/to/green-point.png';
           viewer.entities.add({
             position: entity.position.getValue(),
             billboard: {
-              image: 'path/to/red-point.png', // Replace with the path to your red point image
-              color: layer.color,
-              scale: 1.0,
-              verticalOrigin: Cesium.VerticalOrigin.BOTTOM
-            }
-          });
-
-          viewer.entities.add({
-            position: entity.position.getValue(),
-            billboard: {
-              image: 'path/to/green-point.png', // Replace with the path to your green point image
+              image: billboardImage,
               color: layer.color,
               scale: 1.0,
               verticalOrigin: Cesium.VerticalOrigin.BOTTOM
@@ -93,6 +84,7 @@ const initializeCesium = async () => {
 };
 
 initializeCesium();
+
 
 
 /*
