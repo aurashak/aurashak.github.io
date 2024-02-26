@@ -2,86 +2,98 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-      baseLayerPicker: false,
-      geocoder: false,
-      homeButton: false,
-      infoBox: true,
-      sceneModePicker: false,
-      selectionIndicator: false,
-      timeline: false,
-      navigationHelpButton: false,
-      fullscreenButton: false,
-      animation: false,
-      skyBox: false,
-      skyAtmosphere: false,
-      backgroundColor: Cesium.Color.WHITE
-    });
-  
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-  
-    try {
-      const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-      viewer.scene.primitives.add(tileset);
-      await viewer.zoomTo(tileset);
-  
-      const extras = tileset.asset.extras;
-      if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-        tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-      }
-  
-      // Remove the satellite imagery
-      viewer.imageryLayers.removeAll();
-  
-      // Add GeoJSON layers with styling
-      const geoJsonLayers = [
-        {
-          url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
-          color: Cesium.Color.RED,
-          type: 'Point'
-        },
-        {
-          url: 'https://aurashak.github.io/geojson/nyc/mtsgaspipelines.geojson',
-          color: Cesium.Color.PURPLE,
-          type: 'LineString'
-        },
-        {
-          url: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson',
-          color: Cesium.Color.GREEN,
-          type: 'Point'
-        }
-      ];
-  
-      geoJsonLayers.forEach(async (layer) => {
-        const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(layer.url);
-        viewer.dataSources.add(geoJsonDataSource);
-  
-        // Apply styling
-        geoJsonDataSource.entities.values.forEach(entity => {
-          if (entity.polygon && layer.type === 'Polygon') {
-            entity.polygon.material = layer.color;
-          } else if (entity.polyline && layer.type === 'LineString') {
-            entity.polyline.material = layer.color;
-          } else if (entity.point && layer.type === 'Point') {
-            // Create a new point entity with the desired styling
-            viewer.entities.add({
-              position: entity.position.getValue(), // Copy position from GeoJSON point
-              point: {
-                color: layer.color,
-                pixelSize: 10 // Adjust point size as needed
-              }
-            });
-          }
-        });
-      });
-    } catch (error) {
-      console.log(error);
+  var viewer = new Cesium.Viewer('cesiumContainer', {
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
+  });
+
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+
+  try {
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+    viewer.scene.primitives.add(tileset);
+    await viewer.zoomTo(tileset);
+
+    const extras = tileset.asset.extras;
+    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
-  };
-  
-  initializeCesium();
-  
+
+    // Remove the satellite imagery
+    viewer.imageryLayers.removeAll();
+
+    // Add GeoJSON layers with styling
+    const geoJsonLayers = [
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
+        color: Cesium.Color.RED,
+        type: 'Point'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtsgaspipelines.geojson',
+        color: Cesium.Color.PURPLE,
+        type: 'LineString'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson',
+        color: Cesium.Color.GREEN,
+        type: 'Point'
+      }
+    ];
+
+    geoJsonLayers.forEach(async (layer) => {
+      const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(layer.url);
+      viewer.dataSources.add(geoJsonDataSource);
+
+      // Apply styling
+      geoJsonDataSource.entities.values.forEach(entity => {
+        if (entity.polygon && layer.type === 'Polygon') {
+          entity.polygon.material = layer.color;
+        } else if (entity.polyline && layer.type === 'LineString') {
+          entity.polyline.material = layer.color;
+        } else if (entity.point && layer.type === 'Point') {
+          // Create separate billboards for red and green points
+          viewer.entities.add({
+            position: entity.position.getValue(),
+            billboard: {
+              image: 'path/to/red-point.png', // Replace with the path to your red point image
+              color: layer.color,
+              scale: 1.0,
+              verticalOrigin: Cesium.VerticalOrigin.BOTTOM
+            }
+          });
+
+          viewer.entities.add({
+            position: entity.position.getValue(),
+            billboard: {
+              image: 'path/to/green-point.png', // Replace with the path to your green point image
+              color: layer.color,
+              scale: 1.0,
+              verticalOrigin: Cesium.VerticalOrigin.BOTTOM
+            }
+          });
+        }
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+initializeCesium();
+
 
 /*
 
