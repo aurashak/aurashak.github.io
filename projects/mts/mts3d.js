@@ -37,8 +37,8 @@ const initializeCesium = async () => {
 
     // Add OpenStreetMap Buildings layer initially
     const osmBuildingsProvider = new Cesium.IonImageryProvider({ assetId: 3812 });
-    const osmBuildingsLayer = viewer.imageryLayers.addImageryProvider(osmBuildingsProvider);
-  
+    viewer.imageryLayers.addImageryProvider(osmBuildingsProvider);
+
     // Event listener for 3D Tileset switch
     document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
       tilesetPrimitive.show = event.target.checked;
@@ -46,7 +46,7 @@ const initializeCesium = async () => {
 
     // Event listener for OSM Buildings switch
     document.getElementById('osmBuildingsSwitch').addEventListener('change', (event) => {
-      osmBuildingsLayer.show = event.target.checked;
+      viewer.imageryLayers.get(0).show = event.target.checked; // Assuming OSM Buildings is the first layer
     });
 
     // Event listeners for GeoJSON switches
@@ -84,23 +84,22 @@ const initializeCesium = async () => {
     ];
 
     geoJsonLayers.forEach(layer => {
-      const dataSourcePromise = Cesium.GeoJsonDataSource.load(layer.url, {
+      const dataSource = await Cesium.GeoJsonDataSource.load(layer.url, {
         stroke: layer.color,
         markerSymbol: layer.type === 'Point' ? 'pin' : undefined,
       });
-      dataSourcePromise.then((dataSource) => {
-        dataSource.show = false; // Initially hide the layer
-        viewer.dataSources.add(dataSource);
+      dataSource.show = false; // Initially hide the layer
+      viewer.dataSources.add(dataSource);
 
-        // Event listener for GeoJSON switches
-        document.getElementById(layer.switchId).addEventListener('change', (event) => {
-          dataSource.show = event.target.checked;
-        });
+      // Event listener for GeoJSON switches
+      document.getElementById(layer.switchId).addEventListener('change', (event) => {
+        dataSource.show = event.target.checked;
       });
     });
 };
 
 initializeCesium();
+
 
 
   
