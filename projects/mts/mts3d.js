@@ -1,7 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 const initializeCesium = async () => {
   var viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -48,7 +47,7 @@ const initializeCesium = async () => {
         type: 'LineString'
       },
       {
-        url: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson',
+        url: 'https://aurashak.github.io/geojson/nyc/mtswastewatertreatment.geojson',
         color: Cesium.Color.GREEN,
         type: 'Point'
       },
@@ -64,19 +63,26 @@ const initializeCesium = async () => {
       }
     ];
 
-    geoJsonLayers.forEach(async (layer) => {
+    // Array to store loaded GeoJSON data sources
+    const geoJsonDataSources = [];
+
+    // Load all GeoJSON data sources asynchronously
+    await Promise.all(geoJsonLayers.map(async (layer) => {
       const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(layer.url);
       viewer.dataSources.add(geoJsonDataSource);
+      geoJsonDataSources.push({ dataSource: geoJsonDataSource, type: layer.type, color: layer.color });
+    }));
 
-      // Apply styling
-      geoJsonDataSource.entities.values.forEach(entity => {
-        if (entity.polygon && layer.type === 'Polygon') {
-          entity.polygon.material = Cesium.ColorMaterialProperty.fromColor(layer.color);
-        } else if (entity.polyline && layer.type === 'LineString') {
-          entity.polyline.material = Cesium.ColorMaterialProperty.fromColor(layer.color);
-        } else if (entity.point && layer.type === 'Point') {
+    // Apply styling after all data sources are loaded
+    geoJsonDataSources.forEach(({ dataSource, type, color }) => {
+      dataSource.entities.values.forEach(entity => {
+        if (entity.polygon && type === 'Polygon') {
+          entity.polygon.material = Cesium.ColorMaterialProperty.fromColor(color);
+        } else if (entity.polyline && type === 'LineString') {
+          entity.polyline.material = Cesium.ColorMaterialProperty.fromColor(color);
+        } else if (entity.point && type === 'Point') {
           entity.point.pixelSize = 10; // Adjust point size as needed
-          entity.point.color = Cesium.ColorMaterialProperty.fromColor(layer.color);
+          entity.point.color = Cesium.ColorMaterialProperty.fromColor(color);
         }
       });
     });
@@ -86,8 +92,6 @@ const initializeCesium = async () => {
 };
 
 initializeCesium();
-
-
 
 
 /*
