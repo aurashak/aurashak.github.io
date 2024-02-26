@@ -46,7 +46,8 @@ const initializeCesium = async () => {
   // Remove the satellite imagery
   viewer.imageryLayers.removeAll();
 
-  const geoJsonLayers = [
+  // Add GeoJSON layers with styling
+const geoJsonLayers = [
     {
       url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
       color: Cesium.Color.RED,
@@ -78,24 +79,27 @@ const initializeCesium = async () => {
       switchId: 'mtsstreetsSwitch'
     }
   ];
-
+  
   const switchIds = geoJsonLayers.map(layer => layer.switchId);
-
+  
   // Event listener for 3D Tileset switch
   document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
     tilesetPrimitive1.show = event.target.checked;
     tilesetPrimitive2.show = event.target.checked; // Add the second tileset visibility toggle
   });
-
+  
   // Event listeners for GeoJSON switches
   switchIds.forEach(switchId => {
     document.getElementById(switchId).addEventListener('change', (event) => {
       const layer = geoJsonLayers.find(geoJsonLayer => geoJsonLayer.switchId === switchId);
-      const dataSource = viewer.dataSources.getByName(layer.url)[0];
-      dataSource.show = event.target.checked;
+      const dataSource = Cesium.GeoJsonDataSource.load(layer.url, {
+        stroke: layer.color,
+        markerColor: layer.color,
+      });
+      viewer.dataSources.add(dataSource);
     });
   });
-};
+  
 
 initializeCesium();
 
