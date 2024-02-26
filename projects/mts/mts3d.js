@@ -83,7 +83,7 @@ const initializeCesium = async () => {
       },
     ];
 
-    geoJsonLayers.forEach(layer => {
+    for (const layer of geoJsonLayers) {
       const dataSource = await Cesium.GeoJsonDataSource.load(layer.url, {
         stroke: layer.color,
         markerSymbol: layer.type === 'Point' ? 'pin' : undefined,
@@ -95,10 +95,11 @@ const initializeCesium = async () => {
       document.getElementById(layer.switchId).addEventListener('change', (event) => {
         dataSource.show = event.target.checked;
       });
-    });
+    }
 };
 
 initializeCesium();
+
 
 
 
