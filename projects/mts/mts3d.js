@@ -40,6 +40,8 @@ const initializeCesium = async () => {
         tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
       }
   
+
+      /* 
       // Add Sentinel-2 satellite imagery
       const sentinelImagery = viewer.imageryLayers.addImageryProvider(
         new Cesium.IonImageryProvider({ assetId: 3954 })
@@ -70,6 +72,10 @@ const initializeCesium = async () => {
       });
   
       osmImagery.show = false; // Initially hide the OpenStreetMap layer
+
+      */
+
+
     } catch (error) {
       console.log(error);
     }
