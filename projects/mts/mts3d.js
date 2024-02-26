@@ -47,11 +47,10 @@ const initializeCesium = async () => {
         type: 'LineString'
       },
       {
-        url: 'https://aurashak.github.io/geojson/nyc/mtswastewatertreatment.geojson',
+        url: 'https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson',
         color: Cesium.Color.GREEN,
         type: 'Point'
       },
-    
       {
         url: 'https://aurashak.github.io/geojson/nyc/mtsrail.geojson',
         color: Cesium.Color.BLUE, // Adjust color as needed
@@ -71,19 +70,16 @@ const initializeCesium = async () => {
       // Apply styling
       geoJsonDataSource.entities.values.forEach(entity => {
         if (entity.polygon && layer.type === 'Polygon') {
-          entity.polygon.material = layer.color;
+          entity.polygon.material = new Cesium.ColorMaterialProperty(layer.color);
         } else if (entity.polyline && layer.type === 'LineString') {
-          entity.polyline.material = layer.color;
+          entity.polyline.material = new Cesium.ColorMaterialProperty(layer.color);
         } else if (entity.point && layer.type === 'Point') {
           const billboardImage = (layer.color === Cesium.Color.RED) ? 'path/to/red-point.png' : 'path/to/green-point.png';
-          viewer.entities.add({
-            position: entity.position.getValue(),
-            billboard: {
-              image: billboardImage,
-              color: layer.color,
-              scale: 1.0,
-              verticalOrigin: Cesium.VerticalOrigin.BOTTOM
-            }
+          entity.billboard = new Cesium.BillboardGraphics({
+            image: billboardImage,
+            color: layer.color,
+            scale: 1.0,
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM
           });
         }
       });
