@@ -1,127 +1,91 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
-
-
 const initializeCesium = async () => {
-  var viewer = new Cesium.Viewer('cesiumContainer', {
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
-  });
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      baseLayerPicker: false,
+      geocoder: false,
+      homeButton: false,
+      infoBox: true,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      animation: false,
+      skyBox: false,
+      skyAtmosphere: false,
+      backgroundColor: Cesium.Color.WHITE
+    });
 
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-// Load 3D Tileset 1
-const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-const tilesetPrimitive1 = viewer.scene.primitives.add(tileset1);
-await viewer.zoomTo(tileset1);
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+    const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+    await viewer.zoomTo(tileset);
 
-handleTilesetExtras(tileset1);
-
-// Load 3D Tileset 2
-const tileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(2477200);
-const tilesetPrimitive2 = viewer.scene.primitives.add(tileset2);
-await viewer.zoomTo(tileset2);
-
-handleTilesetExtras(tileset2);
-
-function handleTilesetExtras(tileset) {
-  if (Cesium.defined(tileset.asset) && Cesium.defined(tileset.asset.extras)) {
     const extras = tileset.asset.extras;
-    if (Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
       tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
-  }
-}
 
+    // Remove the satellite imagery
+    viewer.imageryLayers.removeAll();
 
-
-  // Remove the satellite imagery
-  viewer.imageryLayers.removeAll();
-
-  // Add GeoJSON layers with styling
-  const geoJsonLayers = [
-    {
-      url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
-      color: Cesium.Color.RED,
-      type: 'Point',
-      switchId: 'mtscsoSwitch'
-    },
-    {
-      url: 'https://aurashak.github.io/geojson/nyc/mtsgaspipelines.geojson',
-      color: Cesium.Color.PURPLE,
-      type: 'LineString',
-      switchId: 'mtsgaspipelinesSwitch'
-    },
-    {
-      url: 'https://aurashak.github.io/geojson/nyc/mtswastewatertreatment.geojson',
-      color: Cesium.Color.GREEN,
-      type: 'Point',
-      switchId: 'mtswastewatertreatmentSwitch'
-    },
-    {
-      url: 'https://aurashak.github.io/geojson/nyc/mtsrail.geojson',
-      color: Cesium.Color.BLUE,
-      type: 'LineString',
-      switchId: 'mtsrailSwitch'
-    },
-    {
-      url: 'https://aurashak.github.io/geojson/nyc/mtsstreets.geojson',
-      color: Cesium.Color.ORANGE,
-      type: 'LineString',
-      switchId: 'mtsstreetsSwitch'
-    }
-  ];
-
-  const switchIds = geoJsonLayers.map(layer => layer.switchId);
-
-   // Event listener for 3D Tileset switch
-   document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
-    tilesetPrimitive1.show = event.target.checked;
-    tilesetPrimitive2.show = event.target.checked;
-  });
-
-  // Event listeners for GeoJSON switches
-  switchIds.forEach(switchId => {
-    document.getElementById(switchId).addEventListener('change', async (event) => {
-      const layer = geoJsonLayers.find(geoJsonLayer => geoJsonLayer.switchId === switchId);
-
-      if (event.target.checked) {
-        // Load GeoJSON and add it to the viewer
-        try {
-          const dataSource = await Cesium.GeoJsonDataSource.load(layer.url, {
-            stroke: layer.color,
-            markerColor: layer.color,
-          });
-          viewer.dataSources.add(dataSource);
-        } catch (error) {
-          console.error('Error loading GeoJSON:', error);
-        }
-      } else {
-        // Remove GeoJSON if the switch is turned off
-        const dataSource = viewer.dataSources.getByName(layer.url)[0];
-        if (dataSource) {
-          viewer.dataSources.remove(dataSource, true);
-        }
+    const geoJsonLayers = [
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
+        color: Cesium.Color.RED,
+        type: 'Point',
+        switchId: 'mtscsoSwitch'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtsgaspipelines.geojson',
+        color: Cesium.Color.PURPLE,
+        type: 'LineString',
+        switchId: 'mtsgaspipelinesSwitch'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtswastewatertreatment.geojson',
+        color: Cesium.Color.GREEN,
+        type: 'Point',
+        switchId: 'mtswastewatertreatmentSwitch'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtsrail.geojson',
+        color: Cesium.Color.BLUE,
+        type: 'LineString',
+        switchId: 'mtsrailSwitch'
+      },
+      {
+        url: 'https://aurashak.github.io/geojson/nyc/mtsstreets.geojson',
+        color: Cesium.Color.ORANGE,
+        type: 'LineString',
+        switchId: 'mtsstreetsSwitch'
       }
+    ];
+
+    const switchIds = geoJsonLayers.map(layer => layer.switchId);
+
+    // Event listener for 3D Tileset switch
+    document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
+      tilesetPrimitive.show = event.target.checked;
     });
-  });
-};
 
-initializeCesium();
+    // Event listeners for GeoJSON switches
+    switchIds.forEach(switchId => {
+      document.getElementById(switchId).addEventListener('change', (event) => {
+        const layer = geoJsonLayers.find(geoJsonLayer => geoJsonLayer.switchId === switchId);
+        const dataSource = viewer.dataSources.getByName(layer.url)[0];
+        dataSource.show = event.target.checked;
+      });
+    });
+  };
+
+  initializeCesium();
 
 
+  
 /*
 
 const viewer = new Cesium.Viewer('cesiumContainer');
