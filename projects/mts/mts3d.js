@@ -1,25 +1,26 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 const initializeCesium = async () => {
     var viewer = new Cesium.Viewer('cesiumContainer', {
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
-        animation: false,
-        skyBox: false,
-        skyAtmosphere: false,
-        backgroundColor: Cesium.Color.WHITE
-      });
+      baseLayerPicker: false,
+      geocoder: false,
+      homeButton: false,
+      infoBox: true,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      animation: false,
+      skyBox: false,
+      skyAtmosphere: false,
+      backgroundColor: Cesium.Color.WHITE
+    });
 
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
     try {
       const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
@@ -34,14 +35,16 @@ const initializeCesium = async () => {
       // Remove the satellite imagery
       viewer.imageryLayers.removeAll();
 
+      // Add GeoJSON layer
+      const geoJsonUrl = 'https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson';
+      const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonUrl);
+      viewer.dataSources.add(geoJsonDataSource);
     } catch (error) {
       console.log(error);
     }
   };
 
   initializeCesium();
-  
-
 
 
 /*
