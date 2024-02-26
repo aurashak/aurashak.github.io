@@ -42,7 +42,7 @@ const initializeCesium = async () => {
           type: 'Point'
         },
         {
-          url: 'https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson',
+          url: 'https://aurashak.github.io/geojson/nyc/mtsgaspipelines.geojson',
           color: Cesium.Color.PURPLE,
           type: 'LineString'
         },
