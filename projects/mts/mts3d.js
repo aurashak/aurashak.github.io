@@ -2,7 +2,6 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 
-
 const initializeCesium = async () => {
   var viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -23,31 +22,35 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-  // Add the first 3D Tileset
+  // Load 3D Tileset 1
   const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
   const tilesetPrimitive1 = viewer.scene.primitives.add(tileset1);
   await viewer.zoomTo(tileset1);
 
-  const extras1 = tileset1.asset.extras;
-  if (Cesium.defined(extras1) && Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
-    tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
+  if (Cesium.defined(tileset1.asset) && Cesium.defined(tileset1.asset.extras)) {
+    const extras1 = tileset1.asset.extras;
+    if (Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
+      tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
+    }
   }
 
-  // Add the second 3D Tileset
+  // Load 3D Tileset 2
   const tileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(2477200);
   const tilesetPrimitive2 = viewer.scene.primitives.add(tileset2);
   await viewer.zoomTo(tileset2);
 
-  const extras2 = tileset2.asset.extras;
-  if (Cesium.defined(extras2) && Cesium.defined(extras2.ion) && Cesium.defined(extras2.ion.defaultStyle)) {
-    tileset2.style = new Cesium.Cesium3DTileStyle(extras2.ion.defaultStyle);
+  if (Cesium.defined(tileset2.asset) && Cesium.defined(tileset2.asset.extras)) {
+    const extras2 = tileset2.asset.extras;
+    if (Cesium.defined(extras2.ion) && Cesium.defined(extras2.ion.defaultStyle)) {
+      tileset2.style = new Cesium.Cesium3DTileStyle(extras2.ion.defaultStyle);
+    }
   }
 
   // Remove the satellite imagery
   viewer.imageryLayers.removeAll();
 
   // Add GeoJSON layers with styling
-const geoJsonLayers = [
+  const geoJsonLayers = [
     {
       url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
       color: Cesium.Color.RED,
@@ -79,15 +82,15 @@ const geoJsonLayers = [
       switchId: 'mtsstreetsSwitch'
     }
   ];
-  
+
   const switchIds = geoJsonLayers.map(layer => layer.switchId);
-  
+
   // Event listener for 3D Tileset switch
   document.getElementById('3dTileSwitch').addEventListener('change', (event) => {
     tilesetPrimitive1.show = event.target.checked;
     tilesetPrimitive2.show = event.target.checked; // Add the second tileset visibility toggle
   });
-  
+
   // Event listeners for GeoJSON switches
   switchIds.forEach(switchId => {
     document.getElementById(switchId).addEventListener('change', (event) => {
@@ -99,7 +102,7 @@ const geoJsonLayers = [
       viewer.dataSources.add(dataSource);
     });
   });
-  
+};
 
 initializeCesium();
 
