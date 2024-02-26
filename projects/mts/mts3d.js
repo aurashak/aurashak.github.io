@@ -1,7 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 const initializeCesium = async () => {
     var viewer = new Cesium.Viewer('cesiumContainer', {
       baseLayerPicker: false,
@@ -35,17 +34,47 @@ const initializeCesium = async () => {
       // Remove the satellite imagery
       viewer.imageryLayers.removeAll();
 
-      // Add GeoJSON layer
-      const geoJsonUrl = 'https://aurashak.github.io/geojson/nyc/citywideoutfalls.geojson';
-      const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonUrl);
-      viewer.dataSources.add(geoJsonDataSource);
+      // Add GeoJSON layers with styling
+      const geoJsonLayers = [
+        {
+          url: 'https://aurashak.github.io/geojson/nyc/mtscso.geojson',
+          color: Cesium.Color.RED,
+          type: 'Point'
+        },
+        {
+          url: 'https://aurashak.github.io/geojson/nyc/nygaspipelines.geojson',
+          color: Cesium.Color.PURPLE,
+          type: 'LineString'
+        },
+        {
+          url: 'https://aurashak.github.io/geojson/nyc/nycwaste.geojson',
+          color: Cesium.Color.GREEN,
+          type: 'Point'
+        }
+      ];
+
+      geoJsonLayers.forEach(async (layer) => {
+        const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(layer.url);
+        viewer.dataSources.add(geoJsonDataSource);
+
+        // Apply styling
+        geoJsonDataSource.entities.values.forEach(entity => {
+          if (entity.polygon && layer.type === 'Polygon') {
+            entity.polygon.material = layer.color;
+          } else if (entity.polyline && layer.type === 'LineString') {
+            entity.polyline.material = layer.color;
+          } else if (entity.point && layer.type === 'Point') {
+            entity.point.color = layer.color;
+            entity.point.pixelSize = 10; // Adjust point size as needed
+          }
+        });
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
   initializeCesium();
-
 
 /*
 
