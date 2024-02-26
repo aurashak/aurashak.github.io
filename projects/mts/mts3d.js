@@ -17,23 +17,23 @@ const initializeCesium = async () => {
       skyAtmosphere: false,
       backgroundColor: Cesium.Color.WHITE
     });
-
+  
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
+  
     try {
       const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
       viewer.scene.primitives.add(tileset);
       await viewer.zoomTo(tileset);
-
+  
       const extras = tileset.asset.extras;
       if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
         tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
       }
-
+  
       // Remove the satellite imagery
       viewer.imageryLayers.removeAll();
-
+  
       // Add GeoJSON layers with styling
       const geoJsonLayers = [
         {
@@ -52,11 +52,11 @@ const initializeCesium = async () => {
           type: 'Point'
         }
       ];
-
+  
       geoJsonLayers.forEach(async (layer) => {
         const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(layer.url);
         viewer.dataSources.add(geoJsonDataSource);
-
+  
         // Apply styling
         geoJsonDataSource.entities.values.forEach(entity => {
           if (entity.polygon && layer.type === 'Polygon') {
@@ -64,8 +64,14 @@ const initializeCesium = async () => {
           } else if (entity.polyline && layer.type === 'LineString') {
             entity.polyline.material = layer.color;
           } else if (entity.point && layer.type === 'Point') {
-            entity.point.color = layer.color;
-            entity.point.pixelSize = 10; // Adjust point size as needed
+            // Create a new point entity with the desired styling
+            viewer.entities.add({
+              position: entity.position.getValue(), // Copy position from GeoJSON point
+              point: {
+                color: layer.color,
+                pixelSize: 10 // Adjust point size as needed
+              }
+            });
           }
         });
       });
@@ -73,8 +79,9 @@ const initializeCesium = async () => {
       console.log(error);
     }
   };
-
+  
   initializeCesium();
+  
 
 /*
 
