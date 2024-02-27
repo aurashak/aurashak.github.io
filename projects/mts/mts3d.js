@@ -94,4 +94,3 @@ const initializeCesium = async () => {
   
   // Call the initializeCesium function
   initializeCesium();
-  
