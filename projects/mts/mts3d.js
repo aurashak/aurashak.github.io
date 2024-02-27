@@ -44,27 +44,28 @@ const initializeCesium = async () => {
       tileset.show = event.target.checked;
     });
   
-    // Function to load and toggle GeoJSON layers
-    const loadGeoJSONLayer = async (assetId, labelText) => {
+    // Function to load and toggle GeoJSON layer for MTS Streets
+    const loadMTSStreetsGeoJSONLayer = async () => {
       try {
-        // Load GeoJSON data
-        const resource = await Cesium.IonResource.fromAssetId(assetId);
+        // Load GeoJSON data for MTS Streets
+        const resource = await Cesium.IonResource.fromAssetId(2477200);
         const dataSource = await Cesium.GeoJsonDataSource.load(resource);
         viewer.dataSources.add(dataSource);
   
-        // Log that the GeoJSON layer is loaded
-        console.log(`${labelText} GeoJSON loaded.`);
+        // Create a switch for MTS Streets GeoJSON layer
+        const mtsStreetsSwitch = document.getElementById('mtsStreetsSwitch');
+        mtsStreetsSwitch.addEventListener('change', async (event) => {
+          await dataSource.when();
+          dataSource.show = event.target.checked;
+          console.log(`MTS Streets GeoJSON switch:`, event.target.checked);
+        });
       } catch (error) {
-        console.error(`Error loading ${labelText} GeoJSON:`, error);
+        console.error(`Error loading MTS Streets GeoJSON:`, error);
       }
     };
   
-    // Load GeoJSON layers without switches
-    loadGeoJSONLayer(2477200, 'MTS Streets GeoJSON');
-    loadGeoJSONLayer(2477557, 'mtsparks GeoJSON');
-    loadGeoJSONLayer(2477597, 'mtscso GeoJSON');
-    loadGeoJSONLayer(2477584, 'MTSGasPipelines GeoJSON');
-    loadGeoJSONLayer(2477618, 'mtsrail GeoJSON');
+    // Load and toggle MTS Streets GeoJSON layer with switch
+    loadMTSStreetsGeoJSONLayer();
   };
   
   // Call the initializeCesium function
