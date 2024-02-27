@@ -1,7 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 const initializeCesium = async () => {
   const viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -60,7 +59,7 @@ const initializeCesium = async () => {
       document.body.appendChild(layerSwitchContainer);
 
       layerSwitch.addEventListener('change', async (event) => {
-        await dataSource.readyPromise;
+        await dataSource.when();
         dataSource.show = event.target.checked;
         console.log(`${labelText} GeoJSON switch:`, event.target.checked);
       });
@@ -69,9 +68,8 @@ const initializeCesium = async () => {
     }
   };
 
-  // Corrected assetId for 'mtsgaspipelinesSwitch'
-  loadGeoJSONLayer(2477586, 'mtsgaspipelinesSwitch', 'MTSGasPipelines GeoJSON');
-  loadGeoJSONLayer(2477585, 'mtsparksSwitch', 'mtsparks GeoJSON');
+  loadGeoJSONLayer(2477200, 'streetsSwitch', 'MTS Streets GeoJSON');
+  loadGeoJSONLayer(2477584, 'mtsparksSwitch', 'mtsparks GeoJSON');
   loadGeoJSONLayer(2477597, 'mtscsoSwitch', 'mtscso GeoJSON');
   loadGeoJSONLayer(2477584, 'mtsgaspipelinesSwitch', 'MTSGasPipelines GeoJSON');
   loadGeoJSONLayer(2477618, 'mtsrailSwitch', 'mtsrail GeoJSON');
