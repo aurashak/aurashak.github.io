@@ -102,7 +102,7 @@ const initializeCesium = async () => {
   });
 
   // Load additional GeoJSON data and add it as a new data source
-  const additionalResource = await Cesium.IonResource.fromAssetId(2477597);
+  const additionalResource = await Cesium.IonResource.fromAssetId(2477557);
   const additionalDataSource = await Cesium.GeoJsonDataSource.load(additionalResource);
   viewer.dataSources.add(additionalDataSource);
 
