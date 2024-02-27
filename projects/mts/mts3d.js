@@ -1,48 +1,77 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 const initializeCesium = async () => {
-    const viewer = new Cesium.Viewer('cesiumContainer', {
-      baseLayerPicker: false,
-      geocoder: false,
-      homeButton: false,
-      infoBox: true,
-      sceneModePicker: false,
-      selectionIndicator: false,
-      timeline: false,
-      navigationHelpButton: false,
-      fullscreenButton: false,
-      animation: false,
-      skyBox: false,
-      skyAtmosphere: false,
-      backgroundColor: Cesium.Color.WHITE
-    });
-  
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-  
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-    const tilesetPrimitive = viewer.scene.primitives.add(tileset);
-    await viewer.zoomTo(tileset);
-  
-    const extras = tileset.asset.extras;
-    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-    }
-  
-    // Remove the satellite imagery
-    viewer.imageryLayers.removeAll();
-  
-    // Create a switch for the 3D layer
-    const tilesetSwitch = document.getElementById('3dTileSwitch');
-  
-    // Event listener for 3D Tileset switch
-    tilesetSwitch.addEventListener('change', (event) => {
-      tileset.show = event.target.checked;
-    });
-  };
-  
-  initializeCesium();
+  const viewer = new Cesium.Viewer('cesiumContainer', {
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
+  });
+
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+  const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
+
+  const extras = tileset.asset.extras;
+  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
+
+  // Remove the satellite imagery
+  viewer.imageryLayers.removeAll();
+
+  // Create a switch for the 3D layer
+  const tilesetSwitch = document.getElementById('3dTileSwitch');
+
+  // Event listener for 3D Tileset switch
+  tilesetSwitch.addEventListener('change', (event) => {
+    tileset.show = event.target.checked;
+  });
+
+  // Load "mtsstreets" GeoJSON data and add it as a new data source
+  const streetsResource = await Cesium.IonResource.fromAssetId(2477200);
+  const streetsDataSource = await Cesium.GeoJsonDataSource.load(streetsResource);
+  viewer.dataSources.add(streetsDataSource);
+
+  // Create a switch for the streets GeoJSON layer
+  const streetsSwitch = document.createElement('input');
+  streetsSwitch.type = 'checkbox';
+  streetsSwitch.checked = true; // Set initial state
+  streetsSwitch.id = 'streetsSwitch';
+
+  const streetsLabel = document.createElement('label');
+  streetsLabel.appendChild(streetsSwitch);
+  streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
+
+  const streetsSwitchContainer = document.createElement('div');
+  streetsSwitchContainer.classList.add('switch-container');
+  streetsSwitchContainer.appendChild(streetsLabel);
+
+  // Add the streets switch to the page
+  document.body.appendChild(streetsSwitchContainer);
+
+  // Event listener for Streets GeoJSON switch
+  streetsSwitch.addEventListener('change', (event) => {
+    streetsDataSource.show = event.target.checked;
+  });
+};
+
+initializeCesium();
+
 
 
 
