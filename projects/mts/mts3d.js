@@ -84,11 +84,11 @@ const initializeCesium = async () => {
   
     // Event listener for GeoJSON switch
     geoJsonSwitch.addEventListener('change', (event) => {
-      geoJsonDataSource.show = event.target.checked;
+      geoJsonDataSource.entities.show = event.target.checked;
     });
   };
   
-  initializeCesium(
+  initializeCesium();
   
 
 
