@@ -21,6 +21,38 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
+  // Add OpenStreetMap layer with a switch
+  const osmSwitch = document.createElement('input');
+  osmSwitch.type = 'checkbox';
+  osmSwitch.checked = true; // Set initial state
+  osmSwitch.id = 'osmSwitch';
+
+  const osmLabel = document.createElement('label');
+  osmLabel.appendChild(osmSwitch);
+  osmLabel.appendChild(document.createTextNode('OpenStreetMap'));
+
+  const osmSwitchContainer = document.createElement('div');
+  osmSwitchContainer.classList.add('switch-container');
+  osmSwitchContainer.appendChild(osmLabel);
+
+  // Add the OpenStreetMap switch to the page
+  document.body.appendChild(osmSwitchContainer);
+
+  // Event listener for OpenStreetMap switch
+  osmSwitch.addEventListener('change', (event) => {
+    const imageryLayers = viewer.imageryLayers;
+    if (event.target.checked) {
+      // Add OpenStreetMap layer
+      const osmProvider = Cesium.createOpenStreetMapImageryProvider({
+        url: 'https://a.tile.openstreetmap.org/'
+      });
+      imageryLayers.addImageryProvider(osmProvider);
+    } else {
+      // Remove OpenStreetMap layer
+      imageryLayers.remove(imageryLayers.get(0));
+    }
+  });
+
   const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
   const tilesetPrimitive = viewer.scene.primitives.add(tileset);
   await viewer.zoomTo(tileset);
@@ -30,8 +62,8 @@ const initializeCesium = async () => {
     tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
   }
 
-  // Remove the satellite imagery
-  viewer.imageryLayers.removeAll();
+  // Remove the default base layer
+  viewer.imageryLayers.remove(viewer.imageryLayers.get(0));
 
   // Create a switch for the 3D layer
   const tilesetSwitch = document.getElementById('3dTileSwitch');
@@ -67,11 +99,9 @@ const initializeCesium = async () => {
   streetsSwitch.addEventListener('change', async (event) => {
     // Wait for the data source to be ready
     await streetsDataSource.when();
-  
+
     streetsDataSource.show = event.target.checked;
-    console.log('Streets GeoJSON switch:', event.target.checked);
   });
-  
 
   // Load mtsparks GeoJSON data and add it as a new data source
   const mtsparksResource = await Cesium.IonResource.fromAssetId(2477584);
@@ -159,11 +189,10 @@ const initializeCesium = async () => {
   mtsgaspipelinesSwitch.addEventListener('change', async (event) => {
     // Wait for the data source to be ready
     await mtsgaspipelinesDataSource.when();
-  
+
     mtsgaspipelinesDataSource.show = event.target.checked;
-    console.log('MTSGasPipelines GeoJSON switch:', event.target.checked);
   });
-  
+
   // Load mtsrail GeoJSON data and add it as a new data source
   const mtsrailResource = await Cesium.IonResource.fromAssetId(2477618);
   const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
@@ -196,6 +225,7 @@ const initializeCesium = async () => {
 };
 
 initializeCesium();
+
 
 /*
 
