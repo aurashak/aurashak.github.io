@@ -101,35 +101,36 @@ const initializeCesium = async () => {
     mtsparksDataSource.show = event.target.checked;
   });
 
-  // Load additional GeoJSON data and add it as a new data source
-  const additionalResource = await Cesium.IonResource.fromAssetId(2477557);
-  const additionalDataSource = await Cesium.GeoJsonDataSource.load(additionalResource);
-  viewer.dataSources.add(additionalDataSource);
+  // Load mtscso GeoJSON data and add it as a new data source
+const mtscsoResource = await Cesium.IonResource.fromAssetId(2477557);
+const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
+viewer.dataSources.add(mtscsoDataSource);
 
-  // Additional switch for the new GeoJSON layer
-  const additionalSwitch = document.createElement('input');
-  additionalSwitch.type = 'checkbox';
-  additionalSwitch.checked = true; // Set initial state
-  additionalSwitch.id = 'additionalSwitch';
+// mtscso switch for the new GeoJSON layer
+const mtscsoSwitch = document.createElement('input');
+mtscsoSwitch.type = 'checkbox';
+mtscsoSwitch.checked = true; // Set initial state
+mtscsoSwitch.id = 'mtscsoSwitch'; // Set the ID to mtscsoSwitch
 
-  const additionalLabel = document.createElement('label');
-  additionalLabel.appendChild(additionalSwitch);
-  additionalLabel.appendChild(document.createTextNode('Additional GeoJSON'));
+const mtscsoLabel = document.createElement('label');
+mtscsoLabel.appendChild(mtscsoSwitch);
+mtscsoLabel.appendChild(document.createTextNode('MTSCSO GeoJSON'));
 
-  const additionalSwitchContainer = document.createElement('div');
-  additionalSwitchContainer.classList.add('switch-container');
-  additionalSwitchContainer.appendChild(additionalLabel);
+const mtscsoSwitchContainer = document.createElement('div');
+mtscsoSwitchContainer.classList.add('switch-container');
+mtscsoSwitchContainer.appendChild(mtscsoLabel);
 
-  // Add the additional switch to the page
-  document.body.appendChild(additionalSwitchContainer);
+// Add the mtscso switch to the page
+document.body.appendChild(mtscsoSwitchContainer);
 
-  // Event listener for Additional GeoJSON switch
-  additionalSwitch.addEventListener('change', async (event) => {
-    // Wait for the data source to be ready
-    await additionalDataSource.when();
+// Event listener for MTSCSO GeoJSON switch
+mtscsoSwitch.addEventListener('change', async (event) => {
+  // Wait for the data source to be ready
+  await mtscsoDataSource.when();
 
-    additionalDataSource.show = event.target.checked;
-  });
+  mtscsoDataSource.show = event.target.checked;
+});
+
 };
 
 initializeCesium();
