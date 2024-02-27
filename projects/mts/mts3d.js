@@ -2,40 +2,62 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-  var viewer = new Cesium.Viewer('cesiumContainer', {
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
-  });
-
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
-  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-  const tilesetPrimitive = viewer.scene.primitives.add(tileset);
-  await viewer.zoomTo(tileset);
-
-  const extras = tileset.asset.extras;
-  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-  }
-
-  // Remove the satellite imagery
-  viewer.imageryLayers.removeAll();
-};
-
-initializeCesium();
-
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      baseLayerPicker: false,
+      geocoder: false,
+      homeButton: false,
+      infoBox: true,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      animation: false,
+      skyBox: false,
+      skyAtmosphere: false,
+      backgroundColor: Cesium.Color.WHITE
+    });
+  
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+  
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+    const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+    await viewer.zoomTo(tileset);
+  
+    const extras = tileset.asset.extras;
+    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+    }
+  
+    // Remove the satellite imagery
+    viewer.imageryLayers.removeAll();
+  
+    // Create a switch for the 3D layer
+    const tilesetSwitch = document.createElement('input');
+    tilesetSwitch.type = 'checkbox';
+    tilesetSwitch.checked = true; // Set initial state
+    tilesetSwitch.id = '3dTileSwitch';
+  
+    const tilesetLabel = document.createElement('label');
+    tilesetLabel.appendChild(tilesetSwitch);
+    tilesetLabel.appendChild(document.createTextNode('3D Tileset'));
+  
+    const switchContainer = document.createElement('div');
+    switchContainer.classList.add('switch-container');
+    switchContainer.appendChild(tilesetLabel);
+  
+    // Add the switch to the page
+    document.body.appendChild(switchContainer);
+  
+    // Event listener for 3D Tileset switch
+    tilesetSwitch.addEventListener('change', (event) => {
+      tilesetPrimitive.show = event.target.checked;
+    });
+  };
+  
+  initializeCesium();
+  
 
 
 
