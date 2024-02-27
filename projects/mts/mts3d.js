@@ -29,9 +29,11 @@ const initializeCesium = async () => {
     const tileset1Primitive = viewer.scene.primitives.add(tileset1);
     await viewer.zoomTo(tileset1);
 
-    const extras1 = tileset1.asset.extras;
-    if (Cesium.defined(extras1) && Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
-      tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
+    if (Cesium.defined(tileset1.asset) && Cesium.defined(tileset1.asset.extras)) {
+      const extras1 = tileset1.asset.extras;
+      if (Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
+        tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
+      }
     }
 
     // Load the second 3D Tileset (MTS Streets)
@@ -75,6 +77,7 @@ const initializeCesium = async () => {
 };
 
 initializeCesium();
+
 
 
 
