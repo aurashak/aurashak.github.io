@@ -4,19 +4,7 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 const initializeCesium = async () => {
   const viewer = new Cesium.Viewer('cesiumContainer', {
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
+    // ... (other viewer settings)
   });
 
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
@@ -69,7 +57,8 @@ const initializeCesium = async () => {
     }
   };
 
-  // Corrected assetId for 'mtsgaspipelinesSwitch'
+  // Corrected assetId for 'parksSwitch'
+  loadGeoJSONLayer(2477601, 'parksSwitch', 'Parks GeoJSON');
   loadGeoJSONLayer(2477586, 'mtsgaspipelinesSwitch', 'MTSGasPipelines GeoJSON');
   loadGeoJSONLayer(2477585, 'mtsparksSwitch', 'mtsparks GeoJSON');
   loadGeoJSONLayer(2477597, 'mtscsoSwitch', 'mtscso GeoJSON');
