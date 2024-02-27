@@ -133,7 +133,7 @@ const initializeCesium = async () => {
   });
 
   // Load mtsgaspipelines GeoJSON data and add it as a new data source
-  const mtsgaspipelinesResource = await Cesium.IonResource.fromAssetId(YOUR_MTSGASPIPELINES_ASSET_ID);
+  const mtsgaspipelinesResource = await Cesium.IonResource.fromAssetId(2477584);
   const mtsgaspipelinesDataSource = await Cesium.GeoJsonDataSource.load(mtsgaspipelinesResource);
   viewer.dataSources.add(mtsgaspipelinesDataSource);
 
