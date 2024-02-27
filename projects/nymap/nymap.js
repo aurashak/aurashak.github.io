@@ -91,8 +91,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
-// Include the Leaflet Measure Control plugin
-L.control.measureControl().addTo(map);
 
 
 
