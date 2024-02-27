@@ -2,140 +2,139 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-    const viewer = new Cesium.Viewer('cesiumContainer', {
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
-        animation: false,
-        skyBox: false,
-        skyAtmosphere: false,
-        backgroundColor: Cesium.Color.WHITE
-    });
+  const viewer = new Cesium.Viewer('cesiumContainer', {
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
+  });
 
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-    const tilesetPrimitive = viewer.scene.primitives.add(tileset);
-    await viewer.zoomTo(tileset);
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+  const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
 
-    const extras = tileset.asset.extras;
-    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-        tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-    }
+  const extras = tileset.asset.extras;
+  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
 
-    // Remove the satellite imagery
-    viewer.imageryLayers.removeAll();
+  // Remove the satellite imagery
+  viewer.imageryLayers.removeAll();
 
-    // Create a switch for the 3D layer
-    const tilesetSwitch = document.getElementById('3dTileSwitch');
+  // Create a switch for the 3D layer
+  const tilesetSwitch = document.getElementById('3dTileSwitch');
 
-    // Event listener for 3D Tileset switch
-    tilesetSwitch.addEventListener('change', (event) => {
-        tileset.show = event.target.checked;
-    });
+  // Event listener for 3D Tileset switch
+  tilesetSwitch.addEventListener('change', (event) => {
+    tileset.show = event.target.checked;
+  });
 
-    // Load "mtsstreets" GeoJSON data and add it as a new data source
-    const streetsResource = await Cesium.IonResource.fromAssetId(2477200);
-    const streetsDataSource = await Cesium.GeoJsonDataSource.load(streetsResource);
-    viewer.dataSources.add(streetsDataSource);
+  // Load "mtsstreets" GeoJSON data and add it as a new data source
+  const streetsResource = await Cesium.IonResource.fromAssetId(2477200);
+  const streetsDataSource = await Cesium.GeoJsonDataSource.load(streetsResource);
+  viewer.dataSources.add(streetsDataSource);
 
-    // Create a switch for the streets GeoJSON layer
-    const streetsSwitch = document.createElement('input');
-    streetsSwitch.type = 'checkbox';
-    streetsSwitch.checked = true; // Set initial state
-    streetsSwitch.id = 'streetsSwitch';
+  // Create a switch for the streets GeoJSON layer
+  const streetsSwitch = document.createElement('input');
+  streetsSwitch.type = 'checkbox';
+  streetsSwitch.checked = true; // Set initial state
+  streetsSwitch.id = 'streetsSwitch';
 
-    const streetsLabel = document.createElement('label');
-    streetsLabel.appendChild(streetsSwitch);
-    streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
+  const streetsLabel = document.createElement('label');
+  streetsLabel.appendChild(streetsSwitch);
+  streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
 
-    const streetsSwitchContainer = document.createElement('div');
-    streetsSwitchContainer.classList.add('switch-container');
-    streetsSwitchContainer.appendChild(streetsLabel);
+  const streetsSwitchContainer = document.createElement('div');
+  streetsSwitchContainer.classList.add('switch-container');
+  streetsSwitchContainer.appendChild(streetsLabel);
 
-    // Add the streets switch to the page
-    document.body.appendChild(streetsSwitchContainer);
+  // Add the streets switch to the page
+  document.body.appendChild(streetsSwitchContainer);
 
-    // Event listener for Streets GeoJSON switch
-    streetsSwitch.addEventListener('change', async (event) => {
-        // Wait for the data source to be ready
-        await streetsDataSource.when();
+  // Event listener for Streets GeoJSON switch
+  streetsSwitch.addEventListener('change', async (event) => {
+    // Wait for the data source to be ready
+    await streetsDataSource.when();
 
-        streetsDataSource.show = event.target.checked;
-    });
+    streetsDataSource.show = event.target.checked;
+  });
 
-    // Load "mtscso" GeoJSON data and add it as a new data source
-    const mtscsoResource = await Cesium.IonResource.fromAssetId(2461916);
-    const mtscsoDataSource = await Cesium.KmlDataSource.load(mtscsoResource, {
-        camera: viewer.scene.camera,
-        canvas: viewer.scene.canvas,
-    });
-    viewer.dataSources.add(mtscsoDataSource);
+  // Load mtsparks GeoJSON data and add it as a new data source
+  const mtsparksResource = await Cesium.IonResource.fromAssetId(2477584);
+  const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
+  viewer.dataSources.add(mtsparksDataSource);
 
-    // Create a switch for the mtscso GeoJSON layer
-    const mtscsoSwitch = document.createElement('input');
-    mtscsoSwitch.type = 'checkbox';
-    mtscsoSwitch.checked = true; // Set initial state
-    mtscsoSwitch.id = 'mtscsoSwitch';
+  // Switch for the mtsparks GeoJSON layer
+  const mtsparksSwitch = document.createElement('input');
+  mtsparksSwitch.type = 'checkbox';
+  mtsparksSwitch.checked = true; // Set initial state
+  mtsparksSwitch.id = 'mtsparksSwitch';
 
-    const mtscsoLabel = document.createElement('label');
-    mtscsoLabel.appendChild(mtscsoSwitch);
-    mtscsoLabel.appendChild(document.createTextNode('mtscso GeoJSON'));
+  const mtsparksLabel = document.createElement('label');
+  mtsparksLabel.appendChild(mtsparksSwitch);
+  mtsparksLabel.appendChild(document.createTextNode('mtsparks GeoJSON'));
 
-    const mtscsoSwitchContainer = document.createElement('div');
-    mtscsoSwitchContainer.classList.add('switch-container');
-    mtscsoSwitchContainer.appendChild(mtscsoLabel);
+  const mtsparksSwitchContainer = document.createElement('div');
+  mtsparksSwitchContainer.classList.add('switch-container');
+  mtsparksSwitchContainer.appendChild(mtsparksLabel);
 
-    // Add the mtscso switch to the page
-    document.body.appendChild(mtscsoSwitchContainer);
+  // Add the mtsparks switch to the page
+  document.body.appendChild(mtsparksSwitchContainer);
 
-    // Event listener for mtscso GeoJSON switch
-    mtscsoSwitch.addEventListener('change', async (event) => {
-        // Wait for the data source to be ready
-        await mtscsoDataSource.when();
+  // Event listener for mtsparks GeoJSON switch
+  mtsparksSwitch.addEventListener('change', async (event) => {
+    // Wait for the data source to be ready
+    await mtsparksDataSource.when();
 
-        mtscsoDataSource.show = event.target.checked;
-    });
+    mtsparksDataSource.show = event.target.checked;
+  });
 
-    // Load additional GeoJSON data and add it as a new data source
-    const additionalResource = await Cesium.IonResource.fromAssetId(2477584);
-    const additionalDataSource = await Cesium.GeoJsonDataSource.load(additionalResource);
-    viewer.dataSources.add(additionalDataSource);
+  // Load additional GeoJSON data and add it as a new data source
+  const additionalResource = await Cesium.IonResource.fromAssetId(2477557);
+  const additionalDataSource = await Cesium.GeoJsonDataSource.load(additionalResource);
+  viewer.dataSources.add(additionalDataSource);
 
-    // Additional switch for the new GeoJSON layer
-    const additionalSwitch = document.createElement('input');
-    additionalSwitch.type = 'checkbox';
-    additionalSwitch.checked = true; // Set initial state
-    additionalSwitch.id = 'additionalSwitch';
+  // Additional switch for the new GeoJSON layer
+  const additionalSwitch = document.createElement('input');
+  additionalSwitch.type = 'checkbox';
+  additionalSwitch.checked = true; // Set initial state
+  additionalSwitch.id = 'additionalSwitch';
 
-    const additionalLabel = document.createElement('label');
-    additionalLabel.appendChild(additionalSwitch);
-    additionalLabel.appendChild(document.createTextNode('Additional GeoJSON'));
+  const additionalLabel = document.createElement('label');
+  additionalLabel.appendChild(additionalSwitch);
+  additionalLabel.appendChild(document.createTextNode('Additional GeoJSON'));
 
-    const additionalSwitchContainer = document.createElement('div');
-    additionalSwitchContainer.classList.add('switch-container');
-    additionalSwitchContainer.appendChild(additionalLabel);
+  const additionalSwitchContainer = document.createElement('div');
+  additionalSwitchContainer.classList.add('switch-container');
+  additionalSwitchContainer.appendChild(additionalLabel);
 
-    // Add the additional switch to the page
-    document.body.appendChild(additionalSwitchContainer);
+  // Add the additional switch to the page
+  document.body.appendChild(additionalSwitchContainer);
 
-    // Event listener for Additional GeoJSON switch
-    additionalSwitch.addEventListener('change', async (event) => {
-        // Wait for the data source to be ready
-        await additionalDataSource.when();
+  // Event listener for Additional GeoJSON switch
+  additionalSwitch.addEventListener('change', async (event) => {
+    // Wait for the data source to be ready
+    await additionalDataSource.when();
 
-        additionalDataSource.show = event.target.checked;
-    });
+    additionalDataSource.show = event.target.checked;
+  });
 };
 
 initializeCesium();
+
+
 
 
 
