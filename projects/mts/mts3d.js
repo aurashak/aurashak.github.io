@@ -1,6 +1,7 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 const initializeCesium = async () => {
   const viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -101,42 +102,68 @@ const initializeCesium = async () => {
     mtsparksDataSource.show = event.target.checked;
   });
 
+  // Load mtscso GeoJSON data and add it as a new data source
+  const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
+  const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
+  viewer.dataSources.add(mtscsoDataSource);
+
+  // Switch for the mtscso GeoJSON layer
+  const mtscsoSwitch = document.createElement('input');
+  mtscsoSwitch.type = 'checkbox';
+  mtscsoSwitch.checked = true; // Set initial state
+  mtscsoSwitch.id = 'mtscsoSwitch';
+
+  const mtscsoLabel = document.createElement('label');
+  mtscsoLabel.appendChild(mtscsoSwitch);
+  mtscsoLabel.appendChild(document.createTextNode('mtscso GeoJSON'));
+
+  const mtscsoSwitchContainer = document.createElement('div');
+  mtscsoSwitchContainer.classList.add('switch-container');
+  mtscsoSwitchContainer.appendChild(mtscsoLabel);
+
+  // Add the mtscso switch to the page
+  document.body.appendChild(mtscsoSwitchContainer);
+
+  // Event listener for mtscso GeoJSON switch
+  mtscsoSwitch.addEventListener('change', async (event) => {
+    // Wait for the data source to be ready
+    await mtscsoDataSource.when();
+
+    mtscsoDataSource.show = event.target.checked;
+  });
+
   // Load mtsgaspipelines GeoJSON data and add it as a new data source
-const mtsgaspipelinesResource = await Cesium.IonResource.fromAssetId(YOUR_MTSGASPIPELINES_ASSET_ID);
-const mtsgaspipelinesDataSource = await Cesium.GeoJsonDataSource.load(mtsgaspipelinesResource);
-viewer.dataSources.add(mtsgaspipelinesDataSource);
+  const mtsgaspipelinesResource = await Cesium.IonResource.fromAssetId(YOUR_MTSGASPIPELINES_ASSET_ID);
+  const mtsgaspipelinesDataSource = await Cesium.GeoJsonDataSource.load(mtsgaspipelinesResource);
+  viewer.dataSources.add(mtsgaspipelinesDataSource);
 
-// mtsgaspipelines switch for the new GeoJSON layer
-const mtsgaspipelinesSwitch = document.createElement('input');
-mtsgaspipelinesSwitch.type = 'checkbox';
-mtsgaspipelinesSwitch.checked = true; // Set initial state
-mtsgaspipelinesSwitch.id = 'mtsgaspipelinesSwitch'; // Set the ID to mtsgaspipelinesSwitch
+  // mtsgaspipelines switch for the new GeoJSON layer
+  const mtsgaspipelinesSwitch = document.createElement('input');
+  mtsgaspipelinesSwitch.type = 'checkbox';
+  mtsgaspipelinesSwitch.checked = true; // Set initial state
+  mtsgaspipelinesSwitch.id = 'mtsgaspipelinesSwitch'; // Set the ID to mtsgaspipelinesSwitch
 
-const mtsgaspipelinesLabel = document.createElement('label');
-mtsgaspipelinesLabel.appendChild(mtsgaspipelinesSwitch);
-mtsgaspipelinesLabel.appendChild(document.createTextNode('MTSGasPipelines GeoJSON'));
+  const mtsgaspipelinesLabel = document.createElement('label');
+  mtsgaspipelinesLabel.appendChild(mtsgaspipelinesSwitch);
+  mtsgaspipelinesLabel.appendChild(document.createTextNode('MTSGasPipelines GeoJSON'));
 
-const mtsgaspipelinesSwitchContainer = document.createElement('div');
-mtsgaspipelinesSwitchContainer.classList.add('switch-container');
-mtsgaspipelinesSwitchContainer.appendChild(mtsgaspipelinesLabel);
+  const mtsgaspipelinesSwitchContainer = document.createElement('div');
+  mtsgaspipelinesSwitchContainer.classList.add('switch-container');
+  mtsgaspipelinesSwitchContainer.appendChild(mtsgaspipelinesLabel);
 
-// Add the mtsgaspipelines switch to the page
-document.body.appendChild(mtsgaspipelinesSwitchContainer);
+  // Add the mtsgaspipelines switch to the page
+  document.body.appendChild(mtsgaspipelinesSwitchContainer);
 
-// Event listener for MTSGasPipelines GeoJSON switch
-mtsgaspipelinesSwitch.addEventListener('change', async (event) => {
-  // Wait for the data source to be ready
-  await mtsgaspipelinesDataSource.when();
+  // Event listener for MTSGasPipelines GeoJSON switch
+  mtsgaspipelinesSwitch.addEventListener('change', async (event) => {
+    // Wait for the data source to be ready
+    await mtsgaspipelinesDataSource.when();
 
-  mtsgaspipelinesDataSource.show = event.target.checked;
-});
-
-
+    mtsgaspipelinesDataSource.show = event.target.checked;
+  });
 };
 
 initializeCesium();
-
-
 
 
 
