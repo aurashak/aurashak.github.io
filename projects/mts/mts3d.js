@@ -48,59 +48,55 @@ const initializeCesium = async () => {
     viewer.dataSources.add(streetsDataSource);
 
     // Create a switch for the streets GeoJSON layer
-    const streetsSwitch = document.createElement('input');
-    streetsSwitch.type = 'checkbox';
-    streetsSwitch.checked = true; // Set initial state
-    streetsSwitch.id = 'streetsSwitch';
+const streetsSwitch = document.createElement('input');
+streetsSwitch.type = 'checkbox';
+streetsSwitch.checked = true; // Set initial state
+streetsSwitch.id = 'streetsSwitch';
 
-    const streetsLabel = document.createElement('label');
-    streetsLabel.appendChild(streetsSwitch);
-    streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
+const streetsLabel = document.createElement('label');
+streetsLabel.appendChild(streetsSwitch);
+streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
 
-    const streetsSwitchContainer = document.createElement('div');
-    streetsSwitchContainer.classList.add('switch-container');
-    streetsSwitchContainer.appendChild(streetsLabel);
+const streetsSwitchContainer = document.createElement('div');
+streetsSwitchContainer.classList.add('switch-container');
+streetsSwitchContainer.appendChild(streetsLabel);
 
-    // Add the streets switch to the page
-    document.body.appendChild(streetsSwitchContainer);
+// Add the streets switch to the page
+document.body.appendChild(streetsSwitchContainer);
 
-    // Event listener for Streets GeoJSON switch
-    streetsSwitch.addEventListener('change', async (event) => {
-      // Wait for the data source to be ready
-      await streetsDataSource.when();
+// Event listener for Streets GeoJSON switch
+streetsSwitch.addEventListener('change', async (event) => {
+  // Wait for the data source to be ready
+  await streetsDataSource.when();
 
-      streetsDataSource.show = event.target.checked;
-    });
-    
-    // Load additional GeoJSON data and add it as a new data source
-    const additionalResource = await Cesium.IonResource.fromAssetId(2477557);
-    const additionalDataSource = await Cesium.GeoJsonDataSource.load(additionalResource);
-    viewer.dataSources.add(additionalDataSource);
+  streetsDataSource.show = event.target.checked;
+});
 
-    // Additional switch for the new GeoJSON layer
-    const additionalSwitch = document.createElement('input');
-    additionalSwitch.type = 'checkbox';
-    additionalSwitch.checked = true; // Set initial state
-    additionalSwitch.id = 'additionalSwitch';
+// Create a switch for the additional GeoJSON layer
+const additionalSwitch = document.createElement('input');
+additionalSwitch.type = 'checkbox';
+additionalSwitch.checked = true; // Set initial state
+additionalSwitch.id = 'additionalSwitch';
 
-    const additionalLabel = document.createElement('label');
-    additionalLabel.appendChild(additionalSwitch);
-    additionalLabel.appendChild(document.createTextNode('Additional GeoJSON'));
+const additionalLabel = document.createElement('label');
+additionalLabel.appendChild(additionalSwitch);
+additionalLabel.appendChild(document.createTextNode('Additional GeoJSON'));
 
-    const additionalSwitchContainer = document.createElement('div');
-    additionalSwitchContainer.classList.add('switch-container');
-    additionalSwitchContainer.appendChild(additionalLabel);
+const additionalSwitchContainer = document.createElement('div');
+additionalSwitchContainer.classList.add('switch-container');
+additionalSwitchContainer.appendChild(additionalLabel);
 
-    // Add the additional switch to the page
-    document.body.appendChild(additionalSwitchContainer);
+// Add the additional switch to the page
+document.body.appendChild(additionalSwitchContainer);
 
-    // Event listener for Additional GeoJSON switch
-    additionalSwitch.addEventListener('change', async (event) => {
-      // Wait for the data source to be ready
-      await additionalDataSource.when();
+// Event listener for Additional GeoJSON switch
+additionalSwitch.addEventListener('change', async (event) => {
+  // Wait for the data source to be ready
+  await additionalDataSource.when();
 
-      additionalDataSource.show = event.target.checked;
-    });
+  additionalDataSource.show = event.target.checked;
+});
+
   };
 
   initializeCesium();
