@@ -47,12 +47,12 @@ const initializeCesium = async () => {
   // Load GeoJSON data and add it as an overlay
   const geoJsonResource = await Cesium.IonResource.fromAssetId(2477200);
   const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonResource);
+  const geoJsonEntity = geoJsonDataSource.entities.values[0]; // Assuming there is one entity in the GeoJSON
   viewer.dataSources.add(geoJsonDataSource);
 
   console.log("GeoJSON overlay loaded");
 
   // Optionally, you can style the GeoJSON overlay
-  const geoJsonEntity = geoJsonDataSource.entities.values[0]; // Assuming there is one entity in the GeoJSON
   geoJsonEntity.point.color = Cesium.Color.YELLOW; // Example styling
 
   console.log("GeoJSON entity styled");
@@ -67,13 +67,23 @@ const initializeCesium = async () => {
   viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
 
   console.log("Camera set to view both 3D Tileset and GeoJSON overlay");
+
+  // Create switches
+  const tilesetSwitch = document.getElementById('3dTileSwitch');
+  const geoJsonSwitch = document.getElementById('geoJsonSwitch');
+
+  // Event listener for 3D Tileset switch
+  tilesetSwitch.addEventListener('change', (event) => {
+    tilesetPrimitive.show = event.target.checked;
+  });
+
+  // Event listener for GeoJSON switch
+  geoJsonSwitch.addEventListener('change', (event) => {
+    geoJsonDataSource.show = event.target.checked;
+  });
 };
 
 initializeCesium();
-
-
-
-
 
 
 
