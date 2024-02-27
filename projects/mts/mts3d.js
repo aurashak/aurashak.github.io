@@ -2,7 +2,7 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-    const viewer = new Cesium.Viewer('cesiumContainer', {
+    var viewer = new Cesium.Viewer('cesiumContainer', {
       baseLayerPicker: false,
       geocoder: false,
       homeButton: false,
@@ -34,15 +34,33 @@ const initializeCesium = async () => {
     viewer.imageryLayers.removeAll();
   
     // Create a switch for the 3D layer
-    const tilesetSwitch = document.getElementById('3dTileSwitch');
+    const tilesetSwitch = document.createElement('input');
+    tilesetSwitch.type = 'checkbox';
+    tilesetSwitch.checked = true; // Set initial state
+    tilesetSwitch.id = '3dTileSwitch';
+  
+    const tilesetLabel = document.createElement('label');
+    tilesetLabel.appendChild(tilesetSwitch);
+    tilesetLabel.appendChild(document.createTextNode('3D Tileset'));
+  
+    const switchContainer = document.createElement('div');
+    switchContainer.classList.add('switch-container');
+    switchContainer.appendChild(tilesetLabel);
+  
+    // Add the switch to the page
+    document.body.appendChild(switchContainer);
   
     // Event listener for 3D Tileset switch
     tilesetSwitch.addEventListener('change', (event) => {
-      tileset.show = event.target.checked;
+      tilesetPrimitive.show = event.target.checked;
     });
   };
   
   initializeCesium();
+  
+
+
+
 
 
 
