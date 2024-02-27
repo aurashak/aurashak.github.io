@@ -63,14 +63,30 @@ const initializeCesium = async () => {
   // Add the streets switch to the page
   document.body.appendChild(streetsSwitchContainer);
 
-  // Event listener for Streets GeoJSON switch
-  streetsSwitch.addEventListener('change', async (event) => {
+// Event listener for Streets GeoJSON switch
+streetsSwitch.addEventListener('change', async (event) => {
+    
     // Wait for the data source to be ready
     await streetsDataSource.when();
   
     streetsDataSource.show = event.target.checked;
+  
+    // Customize the style when the switch is turned on
+    if (event.target.checked) {
+      streetsDataSource.style = new Cesium.Cesium3DTileStyle({
+        color: 'rgba(255, 0, 0, 0.7)', // Red color with alpha (transparency)
+        width: 2.0, // Line width
+        show: true, // Show the feature
+        heightOffset: 10.0, // Adjust the height offset
+      });
+    } else {
+      // Revert to the default style when the switch is turned off
+      streetsDataSource.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+    }
+  
     console.log('Streets GeoJSON switch:', event.target.checked);
   });
+  
   
 
   // Load mtsparks GeoJSON data and add it as a new data source
@@ -163,7 +179,7 @@ const initializeCesium = async () => {
     mtsgaspipelinesDataSource.show = event.target.checked;
     console.log('MTSGasPipelines GeoJSON switch:', event.target.checked);
   });
-  
+
   // Load mtsrail GeoJSON data and add it as a new data source
   const mtsrailResource = await Cesium.IonResource.fromAssetId(2477618);
   const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
