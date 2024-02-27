@@ -1,7 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 const initializeCesium = async () => {
     var viewer = new Cesium.Viewer('cesiumContainer', {
       baseLayerPicker: false,
@@ -47,26 +46,32 @@ const initializeCesium = async () => {
     const geoJsonResource = await Cesium.IonResource.fromAssetId(2477200);
     const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonResource);
     const geoJsonEntity = geoJsonDataSource.entities.values[0]; // Assuming there is one entity in the GeoJSON
-    viewer.dataSources.add(geoJsonDataSource);
   
-    console.log("GeoJSON overlay loaded");
+    // Check if geoJsonEntity and geoJsonEntity.boundingVolume are defined
+    if (geoJsonEntity && geoJsonEntity.boundingVolume) {
+      viewer.dataSources.add(geoJsonDataSource);
   
-    // Optionally, you can style the GeoJSON overlay
-    if (geoJsonEntity && geoJsonEntity.point) {
-      geoJsonEntity.point.color = Cesium.Color.YELLOW; // Example styling
-      console.log("GeoJSON entity styled");
+      console.log("GeoJSON overlay loaded");
+  
+      // Optionally, you can style the GeoJSON overlay
+      if (geoJsonEntity.point) {
+        geoJsonEntity.point.color = Cesium.Color.YELLOW; // Example styling
+        console.log("GeoJSON entity styled");
+      }
+  
+      // Set the camera to view both the 3D Tileset and the GeoJSON overlay
+      const boundingVolume = Cesium.BoundingVolume.union([
+        tileset.boundingVolume,
+        geoJsonEntity.boundingVolume
+      ]);
+  
+      viewer.camera.viewBoundingVolume(boundingVolume, viewer.scene.globe.ellipsoid);
+      viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+  
+      console.log("Camera set to view both 3D Tileset and GeoJSON overlay");
+    } else {
+      console.log("No valid GeoJSON entity or bounding volume found.");
     }
-  
-    // Set the camera to view both the 3D Tileset and the GeoJSON overlay
-    const boundingVolume = Cesium.BoundingVolume.union([
-      tileset.boundingVolume,
-      geoJsonEntity ? geoJsonEntity.boundingVolume : new Cesium.BoundingVolume()
-    ]);
-  
-    viewer.camera.viewBoundingVolume(boundingVolume, viewer.scene.globe.ellipsoid);
-    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
-  
-    console.log("Camera set to view both 3D Tileset and GeoJSON overlay");
   
     // Create switches
     const tilesetSwitch = document.getElementById('3dTileSwitch');
@@ -83,7 +88,7 @@ const initializeCesium = async () => {
     });
   };
   
-  initializeCesium();
+  initializeCesium(
   
 
 
