@@ -89,6 +89,63 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
+
+// Leaflet Measure Control plugin
+L.Control.measureControl().addTo(map);
+
+
+map.on('click', function (e) {
+    var clickedLatLng = e.latlng;
+
+});
+
+
+map.on('click', function (e) {
+    var clickedLatLng = e.latlng;
+
+    // Iterate through each layer and calculate distance to the clicked point
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.LayerGroup) {
+            // If it's a LayerGroup, iterate through its individual layers
+            layer.eachLayer(function (subLayer) {
+                calculateDistanceAndDensity(subLayer, clickedLatLng);
+            });
+        } else {
+            calculateDistanceAndDensity(layer, clickedLatLng);
+        }
+    });
+});
+
+function calculateDistanceAndDensity(layer, clickedLatLng) {
+    if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+        // If it's a marker, calculate distance and perform density calculations
+        var distance = clickedLatLng.distanceTo(layer.getLatLng());
+        console.log('Distance to marker:', distance);
+
+        // You can perform density calculations based on the distance
+        // For example, check if the distance is within a quarter mile
+        if (distance <= 402.336) { // 1 mile = 1609.34 meters
+            console.log('Marker within a quarter mile');
+        }
+    } else if (layer instanceof L.Polyline || layer instanceof L.Polygon) {
+        // If it's a polyline or polygon, you can calculate distance to the closest point
+        var closestPoint = L.GeometryUtil.closest(map, layer, clickedLatLng);
+        var distance = clickedLatLng.distanceTo(closestPoint);
+        console.log('Distance to closest point on polyline/polygon:', distance);
+
+        // You can perform density calculations based on the distance
+        // For example, check if the distance is within a quarter mile
+        if (distance <= 402.336) { // 1 mile = 1609.34 meters
+            console.log('Polyline/Polygon within a quarter mile');
+        }
+    }
+    // You can add more conditions for other layer types if needed
+}
+
+
+
+
+
 // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -406,6 +463,8 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
     }
 });
 
+// Add the new layer to the layer control
+layerControl.addOverlay(avgIncomeLayer, 'Average Household Income');
 
 // Get the average income checkbox and layer
 var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
