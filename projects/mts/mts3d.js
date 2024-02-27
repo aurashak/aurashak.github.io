@@ -47,27 +47,33 @@ const initializeCesium = async () => {
   const streetsDataSource = await Cesium.GeoJsonDataSource.load(streetsResource);
   viewer.dataSources.add(streetsDataSource);
 
-  // Create a switch for the streets GeoJSON layer
-  const streetsSwitch = document.createElement('input');
-  streetsSwitch.type = 'checkbox';
-  streetsSwitch.checked = true; // Set initial state
-  streetsSwitch.id = 'streetsSwitch';
+  // ... (Your existing code)
 
-  const streetsLabel = document.createElement('label');
-  streetsLabel.appendChild(streetsSwitch);
-  streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
+// Create a switch for the streets GeoJSON layer
+const streetsSwitch = document.createElement('input');
+streetsSwitch.type = 'checkbox';
+streetsSwitch.checked = true; // Set initial state
+streetsSwitch.id = 'streetsSwitch';
 
-  const streetsSwitchContainer = document.createElement('div');
-  streetsSwitchContainer.classList.add('switch-container');
-  streetsSwitchContainer.appendChild(streetsLabel);
+const streetsLabel = document.createElement('label');
+streetsLabel.appendChild(streetsSwitch);
+streetsLabel.appendChild(document.createTextNode('MTS Streets GeoJSON'));
 
-  // Add the streets switch to the page
-  document.body.appendChild(streetsSwitchContainer);
+const streetsSwitchContainer = document.createElement('div');
+streetsSwitchContainer.classList.add('switch-container');
+streetsSwitchContainer.appendChild(streetsLabel);
 
-  // Event listener for Streets GeoJSON switch
-  streetsSwitch.addEventListener('change', (event) => {
-    streetsDataSource.show = event.target.checked;
-  });
+// Add the streets switch to the page
+document.body.appendChild(streetsSwitchContainer);
+
+// Event listener for Streets GeoJSON switch
+streetsSwitch.addEventListener('change', async (event) => {
+  // Wait for the data source to be ready
+  await streetsDataSource.when();
+
+  streetsDataSource.show = event.target.checked;
+});
+
 };
 
 initializeCesium();
