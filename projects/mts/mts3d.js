@@ -67,9 +67,11 @@ const initializeCesium = async () => {
   streetsSwitch.addEventListener('change', async (event) => {
     // Wait for the data source to be ready
     await streetsDataSource.when();
-
+  
     streetsDataSource.show = event.target.checked;
+    console.log('Streets GeoJSON switch:', event.target.checked);
   });
+  
 
   // Load mtsparks GeoJSON data and add it as a new data source
   const mtsparksResource = await Cesium.IonResource.fromAssetId(2477584);
@@ -157,10 +159,11 @@ const initializeCesium = async () => {
   mtsgaspipelinesSwitch.addEventListener('change', async (event) => {
     // Wait for the data source to be ready
     await mtsgaspipelinesDataSource.when();
-
+  
     mtsgaspipelinesDataSource.show = event.target.checked;
+    console.log('MTSGasPipelines GeoJSON switch:', event.target.checked);
   });
-
+  
   // Load mtsrail GeoJSON data and add it as a new data source
   const mtsrailResource = await Cesium.IonResource.fromAssetId(2477618);
   const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
