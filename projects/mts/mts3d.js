@@ -101,35 +101,36 @@ const initializeCesium = async () => {
     mtsparksDataSource.show = event.target.checked;
   });
 
-  // Load mtscso GeoJSON data and add it as a new data source
-const mtscsoResource = await Cesium.IonResource.fromAssetId(2477557);
-const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
-viewer.dataSources.add(mtscsoDataSource);
+  // Load mtsgaspipelines GeoJSON data and add it as a new data source
+const mtsgaspipelinesResource = await Cesium.IonResource.fromAssetId(YOUR_MTSGASPIPELINES_ASSET_ID);
+const mtsgaspipelinesDataSource = await Cesium.GeoJsonDataSource.load(mtsgaspipelinesResource);
+viewer.dataSources.add(mtsgaspipelinesDataSource);
 
-// mtscso switch for the new GeoJSON layer
-const mtscsoSwitch = document.createElement('input');
-mtscsoSwitch.type = 'checkbox';
-mtscsoSwitch.checked = true; // Set initial state
-mtscsoSwitch.id = 'mtscsoSwitch'; // Set the ID to mtscsoSwitch
+// mtsgaspipelines switch for the new GeoJSON layer
+const mtsgaspipelinesSwitch = document.createElement('input');
+mtsgaspipelinesSwitch.type = 'checkbox';
+mtsgaspipelinesSwitch.checked = true; // Set initial state
+mtsgaspipelinesSwitch.id = 'mtsgaspipelinesSwitch'; // Set the ID to mtsgaspipelinesSwitch
 
-const mtscsoLabel = document.createElement('label');
-mtscsoLabel.appendChild(mtscsoSwitch);
-mtscsoLabel.appendChild(document.createTextNode('MTSCSO GeoJSON'));
+const mtsgaspipelinesLabel = document.createElement('label');
+mtsgaspipelinesLabel.appendChild(mtsgaspipelinesSwitch);
+mtsgaspipelinesLabel.appendChild(document.createTextNode('MTSGasPipelines GeoJSON'));
 
-const mtscsoSwitchContainer = document.createElement('div');
-mtscsoSwitchContainer.classList.add('switch-container');
-mtscsoSwitchContainer.appendChild(mtscsoLabel);
+const mtsgaspipelinesSwitchContainer = document.createElement('div');
+mtsgaspipelinesSwitchContainer.classList.add('switch-container');
+mtsgaspipelinesSwitchContainer.appendChild(mtsgaspipelinesLabel);
 
-// Add the mtscso switch to the page
-document.body.appendChild(mtscsoSwitchContainer);
+// Add the mtsgaspipelines switch to the page
+document.body.appendChild(mtsgaspipelinesSwitchContainer);
 
-// Event listener for MTSCSO GeoJSON switch
-mtscsoSwitch.addEventListener('change', async (event) => {
+// Event listener for MTSGasPipelines GeoJSON switch
+mtsgaspipelinesSwitch.addEventListener('change', async (event) => {
   // Wait for the data source to be ready
-  await mtscsoDataSource.when();
+  await mtsgaspipelinesDataSource.when();
 
-  mtscsoDataSource.show = event.target.checked;
+  mtsgaspipelinesDataSource.show = event.target.checked;
 });
+
 
 };
 
