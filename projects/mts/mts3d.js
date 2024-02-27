@@ -47,6 +47,11 @@ const initializeCesium = async () => {
   });
 
 
+  // Create a switch for the streets
+  const tilesetSwitch = document.getElementById('streetsSwitch');
+  tilesetSwitch.addEventListener('change', (event) => {
+    tileset.show = event.target.checked;
+  });
 
 
   // Function to load and toggle GeoJSON layers
