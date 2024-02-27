@@ -2,98 +2,44 @@
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
 const initializeCesium = async () => {
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-      baseLayerPicker: false,
-      geocoder: false,
-      homeButton: false,
-      infoBox: true,
-      sceneModePicker: false,
-      selectionIndicator: false,
-      timeline: false,
-      navigationHelpButton: false,
-      fullscreenButton: false,
-      animation: false,
-      skyBox: false,
-      skyAtmosphere: false,
-      backgroundColor: Cesium.Color.WHITE
-    });
-  
-    console.log("Viewer initialized");
-  
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-  
-    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-    const tilesetPrimitive = viewer.scene.primitives.add(tileset);
-  
-    console.log("3D Tileset loaded");
-  
-    await viewer.zoomTo(tileset);
-  
-    const extras = tileset.asset.extras;
-    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-    }
-  
-    console.log("Zoomed to 3D Tileset");
-  
-    // Remove the satellite imagery
-    viewer.imageryLayers.removeAll();
-  
-    console.log("Imagery layers removed");
-  
-    // Load GeoJSON data
-    const geoJsonResource = await Cesium.IonResource.fromAssetId(2477200);
-    const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonResource);
-  
-    console.log("GeoJSON data loaded");
-  
-    // Optionally, you can style the GeoJSON entities
-    geoJsonDataSource.entities.values.forEach(entity => {
-      if (entity.point) {
-        entity.point.color = Cesium.Color.YELLOW; // Example styling
-      }
-    });
-  
-    // Add GeoJSON entities to a DataSourceCollection
-    const geoJsonCollection = new Cesium.DataSourceCollection();
-    geoJsonCollection.add(geoJsonDataSource);
-  
-    // Add the DataSourceCollection to the viewer
-    viewer.dataSources.add(geoJsonCollection);
-  
-    console.log("GeoJSON overlay loaded");
-  
-    // Set the camera to view both the 3D Tileset and the GeoJSON overlay
-    const boundingVolumeTileset = tileset.boundingVolume;
-    const boundingVolumeGeoJson = geoJsonDataSource.entities.values[0]?.boundingVolume;
-    const boundingVolumeUnion = Cesium.BoundingVolume.union([boundingVolumeTileset, boundingVolumeGeoJson]);
-  
-    viewer.camera.flyToBoundingVolume(boundingVolumeUnion, {
-      offset: new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-20), boundingVolumeUnion.radius * 2.0)
-    });
-  
-    console.log("Camera set to view both 3D Tileset and GeoJSON overlay");
-  
-    // Create switches
-    const tilesetSwitch = document.getElementById('3dTileSwitch');
-    const geoJsonSwitch = document.getElementById('geoJsonSwitch');
-  
-    // Event listener for 3D Tileset switch
-    tilesetSwitch.addEventListener('change', (event) => {
-      tilesetPrimitive.show = event.target.checked;
-    });
-  
-    // Event listener for GeoJSON switch
-    geoJsonSwitch.addEventListener('change', (event) => {
-      geoJsonCollection.show = event.target.checked;
-    });
-  };
-  
-  initializeCesium();
-  
-  
-  
+  var viewer = new Cesium.Viewer('cesiumContainer', {
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE
+  });
+
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+  const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
+
+  const extras = tileset.asset.extras;
+  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
+
+  // Remove the satellite imagery
+  viewer.imageryLayers.removeAll();
+};
+
+initializeCesium();
+
+
+
+
+
 
 
 
