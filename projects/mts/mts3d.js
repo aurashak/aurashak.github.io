@@ -44,28 +44,52 @@ const initializeCesium = async () => {
       tileset.show = event.target.checked;
     });
   
-    // Function to load and toggle GeoJSON layer for MTS Streets
-    const loadMTSStreetsGeoJSONLayer = async () => {
+    // Function to load and toggle GeoJSON layers
+    const loadGeoJSONLayer = async (assetId, labelText, switchId) => {
       try {
-        // Load GeoJSON data for MTS Streets
-        const resource = await Cesium.IonResource.fromAssetId(2477200);
+        // Load GeoJSON data
+        const resource = await Cesium.IonResource.fromAssetId(assetId);
         const dataSource = await Cesium.GeoJsonDataSource.load(resource);
         viewer.dataSources.add(dataSource);
   
-        // Create a switch for MTS Streets GeoJSON layer
-        const mtsStreetsSwitch = document.getElementById('mtsStreetsSwitch');
-        mtsStreetsSwitch.addEventListener('change', async (event) => {
+        // Create a switch for the GeoJSON layer
+        const layerSwitch = document.createElement('input');
+        layerSwitch.type = 'checkbox';
+        layerSwitch.checked = true;
+        layerSwitch.id = switchId;
+  
+        // Create a label for the switch
+        const layerLabel = document.createElement('label');
+        layerLabel.appendChild(layerSwitch);
+        layerLabel.appendChild(document.createTextNode(labelText));
+  
+        // Create a container for the switch and label
+        const layerSwitchContainer = document.createElement('div');
+        layerSwitchContainer.classList.add('switch-container');
+        layerSwitchContainer.appendChild(layerLabel);
+  
+        // Add the switch container to the page
+        document.body.appendChild(layerSwitchContainer);
+  
+        // Event listener for the GeoJSON switch
+        layerSwitch.addEventListener('change', async (event) => {
           await dataSource.when();
           dataSource.show = event.target.checked;
-          console.log(`MTS Streets GeoJSON switch:`, event.target.checked);
+          console.log(`${labelText} GeoJSON switch:`, event.target.checked);
         });
       } catch (error) {
-        console.error(`Error loading MTS Streets GeoJSON:`, error);
+        console.error(`Error loading ${labelText} GeoJSON:`, error);
       }
     };
   
+    // Load existing GeoJSON layers without switches
+    loadGeoJSONLayer(2477557, 'mtsparks GeoJSON', 'mtsparksSwitch');
+    loadGeoJSONLayer(2477597, 'mtscso GeoJSON', 'mtscsoSwitch');
+    loadGeoJSONLayer(2477584, 'MTSGasPipelines GeoJSON', 'mtsgaspipelinesSwitch');
+    loadGeoJSONLayer(2477618, 'mtsrail GeoJSON', 'mtsrailSwitch');
+  
     // Load and toggle MTS Streets GeoJSON layer with switch
-    loadMTSStreetsGeoJSONLayer();
+    loadGeoJSONLayer(2477200, 'MTS Streets GeoJSON', 'mtsStreetsSwitch');
   };
   
   // Call the initializeCesium function
