@@ -66,9 +66,10 @@ const initializeCesium = async () => {
       document.body.appendChild(layerSwitchContainer);
 
       // Event listener for the GeoJSON switch
-      layerSwitch.addEventListener('change', async (event) => {
-        await dataSource.readyPromise;
-        dataSource.show = event.target.checked;
+      layerSwitch.addEventListener('change', (event) => {
+        dataSource.entities.values.forEach((entity) => {
+          entity.show = event.target.checked;
+        });
         console.log(`${labelText} GeoJSON switch:`, event.target.checked);
       });
     } catch (error) {
