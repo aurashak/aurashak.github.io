@@ -65,10 +65,11 @@ const initializeCesium = async () => {
     console.log("GeoJSON overlay loaded");
   
     // Set the camera to view both the 3D Tileset and the GeoJSON overlay
-    const boundingVolume = Cesium.BoundingVolume.union([
-      tileset.boundingVolume,
-      geoJsonDataSource.entities.values[0].boundingVolume
-    ]);
+    let boundingVolume = tileset.boundingVolume;
+    const geoJsonEntity = geoJsonDataSource.entities.values[0];
+    if (geoJsonEntity && geoJsonEntity.boundingVolume) {
+      boundingVolume = Cesium.BoundingVolume.union([boundingVolume, geoJsonEntity.boundingVolume]);
+    }
   
     viewer.camera.viewBoundingVolume(boundingVolume, viewer.scene.globe.ellipsoid);
     viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
@@ -91,6 +92,7 @@ const initializeCesium = async () => {
   };
   
   initializeCesium();
+  
   
 
 
