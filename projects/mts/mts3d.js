@@ -1,10 +1,7 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
-
 const initializeCesium = async () => {
-  try {
     const viewer = new Cesium.Viewer('cesiumContainer', {
       baseLayerPicker: false,
       geocoder: false,
@@ -20,64 +17,32 @@ const initializeCesium = async () => {
       skyAtmosphere: false,
       backgroundColor: Cesium.Color.WHITE
     });
-
+  
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
-    // Load the first 3D Tileset
-    const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-    const tileset1Primitive = viewer.scene.primitives.add(tileset1);
-    await viewer.zoomTo(tileset1);
-
-    if (Cesium.defined(tileset1.asset) && Cesium.defined(tileset1.asset.extras)) {
-      const extras1 = tileset1.asset.extras;
-      if (Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
-        tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
-      }
+  
+    const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+    const tilesetPrimitive = viewer.scene.primitives.add(tileset);
+    await viewer.zoomTo(tileset);
+  
+    const extras = tileset.asset.extras;
+    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+      tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
     }
-
-    // Load the second 3D Tileset (MTS Streets)
-    const tileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(2477200);
-    const tileset2Primitive = viewer.scene.primitives.add(tileset2);
-
+  
     // Remove the satellite imagery
     viewer.imageryLayers.removeAll();
-
-    // Create switches for the 3D layers
+  
+    // Create a switch for the 3D layer
     const tilesetSwitch = document.getElementById('3dTileSwitch');
-    const mtsStreetsSwitch = document.createElement('input');
-    mtsStreetsSwitch.type = 'checkbox';
-    mtsStreetsSwitch.checked = true; // Set initial state
-    mtsStreetsSwitch.id = 'mtsStreetsSwitch';
-
-    const mtsStreetsLabel = document.createElement('label');
-    mtsStreetsLabel.appendChild(mtsStreetsSwitch);
-    mtsStreetsLabel.appendChild(document.createTextNode('MTS Streets'));
-
-    const switchContainer = document.createElement('div');
-    switchContainer.classList.add('switch-container');
-    switchContainer.appendChild(tilesetSwitch);
-    switchContainer.appendChild(mtsStreetsLabel);
-
-    // Add the switches to the page
-    document.body.appendChild(switchContainer);
-
+  
     // Event listener for 3D Tileset switch
     tilesetSwitch.addEventListener('change', (event) => {
-      tileset1.show = event.target.checked;
+      tileset.show = event.target.checked;
     });
-
-    // Event listener for MTS Streets switch
-    mtsStreetsSwitch.addEventListener('change', (event) => {
-      tileset2.show = event.target.checked;
-    });
-  } catch (error) {
-    console.error('Error initializing Cesium:', error);
-  }
-};
-
-initializeCesium();
-
+  };
+  
+  initializeCesium();
 
 
 
