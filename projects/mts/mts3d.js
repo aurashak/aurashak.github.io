@@ -1,7 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 const initializeCesium = async () => {
   const viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: false,
@@ -161,11 +160,39 @@ const initializeCesium = async () => {
 
     mtsgaspipelinesDataSource.show = event.target.checked;
   });
+
+  // Load mtsrail GeoJSON data and add it as a new data source
+  const mtsrailResource = await Cesium.IonResource.fromAssetId(2477618);
+  const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
+  viewer.dataSources.add(mtsrailDataSource);
+
+  // Switch for the mtsrail GeoJSON layer
+  const mtsrailSwitch = document.createElement('input');
+  mtsrailSwitch.type = 'checkbox';
+  mtsrailSwitch.checked = true; // Set initial state
+  mtsrailSwitch.id = 'mtsrailSwitch';
+
+  const mtsrailLabel = document.createElement('label');
+  mtsrailLabel.appendChild(mtsrailSwitch);
+  mtsrailLabel.appendChild(document.createTextNode('mtsrail GeoJSON'));
+
+  const mtsrailSwitchContainer = document.createElement('div');
+  mtsrailSwitchContainer.classList.add('switch-container');
+  mtsrailSwitchContainer.appendChild(mtsrailLabel);
+
+  // Add the mtsrail switch to the page
+  document.body.appendChild(mtsrailSwitchContainer);
+
+  // Event listener for mtsrail GeoJSON switch
+  mtsrailSwitch.addEventListener('change', async (event) => {
+    // Wait for the data source to be ready
+    await mtsrailDataSource.when();
+
+    mtsrailDataSource.show = event.target.checked;
+  });
 };
 
 initializeCesium();
-
-
 
 /*
 
