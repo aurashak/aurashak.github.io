@@ -72,16 +72,38 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 openstreetmapLayer.addTo(map);
 
+// Load OSMBuildings layer after the base map layers
+var osmb = new OSMBuildings(map);
+osmb.on('load', function () {
+    console.log('OSMBuildings layer loaded successfully.');
+});
+osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
+// NYC Counties Layer (Initially hidden)
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'grey',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: .3
+        };
+    },
+    pointToLayer: function (feature, latlng) {
+        // Get the county name from the 'NAME' property
+        var countyName = feature.properties.NAME;
 
-  // Load OSMBuildings layer after the base map layers
-  var osmb = new OSMBuildings(map);
-  osmb.on('load', function () {
-      console.log('OSMBuildings layer loaded successfully.');
-  });
-  osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
-
-
+        // Create a label marker with the county name as the label
+        return L.marker(latlng, {
+            icon: L.divIcon({
+                className: 'leaflet-div-label',
+                html: countyName, // Use the 'NAME' property as the label
+                iconSize: [100, 40] // Adjust the size of the label marker
+            })
+        });
+    }
+});
 
 // Add OSMBuildings layer to base map layers group
 var baseLayers = {
@@ -93,9 +115,6 @@ var baseLayers = {
 var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
-
-
-
 
 
 
