@@ -44,8 +44,31 @@ const initializeCesium = async () => {
     tileset.show = event.target.checked;
   });
 
+  // Create a switch for the mtsstreets layer
+  const mtsstreetsSwitch = document.createElement('input');
+  mtsstreetsSwitch.type = 'checkbox';
+  mtsstreetsSwitch.id = 'mtsstreetsSwitch';
+  mtsstreetsSwitch.checked = true; // Default to checked
+  const mtsstreetsLabel = document.createElement('label');
+  mtsstreetsLabel.innerHTML = 'mtsstreets';
+  mtsstreetsLabel.appendChild(mtsstreetsSwitch);
 
+  // Append the switch to a container element
+  const switchContainer = document.getElementById('switchContainer');
+  switchContainer.appendChild(mtsstreetsLabel);
 
+  // Load mtsstreets GeoJsonDataSource
+  const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+  const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+
+  // Create a switch event listener for mtsstreets
+  mtsstreetsSwitch.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      viewer.dataSources.add(mtsstreetsDataSource);
+    } else {
+      viewer.dataSources.remove(mtsstreetsDataSource);
+    }
+  });
 };
 
 // Call the initializeCesium function
