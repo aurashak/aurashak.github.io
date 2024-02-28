@@ -12,6 +12,8 @@ var map = L.map('nymap', {
     maxZoom: 16                // Maximum zoom level (adjust as needed)
 }).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
 
+
+
 L.control.scale().addTo(map);
 
 // Function to calculate marker size based on zoom level
@@ -24,6 +26,7 @@ function calculateMarkerSize(zoom) {
     var size = initialSize - (zoom - 3) * 5;
     return Math.max(size, minSize);
 }
+
 
 // NYC Counties Layer (Initially hidden)
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
@@ -51,6 +54,9 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }
 });
 
+
+
+
 // Base Map Layers
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     style: function (feature) {
@@ -64,25 +70,23 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
     }
 });
 
-// Add 3D buildings layer to the base map layers
-var osmb = new OSMBuildings(map);
-osmb.loadData([40.7128, -74.0060, 12]);
-osmb.setStyle('height', function (height) {
-    return height * 5; // Adjust the height factor as needed
-});
+openstreetmapLayer.addTo(map);
 
-var buildingsLayer = L.layerGroup([osmb]);
+
+
 
 var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
     "Satellite": satelliteLayer,
-    "Outlines": nyccountiesLayer,
-    "3D Buildings": buildingsLayer,
+    "Outlines": nyccountiesLayer, // Create an empty layer group for "Turn Off"
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
-    position: 'topright'
+    position: 'topright' // Position the control in the top right corner
 }).addTo(map);
+
+
+
 
 
 
