@@ -66,31 +66,15 @@ osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json
     shadow: true
 });
 
-// NYC Counties Layer (Initially hidden)
-var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'grey',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.5,
-            fillOpacity: .3
-        };
-    },
-    pointToLayer: function (feature, latlng) {
-        // Get the county name from the 'NAME' property
-        var countyName = feature.properties.NAME;
 
-        // Create a label marker with the county name as the label
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'leaflet-div-label',
-                html: countyName, // Use the 'NAME' property as the label
-                iconSize: [100, 40] // Adjust the size of the label marker
-            })
-        });
-    }
+var shadowSlider = document.getElementById("shadow-slider");
+shadowSlider.addEventListener("input", function () {
+    var shadowOpacity = parseFloat(shadowSlider.value);
+    osmb.set('shadow', true);
+    osmb.set('shadowDarkness', shadowOpacity);
 });
+
+
 
 // Add OSMBuildings layer to base map layers group
 var baseLayers = {
