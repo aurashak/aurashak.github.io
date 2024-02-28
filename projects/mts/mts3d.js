@@ -24,42 +24,25 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-// Load 3D Tileset - Tileset 1
-const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-viewer.scene.primitives.add(tileset1);
-await viewer.zoomTo(tileset1);
+  // Load 3D Tileset
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+  viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
 
-// Apply default style to the tileset if available
-const extras1 = tileset1.asset ? tileset1.asset.extras : undefined;
-if (Cesium.defined(extras1) && Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
-  tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
-}
+  // Apply default style to the tileset if available
+  const extras = tileset.asset.extras;
+  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
 
-// Load 3D Tileset - Tileset 2 (mtsstreets)
-const tileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(2477200);
-viewer.scene.primitives.add(tileset2);
-await viewer.zoomTo(tileset2);
+  // Remove the default satellite imagery layers
+  viewer.imageryLayers.removeAll();
 
-// Apply default style to the tileset if available
-const extras2 = tileset2.asset ? tileset2.asset.extras : undefined;
-if (Cesium.defined(extras2) && Cesium.defined(extras2.ion) && Cesium.defined(extras2.ion.defaultStyle)) {
-  tileset2.style = new Cesium.Cesium3DTileStyle(extras2.ion.defaultStyle);
-}
-
-// Remove the default satellite imagery layers
-viewer.imageryLayers.removeAll();
-
-// Create a switch for the 3D Tilesets
-const tileset1Switch = document.getElementById('tileset1Switch');
-tileset1Switch.addEventListener('change', (event) => {
-  tileset1.show = event.target.checked;
-});
-
-const tileset2Switch = document.getElementById('tileset2Switch');
-tileset2Switch.addEventListener('change', (event) => {
-  tileset2.show = event.target.checked;
-});
-
+  // Create a switch for the 3D Tileset
+  const tilesetSwitch = document.getElementById('3dTileSwitch');
+  tilesetSwitch.addEventListener('change', (event) => {
+    tileset.show = event.target.checked;
+  });
 
 
 
@@ -67,7 +50,6 @@ tileset2Switch.addEventListener('change', (event) => {
 
 // Call the initializeCesium function
 initializeCesium();
-
 
 
 
