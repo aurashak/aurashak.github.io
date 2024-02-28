@@ -48,9 +48,9 @@ const initializeCesium = async () => {
 
 // Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
-const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtsResource);
+const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
-// Create a switch event listener for mtsstreets
+// Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
 mtscsoSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
@@ -60,8 +60,9 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtsstreets
+// Initial load of mtscso
 viewer.dataSources.add(mtscsoDataSource);
+
 
 
 
