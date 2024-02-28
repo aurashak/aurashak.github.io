@@ -46,6 +46,25 @@ const initializeCesium = async () => {
   });
 
 
+// Load mtscso GeoJsonDataSource
+const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
+const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtsResource);
+
+// Create a switch event listener for mtsstreets
+const mtscsoSwitch = document.getElementById("mtscsoSwitch");
+mtscsoSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(mtscsoDataSource);
+  } else {
+    viewer.dataSources.remove(mtscsoDataSource);
+  }
+});
+
+// Initial load of mtsstreets
+viewer.dataSources.add(mtscsoDataSource);
+
+
+
 
   // Load mtsstreets GeoJsonDataSource
   const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
@@ -63,26 +82,6 @@ const initializeCesium = async () => {
 
   // Initial load of mtsstreets
   viewer.dataSources.add(mtsstreetsDataSource);
-};
-
-
-
-// Load mtscso GeoJsonDataSource
-const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
-const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
-
-// Create a switch event listener for mtsstreets
-const mtscsoSwitch = document.getElementById("mtscsoSwitch");
-mtscsoSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtscsoDataSource);
-  } else {
-    viewer.dataSources.remove(mtscsoDataSource);
-  }
-});
-
-// Initial load of mtsstreets
-viewer.dataSources.add(mtscsoDataSource);
 };
 
 
