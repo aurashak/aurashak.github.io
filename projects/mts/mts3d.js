@@ -1,72 +1,76 @@
+// Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-      // Initialize Cesium
-      const initializeCesium = async () => {
-        // Create a Cesium viewer
-        const viewer = new Cesium.Viewer("cesiumContainer", {
-          baseLayerPicker: false,
-          geocoder: false,
-          homeButton: false,
-          infoBox: true,
-          sceneModePicker: false,
-          selectionIndicator: false,
-          timeline: false,
-          navigationHelpButton: false,
-          fullscreenButton: false,
-          animation: false,
-          skyBox: false,
-          skyAtmosphere: false,
-          backgroundColor: Cesium.Color.WHITE,
-        });
+// Initialize Cesium
+const initializeCesium = async () => {
+  // Create a Cesium viewer
+  const viewer = new Cesium.Viewer("cesiumContainer", {
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+    skyBox: false,
+    skyAtmosphere: false,
+    backgroundColor: Cesium.Color.WHITE,
+  });
 
-        // Set camera controller settings
-        viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-        viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+  // Set camera controller settings
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-        // Load 3D Tileset
-        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-        viewer.scene.primitives.add(tileset);
-        await viewer.zoomTo(tileset);
+  // Load 3D Tileset
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+  viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
 
-        // Apply default style to the tileset if available
-        const extras = tileset.asset.extras;
-        if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-          tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-        }
+  // Apply default style to the tileset if available
+  const extras = tileset.asset.extras;
+  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
 
-        // Remove the default satellite imagery layers
-        viewer.imageryLayers.removeAll();
+  // Remove the default satellite imagery layers
+  viewer.imageryLayers.removeAll();
 
-        // Create a switch event listener for the 3D Tileset
-        const tilesetSwitch = document.getElementById("3dTileSwitch");
-        tilesetSwitch.addEventListener("change", (event) => {
-          tileset.show = event.target.checked;
-        });
+  // Create a switch event listener for the 3D Tileset
+  const tilesetSwitch = document.getElementById("3dTileSwitch");
+  tilesetSwitch.addEventListener("change", (event) => {
+    tileset.show = event.target.checked;
+  });
 
-        // Manually add the switch for mtsstreets (without JavaScript)
-        // <label>
-        //   <input type="checkbox" id="mtsstreetsSwitch" checked>
-        //   mtsstreets
-        // </label>
+  // Manually add the switch for mtsstreets (without JavaScript)
+  // <label>
+  //   <input type="checkbox" id="mtsstreetsSwitch" checked>
+  //   mtsstreets
+  // </label>
 
-        // Load mtsstreets GeoJsonDataSource
-        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
-        const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+  // Load mtsstreets GeoJsonDataSource
+  const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+  const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-        // Create a switch event listener for mtsstreets
-        const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
-        mtsstreetsSwitch.addEventListener("change", (event) => {
-          if (event.target.checked) {
-            viewer.dataSources.add(mtsstreetsDataSource);
-          } else {
-            viewer.dataSources.remove(mtsstreetsDataSource);
-          }
-        });
-      };
+  // Create a switch event listener for mtsstreets
+  const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+  mtsstreetsSwitch.addEventListener("change", (event) => {
+    if (event.target.checked) {
+      viewer.dataSources.add(mtsstreetsDataSource);
+    } else {
+      viewer.dataSources.remove(mtsstreetsDataSource);
+    }
+  });
 
-      // Call the initializeCesium function
-      initializeCesium();
+  // Initial load of mtsstreets
+  viewer.dataSources.add(mtsstreetsDataSource);
+};
+
+// Call the initializeCesium function
+initializeCesium();
 
 
   /*
