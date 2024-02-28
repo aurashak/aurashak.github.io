@@ -110,6 +110,7 @@ var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
     "Satellite": satelliteLayer,
     "Outlines": nyccountiesLayer, // Create an empty layer group for "Turn Off"
+    "OSMBuildings": osmb, // Add the OSMBuildings layer directly to the base layer group
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
