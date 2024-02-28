@@ -63,40 +63,43 @@ mtscsoSwitch.addEventListener("change", (event) => {
 // Initial load of mtscso
 viewer.dataSources.add(mtscsoDataSource);
 
-// Load mtscso GeoJsonDataSource
+
+
+// Load mtsparks GeoJsonDataSource
 const mtsparksResource = await Cesium.IonResource.fromAssetId(2477557);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
 
-// Create a switch event listener for mtscso
+// Create a switch event listener for mtsparks
 const mtsparksSwitch = document.getElementById("mtsparksSwitch");
 mtsparksSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtsparksDataSource);
-  } else {
-    viewer.dataSources.remove(mtsparksDataSource);
-  }
+  mtsparksDataSource.entities.values.forEach((entity) => {
+    entity.show = event.target.checked;
+  });
 });
 
-// Initial load of mtscso
+// Initial load of mtsparks
 viewer.dataSources.add(mtsparksDataSource);
+mtsparksDataSource.entities.values.forEach((entity) => {
+  entity.show = true; // Make sure entities are visible by default
+});
 
-
-// Load mtscso GeoJsonDataSource
+// Load mtsrail GeoJsonDataSource
 const mtsrailResource = await Cesium.IonResource.fromAssetId(2477618);
 const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
 
-// Create a switch event listener for mtscso
+// Create a switch event listener for mtsrail
 const mtsrailSwitch = document.getElementById("mtsrailSwitch");
 mtsrailSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtsrailDataSource);
-  } else {
-    viewer.dataSources.remove(mtsrailDataSource);
-  }
+  mtsrailDataSource.entities.values.forEach((entity) => {
+    entity.show = event.target.checked;
+  });
 });
 
-// Initial load of mtscso
+// Initial load of mtsrail
 viewer.dataSources.add(mtsrailDataSource);
+mtsrailDataSource.entities.values.forEach((entity) => {
+  entity.show = true; // Make sure entities are visible by default
+});
 
 
 
