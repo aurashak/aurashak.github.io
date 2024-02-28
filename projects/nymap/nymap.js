@@ -317,18 +317,18 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
+// Cultural Institutions Layer
 var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/culturalins.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        return L.polygon(latlng, {
-            fillColor: 'purple',
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'white',
             color: 'black',
-            weight: 1,
+            weight: 0,
             opacity: 0.7,
-            fillOpacity: 0.5,
-            rotation: 45, // Rotate the triangle
-            numberOfSides: 3 // Number of sides for a triangle
-        }).setRadius(size);
+            fillOpacity: 0.7
+        });
     }
 });
 
