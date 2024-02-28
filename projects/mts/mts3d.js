@@ -65,6 +65,25 @@ viewer.dataSources.add(mtscsoDataSource);
 
 
 
+// Load mtscso GeoJsonDataSource
+const mtsgasResource = await Cesium.IonResource.fromAssetId(2477584);
+const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
+
+// Create a switch event listener for mtscso
+const mtsgasSwitch = document.getElementById("mtsgasSwitch");
+mtsgasSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(mtsgasDataSource);
+  } else {
+    viewer.dataSources.remove(mtsgasDataSource);
+  }
+});
+
+// Initial load of mtscso
+viewer.dataSources.add(mtsgasDataSource);
+
+
+
 
 
   // Load mtsstreets GeoJsonDataSource
