@@ -323,14 +323,18 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'white',
+            fillColor: 'yellow',
             color: 'black',
-            weight: 0,
+            weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.7
         });
+    },
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup('<b>' + feature.properties.name + '</b><br>' + 'Address: ' + feature.properties.address);
     }
 });
+
 
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
