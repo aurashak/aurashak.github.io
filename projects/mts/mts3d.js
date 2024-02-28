@@ -21,9 +21,12 @@ const initializeCesium = async () => {
     backgroundColor: Cesium.Color.WHITE,
   });
 
-  // Set camera controller settings
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+// Set camera controller settings for limited bounds
+viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+viewer.scene.screenSpaceCameraController.maximumTranslateFactor = 5000; // Adjust this value as needed
+viewer.scene.screenSpaceCameraController.inertiaSpin = 0.98; // Adjust this value as needed
+
 
   // Load 3D Tileset
   const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
