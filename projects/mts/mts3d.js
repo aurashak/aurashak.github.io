@@ -24,8 +24,7 @@ const initializeCesium = async () => {
 // Set camera controller settings for limited bounds
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-viewer.scene.screenSpaceCameraController.maximumTranslateFactor = 5000; // Adjust this value as needed
-viewer.scene.screenSpaceCameraController.inertiaSpin = 0.98; // Adjust this value as needed
+
 
 
   // Load 3D Tileset
@@ -47,6 +46,11 @@ viewer.scene.screenSpaceCameraController.inertiaSpin = 0.98; // Adjust this valu
   tilesetSwitch.addEventListener("change", (event) => {
     tileset.show = event.target.checked;
   });
+
+  // Lock the camera to the tileset
+const boundingVolume = tileset.boundingVolume.boundingVolume;
+viewer.camera.viewBoundingSphere(boundingVolume);
+viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
 
 
   // Load OSM buildings 3D Tileset
