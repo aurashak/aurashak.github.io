@@ -331,10 +331,10 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         });
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup('<b>' + feature.properties.name + '</b><br>' + 'Address: ' + feature.properties.address);
+        var organizationName = feature.properties["Organization Name"];
+        layer.bindPopup('<b>' + organizationName + '</b>');
     }
 });
-
 
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
