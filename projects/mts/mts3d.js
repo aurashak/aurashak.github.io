@@ -46,6 +46,24 @@ const initializeCesium = async () => {
   });
 
 
+  // Load OSM buildings 3D Tileset
+const osmBuildingsTileset = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(96188),
+  );
+  
+  // Apply default style to the OSM buildings tileset if available
+  const osmExtras = osmBuildingsTileset.asset.extras;
+  if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
+    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
+  }
+  
+  // Create a switch event listener for the OSM buildings Tileset
+  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+  osmBuildingsSwitch.addEventListener("change", (event) => {
+    osmBuildingsTileset.show = event.target.checked;
+  });
+
+
 // Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
