@@ -87,7 +87,7 @@ const createSwitch = (switchId, labelText, viewer, dataSource) => {
 
   // Event listener for the switch
   layerSwitch.addEventListener('change', async (event) => {
-    await dataSource.when();
+    await dataSource.readyPromise;
     dataSource.show = event.target.checked;
     console.log(`${labelText} switch:`, event.target.checked);
   });
