@@ -6,27 +6,13 @@ var bounds = L.latLngBounds(
 
 // Create and configure the map with the specified bounds
 var map = L.map('nymap', {
-    maxBounds: bounds,          // Set maxBounds to limit zooming out
-    maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
-    minZoom: 10,                // Minimum zoom level
-    maxZoom: 16                // Maximum zoom level (adjust as needed)
-}).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
-
-
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0,
+    minZoom: 10,
+    maxZoom: 16
+}).setView([40.7128, -74.0060], 12);
 
 L.control.scale().addTo(map);
-
-// Function to calculate marker size based on zoom level
-function calculateMarkerSize(zoom) {
-    // Define the updated initial and minimum sizes
-    var initialSize = 16; // Adjust this value to make markers bigger
-    var minSize = 6;
-
-    // Calculate the size based on zoom level with a minimum size
-    var size = initialSize - (zoom - 3) * 5;
-    return Math.max(size, minSize);
-}
-
 
 // NYC Counties Layer (Initially hidden)
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
@@ -54,9 +40,6 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     }
 });
 
-
-
-
 // Base Map Layers
 var satelliteLayer = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2019_3857/default/g/{z}/{y}/{x}.jpg', {
     style: function (feature) {
@@ -77,7 +60,11 @@ var osmb = new OSMBuildings(map);
 osmb.on('load', function () {
     console.log('OSMBuildings layer loaded successfully.');
 });
-osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
+
+// Add shadows to OSM Buildings
+osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json', {
+    shadow: true
+});
 
 // NYC Counties Layer (Initially hidden)
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
@@ -110,14 +97,12 @@ var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
     "Satellite": satelliteLayer,
     "Outlines": nyccountiesLayer, // Create an empty layer group for "Turn Off"
-    "OSMBuildings": osmb, // Add the OSMBuildings layer directly to the base layer group
+    "3d Buildings": osmb, // Add the OSMBuildings layer directly to the base layer group
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
     position: 'topright' // Position the control in the top right corner
 }).addTo(map);
-
-
 
 
 
