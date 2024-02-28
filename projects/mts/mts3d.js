@@ -1,7 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
-
 // Initialize Cesium
 const initializeCesium = async () => {
   // Create a Cesium viewer
@@ -87,9 +86,13 @@ const createSwitch = (switchId, labelText, viewer, dataSource) => {
 
   // Event listener for the switch
   layerSwitch.addEventListener('change', async (event) => {
-    await dataSource.readyPromise;
-    dataSource.show = event.target.checked;
-    console.log(`${labelText} switch:`, event.target.checked);
+    try {
+      await dataSource.readyPromise;
+      dataSource.show = event.target.checked;
+      console.log(`${labelText} switch:`, event.target.checked);
+    } catch (error) {
+      console.error(`Error changing ${labelText} switch:`, error);
+    }
   });
 
   return { container: layerSwitchContainer, switch: layerSwitch };
