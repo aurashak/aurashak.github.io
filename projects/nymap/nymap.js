@@ -73,12 +73,14 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 openstreetmapLayer.addTo(map);
 
 
+var osmb = new OSMBuildings(map).load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
-
+// Add OSMBuildings layer to base map layers group
 var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
     "Satellite": satelliteLayer,
     "Outlines": nyccountiesLayer, // Create an empty layer group for "Turn Off"
+    "OSMBuildings": osmb
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
