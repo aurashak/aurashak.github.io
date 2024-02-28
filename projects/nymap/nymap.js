@@ -67,12 +67,6 @@ osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json
 });
 
 
-var shadowSlider = document.getElementById("shadow-slider");
-shadowSlider.addEventListener("input", function () {
-    var shadowOpacity = parseFloat(shadowSlider.value);
-    osmb.set('shadow', true);
-    osmb.set('shadowDarkness', shadowOpacity);
-});
 
 
 
