@@ -12,38 +12,4 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 openstreetmapLayer.addTo(map);
 
-// GeoJSON Layer - Remediation Sites (Polygons)
-var remediationSitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/remediationsites.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'green',
-            color: 'black',
-            weight: 2,
-            opacity: 1
-        };
-    }
-});
 
-remediationSitesLayer.addTo(map);
-
-// GeoJSON Layer - Streets (Lines)
-var streetsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/mtsstreets.geojson', {
-    style: function (feature) {
-        return {
-            color: 'blue',   // Set your desired line color
-            weight: 2,       // Set the line weight
-            opacity: 1       // Set the line opacity
-        };
-    }
-});
-
-streetsLayer.addTo(map);
-
-// Console log for debugging
-remediationSitesLayer.on('data:loaded', function () {
-    console.log('Remediation sites GeoJSON data loaded successfully.');
-});
-
-streetsLayer.on('data:loaded', function () {
-    console.log('Streets GeoJSON data loaded successfully.');
-});
