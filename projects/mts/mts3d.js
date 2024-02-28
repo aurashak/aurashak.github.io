@@ -44,8 +44,9 @@ const initializeCesium = async () => {
     tileset.show = event.target.checked;
   });
 
-  /*
 
+  /*
+  
   // Function to load and toggle GeoJSON layers
   const loadGeoJSONLayer = async (assetId, labelText, switchId) => {
     try {
@@ -92,10 +93,10 @@ const initializeCesium = async () => {
 
   // Load and toggle MTS Streets GeoJSON layer with switch
   loadGeoJSONLayer(2477200, 'MTS Streets GeoJSON', 'mtsStreetsSwitch');
+
+  */
+
 };
-
-*/
-
 
 // Call the initializeCesium function
 initializeCesium();
