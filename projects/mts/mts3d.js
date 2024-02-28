@@ -1,6 +1,7 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
 // Initialize Cesium
 const initializeCesium = async () => {
   // Create a Cesium viewer
@@ -77,15 +78,14 @@ const initializeCesium = async () => {
     }
   };
 
-  // Load existing GeoJSON layers without switches
+  // Load and toggle GeoJSON layers with switches
+  loadGeoJSONLayer(2477200, 'MTS Streets GeoJSON', 'mtsStreetsSwitch');
   loadGeoJSONLayer(2477557, 'mtsparks GeoJSON', 'mtsparksSwitch');
   loadGeoJSONLayer(2477597, 'mtscso GeoJSON', 'mtscsoSwitch');
   loadGeoJSONLayer(2477584, 'MTSGasPipelines GeoJSON', 'mtsgaspipelinesSwitch');
   loadGeoJSONLayer(2477618, 'mtsrail GeoJSON', 'mtsrailSwitch');
-
-  // Load and toggle MTS Streets GeoJSON layer with switch
-  loadGeoJSONLayer(2477200, 'MTS Streets GeoJSON', 'mtsStreetsSwitch');
 };
 
 // Call the initializeCesium function
 initializeCesium();
+
