@@ -30,7 +30,7 @@ viewer.scene.primitives.add(tileset1);
 await viewer.zoomTo(tileset1);
 
 // Apply default style to the tileset if available
-const extras1 = tileset1.asset.extras;
+const extras1 = tileset1.asset ? tileset1.asset.extras : undefined;
 if (Cesium.defined(extras1) && Cesium.defined(extras1.ion) && Cesium.defined(extras1.ion.defaultStyle)) {
   tileset1.style = new Cesium.Cesium3DTileStyle(extras1.ion.defaultStyle);
 }
@@ -41,7 +41,7 @@ viewer.scene.primitives.add(tileset2);
 await viewer.zoomTo(tileset2);
 
 // Apply default style to the tileset if available
-const extras2 = Cesium.defined(tileset2.asset) ? tileset2.asset.extras : undefined;
+const extras2 = tileset2.asset ? tileset2.asset.extras : undefined;
 if (Cesium.defined(extras2) && Cesium.defined(extras2.ion) && Cesium.defined(extras2.ion.defaultStyle)) {
   tileset2.style = new Cesium.Cesium3DTileStyle(extras2.ion.defaultStyle);
 }
@@ -59,6 +59,7 @@ const tileset2Switch = document.getElementById('tileset2Switch');
 tileset2Switch.addEventListener('change', (event) => {
   tileset2.show = event.target.checked;
 });
+
 
 
 
