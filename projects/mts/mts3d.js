@@ -1,6 +1,8 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
 
+
+
 // Initialize Cesium
 const initializeCesium = async () => {
   // Create a Cesium viewer
@@ -42,29 +44,12 @@ const initializeCesium = async () => {
   const tilesetSwitch = createSwitch('3dTileSwitch', '3D Tileset', viewer, tileset);
   document.body.appendChild(tilesetSwitch.container);
 
-  // Function to create a switch for GeoJSON layers
-  const createGeoJSONSwitch = async (assetId, labelText) => {
-    try {
-      // Load GeoJSON data
-      const resource = await Cesium.IonResource.fromAssetId(assetId);
-      const dataSource = await Cesium.GeoJsonDataSource.load(resource);
-      viewer.dataSources.add(dataSource);
-
-      // Create a switch for the GeoJSON layer
-      const switchId = labelText.replace(/\s+/g, '').toLowerCase() + 'Switch';
-      const geoJSONSwitch = createSwitch(switchId, labelText, viewer, dataSource);
-      document.body.appendChild(geoJSONSwitch.container);
-    } catch (error) {
-      console.error(`Error loading ${labelText} GeoJSON:`, error);
-    }
-  };
-
   // Load and create switches for GeoJSON layers
-  createGeoJSONSwitch(2477200, 'MTS Streets GeoJSON');
-  createGeoJSONSwitch(2477557, 'mtsparks GeoJSON');
-  createGeoJSONSwitch(2477597, 'mtscso GeoJSON');
-  createGeoJSONSwitch(2477584, 'MTSGasPipelines GeoJSON');
-  createGeoJSONSwitch(2477618, 'mtsrail GeoJSON');
+  createGeoJSONSwitch(2477200, 'MTS Streets GeoJSON', viewer);
+  createGeoJSONSwitch(2477557, 'mtsparks GeoJSON', viewer);
+  createGeoJSONSwitch(2477597, 'mtscso GeoJSON', viewer);
+  createGeoJSONSwitch(2477584, 'MTSGasPipelines GeoJSON', viewer);
+  createGeoJSONSwitch(2477618, 'mtsrail GeoJSON', viewer);
 };
 
 // Function to create a switch for a layer
@@ -87,7 +72,6 @@ const createSwitch = (switchId, labelText, viewer, dataSource) => {
   // Event listener for the switch
   layerSwitch.addEventListener('change', async (event) => {
     try {
-      await dataSource.readyPromise;
       dataSource.show = event.target.checked;
       console.log(`${labelText} switch:`, event.target.checked);
     } catch (error) {
@@ -96,6 +80,23 @@ const createSwitch = (switchId, labelText, viewer, dataSource) => {
   });
 
   return { container: layerSwitchContainer, switch: layerSwitch };
+};
+
+// Function to load and toggle GeoJSON layers
+const createGeoJSONSwitch = async (assetId, labelText, viewer) => {
+  try {
+    // Load GeoJSON data
+    const resource = await Cesium.IonResource.fromAssetId(assetId);
+    const dataSource = await Cesium.GeoJsonDataSource.load(resource);
+    viewer.dataSources.add(dataSource);
+
+    // Create a switch for the GeoJSON layer
+    const switchId = labelText.replace(/\s+/g, '').toLowerCase() + 'Switch';
+    const geoJSONSwitch = createSwitch(switchId, labelText, viewer, dataSource);
+    document.body.appendChild(geoJSONSwitch.container);
+  } catch (error) {
+    console.error(`Error loading ${labelText} GeoJSON:`, error);
+  }
 };
 
 // Call the initializeCesium function
