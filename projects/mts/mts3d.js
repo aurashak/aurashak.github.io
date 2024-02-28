@@ -47,10 +47,10 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
     tileset.show = event.target.checked;
   });
 
-  // Lock the camera to the tileset
-const boundingVolume = tileset.boundingVolume.boundingVolume;
-viewer.camera.viewBoundingSphere(boundingVolume);
-viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+// Lock the camera to the tileset
+const boundingVolume = tileset.boundingVolume;
+viewer.camera.viewBoundingVolume(boundingVolume, Cesium.Ellipsoid.WGS84, 0.5); // Adjust the padding as needed
+
 
 
   // Load OSM buildings 3D Tileset
