@@ -74,8 +74,15 @@ openstreetmapLayer.addTo(map);
 
 
 
-var osmb = new OSMBuildings(map).load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
+  // Load OSMBuildings layer after the base map layers
+  var osmb = new OSMBuildings(map);
+  osmb.on('load', function () {
+      console.log('OSMBuildings layer loaded successfully.');
+  });
+  osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
+
+  
 // Add OSMBuildings layer to base map layers group
 var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
