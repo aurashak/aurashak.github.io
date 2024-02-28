@@ -24,7 +24,7 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-  // Load 3D Tileset - Tileset 1
+ // Load 3D Tileset - Tileset 1
 const tileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
 viewer.scene.primitives.add(tileset1);
 await viewer.zoomTo(tileset1);
@@ -59,6 +59,7 @@ const tileset2Switch = document.getElementById('tileset2Switch');
 tileset2Switch.addEventListener('change', (event) => {
   tileset2.show = event.target.checked;
 });
+
 
 };
 
