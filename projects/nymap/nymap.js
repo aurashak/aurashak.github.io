@@ -786,7 +786,7 @@ setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
-setLegendSymbol('culturalins', 'purple', 'triangle');
+setLegendSymbol('culturalins', 'yellow', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
