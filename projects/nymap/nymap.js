@@ -69,7 +69,12 @@ var openstreetmapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}
 
 openstreetmapLayer.addTo(map);
 
-
+// Load OSMBuildings layer after the base map layers
+var osmb = new OSMBuildings(map);
+osmb.on('load', function () {
+    console.log('OSMBuildings layer loaded successfully.');
+});
+osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
 
 var baseLayers = {
@@ -87,10 +92,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 
 
 
-// Load OSMBuildings layer after the base map layers
-var osmb = new OSMBuildings(map);
-osmb.on('load', function () {
-    console.log('OSMBuildings layer loaded successfully.');
 
     // OSM Building shadows //
 
