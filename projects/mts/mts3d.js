@@ -49,31 +49,9 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
 
 
-// Define the bounding rectangle for New York City (example coordinates)
-const newYorkCityBoundingRectangle = Cesium.Rectangle.fromDegrees(
-    -74.0260, 40.6839, // Southwest corner (longitude, latitude)
-    -73.9250, 40.8220  // Northeast corner (longitude, latitude)
-  );
-  
-  // Convert the bounding rectangle to a bounding volume
-  const boundingVolume = new Cesium.BoundingVolume(
-    Cesium.Cartesian3.fromDegrees(
-      Cesium.Rectangle.southwest(newYorkCityBoundingRectangle).longitude,
-      Cesium.Rectangle.southwest(newYorkCityBoundingRectangle).latitude,
-      0 // Minimum height
-    ),
-    Cesium.Cartesian3.fromDegrees(
-      Cesium.Rectangle.northeast(newYorkCityBoundingRectangle).longitude,
-      Cesium.Rectangle.northeast(newYorkCityBoundingRectangle).latitude,
-      10000 // Maximum height (adjust as needed)
-    )
-  );
-  
   // Load OSM buildings 3D Tileset
-  const osmBuildingsTileset = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(96188, {
-      boundingVolume: boundingVolume
-    })
+const osmBuildingsTileset = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(96188),
   );
   
   // Apply default style to the OSM buildings tileset if available
@@ -87,11 +65,7 @@ const newYorkCityBoundingRectangle = Cesium.Rectangle.fromDegrees(
   osmBuildingsSwitch.addEventListener("change", (event) => {
     osmBuildingsTileset.show = event.target.checked;
   });
-  
-    
-  
-  
-  
+
 
 // Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
