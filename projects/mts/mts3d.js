@@ -25,22 +25,6 @@ const initializeCesium = async () => {
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
-// Set the camera to a specific point over New York City
-const newYorkCityPosition = Cesium.Cartesian3.fromDegrees(-74.006, 40.7128, 1000); // Longitude, Latitude, Height
-const newYorkCityTarget = Cesium.Cartesian3.fromDegrees(-74.006, 40.7128, 0); // Target point at ground level
-
-viewer.camera.setView({
-  destination: newYorkCityPosition,
-  orientation: {
-    heading: Cesium.Math.toRadians(0), // North
-    pitch: Cesium.Math.toRadians(-90), // Look down
-    roll: 0,
-  },
-  endTransform: Cesium.Matrix4.IDENTITY, // Reset any rotation
-  complete: () => {
-    // Do something after the camera has been set
-  },
-});
 
 
 
@@ -63,6 +47,32 @@ viewer.camera.setView({
   tilesetSwitch.addEventListener("change", (event) => {
     tileset.show = event.target.checked;
   });
+
+// Set the camera to the bounding volume of the tileset
+const boundingVolume = tileset.boundingVolume.boundingVolume; // Get the bounding volume of the tileset
+const boundingVolumeCartesian = Cesium.Matrix4.multiplyByPoint(
+  tileset.modelMatrix,
+  new Cesium.Cartesian3(
+    (boundingVolume[0] + boundingVolume[3]) * 0.5,
+    (boundingVolume[1] + boundingVolume[4]) * 0.5,
+    (boundingVolume[2] + boundingVolume[5]) * 0.5
+  ),
+  new Cesium.Cartesian3()
+);
+
+viewer.camera.setView({
+  destination: boundingVolumeCartesian,
+  orientation: {
+    heading: Cesium.Math.toRadians(0), // Set the desired heading
+    pitch: Cesium.Math.toRadians(-90), // Look straight down
+    roll: 0,
+  },
+  endTransform: Cesium.Matrix4.IDENTITY, // Reset any rotation
+  complete: () => {
+    // Do something after the camera has been set
+  },
+});
+
 
 
 
