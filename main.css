@@ -785,6 +785,43 @@ border: 1px solid black;
   cursor: pointer;
 }
 
+
+
+/* Custom styling for Leaflet Geocoder control */
+.leaflet-control-geocoder {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.leaflet-control-geocoder a {
+  color: #007BFF;
+}
+
+.leaflet-control-geocoder input {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.leaflet-control-geocoder button {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.leaflet-control-geocoder button:hover {
+  background-color: #0056b3;
+}
+
+
 .leaflet-touch .leaflet-bar a:first-child {
   border-top-right-radius: 2px;
   color: black;
