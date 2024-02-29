@@ -34,7 +34,7 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.enableTranslate = false;
   viewer.scene.screenSpaceCameraController.enableRotate = false;
   viewer.scene.screenSpaceCameraController.enableZoom = false;
-  viewer.scene.screenSpaceCameraController.enableTilt = false;
+  viewer.scene.screenSpaceCameraController.enableTilt = true;
   viewer.scene.screenSpaceCameraController.enableLook = false;
 
   // Set fixed scene mode
