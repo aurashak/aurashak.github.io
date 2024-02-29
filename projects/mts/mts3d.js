@@ -20,10 +20,6 @@ const initializeCesium = async () => {
     skyAtmosphere: false,
   });
 
-
-// Change the background color to black
-viewer.scene.backgroundColor = Cesium.Color.BLACK;
-
 // Set camera controller settings for limited bounds
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
@@ -50,32 +46,6 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
   tilesetSwitch.addEventListener("change", (event) => {
     tileset.show = event.target.checked;
   });
-
-// Set the camera to the bounding volume of the tileset
-const boundingVolume = tileset.boundingVolume.boundingVolume; // Get the bounding volume of the tileset
-const boundingVolumeCartesian = Cesium.Matrix4.multiplyByPoint(
-  tileset.modelMatrix,
-  new Cesium.Cartesian3(
-    (boundingVolume[0] + boundingVolume[3]) * 0.5,
-    (boundingVolume[1] + boundingVolume[4]) * 0.5,
-    (boundingVolume[2] + boundingVolume[5]) * 0.5
-  ),
-  new Cesium.Cartesian3()
-);
-
-viewer.camera.setView({
-  destination: boundingVolumeCartesian,
-  orientation: {
-    heading: Cesium.Math.toRadians(0), // Set the desired heading
-    pitch: Cesium.Math.toRadians(-90), // Look straight down
-    roll: 0,
-  },
-  endTransform: Cesium.Matrix4.IDENTITY, // Reset any rotation
-  complete: () => {
-    // Do something after the camera has been set
-  },
-});
-
 
 
 
