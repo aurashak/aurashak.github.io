@@ -25,6 +25,23 @@ const initializeCesium = async () => {
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
 
+// Set the camera to a specific point over New York City
+const newYorkCityPosition = Cesium.Cartesian3.fromDegrees(-74.006, 40.7128, 1000); // Longitude, Latitude, Height
+const newYorkCityTarget = Cesium.Cartesian3.fromDegrees(-74.006, 40.7128, 0); // Target point at ground level
+
+viewer.camera.setView({
+  destination: newYorkCityPosition,
+  orientation: {
+    heading: Cesium.Math.toRadians(0), // North
+    pitch: Cesium.Math.toRadians(-90), // Look down
+    roll: 0,
+  },
+  endTransform: Cesium.Matrix4.IDENTITY, // Reset any rotation
+  complete: () => {
+    // Do something after the camera has been set
+  },
+});
+
 
 
   // Load 3D Tileset
@@ -46,10 +63,6 @@ viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
   tilesetSwitch.addEventListener("change", (event) => {
     tileset.show = event.target.checked;
   });
-
-// Lock the camera to the tileset
-const boundingVolume = tileset.boundingVolume;
-viewer.camera.viewBoundingVolume(boundingVolume, Cesium.Ellipsoid.WGS84, 0.5); // Adjust the padding as needed
 
 
 
