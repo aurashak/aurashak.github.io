@@ -6,22 +6,20 @@ var bounds = L.latLngBounds(
 
 // Create and configure the map with the specified bounds
 var map = L.map('nymap', {
-    maxBounds: bounds,   
+    maxBounds: bounds,
     maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
-    minZoom: 10,             
-    maxZoom: 16                
+    minZoom: 10,
+    maxZoom: 16
 }).setView([40.7128, -74.0060], 12); // New York City coordinates
-
-
 
 L.control.scale().addTo(map);
 
 // Add the search control
-var searchControl = L.control.geocoder({
+var searchControl = L.Control.geocoder({
     defaultMarkGeocode: false,
     position: 'topleft',
     placeholder: 'Search for an address...',
-    geocoder: L.Control.Geocoder.nominatim(),
+    geocoder: L.Control.Geocoder.nominatim()
 }).addTo(map);
 
 
