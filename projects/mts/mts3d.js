@@ -142,7 +142,7 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
 
 
 // Load mtscso GeoJsonDataSource
-const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
+const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
 // Modify the billboard color and style before adding the data source
