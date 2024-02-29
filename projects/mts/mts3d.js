@@ -4,44 +4,52 @@ Cesium.Ion.defaultAccessToken =
 
 // Initialize Cesium
 const initializeCesium = async () => {
-  // Create a Cesium viewer
-  const viewer = new Cesium.Viewer("cesiumContainer", {
-    baseLayerPicker: false,
-    geocoder: false,
-    homeButton: false,
-    infoBox: true,
-    sceneModePicker: false,
-    selectionIndicator: false,
-    timeline: false,
-    navigationHelpButton: false,
-    fullscreenButton: false,
-    animation: false,
-    skyBox: false,
-    skyAtmosphere: false,
-  });
-
-  // Set camera controller settings for limited bounds
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
-  // Set camera position
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
-    orientation: {
-      heading: Cesium.Math.toRadians(0), // Heading in radians
-      pitch: Cesium.Math.toRadians(-90), // Pitch in radians
-      roll: 0, // Roll in radians
-    },
-  });
-
-  // Enable rotation and zoom, disable panning
-  viewer.scene.screenSpaceCameraController.enableZoom = true;
-  viewer.scene.screenSpaceCameraController.enableRotate = true;
-  viewer.scene.screenSpaceCameraController.enableTranslate = false; // Disable panning
-};
-
-initializeCesium();
-
+    // Create a Cesium viewer
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+      baseLayerPicker: false,
+      geocoder: false,
+      homeButton: false,
+      infoBox: true,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      animation: false,
+      skyBox: false,
+      skyAtmosphere: false,
+    });
+  
+    // Define the bounding rectangle for New York City (example coordinates)
+    const newYorkCityBoundingRectangle = Cesium.Rectangle.fromDegrees(
+      -74.05, 40.65, // Southwest corner (longitude, latitude)
+      -73.85, 40.85  // Northeast corner (longitude, latitude)
+    );
+  
+    // Set the bounding rectangle for the viewer
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+    viewer.scene.screenSpaceCameraController.enableZoom = true;
+    viewer.scene.screenSpaceCameraController.enableRotate = true;
+    viewer.scene.screenSpaceCameraController.enableTranslate = false; // Disable panning
+  
+    viewer.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the initial camera position
+      orientation: {
+        heading: Cesium.Math.toRadians(0), // Heading in radians
+        pitch: Cesium.Math.toRadians(-90), // Pitch in radians
+        roll: 0, // Roll in radians
+      },
+    });
+  
+    // Set the bounding rectangle for the viewer
+    viewer.camera.setView({ destination: newYorkCityBoundingRectangle });
+  
+    // Create a switch event listener for restricting the view to New York City
+    const restrictViewSwitch = document.getElementById("restrictViewSwitch");
+    restrictViewSwitch.addEventListener("change", (event) => {
+      viewer.camera.setView({ destination: event.target.checked ? newYorkCityBoundingRectangle : undefined });
+    });
 
 
 
