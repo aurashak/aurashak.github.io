@@ -30,12 +30,6 @@ const initializeCesium = async () => {
     },
   });
 
-  // Disable all input handling to prevent camera movement
-  viewer.scene.screenSpaceCameraController.enableTranslate = false;
-  viewer.scene.screenSpaceCameraController.enableRotate = false;
-  viewer.scene.screenSpaceCameraController.enableZoom = true;
-  viewer.scene.screenSpaceCameraController.enableTilt = true;
-  viewer.scene.screenSpaceCameraController.enableLook = false;
 
   // Set fixed scene mode
   viewer.scene.mode = Cesium.SceneMode.SCENE3D;
@@ -83,6 +77,13 @@ const westHarlemBoundingBox = {
     north: 40.827,  // Maximum latitude
     height: 0,      // Height above the ellipsoid
   };
+
+  // Disable all input handling to prevent camera movement
+  viewer.scene.screenSpaceCameraController.enableTranslate = false;
+  viewer.scene.screenSpaceCameraController.enableRotate = false;
+  viewer.scene.screenSpaceCameraController.enableZoom = true;
+  viewer.scene.screenSpaceCameraController.enableTilt = true;
+  viewer.scene.screenSpaceCameraController.enableLook = false;
   
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
