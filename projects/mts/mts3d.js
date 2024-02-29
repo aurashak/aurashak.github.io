@@ -88,14 +88,15 @@ const westHarlemBoundingBox = {
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
   viewer.scene.primitives.add(newTileset);
   
-  // Create a bounding volume for West Harlem
-  const boundingVolume = new Cesium.BoundingVolume(
-    Cesium.Cartesian3.fromDegrees(westHarlemBoundingBox.west, westHarlemBoundingBox.south, westHarlemBoundingBox.height),
-    Cesium.Cartesian3.fromDegrees(westHarlemBoundingBox.east, westHarlemBoundingBox.north, westHarlemBoundingBox.height)
+  // Create a bounding sphere for West Harlem
+  const boundingSphere = Cesium.BoundingSphere.fromRectangle3D(
+    Cesium.Rectangle.fromDegrees(westHarlemBoundingBox.west, westHarlemBoundingBox.south, westHarlemBoundingBox.east, westHarlemBoundingBox.north),
+    viewer.scene.globe.ellipsoid,
+    westHarlemBoundingBox.height
   );
   
-  // Set the custom bounding volume for the area you want to focus on
-  viewer.camera.viewBoundingVolume(boundingVolume, newTileset.boundingVolume);
+  // Set the custom bounding sphere for the area you want to focus on
+  viewer.camera.viewBoundingSphere(boundingSphere);
   
   // Apply default style to the tileset if available
   const newExtras = newTileset.asset.extras;
