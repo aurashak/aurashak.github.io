@@ -20,10 +20,6 @@ const initializeCesium = async () => {
     skyAtmosphere: false,
   });
 
-  // Set camera controller settings for limited bounds
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-
   // Set camera position
   viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
@@ -34,21 +30,19 @@ const initializeCesium = async () => {
     },
   });
 
-  // Enable rotation and zoom, disable panning
-  viewer.scene.screenSpaceCameraController.enableZoom = true;
-  viewer.scene.screenSpaceCameraController.enableRotate = true;
-  viewer.scene.screenSpaceCameraController.enableTranslate = false; // Disable panning
+  // Disable all input handling to prevent camera movement
+  viewer.scene.screenSpaceCameraController.enableTranslate = false;
+  viewer.scene.screenSpaceCameraController.enableRotate = false;
+  viewer.scene.screenSpaceCameraController.enableZoom = false;
+  viewer.scene.screenSpaceCameraController.enableTilt = false;
+  viewer.scene.screenSpaceCameraController.enableLook = false;
 
-  // Adjust sensitivity for zoom and rotate (optional)
-  viewer.scene.screenSpaceCameraController.zoomEventTypes = [
-    Cesium.CameraEventType.WHEEL,
-    Cesium.CameraEventType.PINCH,
-  ];
+  // Set fixed scene mode
+  viewer.scene.mode = Cesium.SceneMode.SCENE3D;
 
-  viewer.scene.screenSpaceCameraController.tiltEventTypes = [
-    Cesium.CameraEventType.RIGHT_DRAG,
-    Cesium.CameraEventType.PINCH,
-  ];
+  // Disable terrain exaggeration if needed
+  viewer.scene.terrainExaggeration = 1.0;
+
 
 
 
