@@ -160,7 +160,7 @@ const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
 mtsgasDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to red
-    entity.polyline.material = Cesium.Color.PURPLE;
+    entity.polyline.material = Cesium.Color.BLACK;
   }
 });
 
