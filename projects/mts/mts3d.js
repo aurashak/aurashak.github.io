@@ -32,7 +32,7 @@ const initializeCesium = async () => {
 
   // Disable all input handling to prevent camera movement
   viewer.scene.screenSpaceCameraController.enableTranslate = false;
-  viewer.scene.screenSpaceCameraController.enableRotate = true;
+  viewer.scene.screenSpaceCameraController.enableRotate = false;
   viewer.scene.screenSpaceCameraController.enableZoom = false;
   viewer.scene.screenSpaceCameraController.enableTilt = false;
   viewer.scene.screenSpaceCameraController.enableLook = false;
