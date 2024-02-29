@@ -176,9 +176,6 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
-
-
-
 // Call the initializeCesium function
 initializeCesium();
 
