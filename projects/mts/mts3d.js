@@ -20,9 +20,27 @@ const initializeCesium = async () => {
     skyAtmosphere: false,
   });
 
-// Set camera controller settings for limited bounds
-viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+  // Set camera controller settings for limited bounds
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
+
+  // Set camera position
+  viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
+    orientation: {
+      heading: Cesium.Math.toRadians(0), // Heading in radians
+      pitch: Cesium.Math.toRadians(-90), // Pitch in radians
+      roll: 0, // Roll in radians
+    },
+  });
+
+  // Enable rotation and zoom, disable panning
+  viewer.scene.screenSpaceCameraController.enableZoom = true;
+  viewer.scene.screenSpaceCameraController.enableRotate = true;
+  viewer.scene.screenSpaceCameraController.enableTranslate = false; // Disable panning
+};
+
+initializeCesium();
 
 
 
