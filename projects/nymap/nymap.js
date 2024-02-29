@@ -16,6 +16,16 @@ var map = L.map('nymap', {
 
 L.control.scale().addTo(map);
 
+// Add the search control
+var searchControl = L.control.geocoder({
+    defaultMarkGeocode: false,
+    position: 'topleft',
+    placeholder: 'Search for an address...',
+    geocoder: L.Control.Geocoder.nominatim(),
+}).addTo(map);
+
+
+
 // Function to calculate marker size based on zoom level
 function calculateMarkerSize(zoom) {
     var initialSize = 16; 
