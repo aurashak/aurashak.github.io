@@ -20,15 +20,6 @@ const initializeCesium = async () => {
     skyAtmosphere: false,
   });
 
-  // Set camera position
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
-    orientation: {
-      heading: Cesium.Math.toRadians(0), // Heading in radians
-      pitch: Cesium.Math.toRadians(-90), // Pitch in radians
-      roll: 0, // Roll in radians
-    },
-  });
 
 
   // Set fixed scene mode
