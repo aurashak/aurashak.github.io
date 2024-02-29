@@ -128,7 +128,7 @@ const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
 mtsrailDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to pink
-    entity.polyline.material = Cesium.Color.fromCssColorString("#FFC0CB"); // Pink color
+    entity.polyline.material = Cesium.Color.RED;
   }
 });
 
@@ -179,7 +179,7 @@ const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResou
 mtsstreetsDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to red
-    entity.polyline.material = Cesium.Color.RED;
+    entity.polyline.material = Cesium.Color.GREY;
   }
 });
 
