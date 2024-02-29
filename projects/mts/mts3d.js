@@ -71,18 +71,32 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2477597);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
+// Modify the point color and style before adding the data source
+mtscsoDataSource.entities.values.forEach((entity) => {
+  if (entity.point) {
+    // Change the point color to red
+    entity.point.color = Cesium.Color.RED;
+    // Change the point style to Circle
+    entity.point.pixelSize = 10; // Adjust the size as needed
+  }
+});
+
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
 mtscsoSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(mtscsoDataSource);
+    console.log("mtscsoDataSource added to viewer");
   } else {
     viewer.dataSources.remove(mtscsoDataSource);
+    console.log("mtscsoDataSource removed from viewer");
   }
 });
 
-// Initial load of mtscso
+// Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
+console.log("Initial load of mtscsoDataSource");
+
 
 
 
