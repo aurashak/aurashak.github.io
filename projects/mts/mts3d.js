@@ -40,9 +40,7 @@ const initializeCesium = async () => {
   // Disable terrain exaggeration if needed
   viewer.scene.terrainExaggeration = 1.0;
 
-  // Set minimum and maximum zoom limits (adjust as needed)
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
+
 
 */ 
 
@@ -80,6 +78,11 @@ const westHarlemBoundingBox = {
     north: 40.827,  // Maximum latitude
     height: 0,      // Height above the ellipsoid
   };
+
+    // Set minimum and maximum zoom limits (adjust as needed)
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
+    
 
   // Disable all input handling to prevent camera movement
   viewer.scene.screenSpaceCameraController.enableTranslate = false;
