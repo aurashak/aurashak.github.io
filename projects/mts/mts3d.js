@@ -146,22 +146,34 @@ viewer.dataSources.add(mtsgasDataSource);
 
 
 
-  // Load mtsstreets GeoJsonDataSource
-  const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
-  const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+// Load mtsstreets GeoJsonDataSource
+const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-  // Create a switch event listener for mtsstreets
-  const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
-  mtsstreetsSwitch.addEventListener("change", (event) => {
-    if (event.target.checked) {
-      viewer.dataSources.add(mtsstreetsDataSource);
-    } else {
-      viewer.dataSources.remove(mtsstreetsDataSource);
-    }
-  });
+// Create a switch event listener for mtsstreets
+const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+mtsstreetsSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    // Modify the polyline color before adding the data source
+    mtsstreetsDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to red
+        entity.polyline.material = Cesium.Color.RED;
+      }
+    });
 
-  // Initial load of mtsstreets
-  viewer.dataSources.add(mtsstreetsDataSource);
+    viewer.dataSources.add(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource removed from viewer");
+  }
+});
+
+// Initial load of mtsstreets
+viewer.dataSources.add(mtsstreetsDataSource);
+console.log("Initial load of mtsstreetsDataSource");
+
 };
 
 
