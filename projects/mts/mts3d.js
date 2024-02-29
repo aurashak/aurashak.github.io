@@ -146,24 +146,23 @@ viewer.dataSources.add(mtsgasDataSource);
 
 
 
- // Load mtsstreets GeoJsonDataSource
+// Set line color for mtsstreets before loading the data
+const lineColor = Cesium.Color.BLUE; // Change this to the desired color
+
 const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
 const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-// Set line color for mtsstreets
-const lineColor = Cesium.Color.BLUE; // Change this to the desired color
+// Modify the line color before adding the data source
+mtsstreetsDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    entity.polyline.material = lineColor;
+  }
+});
 
 // Create a switch event listener for mtsstreets
 const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
 mtsstreetsSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
-    // Modify the line color before adding the data source
-    mtsstreetsDataSource.entities.values.forEach((entity) => {
-      if (entity.polyline) {
-        entity.polyline.material = lineColor;
-      }
-    });
-
     viewer.dataSources.add(mtsstreetsDataSource);
     console.log("mtsstreetsDataSource added to viewer");
   } else {
