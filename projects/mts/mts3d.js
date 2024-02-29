@@ -146,34 +146,25 @@ viewer.dataSources.add(mtsgasDataSource);
 
 
 
-// Set line color for mtsstreets before loading the data
-const lineColor = Cesium.Color.BLUE; // Change this to the desired color
+  // Load mtsstreets GeoJsonDataSource
+  const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+  const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
-const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+  // Create a switch event listener for mtsstreets
+  const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+  mtsstreetsSwitch.addEventListener("change", (event) => {
+    if (event.target.checked) {
+      viewer.dataSources.add(mtsstreetsDataSource);
+    } else {
+      viewer.dataSources.remove(mtsstreetsDataSource);
+    }
+  });
 
-// Modify the line color before adding the data source
-mtsstreetsDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    entity.polyline.material = lineColor;
-  }
-});
+  // Initial load of mtsstreets
+  viewer.dataSources.add(mtsstreetsDataSource);
+};
 
-// Create a switch event listener for mtsstreets
-const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
-mtsstreetsSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtsstreetsDataSource);
-    console.log("mtsstreetsDataSource added to viewer");
-  } else {
-    viewer.dataSources.remove(mtsstreetsDataSource);
-    console.log("mtsstreetsDataSource removed from viewer");
-  }
-});
 
-// Initial load of mtsstreets
-viewer.dataSources.add(mtsstreetsDataSource);
-console.log("Initial load of mtsstreetsDataSource");
 
 // Call the initializeCesium function
 initializeCesium();
