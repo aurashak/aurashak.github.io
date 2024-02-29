@@ -80,6 +80,28 @@ osmb.on('load', function () {
 osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
 
+// Add shadows to OSM Buildings
+osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json', {
+    shadow: true
+});
+
+// Define sliders
+var dateSlider = document.getElementById('date');
+var timeSlider = document.getElementById('time');
+
+// Event listeners for slider changes
+dateSlider.addEventListener('input', onDateChange);
+timeSlider.addEventListener('input', onTimeChange);
+
+function onDateChange() {
+    // Handle date change logic here
+    console.log('Date changed:', dateSlider.value);
+}
+
+function onTimeChange() {
+    // Handle time change logic here
+    console.log('Time changed:', timeSlider.value);
+}
 
 
 // Add OSMBuildings layer to base map layers group
