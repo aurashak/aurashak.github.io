@@ -179,19 +179,22 @@ console.log("Initial load of mtsrailDataSource");
 
 
 
-// Load mtscso GeoJsonDataSource
+// Load mtsgas GeoJsonDataSource
 const mtsgasResource = await Cesium.IonResource.fromAssetId(2477584);
 const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
 
-// Modify the polyline color before adding the data source
+// Modify the polyline color and width before adding the data source
 mtsgasDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
-    // Change the polyline color to red
+    // Change the polyline color to black
     entity.polyline.material = Cesium.Color.BLACK;
+    
+    // Change the polyline width
+    entity.polyline.width = 4; // Adjust the width as needed
   }
 });
 
-// Create a switch event listener for mtscso
+// Create a switch event listener for mtsgas
 const mtsgasSwitch = document.getElementById("mtsgasSwitch");
 mtsgasSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
@@ -203,9 +206,10 @@ mtsgasSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtscso with the red color
+// Initial load of mtsgas with the black color and custom width
 viewer.dataSources.add(mtsgasDataSource);
 console.log("Initial load of mtsgasDataSource");
+
 
 
 
