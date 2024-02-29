@@ -82,7 +82,7 @@ const westHarlemBoundingBox = {
     // Set minimum and maximum zoom limits (adjust as needed)
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
-    
+
 
   // Disable all input handling to prevent camera movement
   viewer.scene.screenSpaceCameraController.enableTranslate = false;
@@ -154,6 +154,7 @@ mtscsoDataSource.entities.values.forEach((entity) => {
     entity.billboard.image = createCircleImage(); // Function to create a red circle image
   }
 });
+
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
@@ -254,7 +255,7 @@ console.log("Initial load of mtsrailDataSource");
 
 
 // Load mtsgas GeoJsonDataSource
-const mtsgasResource = await Cesium.IonResource.fromAssetId(2477584);
+const mtsgasResource = await Cesium.IonResource.fromAssetId(2460344);
 const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
 
 // Modify the polyline color and width before adding the data source
@@ -264,7 +265,7 @@ mtsgasDataSource.entities.values.forEach((entity) => {
     entity.polyline.material = Cesium.Color.BLACK;
     
     // Change the polyline width
-    entity.polyline.width = 4; // Adjust the width as needed
+    entity.polyline.width = 3; // Adjust the width as needed
   }
 });
 
