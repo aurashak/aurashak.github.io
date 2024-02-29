@@ -175,7 +175,7 @@ mtsstreetsSwitch.addEventListener("change", async (event) => {
 const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
-
+};
 
 
 
