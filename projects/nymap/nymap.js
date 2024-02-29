@@ -94,13 +94,6 @@ var layerControl = L.control.layers(baseLayers, null, {
 }).addTo(map);
 
 
- // Add event listener for the shadow slider
- var shadowSlider = document.getElementById("shadow-slider");
- shadowSlider.addEventListener("input", function () {
-     var shadowOpacity = parseFloat(shadowSlider.value);
-     osmb.set('shadow', true);
-     osmb.set('shadowDarkness', shadowOpacity);
- });
 
 
 
