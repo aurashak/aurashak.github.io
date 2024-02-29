@@ -18,8 +18,11 @@ const initializeCesium = async () => {
     animation: false,
     skyBox: false,
     skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE,
   });
+
+
+// Change the background color to black
+viewer.scene.backgroundColor = Cesium.Color.BLACK;
 
 // Set camera controller settings for limited bounds
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
