@@ -43,7 +43,9 @@ const initializeCesium = async () => {
   // Disable terrain exaggeration if needed
   viewer.scene.terrainExaggeration = 1.0;
 
-
+  // Set minimum and maximum zoom limits (adjust as needed)
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 1000; // Maximum zoom distance in meters
 
 
 
