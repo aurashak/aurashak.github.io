@@ -786,22 +786,24 @@ border: 1px solid black;
 }
 
 
-
 /* Custom styling for Leaflet Geocoder control */
 .leaflet-control-geocoder {
+  position: relative;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 5px;
+  margin-top: 5px;
 }
 
 .leaflet-control-geocoder a {
   color: #007BFF;
+  text-decoration: none;
 }
 
 .leaflet-control-geocoder input {
-  width: 200px;
+  width: 150px;
   padding: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
