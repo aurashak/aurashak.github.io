@@ -90,6 +90,17 @@ viewer.dataSources.add(mtscsoDataSource);
 const mtsparksResource = await Cesium.IonResource.fromAssetId(2477557);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
 
+// Modify the polyline/polygon color before adding the data source
+mtsparksDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    // Change the polyline color to green
+    entity.polyline.material = Cesium.Color.GREEN;
+  } else if (entity.polygon) {
+    // Change the polygon color to green
+    entity.polygon.material = Cesium.Color.GREEN;
+  }
+});
+
 // Create a switch event listener for mtsparks
 const mtsparksSwitch = document.getElementById("mtsparksSwitch");
 mtsparksSwitch.addEventListener("change", (event) => {
@@ -98,11 +109,16 @@ mtsparksSwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of mtsparks
+// Initial load of mtsparks with the green color
 viewer.dataSources.add(mtsparksDataSource);
 mtsparksDataSource.entities.values.forEach((entity) => {
   entity.show = true; // Make sure entities are visible by default
 });
+
+console.log("Initial load of mtsparksDataSource");
+
+
+
 
 // Load mtsrail GeoJsonDataSource
 const mtsrailResource = await Cesium.IonResource.fromAssetId(2477618);
