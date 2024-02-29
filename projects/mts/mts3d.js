@@ -50,8 +50,9 @@ const initializeCesium = async () => {
 
 
 
+/*
 
-  // Load 3D Tileset
+  // Load 3D Tileset of mts area segment
   const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
   viewer.scene.primitives.add(tileset);
   await viewer.zoomTo(tileset);
@@ -70,6 +71,30 @@ const initializeCesium = async () => {
   tilesetSwitch.addEventListener("change", (event) => {
     tileset.show = event.target.checked;
   });
+
+  */
+
+
+  // Load full google photorealistic tileset
+const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+viewer.scene.primitives.add(newTileset);
+await viewer.zoomTo(newTileset);
+
+// Apply default style to the tileset if available
+const newExtras = newTileset.asset.extras;
+if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
+  newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+}
+
+// Remove the default satellite imagery layers
+viewer.imageryLayers.removeAll();
+
+// Create a switch event listener for the new 3D Tileset
+const newTilesetSwitch = document.getElementById("3dTileSwitch");
+newTilesetSwitch.addEventListener("change", (event) => {
+  newTileset.show = event.target.checked;
+});
+
 
 
 
