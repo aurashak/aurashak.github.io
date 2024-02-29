@@ -168,9 +168,10 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtsstreets
-// viewer.dataSources.add(mtsstreetsDataSource); // Remove this line to prevent initial loading with default color
+// Initial load of mtsstreets with the red color
+viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
+
 
 };
 
