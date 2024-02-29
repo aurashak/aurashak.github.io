@@ -1,16 +1,16 @@
 // Define the bounds for the New York City Tri-State area
 var bounds = L.latLngBounds(
-    L.latLng(40.4774, -74.2591), // Southwest corner (bottom-left)
-    L.latLng(41.15, -73.3913)  // Adjusted Northeast corner latitude (top-right)
+    L.latLng(40.4774, -74.2591), // Southwest corner
+    L.latLng(41.15, -73.3913)  // Northeast corner
 );
 
 // Create and configure the map with the specified bounds
 var map = L.map('nymap', {
-    maxBounds: bounds,          // Set maxBounds to limit zooming out
+    maxBounds: bounds,   
     maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
-    minZoom: 10,                // Minimum zoom level
-    maxZoom: 16                // Maximum zoom level (adjust as needed)
-}).setView([40.7128, -74.0060], 12); // New York City coordinates, closer zoom level
+    minZoom: 10,             
+    maxZoom: 16                
+}).setView([40.7128, -74.0060], 12); // New York City coordinates
 
 
 
@@ -18,17 +18,14 @@ L.control.scale().addTo(map);
 
 // Function to calculate marker size based on zoom level
 function calculateMarkerSize(zoom) {
-    // Define the updated initial and minimum sizes
-    var initialSize = 16; // Adjust this value to make markers bigger
+    var initialSize = 16; 
     var minSize = 6;
 
-    // Calculate the size based on zoom level with a minimum size
     var size = initialSize - (zoom - 3) * 5;
     return Math.max(size, minSize);
 }
 
 
-// NYC Counties Layer (Initially hidden)
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
     style: function (feature) {
         return {
@@ -80,23 +77,130 @@ osmb.on('load', function () {
 osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
 
 
-
-// Add OSMBuildings layer to base map layers group
 var baseLayers = {
     "OpenStreetMap": openstreetmapLayer,
     "Satellite": satelliteLayer,
-    "Outlines": nyccountiesLayer, // Create an empty layer group for "Turn Off"
-    "3d Buildings": osmb, // Add the OSMBuildings layer directly to the base layer group
+    "Outlines": nyccountiesLayer, 
+    "3d Buildings": osmb, 
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
-    position: 'topright' // Position the control in the top right corner
+    position: 'topright' 
 }).addTo(map);
 
 
 
 
 
+// OSM Buildings layers //
+
+var osmb = new OSMBuildings(map).load();
+
+var
+  now,
+  date, time,
+  timeRange, dateRange,
+  timeRangeLabel, dateRangeLabel;
+
+function changeDate() {
+  var Y = now.getFullYear(),
+    M = now.getMonth(),
+    D = now.getDate(),
+    h = now.getHours(),
+    m = 0;
+
+  timeRangeLabel.innerText = pad(h) + ':' + pad(m);
+  dateRangeLabel.innerText = Y + '-' + pad(M+1) + '-' + pad(D);
+
+  osmb.date(new Date(Y, M, D, h, m));
+}
+
+function onTimeChange() {
+  now.setHours(this.value);
+  now.setMinutes(0);
+  changeDate();
+}
+
+function onDateChange() {
+  now.setMonth(0);
+  now.setDate(this.value);
+  changeDate();
+}
+
+function pad(v) {
+  return (v < 10 ? '0' : '') + v;
+}
+
+timeRange = document.getElementById('time');
+dateRange = document.getElementById('date');
+timeRangeLabel = document.querySelector('*[for=time]');
+dateRangeLabel = document.querySelector('*[for=date]');
+
+now = new Date;
+changeDate();
+
+// init with day of year
+var Jan1 = new Date(now.getFullYear(), 0, 1);
+dateRange.value = Math.ceil((now-Jan1)/86400000);
+
+timeRange.value = now.getHours();
+
+timeRange.addEventListener('change', onTimeChange);
+dateRange.addEventListener('change', onDateChange );
+timeRange.addEventListener('input', onTimeChange);
+dateRange.addEventListener('input', onDateChange);
+
+//************************************************************
+
+// load extra information
+function ajax(url, callback) {
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function() {
+    if (req.readyState !== 4) {
+      return;
+    }
+    if (!req.status || req.status < 200 || req.status > 299) {
+      return;
+    }
+
+    callback(JSON.parse(req.responseText));
+  };
+  req.open('GET', url);
+  req.send(null);
+}
+
+// formatted json output
+function formatJSON(json) {
+  var html = '';
+  for (var key in json) {
+    html += '<em>'+ key +'</em> '+ json[key] +'<br>';
+  }
+  return html;
+}
+
+osmb.click(function(e) {
+  var url = 'https://data.osmbuildings.org/0.2/uejws863/feature/'+ e.feature +'.json';
+  ajax(url, function(json) {
+    var content = '<b>OSM ID '+ e.feature +'</b>';
+    for (var i = 0; i < json.features.length; i++) {
+      content += '<br><em>OSM Part ID</em> '+ json.features[i].id;
+      content += '<br>'+ formatJSON(json.features[i].properties.tags);
+    }
+
+    L.popup({ maxHeight:200, autoPanPaddingTopLeft:[50,50] })
+      .setLatLng(L.latLng(e.lat, e.lon))
+      .setContent(content)
+      .openOn(map);
+  });
+});
+
+
+
+
+
+
+
+// Geojson layers and layer groups //
 
 // AQI sites
 var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisite.geojson', {
@@ -116,7 +220,7 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
-// Get the floodplain checkbox, opacity slider, and floodplain layer
+// floodplain layer
 var floodplainCheckbox = document.getElementById('floodplain');
 var opacitySlider = document.getElementById('opacity-slider');
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
@@ -127,7 +231,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             color: 'black',
             weight: 0,
             opacity: 0,
-            fillOpacity: opacityValue // Set fillOpacity based on the slider value
+            fillOpacity: opacityValue 
         };
     }
 });
@@ -370,7 +474,6 @@ var remediationsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
         };
     },
     onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
         layer.bindPopup("Site Name: " + feature.properties.SITENAME);
     },
     success: function (data) {
@@ -435,8 +538,6 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
 });
 
 
-
-// Get the average income checkbox and layer
 var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
 
 // Add an event listener to the average income checkbox
@@ -783,7 +884,7 @@ function createLegendEntry(label, color, shape) {
     }
 }
 
-// Set the legend symbol shapes and colors for each layer
+// legend symbol shapes and colors for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
