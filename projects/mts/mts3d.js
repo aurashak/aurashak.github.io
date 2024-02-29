@@ -55,20 +55,18 @@ const newYorkCityBoundingRectangle = Cesium.Rectangle.fromDegrees(
     -73.9250, 40.8220  // Northeast corner (longitude, latitude)
   );
   
-  // Get the bounding rectangle in longitude and latitude
-  const boundingRectangle = Cesium.BoundingRectangle.fromDegrees(
-    -74.0260, 40.6839, // Southwest corner (longitude, latitude)
-    -73.9250, 40.8220  // Northeast corner (longitude, latitude)
-  );
-  
-  // Manually set minimum and maximum heights
-  const minimumHeight = 0;
-  const maximumHeight = 10000; // Adjust as needed
-  
-  // Create a bounding volume
+  // Convert the bounding rectangle to a bounding volume
   const boundingVolume = new Cesium.BoundingVolume(
-    Cesium.Cartesian3.fromDegrees(boundingRectangle.west, boundingRectangle.south, minimumHeight),
-    Cesium.Cartesian3.fromDegrees(boundingRectangle.east, boundingRectangle.north, maximumHeight)
+    Cesium.Cartesian3.fromDegrees(
+      Cesium.Rectangle.southwest(newYorkCityBoundingRectangle).longitude,
+      Cesium.Rectangle.southwest(newYorkCityBoundingRectangle).latitude,
+      0 // Minimum height
+    ),
+    Cesium.Cartesian3.fromDegrees(
+      Cesium.Rectangle.northeast(newYorkCityBoundingRectangle).longitude,
+      Cesium.Rectangle.northeast(newYorkCityBoundingRectangle).latitude,
+      10000 // Maximum height (adjust as needed)
+    )
   );
   
   // Load OSM buildings 3D Tileset
@@ -89,6 +87,7 @@ const newYorkCityBoundingRectangle = Cesium.Rectangle.fromDegrees(
   osmBuildingsSwitch.addEventListener("change", (event) => {
     osmBuildingsTileset.show = event.target.checked;
   });
+  
     
   
   
