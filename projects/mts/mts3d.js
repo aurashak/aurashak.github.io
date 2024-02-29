@@ -146,35 +146,32 @@ viewer.dataSources.add(mtsgasDataSource);
 
 // Load mtsstreets GeoJsonDataSource
 const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-// Create a switch event listener for mtsstreets
-const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
-mtsstreetsSwitch.addEventListener("change", async (event) => {
-  // Remove the previous data source if it exists
-  if (viewer.dataSources.contains(mtsstreetsDataSource)) {
-    viewer.dataSources.remove(mtsstreetsDataSource);
-    console.log("mtsstreetsDataSource removed from viewer");
-  }
-
-  if (event.target.checked) {
-    // Modify the polyline color before loading the data source
-    const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
-    mtsstreetsDataSource.entities.values.forEach((entity) => {
-      if (entity.polyline) {
-        // Change the polyline color to red
-        entity.polyline.material = Cesium.Color.RED;
-      }
-    });
-
-    viewer.dataSources.add(mtsstreetsDataSource);
-    console.log("mtsstreetsDataSource added to viewer");
+// Modify the polyline color before adding the data source
+mtsstreetsDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    // Change the polyline color to red
+    entity.polyline.material = Cesium.Color.RED;
   }
 });
 
-// Initial load of mtsstreets (outside the event listener)
-const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+// Create a switch event listener for mtsstreets
+const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+mtsstreetsSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource removed from viewer");
+  }
+});
+
+// Initial load of mtsstreets
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
+
 };
 
 
