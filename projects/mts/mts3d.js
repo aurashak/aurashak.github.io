@@ -32,9 +32,9 @@ const initializeCesium = async () => {
 
   // Disable all input handling to prevent camera movement
   viewer.scene.screenSpaceCameraController.enableTranslate = false;
-  viewer.scene.screenSpaceCameraController.enableRotate = false;
+  viewer.scene.screenSpaceCameraController.enableRotate = true;
   viewer.scene.screenSpaceCameraController.enableZoom = false;
-  viewer.scene.screenSpaceCameraController.enableTilt = false;
+  viewer.scene.screenSpaceCameraController.enableTilt = true;
   viewer.scene.screenSpaceCameraController.enableLook = false;
 
   // Set fixed scene mode
@@ -42,6 +42,8 @@ const initializeCesium = async () => {
 
   // Disable terrain exaggeration if needed
   viewer.scene.terrainExaggeration = 1.0;
+
+
 
 
 
