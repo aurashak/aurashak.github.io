@@ -33,28 +33,14 @@ const initializeCesium = async () => {
         1000 // Adjust the zoom level as needed
       ),
       orientation: {
-        heading: Cesium.Math.toRadians(80),
-        pitch: Cesium.Math.toRadians(-85),
+        heading: Cesium.Math.toRadians(0),
+        pitch: Cesium.Math.toRadians(50),
         roll: 0,
       },
     });
   });
 
-  // Function to fly the camera to New York City
-  function flyToNewYork() {
-    var newYorkCity = Cesium.Cartesian3.fromDegrees(-74.006, 40.7128, 10000);
-    viewer.camera.flyTo({
-        destination: newYorkCity,
-        orientation: {
-            heading: Cesium.Math.toRadians(0),
-            pitch: Cesium.Math.toRadians(50),
-            roll: Cesium.Math.toRadians(0)
-        },
-        duration: 2.0
-    });
-
-
-
+  
 
 
   // Set minimum and maximum zoom limits
