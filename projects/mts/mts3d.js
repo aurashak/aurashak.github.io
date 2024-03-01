@@ -34,7 +34,7 @@ const initializeCesium = async () => {
       ),
       orientation: {
         heading: Cesium.Math.toRadians(80),
-        pitch: Cesium.Math.toRadians(-45),
+        pitch: Cesium.Math.toRadians(-85),
         roll: 0,
       },
     });
