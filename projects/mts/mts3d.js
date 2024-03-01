@@ -28,8 +28,8 @@ const initializeCesium = async () => {
     // Fly to New York City with initial orientation and default radius
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9630,
-        40.8244,
+        -73.9621,
+        40.8447,
         2000 // Adjust the zoom level as needed
       ),
       orientation: {
