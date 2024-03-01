@@ -21,20 +21,23 @@ const initializeCesium = async () => {
   });
 
   // Load nycboroughs GeoJsonDataSource
-  const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
-  const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
+const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
+const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
 
-  // Set a white fill style for the nycboroughs layer
-  nycboroughsDataSource.entities.values.forEach((entity) => {
-    if (entity.polygon) {
-      entity.polygon.material = Cesium.Color.WHITE;
-      entity.polygon.outline = false;
-      entity.polygon.height = 0;
-    }
-  });
+// Set a white fill style for the nycboroughs layer and lower the height
+nycboroughsDataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    entity.polygon.material = Cesium.Color.WHITE;
+    entity.polygon.outline = false;
 
-  // Initial load of nycboroughs layer
-  viewer.dataSources.add(nycboroughsDataSource);
+    // Lower the height, adjust as needed
+    entity.polygon.height = -10; // for example, set to a negative value
+  }
+});
+
+// Initial load of nycboroughs layer
+viewer.dataSources.add(nycboroughsDataSource);
+
 
   // Define the bounding box for New York City
   const nycBoundingBox = {
