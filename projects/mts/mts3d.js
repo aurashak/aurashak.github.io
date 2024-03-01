@@ -23,12 +23,18 @@ const initializeCesium = async () => {
 
 
 
-// Define the central coordinate for West Harlem, NYC (moved slightly to the northwest)
-const westHarlemCentralCoordinate = {
-    longitude: -73.9485,  // Adjusted longitude to the northwest
-    latitude: 40.813,     // Adjusted latitude to the northwest
-    height: 0,            // Height above the ellipsoid
-};
+// Define the bounding box for West Harlem, NYC
+const westHarlemBoundingBox = {
+    west: -73.963,  
+    south: 40.800,  
+    east: -73.934,  
+    north: 40.827,  
+    height: 0,    
+  };
+
+
+
+
 
 
 // Disable all input handling to prevent camera movement
