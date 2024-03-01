@@ -21,31 +21,40 @@ const initializeCesium = async () => {
   });
 
 
-  // Define the bounding box for New York City
-  const nycBoundingBox = {
-    west: -74.257159,
-    south: 40.477398,
-    east: -73.700272,
-    north: 40.917576,
-    height: 0,
-  };
+// Define the bounding box for New York City
+const nycBoundingBox = {
+  west: -74.257159,
+  south: 40.477398,
+  east: -73.700272,
+  north: 40.917576,
+  height: 0,
+};
 
-  // Calculate the center of the bounding box
-  const center = Cesium.Cartesian3.fromDegrees(
-    (nycBoundingBox.west + nycBoundingBox.east) / 2,
-    (nycBoundingBox.south + nycBoundingBox.north) / 2,
-    nycBoundingBox.height
-  );
+// Calculate the center of the bounding box
+const center = Cesium.Cartesian3.fromDegrees(
+  (nycBoundingBox.west + nycBoundingBox.east) / 2,
+  (nycBoundingBox.south + nycBoundingBox.north) / 2,
+  nycBoundingBox.height
+);
 
-  // Fly to New York City with initial orientation
-  viewer.scene.camera.flyTo({
-    destination: center,
-    orientation: {
-      heading: Cesium.Math.toRadians(0),
-      pitch: Cesium.Math.toRadians(-45),
-      roll: 0,
-    },
-  });
+// Fly to New York City with initial orientation and increased radius
+viewer.scene.camera.flyTo({
+  destination: Cesium.Cartesian3.fromDegrees(
+    center.longitude,
+    center.latitude,
+    1000000 // Adjust the radius value as needed
+  ),
+  orientation: {
+    heading: Cesium.Math.toRadians(0),
+    pitch: Cesium.Math.toRadians(-45),
+    roll: 0,
+  },
+});
+
+// Set minimum and maximum zoom limits
+viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 100000; // Adjust the value as needed
+
 
 
 
