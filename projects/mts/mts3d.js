@@ -50,6 +50,21 @@ viewer.scene.screenSpaceCameraController.enableLook = false;
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
   
+
+        // Set camera position and orientation
+        viewer.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(
+                (westHarlemBoundingBox.west + westHarlemBoundingBox.east) / 2,
+                (westHarlemBoundingBox.south + westHarlemBoundingBox.north) / 2,
+                westHarlemBoundingBox.height + 1000 // Adjusted height to lift the camera above the ground
+            ),
+            orientation: {
+                heading: Cesium.Math.toRadians(180), // Heading in radians (rotate 180 degrees)
+                pitch: Cesium.Math.toRadians(-30),   // Pitch in radians (adjust as needed)
+                roll: 0,                            // Roll in radians
+            },
+        });
+        
   
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
