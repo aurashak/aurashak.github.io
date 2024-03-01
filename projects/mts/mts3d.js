@@ -42,7 +42,7 @@ viewer.scene.screenSpaceCameraController.enableTranslate = false;
 viewer.scene.screenSpaceCameraController.enableRotate = true;
 viewer.scene.screenSpaceCameraController.enableZoom = true;
 viewer.scene.screenSpaceCameraController.enableTilt = true;
-viewer.scene.screenSpaceCameraController.enableLook = false;
+viewer.scene.screenSpaceCameraController.enableLook = true;
 
 
     // Set minimum and maximum zoom limits (adjust as needed)
