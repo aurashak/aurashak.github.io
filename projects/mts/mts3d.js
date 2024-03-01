@@ -25,13 +25,13 @@ const initializeCesium = async () => {
 
 // Define the bounding box for West Harlem, NYC
 const westHarlemBoundingBox = {
-    west: -73.963,  
-    south: 40.800,  
-    east: -73.934,  
-    north: 40.827,  
-    height: 0,    
+    west: -73.963 - 0.0001,  // Adjusted longitude to the west
+    south: 40.800 - 0.0001,  // Adjusted latitude to the south
+    east: -73.934 - 0.0001,  // Adjusted longitude to the east
+    north: 40.827 + 0.0001,  // Adjusted latitude to the north
+    height: 0,  // Height above the ellipsoid
   };
-
+  
 
 
 
@@ -230,7 +230,7 @@ const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResourc
 nycsubwayDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to your desired color (e.g., blue)
-    entity.polyline.material = Cesium.Color.BLUE;
+    entity.polyline.material = Cesium.Color.RED;
   }
 });
 
