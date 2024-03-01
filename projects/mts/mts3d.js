@@ -267,9 +267,6 @@ console.log("Initial load of nycsubwayDataSource");
 const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
 const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
 
-// Define the elevation offset (adjust as needed)
-const elevationOffset = 10; // in meters
-
 // Modify the polyline color and width before adding the data source
 mtsgasDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
@@ -278,9 +275,6 @@ mtsgasDataSource.entities.values.forEach((entity) => {
     
     // Change the polyline width
     entity.polyline.width = 3; // Adjust the width as needed
-    
-    // Elevate the entity off the ground
-    entity.position = entity.position.add(new Cesium.Cartesian3(0, 0, elevationOffset));
   }
 });
 
