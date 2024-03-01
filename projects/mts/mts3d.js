@@ -243,6 +243,34 @@ console.log("Initial load of mtsrailDataSource");
 
 
 
+// Load GeoJsonDataSource with asset ID 2483827
+const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
+const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
+
+// Modify the billboard color and style before adding the data source
+busDepotsDataSource.entities.values.forEach((entity) => {
+  if (entity.billboard) {
+    // Change the billboard color to blue
+    entity.billboard.color = Cesium.Color.BLUE;
+    // Change the billboard style to your desired image
+    entity.billboard.image = createCustomImage(); // Function to create a custom image
+  }
+});
+
+// Create a switch event listener for the busdepots layer
+const busDepotsSwitch = document.getElementById("busDepotsSwitch");
+busDepotsSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(busDepotsDataSource);
+  } else {
+    viewer.dataSources.remove(busDepotsDataSource);
+  }
+});
+
+// Initial load of the busdepots layer with modified billboards
+viewer.dataSources.add(busDepotsDataSource);
+
+
 
 
 // Load nycsubway GeoJsonDataSource
