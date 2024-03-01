@@ -22,23 +22,28 @@ const initializeCesium = async () => {
 
 
 
-
-// Define the bounding box for West Harlem, NYC
-const westHarlemBoundingBox = {
-    west: -74.030,  
-    south: 40.510,  
-    east: -73.768,  
-    north: 40.900,  
-    height: 0,    
+// Define the center coordinates
+const centerCoordinates = {
+    longitude: -73.95892455932525,
+    latitude: 40.82575530915204,
+    height: 1000, // Adjusted height to lift the camera above the ground
   };
 
+  // Create a bounding box based on the center coordinates
+  const westHarlemBoundingBox = {
+    west: centerCoordinates.longitude - 0.01,  // Adjusted longitude to the west
+    south: centerCoordinates.latitude - 0.01,  // Adjusted latitude to the south
+    east: centerCoordinates.longitude + 0.01,  // Adjusted longitude to the east
+    north: centerCoordinates.latitude + 0.01,  // Adjusted latitude to the north
+    height: centerCoordinates.height,          // Height above the ellipsoid
+  };
 
   // Set camera position and orientation
   viewer.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
-      -73.95892455932525,  // Longitude
-      40.82575530915204,   // Latitude
-      1000                 // Adjusted height to lift the camera above the ground
+      centerCoordinates.longitude,
+      centerCoordinates.latitude,
+      centerCoordinates.height
     ),
     orientation: {
       heading: Cesium.Math.toRadians(180), // Heading in radians (rotate 180 degrees)
@@ -46,7 +51,6 @@ const westHarlemBoundingBox = {
       roll: 0,                            // Roll in radians
     },
   });
-
 
 
 // Disable all input handling to prevent camera movement
