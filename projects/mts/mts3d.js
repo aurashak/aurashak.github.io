@@ -115,8 +115,6 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
   });
 
 
-
-
 // Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
@@ -137,46 +135,16 @@ const mtscsoSwitch = document.getElementById("mtscsoSwitch");
 mtscsoSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(mtscsoDataSource);
+    console.log("mtscsoDataSource added to viewer");
   } else {
     viewer.dataSources.remove(mtscsoDataSource);
+    console.log("mtscsoDataSource removed from viewer");
   }
 });
 
 // Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
-
-
-
-// Load bus depots
-const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
-const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
-
-// Modify the billboard color and style before adding the data source
-busDepotsDataSource.entities.values.forEach((entity) => {
-  if (entity.billboard) {
-    // Change the billboard color to blue
-    entity.billboard.color = Cesium.Color.BLUE;
-    // Change the billboard style to your desired image
-    entity.billboard.image = createCustomImage(); // Function to create a custom image
-  }
-});
-
-// Create a switch event listener for the busdepots layer
-const busDepotsSwitch = document.getElementById("busDepotsSwitch");
-busDepotsSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(busDepotsDataSource);
-  } else {
-    viewer.dataSources.remove(busDepotsDataSource);
-  }
-});
-
-// Initial load of the busdepots layer with modified billboards
-viewer.dataSources.add(busDepotsDataSource);
-
-
-
-
+console.log("Initial load of mtscsoDataSource");
 
 // Function to create a red circle image
 function createCircleImage() {
@@ -223,6 +191,7 @@ mtsparksDataSource.entities.values.forEach((entity) => {
   entity.show = true; // Make sure entities are visible by default
 });
 
+console.log("Initial load of mtsparksDataSource");
 
 
 
@@ -254,6 +223,7 @@ mtsrailDataSource.entities.values.forEach((entity) => {
   entity.show = true; // Make sure entities are visible by default
 });
 
+console.log("Initial load of mtsrailDataSource");
 
 
 
@@ -285,6 +255,7 @@ nycsubwayDataSource.entities.values.forEach((entity) => {
   entity.show = true; // Make sure entities are visible by default
 });
 
+console.log("Initial load of nycsubwayDataSource");
 
 
 
@@ -312,13 +283,16 @@ const mtsgasSwitch = document.getElementById("mtsgasSwitch");
 mtsgasSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(mtsgasDataSource);
+    console.log("mtsgasDataSource added to viewer");
   } else {
     viewer.dataSources.remove(mtsgasDataSource);
+    console.log("mtsgasDataSource removed from viewer");
   }
 });
 
 // Initial load of mtsgas with the black color and custom width
 viewer.dataSources.add(mtsgasDataSource);
+console.log("Initial load of mtsgasDataSource");
 
 
 
@@ -344,11 +318,13 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
     console.log("mtsstreetsDataSource added to viewer");
   } else {
     viewer.dataSources.remove(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource removed from viewer");
   }
 });
 
 // Initial load of mtsstreets with the red color
 viewer.dataSources.add(mtsstreetsDataSource);
+console.log("Initial load of mtsstreetsDataSource");
 
 };
 
