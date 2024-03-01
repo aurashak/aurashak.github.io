@@ -160,11 +160,14 @@ function createCircleImage() {
 const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
 
-// Modify the polyline/polygon color before adding the data source
+// Modify the polyline/polygon color and disable the outline before adding the data source
 mtsparksDataSource.entities.values.forEach((entity) => {
   if (entity.polygon) {
     // Change the polygon color to green
     entity.polygon.material = Cesium.Color.GREEN;
+    
+    // Disable the polygon outline
+    entity.polygon.outline = false;
   }
 });
 
@@ -176,13 +179,14 @@ mtsparksSwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of mtsparks with the green color
+// Initial load of mtsparks with the green color and disabled outline
 viewer.dataSources.add(mtsparksDataSource);
 mtsparksDataSource.entities.values.forEach((entity) => {
   entity.show = true; // Make sure entities are visible by default
 });
 
 console.log("Initial load of mtsparksDataSource");
+
 
 
 
