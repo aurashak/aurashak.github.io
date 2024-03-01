@@ -253,7 +253,7 @@ console.log("Initial load of mtsrailDataSource");
 
 
 // Load mtsgas GeoJsonDataSource
-const mtsgasResource = await Cesium.IonResource.fromAssetId(2460344);
+const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
 const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
 
 // Modify the polyline color and width before adding the data source
