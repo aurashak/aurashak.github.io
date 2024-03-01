@@ -41,34 +41,27 @@ const initializeCesium = async () => {
   });
 
 
+  // Set minimum and maximum zoom limits
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000; // Adjust the value as needed
 
-// Set minimum and maximum zoom limits
-viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000; // Adjust the value as needed
+  // Load nycboroughs GeoJsonDataSource
+  const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
+  const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
 
+  // Set a white fill style for the nycboroughs layer and lower the height
+  nycboroughsDataSource.entities.values.forEach((entity) => {
+    if (entity.polygon) {
+      entity.polygon.material = Cesium.Color.WHITE;
+      entity.polygon.outline = false;
 
+      // Lower the height, adjust as needed
+      entity.polygon.height = -50; // for example, set to a negative value
+    }
+  });
 
-
-// Load nycboroughs GeoJsonDataSource
-const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
-const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
-
-// Set a white fill style for the nycboroughs layer and lower the height
-nycboroughsDataSource.entities.values.forEach((entity) => {
-  if (entity.polygon) {
-    entity.polygon.material = Cesium.Color.WHITE;
-    entity.polygon.outline = false;
-
-    // Lower the height, adjust as needed
-    entity.polygon.height = -50; // for example, set to a negative value
-  }
-});
-
-// Initial load of nycboroughs layer
-viewer.dataSources.add(nycboroughsDataSource);
-
-
-
+  // Initial load of nycboroughs layer
+  viewer.dataSources.add(nycboroughsDataSource);
 
 
 
@@ -377,72 +370,7 @@ viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
 
-
-// Function to set legend symbols with support for multiple shapes and colors
-function setLegendSymbol(layerId, colors, shape) {
-  // ... (your existing setLegendSymbol function)
-}
-
-// Function to create a legend entry based on shape and color
-function createLegendEntry(label, color, shape) {
-  // ... (your existing createLegendEntry function)
-}
-
-// Function to add legend items to the container
-function addLegend() {
-  console.log('Entering addLegend function');
-  const legendContainer = document.getElementById('legend-container');
-  console.log('Legend container:', legendContainer);
-
-  if (legendContainer) {
-    legendContainer.innerHTML = ''; // Clear existing content
-
-    // Add legend symbols for each layer
-    setLegendSymbol('mtscso', 'red', 'circle');
-    setLegendSymbol('mtsparks', 'green', 'polygon');
-    setLegendSymbol('mtsrail', 'red', 'line');
-    setLegendSymbol('nycsubway', 'red', 'line');
-    setLegendSymbol('mtsgas', 'black', 'line');
-    setLegendSymbol('mtsstreets', 'grey', 'line');
-    // You can add more layers as needed with their respective colors and shapes
-
-    // Add legend symbols for the newTileset layer
-    setLegendSymbol('newTileset', 'blue', 'circle'); // Update with the correct color and shape
-
-    // Add legend symbols for the osmBuildingsTileset layer
-    setLegendSymbol('osmBuildingsTileset', 'orange', 'polygon'); // Update with the correct color and shape
-
-    // Add legend symbols for the mtscsoDataSource layer
-    setLegendSymbol('mtscsoDataSource', 'red', 'circle'); // Update with the correct color and shape
-
-    // Add legend symbols for the mtsparksDataSource layer
-    setLegendSymbol('mtsparksDataSource', 'green', 'polygon'); // Update with the correct color and shape
-
-    // Add legend symbols for the mtsrailDataSource layer
-    setLegendSymbol('mtsrailDataSource', 'red', 'line'); // Update with the correct color and shape
-
-    // Add legend symbols for the busDepotsDataSource layer
-    setLegendSymbol('busDepotsDataSource', 'blue', 'circle'); // Update with the correct color and shape
-
-    // Add legend symbols for the nycsubwayDataSource layer
-    setLegendSymbol('nycsubwayDataSource', 'red', 'line'); // Update with the correct color and shape
-
-    // Add legend symbols for the mtsgasDataSource layer
-    setLegendSymbol('mtsgasDataSource', 'black', 'line'); // Update with the correct color and shape
-
-    // Add legend symbols for the mtsstreetsDataSource layer
-    setLegendSymbol('mtsstreetsDataSource', 'grey', 'line'); // Update with the correct color and shape
-
-    console.log('Legend added successfully.');
-  } else {
-    console.error('Legend container not found.');
-  }
-  console.log('Exiting addLegend function');
-}
-
-// Call the addLegend function after initializing your layers
-addLegend();
-
+};
 
 
 
