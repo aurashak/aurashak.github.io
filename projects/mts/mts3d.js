@@ -390,6 +390,7 @@ function addLegend() {
         setLegendSymbol('mtsstreets', 'grey', 'line');
         // You can add more layers as needed with their respective colors and shapes
         // ...
+        console.log('Legend added successfully.');
     }
 }
 
