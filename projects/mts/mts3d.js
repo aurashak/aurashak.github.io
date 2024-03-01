@@ -32,7 +32,7 @@ nycboroughsDataSource.entities.values.forEach((entity) => {
     entity.polygon.outline = false;
 
     // Lower the height, adjust as needed
-    entity.polygon.height = -10; // for example, set to a negative value
+    entity.polygon.height = -50; // for example, set to a negative value
   }
 });
 
