@@ -25,10 +25,10 @@ const initializeCesium = async () => {
 
 // Define the bounding box for West Harlem, NYC
 const westHarlemBoundingBox = {
-    west: -73.969,  
-    south: 40.820,  
-    east: -73.942,  
-    north: 40.827,  
+    west: -74.030,  
+    south: 40.510,  
+    east: -73.768,  
+    north: 40.900,  
     height: 0,    
   };
 
