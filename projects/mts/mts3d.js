@@ -21,6 +21,32 @@ const initializeCesium = async () => {
   });
 
 
+  // Define the bounding box for New York City
+  const nycBoundingBox = {
+    west: -74.257159,
+    south: 40.477398,
+    east: -73.700272,
+    north: 40.917576,
+    height: 0,
+  };
+
+  // Convert the bounding box to a bounding sphere for New York City
+  const nycBoundingSphere = Cesium.BoundingSphere.fromRectangle3D(
+    Cesium.Rectangle.fromDegrees(
+      nycBoundingBox.west,
+      nycBoundingBox.south,
+      nycBoundingBox.east,
+      nycBoundingBox.north
+    ),
+    viewer.scene.globe.ellipsoid,
+    nycBoundingBox.height
+  );
+
+  // Set the custom bounding sphere for the entire New York City
+  viewer.scene.camera.viewBoundingSphere(nycBoundingSphere);
+
+
+  
 // Load nycboroughs GeoJsonDataSource
 const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
 const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
