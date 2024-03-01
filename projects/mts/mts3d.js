@@ -30,23 +30,25 @@ const initializeCesium = async () => {
     height: 0,
   };
 
-  // Convert the bounding box to a bounding sphere for New York City
-  const nycBoundingSphere = Cesium.BoundingSphere.fromRectangle3D(
-    Cesium.Rectangle.fromDegrees(
-      nycBoundingBox.west,
-      nycBoundingBox.south,
-      nycBoundingBox.east,
-      nycBoundingBox.north
-    ),
-    viewer.scene.globe.ellipsoid,
+  // Calculate the center of the bounding box
+  const center = Cesium.Cartesian3.fromDegrees(
+    (nycBoundingBox.west + nycBoundingBox.east) / 2,
+    (nycBoundingBox.south + nycBoundingBox.north) / 2,
     nycBoundingBox.height
   );
 
-  // Set the custom bounding sphere for the entire New York City
-  viewer.scene.camera.viewBoundingSphere(nycBoundingSphere);
+  // Fly to New York City with initial orientation
+  viewer.scene.camera.flyTo({
+    destination: center,
+    orientation: {
+      heading: Cesium.Math.toRadians(0),
+      pitch: Cesium.Math.toRadians(-45),
+      roll: 0,
+    },
+  });
 
 
-  
+
 // Load nycboroughs GeoJsonDataSource
 const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
 const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
