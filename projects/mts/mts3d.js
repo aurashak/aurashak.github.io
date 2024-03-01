@@ -280,8 +280,7 @@ mtsgasDataSource.entities.values.forEach((entity) => {
     // Change the polyline width
     entity.polyline.width = 3; // Adjust the width as needed
     
-    // Elevate the entity off the ground
-    entity.position = entity.position.add(new Cesium.Cartesian3(0, 0, elevationOffset));
+
   }
 });
 
