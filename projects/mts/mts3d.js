@@ -2,15 +2,8 @@
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s";
 
-// Define the bounding box for West Harlem, NYC
-const westHarlemBoundingBox = {
-    west: -73.963 - 0.0001,  // Adjusted longitude to the west
-    south: 40.800 - 0.0001,  // Adjusted latitude to the south
-    east: -73.934 - 0.0001,  // Adjusted longitude to the east
-    north: 40.827 + 0.0001,  // Adjusted latitude to the north
-    height: 0,  // Height above the ellipsoid
-  };
-  
+// Initialize Cesium
+const initializeCesium = async () => {
   // Create a Cesium viewer
   const viewer = new Cesium.Viewer("cesiumContainer", {
     baseLayerPicker: false,
@@ -26,31 +19,30 @@ const westHarlemBoundingBox = {
     skyBox: false,
     skyAtmosphere: false,
   });
-  
-  // Disable all input handling to prevent camera movement
-  viewer.scene.screenSpaceCameraController.enableTranslate = false;
-  viewer.scene.screenSpaceCameraController.enableRotate = true;
-  viewer.scene.screenSpaceCameraController.enableZoom = true;
-  viewer.scene.screenSpaceCameraController.enableTilt = true;
-  viewer.scene.screenSpaceCameraController.enableLook = false;
-  
-  // Set minimum and maximum zoom limits (adjust as needed)
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
-  
-  // Set camera position and orientation
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(
-      (westHarlemBoundingBox.west + westHarlemBoundingBox.east) / 2,
-      (westHarlemBoundingBox.south + westHarlemBoundingBox.north) / 2,
-      westHarlemBoundingBox.height + 1000 // Adjusted height to lift the camera above the ground
-    ),
-    orientation: {
-      heading: Cesium.Math.toRadians(45), // Heading in radians (rotate 45 degrees)
-      pitch: Cesium.Math.toRadians(-30), // Pitch in radians (adjust as needed)
-      roll: 0, // Roll in radians
-    },
-  });
+
+
+
+
+// Define the central coordinate for West Harlem, NYC (moved slightly to the northwest)
+const westHarlemCentralCoordinate = {
+    longitude: -73.9485,  // Adjusted longitude to the northwest
+    latitude: 40.813,     // Adjusted latitude to the northwest
+    height: 0,            // Height above the ellipsoid
+};
+
+
+// Disable all input handling to prevent camera movement
+console.log("Disabling input handling to prevent camera movement...");
+viewer.scene.screenSpaceCameraController.enableTranslate = false;
+viewer.scene.screenSpaceCameraController.enableRotate = true;
+viewer.scene.screenSpaceCameraController.enableZoom = true;
+viewer.scene.screenSpaceCameraController.enableTilt = true;
+viewer.scene.screenSpaceCameraController.enableLook = false;
+
+
+    // Set minimum and maximum zoom limits (adjust as needed)
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
   
   
   // Load full google photorealistic tileset
@@ -315,6 +307,8 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
+
+};
 
 
 
