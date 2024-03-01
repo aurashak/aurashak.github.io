@@ -21,6 +21,22 @@ const initializeCesium = async () => {
   });
 
 
+  // Load nycboroughs GeoJsonDataSource
+const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
+const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
+
+// Set a white fill style for the nycboroughs layer
+nycboroughsDataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    entity.polygon.material = Cesium.Color.WHITE;
+    entity.polygon.outline = false; // Optional: Disable polygon outline
+  }
+});
+
+// Initial load of nycboroughs layer
+viewer.dataSources.add(nycboroughsDataSource);
+
+
 
 
 // Define the bounding box for West Harlem, NYC
