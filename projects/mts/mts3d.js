@@ -23,20 +23,6 @@ const initializeCesium = async () => {
 
 
 
-// Fly to New York City with initial orientation and increased radius
-viewer.scene.camera.flyTo({
-  destination: Cesium.Cartesian3.fromDegrees(
-    center.longitude,
-    center.latitude,
-    1000000 // Adjust the radius value as needed
-  ),
-  orientation: {
-    heading: Cesium.Math.toRadians(0),
-    pitch: Cesium.Math.toRadians(-45),
-    roll: 0,
-  },
-});
-
 // Set minimum and maximum zoom limits
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 100000; // Adjust the value as needed
