@@ -20,18 +20,17 @@ const initializeCesium = async () => {
     skyAtmosphere: false,
   });
 
-  // Load nycboroughs GeoJsonDataSource
+
+ // Load nycboroughs GeoJsonDataSource
 const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
 const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
 
-// Set a white fill style for the nycboroughs layer and lower the height
+// Set a white fill style for the nycboroughs layer
 nycboroughsDataSource.entities.values.forEach((entity) => {
   if (entity.polygon) {
     entity.polygon.material = Cesium.Color.WHITE;
-    entity.polygon.outline = false;
-
-    // Lower the height, adjust as needed
-    entity.polygon.height = -10; // for example, set to a negative value
+    entity.polygon.outline = false; // Optional: Disable polygon outline
+    entity.polygon.height = 0; // Set the height to 0 to place it on the ground
   }
 });
 
@@ -39,121 +38,129 @@ nycboroughsDataSource.entities.values.forEach((entity) => {
 viewer.dataSources.add(nycboroughsDataSource);
 
 
-  // Define the bounding box for New York City
-  const nycBoundingBox = {
-    west: -74.258,
-    south: 40.477,
-    east: -73.700,
-    north: 40.917,
-    height: 0,
+
+// Define the bounding box for West Harlem, NYC
+const westHarlemBoundingBox = {
+    west: -73.969,  
+    south: 40.820,  
+    east: -73.942,  
+    north: 40.827,  
+    height: 0,    
   };
 
-  // Set camera position and orientation using the bounding box
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(
-      (nycBoundingBox.west + nycBoundingBox.east) / 2,
-      (nycBoundingBox.south + nycBoundingBox.north) / 2,
-      nycBoundingBox.height + 10000
-    ),
-    orientation: {
-      heading: Cesium.Math.toRadians(0),
-      pitch: Cesium.Math.toRadians(-45),
-      roll: 0,
-    },
-  });
 
-  // Create a bounding sphere for the entire New York City
-  const boundingSphere = Cesium.BoundingSphere.fromRectangle3D(
-    Cesium.Rectangle.fromDegrees(
-      nycBoundingBox.west,
-      nycBoundingBox.south,
-      nycBoundingBox.east,
-      nycBoundingBox.north
-    ),
-    viewer.scene.globe.ellipsoid,
-    nycBoundingBox.height
-  );
 
-  // Set the custom bounding sphere for the entire New York City
-  viewer.scene.camera.viewBoundingSphere(boundingSphere);
 
+
+
+/*
+
+// Disable all input handling to prevent camera movement
+viewer.scene.screenSpaceCameraController.enableTranslate = true;
+viewer.scene.screenSpaceCameraController.enableRotate = true;
+viewer.scene.screenSpaceCameraController.enableZoom = true;
+viewer.scene.screenSpaceCameraController.enableTilt = true;
+viewer.scene.screenSpaceCameraController.enableLook = true;
+
+*/
+
+
+    // Set minimum and maximum zoom limits (adjust as needed)
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
+  
+
+        // Set camera position and orientation
+        viewer.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(
+                (westHarlemBoundingBox.west + westHarlemBoundingBox.east) / 2,
+                (westHarlemBoundingBox.south + westHarlemBoundingBox.north) / 2,
+                westHarlemBoundingBox.height + 1000 // Adjusted height to lift the camera above the ground
+            ),
+            orientation: {
+                heading: Cesium.Math.toRadians(180), // Heading in radians (rotate 180 degrees)
+                pitch: Cesium.Math.toRadians(-30),   // Pitch in radians (adjust as needed)
+                roll: 0,                            // Roll in radians
+            },
+        });
+
+  
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
   viewer.scene.primitives.add(newTileset);
-
+  
+  // Create a bounding sphere for West Harlem
+  const boundingSphere = Cesium.BoundingSphere.fromRectangle3D(
+    Cesium.Rectangle.fromDegrees(westHarlemBoundingBox.west, westHarlemBoundingBox.south, westHarlemBoundingBox.east, westHarlemBoundingBox.north),
+    viewer.scene.globe.ellipsoid,
+    westHarlemBoundingBox.height
+  );
+  
+  // Set the custom bounding sphere for the area you want to focus on
+  viewer.camera.viewBoundingSphere(boundingSphere);
+  
   // Apply default style to the tileset if available
   const newExtras = newTileset.asset.extras;
   if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
     newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
   }
-
+  
   // Remove the default satellite imagery layers
   viewer.imageryLayers.removeAll();
-
+  
   // Create a switch event listener for the new 3D Tileset
   const newTilesetSwitch = document.getElementById("3dTileSwitch");
   newTilesetSwitch.addEventListener("change", (event) => {
     newTileset.show = event.target.checked;
   });
-
-  // Set minimum and maximum zoom limits
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000;
-};
-
   
 
 
 
-// Load OSM buildings 3D Tileset
+  // Load OSM buildings 3D Tileset
 const osmBuildingsTileset = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(96188),
-);
+    await Cesium.Cesium3DTileset.fromIonAssetId(96188),
+  );
+  
+  // Apply default style to the OSM buildings tileset if available
+  const osmExtras = osmBuildingsTileset.asset.extras;
+  if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
+    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
+  }
+  
+  // Create a switch event listener for the OSM buildings Tileset
+  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+  osmBuildingsSwitch.addEventListener("change", (event) => {
+    osmBuildingsTileset.show = event.target.checked;
+  });
 
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
-}
 
-// Create a switch event listener for the OSM buildings Tileset
-const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-osmBuildingsSwitch.addEventListener("change", (event) => {
-  osmBuildingsTileset.show = event.target.checked;
-});
-
-
-
-// Load mts// Load mtscso GeoJsonDataSource
+// Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
 // Modify the billboard color and style before adding the data source
 mtscsoDataSource.entities.values.forEach((entity) => {
-    if (entity.billboard) {
-        // Change the billboard color to red
-        entity.billboard.color = Cesium.Color.RED;
-        // Change the billboard style to Circle
-        entity.billboard.image = createCircleImage(); // Function to create a red circle image
-    }
+  if (entity.billboard) {
+    // Change the billboard color to red
+    entity.billboard.color = Cesium.Color.RED;
+    // Change the billboard style to Circle
+    entity.billboard.image = createCircleImage(); // Function to create a red circle image
+  }
 });
+
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
 mtscsoSwitch.addEventListener("change", (event) => {
-    if (event.target.checked) {
-        viewer.dataSources.add(mtscsoDataSource);
-        console.log("mtscsoDataSource added to viewer");
-    } else {
-        viewer.dataSources.remove(mtscsoDataSource);
-        console.log("mtscsoDataSource removed from viewer");
-    }
+  if (event.target.checked) {
+    viewer.dataSources.add(mtscsoDataSource);
+    console.log("mtscsoDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(mtscsoDataSource);
+    console.log("mtscsoDataSource removed from viewer");
+  }
 });
-
-// Initial load of mtscso with the red circle markers
-viewer.dataSources.add(mtscsoDataSource);
-console.log("Initial load of mtscsoDataSource");
-
 
 // Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
@@ -384,7 +391,7 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
-
+};
 
 
 // Function to set legend symbols with support for multiple shapes and colors
