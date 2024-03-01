@@ -379,7 +379,7 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
-};
+
 
 
 // Function to set legend symbols with support for multiple shapes and colors
