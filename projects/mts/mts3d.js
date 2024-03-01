@@ -277,6 +277,19 @@ busDepotsSwitch.addEventListener("change", (event) => {
 viewer.dataSources.add(busDepotsDataSource);
 console.log("Initial load of busDepotsDataSource");
 
+// Function to create a custom image
+function createCustomImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 20;
+  canvas.height = 20;
+  const context = canvas.getContext("2d");
+  // Customize the image as needed
+  context.fillStyle = "blue";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  return canvas;
+}
+
+
 
 
 
