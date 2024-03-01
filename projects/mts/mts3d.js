@@ -195,10 +195,7 @@ const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource)
 
 // Modify the polyline/polygon color before adding the data source
 mtsparksDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    // Change the polyline color to green
-    entity.polyline.material = Cesium.Color.GREEN;
-  } else if (entity.polygon) {
+  if (entity.polygon) {
     // Change the polygon color to green
     entity.polygon.material = Cesium.Color.GREEN;
   }
