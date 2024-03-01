@@ -13,7 +13,7 @@ const initializeCesium = async () => {
     sceneModePicker: false,
     selectionIndicator: false,
     timeline: false,
-    navigationHelpButton: false,
+    navigationHelpButton: true,
     fullscreenButton: false,
     animation: false,
     skyBox: false,
