@@ -39,65 +39,40 @@ viewer.dataSources.add(nycboroughsDataSource);
 
 
 
-// Define the bounding box for West Harlem, NYC
-const westHarlemBoundingBox = {
-    west: -73.969,  
-    south: 40.820,  
-    east: -73.942,  
-    north: 40.827,  
-    height: 0,    
-  };
+// Define the bounding box for New York City
+const nycBoundingBox = {
+  west: -74.257159,
+  south: 40.477398,
+  east: -73.700272,
+  north: 40.917576,
+  height: 0,
+};
+
+// Convert the bounding box to a bounding sphere
+const nycBoundingSphere = Cesium.BoundingSphere.fromRectangle3D(
+  Cesium.Rectangle.fromDegrees(
+      nycBoundingBox.west,
+      nycBoundingBox.south,
+      nycBoundingBox.east,
+      nycBoundingBox.north
+  ),
+  viewer.scene.globe.ellipsoid,
+  nycBoundingBox.height
+);
+
+// Set the custom bounding sphere for the entire New York City
+viewer.scene.camera.viewBoundingSphere(nycBoundingSphere);
 
 
 
 
 
-
-/*
-
-// Disable all input handling to prevent camera movement
-viewer.scene.screenSpaceCameraController.enableTranslate = true;
-viewer.scene.screenSpaceCameraController.enableRotate = true;
-viewer.scene.screenSpaceCameraController.enableZoom = true;
-viewer.scene.screenSpaceCameraController.enableTilt = true;
-viewer.scene.screenSpaceCameraController.enableLook = true;
-
-*/
-
-
-    // Set minimum and maximum zoom limits (adjust as needed)
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
-  
-
-        // Set camera position and orientation
-        viewer.camera.setView({
-            destination: Cesium.Cartesian3.fromDegrees(
-                (westHarlemBoundingBox.west + westHarlemBoundingBox.east) / 2,
-                (westHarlemBoundingBox.south + westHarlemBoundingBox.north) / 2,
-                westHarlemBoundingBox.height + 1000 // Adjusted height to lift the camera above the ground
-            ),
-            orientation: {
-                heading: Cesium.Math.toRadians(180), // Heading in radians (rotate 180 degrees)
-                pitch: Cesium.Math.toRadians(-30),   // Pitch in radians (adjust as needed)
-                roll: 0,                            // Roll in radians
-            },
-        });
 
   
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
   viewer.scene.primitives.add(newTileset);
-  
-  // Create a bounding sphere for West Harlem
-  const boundingSphere = Cesium.BoundingSphere.fromRectangle3D(
-    Cesium.Rectangle.fromDegrees(westHarlemBoundingBox.west, westHarlemBoundingBox.south, westHarlemBoundingBox.east, westHarlemBoundingBox.north),
-    viewer.scene.globe.ellipsoid,
-    westHarlemBoundingBox.height
-  );
-  
-  // Set the custom bounding sphere for the area you want to focus on
-  viewer.camera.viewBoundingSphere(boundingSphere);
+
   
   // Apply default style to the tileset if available
   const newExtras = newTileset.asset.extras;
@@ -465,6 +440,20 @@ addLegend();
 
 // Call the initializeCesium function
 initializeCesium();
+
+
+
+/*
+
+// Disable all input handling to prevent camera movement
+viewer.scene.screenSpaceCameraController.enableTranslate = true;
+viewer.scene.screenSpaceCameraController.enableRotate = true;
+viewer.scene.screenSpaceCameraController.enableZoom = true;
+viewer.scene.screenSpaceCameraController.enableTilt = true;
+viewer.scene.screenSpaceCameraController.enableLook = true;
+
+*/
+
 
 
 
