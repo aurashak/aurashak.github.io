@@ -91,6 +91,9 @@ const westHarlemBoundingBox = {
   viewer.scene.screenSpaceCameraController.enableTilt = true;
   viewer.scene.screenSpaceCameraController.enableLook = false;
   
+
+  /*
+
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
   viewer.scene.primitives.add(newTileset);
@@ -119,6 +122,8 @@ const westHarlemBoundingBox = {
   newTilesetSwitch.addEventListener("change", (event) => {
     newTileset.show = event.target.checked;
   });
+
+  */
   
 
 
