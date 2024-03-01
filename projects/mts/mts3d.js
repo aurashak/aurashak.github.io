@@ -397,8 +397,6 @@ function addLegend() {
 addLegend();
 
 
-
-
 // Call the initializeCesium function
 initializeCesium();
 
