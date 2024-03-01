@@ -105,50 +105,55 @@ viewer.dataSources.add(nycboroughsDataSource);
 
 
 
-  // Load OSM buildings 3D Tileset
+// Load OSM buildings 3D Tileset
 const osmBuildingsTileset = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(96188),
-  );
-  
-  // Apply default style to the OSM buildings tileset if available
-  const osmExtras = osmBuildingsTileset.asset.extras;
-  if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
-    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
-  }
-  
-  // Create a switch event listener for the OSM buildings Tileset
-  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-  osmBuildingsSwitch.addEventListener("change", (event) => {
-    osmBuildingsTileset.show = event.target.checked;
-  });
+  await Cesium.Cesium3DTileset.fromIonAssetId(96188),
+);
+
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
+}
+
+// Create a switch event listener for the OSM buildings Tileset
+const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+osmBuildingsSwitch.addEventListener("change", (event) => {
+  osmBuildingsTileset.show = event.target.checked;
+});
 
 
-// Load mtscso GeoJsonDataSource
+
+// Load mts// Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
 // Modify the billboard color and style before adding the data source
 mtscsoDataSource.entities.values.forEach((entity) => {
-  if (entity.billboard) {
-    // Change the billboard color to red
-    entity.billboard.color = Cesium.Color.RED;
-    // Change the billboard style to Circle
-    entity.billboard.image = createCircleImage(); // Function to create a red circle image
-  }
+    if (entity.billboard) {
+        // Change the billboard color to red
+        entity.billboard.color = Cesium.Color.RED;
+        // Change the billboard style to Circle
+        entity.billboard.image = createCircleImage(); // Function to create a red circle image
+    }
 });
-
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
 mtscsoSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtscsoDataSource);
-    console.log("mtscsoDataSource added to viewer");
-  } else {
-    viewer.dataSources.remove(mtscsoDataSource);
-    console.log("mtscsoDataSource removed from viewer");
-  }
+    if (event.target.checked) {
+        viewer.dataSources.add(mtscsoDataSource);
+        console.log("mtscsoDataSource added to viewer");
+    } else {
+        viewer.dataSources.remove(mtscsoDataSource);
+        console.log("mtscsoDataSource removed from viewer");
+    }
 });
+
+// Initial load of mtscso with the red circle markers
+viewer.dataSources.add(mtscsoDataSource);
+console.log("Initial load of mtscsoDataSource");
+
 
 // Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
