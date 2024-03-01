@@ -51,13 +51,22 @@ const nycBoundingBox = {
   height: 0,
 };
 
-// Convert the bounding box to a bounding sphere
+// Define the bounding box for New York City
+const nycBoundingBox = {
+  west: -74.257159,
+  south: 40.477398,
+  east: -73.700272,
+  north: 40.917576,
+  height: 0,
+};
+
+// Convert the bounding box to a bounding sphere for New York City
 const nycBoundingSphere = Cesium.BoundingSphere.fromRectangle3D(
   Cesium.Rectangle.fromDegrees(
-      nycBoundingBox.west,
-      nycBoundingBox.south,
-      nycBoundingBox.east,
-      nycBoundingBox.north
+    nycBoundingBox.west,
+    nycBoundingBox.south,
+    nycBoundingBox.east,
+    nycBoundingBox.north
   ),
   viewer.scene.globe.ellipsoid,
   nycBoundingBox.height
@@ -65,6 +74,31 @@ const nycBoundingSphere = Cesium.BoundingSphere.fromRectangle3D(
 
 // Set the custom bounding sphere for the entire New York City
 viewer.scene.camera.viewBoundingSphere(nycBoundingSphere);
+
+// Define the bounding box for West Harlem, NYC
+const westHarlemBoundingBox = {
+  west: -73.969,
+  south: 40.820,
+  east: -73.942,
+  north: 40.827,
+  height: 0,
+};
+
+// Convert the bounding box to a bounding sphere for West Harlem
+const westHarlemBoundingSphere = Cesium.BoundingSphere.fromRectangle3D(
+  Cesium.Rectangle.fromDegrees(
+    westHarlemBoundingBox.west,
+    westHarlemBoundingBox.south,
+    westHarlemBoundingBox.east,
+    westHarlemBoundingBox.north
+  ),
+  viewer.scene.globe.ellipsoid,
+  westHarlemBoundingBox.height
+);
+
+// Set the custom bounding sphere for West Harlem
+viewer.scene.camera.viewBoundingSphere(westHarlemBoundingSphere);
+
 
 
 
