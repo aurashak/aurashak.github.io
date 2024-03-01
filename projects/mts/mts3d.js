@@ -21,8 +21,21 @@ const initializeCesium = async () => {
   });
 
 
+  // Fly to New York City with initial orientation and default radius
+  viewer.scene.camera.flyTo({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -74.006,
+      40.7128,
+      50000 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(0),
+      pitch: Cesium.Math.toRadians(-45),
+      roll: 0,
+    },
+  });
 
-
+  
 // Set minimum and maximum zoom limits
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 100000; // Adjust the value as needed
@@ -364,50 +377,53 @@ function addLegend() {
   const legendContainer = document.getElementById('legend-container');
 
   if (legendContainer) {
-      legendContainer.innerHTML = ''; // Clear existing content
+    legendContainer.innerHTML = ''; // Clear existing content
 
-      // Add legend symbols for each layer
-      setLegendSymbol('mtscso', 'red', 'circle');
-      setLegendSymbol('mtsparks', 'green', 'polygon');
-      setLegendSymbol('mtsrail', 'red', 'line');
-      setLegendSymbol('nycsubway', 'red', 'line');
-      setLegendSymbol('mtsgas', 'black', 'line');
-      setLegendSymbol('mtsstreets', 'grey', 'line');
-      // You can add more layers as needed with their respective colors and shapes
+    // Add legend symbols for each layer
+    setLegendSymbol('mtscso', 'red', 'circle');
+    setLegendSymbol('mtsparks', 'green', 'polygon');
+    setLegendSymbol('mtsrail', 'red', 'line');
+    setLegendSymbol('nycsubway', 'red', 'line');
+    setLegendSymbol('mtsgas', 'black', 'line');
+    setLegendSymbol('mtsstreets', 'grey', 'line');
+    // You can add more layers as needed with their respective colors and shapes
 
-      // Add legend symbols for the newTileset layer
-      setLegendSymbol('newTileset', 'blue', 'circle'); // Update with the correct color and shape
+    // Add legend symbols for the newTileset layer
+    setLegendSymbol('newTileset', 'blue', 'circle'); // Update with the correct color and shape
 
-      // Add legend symbols for the osmBuildingsTileset layer
-      setLegendSymbol('osmBuildingsTileset', 'orange', 'polygon'); // Update with the correct color and shape
+    // Add legend symbols for the osmBuildingsTileset layer
+    setLegendSymbol('osmBuildingsTileset', 'orange', 'polygon'); // Update with the correct color and shape
 
-      // Add legend symbols for the mtscsoDataSource layer
-      setLegendSymbol('mtscsoDataSource', 'red', 'circle'); // Update with the correct color and shape
+    // Add legend symbols for the mtscsoDataSource layer
+    setLegendSymbol('mtscsoDataSource', 'red', 'circle'); // Update with the correct color and shape
 
-      // Add legend symbols for the mtsparksDataSource layer
-      setLegendSymbol('mtsparksDataSource', 'green', 'polygon'); // Update with the correct color and shape
+    // Add legend symbols for the mtsparksDataSource layer
+    setLegendSymbol('mtsparksDataSource', 'green', 'polygon'); // Update with the correct color and shape
 
-      // Add legend symbols for the mtsrailDataSource layer
-      setLegendSymbol('mtsrailDataSource', 'red', 'line'); // Update with the correct color and shape
+    // Add legend symbols for the mtsrailDataSource layer
+    setLegendSymbol('mtsrailDataSource', 'red', 'line'); // Update with the correct color and shape
 
-      // Add legend symbols for the busDepotsDataSource layer
-      setLegendSymbol('busDepotsDataSource', 'blue', 'circle'); // Update with the correct color and shape
+    // Add legend symbols for the busDepotsDataSource layer
+    setLegendSymbol('busDepotsDataSource', 'blue', 'circle'); // Update with the correct color and shape
 
-      // Add legend symbols for the nycsubwayDataSource layer
-      setLegendSymbol('nycsubwayDataSource', 'red', 'line'); // Update with the correct color and shape
+    // Add legend symbols for the nycsubwayDataSource layer
+    setLegendSymbol('nycsubwayDataSource', 'red', 'line'); // Update with the correct color and shape
 
-      // Add legend symbols for the mtsgasDataSource layer
-      setLegendSymbol('mtsgasDataSource', 'black', 'line'); // Update with the correct color and shape
+    // Add legend symbols for the mtsgasDataSource layer
+    setLegendSymbol('mtsgasDataSource', 'black', 'line'); // Update with the correct color and shape
 
-      // Add legend symbols for the mtsstreetsDataSource layer
-      setLegendSymbol('mtsstreetsDataSource', 'grey', 'line'); // Update with the correct color and shape
+    // Add legend symbols for the mtsstreetsDataSource layer
+    setLegendSymbol('mtsstreetsDataSource', 'grey', 'line'); // Update with the correct color and shape
 
-      console.log('Legend added successfully.');
+    console.log('Legend added successfully.');
+  } else {
+    console.error('Legend container not found.');
   }
 }
 
 // Call the addLegend function after initializing your layers
 addLegend();
+
 
 
 // Call the initializeCesium function
