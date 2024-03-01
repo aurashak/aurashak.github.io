@@ -22,16 +22,19 @@ const initializeCesium = async () => {
 
 
 
-
-// Define the bounding box for West Harlem, NYC
-const westHarlemBoundingBox = {
-    west: -74.030,  
-    south: 40.510,  
-    east: -73.768,  
-    north: 40.900,  
-    height: 0,    
-  };
-
+  // Set camera position and orientation
+  viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.95892455932525,  // Longitude
+      40.82575530915204,   // Latitude
+      1000                 // Adjusted height to lift the camera above the ground
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(180), // Heading in radians (rotate 180 degrees)
+      pitch: Cesium.Math.toRadians(-30),   // Pitch in radians (adjust as needed)
+      roll: 0,                            // Roll in radians
+    },
+  });
 
 
 
