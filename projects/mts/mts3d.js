@@ -381,19 +381,22 @@ setLegendSymbol('mtsstreets', 'grey', 'line');
 // You can add more layers as needed with their respective colors and shapes
 // ...
 
-// Add this function call after loading your layers
 function addLegend() {
-    const legendContainer = document.getElementById('legend-container'); // Change 'legend-container' to the ID of your legend container
-    legendContainer.innerHTML = ''; // Clear existing content
-    // Add legend symbols for each layer
-    setLegendSymbol('mtscso', 'red', 'circle');
-    setLegendSymbol('mtsparks', 'green', 'polygon');
-    setLegendSymbol('mtsrail', 'red', 'line');
-    setLegendSymbol('nycsubway', 'red', 'line');
-    setLegendSymbol('mtsgas', 'black', 'line');
-    setLegendSymbol('mtsstreets', 'grey', 'line');
-    // You can add more layers as needed with their respective colors and shapes
-    // ...
+    const legendContainer = document.getElementById('legend-container');
+
+    if (legendContainer) {
+        legendContainer.innerHTML = ''; // Clear existing content
+
+        // Add legend symbols for each layer
+        setLegendSymbol('mtscso', 'red', 'circle');
+        setLegendSymbol('mtsparks', 'green', 'polygon');
+        setLegendSymbol('mtsrail', 'red', 'line');
+        setLegendSymbol('nycsubway', 'red', 'line');
+        setLegendSymbol('mtsgas', 'black', 'line');
+        setLegendSymbol('mtsstreets', 'grey', 'line');
+        // You can add more layers as needed with their respective colors and shapes
+        // ...
+    }
 }
 
 // Call the addLegend function after initializing your layers
