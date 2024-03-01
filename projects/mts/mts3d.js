@@ -32,9 +32,10 @@ const westHarlemBoundingBox = {
     height: 0,      // Height above the ellipsoid
   };
 
-    // Set minimum and maximum zoom limits (adjust as needed)
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
+
+
+// Reset camera controllers to default values
+viewer.scene.screenSpaceCameraController.reset();
 
 
 // Disable all input handling to prevent camera movement
@@ -45,14 +46,9 @@ viewer.scene.screenSpaceCameraController.enableZoom = true;
 viewer.scene.screenSpaceCameraController.enableTilt = true;
 viewer.scene.screenSpaceCameraController.enableLook = false;
 
-// Confirming the status of input handling
-console.log("Input handling status after changes:");
-console.log("Enable Translate:", viewer.scene.screenSpaceCameraController.enableTranslate);
-console.log("Enable Rotate:", viewer.scene.screenSpaceCameraController.enableRotate);
-console.log("Enable Zoom:", viewer.scene.screenSpaceCameraController.enableZoom);
-console.log("Enable Tilt:", viewer.scene.screenSpaceCameraController.enableTilt);
-console.log("Enable Look:", viewer.scene.screenSpaceCameraController.enableLook);
-
+    // Set minimum and maximum zoom limits (adjust as needed)
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Minimum zoom distance in meters
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
   
   
   // Load full google photorealistic tileset
