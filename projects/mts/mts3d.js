@@ -30,11 +30,11 @@ const initializeCesium = async () => {
       destination: Cesium.Cartesian3.fromDegrees(
         -73.9621,
         40.8447,
-        2000 // Adjust the zoom level as needed
+        1000 // Adjust the zoom level as needed
       ),
       orientation: {
-        heading: Cesium.Math.toRadians(40),
-        pitch: Cesium.Math.toRadians(-20),
+        heading: Cesium.Math.toRadians(-40),
+        pitch: Cesium.Math.toRadians(-45),
         roll: 0,
       },
     });
