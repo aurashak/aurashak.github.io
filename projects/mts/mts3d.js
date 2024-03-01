@@ -21,18 +21,20 @@ const initializeCesium = async () => {
   });
 
 
-  // Fly to New York City with initial orientation and default radius
-  viewer.scene.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(
-      -72.9630,
-      20.8244,
-      50000 // Adjust the zoom level as needed
-    ),
-    orientation: {
-      heading: Cesium.Math.toRadians(45),
-      pitch: Cesium.Math.toRadians(-45),
-      roll: 0,
-    },
+  // Wait for the camera to be ready, then fly to New York City
+  viewer.scene.camera.readyPromise.then(() => {
+    viewer.scene.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9630,
+        40.8244,
+        50000 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(45),
+        pitch: Cesium.Math.toRadians(-45),
+        roll: 0,
+      },
+    });
   });
 
 
