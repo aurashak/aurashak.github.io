@@ -21,53 +21,6 @@ const initializeCesium = async () => {
   });
 
 
-  /* 
-
-  // Set camera position
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
-    orientation: {
-      heading: Cesium.Math.toRadians(0), // Heading in radians
-      pitch: Cesium.Math.toRadians(-90), // Pitch in radians
-      roll: 0, // Roll in radians
-    },
-  });
-
-
-  // Set fixed scene mode
-  viewer.scene.mode = Cesium.SceneMode.SCENE3D;
-
-  // Disable terrain exaggeration if needed
-  viewer.scene.terrainExaggeration = 1.0;
-
-
-
-*/ 
-
-
-/*
-
-  // Load 3D Tileset of mts area segment
-  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-  viewer.scene.primitives.add(tileset);
-  await viewer.zoomTo(tileset);
-
-  // Apply default style to the tileset if available
-  const extras = tileset.asset.extras;
-  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-  }
-
-  // Remove the default satellite imagery layers
-  viewer.imageryLayers.removeAll();
-
-  // Create a switch event listener for the 3D Tileset
-  const tilesetSwitch = document.getElementById("3dTileSwitch");
-  tilesetSwitch.addEventListener("change", (event) => {
-    tileset.show = event.target.checked;
-  });
-
-  */
 
 
 // Define the bounding box for West Harlem, NYC
@@ -84,12 +37,22 @@ const westHarlemBoundingBox = {
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 10000; // Maximum zoom distance in meters
 
 
-  // Disable all input handling to prevent camera movement
-  viewer.scene.screenSpaceCameraController.enableTranslate = false;
-  viewer.scene.screenSpaceCameraController.enableRotate = false;
-  viewer.scene.screenSpaceCameraController.enableZoom = true;
-  viewer.scene.screenSpaceCameraController.enableTilt = true;
-  viewer.scene.screenSpaceCameraController.enableLook = false;
+// Disable all input handling to prevent camera movement
+console.log("Disabling input handling to prevent camera movement...");
+viewer.scene.screenSpaceCameraController.enableTranslate = false;
+viewer.scene.screenSpaceCameraController.enableRotate = false;
+viewer.scene.screenSpaceCameraController.enableZoom = true;
+viewer.scene.screenSpaceCameraController.enableTilt = true;
+viewer.scene.screenSpaceCameraController.enableLook = false;
+
+// Confirming the status of input handling
+console.log("Input handling status after changes:");
+console.log("Enable Translate:", viewer.scene.screenSpaceCameraController.enableTranslate);
+console.log("Enable Rotate:", viewer.scene.screenSpaceCameraController.enableRotate);
+console.log("Enable Zoom:", viewer.scene.screenSpaceCameraController.enableZoom);
+console.log("Enable Tilt:", viewer.scene.screenSpaceCameraController.enableTilt);
+console.log("Enable Look:", viewer.scene.screenSpaceCameraController.enableLook);
+
   
   
   // Load full google photorealistic tileset
@@ -324,6 +287,63 @@ console.log("Initial load of mtsstreetsDataSource");
 initializeCesium();
 
 
+
+
+  /* 
+
+  // Set camera position
+  viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
+    orientation: {
+      heading: Cesium.Math.toRadians(0), // Heading in radians
+      pitch: Cesium.Math.toRadians(-90), // Pitch in radians
+      roll: 0, // Roll in radians
+    },
+  });
+
+
+  // Set fixed scene mode
+  viewer.scene.mode = Cesium.SceneMode.SCENE3D;
+
+  // Disable terrain exaggeration if needed
+  viewer.scene.terrainExaggeration = 1.0;
+
+
+
+*/ 
+
+
+/*
+
+  // Load 3D Tileset of mts area segment
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
+  viewer.scene.primitives.add(tileset);
+  await viewer.zoomTo(tileset);
+
+  // Apply default style to the tileset if available
+  const extras = tileset.asset.extras;
+  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+  }
+
+  // Remove the default satellite imagery layers
+  viewer.imageryLayers.removeAll();
+
+  // Create a switch event listener for the 3D Tileset
+  const tilesetSwitch = document.getElementById("3dTileSwitch");
+  tilesetSwitch.addEventListener("change", (event) => {
+    tileset.show = event.target.checked;
+  });
+
+  */
+
+
+
+
+
+
+
+  
   /*
   
   // Function to load and toggle GeoJSON layers
