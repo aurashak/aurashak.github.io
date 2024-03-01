@@ -24,8 +24,8 @@ const initializeCesium = async () => {
   // Fly to New York City with initial orientation and default radius
   viewer.scene.camera.flyTo({
     destination: Cesium.Cartesian3.fromDegrees(
-      -74.006,
-      40.7128,
+      -73.9630,
+      40.8244,
       50000 // Adjust the zoom level as needed
     ),
     orientation: {
@@ -385,7 +385,9 @@ function createLegendEntry(label, color, shape) {
 
 // Function to add legend items to the container
 function addLegend() {
+  console.log('Entering addLegend function');
   const legendContainer = document.getElementById('legend-container');
+  console.log('Legend container:', legendContainer);
 
   if (legendContainer) {
     legendContainer.innerHTML = ''; // Clear existing content
@@ -430,6 +432,7 @@ function addLegend() {
   } else {
     console.error('Legend container not found.');
   }
+  console.log('Exiting addLegend function');
 }
 
 // Call the addLegend function after initializing your layers
