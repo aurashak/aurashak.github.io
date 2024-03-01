@@ -25,7 +25,7 @@ const initializeCesium = async () => {
   viewer.scene.camera.flyTo({
     destination: Cesium.Cartesian3.fromDegrees(
       -72.9630,
-      40.8244,
+      20.8244,
       50000 // Adjust the zoom level as needed
     ),
     orientation: {
