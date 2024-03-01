@@ -262,13 +262,17 @@ const busDepotsSwitch = document.getElementById("busDepotsSwitch");
 busDepotsSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(busDepotsDataSource);
+    console.log("busDepotsDataSource added to viewer");
   } else {
     viewer.dataSources.remove(busDepotsDataSource);
+    console.log("busDepotsDataSource removed from viewer");
   }
 });
 
 // Initial load of the busdepots layer with modified billboards
 viewer.dataSources.add(busDepotsDataSource);
+console.log("Initial load of busDepotsDataSource");
+
 
 
 
