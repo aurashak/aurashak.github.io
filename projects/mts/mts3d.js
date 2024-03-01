@@ -35,7 +35,7 @@ const initializeCesium = async () => {
     },
   });
 
-  
+
 // Set minimum and maximum zoom limits
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 100000; // Adjust the value as needed
@@ -373,6 +373,17 @@ console.log("Initial load of mtsstreetsDataSource");
 };
 
 
+// Function to set legend symbols with support for multiple shapes and colors
+function setLegendSymbol(layerId, colors, shape) {
+  // ... (your existing setLegendSymbol function)
+}
+
+// Function to create a legend entry based on shape and color
+function createLegendEntry(label, color, shape) {
+  // ... (your existing createLegendEntry function)
+}
+
+// Function to add legend items to the container
 function addLegend() {
   const legendContainer = document.getElementById('legend-container');
 
@@ -423,6 +434,7 @@ function addLegend() {
 
 // Call the addLegend function after initializing your layers
 addLegend();
+
 
 
 
