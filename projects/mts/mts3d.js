@@ -34,8 +34,7 @@ const westHarlemBoundingBox = {
 
 
 
-// Reset camera controllers to default values
-viewer.scene.screenSpaceCameraController.reset();
+
 
 
 // Disable all input handling to prevent camera movement
