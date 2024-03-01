@@ -723,9 +723,7 @@ border: 1px solid black;
 .time-control {
 
   background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #999999;
   border-radius: 3px;
-  box-shadow: 1px 1px 2px #000000;
   vertical-align: middle;
   font-family: sans-serif;
   font-size: 14px;
