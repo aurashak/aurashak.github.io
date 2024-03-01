@@ -21,7 +21,7 @@ const initializeCesium = async () => {
   });
 
 
-  // Load nycboroughs GeoJsonDataSource
+ // Load nycboroughs GeoJsonDataSource
 const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
 const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
 
@@ -30,12 +30,12 @@ nycboroughsDataSource.entities.values.forEach((entity) => {
   if (entity.polygon) {
     entity.polygon.material = Cesium.Color.WHITE;
     entity.polygon.outline = false; // Optional: Disable polygon outline
+    entity.polygon.height = 0; // Set the height to 0 to place it on the ground
   }
 });
 
 // Initial load of nycboroughs layer
 viewer.dataSources.add(nycboroughsDataSource);
-
 
 
 
