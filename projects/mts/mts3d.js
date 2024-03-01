@@ -222,6 +222,41 @@ console.log("Initial load of mtsrailDataSource");
 
 
 
+// Load nycsubway GeoJsonDataSource
+const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
+const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
+
+// Modify the polyline color before adding the data source
+nycsubwayDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    // Change the polyline color to your desired color (e.g., blue)
+    entity.polyline.material = Cesium.Color.BLUE;
+  }
+});
+
+// Create a switch event listener for nycsubway
+const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
+nycsubwaySwitch.addEventListener("change", (event) => {
+  nycsubwayDataSource.entities.values.forEach((entity) => {
+    entity.show = event.target.checked;
+  });
+});
+
+// Initial load of nycsubway with the specified color
+viewer.dataSources.add(nycsubwayDataSource);
+nycsubwayDataSource.entities.values.forEach((entity) => {
+  entity.show = true; // Make sure entities are visible by default
+});
+
+console.log("Initial load of nycsubwayDataSource");
+
+
+
+
+
+
+
+
 // Load mtsgas GeoJsonDataSource
 const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
 const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
