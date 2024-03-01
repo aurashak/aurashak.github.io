@@ -23,15 +23,6 @@ const initializeCesium = async () => {
 
 
 
-// Define the bounding box for West Harlem, NYC
-const westHarlemBoundingBox = {
-    west: -73.963,  // Minimum longitude
-    south: 40.800,  // Minimum latitude
-    east: -73.934,  // Maximum longitude
-    north: 40.827,  // Maximum latitude
-    height: 0,      // Height above the ellipsoid
-  };
-
 
 
 // Reset camera controllers to default values
