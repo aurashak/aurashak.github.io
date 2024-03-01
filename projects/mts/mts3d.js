@@ -21,21 +21,7 @@ const initializeCesium = async () => {
   });
 
 
-// Define the bounding box for New York City
-const nycBoundingBox = {
-  west: -74.257159,
-  south: 40.477398,
-  east: -73.700272,
-  north: 40.917576,
-  height: 0,
-};
 
-// Calculate the center of the bounding box
-const center = Cesium.Cartesian3.fromDegrees(
-  (nycBoundingBox.west + nycBoundingBox.east) / 2,
-  (nycBoundingBox.south + nycBoundingBox.north) / 2,
-  nycBoundingBox.height
-);
 
 // Fly to New York City with initial orientation and increased radius
 viewer.scene.camera.flyTo({
