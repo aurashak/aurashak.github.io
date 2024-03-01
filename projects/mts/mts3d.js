@@ -1,6 +1,6 @@
 // Grant CesiumJS access to your ion assets
 Cesium.Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjAyN2RmMC05ZDQxLTQwM2YtOWZiZC1hMTI5ZDZlMDgyMGIiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDM4MzA3Njh9.5yn30zsnLQltPUj52_wu8sNHKKNeHkGVi267uKmzI3Q";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s";
 
 // Initialize Cesium
 const initializeCesium = async () => {
@@ -190,7 +190,7 @@ function createCircleImage() {
 
 
 // Load mtsparks GeoJsonDataSource
-const mtsparksResource = await Cesium.IonResource.fromAssetId(2477557);
+const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
 
 // Modify the polyline/polygon color before adding the data source
