@@ -29,7 +29,7 @@ const initializeCesium = async () => {
       50000 // Adjust the zoom level as needed
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(0),
+      heading: Cesium.Math.toRadians(45),
       pitch: Cesium.Math.toRadians(-45),
       roll: 0,
     },
@@ -38,7 +38,7 @@ const initializeCesium = async () => {
 
 // Set minimum and maximum zoom limits
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
-viewer.scene.screenSpaceCameraController.maximumZoomDistance = 100000; // Adjust the value as needed
+viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000; // Adjust the value as needed
 
 
 
