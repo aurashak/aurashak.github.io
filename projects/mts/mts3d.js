@@ -40,7 +40,7 @@ const westHarlemBoundingBox = {
 // Disable all input handling to prevent camera movement
 console.log("Disabling input handling to prevent camera movement...");
 viewer.scene.screenSpaceCameraController.enableTranslate = false;
-viewer.scene.screenSpaceCameraController.enableRotate = false;
+viewer.scene.screenSpaceCameraController.enableRotate = true;
 viewer.scene.screenSpaceCameraController.enableZoom = true;
 viewer.scene.screenSpaceCameraController.enableTilt = true;
 viewer.scene.screenSpaceCameraController.enableLook = false;
