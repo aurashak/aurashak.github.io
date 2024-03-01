@@ -360,6 +360,47 @@ console.log("Initial load of mtsstreetsDataSource");
 };
 
 
+
+
+// Function to set legend symbols with support for multiple shapes and colors
+function setLegendSymbol(layerId, colors, shape) {
+  const legendSymbol = document.getElementById(`legend-${layerId}`);
+
+  if (legendSymbol) {
+      // Check if 'colors' is an object (for income categories) or a string (for single color)
+      if (typeof colors === 'object') {
+          let legendHTML = '';
+          for (const category in colors) {
+              const color = colors[category];
+              legendHTML += createLegendEntry(category, color, shape);
+          }
+          // Set the legend HTML
+          legendSymbol.innerHTML = legendHTML;
+      } else if (typeof colors === 'string') {
+          // Set legend HTML for a single color and shape
+          legendSymbol.innerHTML = createLegendEntry('', colors, shape);
+      }
+  }
+}
+
+// Function to create a legend entry based on shape and color
+function createLegendEntry(label, color, shape) {
+  switch (shape) {
+      case 'circle':
+          return `<div><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
+      case 'line':
+          return `<div><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
+      case 'polygon':
+          return `<div><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
+      default:
+          return ''; // Handle other shapes if needed
+  }
+}
+
+
+
+
+
 function addLegend() {
   const legendContainer = document.getElementById('legend-container');
 
