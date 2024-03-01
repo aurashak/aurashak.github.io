@@ -25,10 +25,10 @@ const initializeCesium = async () => {
 
 // Define the bounding box for West Harlem, NYC
 const westHarlemBoundingBox = {
-    west: -74.030,  
-    south: 40.510,  
-    east: -73.768,  
-    north: 40.900,  
+    west: -73.969,  
+    south: 40.820,  
+    east: -73.942,  
+    north: 40.827,  
     height: 0,    
   };
 
@@ -38,6 +38,7 @@ const westHarlemBoundingBox = {
 
 
 // Disable all input handling to prevent camera movement
+console.log("Disabling input handling to prevent camera movement...");
 viewer.scene.screenSpaceCameraController.enableTranslate = false;
 viewer.scene.screenSpaceCameraController.enableRotate = true;
 viewer.scene.screenSpaceCameraController.enableZoom = true;
@@ -279,7 +280,8 @@ mtsgasDataSource.entities.values.forEach((entity) => {
     // Change the polyline width
     entity.polyline.width = 3; // Adjust the width as needed
     
-
+    // Elevate the entity off the ground
+    entity.position = entity.position.add(new Cesium.Cartesian3(0, 0, elevationOffset));
   }
 });
 
