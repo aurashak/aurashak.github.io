@@ -21,25 +21,25 @@ const initializeCesium = async () => {
   });
 
 
-    // Wait for the viewer to be ready, then fly to New York City
-    viewer.scene.postRender.addEventListener(function onPostRender() {
-      viewer.scene.postRender.removeEventListener(onPostRender);
-  
-      // Fly to New York City with initial orientation and default radius
-      viewer.scene.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(
-          -73.9630,
-          40.8244,
-          50000 // Adjust the zoom level as needed
-        ),
-        orientation: {
-          heading: Cesium.Math.toRadians(45),
-          pitch: Cesium.Math.toRadians(-45),
-          roll: 0,
-        },
-      });
+  // Wait for the viewer to be ready, then fly to New York City
+  viewer.scene.postRender.addEventListener(function onPostRender() {
+    viewer.scene.postRender.removeEventListener(onPostRender);
+
+    // Fly to New York City with initial orientation and default radius
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9630,
+        40.8244,
+        50000 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(45),
+        pitch: Cesium.Math.toRadians(-45),
+        roll: 0,
+      },
     });
-  };
+  });
+
 
 
 // Set minimum and maximum zoom limits
