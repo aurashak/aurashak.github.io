@@ -35,8 +35,6 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
-  
-
   // Load nycboroughs GeoJsonDataSource
   const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
   const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
@@ -53,26 +51,32 @@ const initializeCesium = async () => {
   // Initial load of nycboroughs layer
   viewer.dataSources.add(nycboroughsDataSource);
 
+  // Load OSM buildings 3D Tileset
+  const osmBuildingsTileset = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+  );
 
-
-  // Load full google photorealistic tileset
-  const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-  viewer.scene.primitives.add(newTileset);
-
-  // Apply default style to the tileset if available
-  const newExtras = newTileset.asset.extras;
-  if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
-    newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+  // Apply default style to the OSM buildings tileset if available
+  const osmExtras = osmBuildingsTileset.asset.extras;
+  if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
+    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
   }
 
-  // Remove the default satellite imagery layers
-  viewer.imageryLayers.removeAll();
-
-  // Create a switch event listener for the new 3D Tileset
-  const newTilesetSwitch = document.getElementById("3dTileSwitch");
-  newTilesetSwitch.addEventListener("change", (event) => {
-    newTileset.show = event.target.checked;
+  // Create a switch event listener for the OSM buildings Tileset
+  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+  osmBuildingsSwitch.addEventListener("change", (event) => {
+    osmBuildingsTileset.show = event.target.checked;
   });
+
+  // Load full Google photorealistic tileset
+  const googlePhotorealisticTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+  viewer.scene.primitives.add(googlePhotorealisticTileset);
+
+  // Apply default style to the Google photorealistic tileset if available
+  const googleExtras = googlePhotorealisticTileset.asset.extras;
+  if (Cesium.defined(googleExtras) && Cesium.defined(googleExtras.ion) && Cesium.defined(googleExtras.ion.defaultStyle)) {
+    googlePhotorealisticTileset.style = new Cesium.Cesium3DTileStyle(googleExtras.ion.defaultStyle);
+  }
 
   // Add a layer of Bing Imagery from Cesium Ion
   const bingImageryLayer = viewer.imageryLayers.addImageryProvider(
@@ -93,22 +97,7 @@ const initializeCesium = async () => {
   // Optionally, set the initial state of the switch
   bingLayerSwitch.checked = true; // or false, depending on your default visibility preference
 
-  // Load OSM buildings 3D Tileset
-  const osmBuildingsTileset = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-  );
 
-  // Apply default style to the OSM buildings tileset if available
-  const osmExtras = osmBuildingsTileset.asset.extras;
-  if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
-    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
-  }
-
-  // Create a switch event listener for the OSM buildings Tileset
-  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-  osmBuildingsSwitch.addEventListener("change", (event) => {
-    osmBuildingsTileset.show = event.target.checked;
-  });
 
   
   // Load mtscso GeoJsonDataSource
