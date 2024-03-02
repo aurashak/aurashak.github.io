@@ -92,12 +92,14 @@ const initializeCesium = async () => {
   });
   
 
-// Load Bing Maps ImageryProvider
+// Create Bing Maps ImageryProvider
 const bingImageryProvider = new Cesium.IonImageryProvider({ assetId: 4 });
-viewer.imageryLayers.addImageryProvider(bingImageryProvider);
 
 // Wait for the Bing Maps ImageryProvider to load
 bingImageryProvider.readyPromise.then(function () {
+  // Add Bing Maps Imagery Layer
+  viewer.imageryLayers.addImageryProvider(bingImageryProvider);
+
   // Load Bing Maps 3D Tileset
   const bingTileset = new Cesium.Cesium3DTileset({
     url: Cesium.IonResource.fromAssetId(4),
