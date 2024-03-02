@@ -28,8 +28,8 @@ const initializeCesium = async () => {
     // Fly to New York City with initial orientation and default radius
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9714,
-        40.8204,
+        -73.9769,
+        40.8144,
         1500 // Adjust the zoom level as needed
       ),
       orientation: {
@@ -372,64 +372,6 @@ viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
 
-
-// Function to create a red circle image with dynamic size
-function createDynamicCircleImage() {
-  const canvas = document.createElement("canvas");
-  const size = calculateDynamicSize(); // Calculate dynamic size based on zoom level
-  canvas.width = size;
-  canvas.height = size;
-  const context = canvas.getContext("2d");
-  context.beginPath();
-  context.arc(size / 2, size / 2, size / 2 - 2, 0, 2 * Math.PI); // Adjust radius based on size
-  context.fillStyle = "red";
-  context.fill();
-  return canvas;
-}
-
-// Function to calculate dynamic size based on zoom level
-function calculateDynamicSize() {
-  const zoomLevel = viewer.camera.zoomLevel;
-  // Adjust the scaling factor as needed
-  const scaleFactor = 10;
-  return Math.max(10, 20 - zoomLevel * scaleFactor);
-}
-
-// Modify the billboard color and style before adding the data source
-mtscsoDataSource.entities.values.forEach((entity) => {
-  if (entity.billboard) {
-    // Change the billboard color to red
-    entity.billboard.color = Cesium.Color.RED;
-    // Change the billboard style to Circle with dynamic size
-    entity.billboard.image = createDynamicCircleImage();
-  }
-});
-
-// Modify the polyline color and width before adding the data source
-mtsgasDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    // Change the polyline color to black
-    entity.polyline.material = Cesium.Color.BLACK;
-    // Change the polyline width with dynamic sizing
-    entity.polyline.width = calculateDynamicSize() / 5; // Adjust the scaling factor as needed
-  }
-});
-
-// Update dynamic sizing on camera move
-viewer.camera.moveEnd.addEventListener(() => {
-  // Update circle size and line width on camera move
-  mtscsoDataSource.entities.values.forEach((entity) => {
-    if (entity.billboard) {
-      entity.billboard.image = createDynamicCircleImage();
-    }
-  });
-
-  mtsgasDataSource.entities.values.forEach((entity) => {
-    if (entity.polyline) {
-      entity.polyline.width = calculateDynamicSize() / 5;
-    }
-  });
-});
 
 
 
