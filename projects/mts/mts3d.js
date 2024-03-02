@@ -114,14 +114,13 @@ const initializeCesium = async () => {
   const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
   const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
-  // Modify the billboard color and style before adding the data source
   mtscsoDataSource.entities.values.forEach((entity) => {
     if (entity.billboard) {
       // Change the billboard color to red
       entity.billboard.color = Cesium.Color.RED;
       // Change the billboard style to Circle
       entity.billboard.image = createCircleImage(); // Function to create a red circle image
-
+  
       if (entity.position) {
         // Update the entity's position to the same longitude and latitude
         const newPosition = new Cesium.Cartesian3.fromDegrees(
@@ -129,9 +128,13 @@ const initializeCesium = async () => {
           Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude
         );
         entity.position.setValue(newPosition);
+  
+        // Log the entity's position for debugging
+        console.log("Entity Position:", newPosition);
       }
     }
   });
+  
 
   // Create a switch event listener for mtscso
   const mtscsoSwitch = document.getElementById("mtscsoSwitch");
