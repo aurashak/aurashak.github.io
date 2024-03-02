@@ -93,35 +93,21 @@ const initializeCesium = async () => {
   
 
 
-  // Load Cesium Ion imagery layer
-const ionImageryLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-const layer = viewer.imageryLayers.addImageryProvider(ionImageryLayer);
 
-// Create a switch event listener for the Ion imagery layer
-const ionLayerSwitch = document.getElementById("ionLayerSwitch"); // Replace with your HTML switch element ID
-ionLayerSwitch.addEventListener("change", (event) => {
-  layer.show = event.target.checked;
+
+// Add a layer of Bing Imagery from Cesium Ion
+const bingImageryLayer = viewer.imageryLayers.addImageryProvider(
+  await Cesium.IonImageryProvider.fromAssetId(4)
+);
+
+// Create a switch event listener for the Bing Imagery layer
+const bingLayerSwitch = document.getElementById("bingLayerSwitch");
+bingLayerSwitch.addEventListener("change", (event) => {
+  bingImageryLayer.show = event.target.checked;
 });
 
-// Load full Google photorealistic tileset
-const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-viewer.scene.primitives.add(newTileset);
-
-// Apply default style to the tileset if available
-const newExtras = newTileset.asset.extras;
-if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
-  newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
-}
-
-// Remove the default satellite imagery layers
-viewer.imageryLayers.removeAll();
-
-// Create a switch event listener for the new 3D Tileset
-const newTilesetSwitch = document.getElementById("3dTileSwitch"); // Replace with your HTML switch element ID
-newTilesetSwitch.addEventListener("change", (event) => {
-  newTileset.show = event.target.checked;
-});
-
+// Optionally, set the initial state of the switch
+bingLayerSwitch.checked = true; // or false, depending on your default visibility preference
 
 
 
