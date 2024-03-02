@@ -115,6 +115,19 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
   });
 
 
+// Function to create a red circle image
+function createCircleImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 20;
+  canvas.height = 20;
+  const context = canvas.getContext("2d");
+  context.beginPath();
+  context.arc(10, 10, 8, 0, 2 * Math.PI);
+  context.fillStyle = "red";
+  context.fill();
+  return canvas;
+}
+
 // Load mtscso GeoJsonDataSource
 console.log("Loading mtscso GeoJsonDataSource...");
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
@@ -127,7 +140,7 @@ mtscsoDataSource.entities.values.forEach((entity) => {
     // Change the billboard color to red
     entity.billboard.color = Cesium.Color.RED;
     // Change the billboard style to Circle
-    entity.billboard.image = createCircleImage(); // Function to create a red circle image
+    entity.billboard.image = createCircleImage();
 
     // Lower the height of each entity to -50
     if (entity.position) {
@@ -157,8 +170,6 @@ mtscsoSwitch.addEventListener("change", (event) => {
 // Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
-
-
 
 
 
