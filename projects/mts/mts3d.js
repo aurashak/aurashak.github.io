@@ -16,8 +16,7 @@ const initializeCesium = async () => {
     navigationHelpButton: true,
     fullscreenButton: false,
     animation: false,
-    skyBox: true,
-    skyAtmosphere: false,
+  
   });
 
 
