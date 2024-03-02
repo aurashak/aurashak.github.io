@@ -131,6 +131,8 @@ mtscsoDataSource.entities.values.forEach((entity) => {
   }
 });
 
+// ... (Previous code)
+
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
 mtscsoSwitch.addEventListener("change", (event) => {
@@ -146,6 +148,13 @@ mtscsoSwitch.addEventListener("change", (event) => {
 // Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
+
+// Log the GeoJSON data for debugging
+console.log("mtscsoDataSource GeoJSON data:", mtscsoDataSource);
+
+// Log the switch status for debugging
+console.log("Initial mtscsoSwitch status:", mtscsoSwitch.checked);
+
 
 // Function to create a red circle image
 function createCircleImage() {
@@ -334,7 +343,7 @@ function createCircleImage() {
 
 
 
-  
+
 
   // Load mtsstreets GeoJsonDataSource
 const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477125);
