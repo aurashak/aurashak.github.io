@@ -111,64 +111,70 @@ const initializeCesium = async () => {
   });
 
   
-  // load cso layer
-  const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
-  const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
-  
-  mtscsoDataSource.loadingEvent.addEventListener((isLoading) => {
-    if (!isLoading) {
-      mtscsoDataSource.entities.values.forEach((entity) => {
-        if (entity.billboard) {
-          // Change the billboard color to red
-          entity.billboard.color = Cesium.Color.RED;
-          // Change the billboard style to Circle
-          entity.billboard.image = createCircleImage(); // Function to create a red circle image
-    
-          if (entity.position) {
-            // Update the entity's position to the same longitude and latitude
-            const newPosition = new Cesium.Cartesian3.fromDegrees(
-              Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
-              Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
-              100  // Add a height offset of 100
-            );
-            entity.position.setValue(newPosition);
-    
-            // Log the entity's position for debugging
-            console.log("Entity Position:", newPosition);
-          }
-        }
-      });
-    
-      // Create a switch event listener for mtscso
-      const mtscsoSwitch = document.getElementById("mtscsoSwitch");
-      mtscsoSwitch.addEventListener("change", (event) => {
-        if (event.target.checked) {
-          viewer.dataSources.add(mtscsoDataSource);
-          console.log("mtscsoDataSource added to viewer");
-        } else {
-          viewer.dataSources.remove(mtscsoDataSource);
-          console.log("mtscsoDataSource removed from viewer");
-        }
-      });
-    
-      // Initial load of mtscso with the red circle markers
-      viewer.dataSources.add(mtscsoDataSource);
-      console.log("Initial load of mtscsoDataSource");
+  // Load mtscso GeoJsonDataSource
+const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
+const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
+
+// Wait for the data source to be ready
+await mtscsoDataSource.when();
+
+// Modify individual circle markers
+mtscsoDataSource.entities.values.forEach((entity) => {
+  if (entity.billboard) {
+    // Change the billboard color to red
+    entity.billboard.color = Cesium.Color.RED;
+    // Change the billboard style to Circle
+    entity.billboard.image = createCircleImage(); // Function to create a red circle image
+
+    if (entity.position) {
+      // Get the current position
+      const currentPosition = entity.position.getValue(viewer.clock.currentTime);
+
+      // Update the entity's position to the same longitude and latitude with a height offset of 100
+      const newPosition = new Cesium.Cartesian3.fromDegrees(
+        Cesium.Cartographic.fromCartesian(currentPosition).longitude,
+        Cesium.Cartographic.fromCartesian(currentPosition).latitude,
+        Cesium.Cartographic.fromCartesian(currentPosition).height + 100  // Add a height offset of 100
+      );
+
+      // Set the new position with height offset
+      entity.position.setValue(newPosition);
+
+      // Log the entity's position for debugging
+      console.log("Entity Position:", newPosition);
     }
-  });
-  
-  // Function to create a red circle image
-  function createCircleImage() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 20;
-    canvas.height = 20;
-    const context = canvas.getContext("2d");
-    context.beginPath();
-    context.arc(10, 10, 8, 0, 2 * Math.PI);
-    context.fillStyle = "red";
-    context.fill();
-    return canvas;
   }
+});
+
+// Create a switch event listener for mtscso
+const mtscsoSwitch = document.getElementById("mtscsoSwitch");
+mtscsoSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(mtscsoDataSource);
+    console.log("mtscsoDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(mtscsoDataSource);
+    console.log("mtscsoDataSource removed from viewer");
+  }
+});
+
+// Initial load of mtscso with the red circle markers
+viewer.dataSources.add(mtscsoDataSource);
+console.log("Initial load of mtscsoDataSource");
+
+// Function to create a red circle image
+function createCircleImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 20;
+  canvas.height = 20;
+  const context = canvas.getContext("2d");
+  context.beginPath();
+  context.arc(10, 10, 8, 0, 2 * Math.PI);
+  context.fillStyle = "red";
+  context.fill();
+  return canvas;
+}
+
   
   
 
