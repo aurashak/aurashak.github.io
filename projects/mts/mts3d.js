@@ -332,34 +332,53 @@ function createCircleImage() {
   viewer.dataSources.add(mtsgasDataSource);
   console.log("Initial load of mtsgasDataSource");
 
+
+
+  
+
   // Load mtsstreets GeoJsonDataSource
-  const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477125);
-  const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477125);
+const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-  // Modify the polyline color before adding the data source
-  mtsstreetsDataSource.entities.values.forEach((entity) => {
-    if (entity.polyline) {
-      // Change the polyline color to red
-      entity.polyline.material = Cesium.Color.GREY;
-      entity.polyline.height = -40;
-    }
-  });
+// Modify the polyline color before adding the data source
+mtsstreetsDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    // Change the polyline color to grey
+    entity.polyline.material = Cesium.Color.GREY;
+    entity.polyline.height = -40;
 
-  // Create a switch event listener for mtsstreets
-  const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
-  mtsstreetsSwitch.addEventListener("change", (event) => {
-    if (event.target.checked) {
-      viewer.dataSources.add(mtsstreetsDataSource);
-      console.log("mtsstreetsDataSource added to viewer");
-    } else {
-      viewer.dataSources.remove(mtsstreetsDataSource);
-      console.log("mtsstreetsDataSource removed from viewer");
-    }
-  });
+    // Add label for each feature
+    const labelEntity = mtsstreetsDataSource.entities.add({
+      position: entity.polyline.positions[0], // Assuming the label position is at the start of the polyline
+      label: {
+        text: entity.name, // You may need to adjust this based on your GeoJSON structure
+        font: "12px sans-serif",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 1,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      },
+    });
+  }
+});
 
-  // Initial load of mtsstreets with the red color
-  viewer.dataSources.add(mtsstreetsDataSource);
-  console.log("Initial load of mtsstreetsDataSource");
+// Create a switch event listener for mtsstreets
+const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+mtsstreetsSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource removed from viewer");
+  }
+});
+
+// Initial load of mtsstreets with the grey color and labels
+viewer.dataSources.add(mtsstreetsDataSource);
+console.log("Initial load of mtsstreetsDataSource");
+
 };
 
 // Call the initializeCesium function
