@@ -96,23 +96,30 @@ const initializeCesium = async () => {
 const bingImageryProvider = new Cesium.IonImageryProvider({ assetId: 4 });
 viewer.imageryLayers.addImageryProvider(bingImageryProvider);
 
-// Load Bing Maps 3D Tileset
-const bingTileset = await Cesium.Cesium3DTileset.fromIonAssetId(4);
-viewer.scene.primitives.add(bingTileset);
+// Wait for the Bing Maps ImageryProvider to load
+bingImageryProvider.readyPromise.then(function () {
+  // Load Bing Maps 3D Tileset
+  const bingTileset = new Cesium.Cesium3DTileset({
+    url: Cesium.IonResource.fromAssetId(4),
+  });
+  viewer.scene.primitives.add(bingTileset);
 
-// Apply default style to the Bing Maps tileset if available
-const bingExtras = bingTileset.asset.extras;
-if (Cesium.defined(bingExtras) && Cesium.defined(bingExtras.ion) && Cesium.defined(bingExtras.ion.defaultStyle)) {
-  bingTileset.style = new Cesium.Cesium3DTileStyle(bingExtras.ion.defaultStyle);
-}
+  // Apply default style to the Bing Maps tileset if available
+  const bingExtras = bingTileset.asset.extras;
+  if (Cesium.defined(bingExtras) && Cesium.defined(bingExtras.ion) && Cesium.defined(bingExtras.ion.defaultStyle)) {
+    bingTileset.style = new Cesium.Cesium3DTileStyle(bingExtras.ion.defaultStyle);
+  }
 
-// Remove the default satellite imagery layers (optional, depending on your requirements)
-viewer.imageryLayers.removeAll();
+  // Remove the default satellite imagery layers (optional, depending on your requirements)
+  viewer.imageryLayers.removeAll();
 
-// Create a switch event listener for the new 3D Tileset (Bing Maps)
-const bingTilesetSwitch = document.getElementById("bingTileSwitch");
-bingTilesetSwitch.addEventListener("change", (event) => {
-  bingTileset.show = event.target.checked;
+  // Create a switch event listener for the new 3D Tileset (Bing Maps)
+  const bingTilesetSwitch = document.getElementById("bingTileSwitch");
+  bingTilesetSwitch.addEventListener("change", (event) => {
+    bingTileset.show = event.target.checked;
+  });
+}).otherwise(function (error) {
+  console.error("Error loading Bing Maps ImageryProvider:", error);
 });
 
 
