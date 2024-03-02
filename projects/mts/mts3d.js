@@ -116,13 +116,20 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
-// Modify the billboard color and style before adding the data source
+// Remove custom styling and height adjustment
 mtscsoDataSource.entities.values.forEach((entity) => {
   if (entity.billboard) {
-    // Change the billboard color to red
-    entity.billboard.color = Cesium.Color.RED;
-    // Change the billboard style to Circle
-    entity.billboard.image = createCircleImage(); // Function to create a red circle image
+    // Remove custom styling by not changing the billboard color and image
+
+    // Remove height adjustment - you can remove these lines:
+    // if (entity.position) {
+    //   const newPosition = new Cesium.Cartesian3.fromDegrees(
+    //     Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
+    //     Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
+    //     -50
+    //   );
+    //   entity.position.setValue(newPosition);
+    // }
   }
 });
 
@@ -138,22 +145,10 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtscso with the red circle markers
+// Initial load of mtscso with the default styling
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
 
-// Function to create a red circle image
-function createCircleImage() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 20;
-  canvas.height = 20;
-  const context = canvas.getContext("2d");
-  context.beginPath();
-  context.arc(10, 10, 8, 0, 2 * Math.PI);
-  context.fillStyle = "red";
-  context.fill();
-  return canvas;
-}
 
 
 
