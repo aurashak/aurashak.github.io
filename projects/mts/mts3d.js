@@ -20,11 +20,11 @@ const initializeCesium = async () => {
   });
 
 
-  // Wait for the viewer to be ready, then fly to New York City
+  // Wait for the viewer to be ready
   viewer.scene.postRender.addEventListener(function onPostRender() {
     viewer.scene.postRender.removeEventListener(onPostRender);
 
-    // Fly to New York City with initial orientation and default radius
+    // Fly to New York City 
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
         -73.9704,
@@ -32,8 +32,8 @@ const initializeCesium = async () => {
         200 // Adjust the zoom level as needed
       ),
       orientation: {
-        heading: Cesium.Math.toRadians(65),  // Look southeast (135 degrees clockwise from north)
-        pitch: Cesium.Math.toRadians(-40),    // Look downward at a 30-degree angle
+        heading: Cesium.Math.toRadians(65),  // clockwise from north
+        pitch: Cesium.Math.toRadians(-40),    // Look downward 
         roll: 0,
       },
     });
@@ -42,9 +42,9 @@ const initializeCesium = async () => {
   
 
 
-  // Set minimum and maximum zoom limits
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Adjust the value as needed
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000; // Adjust the value as needed
+  // minimum and maximum zoom limits
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; 
+  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
   // Load nycboroughs GeoJsonDataSource
   const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
@@ -55,9 +55,7 @@ const initializeCesium = async () => {
     if (entity.polygon) {
       entity.polygon.material = Cesium.Color.WHITE;
       entity.polygon.outline = false;
-
-      // Lower the height, adjust as needed
-      entity.polygon.height = -50; // for example, set to a negative value
+      entity.polygon.height = -50;
     }
   });
 
@@ -125,9 +123,19 @@ mtscsoDataSource.entities.values.forEach((entity) => {
     entity.billboard.color = Cesium.Color.RED;
     // Change the billboard style to Circle
     entity.billboard.image = createCircleImage(); // Function to create a red circle image
+
+    // Lower the height of each entity to -50
+    if (entity.position) {
+      // Update the entity's position to a new Cartesian3 with the same longitude and latitude but lower height
+      const newPosition = new Cesium.Cartesian3.fromDegrees(
+        Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
+        Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
+        -50
+      );
+      entity.position.setValue(newPosition);
+    }
   }
 });
-
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
@@ -161,6 +169,7 @@ function createCircleImage() {
 
 
 
+
 // Load mtsparks GeoJsonDataSource
 const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
@@ -173,6 +182,8 @@ mtsparksDataSource.entities.values.forEach((entity) => {
     
     // Disable the polygon outline
     entity.polygon.outline = false;
+    entity.polygon.height = -40;
+
   }
 });
 
@@ -205,6 +216,8 @@ mtsrailDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to pink
     entity.polyline.material = Cesium.Color.RED;
+    entity.polyline.height = -40;
+
   }
 });
 
@@ -282,6 +295,8 @@ nycsubwayDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to your desired color (e.g., blue)
     entity.polyline.material = Cesium.Color.RED;
+    entity.polyline.height = -40;
+
   }
 });
 
@@ -319,6 +334,8 @@ mtsgasDataSource.entities.values.forEach((entity) => {
     
     // Change the polyline width
     entity.polyline.width = 3; // Adjust the width as needed
+    entity.polyline.height = -40;
+
   }
 });
 
@@ -351,6 +368,8 @@ mtsstreetsDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to red
     entity.polyline.material = Cesium.Color.GREY;
+    entity.polyline.height = -40;
+
   }
 });
 
