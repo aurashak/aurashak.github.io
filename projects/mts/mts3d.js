@@ -92,6 +92,11 @@ const initializeCesium = async () => {
   });
   
 
+
+
+
+  
+
   // Load OpenStreetMap Buildings 3D Tileset
 const osmTileset = new Cesium.Cesium3DTileset({
   url: Cesium.IonResource.fromAssetId(382649),
