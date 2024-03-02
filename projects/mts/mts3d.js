@@ -92,38 +92,25 @@ const initializeCesium = async () => {
   });
   
 
-
-
-
   
+// Load Bing Maps tileset using Cesium asset number 4
+const bingTileset = await Cesium.Cesium3DTileset.fromIonAssetId(4);
+viewer.scene.primitives.add(bingTileset);
 
-  // Load OpenStreetMap Buildings 3D Tileset
-const osmTileset = new Cesium.Cesium3DTileset({
-  url: Cesium.IonResource.fromAssetId(382649),
-});
-viewer.scene.primitives.add(osmTileset);
-
-// Load OpenStreetMap Imagery
-const osmImageryProvider = new Cesium.OpenStreetMapImageryProvider({
-  url: 'https://a.tile.openstreetmap.org/',
-});
-viewer.imageryLayers.addImageryProvider(osmImageryProvider);
+// Apply default style to the Bing Maps tileset if available
+const bingExtras = bingTileset.asset.extras;
+if (Cesium.defined(bingExtras) && Cesium.defined(bingExtras.ion) && Cesium.defined(bingExtras.ion.defaultStyle)) {
+  bingTileset.style = new Cesium.Cesium3DTileStyle(bingExtras.ion.defaultStyle);
+}
 
 // Remove the default satellite imagery layers
 viewer.imageryLayers.removeAll();
 
-// Apply default style to the OSM Buildings tileset if available
-const osmExtras = osmTileset.asset.extras;
-if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
-  osmTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
-}
-
-// Create a switch event listener for the new OSM Buildings 3D Tileset
-const osmTilesetSwitch = document.getElementById("osmTileSwitch");
-osmTilesetSwitch.addEventListener("change", (event) => {
-  osmTileset.show = event.target.checked;
+// Create a switch event listener for the new 3D Tileset (Bing Maps)
+const bingTilesetSwitch = document.getElementById("bingTileSwitch");
+bingTilesetSwitch.addEventListener("change", (event) => {
+  bingTileset.show = event.target.checked;
 });
-
 
 
 
