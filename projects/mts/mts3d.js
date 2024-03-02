@@ -35,21 +35,11 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
-  // Load nycboroughs GeoJsonDataSource
-  const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
-  const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
 
-  // Set a white fill style for the nycboroughs layer and lower the height
-  nycboroughsDataSource.entities.values.forEach((entity) => {
-    if (entity.polygon) {
-      entity.polygon.material = Cesium.Color.WHITE;
-      entity.polygon.outline = false;
-      entity.polygon.height = -30;
-    }
-  });
 
-  // Initial load of nycboroughs layer
-  viewer.dataSources.add(nycboroughsDataSource);
+  
+
+
 
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
@@ -106,6 +96,9 @@ const initializeCesium = async () => {
     osmBuildingsTileset.show = event.target.checked;
   });
 
+
+
+  
   // Load mtscso GeoJsonDataSource
   const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
   const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
@@ -351,6 +344,25 @@ const initializeCesium = async () => {
   viewer.dataSources.add(mtsstreetsDataSource);
   console.log("Initial load of mtsstreetsDataSource");
 };
+
+
+// Load nycboroughs GeoJsonDataSource
+const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
+const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
+
+// Set a white fill style for the nycboroughs layer and lower the height
+nycboroughsDataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    entity.polygon.material = Cesium.Color.WHITE;
+    entity.polygon.outline = false;
+    entity.polygon.height = -30;
+  }
+});
+
+// Initial load of nycboroughs layer
+viewer.dataSources.add(nycboroughsDataSource);
+
+
 
 // Call the initializeCesium function
 initializeCesium();
