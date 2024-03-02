@@ -27,9 +27,9 @@ const initializeCesium = async () => {
     // Fly to New York City 
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9690,
+        -73.9704,
         40.8144,
-        400 // Adjust the zoom level as needed
+        200 // Adjust the zoom level as needed
       ),
       orientation: {
         heading: Cesium.Math.toRadians(65),  // clockwise from north
@@ -65,24 +65,7 @@ const initializeCesium = async () => {
 
 
 
-// Load Bing Maps ImageryProvider
-const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4) // Assuming the assetId for Bing Maps is 4
-);
 
-// Optionally, set additional properties for the Bing Maps layer
-// For example, adjusting brightness and contrast:
-bingMapsLayer.brightness = 1.2;
-bingMapsLayer.contrast = 1.2;
-
-// Create a switch event listener for the Bing Maps layer
-const bingMapsSwitch = document.getElementById("bingMapsSwitch"); // Replace "bingMapsSwitch" with the actual ID of your switch element
-bingMapsSwitch.addEventListener("change", (event) => {
-  bingMapsLayer.show = event.target.checked;
-});
-
-// Initial load of Bing Maps layer
-viewer.imageryLayers.add(bingMapsLayer);
 
 
 
@@ -109,9 +92,6 @@ viewer.imageryLayers.add(bingMapsLayer);
   });
   
 
-  
-
-  
 
 
   // Load OSM buildings 3D Tileset
@@ -132,23 +112,25 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
   });
 
 
-
 // Load mtscso GeoJsonDataSource
-console.log("Loading mtscso GeoJsonDataSource...");
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
-console.log("mtscso GeoJsonDataSource loaded:", mtscsoDataSource);
 
-// Remove custom styling (red circles)
+// Modify the billboard color and style before adding the data source
 mtscsoDataSource.entities.values.forEach((entity) => {
   if (entity.billboard) {
-  
+    // Change the billboard color to red
+    entity.billboard.color = Cesium.Color.RED;
+    // Change the billboard style to Circle
+    entity.billboard.image = createCircleImage(); // Function to create a red circle image
 
+    // Lower the height of each entity to -50
     if (entity.position) {
       // Update the entity's position to a new Cartesian3 with the same longitude and latitude but lower height
       const newPosition = new Cesium.Cartesian3.fromDegrees(
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
+        -50
       );
       entity.position.setValue(newPosition);
     }
@@ -167,9 +149,22 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtscso with the default styling
+// Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
+
+// Function to create a red circle image
+function createCircleImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 20;
+  canvas.height = 20;
+  const context = canvas.getContext("2d");
+  context.beginPath();
+  context.arc(10, 10, 8, 0, 2 * Math.PI);
+  context.fillStyle = "red";
+  context.fill();
+  return canvas;
+}
 
 
 
