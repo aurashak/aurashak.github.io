@@ -92,8 +92,11 @@ const initializeCesium = async () => {
   });
   
 
-  
-// Load Bing Maps tileset using Cesium asset number 4
+// Load Bing Maps ImageryProvider
+const bingImageryProvider = new Cesium.IonImageryProvider({ assetId: 4 });
+viewer.imageryLayers.addImageryProvider(bingImageryProvider);
+
+// Load Bing Maps 3D Tileset
 const bingTileset = await Cesium.Cesium3DTileset.fromIonAssetId(4);
 viewer.scene.primitives.add(bingTileset);
 
@@ -103,7 +106,7 @@ if (Cesium.defined(bingExtras) && Cesium.defined(bingExtras.ion) && Cesium.defin
   bingTileset.style = new Cesium.Cesium3DTileStyle(bingExtras.ion.defaultStyle);
 }
 
-// Remove the default satellite imagery layers
+// Remove the default satellite imagery layers (optional, depending on your requirements)
 viewer.imageryLayers.removeAll();
 
 // Create a switch event listener for the new 3D Tileset (Bing Maps)
