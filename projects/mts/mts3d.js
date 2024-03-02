@@ -30,7 +30,7 @@ const initializeCesium = async () => {
       destination: Cesium.Cartesian3.fromDegrees(
         -73.9621,
         40.8447,
-        1000 // Adjust the zoom level as needed
+        1500 // Adjust the zoom level as needed
       ),
       orientation: {
         heading: Cesium.Math.toRadians(165),  // Look southeast (135 degrees clockwise from north)
