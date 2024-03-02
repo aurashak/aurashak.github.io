@@ -64,23 +64,28 @@ const initializeCesium = async () => {
 
 
 
+
 // Load Bing Maps ImageryProvider
-console.log("Loading Bing Maps ImageryProvider...");
 const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4)
+  await Cesium.IonImageryProvider.fromAssetId(4) // Assuming the assetId for Bing Maps is 4
 );
-console.log("Bing Maps ImageryProvider loaded:", bingMapsLayer);
+
+// Optionally, set additional properties for the Bing Maps layer
+// For example, adjusting brightness and contrast:
+bingMapsLayer.brightness = 1.2;
+bingMapsLayer.contrast = 1.2;
 
 // Create a switch event listener for the Bing Maps layer
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+const bingMapsSwitch = document.getElementById("bingMapsSwitch"); // Replace "bingMapsSwitch" with the actual ID of your switch element
 bingMapsSwitch.addEventListener("change", (event) => {
-  console.log("Switching Bing Maps layer visibility:", event.target.checked);
   bingMapsLayer.show = event.target.checked;
 });
 
 // Initial load of Bing Maps layer
-console.log("Initial load of Bing Maps layer");
 viewer.imageryLayers.add(bingMapsLayer);
+
+
+
 
   
   // Load full google photorealistic tileset
@@ -134,21 +139,16 @@ const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 console.log("mtscso GeoJsonDataSource loaded:", mtscsoDataSource);
 
-// Modify the billboard color and style before adding the data source
+// Remove custom styling (red circles)
 mtscsoDataSource.entities.values.forEach((entity) => {
   if (entity.billboard) {
-    // Change the billboard color to red
-    entity.billboard.color = Cesium.Color.RED;
-    // Change the billboard style to Circle
-    entity.billboard.image = createCircleImage();
+  
 
-    // Lower the height of each entity to -50
     if (entity.position) {
       // Update the entity's position to a new Cartesian3 with the same longitude and latitude but lower height
       const newPosition = new Cesium.Cartesian3.fromDegrees(
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
-        -50
       );
       entity.position.setValue(newPosition);
     }
@@ -167,9 +167,10 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtscso with the red circle markers
+// Initial load of mtscso with the default styling
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
+
 
 
 
