@@ -116,8 +116,10 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
 
 
 // Load mtscso GeoJsonDataSource
+console.log("Loading mtscso GeoJsonDataSource...");
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
+console.log("mtscso GeoJsonDataSource loaded:", mtscsoDataSource);
 
 // Modify the billboard color and style before adding the data source
 mtscsoDataSource.entities.values.forEach((entity) => {
@@ -156,18 +158,6 @@ mtscsoSwitch.addEventListener("change", (event) => {
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
 
-// Function to create a red circle image
-function createCircleImage() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 20;
-  canvas.height = 20;
-  const context = canvas.getContext("2d");
-  context.beginPath();
-  context.arc(10, 10, 8, 0, 2 * Math.PI);
-  context.fillStyle = "red";
-  context.fill();
-  return canvas;
-}
 
 
 
