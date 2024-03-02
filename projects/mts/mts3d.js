@@ -144,13 +144,11 @@ mtscsoDataSource.entities.values.forEach((entity) => {
     // Change the billboard style to Circle
     entity.billboard.image = createCircleImage(); // Function to create a red circle image
 
-    // Lower the height of each entity to -50
     if (entity.position) {
-      // Update the entity's position to a new Cartesian3 with the same longitude and latitude but lower height
+      // Update the entity's position to the same longitude and latitude
       const newPosition = new Cesium.Cartesian3.fromDegrees(
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
-        Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
-        -30
+        Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude
       );
       entity.position.setValue(newPosition);
     }
@@ -185,6 +183,7 @@ function createCircleImage() {
   context.fill();
   return canvas;
 }
+
 
 
 
