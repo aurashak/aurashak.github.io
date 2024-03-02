@@ -128,7 +128,8 @@ const initializeCesium = async () => {
             // Update the entity's position to the same longitude and latitude
             const newPosition = new Cesium.Cartesian3.fromDegrees(
               Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
-              Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude
+              Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
+              100  // Add a height offset of 100
             );
             entity.position.setValue(newPosition);
     
@@ -168,6 +169,7 @@ const initializeCesium = async () => {
     context.fill();
     return canvas;
   }
+  
   
 
 
