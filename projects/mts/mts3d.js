@@ -33,8 +33,8 @@ const initializeCesium = async () => {
         10000 // Adjust the zoom level as needed
       ),
       orientation: {
-        heading: Cesium.Math.toRadians(100),
-        pitch: Cesium.Math.toRadians(-50),
+        heading: Cesium.Math.toRadians(135),  // Look southeast (135 degrees clockwise from north)
+        pitch: Cesium.Math.toRadians(-30),    // Look downward at a 30-degree angle
         roll: 0,
       },
     });
