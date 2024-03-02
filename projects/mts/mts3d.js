@@ -33,8 +33,8 @@ const initializeCesium = async () => {
         1000 // Adjust the zoom level as needed
       ),
       orientation: {
-        heading: Cesium.Math.toRadians(135),  // Look southeast (135 degrees clockwise from north)
-        pitch: Cesium.Math.toRadians(-30),    // Look downward at a 30-degree angle
+        heading: Cesium.Math.toRadians(145),  // Look southeast (135 degrees clockwise from north)
+        pitch: Cesium.Math.toRadians(-40),    // Look downward at a 30-degree angle
         roll: 0,
       },
     });
@@ -44,7 +44,7 @@ const initializeCesium = async () => {
 
 
   // Set minimum and maximum zoom limits
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000; // Adjust the value as needed
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; // Adjust the value as needed
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000; // Adjust the value as needed
 
   // Load nycboroughs GeoJsonDataSource
