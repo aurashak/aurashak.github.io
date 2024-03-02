@@ -92,36 +92,34 @@ const initializeCesium = async () => {
   });
   
 
-// Create Bing Maps ImageryProvider
-const bingImageryProvider = new Cesium.IonImageryProvider({ assetId: 4 });
 
-// Wait for the Bing Maps ImageryProvider to load
-bingImageryProvider.readyPromise.then(function () {
-  // Add Bing Maps Imagery Layer
-  viewer.imageryLayers.addImageryProvider(bingImageryProvider);
+  // Load Cesium Ion imagery layer
+const ionImageryLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+const layer = viewer.imageryLayers.addImageryProvider(ionImageryLayer);
 
-  // Load Bing Maps 3D Tileset
-  const bingTileset = new Cesium.Cesium3DTileset({
-    url: Cesium.IonResource.fromAssetId(4),
-  });
-  viewer.scene.primitives.add(bingTileset);
+// Create a switch event listener for the Ion imagery layer
+const ionLayerSwitch = document.getElementById("ionLayerSwitch"); // Replace with your HTML switch element ID
+ionLayerSwitch.addEventListener("change", (event) => {
+  layer.show = event.target.checked;
+});
 
-  // Apply default style to the Bing Maps tileset if available
-  const bingExtras = bingTileset.asset.extras;
-  if (Cesium.defined(bingExtras) && Cesium.defined(bingExtras.ion) && Cesium.defined(bingExtras.ion.defaultStyle)) {
-    bingTileset.style = new Cesium.Cesium3DTileStyle(bingExtras.ion.defaultStyle);
-  }
+// Load full Google photorealistic tileset
+const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+viewer.scene.primitives.add(newTileset);
 
-  // Remove the default satellite imagery layers (optional, depending on your requirements)
-  viewer.imageryLayers.removeAll();
+// Apply default style to the tileset if available
+const newExtras = newTileset.asset.extras;
+if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
+  newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+}
 
-  // Create a switch event listener for the new 3D Tileset (Bing Maps)
-  const bingTilesetSwitch = document.getElementById("bingTileSwitch");
-  bingTilesetSwitch.addEventListener("change", (event) => {
-    bingTileset.show = event.target.checked;
-  });
-}).otherwise(function (error) {
-  console.error("Error loading Bing Maps ImageryProvider:", error);
+// Remove the default satellite imagery layers
+viewer.imageryLayers.removeAll();
+
+// Create a switch event listener for the new 3D Tileset
+const newTilesetSwitch = document.getElementById("3dTileSwitch"); // Replace with your HTML switch element ID
+newTilesetSwitch.addEventListener("change", (event) => {
+  newTileset.show = event.target.checked;
 });
 
 
