@@ -119,7 +119,6 @@ mtscsoDataSource.entities.values.forEach((entity) => {
       const newPosition = new Cesium.Cartesian3.fromDegrees(
         Cesium.Cartographic.fromCartesian(currentPosition).longitude,
         Cesium.Cartographic.fromCartesian(currentPosition).latitude,
-        Cesium.Cartographic.fromCartesian(currentPosition).height + 100  // Add a height offset of 100
       );
 
       // Set the new position with height offset
@@ -131,7 +130,6 @@ mtscsoDataSource.entities.values.forEach((entity) => {
   }
 });
 
-// ... (Previous code)
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
