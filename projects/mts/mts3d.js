@@ -28,12 +28,12 @@ const initializeCesium = async () => {
     // Fly to New York City with initial orientation and default radius
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9621,
-        40.8447,
+        -73.9714,
+        40.8204,
         1500 // Adjust the zoom level as needed
       ),
       orientation: {
-        heading: Cesium.Math.toRadians(165),  // Look southeast (135 degrees clockwise from north)
+        heading: Cesium.Math.toRadians(65),  // Look southeast (135 degrees clockwise from north)
         pitch: Cesium.Math.toRadians(-40),    // Look downward at a 30-degree angle
         roll: 0,
       },
@@ -372,9 +372,6 @@ viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
 
 
-};
-
-
 
 // Function to create a red circle image with dynamic size
 function createDynamicCircleImage() {
@@ -438,8 +435,12 @@ viewer.camera.moveEnd.addEventListener(() => {
 
 
 
+};
+
 // Call the initializeCesium function
 initializeCesium();
+
+
 
 
 
