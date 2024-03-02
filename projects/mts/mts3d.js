@@ -64,23 +64,23 @@ const initializeCesium = async () => {
 
 
 
-
 // Load Bing Maps ImageryProvider
+console.log("Loading Bing Maps ImageryProvider...");
 const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4) 
+  await Cesium.IonImageryProvider.fromAssetId(4)
 );
+console.log("Bing Maps ImageryProvider loaded:", bingMapsLayer);
 
 // Create a switch event listener for the Bing Maps layer
-const bingMapsSwitch = document.getElementById("bingMapsSwitch"); 
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
 bingMapsSwitch.addEventListener("change", (event) => {
+  console.log("Switching Bing Maps layer visibility:", event.target.checked);
   bingMapsLayer.show = event.target.checked;
 });
 
 // Initial load of Bing Maps layer
+console.log("Initial load of Bing Maps layer");
 viewer.imageryLayers.add(bingMapsLayer);
-
-
-
 
   
   // Load full google photorealistic tileset
