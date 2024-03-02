@@ -55,7 +55,7 @@ const initializeCesium = async () => {
     if (entity.polygon) {
       entity.polygon.material = Cesium.Color.WHITE;
       entity.polygon.outline = false;
-      entity.polygon.height = -60;
+      entity.polygon.height = -300;
     }
   });
 
