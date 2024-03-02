@@ -65,7 +65,19 @@ const initializeCesium = async () => {
 
 
 
+// Load Bing Maps ImageryProvider
+const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
+  await Cesium.IonImageryProvider.fromAssetId(4) 
+);
 
+// Create a switch event listener for the Bing Maps layer
+const bingMapsSwitch = document.getElementById("bingMapsSwitch"); 
+bingMapsSwitch.addEventListener("change", (event) => {
+  bingMapsLayer.show = event.target.checked;
+});
+
+// Initial load of Bing Maps layer
+viewer.imageryLayers.add(bingMapsLayer);
 
 
 
@@ -115,11 +127,33 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
   });
 
 
+
 // Load mtscso GeoJsonDataSource
 console.log("Loading mtscso GeoJsonDataSource...");
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 console.log("mtscso GeoJsonDataSource loaded:", mtscsoDataSource);
+
+// Modify the billboard color and style before adding the data source
+mtscsoDataSource.entities.values.forEach((entity) => {
+  if (entity.billboard) {
+    // Change the billboard color to red
+    entity.billboard.color = Cesium.Color.RED;
+    // Change the billboard style to Circle
+    entity.billboard.image = createCircleImage();
+
+    // Lower the height of each entity to -50
+    if (entity.position) {
+      // Update the entity's position to a new Cartesian3 with the same longitude and latitude but lower height
+      const newPosition = new Cesium.Cartesian3.fromDegrees(
+        Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
+        Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
+        -50
+      );
+      entity.position.setValue(newPosition);
+    }
+  }
+});
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
@@ -133,9 +167,10 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtscso with the default styling
+// Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
+
 
 
 
