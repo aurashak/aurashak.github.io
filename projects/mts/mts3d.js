@@ -110,10 +110,10 @@ const initializeCesium = async () => {
     osmBuildingsTileset.show = event.target.checked;
   });
 
-  // Load mtscso GeoJsonDataSource
   const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
-  const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
+const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
+mtscsoDataSource.ready.then(() => {
   mtscsoDataSource.entities.values.forEach((entity) => {
     if (entity.billboard) {
       // Change the billboard color to red
@@ -134,7 +134,6 @@ const initializeCesium = async () => {
       }
     }
   });
-  
 
   // Create a switch event listener for mtscso
   const mtscsoSwitch = document.getElementById("mtscsoSwitch");
@@ -151,19 +150,21 @@ const initializeCesium = async () => {
   // Initial load of mtscso with the red circle markers
   viewer.dataSources.add(mtscsoDataSource);
   console.log("Initial load of mtscsoDataSource");
+});
 
-  // Function to create a red circle image
-  function createCircleImage() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 20;
-    canvas.height = 20;
-    const context = canvas.getContext("2d");
-    context.beginPath();
-    context.arc(10, 10, 8, 0, 2 * Math.PI);
-    context.fillStyle = "red";
-    context.fill();
-    return canvas;
-  }
+// Function to create a red circle image
+function createCircleImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 20;
+  canvas.height = 20;
+  const context = canvas.getContext("2d");
+  context.beginPath();
+  context.arc(10, 10, 8, 0, 2 * Math.PI);
+  context.fillStyle = "red";
+  context.fill();
+  return canvas;
+}
+
 
   // Load mtsparks GeoJsonDataSource
   const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
