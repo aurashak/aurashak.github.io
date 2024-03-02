@@ -55,7 +55,7 @@ const initializeCesium = async () => {
     if (entity.polygon) {
       entity.polygon.material = Cesium.Color.WHITE;
       entity.polygon.outline = false;
-      entity.polygon.height = -50;
+      entity.polygon.height = -60;
     }
   });
 
@@ -147,7 +147,7 @@ mtscsoDataSource.entities.values.forEach((entity) => {
       const newPosition = new Cesium.Cartesian3.fromDegrees(
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).longitude,
         Cesium.Cartographic.fromCartesian(entity.position.getValue(viewer.clock.currentTime)).latitude,
-        -50
+        -30
       );
       entity.position.setValue(newPosition);
     }
@@ -311,7 +311,7 @@ const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResourc
 nycsubwayDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to your desired color (e.g., blue)
-    entity.polyline.material = Cesium.Color.RED;
+    entity.polyline.material = Cesium.Color.BLUE;
     entity.polyline.height = -40;
 
   }
