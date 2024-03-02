@@ -92,6 +92,35 @@ const initializeCesium = async () => {
   });
   
 
+  // Load OpenStreetMap Buildings 3D Tileset
+const osmTileset = new Cesium.Cesium3DTileset({
+  url: Cesium.IonResource.fromAssetId(382649),
+});
+viewer.scene.primitives.add(osmTileset);
+
+// Load OpenStreetMap Imagery
+const osmImageryProvider = new Cesium.OpenStreetMapImageryProvider({
+  url: 'https://a.tile.openstreetmap.org/',
+});
+viewer.imageryLayers.addImageryProvider(osmImageryProvider);
+
+// Remove the default satellite imagery layers
+viewer.imageryLayers.removeAll();
+
+// Apply default style to the OSM Buildings tileset if available
+const osmExtras = osmTileset.asset.extras;
+if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
+  osmTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
+}
+
+// Create a switch event listener for the new OSM Buildings 3D Tileset
+const osmTilesetSwitch = document.getElementById("osmTileSwitch");
+osmTilesetSwitch.addEventListener("change", (event) => {
+  osmTileset.show = event.target.checked;
+});
+
+
+
 
 
   // Load OSM buildings 3D Tileset
