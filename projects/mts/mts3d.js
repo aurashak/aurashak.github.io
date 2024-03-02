@@ -354,11 +354,18 @@ mtsstreetsDataSource.entities.values.forEach((entity) => {
     entity.polyline.material = Cesium.Color.GREY;
     entity.polyline.height = -40;
 
+    // Get the center position of the polyline
+    const centerPosition = Cesium.Cartesian3.midpoint(
+      entity.polyline.positions[0],
+      entity.polyline.positions[entity.polyline.positions.length - 1],
+      new Cesium.Cartesian3()
+    );
+
     // Add label for each feature
     const labelEntity = mtsstreetsDataSource.entities.add({
-      position: entity.polyline.positions[0], // Assuming the label position is at the start of the polyline
+      position: centerPosition,
       label: {
-        text: entity.name, // You may need to adjust this based on your GeoJSON structure
+        text: entity.name, // Adjust this based on your GeoJSON structure
         font: "12px sans-serif",
         fillColor: Cesium.Color.WHITE,
         outlineColor: Cesium.Color.BLACK,
@@ -369,6 +376,7 @@ mtsstreetsDataSource.entities.values.forEach((entity) => {
     });
   }
 });
+
 
 // Create a switch event listener for mtsstreets
 const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
