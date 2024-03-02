@@ -55,7 +55,7 @@ const initializeCesium = async () => {
     if (entity.polygon) {
       entity.polygon.material = Cesium.Color.WHITE;
       entity.polygon.outline = false;
-      entity.polygon.height = -300;
+      entity.polygon.height = -30;
     }
   });
 
@@ -105,6 +105,9 @@ const bingLayerSwitch = document.getElementById("bingLayerSwitch");
 bingLayerSwitch.addEventListener("change", (event) => {
   bingImageryLayer.show = event.target.checked;
 });
+
+// Set the height for the Bing Imagery layer
+bingImageryLayer.height = 100;
 
 // Optionally, set the initial state of the switch
 bingLayerSwitch.checked = true; // or false, depending on your default visibility preference
