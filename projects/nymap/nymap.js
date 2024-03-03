@@ -875,6 +875,9 @@ setLegendSymbol('culturalins', {
 
 function toggleDropdown() {
     var dropdownContent = document.getElementById("legendDropdown");
-    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    if (dropdownContent.style.display === "block" || dropdownContent.style.display === "") {
+        dropdownContent.style.display = "none";
+    } else {
+        dropdownContent.style.display = "block";
+    }
 }
-
