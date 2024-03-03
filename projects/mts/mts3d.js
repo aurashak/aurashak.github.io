@@ -108,7 +108,6 @@ osmBuildingsTileset.show = false;
 console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
-
 // Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
 const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
@@ -140,12 +139,8 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Do not add mtscsoDataSource initially, as the switch is off
+// Initial load of mtscso with the red circle markers should be inside the switch event listener
 console.log("Initial state of mtscsoDataSource: Not added to viewer");
-
-// Initial load of mtscso with the red circle markers
-viewer.dataSources.add(mtscsoDataSource);
-console.log("Initial load of mtscsoDataSource");
 
 // Function to create a red circle image
 function createCircleImage() {
