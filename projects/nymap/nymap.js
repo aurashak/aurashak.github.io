@@ -871,7 +871,7 @@ setLegendSymbol('culturalins', {
     'Crafts': 'olive',
     'Botanical': 'navy',
     'Architecture/Design': 'gray'
-}, 'circle');
+}, 'square');
 
 
 
