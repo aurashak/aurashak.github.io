@@ -150,13 +150,6 @@ viewer.dataSources.add(dataSource);
 // Initially hide the GeoJSON layer
 dataSource.show = false;
 
-// Create a switch event listener for the GeoJSON layer
-const geoJSONSwitch = document.getElementById("geoJSONSwitch");
-geoJSONSwitch.addEventListener("change", (event) => {
-  dataSource.show = event.target.checked;
-});
-
-
 
 
 
