@@ -42,6 +42,24 @@ const initializeCesium = async () => {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
+    
+
+    // Load GeoJSON DataSource beneath other layers
+const resource = await Cesium.IonResource.fromAssetId(2483910);
+const dataSource = await Cesium.GeoJsonDataSource.load(resource);
+
+// Modify the GeoJSON layer properties if needed
+
+// Add the GeoJSON layer to the viewer beneath other layers
+viewer.dataSources.add(dataSource);
+
+// Set the order of the layers in the viewer
+viewer.dataSources.lowerToBottom(dataSource);
+
+
+
+
+
     // Load full google photorealistic tileset
     const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
     viewer.scene.primitives.add(newTileset);
@@ -116,7 +134,7 @@ const initializeCesium = async () => {
   console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
-  
+
 
 
 // Load mtscso GeoJsonDataSource
@@ -385,7 +403,7 @@ console.log("Initial load of mtsgasDataSource");
 
 
 // Load mtsstreets GeoJsonDataSource
-const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477125);
+const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
 const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
 // Modify the polyline color before adding the data source
