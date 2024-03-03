@@ -128,7 +128,7 @@ dataSource.entities.values.forEach((entity) => {
     entity.polygon.material = Cesium.Color.WHITE;
 
     // Lower the extruded height to your desired value
-    entity.polygon.extrudedHeight = 0; // Set the extruded height in meters
+    entity.polygon.extrudedHeight = -500; // Set the extruded height in meters
   }
 });
 
