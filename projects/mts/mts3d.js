@@ -46,6 +46,9 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; 
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
+
+  /*
+
   // Load nycboroughs GeoJsonDataSource
   const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
   const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
@@ -62,7 +65,7 @@ const initializeCesium = async () => {
   // Initial load of nycboroughs layer
   viewer.dataSources.add(nycboroughsDataSource);
 
-
+ */
 
 
 
