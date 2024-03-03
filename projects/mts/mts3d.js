@@ -44,17 +44,6 @@ const initializeCesium = async () => {
 
     
 
-    // Load GeoJSON DataSource beneath other layers
-const resource = await Cesium.IonResource.fromAssetId(2483910);
-const dataSource = await Cesium.GeoJsonDataSource.load(resource);
-
-// Modify the GeoJSON layer properties if needed
-
-// Add the GeoJSON layer to the viewer beneath other layers
-viewer.dataSources.add(dataSource);
-
-// Set the order of the layers in the viewer
-viewer.dataSources.lowerToBottom(dataSource);
 
 
 
