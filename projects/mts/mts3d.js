@@ -167,6 +167,10 @@ mtsparksDataSource.entities.values.forEach((entity) => {
 
 // Create a switch event listener for mtsparks
 const mtsparksSwitch = document.getElementById("mtsparksSwitch");
+
+// Set the switch to the off position initially
+mtsparksSwitch.checked = false;
+
 mtsparksSwitch.addEventListener("change", (event) => {
   mtsparksDataSource.entities.values.forEach((entity) => {
     entity.show = event.target.checked;
@@ -176,10 +180,11 @@ mtsparksSwitch.addEventListener("change", (event) => {
 // Initial load of mtsparks with the green color and disabled outline
 viewer.dataSources.add(mtsparksDataSource);
 mtsparksDataSource.entities.values.forEach((entity) => {
-  entity.show = true; // Make sure entities are visible by default
+  entity.show = false; // Make sure entities are hidden by default
 });
 
 console.log("Initial load of mtsparksDataSource");
+
 
 
 
@@ -200,6 +205,10 @@ mtsrailDataSource.entities.values.forEach((entity) => {
 
 // Create a switch event listener for mtsrail
 const mtsrailSwitch = document.getElementById("mtsrailSwitch");
+
+// Set the switch to the off position initially
+mtsrailSwitch.checked = false;
+
 mtsrailSwitch.addEventListener("change", (event) => {
   mtsrailDataSource.entities.values.forEach((entity) => {
     entity.show = event.target.checked;
@@ -209,10 +218,11 @@ mtsrailSwitch.addEventListener("change", (event) => {
 // Initial load of mtsrail with the pink color
 viewer.dataSources.add(mtsrailDataSource);
 mtsrailDataSource.entities.values.forEach((entity) => {
-  entity.show = true; // Make sure entities are visible by default
+  entity.show = false; // Make sure entities are hidden by default
 });
 
 console.log("Initial load of mtsrailDataSource");
+
 
 
 
@@ -232,6 +242,10 @@ busDepotsDataSource.entities.values.forEach((entity) => {
 
 // Create a switch event listener for the busdepots layer
 const busDepotsSwitch = document.getElementById("busDepotsSwitch");
+
+// Set the switch to the off position initially
+busDepotsSwitch.checked = false;
+
 busDepotsSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(busDepotsDataSource);
