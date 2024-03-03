@@ -335,7 +335,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/culturalins.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        var discipline = feature.properties["discipline"];
+        var discipline = feature.properties["Discipline"];
         var markerColor = getColorForDiscipline(discipline);
         
         return L.circleMarker(latlng, {
@@ -390,7 +390,6 @@ function getColorForDiscipline(discipline) {
             return 'gray'; // Default color for unknown disciplines
     }
 }
-
 
 
 
