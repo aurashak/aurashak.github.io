@@ -68,20 +68,6 @@ const initializeCesium = async () => {
     });
   });
 
-  // Load Cesium Bing Maps layer
-  const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-    await Cesium.IonImageryProvider.fromAssetId(4)
-  );
-  bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-  console.log("Bing Maps layer added to viewer");
-
-  // Create a switch event listener for the Bing Maps layer
-  const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-  bingMapsSwitch.addEventListener("change", (event) => {
-    bingMapsLayer.show = event.target.checked;
-    const status = event.target.checked ? "shown" : "hidden";
-    console.log(`Bing Maps Layer ${status}`);
-  });
 
   // Load OSM buildings 3D Tileset
   const osmBuildingsTileset = viewer.scene.primitives.add(
@@ -117,6 +103,25 @@ const initializeCesium = async () => {
 
 
 
+// ... (Your existing code)
+
+// Load Cesium Bing Maps layer
+const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
+  await Cesium.IonImageryProvider.fromAssetId(4)
+);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.addEventListener("change", (event) => {
+  bingMapsLayer.show = event.target.checked;
+  const status = event.target.checked ? "shown" : "hidden";
+  console.log(`Bing Maps Layer ${status}`);
+});
+
+
 
 
 // Load GeoJSON borough boundaries
@@ -141,6 +146,16 @@ dataSource.entities.values.forEach((entity) => {
 
 // Add the GeoJSON layer to the viewer beneath other layers
 viewer.dataSources.add(dataSource);
+
+// Initially hide the GeoJSON layer
+dataSource.show = false;
+
+// Create a switch event listener for the GeoJSON layer
+const geoJSONSwitch = document.getElementById("geoJSONSwitch");
+geoJSONSwitch.addEventListener("change", (event) => {
+  dataSource.show = event.target.checked;
+});
+
 
 
 
