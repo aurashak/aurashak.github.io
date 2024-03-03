@@ -342,7 +342,8 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         
         // Use L.polygon to create a triangle
         return L.polygon([
-            [latlng.lat, latlng.lng - 0.0005 * size],
+            [latlng.lat - 0.0005 * size, latlng.lng - 0.0005 * size],
+            [latlng.lat + 0.0005 * size, latlng.lng - 0.0005 * size],
             [latlng.lat + 0.0005 * size, latlng.lng + 0.0005 * size],
             [latlng.lat - 0.0005 * size, latlng.lng + 0.0005 * size]
         ], {
