@@ -116,7 +116,8 @@ const initializeCesium = async () => {
   console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
-// Load GeoJSON DataSource beneath other layers
+
+// Load GeoJSON borough boundaries
 const resource = await Cesium.IonResource.fromAssetId(2483910);
 const dataSource = await Cesium.GeoJsonDataSource.load(resource);
 
@@ -125,11 +126,15 @@ dataSource.entities.values.forEach((entity) => {
   if (entity.polygon) {
     // Change the polygon color to white
     entity.polygon.material = Cesium.Color.WHITE;
+
+    // Lower the extruded height to your desired value
+    entity.polygon.extrudedHeight = 0; // Set the extruded height in meters
   }
 });
 
 // Add the GeoJSON layer to the viewer beneath other layers
 viewer.dataSources.add(dataSource);
+
 
 
 
