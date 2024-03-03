@@ -89,10 +89,10 @@ osmb.load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json
 
 
 var baseLayers = {
-    "OpenStreetMap": openstreetmapLayer,
+    "Open Street Maps": openstreetmapLayer,
     "Satellite": satelliteLayer,
     "Outlines": nyccountiesLayer, 
-    "3d Buildings": osmb, 
+    "3d Buildings (must be zoomed in)": osmb, 
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
