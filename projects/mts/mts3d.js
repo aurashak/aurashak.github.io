@@ -113,7 +113,6 @@ const initializeCesium = async () => {
   // Hide the OSM buildings Tileset initially
   osmBuildingsTileset.show = false;
 
-  console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
 
@@ -182,8 +181,6 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Initial load of mtscso with the red circle markers should be inside the switch event listener
-console.log("Initial state of mtscsoDataSource: Not added to viewer");
 
 // Function to create a red circle image
 function createCircleImage() {
@@ -238,7 +235,6 @@ mtsparksDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
 });
 
-console.log("Initial load of mtsparksDataSource");
 
 
 
@@ -276,7 +272,6 @@ mtsrailDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
 });
 
-console.log("Initial load of mtsrailDataSource");
 
 
 
@@ -362,9 +357,6 @@ nycsubwaySwitch.checked = false;
 const initialChangeEventNycsubway = new Event("change");
 nycsubwaySwitch.dispatchEvent(initialChangeEventNycsubway);
 
-// Initial load of nycsubway with the specified color
-// (No need to add it to viewer initially, as the switch is in the 'off' position)
-console.log("Initial load of nycsubwayDataSource");
 
 
 
@@ -408,9 +400,6 @@ mtsgasSwitch.checked = false;
 const initialChangeEvent = new Event("change");
 mtsgasSwitch.dispatchEvent(initialChangeEvent);
 
-// Initial load of mtsgas with the black color and custom width
-// (No need to add it to viewer initially, as the switch is in the 'off' position)
-console.log("Initial load of mtsgasDataSource");
 
 
 
@@ -443,9 +432,6 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
     console.log("mtsstreetsDataSource removed from viewer");
   }
 });
-
-// Do not add mtsstreetsDataSource initially, as the switch is off
-console.log("Initial state of mtsstreetsDataSource: Not added to viewer");
 
 
 
