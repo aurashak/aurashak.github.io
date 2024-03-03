@@ -47,28 +47,17 @@ const initializeCesium = async () => {
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
 
-  /*
 
-  // Load nycboroughs GeoJsonDataSource
-  const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
-  const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
+// Load Cesium Bing Maps layer
+const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
+  await Cesium.IonImageryProvider.fromAssetId(4),
+);
 
-  // Set a white fill style for the nycboroughs layer and lower the height
-  nycboroughsDataSource.entities.values.forEach((entity) => {
-    if (entity.polygon) {
-      entity.polygon.material = Cesium.Color.WHITE;
-      entity.polygon.outline = false;
-      entity.polygon.height = -50;
-    }
-  });
-
-  // Initial load of nycboroughs layer
-  viewer.dataSources.add(nycboroughsDataSource);
-
- */
-
-
-
+// Create a switch event listener for the Bing Maps layer
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.addEventListener("change", (event) => {
+  bingMapsLayer.show = event.target.checked;
+});
 
 
 
@@ -391,6 +380,26 @@ console.log("Initial load of mtsstreetsDataSource");
 initializeCesium();
 
 
+
+  /*
+
+  // Load nycboroughs GeoJsonDataSource
+  const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
+  const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
+
+  // Set a white fill style for the nycboroughs layer and lower the height
+  nycboroughsDataSource.entities.values.forEach((entity) => {
+    if (entity.polygon) {
+      entity.polygon.material = Cesium.Color.WHITE;
+      entity.polygon.outline = false;
+      entity.polygon.height = -50;
+    }
+  });
+
+  // Initial load of nycboroughs layer
+  viewer.dataSources.add(nycboroughsDataSource);
+
+ */
 
 
 
