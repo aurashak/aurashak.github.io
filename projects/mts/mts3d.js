@@ -48,6 +48,7 @@ const initializeCesium = async () => {
 
 
 
+
 // Load Cesium Bing Maps layer
 const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
   await Cesium.IonImageryProvider.fromAssetId(4),
@@ -57,7 +58,10 @@ const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
 bingMapsSwitch.addEventListener("change", (event) => {
   bingMapsLayer.show = event.target.checked;
+  const status = event.target.checked ? "shown" : "hidden";
+  console.log(`Bing Maps Layer ${status}`);
 });
+
 
 
 
