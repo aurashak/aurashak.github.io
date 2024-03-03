@@ -59,18 +59,7 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
   viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
-  // Load Cesium Bing Maps layer
-  const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-    await Cesium.IonImageryProvider.fromAssetId(4),
-  );
-
-  // Create a switch event listener for the Bing Maps layer
-  const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-  bingMapsSwitch.addEventListener("change", (event) => {
-    bingMapsLayer.show = event.target.checked;
-    const status = event.target.checked ? "shown" : "hidden";
-    console.log(`Bing Maps Layer ${status}`);
-  });
+  
 
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
