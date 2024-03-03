@@ -335,7 +335,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/culturalins.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        var discipline = feature.properties["discipline"];
+        var discipline = feature.properties["Discipline"];
         var markerColor = getColorForDiscipline(discipline);
         
         return L.circleMarker(latlng, {
@@ -390,7 +390,6 @@ function getColorForDiscipline(discipline) {
             return 'gray'; // Default color for unknown disciplines
     }
 }
-
 
 
 
@@ -853,7 +852,24 @@ setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
 
-
+// Set legend symbols for Cultural Institutions Layer
+setLegendSymbol('culturalins', {
+    'Zoo': 'green',
+    'Visual Arts': 'blue',
+    'Theatre': 'red',
+    'Science': 'purple',
+    'Photography': 'orange',
+    'Other': 'brown',
+    'New Media': 'pink',
+    'Music': 'yellow',
+    'Multi-disciplinary': 'teal',
+    'Literature': 'lime',
+    'Film/Video/Audio': 'cyan',
+    'Dance': 'magenta',
+    'Crafts': 'olive',
+    'Botanical': 'navy',
+    'Architecture/Design': 'gray'
+}, 'circle');
 
 
 
