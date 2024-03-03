@@ -177,7 +177,6 @@ mtsparksDataSource.entities.values.forEach((entity) => {
     
     // Disable the polygon outline
     entity.polygon.outline = false;
-    entity.poly.height = -40;
 
   }
 });
@@ -211,7 +210,6 @@ mtsrailDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to pink
     entity.polyline.material = Cesium.Color.RED;
-    entity.polyline.height = -40;
 
   }
 });
@@ -290,7 +288,6 @@ nycsubwayDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to your desired color (e.g., blue)
     entity.polyline.material = Cesium.Color.RED;
-    entity.polyline.height = -40;
 
   }
 });
@@ -329,7 +326,6 @@ mtsgasDataSource.entities.values.forEach((entity) => {
     
     // Change the polyline width
     entity.polyline.width = 3; // Adjust the width as needed
-    entity.polyline.height = -40;
 
   }
 });
@@ -363,7 +359,6 @@ mtsstreetsDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to red
     entity.polyline.material = Cesium.Color.GREY;
-    entity.polyline.height = -40;
 
   }
 });
