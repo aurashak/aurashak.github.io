@@ -869,7 +869,7 @@ setLegendSymbol('culturalins', {
     'Crafts': 'olive',
     'Botanical': 'navy',
     'Architecture/Design': 'gray'
-}, 'diamond');
+}, 'square');
 
 
 
