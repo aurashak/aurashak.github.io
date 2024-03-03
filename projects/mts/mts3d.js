@@ -116,18 +116,7 @@ const initializeCesium = async () => {
   console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
-// Assuming the building ID you want to change the color for
-const buildingIdToChange = 3629576;
 
-// Find the building entity by ID
-const buildingEntity = osmBuildingsTileset._entityCollection.getById(buildingIdToChange);
-
-if (buildingEntity) {
-  // Change the color of the building
-  buildingEntity.polygon.material = Cesium.Color.RED; // Replace RED with your desired color
-} else {
-  console.error(`Building with ID ${buildingIdToChange} not found.`);
-}
 
   
 
@@ -141,8 +130,13 @@ dataSource.entities.values.forEach((entity) => {
     // Change the polygon color to white
     entity.polygon.material = Cesium.Color.WHITE;
 
-    // Lower the extruded height to your desired value
-    entity.polygon.extrudedHeight = -500; // Set the extruded height in meters
+    // Lower the height of the entity to your desired value
+    const currentHeight = entity.polygon.height.getValue();
+    const loweredHeight = currentHeight - 500; // Set the lowered height in meters
+    entity.polygon.height = loweredHeight;
+
+    // You can also adjust other properties like `extrudedHeight` if needed
+    // entity.polygon.extrudedHeight = loweredHeight;
   }
 });
 
