@@ -20,25 +20,23 @@ const initializeCesium = async () => {
   });
 
 
-  // Wait for the viewer to be ready
-  viewer.scene.postRender.addEventListener(function onPostRender() {
-    viewer.scene.postRender.removeEventListener(onPostRender);
+// Wait for the viewer to be ready
+viewer.scene.postRender.addEventListener(function onPostRender() {
+  viewer.scene.postRender.removeEventListener(onPostRender);
 
-    // Fly to New York City 
-    viewer.scene.camera.setView({
-      destination: Cesium.Cartesian3.fromDegrees(
-        -73.9704,
-        40.8144,
-        200 // Adjust the zoom level as needed
-      ),
-      orientation: {
-        heading: Cesium.Math.toRadians(65),  // clockwise from north
-        pitch: Cesium.Math.toRadians(-40),    // Look downward 
-        roll: 0,
-      },
-    });
+  // Fly to New York City 
+  viewer.scene.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.9704,
+      40.8144,
+      200 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(65),  // clockwise from north
+      pitch: Cesium.Math.toRadians(-40),    // Look downward 
+      roll: 0,
+    },
   });
-
   
 
 
@@ -49,20 +47,19 @@ const initializeCesium = async () => {
 
 
 
-// Load Cesium Bing Maps layer
-const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4),
-);
+  // Load Cesium Bing Maps layer
+  const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
+    await Cesium.IonImageryProvider.fromAssetId(4),
+  );
 
-// Create a switch event listener for the Bing Maps layer
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.addEventListener("change", (event) => {
-  bingMapsLayer.show = event.target.checked;
-  const status = event.target.checked ? "shown" : "hidden";
-  console.log(`Bing Maps Layer ${status}`);
+  // Create a switch event listener for the Bing Maps layer
+  const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+  bingMapsSwitch.addEventListener("change", (event) => {
+    bingMapsLayer.show = event.target.checked;
+    const status = event.target.checked ? "shown" : "hidden";
+    console.log(`Bing Maps Layer ${status}`);
+  });
 });
-
-
 
 
 
