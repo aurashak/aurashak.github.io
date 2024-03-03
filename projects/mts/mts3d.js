@@ -20,95 +20,103 @@ const initializeCesium = async () => {
   });
 
 
+  // Wait for the viewer to be ready
+  viewer.scene.postRender.addEventListener(async function onPostRender() {
+    viewer.scene.postRender.removeEventListener(onPostRender);
 
-// Load Cesium Bing Maps layer
-const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4)
-);
-bingMapsLayer.name = 'Bing Maps'; // Set the name of the layer
-console.log('Bing Maps layer added to viewer');
+    // Fly to New York City
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9625,
+        40.8217,
+        200 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(65), // clockwise from north
+        pitch: Cesium.Math.toRadians(-40), // Look downward
+        roll: 0,
+      },
+    });
 
-// Create a switch event listener for the Bing Maps layer
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.addEventListener("change", (event) => {
-  bingMapsLayer.show = event.target.checked;
-  const status = event.target.checked ? "shown" : "hidden";
-  console.log(`Bing Maps Layer ${status}`);
-});
+    // minimum and maximum zoom limits
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
+    // Load full google photorealistic tileset
+    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+    viewer.scene.primitives.add(newTileset);
 
-// Wait for the viewer to be ready
-viewer.scene.postRender.addEventListener(async function onPostRender() {
-  viewer.scene.postRender.removeEventListener(onPostRender);
+    // Apply default style to the tileset if available
+    const newExtras = newTileset.asset.extras;
+    if (
+      Cesium.defined(newExtras) &&
+      Cesium.defined(newExtras.ion) &&
+      Cesium.defined(newExtras.ion.defaultStyle)
+    ) {
+      newTileset.style = new Cesium.Cesium3DTileStyle(
+        newExtras.ion.defaultStyle
+      );
+    }
 
-  // Fly to New York City 
-  viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(
-      -73.9625,
-      40.8217,
-      200 // Adjust the zoom level as needed
-    ),
-    orientation: {
-      heading: Cesium.Math.toRadians(65),  // clockwise from north
-      pitch: Cesium.Math.toRadians(-40),    // Look downward 
-      roll: 0,
-    },
+    // Remove the default satellite imagery layers
+    viewer.imageryLayers.removeAll();
+
+    // Create a switch event listener for the new 3D Tileset
+    const newTilesetSwitch = document.getElementById("3dTileSwitch");
+    newTilesetSwitch.addEventListener("change", (event) => {
+      newTileset.show = event.target.checked;
+    });
   });
 
-  // minimum and maximum zoom limits
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
-  viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
+  // Load Cesium Bing Maps layer
+  const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
+    await Cesium.IonImageryProvider.fromAssetId(4)
+  );
+  bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+  console.log("Bing Maps layer added to viewer");
 
-  
-
-  // Load full google photorealistic tileset
-  const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-  viewer.scene.primitives.add(newTileset);
-
-  // Apply default style to the tileset if available
-  const newExtras = newTileset.asset.extras;
-  if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
-    newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
-  }
-
-  // Remove the default satellite imagery layers
-  viewer.imageryLayers.removeAll();
-
-  // Create a switch event listener for the new 3D Tileset
-  const newTilesetSwitch = document.getElementById("3dTileSwitch");
-  newTilesetSwitch.addEventListener("change", (event) => {
-    newTileset.show = event.target.checked;
+  // Create a switch event listener for the Bing Maps layer
+  const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+  bingMapsSwitch.addEventListener("change", (event) => {
+    bingMapsLayer.show = event.target.checked;
+    const status = event.target.checked ? "shown" : "hidden";
+    console.log(`Bing Maps Layer ${status}`);
   });
-
-});
-
-
 
   // Load OSM buildings 3D Tileset
-const osmBuildingsTileset = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(96188),
+  const osmBuildingsTileset = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(96188)
   );
-  
+
   // Apply default style to the OSM buildings tileset if available
   const osmExtras = osmBuildingsTileset.asset.extras;
-  if (Cesium.defined(osmExtras) && Cesium.defined(osmExtras.ion) && Cesium.defined(osmExtras.ion.defaultStyle)) {
-    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
+  if (
+    Cesium.defined(osmExtras) &&
+    Cesium.defined(osmExtras.ion) &&
+    Cesium.defined(osmExtras.ion.defaultStyle)
+  ) {
+    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+      osmExtras.ion.defaultStyle
+    );
   }
+
+  // Create a switch event listener for the OSM buildings Tileset
+  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+  // Set the switch to the off position initially
+  osmBuildingsSwitch.checked = false;
+
+  osmBuildingsSwitch.addEventListener("change", (event) => {
+    osmBuildingsTileset.show = event.target.checked;
+  });
+
+  // Hide the OSM buildings Tileset initially
+  osmBuildingsTileset.show = false;
+
+  console.log("Initial state of OSM buildings Tileset: Hidden");
+
+
   
-// Create a switch event listener for the OSM buildings Tileset
-const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-
-// Set the switch to the off position initially
-osmBuildingsSwitch.checked = false;
-
-osmBuildingsSwitch.addEventListener("change", (event) => {
-  osmBuildingsTileset.show = event.target.checked;
-});
-
-// Hide the OSM buildings Tileset initially
-osmBuildingsTileset.show = false;
-
-console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
 // Load mtscso GeoJsonDataSource
