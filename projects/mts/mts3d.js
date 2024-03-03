@@ -92,11 +92,21 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
     osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(osmExtras.ion.defaultStyle);
   }
   
-  // Create a switch event listener for the OSM buildings Tileset
-  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-  osmBuildingsSwitch.addEventListener("change", (event) => {
-    osmBuildingsTileset.show = event.target.checked;
-  });
+// Create a switch event listener for the OSM buildings Tileset
+const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+// Set the switch to the off position initially
+osmBuildingsSwitch.checked = false;
+
+osmBuildingsSwitch.addEventListener("change", (event) => {
+  osmBuildingsTileset.show = event.target.checked;
+});
+
+// Hide the OSM buildings Tileset initially
+osmBuildingsTileset.show = false;
+
+console.log("Initial state of OSM buildings Tileset: Hidden");
+
 
 
 // Load mtscso GeoJsonDataSource
@@ -116,6 +126,10 @@ mtscsoDataSource.entities.values.forEach((entity) => {
 
 // Create a switch event listener for mtscso
 const mtscsoSwitch = document.getElementById("mtscsoSwitch");
+
+// Set the switch to the off position initially
+mtscsoSwitch.checked = false;
+
 mtscsoSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(mtscsoDataSource);
@@ -126,6 +140,9 @@ mtscsoSwitch.addEventListener("change", (event) => {
   }
 });
 
+// Do not add mtscsoDataSource initially, as the switch is off
+console.log("Initial state of mtscsoDataSource: Not added to viewer");
+
 // Initial load of mtscso with the red circle markers
 viewer.dataSources.add(mtscsoDataSource);
 console.log("Initial load of mtscsoDataSource");
@@ -133,8 +150,8 @@ console.log("Initial load of mtscsoDataSource");
 // Function to create a red circle image
 function createCircleImage() {
   const canvas = document.createElement("canvas");
-  canvas.width = 20;
-  canvas.height = 20;
+  canvas.width = 15;
+  canvas.height = 15;
   const context = canvas.getContext("2d");
   context.beginPath();
   context.arc(10, 10, 8, 0, 2 * Math.PI);
@@ -375,6 +392,10 @@ mtsstreetsDataSource.entities.values.forEach((entity) => {
 
 // Create a switch event listener for mtsstreets
 const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+
+// Set the switch to the off position initially
+mtsstreetsSwitch.checked = false;
+
 mtsstreetsSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     viewer.dataSources.add(mtsstreetsDataSource);
@@ -384,6 +405,10 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
     console.log("mtsstreetsDataSource removed from viewer");
   }
 });
+
+// Do not add mtsstreetsDataSource initially, as the switch is off
+console.log("Initial state of mtsstreetsDataSource: Not added to viewer");
+
 
 // Initial load of mtsstreets with the red color
 viewer.dataSources.add(mtsstreetsDataSource);
