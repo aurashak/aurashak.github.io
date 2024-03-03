@@ -271,7 +271,7 @@ const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResourc
 nycsubwayDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to your desired color (e.g., blue)
-    entity.polyline.material = Cesium.Color.RED;
+    entity.polyline.material = Cesium.Color.BLUE;
 
   }
 });
@@ -284,13 +284,17 @@ nycsubwaySwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of nycsubway with the specified color
-viewer.dataSources.add(nycsubwayDataSource);
-nycsubwayDataSource.entities.values.forEach((entity) => {
-  entity.show = true; // Make sure entities are visible by default
-});
+// Set the initial state of the switch to 'off'
+nycsubwaySwitch.checked = false;
 
+// Trigger the 'change' event to ensure the initial state is applied
+const initialChangeEventNycsubway = new Event("change");
+nycsubwaySwitch.dispatchEvent(initialChangeEventNycsubway);
+
+// Initial load of nycsubway with the specified color
+// (No need to add it to viewer initially, as the switch is in the 'off' position)
 console.log("Initial load of nycsubwayDataSource");
+
 
 
 
