@@ -338,8 +338,13 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         var discipline = feature.properties["Discipline"];
         var markerColor = getColorForDiscipline(discipline);
         
-        return L.circleMarker(latlng, {
-            radius: size,
+        // Use L.polygon to create a diamond shape
+        return L.polygon([
+            latlng,
+            [latlng.lat + 0.0005, latlng.lng],  // Adjust the points to create a diamond shape
+            [latlng.lat, latlng.lng + 0.0005],
+            [latlng.lat - 0.0005, latlng.lng],
+        ], {
             fillColor: markerColor,
             color: 'black',
             weight: 0.5,
@@ -869,7 +874,7 @@ setLegendSymbol('culturalins', {
     'Crafts': 'olive',
     'Botanical': 'navy',
     'Architecture/Design': 'gray'
-}, 'circle');
+}, 'diamond'); // Change the symbol to 'diamond'
 
 
 
