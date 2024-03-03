@@ -116,6 +116,20 @@ const initializeCesium = async () => {
   console.log("Initial state of OSM buildings Tileset: Hidden");
 
 
+// Assuming the building ID you want to change the color for
+const buildingIdToChange = 3629576;
+
+// Find the building entity by ID
+const buildingEntity = osmBuildingsTileset._entityCollection.getById(buildingIdToChange);
+
+if (buildingEntity) {
+  // Change the color of the building
+  buildingEntity.polygon.material = Cesium.Color.RED; // Replace RED with your desired color
+} else {
+  console.error(`Building with ID ${buildingIdToChange} not found.`);
+}
+
+  
 
 // Load GeoJSON borough boundaries
 const resource = await Cesium.IonResource.fromAssetId(2483910);
