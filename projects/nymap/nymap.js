@@ -852,23 +852,24 @@ setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
 
-// Set legend symbols for each discipline
-setLegendSymbol('Zoo', 'green', 'circle');
-setLegendSymbol('Visual Arts', 'blue', 'circle');
-setLegendSymbol('Theatre', 'red', 'circle');
-setLegendSymbol('Science', 'purple', 'circle');
-setLegendSymbol('Photography', 'orange', 'circle');
-setLegendSymbol('Other', 'brown', 'circle');
-setLegendSymbol('New Media', 'pink', 'circle');
-setLegendSymbol('Music', 'yellow', 'circle');
-setLegendSymbol('Multi-disciplinary', 'teal', 'circle');
-setLegendSymbol('Literature', 'lime', 'circle');
-setLegendSymbol('Film/Video/Audio', 'cyan', 'circle');
-setLegendSymbol('Dance', 'magenta', 'circle');
-setLegendSymbol('Crafts', 'olive', 'circle');
-setLegendSymbol('Botanical', 'navy', 'circle');
-setLegendSymbol('Architecture/Design', 'gray', 'circle');
-
+// Set legend symbols for Cultural Institutions Layer
+setLegendSymbol('culturalins', {
+    'Zoo': 'green',
+    'Visual Arts': 'blue',
+    'Theatre': 'red',
+    'Science': 'purple',
+    'Photography': 'orange',
+    'Other': 'brown',
+    'New Media': 'pink',
+    'Music': 'yellow',
+    'Multi-disciplinary': 'teal',
+    'Literature': 'lime',
+    'Film/Video/Audio': 'cyan',
+    'Dance': 'magenta',
+    'Crafts': 'olive',
+    'Botanical': 'navy',
+    'Architecture/Design': 'gray'
+}, 'circle');
 
 
 
