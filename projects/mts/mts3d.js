@@ -274,8 +274,10 @@ busDepotsSwitch.addEventListener("change", (event) => {
 });
 
 // Initial load of the busdepots layer with modified billboards
-viewer.dataSources.add(busDepotsDataSource);
-console.log("Initial load of busDepotsDataSource");
+if (busDepotsSwitch.checked) {
+  viewer.dataSources.add(busDepotsDataSource);
+  console.log("Initial load of busDepotsDataSource");
+}
 
 // Function to create a custom image
 function createCustomImage() {
