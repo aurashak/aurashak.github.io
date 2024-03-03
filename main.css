@@ -734,9 +734,8 @@ border: 1px solid black;
 
 
 
-/* Dropdown Styles */
+/* Updated Dropdown Styles */
 .dropdown {
-  position: relative;
   display: inline-block;
 }
 
@@ -745,6 +744,7 @@ border: 1px solid black;
   border: none;
   padding: 5px;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .dropdown-content {
@@ -754,6 +754,7 @@ border: 1px solid black;
   min-width: 160px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  border-radius: 8px;
 }
 
 .dropdown-content .nymapbox {
