@@ -121,12 +121,19 @@ const resource = await Cesium.IonResource.fromAssetId(2483910);
 const dataSource = await Cesium.GeoJsonDataSource.load(resource);
 
 // Modify the GeoJSON layer properties if needed
+dataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    // Change the polygon color to white
+    entity.polygon.material = Cesium.Color.WHITE;
+  }
+});
 
 // Add the GeoJSON layer to the viewer beneath other layers
 viewer.dataSources.add(dataSource);
 
-// Set the order of the layers in the viewer
-viewer.dataSources.lowerToBottom(dataSource);
+
+
+
 
 
 
