@@ -331,19 +331,19 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     }
 });
 
+
+
 // Cultural Institutions Layer
 var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/culturalins.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         var discipline = feature.properties["Discipline"];
         var markerColor = getColorForDiscipline(discipline);
-        
-        // Use L.polygon to create a diamond shape
-        return L.polygon([
-            latlng,
-            [latlng.lat + 0.0005, latlng.lng],  // Adjust the points to create a diamond shape
-            [latlng.lat, latlng.lng + 0.0005],
-            [latlng.lat - 0.0005, latlng.lng],
+
+        // Use L.rectangle to create a square
+        return L.rectangle([
+            [latlng.lat - 0.0005 * size, latlng.lng - 0.0005 * size],
+            [latlng.lat + 0.0005 * size, latlng.lng + 0.0005 * size]
         ], {
             fillColor: markerColor,
             color: 'black',
@@ -357,6 +357,7 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         layer.bindPopup('<b>' + organizationName + '</b>');
     }
 });
+
 
 // Function to get color based on discipline
 function getColorForDiscipline(discipline) {
@@ -874,7 +875,7 @@ setLegendSymbol('culturalins', {
     'Crafts': 'olive',
     'Botanical': 'navy',
     'Architecture/Design': 'gray'
-}, 'diamond'); // Change the symbol to 'diamond'
+}, 'rectangle');
 
 
 
