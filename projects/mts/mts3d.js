@@ -21,7 +21,7 @@ const initializeCesium = async () => {
 
 
 // Wait for the viewer to be ready
-viewer.scene.postRender.addEventListener(function onPostRender() {
+viewer.scene.postRender.addEventListener(async function onPostRender() {
   viewer.scene.postRender.removeEventListener(onPostRender);
 
   // Fly to New York City 
@@ -37,15 +37,10 @@ viewer.scene.postRender.addEventListener(function onPostRender() {
       roll: 0,
     },
   });
-  
-
 
   // minimum and maximum zoom limits
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100; 
+  viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
   viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
-
-
-
 
   // Load Cesium Bing Maps layer
   const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
@@ -59,30 +54,29 @@ viewer.scene.postRender.addEventListener(function onPostRender() {
     const status = event.target.checked ? "shown" : "hidden";
     console.log(`Bing Maps Layer ${status}`);
   });
-});
 
-
-
-  
   // Load full google photorealistic tileset
   const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
   viewer.scene.primitives.add(newTileset);
 
-  
   // Apply default style to the tileset if available
   const newExtras = newTileset.asset.extras;
   if (Cesium.defined(newExtras) && Cesium.defined(newExtras.ion) && Cesium.defined(newExtras.ion.defaultStyle)) {
     newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
   }
-  
+
   // Remove the default satellite imagery layers
   viewer.imageryLayers.removeAll();
-  
+
   // Create a switch event listener for the new 3D Tileset
   const newTilesetSwitch = document.getElementById("3dTileSwitch");
   newTilesetSwitch.addEventListener("change", (event) => {
     newTileset.show = event.target.checked;
   });
+
+  // ... (rest of your code)
+});
+
   
 
 
@@ -368,11 +362,6 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
 // Initial load of mtsstreets with the red color
 viewer.dataSources.add(mtsstreetsDataSource);
 console.log("Initial load of mtsstreetsDataSource");
-
-
-
-
-
 
 
 };
