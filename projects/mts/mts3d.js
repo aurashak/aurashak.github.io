@@ -27,8 +27,8 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
   // Fly to New York City 
   viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
-      -73.9704,
-      40.8144,
+      -73.9625,
+      40.8217,
       200 // Adjust the zoom level as needed
     ),
     orientation: {
@@ -74,10 +74,7 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
     newTileset.show = event.target.checked;
   });
 
-  // ... (rest of your code)
 });
-
-  
 
 
 
@@ -373,7 +370,6 @@ console.log("Initial load of mtsgasDataSource");
 
 
 
-
 // Load mtsstreets GeoJsonDataSource
 const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477125);
 const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
@@ -383,7 +379,6 @@ mtsstreetsDataSource.entities.values.forEach((entity) => {
   if (entity.polyline) {
     // Change the polyline color to red
     entity.polyline.material = Cesium.Color.GREY;
-
   }
 });
 
@@ -406,10 +401,6 @@ mtsstreetsSwitch.addEventListener("change", (event) => {
 // Do not add mtsstreetsDataSource initially, as the switch is off
 console.log("Initial state of mtsstreetsDataSource: Not added to viewer");
 
-
-// Initial load of mtsstreets with the red color
-viewer.dataSources.add(mtsstreetsDataSource);
-console.log("Initial load of mtsstreetsDataSource");
 
 
 };
