@@ -325,9 +325,10 @@ NY Environmental Infrastructure Map
 <br>
 
 <div class="nymapboxcontainer">
-    <!-- Average Income -->
-    <div class="nymapbox">
-        <div style="display: flex; align-items: center;" class="legend-item">
+            <!-- Average Income -->
+        <div class="nymapbox">      
+             <div style="display: flex; align-items: center;" class="legend-item">
+
             <label class="switch-label"><b>Median Household Income</b> 💵</label>
             <label class="switch" style="margin-left: auto;">
                 <input type="checkbox" class="switch-input" id="avgIncomeLayer">
@@ -337,21 +338,12 @@ NY Environmental Infrastructure Map
             </label>
         </div>
     </div>
-
-    <!-- Dropdown Menu for the Second nymapbox -->
-    <div class="dropdown">
-        <button class="dropdown-btn" onclick="toggleDropdown()">Show Legend</button>
-        <div class="dropdown-content" id="legendDropdown">
-            <div class="nymapbox">
-                <div style="align-items: center;" class="legend-item">
-                    <div class="legend-symbol" id="legend-avgIncome"></div>
-                </div>
-            </div>
-            <!-- Add additional dropdown items if needed -->
+    <div class="nymapbox">
+        <div style="align-items: center;" class="legend-item">
+            <div class="legend-symbol" id="legend-avgIncome"></div>
         </div>
     </div>
 </div>
-
 
 <br>
 
