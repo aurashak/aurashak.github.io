@@ -326,9 +326,17 @@ mtsgasSwitch.addEventListener("change", (event) => {
   }
 });
 
+// Set the initial state of the switch to 'off'
+mtsgasSwitch.checked = false;
+
+// Trigger the 'change' event to ensure the initial state is applied
+const initialChangeEvent = new Event("change");
+mtsgasSwitch.dispatchEvent(initialChangeEvent);
+
 // Initial load of mtsgas with the black color and custom width
-viewer.dataSources.add(mtsgasDataSource);
+// (No need to add it to viewer initially, as the switch is in the 'off' position)
 console.log("Initial load of mtsgasDataSource");
+
 
 
 
