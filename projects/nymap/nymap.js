@@ -340,8 +340,12 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         var discipline = feature.properties["Discipline"];
         var markerColor = getColorForDiscipline(discipline);
         
-        return L.circleMarker(latlng, {
-            radius: size,
+        // Use L.polygon to create a triangle
+        return L.polygon([
+            [latlng.lat, latlng.lng - 0.0005 * size],
+            [latlng.lat + 0.0005 * size, latlng.lng + 0.0005 * size],
+            [latlng.lat - 0.0005 * size, latlng.lng + 0.0005 * size]
+        ], {
             fillColor: markerColor,
             color: 'black',
             weight: 0.5,
@@ -354,6 +358,7 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         layer.bindPopup('<b>' + organizationName + '</b>');
     }
 });
+
 
 // Function to get color based on discipline
 function getColorForDiscipline(discipline) {
@@ -871,7 +876,7 @@ setLegendSymbol('culturalins', {
     'Crafts': 'olive',
     'Botanical': 'navy',
     'Architecture/Design': 'gray'
-}, 'square');
+}, 'polygon'); // Change the symbol to 'polygon'
 
 
 
