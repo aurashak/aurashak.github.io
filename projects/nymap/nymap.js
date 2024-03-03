@@ -873,5 +873,8 @@ setLegendSymbol('culturalins', {
     'Architecture/Design': 'gray'
 }, 'circle');
 
-
+function toggleDropdown() {
+    var dropdownContent = document.getElementById("legendDropdown");
+    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+}
 
