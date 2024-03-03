@@ -37,7 +37,7 @@ function calculateMarkerSize(zoom) {
 }
 
 
-var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyccounties.geojson', {
+var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson', {
     style: function (feature) {
         return {
             fillColor: 'grey',
