@@ -20,6 +20,13 @@ const initializeCesium = async () => {
   });
 
 
+  const layer = viewer.imageryLayers.addImageryProvider(
+    await Cesium.IonImageryProvider.fromAssetId(4),
+  );
+
+  
+  
+
 // Wait for the viewer to be ready
 viewer.scene.postRender.addEventListener(async function onPostRender() {
   viewer.scene.postRender.removeEventListener(onPostRender);
