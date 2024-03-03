@@ -92,7 +92,7 @@ var baseLayers = {
     "Open Street Maps": openstreetmapLayer,
     "Satellite": satelliteLayer,
     "Outlines": nyccountiesLayer, 
-    "3d Buildings (must be zoomed in)": osmb, 
+    "3d Buildings (zoom in)": osmb, 
 };
 
 var layerControl = L.control.layers(baseLayers, null, {
