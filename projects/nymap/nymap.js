@@ -335,9 +335,12 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/culturalins.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
+        var discipline = feature.properties["discipline"];
+        var markerColor = getColorForDiscipline(discipline);
+        
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: 'yellow',
+            fillColor: markerColor,
             color: 'black',
             weight: 0.5,
             opacity: 0.7,
@@ -349,6 +352,47 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
         layer.bindPopup('<b>' + organizationName + '</b>');
     }
 });
+
+// Function to get color based on discipline
+function getColorForDiscipline(discipline) {
+    switch (discipline) {
+        case 'Zoo':
+            return 'green';
+        case 'Visual Arts':
+            return 'blue';
+        case 'Theatre':
+            return 'red';
+        case 'Science':
+            return 'purple';
+        case 'Photography':
+            return 'orange';
+        case 'Other':
+            return 'brown';
+        case 'New Media':
+            return 'pink';
+        case 'Music':
+            return 'yellow';
+        case 'Multi-disciplinary':
+            return 'teal';
+        case 'Literature':
+            return 'lime';
+        case 'Film/Video/Audio':
+            return 'cyan';
+        case 'Dance':
+            return 'magenta';
+        case 'Crafts':
+            return 'olive';
+        case 'Botanical':
+            return 'navy';
+        case 'Architecture/Design':
+            return 'gray';
+        default:
+            return 'gray'; // Default color for unknown disciplines
+    }
+}
+
+
+
 
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
@@ -796,7 +840,7 @@ setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
-setLegendSymbol('culturalins', 'yellow', 'circle');
+
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
@@ -809,6 +853,22 @@ setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
 
+// Set legend symbols for each discipline
+setLegendSymbol('Zoo', 'green', 'circle');
+setLegendSymbol('Visual Arts', 'blue', 'circle');
+setLegendSymbol('Theatre', 'red', 'circle');
+setLegendSymbol('Science', 'purple', 'circle');
+setLegendSymbol('Photography', 'orange', 'circle');
+setLegendSymbol('Other', 'brown', 'circle');
+setLegendSymbol('New Media', 'pink', 'circle');
+setLegendSymbol('Music', 'yellow', 'circle');
+setLegendSymbol('Multi-disciplinary', 'teal', 'circle');
+setLegendSymbol('Literature', 'lime', 'circle');
+setLegendSymbol('Film/Video/Audio', 'cyan', 'circle');
+setLegendSymbol('Dance', 'magenta', 'circle');
+setLegendSymbol('Crafts', 'olive', 'circle');
+setLegendSymbol('Botanical', 'navy', 'circle');
+setLegendSymbol('Architecture/Design', 'gray', 'circle');
 
 
 
