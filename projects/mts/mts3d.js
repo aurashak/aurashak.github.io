@@ -117,7 +117,7 @@ const initializeCesium = async () => {
 
 
 
-  /*
+
 
 // Load GeoJSON borough boundaries
 const resource = await Cesium.IonResource.fromAssetId(2483910);
@@ -142,7 +142,7 @@ dataSource.entities.values.forEach((entity) => {
 // Add the GeoJSON layer to the viewer beneath other layers
 viewer.dataSources.add(dataSource);
 
-*/
+
 
 
 
