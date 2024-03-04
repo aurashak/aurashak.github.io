@@ -569,7 +569,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 document.getElementById('nycso').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
         // If the layer is already on, do nothing when switching left to right
@@ -920,14 +919,16 @@ setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
 
 
-// Call the function with the provided parameters
-setLegendSymbol('avgIncome', {
-    '$0 - $30,000': '#fee08b',
-    '$30,000 - $60,000': '#fdae61',
-    '$60,000 - $90,000': '#d73027',
-    '$90,000 - $150,000': '#4575b4',
-    '$150,000 - $250,000': '#313695'
-}, 'polygon', { layout: 'vertical' });
+/ Legend for Population Layer
+setLegendSymbol('Population', {
+    '0-1000': '#fee08b',
+    '1000-3000': '#fdae61',
+    '3000-6000': '#d73027',
+    '6000-10000': '#4575b4',
+    '10000-15000': '#313695',
+    '15000-18000': '#a50026',
+    '18000+': '#800026'
+}, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
 // Set legend symbols for Cultural Institutions Layer
 setLegendSymbol('culturalins', {
