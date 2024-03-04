@@ -574,7 +574,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Load the ctpop2020.geojson layer initially with transparent style
 var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: {
@@ -590,31 +589,54 @@ var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop202
     }
 }).addTo(map);
 
-// Create an array to store the counts for each census tract
-var counts = [];
+// NYC CSO Layer
+var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'brown',
+            color: 'black',
+            weight: 0,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        });
+    }
+}).addTo(map);
 
-// Event listener for the "Show Max Count Census Tract in Red" switch
-document.getElementById('maxCountCensusTract').addEventListener('change', function () {
-    if (document.getElementById('maxCountCensusTract').checked) {
-        // If the switch is on, find the census tract with the maximum count
-        var maxCountCensusTract = counts.reduce((max, ct) => (ct.Count > max.Count) ? ct : max, counts[0]);
+// Find the closest census tract to the NYC CSO
+function findClosestCensusTract() {
+    var closestCensusTract = null;
+    var minDistance = Infinity;
 
-        if (maxCountCensusTract) {
-            console.log("Census Tract with Maximum Count:", maxCountCensusTract.CensusTract);
-            console.log("Maximum Count:", maxCountCensusTract.Count);
+    ctpopLayer.eachLayer(function (censusTractLayer) {
+        var distance = censusTractLayer.getBounds().getCenter().distanceTo(nycsoLayer.getBounds().getCenter());
 
-            // Set the fill color of the census tract with the highest count to red
-            ctpopLayer.eachLayer(function (layer) {
-                layer.setStyle({
-                    fillColor: (layer.feature.properties.TRACTCE10 === maxCountCensusTract.CensusTract) ? 'red' : 'transparent',
-                    color: 'black',
-                    weight: 0.5,
-                    opacity: 0.7,
-                    fillOpacity: 0.7
-                });
+        if (distance < minDistance) {
+            minDistance = distance;
+            closestCensusTract = censusTractLayer;
+        }
+    });
+
+    return closestCensusTract;
+}
+
+// Event listener for the "Show Closest Census Tract to NYC CSO" switch
+document.getElementById('showClosestCensusTract').addEventListener('change', function () {
+    if (document.getElementById('showClosestCensusTract').checked) {
+        var closestCensusTract = findClosestCensusTract();
+
+        if (closestCensusTract) {
+            // Highlight the closest census tract
+            closestCensusTract.setStyle({
+                fillColor: 'red',
+                color: 'black',
+                weight: 1.5,
+                opacity: 1,
+                fillOpacity: 0.7
             });
         } else {
-            console.log("No census tract with valid data found.");
+            console.log("No census tract found.");
         }
     } else {
         // If the switch is off, reset styles
@@ -641,8 +663,6 @@ function toggleGeoJSONLayer() {
 
 // Initial hide
 toggleGeoJSONLayer();
-
-
 
 
 
