@@ -946,21 +946,35 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-// Create a custom control container and add it to the map
-var customControlContainer = L.DomUtil.create('div', 'custom-control-container');
-document.getElementById('search-container').appendChild(customControlContainer);
+document.addEventListener('DOMContentLoaded', function() {
+    // Your Leaflet map and search control setup code here
 
-// Add the search control to the custom control container
-var searchControl = L.Control.geocoder({
-    defaultMarkGeocode: false,
-    placeholder: 'Search for an address...',
-    geocoder: L.Control.Geocoder.nominatim()
-}).addTo(map);
+    // Create the map
+    var map = L.map('map', {
+        // Your map configuration options
+    });
 
-// Add the custom control container to the map
-map.addControl(new L.Control({ position: 'topleft' }).onAdd = function () {
-    return customControlContainer;
+    // ... (Your existing map configuration code)
+
+    // Create a custom control container and add it to the map
+    var customControlContainer = L.DomUtil.create('div', 'custom-control-container');
+    document.getElementById('search-container').appendChild(customControlContainer);
+
+    // Add the search control to the custom control container
+    var searchControl = L.Control.geocoder({
+        defaultMarkGeocode: false,
+        placeholder: 'Search for an address...',
+        geocoder: L.Control.Geocoder.nominatim()
+    }).addTo(map);
+
+    // Add the custom control container to the map
+    map.addControl(new L.Control({ position: 'topleft' }).onAdd = function () {
+        return customControlContainer;
+    });
 });
+
+
+
 
 
 
