@@ -103,8 +103,7 @@ const initializeCesium = async () => {
     
     
     
-    
-    // Set the switch to the off position initially
+// Set the switch to the off position initially
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
 bingMapsSwitch.checked = false;
 
@@ -132,6 +131,8 @@ bingMapsSwitch.addEventListener("change", handleBingMapsLayer);
 
 // Trigger the event listener initially to ensure the initial state is applied
 handleBingMapsLayer();
+
+
 
 
 
