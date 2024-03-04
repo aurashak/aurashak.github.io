@@ -1163,10 +1163,8 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-
-
-// Function to set legend symbols with support for multiple shapes and colors
-function setLegendSymbol(layerId, colors, shape, options) {
+// Function to set legend symbols with support for multiple shapes, colors, and images
+function setLegendSymbol(layerId, colors, shape, imageUrl, options) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
     
     if (legendSymbol) {
@@ -1175,22 +1173,22 @@ function setLegendSymbol(layerId, colors, shape, options) {
             let legendHTML = '';
             for (const category in colors) {
                 const color = colors[category];
-                legendHTML += createLegendEntry(category, color, shape);
+                legendHTML += createLegendEntry(category, color, shape, imageUrl);
             }
             // Set the legend HTML
             legendSymbol.innerHTML = legendHTML;
         } else if (typeof colors === 'string') {
             // Set legend HTML for a single color and shape
-            legendSymbol.innerHTML = createLegendEntry('', colors, shape);
+            legendSymbol.innerHTML = createLegendEntry('', colors, shape, imageUrl);
         }
     }
 }
 
-// Function to create a legend entry based on shape and color
-function createLegendEntry(label, color, shape) {
+// Function to create a legend entry based on shape, color, and image
+function createLegendEntry(label, color, shape, imageUrl) {
     switch (shape) {
         case 'circle':
-            return `<div><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
+            return `<div><img src="${imageUrl}" style="width: 20px; height: 20px; margin-right: 5px;">${label}</div>`;
         case 'line':
             return `<div><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
         case 'polygon':
@@ -1200,7 +1198,7 @@ function createLegendEntry(label, color, shape) {
     }
 }
 
-// legend symbol shapes and colors for each layer
+// Legend symbol shapes, colors, and images for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
@@ -1209,10 +1207,11 @@ setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
+
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
-setLegendSymbol('nycsubway', 'blue', 'line');
+setLegendSymbol('nycsubway', 'blue', 'line', 'https://aurashak.github.io/images/mtalogo.png');
 setLegendSymbol('nyrail', 'red', 'line');
 
 setLegendSymbol('powerplants', '#FFC0CB', 'circle');
