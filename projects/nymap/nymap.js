@@ -1162,7 +1162,6 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-
 // Function to set legend symbols with support for multiple shapes, colors, and images
 function setLegendSymbol(layerId, colors, shape, imageUrl, options) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
@@ -1190,13 +1189,14 @@ function createLegendEntry(label, color, shape, imageUrl) {
         case 'circle':
             return `<div><img src="${imageUrl}" style="width: 20px; height: 20px; margin-right: 5px;">${label}</div>`;
         case 'line':
-            return `<div><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
+            return `<div><img src="${imageUrl}" style="width: 20px; height: 20px; margin-right: 5px;">${label}</div>`;
         case 'polygon':
-            return `<div><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
+            return `<div><img src="${imageUrl}" style="width: 20px; height: 20px; margin-right: 5px;">${label}</div>`;
         default:
             return ''; // Handle other shapes if needed
     }
 }
+
 
 // Legend symbol shapes, colors, and images for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
