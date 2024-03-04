@@ -1186,7 +1186,7 @@ function setLegendSymbol(layerId, colors, shape, imageUrl, options) {
 function createLegendEntry(label, color, shape, imageUrl) {
     switch (shape) {
         case 'circle':
-            return `<div><img src="${imageUrl}" style="width: 20px; height: 20px; margin-right: 5px;">${label}</div>`;
+            return `<div><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
         case 'line':
             return `<div><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
         case 'polygon':
@@ -1209,7 +1209,7 @@ setLegendSymbol('nycbusdepots', 'black', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
-setLegendSymbol('nycsubway', 'blue', 'line', 'https://aurashak.github.io/images/mtalogo.png');
+setLegendSymbol('nycsubway', 'https://aurashak.github.io/images/mtalogo.png');
 setLegendSymbol('nyrail', 'red', 'line');
 
 setLegendSymbol('powerplants', '#FFC0CB', 'circle');
