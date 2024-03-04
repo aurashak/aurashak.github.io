@@ -316,6 +316,31 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
 
 
 
+
+
+
+// Bus Depots Layer
+var busdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nybusdepots.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            radius: size,
+            fillColor: 'black',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.8
+        });
+    }
+}).addTo(transportationLayerGroup);
+
+
+
+
+
+
+
+
 // Chemical Storage Layer
 var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/chemicalstorage.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -468,12 +493,13 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
 
     // Define colors for each category
     var categoryColors = {
-        '0-30000': '#fee08b',
-        '30000-60000': '#fdae61',
-        '60000-90000': '#d73027',
-        '90000-150000': '#4575b4',
-        '150000-250000': '#313695'
+        '0-30000': 'rgba(254, 224, 139, 0.7)',    // Adding alpha channel (0.7 for 70% opacity)
+        '30000-60000': 'rgba(253, 174, 97, 0.7)',
+        '60000-90000': 'rgba(215, 48, 39, 0.7)',
+        '90000-150000': 'rgba(69, 117, 180, 0.7)',
+        '150000-250000': 'rgba(49, 54, 149, 0.7)'
     };
+    
 
 
 
@@ -819,6 +845,19 @@ document.getElementById('wastewatertreatment').addEventListener('change', functi
 });
 
 
+document.getElementById('nycbusdepots').addEventListener('change', function() {
+    if (map.hasLayer(nycbusdepotsLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nycbusdepots').checked) {
+            return;
+        }
+        map.removeLayer(nycbusdepotsLayer);
+    } else {
+        map.addLayer(nycbusdepotsLayer);
+    }
+});
+
+
 
 document.getElementById('evacuationzones').addEventListener('click', function() {
     if (map.hasLayer(evacuationzonesLayer)) {
@@ -958,6 +997,23 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
+// Transportation Layer Group
+var transportationLayerGroup = L.layerGroup();
+
+// Event listener for the transportation layer group toggle
+document.getElementById('transportationLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(transportationLayerGroup)) {
+        map.removeLayer(transportationLayerGroup);
+    } else {
+        map.addLayer(transportationLayerGroup);
+    }
+});
+
+
+
+
+
+
 
 // Function to set legend symbols with support for multiple shapes and colors
 function setLegendSymbol(layerId, colors, shape, options) {
@@ -1001,6 +1057,7 @@ setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 
 setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
+setLegendSymbol('nycbusdepots', 'black', 'circle');
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
