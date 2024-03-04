@@ -42,31 +42,74 @@ const initializeCesium = async () => {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
-   // ... (Your existing code)
+    // Load full google photorealistic tileset
+    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+    viewer.scene.primitives.add(newTileset);
 
-// Create a switch event listener for the new 3D Tileset
-const newTilesetSwitch = document.getElementById("3dTileSwitch");
-newTilesetSwitch.addEventListener("change", (event) => {
-  newTileset.show = event.target.checked;
-});
+    // Apply default style to the tileset if available
+    const newExtras = newTileset.asset.extras;
+    if (
+      Cesium.defined(newExtras) &&
+      Cesium.defined(newExtras.ion) &&
+      Cesium.defined(newExtras.ion.defaultStyle)
+    ) {
+      newTileset.style = new Cesium.Cesium3DTileStyle(
+        newExtras.ion.defaultStyle
+      );
+    }
 
-// Set the switch to the off position initially
-newTilesetSwitch.checked = false;
-// Trigger the 'change' event to ensure the initial state is applied
-newTilesetSwitch.dispatchEvent(new Event("change"));
+    // Remove the default satellite imagery layers
+    viewer.imageryLayers.removeAll();
 
-// Create a switch event listener for the OSM buildings Tileset
-const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-osmBuildingsSwitch.addEventListener("change", (event) => {
-  osmBuildingsTileset.show = event.target.checked;
-});
+    // Create a switch event listener for the new 3D Tileset
+    const newTilesetSwitch = document.getElementById("3dTileSwitch");
+    newTilesetSwitch.addEventListener("change", (event) => {
+      newTileset.show = event.target.checked;
+    });
+  });
 
-// Set the switch to the off position initially
-osmBuildingsSwitch.checked = false;
-// Trigger the 'change' event to ensure the initial state is applied
-osmBuildingsSwitch.dispatchEvent(new Event("change"));
 
-// ... (Continue this pattern for other switches)
+  // Load OSM buildings 3D Tileset
+  const osmBuildingsTileset = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+  );
+
+  // Apply default style to the OSM buildings tileset if available
+  const osmExtras = osmBuildingsTileset.asset.extras;
+  if (
+    Cesium.defined(osmExtras) &&
+    Cesium.defined(osmExtras.ion) &&
+    Cesium.defined(osmExtras.ion.defaultStyle)
+  ) {
+    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+      osmExtras.ion.defaultStyle
+    );
+  }
+
+  // Create a switch event listener for the OSM buildings Tileset
+  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+  // Set the switch to the off position initially
+  osmBuildingsSwitch.checked = false;
+
+  osmBuildingsSwitch.addEventListener("change", (event) => {
+    osmBuildingsTileset.show = event.target.checked;
+  });
+
+  // Hide the OSM buildings Tileset initially
+  osmBuildingsTileset.show = false;
+
+
+
+
+
+// Load Cesium Bing Maps layer
+const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
+  await Cesium.IonImageryProvider.fromAssetId(4)
+);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer added to viewer");
 
 // Create a switch event listener for the Bing Maps layer
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
@@ -76,21 +119,9 @@ bingMapsSwitch.addEventListener("change", (event) => {
   console.log(`Bing Maps Layer ${status}`);
 });
 
-// Set the switch to the off position initially
-bingMapsSwitch.checked = false;
-// Trigger the 'change' event to ensure the initial state is applied
-bingMapsSwitch.dispatchEvent(new Event("change"));
-
-// ... (Continue this pattern for other switches)
-
-// Call the initializeCesium function
-initializeCesium();
-
-
 
 
 /* 
-
 // Load GeoJSON borough boundaries
 const resource = await Cesium.IonResource.fromAssetId(2483910);
 const dataSource = await Cesium.GeoJsonDataSource.load(resource);
@@ -118,7 +149,6 @@ viewer.dataSources.add(dataSource);
 dataSource.show = false;
 
 */
-
 
 
 
