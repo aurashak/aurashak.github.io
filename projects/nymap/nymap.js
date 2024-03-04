@@ -847,6 +847,7 @@ document.getElementById('wastewatertreatment').addEventListener('change', functi
 });
 
 
+// Event listener for the nycbusdepots layer toggle
 document.getElementById('nycbusdepots').addEventListener('change', function() {
     if (map.hasLayer(nycbusdepotsLayer)) {
         // If the layer is already on, do nothing when switching left to right
