@@ -574,8 +574,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
-
 // Census Tract Layer
 var ctpop2020Layer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson').addTo(map);
 
@@ -584,15 +582,6 @@ var censusTractCounts = {};
 
 // Checkbox for Census Tract Layer
 var censusTractCheckbox = document.getElementById('censusTractLayer');
-
-// Add an event listener to the Census Tract layer checkbox
-censusTractCheckbox.addEventListener('change', function () {
-    if (censusTractCheckbox.checked) {
-        map.addLayer(ctpop2020Layer);
-    } else {
-        map.removeLayer(ctpop2020Layer);
-    }
-});
 
 // Event listener for when the CSO layer is loaded
 nycsoLayer.on('data:loaded', function () {
@@ -639,8 +628,23 @@ nycsoLayer.on('data:loaded', function () {
             console.log('Census Tract with the highest CSO count:', maxCensusTractID);
         }
     });
+
+    // Add an event listener to the Census Tract layer checkbox
+    censusTractCheckbox.addEventListener('change', function () {
+        if (censusTractCheckbox.checked) {
+            map.addLayer(ctpop2020Layer);
+        } else {
+            map.removeLayer(ctpop2020Layer);
+        }
+    });
 });
 
+// Ensure that the checkbox state is initially set correctly
+if (censusTractCheckbox.checked) {
+    map.addLayer(ctpop2020Layer);
+} else {
+    map.removeLayer(ctpop2020Layer);
+}
 
 
 
