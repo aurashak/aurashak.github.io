@@ -200,6 +200,61 @@ bingMapsSwitch.addEventListener("change", (event) => {
       return canvas;
     }
 
+
+
+    // Load whejsites GeoJsonDataSource
+const whejsitesResource = await Cesium.IonResource.fromAssetId(2486537);
+const whejsitesDataSource = await Cesium.GeoJsonDataSource.load(whejsitesResource);
+
+// Modify the billboard color and style before adding the data source
+whejsitesDataSource.entities.values.forEach((entity) => {
+    if (entity.billboard) {
+        // Change the billboard color to orange
+        entity.billboard.color = Cesium.Color.ORANGE;
+
+        // Change the billboard style to Circle using the createCircleImage function
+        entity.billboard.image = createCircleImage();
+    }
+});
+
+// Create a switch event listener for whejsites
+const whejsitesSwitch = document.getElementById("whejsites");
+
+// Set the switch to the off position initially
+whejsitesSwitch.checked = false;
+
+whejsitesSwitch.addEventListener("change", (event) => {
+    if (event.target.checked) {
+        viewer.dataSources.add(whejsitesDataSource);
+        console.log("whejsites layer added to viewer");
+    } else {
+        viewer.dataSources.remove(whejsitesDataSource);
+        console.log("whejsites layer removed from viewer");
+    }
+});
+
+// Function to create an orange circle image
+function createCircleImage() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 15;
+    canvas.height = 15;
+    const context = canvas.getContext("2d");
+    context.beginPath();
+    context.arc(10, 10, 8, 0, 2 * Math.PI);
+    context.fillStyle = "orange";
+    context.fill();
+    return canvas;
+}
+
+
+
+
+
+
+
+
+    
+
     // Load mtsparks GeoJsonDataSource
     const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
     const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
