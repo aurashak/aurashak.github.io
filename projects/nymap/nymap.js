@@ -335,6 +335,34 @@ var nycbusdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/n
 });
 
 
+// Subway Layer
+var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycsubway.geojson', {
+    style: function (feature) {
+        var size = calculateMarkerSize(map.getZoom());
+        return {
+            color: 'blue',
+            weight: 3,
+            opacity: 0.6
+        };
+    }
+});
+
+
+
+// State rail Layer
+var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyrail.geojson', {
+    style: function (feature) {
+        var size = calculateMarkerSize(map.getZoom());
+        return {
+            color: 'red',
+            weight: 3,
+            opacity: 0.6
+        };
+    }
+});
+
+
+
 
 
 
@@ -847,6 +875,12 @@ document.getElementById('wastewatertreatment').addEventListener('change', functi
 });
 
 
+
+
+
+
+
+
 // Event listener for the nycbusdepots layer toggle
 document.getElementById('nycbusdepots').addEventListener('change', function() {
     if (map.hasLayer(nycbusdepotsLayer)) {
@@ -859,6 +893,42 @@ document.getElementById('nycbusdepots').addEventListener('change', function() {
         map.addLayer(nycbusdepotsLayer);
     }
 });
+
+
+// Event listener for the nycbusdepots layer toggle
+document.getElementById('nycsubway').addEventListener('change', function() {
+    if (map.hasLayer(nycsubwayLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nycsubway').checked) {
+            return;
+        }
+        map.removeLayer(nycsubwayLayer);
+    } else {
+        map.addLayer(nycsubwayLayer);
+    }
+});
+
+
+
+// Event listener for the nycbusdepots layer toggle
+document.getElementById('nyrail').addEventListener('change', function() {
+    if (map.hasLayer(nycbusdepotsLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nyrail').checked) {
+            return;
+        }
+        map.removeLayer(nyrailLayer);
+    } else {
+        map.addLayer(nyrailLayer);
+    }
+});
+
+
+
+
+
+
+
 
 
 
@@ -1052,6 +1122,9 @@ setLegendSymbol('nycbusdepots', 'black', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
+setLegendSymbol('nycsubway', 'blue', 'line');
+setLegendSymbol('nyrail', 'red', 'line');
+
 setLegendSymbol('powerplants', '#FFC0CB', 'circle');
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
 setLegendSymbol('wastetransferfacility', 'purple', 'circle');
