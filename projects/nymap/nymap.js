@@ -514,11 +514,11 @@ function getPopulationCategory(population) {
     } else if (population <= 10000) {
         return '6000-10000';
     } else if (population <= 15000) {
-        return '10000-15000';
+        return '10000-14000';
     } else if (population <= 18000) {
-        return '15000-18000';
+        return '14000-17000';
     } else {
-        return '18000+';
+        return '17000+';
     }
 }
 
@@ -529,16 +529,16 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
         var population = feature.properties.population; // Update to lowercase 'population'
         var category = getPopulationCategory(population);
 
-        // Define colors for each category as a gradient of purple with transparency
-        var categoryColors = {
-            '0-1000': 'rgba(128,0,128,0.5)',
-            '1000-3000': 'rgba(148,0,211,0.5)',
-            '3000-6000': 'rgba(186,85,211,0.5)',
-            '6000-10000': 'rgba(221,160,221,0.5)',
-            '10000-15000': 'rgba(238,130,238,0.5)',
-            '15000-18000': 'rgba(255,182,193,0.5)',
-            '18000+': 'rgba(255,192,203,0.5)'
-        };
+ // Define colors for each category as a gradient with transparency
+var categoryColors = {
+    '0-1000': 'rgba(255, 255, 255, 0.5)', // White
+    '1000-3000': 'rgba(211, 211, 211, 0.5)', // Light Gray
+    '3000-6000': 'rgba(169, 169, 169, 0.5)', // Dark Gray
+    '6000-10000': 'rgba(128, 128, 128, 0.5)', // Gray
+    '10000-14000': 'rgba(105, 105, 105, 0.5)', // Dim Gray
+    '14000-17000': 'rgba(47, 79, 79, 0.5)', // Dark Slate Gray
+    '17000+': 'rgba(0, 0, 0, 0.5)' // Black
+};
 
         return {
             fillColor: categoryColors[category],
@@ -992,16 +992,18 @@ setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
-// Legend for Population Layer (reversed colors)
+// Legend for Population Layer (white to dark gray colors)
 setLegendSymbol('population', {
-    '18000+': 'rgba(169,169,169,0.5)',  // Dark Gray
-    '15000-18000': 'rgba(128,128,128,0.5)', // Gray
-    '10000-15000': 'rgba(192,192,192,0.5)', // Silver
-    '6000-10000': 'rgba(211,211,211,0.5)', // Light Gray
-    '3000-6000': 'rgba(220,220,220,0.5)', // Gainsboro
-    '1000-3000': 'rgba(245,245,245,0.5)', // White Smoke
-    '0-1000': 'rgba(255,255,255,0.5)'  // White
+    '0-1000': 'rgba(255,255,255,0.5)',  // White
+    '1000-3000': 'rgba(211,211,211,0.5)', // Light Gray
+    '3000-6000': 'rgba(169,169,169,0.5)', // Dark Gray
+    '6000-10000': 'rgba(128,128,128,0.5)', // Gray
+    '10000-14000': 'rgba(105,105,105,0.5)', // Dim Gray
+    '14000-17000': 'rgba(128,128,128,0.5)', // Gray
+    '17000+': 'rgba(169,169,169,0.5)'  // Dark Gray
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
+
+
 
 
 
