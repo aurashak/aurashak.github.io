@@ -536,14 +536,25 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
  // Define colors for each category as a gradient with transparency
 var categoryColors = {
     '0-1000': 'rgba(255, 255, 255, 0.7)', // White
-    '1000-3000': 'rgba(200, 200, 200, 0.7)', // Light Gray
-    '3000-6000': 'rgba(120, 120, 120, 0.7)', // Dark Gray
-    '6000-10000': 'rgba(70, 70, 70, 0.7)', // Gray
-    '10000-14000': 'rgba(40, 40, 40, 0.7)', // Dim Gray
-    '14000-17000': 'rgba(20, 20, 20, 0.7)', // Dark Slate Gray
+    '1000-3000': 'rgba(211,211,211,0.5)', // Light Gray
+    '3000-6000': 'rgba(169,169,169,0.5)', // Dark Gray
+    '6000-10000': 'rgba(128,128,128,0.5)', // Gray
+    '10000-14000': 'rgba(100, 100, 100, 0.7)', // Dim Gray
+    '14000-17000': 'rgba(50, 50, 50, 0.7)', // Dark Slate Gray
     '17000+': 'rgba(0, 0, 0, 0.7)' // Black
     
 };
+
+// Legend for Population Layer (white to dark gray colors)
+setLegendSymbol('population', {
+    '0-1000': 'rgba(255,255,255,0.5)',  // White
+    '1000-3000': 'rgba', // Light Gray
+    '3000-6000': 'rgba', // Dark Gray
+    '6000-10000': 'rgba', // Gray
+    '10000-14000': 'rgba(100,100,100,0.5)', // Dim Gray
+    '14000-17000': 'rgba(50, 50, 50, 0.5)', // Less than Black
+    '17000+': 'rgba(0, 0, 0, .8)'  // Black
+}, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
         return {
             fillColor: categoryColors[category],
@@ -1014,9 +1025,9 @@ setLegendSymbol('population', {
     '1000-3000': 'rgba(211,211,211,0.5)', // Light Gray
     '3000-6000': 'rgba(169,169,169,0.5)', // Dark Gray
     '6000-10000': 'rgba(128,128,128,0.5)', // Gray
-    '10000-14000': 'rgba(105,105,105,0.5)', // Dim Gray
-    '14000-17000': 'rgba(128,128,128,0.5)', // Gray
-    '17000+': 'rgba(169,169,169,0.5)'  // Dark Gray
+    '10000-14000': 'rgba(100,100,100,0.5)', // Dim Gray
+    '14000-17000': 'rgba(50, 50, 50, 0.5)', // Less than Black
+    '17000+': 'rgba(0, 0, 0, .8)'  // Black
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
 
