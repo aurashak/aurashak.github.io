@@ -42,31 +42,32 @@ const initializeCesium = async () => {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
-    // Load full google photorealistic tileset
-    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-    viewer.scene.primitives.add(newTileset);
+// Load full google photorealistic tileset
+const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+viewer.scene.primitives.add(newTileset);
+newTileset.show = true; // Set the initial state to 'on'
 
-    // Apply default style to the tileset if available
-    const newExtras = newTileset.asset.extras;
-    if (
-      Cesium.defined(newExtras) &&
-      Cesium.defined(newExtras.ion) &&
-      Cesium.defined(newExtras.ion.defaultStyle)
-    ) {
-      newTileset.style = new Cesium.Cesium3DTileStyle(
-        newExtras.ion.defaultStyle
-      );
-    }
+// Apply default style to the tileset if available
+const newExtras = newTileset.asset.extras;
+if (
+  Cesium.defined(newExtras) &&
+  Cesium.defined(newExtras.ion) &&
+  Cesium.defined(newExtras.ion.defaultStyle)
+) {
+  newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+}
 
-    // Remove the default satellite imagery layers
-    viewer.imageryLayers.removeAll();
+// Remove the default satellite imagery layers
+viewer.imageryLayers.removeAll();
 
-    // Create a switch event listener for the new 3D Tileset
-    const newTilesetSwitch = document.getElementById("3dTileSwitch");
-    newTilesetSwitch.addEventListener("change", (event) => {
-      newTileset.show = event.target.checked;
-    });
-  });
+// Create a switch event listener for the new 3D Tileset
+const newTilesetSwitch = document.getElementById("3dTileSwitch");
+newTilesetSwitch.checked = true; // Set the initial state to 'on'
+
+newTilesetSwitch.addEventListener("change", (event) => {
+  newTileset.show = event.target.checked;
+});
+
 
 
   // Load OSM buildings 3D Tileset
