@@ -16,9 +16,7 @@ const initializeCesium = async () => {
     navigationHelpButton: true,
     fullscreenButton: false,
     animation: false,
-  
   });
-
 
   // Wait for the viewer to be ready
   viewer.scene.postRender.addEventListener(async function onPostRender() {
@@ -42,396 +40,352 @@ const initializeCesium = async () => {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
+    // Load full google photorealistic tileset
+    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+    viewer.scene.primitives.add(newTileset);
+    newTileset.show = true; // Set the initial state to 'on'
 
+    // Apply default style to the tileset if available
+    const newExtras = newTileset.asset.extras;
+    if (
+      Cesium.defined(newExtras) &&
+      Cesium.defined(newExtras.ion) &&
+      Cesium.defined(newExtras.ion.defaultStyle)
+    ) {
+      newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+    }
 
-// Load full google photorealistic tileset
-const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-viewer.scene.primitives.add(newTileset);
-newTileset.show = true; // Set the initial state to 'on'
+    // Remove the default satellite imagery layers
+    viewer.imageryLayers.removeAll();
 
-// Apply default style to the tileset if available
-const newExtras = newTileset.asset.extras;
-if (
-  Cesium.defined(newExtras) &&
-  Cesium.defined(newExtras.ion) &&
-  Cesium.defined(newExtras.ion.defaultStyle)
-) {
-  newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
-}
+    // Create a switch event listener for the new 3D Tileset
+    const newTilesetSwitch = document.getElementById("3dTileSwitch");
+    newTilesetSwitch.checked = true; // Set the initial state to 'on'
 
-// Remove the default satellite imagery layers
-viewer.imageryLayers.removeAll();
+    newTilesetSwitch.addEventListener("change", (event) => {
+      newTileset.show = event.target.checked;
+      const status = event.target.checked ? "shown" : "hidden";
+      console.log(`3D Tileset Layer ${status}`);
+    });
 
-// Create a switch event listener for the new 3D Tileset
-const newTilesetSwitch = document.getElementById("3dTileSwitch");
-newTilesetSwitch.checked = true; // Set the initial state to 'on'
+    console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
-newTilesetSwitch.addEventListener("change", (event) => {
-  newTileset.show = event.target.checked;
-  const status = event.target.checked ? "shown" : "hidden";
-  console.log(`3D Tileset Layer ${status}`);
-});
-
-console.log("Initial load of 3D Tileset layer with the switch turned on.");
-
-
-
-  // Load OSM buildings 3D Tileset
-  const osmBuildingsTileset = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-  );
-
-  // Apply default style to the OSM buildings tileset if available
-  const osmExtras = osmBuildingsTileset.asset.extras;
-  if (
-    Cesium.defined(osmExtras) &&
-    Cesium.defined(osmExtras.ion) &&
-    Cesium.defined(osmExtras.ion.defaultStyle)
-  ) {
-    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-      osmExtras.ion.defaultStyle
+    // Load OSM buildings 3D Tileset
+    const osmBuildingsTileset = viewer.scene.primitives.add(
+      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
     );
-  }
 
-  // Create a switch event listener for the OSM buildings Tileset
-  const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-
-  // Set the switch to the off position initially
-  osmBuildingsSwitch.checked = false;
-
-  osmBuildingsSwitch.addEventListener("change", (event) => {
-    osmBuildingsTileset.show = event.target.checked;
-  });
-
-  // Hide the OSM buildings Tileset initially
-  osmBuildingsTileset.show = false;
-
-
-
-// Set the switch to the off position initially
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.checked = false;
-
-// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
-const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("Bing Maps layer initialized, but not added to viewer");
-
-// Create a switch event listener for the Bing Maps layer
-bingMapsSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    // Add the layer to the viewer when the switch is turned on
-    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
-    console.log("Bing Maps layer added to viewer");
-  } else {
-    // Remove the layer from the viewer when the switch is turned off
-    viewer.imageryLayers.remove(bingMapsLayer);
-    console.log("Bing Maps layer removed from viewer");
-  }
-});
-
-
-
-
-// Load mtscso GeoJsonDataSource
-const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
-const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
-
-// Modify the billboard color and style before adding the data source
-mtscsoDataSource.entities.values.forEach((entity) => {
-  if (entity.billboard) {
-    // Change the billboard color to red
-    entity.billboard.color = Cesium.Color.RED;
-
-    // Change the billboard style to Circle using the createCircleImage function
-    entity.billboard.image = createCircleImage();
-  }
-});
-
-// Create a switch event listener for mtscso
-const mtscsoSwitch = document.getElementById("mtscsoSwitch");
-
-// Set the switch to the off position initially
-mtscsoSwitch.checked = false;
-
-mtscsoSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtscsoDataSource);
-    console.log("mtscsoDataSource added to viewer");
-  } else {
-    viewer.dataSources.remove(mtscsoDataSource);
-    console.log("mtscsoDataSource removed from viewer");
-  }
-});
-
-
-// Function to create a red circle image
-function createCircleImage() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 15;
-  canvas.height = 15;
-  const context = canvas.getContext("2d");
-  context.beginPath();
-  context.arc(10, 10, 8, 0, 2 * Math.PI);
-  context.fillStyle = "red";
-  context.fill();
-  return canvas;
-}
-
-
-
-
-
-
-
-// Load mtsparks GeoJsonDataSource
-const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
-const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
-
-// Modify the polyline/polygon color and disable the outline before adding the data source
-mtsparksDataSource.entities.values.forEach((entity) => {
-  if (entity.polygon) {
-    // Change the polygon color to green
-    entity.polygon.material = Cesium.Color.GREEN;
-    
-    // Disable the polygon outline
-    entity.polygon.outline = false;
-
-  }
-});
-
-// Create a switch event listener for mtsparks
-const mtsparksSwitch = document.getElementById("mtsparksSwitch");
-
-// Set the switch to the off position initially
-mtsparksSwitch.checked = false;
-
-mtsparksSwitch.addEventListener("change", (event) => {
-  mtsparksDataSource.entities.values.forEach((entity) => {
-    entity.show = event.target.checked;
-  });
-});
-
-// Initial load of mtsparks with the green color and disabled outline
-viewer.dataSources.add(mtsparksDataSource);
-mtsparksDataSource.entities.values.forEach((entity) => {
-  entity.show = false; // Make sure entities are hidden by default
-});
-
-
-
-
-
-
-
-// Load mtsrail GeoJsonDataSource
-const mtsrailResource = await Cesium.IonResource.fromAssetId(2482267);
-const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
-
-// Modify the polyline color before adding the data source
-mtsrailDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    // Change the polyline color to pink
-    entity.polyline.material = Cesium.Color.RED;
-
-  }
-});
-
-// Create a switch event listener for mtsrail
-const mtsrailSwitch = document.getElementById("mtsrailSwitch");
-
-// Set the switch to the off position initially
-mtsrailSwitch.checked = false;
-
-mtsrailSwitch.addEventListener("change", (event) => {
-  mtsrailDataSource.entities.values.forEach((entity) => {
-    entity.show = event.target.checked;
-  });
-});
-
-// Initial load of mtsrail with the pink color
-viewer.dataSources.add(mtsrailDataSource);
-mtsrailDataSource.entities.values.forEach((entity) => {
-  entity.show = false; // Make sure entities are hidden by default
-});
-
-
-
-
-
-// Load GeoJsonDataSource with asset ID 2483827
-const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
-const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
-
-// Modify the billboard color and style before adding the data source
-busDepotsDataSource.entities.values.forEach((entity) => {
-  if (entity.billboard) {
-    // Change the billboard color to blue
-    entity.billboard.color = Cesium.Color.BLUE;
-    // Change the billboard style to your desired image
-    entity.billboard.image = createCustomImage(); // Function to create a custom image
-  }
-});
-
-// Create a switch event listener for the busdepots layer
-const busDepotsSwitch = document.getElementById("busDepotsSwitch");
-
-// Set the switch to the off position initially
-busDepotsSwitch.checked = false;
-
-busDepotsSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(busDepotsDataSource);
-    console.log("busDepotsDataSource added to viewer");
-  } else {
-    viewer.dataSources.remove(busDepotsDataSource);
-    console.log("busDepotsDataSource removed from viewer");
-  }
-});
-
-// Initial load of the busdepots layer with modified billboards
-if (busDepotsSwitch.checked) {
-  viewer.dataSources.add(busDepotsDataSource);
-  console.log("Initial load of busDepotsDataSource");
-}
-
-// Function to create a custom image
-function createCustomImage() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 20;
-  canvas.height = 20;
-  const context = canvas.getContext("2d");
-  // Customize the image as needed
-  context.fillStyle = "blue";
-  context.fillRect(0, 0, canvas.width, canvas.height);
-  return canvas;
-}
-
-
-
-
-
-// Load nycsubway GeoJsonDataSource
-const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
-const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
-
-// Modify the polyline color before adding the data source
-nycsubwayDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    // Change the polyline color to your desired color (e.g., blue)
-    entity.polyline.material = Cesium.Color.BLUE;
-  }
-});
-
-// Create a switch event listener for nycsubway
-const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
-
-// Function to toggle the visibility of the nycsubwayDataSource
-const toggleNycSubwayLayer = () => {
-  const isChecked = nycsubwaySwitch.checked;
-  nycsubwayDataSource.entities.values.forEach((entity) => {
-    entity.show = isChecked;
-  });
-};
-
-// Set the switch's initial state and add the event listener
-nycsubwaySwitch.checked = false;
-nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
-
-// Trigger the 'change' event to ensure the initial state is applied
-const initialChangeEventNycsubway = new Event("change");
-nycsubwaySwitch.dispatchEvent(initialChangeEventNycsubway);
-
-// Initial load of nycsubway with the specified color
-// (No need to add it to viewer initially, as the switch is in the 'off' position)
-console.log("Initial load of nycsubwayDataSource");
-
-
-
-
-
-
-
-// Load mtsgas GeoJsonDataSource
-const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
-const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
-
-// Modify the polyline color and width before adding the data source
-mtsgasDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    // Change the polyline color to black
-    entity.polyline.material = Cesium.Color.BLACK;
-    
-    // Change the polyline width
-    entity.polyline.width = 3; // Adjust the width as needed
-
-  }
-});
-
-// Create a switch event listener for mtsgas
-const mtsgasSwitch = document.getElementById("mtsgasSwitch");
-mtsgasSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    viewer.dataSources.add(mtsgasDataSource);
-    console.log("mtsgasDataSource added to viewer");
-  } else {
-    viewer.dataSources.remove(mtsgasDataSource);
-    console.log("mtsgasDataSource removed from viewer");
-  }
-});
-
-// Set the initial state of the switch to 'off'
-mtsgasSwitch.checked = false;
-
-// Trigger the 'change' event to ensure the initial state is applied
-const initialChangeEvent = new Event("change");
-mtsgasSwitch.dispatchEvent(initialChangeEvent);
-
-
-
-
-// Create a switch event listener for mtsstreets
-const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
-
-// Set the switch to the off position initially
-mtsstreetsSwitch.checked = false;
-
-// Function to handle loading or unloading mtsstreetsDataSource
-const toggleMtsstreetsLayer = async () => {
-  if (mtsstreetsSwitch.checked) {
-    // Load mtsstreets GeoJsonDataSource
-    const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
-    const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
-
-    // Modify the polyline color before adding the data source
-    mtsstreetsDataSource.entities.values.forEach((entity) => {
-      if (entity.polyline) {
-        // Change the polyline color to red
-        entity.polyline.material = Cesium.Color.GREY;
+    // Apply default style to the OSM buildings tileset if available
+    const osmExtras = osmBuildingsTileset.asset.extras;
+    if (
+      Cesium.defined(osmExtras) &&
+      Cesium.defined(osmExtras.ion) &&
+      Cesium.defined(osmExtras.ion.defaultStyle)
+    ) {
+      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+        osmExtras.ion.defaultStyle
+      );
+    }
+
+    // Create a switch event listener for the OSM buildings Tileset
+    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+    // Set the switch to the off position initially
+    osmBuildingsSwitch.checked = false;
+
+    osmBuildingsSwitch.addEventListener("change", (event) => {
+      osmBuildingsTileset.show = event.target.checked;
+    });
+
+    // Hide the OSM buildings Tileset initially
+    osmBuildingsTileset.show = false;
+
+    // Set the switch to the off position initially
+    const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+    bingMapsSwitch.checked = false;
+
+    // Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+    const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+    bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+    bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+    console.log("Bing Maps layer initialized, but not added to viewer");
+
+    // Create a switch event listener for the Bing Maps layer
+    bingMapsSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        // Add the layer to the viewer when the switch is turned on
+        viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+        console.log("Bing Maps layer added to viewer");
+      } else {
+        // Remove the layer from the viewer when the switch is turned off
+        viewer.imageryLayers.remove(bingMapsLayer);
+        console.log("Bing Maps layer removed from viewer");
       }
     });
 
-    // Add the loaded mtsstreetsDataSource to the viewer
-    viewer.dataSources.add(mtsstreetsDataSource);
-    console.log("mtsstreetsDataSource added to viewer");
-  } else {
-    // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
-    viewer.dataSources.remove(mtsstreetsDataSource);
-    console.log("mtsstreetsDataSource removed from viewer");
-  }
-};
+    // Load mtscso GeoJsonDataSource
+    const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
+    const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
 
-// Add the event listener to the switch
-mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
+    // Modify the billboard color and style before adding the data source
+    mtscsoDataSource.entities.values.forEach((entity) => {
+      if (entity.billboard) {
+        // Change the billboard color to red
+        entity.billboard.color = Cesium.Color.RED;
 
+        // Change the billboard style to Circle using the createCircleImage function
+        entity.billboard.image = createCircleImage();
+      }
+    });
 
+    // Create a switch event listener for mtscso
+    const mtscsoSwitch = document.getElementById("mtscsoSwitch");
+
+    // Set the switch to the off position initially
+    mtscsoSwitch.checked = false;
+
+    mtscsoSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(mtscsoDataSource);
+        console.log("mtscsoDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(mtscsoDataSource);
+        console.log("mtscsoDataSource removed from viewer");
+      }
+    });
+
+    // Function to create a red circle image
+    function createCircleImage() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 15;
+      canvas.height = 15;
+      const context = canvas.getContext("2d");
+      context.beginPath();
+      context.arc(10, 10, 8, 0, 2 * Math.PI);
+      context.fillStyle = "red";
+      context.fill();
+      return canvas;
+    }
+
+    // Load mtsparks GeoJsonDataSource
+    const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
+    const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
+
+    // Modify the polyline/polygon color and disable the outline before adding the data source
+    mtsparksDataSource.entities.values.forEach((entity) => {
+      if (entity.polygon) {
+        // Change the polygon color to green
+        entity.polygon.material = Cesium.Color.GREEN;
+
+        // Disable the polygon outline
+        entity.polygon.outline = false;
+      }
+    });
+
+    // Create a switch event listener for mtsparks
+    const mtsparksSwitch = document.getElementById("mtsparksSwitch");
+
+    // Set the switch to the off position initially
+    mtsparksSwitch.checked = false;
+
+    mtsparksSwitch.addEventListener("change", (event) => {
+      mtsparksDataSource.entities.values.forEach((entity) => {
+        entity.show = event.target.checked;
+      });
+    });
+
+    // Initial load of mtsparks with the green color and disabled outline
+    viewer.dataSources.add(mtsparksDataSource);
+    mtsparksDataSource.entities.values.forEach((entity) => {
+      entity.show = false; // Make sure entities are hidden by default
+    });
+
+    // Load mtsrail GeoJsonDataSource
+    const mtsrailResource = await Cesium.IonResource.fromAssetId(2482267);
+    const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
+
+    // Modify the polyline color before adding the data source
+    mtsrailDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to pink
+        entity.polyline.material = Cesium.Color.RED;
+      }
+    });
+
+    // Create a switch event listener for mtsrail
+    const mtsrailSwitch = document.getElementById("mtsrailSwitch");
+
+    // Set the switch to the off position initially
+    mtsrailSwitch.checked = false;
+
+    mtsrailSwitch.addEventListener("change", (event) => {
+      mtsrailDataSource.entities.values.forEach((entity) => {
+        entity.show = event.target.checked;
+      });
+    });
+
+    // Initial load of mtsrail with the pink color
+    viewer.dataSources.add(mtsrailDataSource);
+    mtsrailDataSource.entities.values.forEach((entity) => {
+      entity.show = false; // Make sure entities are hidden by default
+    });
+
+    // Load GeoJsonDataSource with asset ID 2483827
+    const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
+    const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
+
+    // Modify the billboard color and style before adding the data source
+    busDepotsDataSource.entities.values.forEach((entity) => {
+      if (entity.billboard) {
+        // Change the billboard color to blue
+        entity.billboard.color = Cesium.Color.BLUE;
+        // Change the billboard style to your desired image
+        entity.billboard.image = createCustomImage(); // Function to create a custom image
+      }
+    });
+
+    // Create a switch event listener for the busdepots layer
+    const busDepotsSwitch = document.getElementById("busDepotsSwitch");
+
+    // Set the switch to the off position initially
+    busDepotsSwitch.checked = false;
+
+    busDepotsSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(busDepotsDataSource);
+        console.log("busDepotsDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(busDepotsDataSource);
+        console.log("busDepotsDataSource removed from viewer");
+      }
+    });
+
+    // Initial load of the busdepots layer with modified billboards
+    if (busDepotsSwitch.checked) {
+      viewer.dataSources.add(busDepotsDataSource);
+      console.log("Initial load of busDepotsDataSource");
+    }
+
+    // Function to create a custom image
+    function createCustomImage() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 20;
+      canvas.height = 20;
+      const context = canvas.getContext("2d");
+      // Customize the image as needed
+      context.fillStyle = "blue";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      return canvas;
+    }
+
+    // Load nycsubway GeoJsonDataSource
+    const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
+    const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
+
+    // Modify the polyline color before adding the data source
+    nycsubwayDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to your desired color (e.g., blue)
+        entity.polyline.material = Cesium.Color.BLUE;
+      }
+    });
+
+    // Create a switch event listener for nycsubway
+    const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
+
+    // Function to toggle the visibility of the nycsubwayDataSource
+    const toggleNycSubwayLayer = () => {
+      const isChecked = nycsubwaySwitch.checked;
+      nycsubwayDataSource.entities.values.forEach((entity) => {
+        entity.show = isChecked;
+      });
+    };
+
+    // Set the switch's initial state and add the event listener
+    nycsubwaySwitch.checked = false;
+    nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
+
+    // Trigger the 'change' event to ensure the initial state is applied
+    const initialChangeEventNycsubway = new Event("change");
+    nycsubwaySwitch.dispatchEvent(initialChangeEventNycsubway);
+
+    // Initial load of nycsubway with the specified color
+    // (No need to add it to viewer initially, as the switch is in the 'off' position)
+    console.log("Initial load of nycsubwayDataSource");
+
+    // Load mtsgas GeoJsonDataSource
+    const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
+    const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
+
+    // Modify the polyline color and width before adding the data source
+    mtsgasDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to black
+        entity.polyline.material = Cesium.Color.BLACK;
+
+        // Change the polyline width
+        entity.polyline.width = 3; // Adjust the width as needed
+      }
+    });
+
+    // Create a switch event listener for mtsgas
+    const mtsgasSwitch = document.getElementById("mtsgasSwitch");
+    mtsgasSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(mtsgasDataSource);
+        console.log("mtsgasDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(mtsgasDataSource);
+        console.log("mtsgasDataSource removed from viewer");
+      }
+    });
+
+    // Set the initial state of the switch to 'off'
+    mtsgasSwitch.checked = false;
+
+    // Trigger the 'change' event to ensure the initial state is applied
+    const initialChangeEvent = new Event("change");
+    mtsgasSwitch.dispatchEvent(initialChangeEvent);
+
+    // Create a switch event listener for mtsstreets
+    const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+
+    // Set the switch to the off position initially
+    mtsstreetsSwitch.checked = false;
+
+    // Function to handle loading or unloading mtsstreetsDataSource
+    const toggleMtsstreetsLayer = async () => {
+      if (mtsstreetsSwitch.checked) {
+        // Load mtsstreets GeoJsonDataSource
+        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
+        const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+
+        // Modify the polyline color before adding the data source
+        mtsstreetsDataSource.entities.values.forEach((entity) => {
+          if (entity.polyline) {
+            // Change the polyline color to red
+            entity.polyline.material = Cesium.Color.GREY;
+          }
+        });
+
+        // Add the loaded mtsstreetsDataSource to the viewer
+        viewer.dataSources.add(mtsstreetsDataSource);
+        console.log("mtsstreetsDataSource added to viewer");
+      } else {
+        // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
+        viewer.dataSources.remove(mtsstreetsDataSource);
+        console.log("mtsstreetsDataSource removed from viewer");
+      }
+    };
+
+    // Add the event listener to the switch
+    mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
+  });
 
 };
 
 // Call the initializeCesium function
 initializeCesium();
-
 
 
   /*
