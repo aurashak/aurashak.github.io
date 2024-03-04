@@ -579,6 +579,7 @@ function calculateProximityAndCount() {
         style: function (feature) {
             // Default style for all census tracts
             return {
+                fillColor: 'transparent', // Set the default fill color to transparent
                 color: 'black',
                 weight: 0.5,
                 opacity: 0.7,
@@ -631,6 +632,7 @@ function calculateProximityAndCount() {
 
 // Call the function to calculate proximity and count
 calculateProximityAndCount();
+
 
 
 
