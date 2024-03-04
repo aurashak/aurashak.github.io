@@ -643,6 +643,11 @@ function toggleGeoJSONLayer() {
     }
 }
 
+function calculateProximityAndCount() {
+    // Your implementation goes here
+    console.log('calculateProximityAndCount function executed');
+}
+
 // Call the function to calculate proximity and count
 calculateProximityAndCount();
 
