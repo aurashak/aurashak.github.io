@@ -571,34 +571,30 @@ populationCheckbox.addEventListener('change', function () {
 });
 
 
-// Load the ctpop2020.geojson layer initially as a hidden layer
+
+
+
+
+// Load the ctpop2020.geojson layer initially with transparent style
 var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
-    style: function (feature) {
-        // Default style for all census tracts
-        return {
-            fillColor: 'transparent',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        };
+    style: {
+        fillColor: 'transparent',
+        color: 'black',
+        weight: 0.5,
+        opacity: 0.7,
+        fillOpacity: 0.7
     },
     onEachFeature: function (feature, layer) {
         // You can add any additional actions or pop-up content here if needed
         layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
-    },
-    // Set the initial visibility of the layer to false
-    onAdd: function(map) {
-        map.addLayer(this);
-        this.hide();
-    },
+    }
 }).addTo(map);
 
 // Create an array to store the counts for each census tract
 var counts = [];
 
 // Event listener for the "Show Max Count Census Tract in Red" switch
-document.getElementById('maxCountCensusTract').addEventListener('change', function() {
+document.getElementById('maxCountCensusTract').addEventListener('change', function () {
     if (document.getElementById('maxCountCensusTract').checked) {
         // If the switch is on, find the census tract with the maximum count
         var maxCountCensusTract = counts.reduce((max, ct) => (ct.Count > max.Count) ? ct : max, counts[0]);
@@ -608,7 +604,7 @@ document.getElementById('maxCountCensusTract').addEventListener('change', functi
             console.log("Maximum Count:", maxCountCensusTract.Count);
 
             // Set the fill color of the census tract with the highest count to red
-            ctpopLayer.eachLayer(function(layer) {
+            ctpopLayer.eachLayer(function (layer) {
                 layer.setStyle({
                     fillColor: (layer.feature.properties.TRACTCE10 === maxCountCensusTract.CensusTract) ? 'red' : 'transparent',
                     color: 'black',
@@ -622,7 +618,7 @@ document.getElementById('maxCountCensusTract').addEventListener('change', functi
         }
     } else {
         // If the switch is off, reset styles
-        ctpopLayer.eachLayer(function(layer) {
+        ctpopLayer.eachLayer(function (layer) {
             layer.setStyle({
                 fillColor: 'transparent',
                 color: 'black',
@@ -643,13 +639,13 @@ function toggleGeoJSONLayer() {
     }
 }
 
-function calculateProximityAndCount() {
-    // Your implementation goes here
-    console.log('calculateProximityAndCount function executed');
-}
+// Initial hide
+toggleGeoJSONLayer();
 
-// Call the function to calculate proximity and count
-calculateProximityAndCount();
+
+
+
+
 
 
 
