@@ -293,39 +293,38 @@ bingMapsSwitch.addEventListener("change", (event) => {
     }
 
     // Load nycsubway GeoJsonDataSource
-    const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
-    const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
+const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
+const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
 
-    // Modify the polyline color before adding the data source
-    nycsubwayDataSource.entities.values.forEach((entity) => {
-      if (entity.polyline) {
+// Modify the polyline color before adding the data source
+nycsubwayDataSource.entities.values.forEach((entity) => {
+    if (entity.polyline) {
         // Change the polyline color to your desired color (e.g., blue)
         entity.polyline.material = Cesium.Color.BLUE;
-      }
-    });
+    }
+});
 
-    // Create a switch event listener for nycsubway
-    const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
+// Create a switch event listener for nycsubway
+const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
 
-    // Function to toggle the visibility of the nycsubwayDataSource
-    const toggleNycSubwayLayer = () => {
-      const isChecked = nycsubwaySwitch.checked;
-      nycsubwayDataSource.entities.values.forEach((entity) => {
+// Function to toggle the visibility of the nycsubwayDataSource
+const toggleNycSubwayLayer = () => {
+    const isChecked = nycsubwaySwitch.checked;
+    nycsubwayDataSource.entities.values.forEach((entity) => {
         entity.show = isChecked;
-      });
-    };
+    });
+};
 
-    // Set the switch's initial state and add the event listener
-    nycsubwaySwitch.checked = false;
-    nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
+// Add an event listener to the switch
+nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
 
-    // Trigger the 'change' event to ensure the initial state is applied
-    const initialChangeEventNycsubway = new Event("change");
-    nycsubwaySwitch.dispatchEvent(initialChangeEventNycsubway);
+// Set the switch's initial state
+nycsubwaySwitch.checked = false;
 
-    // Initial load of nycsubway with the specified color
-    // (No need to add it to viewer initially, as the switch is in the 'off' position)
-    console.log("Initial load of nycsubwayDataSource");
+// Initial load of nycsubway with the specified color
+// (No need to add it to viewer initially, as the switch is in the 'off' position)
+console.log("Initial load of nycsubwayDataSource");
+
 
     // Load mtsgas GeoJsonDataSource
     const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
