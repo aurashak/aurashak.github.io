@@ -570,7 +570,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Load the ctpop2020.geojson layer
 var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
@@ -621,24 +620,26 @@ function calculateProximityAndCount() {
     // Find the census tract with the maximum count
     var maxCountCensusTract = counts.reduce((max, ct) => (ct.Count > max.Count) ? ct : max, counts[0]);
 
-    console.log("Census Tract with Maximum Count:", maxCountCensusTract.CensusTract);
-    console.log("Maximum Count:", maxCountCensusTract.Count);
+    if (maxCountCensusTract) {
+        console.log("Census Tract with Maximum Count:", maxCountCensusTract.CensusTract);
+        console.log("Maximum Count:", maxCountCensusTract.Count);
 
-    // Set the fill color of the census tract with the highest count to red
-    var maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
-    maxCountCensusTractLayer.setStyle({
-        fillColor: 'red',
-        color: 'black',
-        weight: 0.5,
-        opacity: 0.7,
-        fillOpacity: 0.7
-    });
+        // Set the fill color of the census tract with the highest count to red
+        var maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
+        maxCountCensusTractLayer.setStyle({
+            fillColor: 'red',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        });
+    } else {
+        console.log("No census tract with valid data found.");
+    }
 }
 
 // Call the function to calculate proximity and count
 calculateProximityAndCount();
-
-
 
 
 
