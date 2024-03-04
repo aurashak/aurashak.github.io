@@ -743,9 +743,11 @@ border: 1px solid black;
 
 /* Button Style */
 #flyToNewYorkCity {
-  padding: 5px;
+  padding: 10px 5px;
   margin: 5px 2px;
   border-radius: 8px;
+  width: 100%;
+  text-align: left;
   border: solid .3px rgb(18, 18, 18);
   background-color: #f3f3f3;
     font-size: 15px;
