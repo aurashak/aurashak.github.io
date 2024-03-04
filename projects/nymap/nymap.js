@@ -466,14 +466,15 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         var income = feature.properties.MHI;
         var category = getIncomeCategory(income);
 
-// Define colors for each category (reversed)
-var categoryColors = {
-    '150000-250000': 'rgba(220,220,220,0.5)', // Gainsboro
-    '90000-150000': 'rgba(211,211,211,0.5)', // Light Gray
-    '60000-90000': 'rgba(192,192,192,0.5)', // Silver
-    '30000-60000': 'rgba(128,128,128,0.5)', // Gray
-    '0-30000': 'rgba(169,169,169,0.5)'  // Dark Gray
-};
+    // Define colors for each category
+    var categoryColors = {
+        '0-30000': '#fee08b',
+        '30000-60000': '#fdae61',
+        '60000-90000': '#d73027',
+        '90000-150000': '#4575b4',
+        '150000-250000': '#313695'
+    };
+
 
 
         return {
@@ -501,6 +502,9 @@ avgIncomeCheckbox.addEventListener('change', function () {
         map.removeLayer(avgIncomeLayer);
     }
 });
+
+
+
 
 
 // Function to get population category based on population value
