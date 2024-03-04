@@ -535,12 +535,12 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
 
  // Define colors for each category as a gradient with transparency
 var categoryColors = {
-    '0-1000': '#ffffff', // White
-    '1000-3000': '#b7b7b7', // Light Gray
-    '3000-6000': '#c0c0c0', // Dark Gray
-    '6000-10000': '#808080', // Gray
-    '10000-14000': '#4575b4', // Dim Gray
-    '14000-17000': '#2b2b2b', // Dark Slate Gray
+    '0-1000': '#4575b4', // White
+    '1000-3000': '#e3e2e1', // Light Gray
+    '3000-6000': '#b8b8b8', // Dark Gray
+    '6000-10000': '#919190', // Gray
+    '10000-14000': '#5c5c5c', // Dim Gray
+    '14000-17000': '#2e2e2e', // Dark Slate Gray
     '17000+': '#000' // Black
     
 };
@@ -1013,15 +1013,14 @@ setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#
 
 // Legend for Population Layer (white to dark gray colors)
 setLegendSymbol('population', {
-    '0-1000': '#ffffff',  
-    '1000-3000': '#b7b7b7', // Light Gray
-    '3000-6000': '#c0c0c0', // Dark Gray
-    '6000-10000': '#808080', // Gray
-    '10000-14000': '#4575b4', // Dim Gray
-    '14000-17000': '#2b2b2b', // Less than Black
+    '0-1000': '#4575b4',  
+    '1000-3000': '#e3e2e1', // 
+    '3000-6000': '#b8b8b8', // 
+    '6000-10000': '#919190', // 
+    '10000-14000': '#5c5c5c', //
+    '14000-17000': '#2e2e2e', // 
     '17000+': '#000'  // Black
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
-
 
 
 
