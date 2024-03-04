@@ -566,16 +566,12 @@ populationCheckbox.addEventListener('change', function () {
 });
 
 
-
-
 // Load the ctpop2020.geojson layer
 var ctpopLayer;
+var maxCountCensusTractLayer; // Declare the variable here
 
 // Create an array to store the counts for each census tract
 var counts = [];
-
-// Variable to store the maxCountCensusTractLayer
-var maxCountCensusTractLayer;
 
 // Function to calculate proximity and count for each census tract
 function calculateProximityAndCount() {
@@ -628,21 +624,14 @@ function calculateProximityAndCount() {
 
         // Set the fill color of the census tract with the highest count to red
         maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
-        maxCountCensusTractLayer.setStyle({
-            fillColor: 'red',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        });
     } else {
         console.log("No census tract with valid data found.");
     }
 
     // Event listener for the "Show Max Count Census Tract in Red" switch
     document.getElementById('maxCountCensusTract').addEventListener('change', function() {
-        if (document.getElementById('maxCountCensusTract').checked) {
-            // If the switch is on, show the census tract with the maximum count in red
+        if (document.getElementById('maxCountCensusTract').checked && maxCountCensusTractLayer) {
+            // If the switch is on and the layer is available, show the census tract with the maximum count in red
             maxCountCensusTractLayer.setStyle({
                 fillColor: 'red',
                 color: 'black',
@@ -651,7 +640,7 @@ function calculateProximityAndCount() {
                 fillOpacity: 0.7
             });
         } else {
-            // If the switch is off, hide the layer
+            // If the switch is off or the layer is not available, hide the layer
             map.removeLayer(ctpopLayer);
         }
     });
