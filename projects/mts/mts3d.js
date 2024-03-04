@@ -36,6 +36,10 @@ const initializeCesium = async () => {
       },
     });
 
+    // Add a click event listener to the flyback button
+const flybackButton = document.getElementById('flybackButton');
+flybackButton.addEventListener('click', flyToNewYorkCity);
+
     // minimum and maximum zoom limits
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
@@ -102,7 +106,7 @@ const initializeCesium = async () => {
 
     
     
-    
+   
 // Set the switch to the off position initially
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
 bingMapsSwitch.checked = false;
@@ -127,6 +131,7 @@ bingMapsSwitch.addEventListener("change", (event) => {
   }
 });
 
+    
 
 
 
