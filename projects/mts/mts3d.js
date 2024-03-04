@@ -27,7 +27,7 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
     destination: Cesium.Cartesian3.fromDegrees(
       -73.9625,
       40.8217,
-      200 // Adjust the zoom level as needed
+      400 // Adjust the zoom level as needed
     ),
     orientation: {
       heading: Cesium.Math.toRadians(65), // clockwise from north
