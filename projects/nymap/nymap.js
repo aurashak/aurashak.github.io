@@ -997,22 +997,6 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-// Toggle Transportation Layer Group
-document.getElementById('transportationLayerGroup').addEventListener('click', function() {
-    if (map.hasLayer(transportationLayerGroup)) {
-        map.removeLayer(transportationLayerGroup);
-        // If the group toggle is turned off, turn off individual layers as well
-        map.removeLayer(nycbusdepotsLayer);
-        // Reset the individual layer toggle button to off state
-        document.getElementById('nycbusdepots').checked = false;
-    } else {
-        map.addLayer(transportationLayerGroup);
-        // If the group toggle is turned on, turn on individual layers if it was previously checked
-        if (document.getElementById('nycbusdepots').checked) {
-            map.addLayer(nycbusdepotsLayer);
-        }
-    }
-});
 
 
 
