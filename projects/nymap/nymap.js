@@ -895,31 +895,35 @@ document.getElementById('nycbusdepots').addEventListener('change', function() {
 });
 
 
-// Event listener for the nycbusdepots layer toggle
+// Event listener for the nycsubway layer toggle
 document.getElementById('nycsubway').addEventListener('change', function() {
+    // Check if the layer is currently on the map
     if (map.hasLayer(nycsubwayLayer)) {
-        // If the layer is already on, do nothing when switching left to right
-        if (document.getElementById('nycsubway').checked) {
-            return;
+        // If the layer is on, remove it when switching left to right
+        if (!document.getElementById('nycsubway').checked) {
+            map.removeLayer(nycsubwayLayer);
         }
-        map.removeLayer(nycsubwayLayer);
     } else {
-        map.addLayer(nycsubwayLayer);
+        // If the layer is off, add it when switching right to left
+        if (document.getElementById('nycsubway').checked) {
+            map.addLayer(nycsubwayLayer);
+        }
     }
 });
 
-
-
-// Event listener for the nycbusdepots layer toggle
+// Event listener for the nyrail layer toggle
 document.getElementById('nyrail').addEventListener('change', function() {
-    if (map.hasLayer(nycbusdepotsLayer)) {
-        // If the layer is already on, do nothing when switching left to right
-        if (document.getElementById('nyrail').checked) {
-            return;
+    // Check if the layer is currently on the map
+    if (map.hasLayer(nyrailLayer)) {
+        // If the layer is on, remove it when switching left to right
+        if (!document.getElementById('nyrail').checked) {
+            map.removeLayer(nyrailLayer);
         }
-        map.removeLayer(nyrailLayer);
     } else {
-        map.addLayer(nyrailLayer);
+        // If the layer is off, add it when switching right to left
+        if (document.getElementById('nyrail').checked) {
+            map.addLayer(nyrailLayer);
+        }
     }
 });
 
