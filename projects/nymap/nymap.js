@@ -946,16 +946,6 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Your Leaflet map and search control setup code here
-
-    // Create the map
-    var map = L.map('map', {
-        // Your map configuration options
-    });
-
-    // ... (Your existing map configuration code)
-
     // Create a custom control container and add it to the map
     var customControlContainer = L.DomUtil.create('div', 'custom-control-container');
     document.getElementById('search-container').appendChild(customControlContainer);
@@ -971,7 +961,7 @@ document.addEventListener('DOMContentLoaded', function() {
     map.addControl(new L.Control({ position: 'topleft' }).onAdd = function () {
         return customControlContainer;
     });
-});
+
 
 
 
