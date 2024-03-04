@@ -113,9 +113,10 @@ bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
 bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
 console.log("Bing Maps layer initialized, but not added to viewer");
 
-// Function to handle adding or removing Bing Maps layer based on the switch state
-const handleBingMapsLayer = () => {
-  if (bingMapsSwitch.checked) {
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
     // Add the layer to the viewer when the switch is turned on
     viewer.imageryLayers.addImageryProvider(bingMapsLayer);
     console.log("Bing Maps layer added to viewer");
@@ -124,14 +125,7 @@ const handleBingMapsLayer = () => {
     viewer.imageryLayers.remove(bingMapsLayer);
     console.log("Bing Maps layer removed from viewer");
   }
-};
-
-// Create a switch event listener for the Bing Maps layer
-bingMapsSwitch.addEventListener("change", handleBingMapsLayer);
-
-// Trigger the event listener initially to ensure the initial state is applied
-handleBingMapsLayer();
-
+});
 
 
 
