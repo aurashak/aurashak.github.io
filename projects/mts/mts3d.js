@@ -109,16 +109,16 @@ bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
 bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
 console.log("Bing Maps layer added to viewer");
 
-// Create a switch event listener for the Bing Maps layer
+// Set the switch to the off position initially
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Create a switch event listener for the Bing Maps layer
 bingMapsSwitch.addEventListener("change", (event) => {
   bingMapsLayer.show = event.target.checked;
   const status = event.target.checked ? "shown" : "hidden";
   console.log(`Bing Maps Layer ${status}`);
 });
-
-// Set the switch to the off position initially
-bingMapsSwitch.checked = false;
 
 
 
