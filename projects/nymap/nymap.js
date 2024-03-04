@@ -502,7 +502,6 @@ avgIncomeCheckbox.addEventListener('change', function () {
 });
 
 
-
 // Function to get population category based on population value
 function getPopulationCategory(population) {
     if (population <= 1000) {
@@ -526,18 +525,18 @@ function getPopulationCategory(population) {
 var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on population level
-        var population = feature.properties.POPULATION;
+        var population = feature.properties.population; // Update to lowercase 'population'
         var category = getPopulationCategory(population);
 
-        // Define colors for each category
+        // Define colors for each category as a gradient of purple with transparency
         var categoryColors = {
-            '0-1000': '#fee08b',
-            '1000-3000': '#fdae61',
-            '3000-6000': '#d73027',
-            '6000-10000': '#4575b4',
-            '10000-15000': '#313695',
-            '15000-18000': '#a50026',
-            '18000+': '#800026'
+            '0-1000': 'rgba(128,0,128,0.5)',
+            '1000-3000': 'rgba(148,0,211,0.5)',
+            '3000-6000': 'rgba(186,85,211,0.5)',
+            '6000-10000': 'rgba(221,160,221,0.5)',
+            '10000-15000': 'rgba(238,130,238,0.5)',
+            '15000-18000': 'rgba(255,182,193,0.5)',
+            '18000+': 'rgba(255,192,203,0.5)'
         };
 
         return {
@@ -550,7 +549,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
     },
     onEachFeature: function (feature, layer) {
         // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.POPULATION);
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population); // Update to lowercase 'population'
     }
 });
 
@@ -564,6 +563,7 @@ populationCheckbox.addEventListener('change', function () {
         map.removeLayer(populationLayer);
     }
 });
+
 
 
 
@@ -918,14 +918,15 @@ setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#
 
 // Legend for Population Layer
 setLegendSymbol('population', {
-    '0-1000': '#fee08b',
-    '1000-3000': '#fdae61',
-    '3000-6000': '#d73027',
-    '6000-10000': '#4575b4',
-    '10000-15000': '#313695',
-    '15000-18000': '#a50026',
-    '18000+': '#800026'
+    '0-1000': 'rgba(128,0,128,0.5)',
+    '1000-3000': 'rgba(148,0,211,0.5)',
+    '3000-6000': 'rgba(186,85,211,0.5)',
+    '6000-10000': 'rgba(221,160,221,0.5)',
+    '10000-15000': 'rgba(238,130,238,0.5)',
+    '15000-18000': 'rgba(255,182,193,0.5)',
+    '18000+': 'rgba(255,192,203,0.5)'
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
+
 
 // Set legend symbols for Cultural Institutions Layer
 setLegendSymbol('culturalins', {
