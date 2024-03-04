@@ -1186,7 +1186,8 @@ setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('censusTractLayer', 'green', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
-setLegendSymbol('nycejsites', {'EJ Area': 'red', 'Not EJ Area': 'green', 'Potential EJ Area': '#blue'}, 'polygon', { layout: 'vertical' });
+setLegendSymbol('nycejsites', {'EJ Area': 'rgba(255, 0, 0, 0.7)', 'Not EJ Area': 'rgba(0, 255, 0, 0.7)', 'Potential EJ Area': 'rgba(0, 0, 255, 0.7)'}, 'polygon', { layout: 'vertical' });
+
 
 // Legend for Population Layer (white to dark gray colors)
 setLegendSymbol('population', {
