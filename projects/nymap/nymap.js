@@ -569,28 +569,32 @@ populationCheckbox.addEventListener('change', function () {
 
 
 // Load the ctpop2020.geojson layer
-var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
-    style: function (feature) {
-        // Default style for all census tracts
-        return {
-            fillColor: 'purple',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
-    }
-}).addTo(map);
+var ctpopLayer;
 
 // Create an array to store the counts for each census tract
 var counts = [];
 
+// Variable to store the maxCountCensusTractLayer
+var maxCountCensusTractLayer;
+
 // Function to calculate proximity and count for each census tract
 function calculateProximityAndCount() {
+    ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
+        style: function (feature) {
+            // Default style for all census tracts
+            return {
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            // You can add any additional actions or pop-up content here if needed
+            layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
+        }
+    }).addTo(map);
+
     ctpopLayer.eachLayer(function (ctLayer) {
         var ctGeometry = ctLayer.toGeoJSON().geometry;
         var count = 0;
@@ -623,7 +627,7 @@ function calculateProximityAndCount() {
         console.log("Maximum Count:", maxCountCensusTract.Count);
 
         // Set the fill color of the census tract with the highest count to red
-        var maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
+        maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
         maxCountCensusTractLayer.setStyle({
             fillColor: 'red',
             color: 'black',
@@ -634,33 +638,30 @@ function calculateProximityAndCount() {
     } else {
         console.log("No census tract with valid data found.");
     }
+
+    // Event listener for the "Show Max Count Census Tract in Red" switch
+    document.getElementById('maxCountCensusTract').addEventListener('change', function() {
+        if (document.getElementById('maxCountCensusTract').checked) {
+            // If the switch is on, show the census tract with the maximum count in red
+            maxCountCensusTractLayer.setStyle({
+                fillColor: 'red',
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.7
+            });
+        } else {
+            // If the switch is off, hide the layer
+            map.removeLayer(ctpopLayer);
+        }
+    });
+
+    setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 }
 
 // Call the function to calculate proximity and count
 calculateProximityAndCount();
 
-// Event listener for the "Show Max Count Census Tract in Red" switch
-document.getElementById('maxCountCensusTract').addEventListener('change', function() {
-    if (document.getElementById('maxCountCensusTract').checked) {
-        // If the switch is on, show the census tract with the maximum count in red
-        maxCountCensusTractLayer.setStyle({
-            fillColor: 'red',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        });
-    } else {
-        // If the switch is off, reset the style to the default
-        maxCountCensusTractLayer.setStyle({
-            fillColor: 'purple',
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        });
-    }
-});
 
 
 
