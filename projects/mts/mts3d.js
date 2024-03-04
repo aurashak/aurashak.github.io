@@ -25,7 +25,7 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
   // Fly to New York City initially
   viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
-      -73.9656,
+      -73.9752,
       40.8217,
       400 // Adjust the zoom level as needed
     ),
@@ -41,9 +41,9 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9625,
+        -73.9752,
         40.8217,
-        200 // Adjust the zoom level as needed
+        400 // Adjust the zoom level as needed
       ),
       orientation: {
         heading: Cesium.Math.toRadians(65), // clockwise from north
