@@ -503,6 +503,71 @@ avgIncomeCheckbox.addEventListener('change', function () {
 
 
 
+// Function to get population category based on population value
+function getPopulationCategory(population) {
+    if (population <= 1000) {
+        return '0-1000';
+    } else if (population <= 3000) {
+        return '1000-3000';
+    } else if (population <= 6000) {
+        return '3000-6000';
+    } else if (population <= 10000) {
+        return '6000-10000';
+    } else if (population <= 15000) {
+        return '10000-15000';
+    } else if (population <= 18000) {
+        return '15000-18000';
+    } else {
+        return '18000+';
+    }
+}
+
+// NYC Population Layer
+var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
+    style: function (feature) {
+        // Adjust styling based on population level
+        var population = feature.properties.POPULATION;
+        var category = getPopulationCategory(population);
+
+        // Define colors for each category
+        var categoryColors = {
+            '0-1000': '#fee08b',
+            '1000-3000': '#fdae61',
+            '3000-6000': '#d73027',
+            '6000-10000': '#4575b4',
+            '10000-15000': '#313695',
+            '15000-18000': '#a50026',
+            '18000+': '#800026'
+        };
+
+        return {
+            fillColor: categoryColors[category],
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.POPULATION);
+    }
+});
+
+var populationCheckbox = document.getElementById('populationLayer');
+
+// Add an event listener to the population checkbox
+populationCheckbox.addEventListener('change', function () {
+    if (populationCheckbox.checked) {
+        map.addLayer(populationLayer);
+    } else {
+        map.removeLayer(populationLayer);
+    }
+});
+
+
+
+
 
 
 document.getElementById('nycso').addEventListener('change', function() {
@@ -853,6 +918,16 @@ setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
+
+
+// Call the function with the provided parameters
+setLegendSymbol('avgIncome', {
+    '$0 - $30,000': '#fee08b',
+    '$30,000 - $60,000': '#fdae61',
+    '$60,000 - $90,000': '#d73027',
+    '$90,000 - $150,000': '#4575b4',
+    '$150,000 - $250,000': '#313695'
+}, 'polygon', { layout: 'vertical' });
 
 // Set legend symbols for Cultural Institutions Layer
 setLegendSymbol('culturalins', {
