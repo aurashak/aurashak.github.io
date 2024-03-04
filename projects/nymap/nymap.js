@@ -372,9 +372,48 @@ var nycbusdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/n
 // Subway Layer
 var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycsubway.geojson', {
     style: function (feature) {
-        var size = calculateMarkerSize(map.getZoom());
+        var subwayLineName = feature.properties.name;
+
+        // Define colors for each subway line
+        var subwayLineColors = {
+            '1': 'red',
+            '1-2-3': 'red',
+            '2': 'red',
+            '3': 'red',
+            'A': 'blue',
+            'B': 'orange',
+            'C': 'blue',
+            'D': 'orange',
+            'Q': 'yellow',
+            'R': 'yellow',
+            '4': 'green',
+            '5': 'green',
+            '6': 'green',
+            '4-5-6': 'green',
+            '7': 'purple',
+            'A-C': 'blue',
+            'A-C-E': 'blue',
+            'B-D': 'orange',
+            'B-D-F-M': 'orange',
+            'F': 'orange',
+            'E': 'blue',
+            'F-M': 'orange',
+            'G': 'lime',
+            'J-Z': 'brown',
+            'L': 'gray',
+            'M': 'orange',
+            'N': 'yellow',
+            'N-Q-R': 'yellow',
+            'N-R': 'yellow',
+            'N-Q': 'yellow',
+            'N-R-W': 'yellow',
+            'N-W': 'yellow',
+            'R-W': 'yellow',
+            'S': 'gray'
+        };
+
         return {
-            color: 'blue',
+            color: subwayLineColors[subwayLineName] || 'gray', // Default color if not in the mapping
             weight: 3,
             opacity: 0.6
         };
