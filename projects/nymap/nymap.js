@@ -609,13 +609,20 @@ function calculateProximityAndCount() {
 
                 // Set the fill color of the census tract with the highest count to red
                 maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
-                maxCountCensusTractLayer.setStyle({
-                    fillColor: 'red',
-                    color: 'black',
-                    weight: 0.5,
-                    opacity: 0.7,
-                    fillOpacity: 0.7
-                });
+
+                if (maxCountCensusTractLayer) {
+                    console.log("Max Count Census Tract Layer:", maxCountCensusTractLayer);
+                    
+                    maxCountCensusTractLayer.setStyle({
+                        fillColor: 'red',
+                        color: 'black',
+                        weight: 0.5,
+                        opacity: 0.7,
+                        fillOpacity: 0.7
+                    });
+                } else {
+                    console.log("Error: Max Count Census Tract Layer not found.");
+                }
             } else {
                 console.log("No census tract with valid data found.");
             }
@@ -632,6 +639,7 @@ function calculateProximityAndCount() {
 
 // Call the function to calculate proximity and count
 calculateProximityAndCount();
+
 
 
 
