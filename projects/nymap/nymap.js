@@ -332,7 +332,17 @@ var busdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycb
             fillOpacity: 0.8
         });
     }
-}).addTo(transportationLayerGroup);
+});
+
+// Add the busdepotsLayer to the transportationLayerGroup
+busdepotsLayer.addTo(transportationLayerGroup);
+
+// Set the initial state of the bus depots layer
+map.addLayer(transportationLayerGroup);
+
+// Set the initial state of the transportation layer group
+document.getElementById('transportationLayerGroup').checked = true;
+
 
 
 
