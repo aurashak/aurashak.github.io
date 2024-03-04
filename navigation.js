@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="navigation" id="projectsLink">Projects</div>
         <div class="hidden-projects" id="projectsList">
             <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
-            <a href="https://aurashak.github.io/projects/mts/mts.html">WH 3d Model</a>
+            <a href="https://aurashak.github.io/projects/mts/mts.html">WH 3D Model</a>
 
             <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
             <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
