@@ -573,99 +573,73 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-// Load the ctpop2020.geojson layer initially with transparent style
-var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
-    style: {
-        fillColor: 'transparent',
-        color: 'black',
-        weight: 0.5,
-        opacity: 0.7,
-        fillOpacity: 0.7
-    },
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
-    }
-}).addTo(map);
 
-// NYC CSO Layer
-var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'brown',
-            color: 'black',
-            weight: 0,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    }
-}).addTo(map);
 
-// Function to find the closest census tract to the NYC CSO
-function findClosestCensusTract() {
-    var closestCensusTract = null;
-    var minDistance = Infinity;
 
-    ctpopLayer.eachLayer(function (censusTractLayer) {
-        var distance = censusTractLayer.getBounds().getCenter().distanceTo(nycsoLayer.getBounds().getCenter());
+// Census Tract Layer
+var ctpop2020Layer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson').addTo(map);
 
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestCensusTract = censusTractLayer;
-        }
-    });
+// Object to store counts for each census tract
+var censusTractCounts = {};
 
-    return closestCensusTract;
-}
+// Checkbox for Census Tract Layer
+var censusTractCheckbox = document.getElementById('censusTractLayer');
 
-// Event listener for the "Show Closest Census Tract to NYC CSO" switch
-document.getElementById('showClosestCensusTract').addEventListener('change', function () {
-    if (this.checked) {
-        var closestCensusTract = findClosestCensusTract();
-
-        if (closestCensusTract) {
-            // Highlight the closest census tract
-            closestCensusTract.setStyle({
-                fillColor: 'red',
-                color: 'black',
-                weight: 1.5,
-                opacity: 1,
-                fillOpacity: 0.7
-            });
-        } else {
-            console.log("No census tract found.");
-        }
+// Add an event listener to the Census Tract layer checkbox
+censusTractCheckbox.addEventListener('change', function () {
+    if (censusTractCheckbox.checked) {
+        map.addLayer(ctpop2020Layer);
     } else {
-        // If the switch is off, reset styles
-        ctpopLayer.eachLayer(function (layer) {
-            layer.setStyle({
-                fillColor: 'transparent',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            });
-        });
+        map.removeLayer(ctpop2020Layer);
     }
 });
 
-// Function to show/hide the GeoJSON layer
-function toggleGeoJSONLayer() {
-    if (map.hasLayer(ctpopLayer)) {
-        map.removeLayer(ctpopLayer);
-    } else {
-        map.addLayer(ctpopLayer);
+// Event listener for when the CSO layer is loaded
+nycsoLayer.on('data:loaded', function () {
+    // Iterate over CSO layer features
+    nycsoLayer.eachLayer(function (layer) {
+        // Get the census tract ID from CSO layer properties
+        var censusTractID = layer.feature.properties.census_tract;
+
+        // Initialize count if not already present
+        censusTractCounts[censusTractID] = censusTractCounts[censusTractID] || 0;
+
+        // Increment count for the census tract
+        censusTractCounts[censusTractID]++;
+    });
+
+    // Find the census tract with the highest count
+    var maxCount = 0;
+    var maxCensusTractID;
+
+    for (var tractID in censusTractCounts) {
+        if (censusTractCounts.hasOwnProperty(tractID) && censusTractCounts[tractID] > maxCount) {
+            maxCount = censusTractCounts[tractID];
+            maxCensusTractID = tractID;
+        }
     }
-}
 
-// Initial hide
-toggleGeoJSONLayer();
-
-
-
-
-
+    // Highlight the census tract with the highest count
+    ctpop2020Layer.eachLayer(function (layer) {
+        if (layer.feature.properties.census_tract === maxCensusTractID) {
+            switch (maxCount) {
+                case 1:
+                    // Add styling or actions for maxCount = 1
+                    layer.setStyle({ fillColor: 'red' });
+                    break;
+                case 2:
+                    // Add styling or actions for maxCount = 2
+                    layer.setStyle({ fillColor: 'blue' });
+                    break;
+                // Add more cases as needed
+                default:
+                    // Default styling or actions
+                    layer.setStyle({ fillColor: 'green' });
+            }
+            console.log('Census Tract with the highest CSO count:', maxCensusTractID);
+        }
+    });
+});
 
 
 
@@ -1027,6 +1001,7 @@ setLegendSymbol('majoroilstorage', 'black', 'circle');
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
+setLegendSymbol('censusTractCheckbox', 'green', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
 // Legend for Population Layer (white to dark gray colors)
