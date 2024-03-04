@@ -863,10 +863,8 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
     }
 });
 
-
-
 // Function to set legend symbols with support for multiple shapes and colors
-function setLegendSymbol(layerId, colors, shape) {
+function setLegendSymbol(layerId, colors, shape, options) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
     
     if (legendSymbol) {
@@ -916,10 +914,9 @@ setLegendSymbol('majoroilstorage', 'black', 'circle');
 setLegendSymbol('inactivesolidwastelandfill', 'grey', 'circle');
 setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
-setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical'});
+setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
-
-/ Legend for Population Layer
+// Legend for Population Layer
 setLegendSymbol('Population', {
     '0-1000': '#fee08b',
     '1000-3000': '#fdae61',
@@ -948,6 +945,3 @@ setLegendSymbol('culturalins', {
     'Botanical': 'navy',
     'Architecture/Design': 'gray'
 }, 'circle');
-
-
-
