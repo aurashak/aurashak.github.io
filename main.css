@@ -732,32 +732,66 @@ border: 1px solid black;
 
 
 
+
+
+/* Styles for the search control container */
 #search-container {
-  top: 10px;
-  left: 10px;
+  
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the input field within the search control container */
+#search-container .leaflet-control-geocoder-form input[type="text"] {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Styles for the search button within the search control container */
+#search-container .leaflet-control-geocoder-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for the search button within the search control container */
+#search-container .leaflet-control-geocoder-form button:hover {
+  background-color: #45a049;
+}
+
+/* Styles for the search results container within the search control container */
+#search-container .leaflet-control-geocoder-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for individual search results within the search control container */
+#search-container .leaflet-control-geocoder-results li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* Hover effect for individual search results within the search control container */
+#search-container .leaflet-control-geocoder-results li:hover {
+  background-color: #f0f0f0;
 }
 
 
-.switch-container {
-  display: flex;
-  flex-direction: column;
-}
 
 
-#scene-container {
-  position: relative;
-  width: 700px;
-  height: 500px; /* Adjust the height as needed */
-  border: 1px solid black; /* Add a border for visibility */
-  margin: 0 auto;
-}
 
-#scene-container canvas {
-  width: 100% !important;
-  height: 500px !important; /* Adjust the height as needed */
-  border: 1px solid black !important; /* Add a border for visibility */
-  /* Add any additional styles you want to override here */
-}
 
 
 #cesiumContainer {
