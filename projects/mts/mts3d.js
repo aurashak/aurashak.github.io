@@ -25,7 +25,7 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
   // Fly to New York City initially
   viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
-      -73.9625,
+      -73.9656,
       40.8217,
       400 // Adjust the zoom level as needed
     ),
