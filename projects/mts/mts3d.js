@@ -101,8 +101,6 @@ const initializeCesium = async () => {
 
 
 
-
-
 // Load Cesium Bing Maps layer
 const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
   await Cesium.IonImageryProvider.fromAssetId(4)
@@ -118,6 +116,10 @@ bingMapsSwitch.addEventListener("change", (event) => {
   const status = event.target.checked ? "shown" : "hidden";
   console.log(`Bing Maps Layer ${status}`);
 });
+
+// Set the switch to the off position initially
+bingMapsSwitch.checked = false;
+
 
 
 
