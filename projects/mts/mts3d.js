@@ -18,11 +18,27 @@ const initializeCesium = async () => {
     animation: false,
   });
 
-  // Wait for the viewer to be ready
-  viewer.scene.postRender.addEventListener(async function onPostRender() {
-    viewer.scene.postRender.removeEventListener(onPostRender);
+// Wait for the viewer to be ready
+viewer.scene.postRender.addEventListener(async function onPostRender() {
+  viewer.scene.postRender.removeEventListener(onPostRender);
 
-    // Fly to New York City
+  // Fly to New York City initially
+  viewer.scene.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.9625,
+      40.8217,
+      200 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(65), // clockwise from north
+      pitch: Cesium.Math.toRadians(-40), // Look downward
+      roll: 0,
+    },
+  });
+
+  // Define the flyToNewYorkCity function
+  function flyToNewYorkCity() {
+    // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
         -73.9625,
@@ -35,10 +51,9 @@ const initializeCesium = async () => {
         roll: 0,
       },
     });
+  }
 
-    // Add a click event listener to the flyback button
-const flybackButton = document.getElementById('flybackButton');
-flybackButton.addEventListener('click', flyToNewYorkCity);
+
 
     // minimum and maximum zoom limits
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
