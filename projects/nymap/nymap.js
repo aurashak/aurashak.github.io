@@ -350,7 +350,7 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 
 
 // State rail Layer
-var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyrail.geojson', {
+var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrains.geojson', {
     style: function (feature) {
         var size = calculateMarkerSize(map.getZoom());
         return {
