@@ -320,7 +320,7 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
 
 
 // Bus Depots Layer
-var busdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycbusdepots.geojson', {
+var nycbusdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycbusdepots.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         return L.circleMarker(latlng, {
