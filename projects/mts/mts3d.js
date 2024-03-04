@@ -36,8 +36,6 @@ const initializeCesium = async () => {
       },
     });
 
-
-
     // minimum and maximum zoom limits
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
@@ -104,29 +102,31 @@ const initializeCesium = async () => {
 
     
     
-     // Load the Bing Maps layer
-  const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-  bingMapsLayer.name = "Bing Maps";
-  bingMapsLayer.order = 1;
-
-  // Set the switch to the off position initially
-  const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-  bingMapsSwitch.checked = false;
-
-  // Create a switch event listener for the Bing Maps layer
-  bingMapsSwitch.addEventListener("change", (event) => {
-    // Check the switch state directly within the event listener
-    if (event.target.checked) {
-      // Add the layer to the viewer when the switch is turned on
-      viewer.imageryLayers.addImageryProvider(bingMapsLayer);
-      console.log("Bing Maps layer added to viewer");
-    } else {
-      // Remove the layer from the viewer when the switch is turned off
-      viewer.imageryLayers.remove(bingMapsLayer);
-      console.log("Bing Maps layer removed from viewer");
-    }
-  });
     
+// Set the switch to the off position initially
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
+});
+
 
 
 
