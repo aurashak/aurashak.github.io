@@ -123,39 +123,6 @@ bingMapsSwitch.checked = false;
 
 
 
-/* 
-// Load GeoJSON borough boundaries
-const resource = await Cesium.IonResource.fromAssetId(2483910);
-const dataSource = await Cesium.GeoJsonDataSource.load(resource);
-
-// Modify the GeoJSON layer properties if needed
-dataSource.entities.values.forEach((entity) => {
-  if (entity.polygon) {
-    // Change the polygon color to white
-    entity.polygon.material = Cesium.Color.WHITE;
-
-    // Lower the height of the entity to your desired value
-    const currentHeight = entity.polygon.height.getValue();
-    const loweredHeight = currentHeight - 500; // Set the lowered height in meters
-    entity.polygon.height = loweredHeight;
-
-    // You can also adjust other properties like `extrudedHeight` if needed
-    // entity.polygon.extrudedHeight = loweredHeight;
-  }
-});
-
-// Add the GeoJSON layer to the viewer beneath other layers
-viewer.dataSources.add(dataSource);
-
-// Initially hide the GeoJSON layer
-dataSource.show = false;
-
-*/
-
-
-
-
-
 
 // Load mtscso GeoJsonDataSource
 const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
@@ -414,35 +381,39 @@ mtsgasSwitch.dispatchEvent(initialChangeEvent);
 
 
 
-
-
-// Load mtsstreets GeoJsonDataSource
-const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
-const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
-
-// Modify the polyline color before adding the data source
-mtsstreetsDataSource.entities.values.forEach((entity) => {
-  if (entity.polyline) {
-    // Change the polyline color to red
-    entity.polyline.material = Cesium.Color.GREY;
-  }
-});
-
 // Create a switch event listener for mtsstreets
 const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
 
 // Set the switch to the off position initially
 mtsstreetsSwitch.checked = false;
 
-mtsstreetsSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
+// Function to handle loading or unloading mtsstreetsDataSource
+const toggleMtsstreetsLayer = async () => {
+  if (mtsstreetsSwitch.checked) {
+    // Load mtsstreets GeoJsonDataSource
+    const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
+    const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+
+    // Modify the polyline color before adding the data source
+    mtsstreetsDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to red
+        entity.polyline.material = Cesium.Color.GREY;
+      }
+    });
+
+    // Add the loaded mtsstreetsDataSource to the viewer
     viewer.dataSources.add(mtsstreetsDataSource);
     console.log("mtsstreetsDataSource added to viewer");
   } else {
+    // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
     viewer.dataSources.remove(mtsstreetsDataSource);
     console.log("mtsstreetsDataSource removed from viewer");
   }
-});
+};
+
+// Add the event listener to the switch
+mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
@@ -541,6 +512,36 @@ viewer.scene.screenSpaceCameraController.enableLook = true;
 
 
 
+
+
+/* 
+// Load GeoJSON borough boundaries
+const resource = await Cesium.IonResource.fromAssetId(2483910);
+const dataSource = await Cesium.GeoJsonDataSource.load(resource);
+
+// Modify the GeoJSON layer properties if needed
+dataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    // Change the polygon color to white
+    entity.polygon.material = Cesium.Color.WHITE;
+
+    // Lower the height of the entity to your desired value
+    const currentHeight = entity.polygon.height.getValue();
+    const loweredHeight = currentHeight - 500; // Set the lowered height in meters
+    entity.polygon.height = loweredHeight;
+
+    // You can also adjust other properties like `extrudedHeight` if needed
+    // entity.polygon.extrudedHeight = loweredHeight;
+  }
+});
+
+// Add the GeoJSON layer to the viewer beneath other layers
+viewer.dataSources.add(dataSource);
+
+// Initially hide the GeoJSON layer
+dataSource.show = false;
+
+*/
 
 
 
