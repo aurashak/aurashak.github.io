@@ -1212,7 +1212,7 @@ setLegendSymbol('nycbusdepots', 'black', 'circle');
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
-setLegendSymbol('nycsubway', 'imageUrl', 'https://aurashak.github.io/images/mtalogo.png');
+setLegendSymbol('nycsubway', 'blue', 'imageUrl', 'https://aurashak.github.io/images/mtalogo.png');
 setLegendSymbol('nyrail', 'red', 'line');
 
 setLegendSymbol('powerplants', '#FFC0CB', 'circle');
