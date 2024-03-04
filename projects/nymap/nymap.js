@@ -573,7 +573,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Load the ctpop2020.geojson layer initially with transparent style
 var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: {
@@ -584,7 +583,6 @@ var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop202
         fillOpacity: 0.7
     },
     onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
         layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
     }
 }).addTo(map);
@@ -604,7 +602,7 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
     }
 }).addTo(map);
 
-// Find the closest census tract to the NYC CSO
+// Function to find the closest census tract to the NYC CSO
 function findClosestCensusTract() {
     var closestCensusTract = null;
     var minDistance = Infinity;
@@ -623,7 +621,7 @@ function findClosestCensusTract() {
 
 // Event listener for the "Show Closest Census Tract to NYC CSO" switch
 document.getElementById('showClosestCensusTract').addEventListener('change', function () {
-    if (document.getElementById('showClosestCensusTract').checked) {
+    if (this.checked) {
         var closestCensusTract = findClosestCensusTract();
 
         if (closestCensusTract) {
@@ -663,6 +661,7 @@ function toggleGeoJSONLayer() {
 
 // Initial hide
 toggleGeoJSONLayer();
+
 
 
 
