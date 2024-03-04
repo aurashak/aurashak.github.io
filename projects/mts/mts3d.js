@@ -42,6 +42,8 @@ const initializeCesium = async () => {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
+
+
 // Load full google photorealistic tileset
 const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
 viewer.scene.primitives.add(newTileset);
@@ -66,7 +68,11 @@ newTilesetSwitch.checked = true; // Set the initial state to 'on'
 
 newTilesetSwitch.addEventListener("change", (event) => {
   newTileset.show = event.target.checked;
+  const status = event.target.checked ? "shown" : "hidden";
+  console.log(`3D Tileset Layer ${status}`);
 });
+
+console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
 
 
