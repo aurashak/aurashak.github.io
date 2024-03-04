@@ -316,6 +316,41 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
 
 
 
+// NYC EJ sites Layer
+var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycejsites.geojson', {
+    pointToLayer: function (feature, latlng) {
+        var size = calculateMarkerSize(map.getZoom());
+        return L.circleMarker(latlng, {
+            // Add any other marker styling you need
+        });
+    },
+    style: function (feature) {
+        // Adjust styling based on EJ Area type
+        var ejAreaType = feature.properties['EJ Area'];
+
+        // Define colors for each EJ Area type
+        var ejAreaColors = {
+            'EJ Area': 'rgba(255, 0, 0, 0.7)',               // Red
+            'Not EJ Area': 'rgba(0, 255, 0, 0.7)',           // Green
+            'Potential EJ Area': 'rgba(0, 0, 255, 0.7)'      // Blue
+        };
+
+        return {
+            fillColor: ejAreaColors[ejAreaType],
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>EJ Area Type: " + feature.properties['EJ Area']);
+    }
+});
+
+
+
 
 
 
@@ -879,6 +914,22 @@ document.getElementById('wastewatertreatment').addEventListener('change', functi
 
 
 
+// Event listener for the nycejsites layer toggle
+document.getElementById('nycejsites').addEventListener('change', function() {
+    if (map.hasLayer(nycejsitesLayer)) {
+        // If the layer is already on, do nothing when switching left to right
+        if (document.getElementById('nycejsites').checked) {
+            return;
+        }
+        map.removeLayer(nycejsitesLayer);
+    } else {
+        map.addLayer(nycejsitesLayer);
+    }
+});
+
+
+
+
 
 
 // Event listener for the nycbusdepots layer toggle
@@ -913,19 +964,16 @@ document.getElementById('nycsubway').addEventListener('change', function() {
 
 // Event listener for the nyrail layer toggle
 document.getElementById('nyrail').addEventListener('change', function() {
-    // Check if the layer is currently on the map
-    if (map.hasLayer(nyrailLayer)) {
-        // If the layer is on, remove it when switching left to right
-        if (!document.getElementById('nyrail').checked) {
-            map.removeLayer(nyrailLayer);
-        }
+    // Check if the switch is checked
+    if (document.getElementById('nyrail').checked) {
+        // If the switch is checked, add the layer
+        map.addLayer(nyrailLayer);
     } else {
-        // If the layer is off, add it when switching right to left
-        if (document.getElementById('nyrail').checked) {
-            map.addLayer(nyrailLayer);
-        }
+        // If the switch is unchecked, remove the layer
+        map.removeLayer(nyrailLayer);
     }
 });
+
 
 
 
@@ -1138,6 +1186,8 @@ setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('censusTractLayer', 'green', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
+
+setLegendSymbol('nycejsites', {'EJ Area': 'red', 'Not EJ Area': 'green', 'Potential EJ Area': '#blue'}, 'polygon', { layout: 'vertical' });
 
 // Legend for Population Layer (white to dark gray colors)
 setLegendSymbol('population', {
