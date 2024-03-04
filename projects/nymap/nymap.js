@@ -466,14 +466,14 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         var income = feature.properties.MHI;
         var category = getIncomeCategory(income);
 
-        // Define colors for each category
-        var categoryColors = {
-            '0-30000': '#fee08b',
-            '30000-60000': '#fdae61',
-            '60000-90000': '#d73027',
-            '90000-150000': '#4575b4',
-            '150000-250000': '#313695'
-        };
+    // Define colors for each category
+var categoryColors = {
+    '0-30000': 'rgba(169,169,169,0.5)',  // Dark Gray
+    '30000-60000': 'rgba(128,128,128,0.5)', // Gray
+    '60000-90000': 'rgba(192,192,192,0.5)', // Silver
+    '90000-150000': 'rgba(211,211,211,0.5)', // Light Gray
+    '150000-250000': 'rgba(220,220,220,0.5)' // Gainsboro
+};
 
         return {
             fillColor: categoryColors[category],
@@ -918,14 +918,15 @@ setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#
 
 // Legend for Population Layer
 setLegendSymbol('population', {
-    '0-1000': 'rgba(128,0,128,0.5)',
-    '1000-3000': 'rgba(148,0,211,0.5)',
-    '3000-6000': 'rgba(186,85,211,0.5)',
-    '6000-10000': 'rgba(221,160,221,0.5)',
-    '10000-15000': 'rgba(238,130,238,0.5)',
-    '15000-18000': 'rgba(255,182,193,0.5)',
-    '18000+': 'rgba(255,192,203,0.5)'
+    '0-1000': 'rgba(169,169,169,0.5)',  // Dark Gray
+    '1000-3000': 'rgba(128,128,128,0.5)', // Gray
+    '3000-6000': 'rgba(192,192,192,0.5)', // Silver
+    '6000-10000': 'rgba(211,211,211,0.5)', // Light Gray
+    '10000-15000': 'rgba(220,220,220,0.5)', // Gainsboro
+    '15000-18000': 'rgba(245,245,245,0.5)', // White Smoke
+    '18000+': 'rgba(255,255,255,0.5)'  // White
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
+
 
 
 // Set legend symbols for Cultural Institutions Layer
