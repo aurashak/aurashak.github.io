@@ -53,6 +53,10 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
     });
   }
 
+ // Add a click event listener to the flyToNewYorkCity button
+  const flyToNewYorkCityButton = document.getElementById('flyToNewYorkCity');
+  flyToNewYorkCityButton.addEventListener('click', flyToNewYorkCity);
+
 
 
     // minimum and maximum zoom limits
