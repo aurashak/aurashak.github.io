@@ -2377,7 +2377,8 @@ span.cesium-projectionPicker-wrapper {
   display:block;
   position:absolute;
   top:5px;
-  right:5px
+  right:5px;
+      z-index: 1000;
 }
 .cesium-viewer-cesiumInspectorContainer {
   display:block;
