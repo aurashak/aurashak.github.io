@@ -535,26 +535,18 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
 
  // Define colors for each category as a gradient with transparency
 var categoryColors = {
-    '0-1000': 'rgba(255, 255, 255, 0.7)', // White
-    '1000-3000': 'rgba(211,211,211,0.5)', // Light Gray
-    '3000-6000': 'rgba(169,169,169,0.5)', // Dark Gray
-    '6000-10000': 'rgba(128,128,128,0.5)', // Gray
-    '10000-14000': 'rgba(100, 100, 100, 0.7)', // Dim Gray
-    '14000-17000': 'rgba(50, 50, 50, 0.7)', // Dark Slate Gray
-    '17000+': 'rgba(0, 0, 0, 0.7)' // Black
+    '0-1000': '#ffffff', // White
+    '1000-3000': '#b7b7b7', // Light Gray
+    '3000-6000': '#c0c0c0', // Dark Gray
+    '6000-10000': '#808080', // Gray
+    '10000-14000': '#4575b4', // Dim Gray
+    '14000-17000': '#2b2b2b', // Dark Slate Gray
+    '17000+': '#000' // Black
     
 };
 
-// Legend for Population Layer (white to dark gray colors)
-setLegendSymbol('population', {
-    '0-1000': 'rgba(255,255,255,0.5)',  // White
-    '1000-3000': 'rgba', // Light Gray
-    '3000-6000': 'rgba', // Dark Gray
-    '6000-10000': 'rgba', // Gray
-    '10000-14000': 'rgba(100,100,100,0.5)', // Dim Gray
-    '14000-17000': 'rgba(50, 50, 50, 0.5)', // Less than Black
-    '17000+': 'rgba(0, 0, 0, .8)'  // Black
-}, 'polygon', { layout: 'vertical', id: 'legend-population' });
+
+
 
         return {
             fillColor: categoryColors[category],
@@ -1021,13 +1013,13 @@ setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#
 
 // Legend for Population Layer (white to dark gray colors)
 setLegendSymbol('population', {
-    '0-1000': 'rgba(255,255,255,0.5)',  // White
-    '1000-3000': 'rgba(211,211,211,0.5)', // Light Gray
-    '3000-6000': 'rgba(169,169,169,0.5)', // Dark Gray
-    '6000-10000': 'rgba(128,128,128,0.5)', // Gray
-    '10000-14000': 'rgba(100,100,100,0.5)', // Dim Gray
-    '14000-17000': 'rgba(50, 50, 50, 0.5)', // Less than Black
-    '17000+': 'rgba(0, 0, 0, .8)'  // Black
+    '0-1000': '#ffffff',  
+    '1000-3000': '#b7b7b7', // Light Gray
+    '3000-6000': '#c0c0c0', // Dark Gray
+    '6000-10000': '#808080', // Gray
+    '10000-14000': '#4575b4', // Dim Gray
+    '14000-17000': '#2b2b2b', // Less than Black
+    '17000+': '#000'  // Black
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
 
