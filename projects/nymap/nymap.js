@@ -326,7 +326,7 @@ var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyc
     },
     style: function (feature) {
         // Adjust styling based on EJ Area type
-        var ejAreaType = feature.properties['EJ Area'];
+        var ejAreaType = feature.properties['ejdesignat']; // Update property name
 
         // Define colors for each EJ Area type
         var ejAreaColors = {
@@ -345,10 +345,9 @@ var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyc
     },
     onEachFeature: function (feature, layer) {
         // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>EJ Area Type: " + feature.properties['EJ Area']);
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>EJ Area Type: " + feature.properties['ejdesignat']); // Update property name
     }
 });
-
 
 
 
