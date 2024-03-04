@@ -732,7 +732,10 @@ border: 1px solid black;
 
 
 
-
+#search-container {
+  top: 10px;
+  left: 10px;
+}
 
 
 .switch-container {
