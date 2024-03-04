@@ -36,9 +36,7 @@ const initializeCesium = async () => {
       },
     });
 
-    // Add a click event listener to the flyback button
-const flybackButton = document.getElementById('flybackButton');
-flybackButton.addEventListener('click', flyToNewYorkCity);
+
 
     // minimum and maximum zoom limits
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
