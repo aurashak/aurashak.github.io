@@ -997,15 +997,24 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-// Transportation Layer Group
-var transportationLayerGroup = L.layerGroup();
-
 // Event listener for the transportation layer group toggle
-document.getElementById('transportationLayerGroup').addEventListener('click', function() {
-    if (map.hasLayer(transportationLayerGroup)) {
-        map.removeLayer(transportationLayerGroup);
+document.getElementById('transportationLayerGroup').addEventListener('change', function(event) {
+    if (event.target.checked) {
+        // If the group toggle is turned on, add the transportation layer group to the map
+        if (map) {
+            map.addLayer(transportationLayerGroup);
+            console.log("Transportation Layer Group added to the map");
+        } else {
+            console.error("Leaflet map not found.");
+        }
     } else {
-        map.addLayer(transportationLayerGroup);
+        // If the group toggle is turned off, remove the transportation layer group from the map
+        if (map) {
+            map.removeLayer(transportationLayerGroup);
+            console.log("Transportation Layer Group removed from the map");
+        } else {
+            console.error("Leaflet map not found.");
+        }
     }
 });
 
