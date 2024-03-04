@@ -763,7 +763,11 @@ border: 1px solid black;
 
 
 
-
+.leaflet-control-attribution svg {
+	display: inline !important;
+    height: 0;
+    width: 0;
+	}
 
 
 /* Styles for the search control container */
