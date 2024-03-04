@@ -942,6 +942,29 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
     }
 });
 
+
+
+
+
+// Create a custom control container and add it to the map
+var customControlContainer = L.DomUtil.create('div', 'custom-control-container');
+document.getElementById('search-container').appendChild(customControlContainer);
+
+// Add the search control to the custom control container
+var searchControl = L.Control.geocoder({
+    defaultMarkGeocode: false,
+    placeholder: 'Search for an address...',
+    geocoder: L.Control.Geocoder.nominatim()
+}).addTo(map);
+
+// Add the custom control container to the map
+map.addControl(new L.Control({ position: 'topleft' }).onAdd = function () {
+    return customControlContainer;
+});
+
+
+
+
 // Function to set legend symbols with support for multiple shapes and colors
 function setLegendSymbol(layerId, colors, shape, options) {
     const legendSymbol = document.getElementById(`legend-${layerId}`);
