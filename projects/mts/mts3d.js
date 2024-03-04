@@ -101,25 +101,28 @@ const initializeCesium = async () => {
 
 
 
-// Load Cesium Bing Maps layer
-const bingMapsLayer = viewer.imageryLayers.addImageryProvider(
-  await Cesium.IonImageryProvider.fromAssetId(4)
-);
-bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("Bing Maps layer added to viewer");
-
 // Set the switch to the off position initially
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
 bingMapsSwitch.checked = false;
 
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
 // Create a switch event listener for the Bing Maps layer
 bingMapsSwitch.addEventListener("change", (event) => {
-  bingMapsLayer.show = event.target.checked;
-  const status = event.target.checked ? "shown" : "hidden";
-  console.log(`Bing Maps Layer ${status}`);
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
 });
-
 
 
 
