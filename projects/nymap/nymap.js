@@ -576,7 +576,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Census Tract Layer
 var ctpop2020Layer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson').addTo(map);
 
@@ -588,16 +587,16 @@ var censusTractCheckbox = document.getElementById('censusTractLayer');
 
 // Event listener for when the CSO layer is loaded
 nycsoLayer.on('data:loaded', function () {
+    // Reset counts
+    censusTractCounts = {};
+
     // Iterate over CSO layer features
     nycsoLayer.eachLayer(function (layer) {
         // Get the census tract ID from CSO layer properties
         var censusTractID = layer.feature.properties.census_tract;
 
         // Initialize count if not already present
-        censusTractCounts[censusTractID] = censusTractCounts[censusTractID] || 0;
-
-        // Increment count for the census tract
-        censusTractCounts[censusTractID]++;
+        censusTractCounts[censusTractID] = (censusTractCounts[censusTractID] || 0) + 1;
     });
 
     // Find the census tract with the highest count
@@ -610,6 +609,9 @@ nycsoLayer.on('data:loaded', function () {
             maxCensusTractID = tractID;
         }
     }
+
+    // Reset styles for all census tracts
+    ctpop2020Layer.setStyle({ fillColor: 'grey', color: 'black', weight: 0.5 });
 
     // Highlight the census tract with the highest count
     ctpop2020Layer.eachLayer(function (layer) {
@@ -631,15 +633,15 @@ nycsoLayer.on('data:loaded', function () {
             console.log('Census Tract with the highest CSO count:', maxCensusTractID);
         }
     });
+});
 
-    // Add an event listener to the Census Tract layer checkbox
-    censusTractCheckbox.addEventListener('change', function () {
-        if (censusTractCheckbox.checked) {
-            map.addLayer(ctpop2020Layer);
-        } else {
-            map.removeLayer(ctpop2020Layer);
-        }
-    });
+// Add an event listener to the Census Tract layer checkbox
+censusTractCheckbox.addEventListener('change', function () {
+    if (censusTractCheckbox.checked) {
+        map.addLayer(ctpop2020Layer);
+    } else {
+        map.removeLayer(ctpop2020Layer);
+    }
 });
 
 // Ensure that the checkbox state is initially set correctly
@@ -648,6 +650,7 @@ if (censusTractCheckbox.checked) {
 } else {
     map.removeLayer(ctpop2020Layer);
 }
+
 
 
 
