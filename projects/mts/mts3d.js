@@ -201,8 +201,7 @@ bingMapsSwitch.addEventListener("change", (event) => {
     }
 
 
-
-    // Load whejsites GeoJsonDataSource
+// Load whejsites GeoJsonDataSource
 const whejsitesResource = await Cesium.IonResource.fromAssetId(2486537);
 const whejsitesDataSource = await Cesium.GeoJsonDataSource.load(whejsitesResource);
 
@@ -245,10 +244,6 @@ function createCircleImage() {
     context.fill();
     return canvas;
 }
-
-
-
-
 
 
 
