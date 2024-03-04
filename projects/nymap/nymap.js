@@ -575,6 +575,7 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
+/* 
 
 // Census Tract Layer
 var ctpop2020Layer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson').addTo(map);
@@ -651,7 +652,7 @@ if (censusTractCheckbox.checked) {
     map.removeLayer(ctpop2020Layer);
 }
 
-
+*/
 
 
 
