@@ -568,8 +568,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
-
 // Load the ctpop2020.geojson layer
 var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
@@ -641,7 +639,28 @@ function calculateProximityAndCount() {
 // Call the function to calculate proximity and count
 calculateProximityAndCount();
 
-
+// Event listener for the "Show Max Count Census Tract in Red" switch
+document.getElementById('maxCountCensusTract').addEventListener('change', function() {
+    if (document.getElementById('maxCountCensusTract').checked) {
+        // If the switch is on, show the census tract with the maximum count in red
+        maxCountCensusTractLayer.setStyle({
+            fillColor: 'red',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        });
+    } else {
+        // If the switch is off, reset the style to the default
+        maxCountCensusTractLayer.setStyle({
+            fillColor: 'purple',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        });
+    }
+});
 
 
 
@@ -980,6 +999,8 @@ setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
+
+setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
