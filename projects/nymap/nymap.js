@@ -945,22 +945,30 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
+// Check if the search-container element exists before proceeding
+var searchContainer = document.getElementById('search-container');
 
-    // Create a custom control container and add it to the map
-    var customControlContainer = L.DomUtil.create('div', 'custom-control-container');
-    document.getElementById('search-container').appendChild(customControlContainer);
+if (searchContainer) {
+  // Create a custom control container and add it to the map
+  var customControlContainer = L.DomUtil.create('div', 'custom-control-container');
 
-    // Add the search control to the custom control container
-    var searchControl = L.Control.geocoder({
-        defaultMarkGeocode: false,
-        placeholder: 'Search for an address...',
-        geocoder: L.Control.Geocoder.nominatim()
-    }).addTo(map);
+  // Add the search control to the custom control container
+  var searchControl = L.Control.geocoder({
+    defaultMarkGeocode: false,
+    placeholder: 'Search for an address...',
+    geocoder: L.Control.Geocoder.nominatim()
+  }).addTo(map);
 
-    // Add the custom control container to the map
-    map.addControl(new L.Control({ position: 'topleft' }).onAdd = function () {
-        return customControlContainer;
-    });
+  // Add the custom control container to the map
+  map.addControl(new L.Control({ position: 'topleft' }).onAdd = function () {
+    return customControlContainer;
+  });
+
+  // Append the custom control container to the search-container div
+  searchContainer.appendChild(customControlContainer);
+} else {
+  console.error("The 'search-container' div is not found in the HTML.");
+}
 
 
 
