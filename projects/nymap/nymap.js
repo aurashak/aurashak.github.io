@@ -1005,25 +1005,19 @@ document.getElementById('wasteLayerGroup').addEventListener('click', function() 
 
 
 
-
-
-// Event listener for the transportation layer group toggle
-document.getElementById('transportationLayerGroup').addEventListener('change', function(event) {
-    if (event.target.checked) {
-        // If the group toggle is turned on, add the transportation layer group to the map
-        if (map) {
-            map.addLayer(transportationLayerGroup);
-            console.log("Transportation Layer Group added to the map");
-        } else {
-            console.error("Leaflet map not found.");
-        }
+// Toggle Transportation Layer Group
+document.getElementById('transportationLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(transportationLayerGroup)) {
+        map.removeLayer(transportationLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(nycbusdepotsLayer);
+        // Reset the individual layer toggle button to off state
+        document.getElementById('nycbusdepots').checked = false;
     } else {
-        // If the group toggle is turned off, remove the transportation layer group from the map
-        if (map) {
-            map.removeLayer(transportationLayerGroup);
-            console.log("Transportation Layer Group removed from the map");
-        } else {
-            console.error("Leaflet map not found.");
+        map.addLayer(transportationLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if it was previously checked
+        if (document.getElementById('nycbusdepots').checked) {
+            map.addLayer(nycbusdepotsLayer);
         }
     }
 });
