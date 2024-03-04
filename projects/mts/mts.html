@@ -49,12 +49,15 @@ West Harlem Infrastructure Model</div>
             </div>
         </div>
 
+ 
+
         <div class="nymapbox">
-            <div style="display: flex; align-items: center;">
-                <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/binglogo.png" style="height: 25px; background: none; "></div>
-                <label class="switch-label-b"><b>Bing Street Maps</b></label>
+            <div style="display: flex; align-items: center;" >
+                <div style="width: 20px; height: 20px; background-color: grey; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+
+                <label class="switch-label-b"><b>OSM buildings</b></label>
                 <label class="switch-b" style="margin-left: auto;">
-                    <input type="checkbox" class="switch-input-b" id="bingMapsSwitch" >
+                    <input type="checkbox" class="switch-input-b" id="osmBuildingsSwitch" >
                     <div class="switch-track-b">
                         <div class="switch-thumb-b"></div>
                     </div>
@@ -73,19 +76,7 @@ West Harlem Infrastructure Model</div>
             <B>Waste:</B>
     </div></div>
 
-        <div class="nymapbox">
-            <div style="display: flex; align-items: center;" >
-                <div style="width: 20px; height: 20px; background-color: grey; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
 
-                <label class="switch-label-b"><b>OSM 3d buildings</b></label>
-                <label class="switch-b" style="margin-left: auto;">
-                    <input type="checkbox" class="switch-input-b" id="osmBuildingsSwitch" >
-                    <div class="switch-track-b">
-                        <div class="switch-thumb-b"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
     
     
         <div class="nymapbox">
@@ -126,32 +117,22 @@ West Harlem Infrastructure Model</div>
             <B>Transportation:</B>
     </div></div>
 
-        <div class="nymapbox">
-            <div style="display: flex; align-items: center;" >
-                <div style="width: 20px; height: 5px; background-color: rgb(0, 0, 0); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
-                <label class="switch-label-b"><b>Natural Gas Pipelines</b></label>
-                <label class="switch-b" style="margin-left: auto;">
-                    <input type="checkbox" class="switch-input-b" id="mtsgasSwitch" >
-                    <div class="switch-track-b">
-                        <div class="switch-thumb-b"></div>
-                    </div>
-                </label>
-            </div>
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/binglogo.png" style="height: 25px; background: none; "></div>
+            <label class="switch-label-b"><b>Bing Street Maps</b></label>
+            <label class="switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input-b" id="bingMapsSwitch" >
+                <div class="switch-track-b">
+                    <div class="switch-thumb-b"></div>
+                </div>
+            </label>
         </div>
-    
-        <div class="nymapbox">
-            <div style="display: flex; align-items: center;">
-                <div style="width: 20px; height: 20px; background-color: rgb(10, 96, 33); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+    </div>
 
-                <label class="switch-label-b"><b>Parks</b></label>
-                <label class="switch-b" style="margin-left: auto;">
-                    <input type="checkbox" class="switch-input-b" id="mtsparksSwitch" >
-                    <div class="switch-track-b">
-                        <div class="switch-thumb-b"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
+      
+    
+  
     
         <div class="nymapbox">
             <div style="display: flex; align-items: center;" >
@@ -196,6 +177,71 @@ West Harlem Infrastructure Model</div>
 
     </div>
 <Br>
+
+    <div class="nymapboxcontainer">
+
+        <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>Other:</B>
+    </div></div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: rgb(10, 96, 33); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="switch-label-b"><b>Parks</b></label>
+            <label class="switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input-b" id="mtsparksSwitch" >
+                <div class="switch-track-b">
+                    <div class="switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+
+<br>
+
+    <div class="nymapboxcontainer">
+
+        <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>Energy:</B>
+    </div></div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 5px; background-color: rrgb(246, 207, 9)x-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="switch-label-b"><b>Electric Transmission Lines</b></label>
+            <label class="switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input-b" id="electriclinesSwitch" >
+                <div class="switch-track-b">
+                    <div class="switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: rgb(0, 0, 0); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+            <label class="switch-label-b"><b>Natural Gas Pipelines</b></label>
+            <label class="switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input-b" id="mtsgasSwitch" >
+                <div class="switch-track-b">
+                    <div class="switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+    </div>
+    <Br>
+
+
     <div class="nymapboxcontainer">
 
     

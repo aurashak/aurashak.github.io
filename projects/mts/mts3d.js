@@ -379,6 +379,45 @@ console.log("Initial load of nycsubwayDataSource");
     const initialChangeEvent = new Event("change");
     mtsgasSwitch.dispatchEvent(initialChangeEvent);
 
+
+
+    // Load electriclines GeoJsonDataSource
+const electriclinesResource = await Cesium.IonResource.fromAssetId(2485569);
+const electriclinesDataSource = await Cesium.GeoJsonDataSource.load(electriclinesResource);
+
+// Modify the polyline color and width before adding the data source
+electriclinesDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    // Change the polyline color to your desired color
+    entity.polyline.material = Cesium.Color.YELLOW; // Change to the color you want
+    // Change the polyline width
+    entity.polyline.width = 3; // Adjust the width as needed
+  }
+});
+
+// Create a switch event listener for electriclines
+const electriclinesSwitch = document.getElementById("electriclinesSwitch");
+electriclinesSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(electriclinesDataSource);
+    console.log("electriclinesDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(electriclinesDataSource);
+    console.log("electriclinesDataSource removed from viewer");
+  }
+});
+
+// Set the initial state of the switch to 'off'
+electriclinesSwitch.checked = false;
+
+// Trigger the 'change' event to ensure the initial state is applied
+const initialChangeEventElectriclines = new Event("change");
+electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
+
+
+
+
+
     // Create a switch event listener for mtsstreets
     const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
 
