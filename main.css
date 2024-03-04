@@ -741,22 +741,22 @@ border: 1px solid black;
 
 
 
-
 /* Button Style */
 #flyToNewYorkCity {
-  background-color: #4c5863; /* Adjust the color as needed */
-  color: #000; /* Adjust the text color as needed */
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
+  padding: 5px;
+  margin: 5px 2px;
+  border-radius: 8px;
+  border: solid .3px rgb(18, 18, 18);
+  background-color: #f3f3f3;
+    font-size: 15px;
+    cursor: pointer;
+  
+
 }
 
 #flyToNewYorkCity:hover {
-  background-color: #394457; /* Adjust the hover color as needed */
-  color: #fff; /* Adjust the hover text color as needed */
+  background-color: #c7c7c7; 
+  color: #fff; 
 }
 
 
