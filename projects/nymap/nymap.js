@@ -589,59 +589,40 @@ function calculateProximityAndCount() {
             // You can add any additional actions or pop-up content here if needed
             layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
         }
-    }).addTo(map);
-
-    ctpopLayer.eachLayer(function (ctLayer) {
-        var ctGeometry = ctLayer.toGeoJSON().geometry;
-        var count = 0;
-
-        // Iterate over energy layer features
-        energyLayerGroup.eachLayer(function (energyLayer) {
-            // Check if the energy feature is within a quarter mile (adjust distance as needed)
-            if (map.distance(ctLayer.getLatLng(), energyLayer.getLatLng()) <= 0.25) {
-                count++;
-            }
-        });
-
-        // Iterate over waste layer features
-        wasteLayerGroup.eachLayer(function (wasteLayer) {
-            // Check if the waste feature is within a quarter mile (adjust distance as needed)
-            if (map.distance(ctLayer.getLatLng(), wasteLayer.getLatLng()) <= 0.25) {
-                count++;
-            }
-        });
-
-        // Add the count to the counts array
-        counts.push({ "CensusTract": ctGeometry, "Count": count });
     });
-
-    // Find the census tract with the maximum count
-    var maxCountCensusTract = counts.reduce((max, ct) => (ct.Count > max.Count) ? ct : max, counts[0]);
-
-    if (maxCountCensusTract) {
-        console.log("Census Tract with Maximum Count:", maxCountCensusTract.CensusTract);
-        console.log("Maximum Count:", maxCountCensusTract.Count);
-
-        // Set the fill color of the census tract with the highest count to red
-        maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
-    } else {
-        console.log("No census tract with valid data found.");
-    }
 
     // Event listener for the "Show Max Count Census Tract in Red" switch
     document.getElementById('maxCountCensusTract').addEventListener('change', function() {
-        if (document.getElementById('maxCountCensusTract').checked && maxCountCensusTractLayer) {
-            // If the switch is on and the layer is available, show the census tract with the maximum count in red
-            maxCountCensusTractLayer.setStyle({
-                fillColor: 'red',
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            });
+        if (document.getElementById('maxCountCensusTract').checked) {
+            // If the switch is on, add the layer to the map
+            if (!map.hasLayer(ctpopLayer)) {
+                ctpopLayer.addTo(map);
+            }
+
+            // Find the census tract with the maximum count
+            var maxCountCensusTract = counts.reduce((max, ct) => (ct.Count > max.Count) ? ct : max, counts[0]);
+
+            if (maxCountCensusTract) {
+                console.log("Census Tract with Maximum Count:", maxCountCensusTract.CensusTract);
+                console.log("Maximum Count:", maxCountCensusTract.Count);
+
+                // Set the fill color of the census tract with the highest count to red
+                maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
+                maxCountCensusTractLayer.setStyle({
+                    fillColor: 'red',
+                    color: 'black',
+                    weight: 0.5,
+                    opacity: 0.7,
+                    fillOpacity: 0.7
+                });
+            } else {
+                console.log("No census tract with valid data found.");
+            }
         } else {
-            // If the switch is off or the layer is not available, hide the layer
-            map.removeLayer(ctpopLayer);
+            // If the switch is off, remove the layer from the map
+            if (map.hasLayer(ctpopLayer)) {
+                map.removeLayer(ctpopLayer);
+            }
         }
     });
 
