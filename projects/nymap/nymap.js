@@ -466,14 +466,15 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         var income = feature.properties.MHI;
         var category = getIncomeCategory(income);
 
-    // Define colors for each category
+// Define colors for each category (reversed)
 var categoryColors = {
-    '0-30000': 'rgba(169,169,169,0.5)',  // Dark Gray
-    '30000-60000': 'rgba(128,128,128,0.5)', // Gray
-    '60000-90000': 'rgba(192,192,192,0.5)', // Silver
+    '150000-250000': 'rgba(220,220,220,0.5)', // Gainsboro
     '90000-150000': 'rgba(211,211,211,0.5)', // Light Gray
-    '150000-250000': 'rgba(220,220,220,0.5)' // Gainsboro
+    '60000-90000': 'rgba(192,192,192,0.5)', // Silver
+    '30000-60000': 'rgba(128,128,128,0.5)', // Gray
+    '0-30000': 'rgba(169,169,169,0.5)'  // Dark Gray
 };
+
 
         return {
             fillColor: categoryColors[category],
@@ -563,6 +564,81 @@ populationCheckbox.addEventListener('change', function () {
         map.removeLayer(populationLayer);
     }
 });
+
+
+
+
+
+
+
+// Load the ctpop2020.geojson layer
+var ctpopLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
+    style: function (feature) {
+        // Default style for all census tracts
+        return {
+            fillColor: 'purple',
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population);
+    }
+}).addTo(map);
+
+// Create an array to store the counts for each census tract
+var counts = [];
+
+// Function to calculate proximity and count for each census tract
+function calculateProximityAndCount() {
+    ctpopLayer.eachLayer(function (ctLayer) {
+        var ctGeometry = ctLayer.toGeoJSON().geometry;
+        var count = 0;
+
+        // Iterate over energy layer features
+        energyLayerGroup.eachLayer(function (energyLayer) {
+            // Check if the energy feature is within a quarter mile (adjust distance as needed)
+            if (map.distance(ctLayer.getLatLng(), energyLayer.getLatLng()) <= 0.25) {
+                count++;
+            }
+        });
+
+        // Iterate over waste layer features
+        wasteLayerGroup.eachLayer(function (wasteLayer) {
+            // Check if the waste feature is within a quarter mile (adjust distance as needed)
+            if (map.distance(ctLayer.getLatLng(), wasteLayer.getLatLng()) <= 0.25) {
+                count++;
+            }
+        });
+
+        // Add the count to the counts array
+        counts.push({ "CensusTract": ctGeometry, "Count": count });
+    });
+
+    // Find the census tract with the maximum count
+    var maxCountCensusTract = counts.reduce((max, ct) => (ct.Count > max.Count) ? ct : max, counts[0]);
+
+    console.log("Census Tract with Maximum Count:", maxCountCensusTract.CensusTract);
+    console.log("Maximum Count:", maxCountCensusTract.Count);
+
+    // Set the fill color of the census tract with the highest count to red
+    var maxCountCensusTractLayer = ctpopLayer.getLayer(ctpopLayer.getLayerId(maxCountCensusTract.CensusTract));
+    maxCountCensusTractLayer.setStyle({
+        fillColor: 'red',
+        color: 'black',
+        weight: 0.5,
+        opacity: 0.7,
+        fillOpacity: 0.7
+    });
+}
+
+// Call the function to calculate proximity and count
+calculateProximityAndCount();
+
+
 
 
 
@@ -916,15 +992,15 @@ setLegendSymbol('floodplain', '#ADD8E6', 'polygon');
 setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
-// Legend for Population Layer
+// Legend for Population Layer (reversed colors)
 setLegendSymbol('population', {
-    '0-1000': 'rgba(169,169,169,0.5)',  // Dark Gray
-    '1000-3000': 'rgba(128,128,128,0.5)', // Gray
-    '3000-6000': 'rgba(192,192,192,0.5)', // Silver
+    '18000+': 'rgba(169,169,169,0.5)',  // Dark Gray
+    '15000-18000': 'rgba(128,128,128,0.5)', // Gray
+    '10000-15000': 'rgba(192,192,192,0.5)', // Silver
     '6000-10000': 'rgba(211,211,211,0.5)', // Light Gray
-    '10000-15000': 'rgba(220,220,220,0.5)', // Gainsboro
-    '15000-18000': 'rgba(245,245,245,0.5)', // White Smoke
-    '18000+': 'rgba(255,255,255,0.5)'  // White
+    '3000-6000': 'rgba(220,220,220,0.5)', // Gainsboro
+    '1000-3000': 'rgba(245,245,245,0.5)', // White Smoke
+    '0-1000': 'rgba(255,255,255,0.5)'  // White
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
 
