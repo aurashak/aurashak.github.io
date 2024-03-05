@@ -1210,13 +1210,13 @@ function createLegendEntry(label, color, shape, imageUrl) {
             return `<div><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
         case 'polygon':
             return `<div><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
-            case 'imageUrl':
-                return `<div><img src="${imageUrl}" width="20" height="20">${label}</div>`;
-            
-            default:
+        case 'imageUrl':
+            return `<div><img src="${imageUrl}" alt="${label}" class="legend-image">${label}</div>`;
+        default:
             return ''; // Handle other shapes if needed
     }
 }
+
 
 // Legend symbol shapes, colors, and images for each layer
 setLegendSymbol('evacuationzones', 'red', 'polygon');
