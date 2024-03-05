@@ -430,9 +430,9 @@ background: none;
 
 
 .legend-image {
-  width: 20px;  /* Set your preferred width */
-  height: 20px; /* Set your preferred height */
-  margin-right: 5px; /* Adjust margin if needed */
+  width: 100%;  /* Set your preferred width */
+  height: 100%; /* Set your preferred height */
+  margin-right: 0px; /* Adjust margin if needed */
 }
 
 
