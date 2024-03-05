@@ -425,12 +425,31 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 // State rail Layer
 var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrains.geojson', {
     style: function (feature) {
-        var size = calculateMarkerSize(map.getZoom());
-        return {
-            color: 'red',
-            weight: 3,
-            opacity: 0.6
-        };
+        var railowner = feature.properties.railowner;
+
+        // Check if the railowner is Long Island Rail Road
+        if (railowner === 'Long Island Rail Road') {
+            return {
+                color: 'blue',
+                weight: 3,
+                opacity: 0.6
+            };
+        }
+        // Check if the railowner is Metro North Commuter Railroad Company
+        else if (railowner === 'Metro North Commuter Railroad Company') {
+            return {
+                color: 'red',
+                weight: 3,
+                opacity: 0.6
+            };
+        }
+        // Default style for other rail lines (make them invisible)
+        else {
+            return {
+                opacity: 0,
+                fillOpacity: 0
+            };
+        }
     }
 });
 
@@ -1213,8 +1232,11 @@ setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
 setLegendSymbol('nycsubway', 'blue', 'imageUrl', 'https://aurashak.github.io/images/mtalogo.png');
-setLegendSymbol('nyrail', 'red', 'line');
+// Legend for Long Island Rail Road (nyrail)
+setLegendSymbol('nyrail', {'Long Island Rail Road': 'blue'}, 'line');
 
+// Legend for Metro North Commuter Railroad Company (nyrail)
+setLegendSymbol('nyrail', {'Metro North Commuter Railroad Company': 'red'}, 'line')
 setLegendSymbol('powerplants', '#FFC0CB', 'circle');
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
 setLegendSymbol('wastetransferfacility', 'purple', 'circle');
