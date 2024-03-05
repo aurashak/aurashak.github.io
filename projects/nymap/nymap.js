@@ -1232,11 +1232,12 @@ setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
 setLegendSymbol('nycsubway', 'blue', 'imageUrl', 'https://aurashak.github.io/images/mtalogo.png');
-// Legend for Long Island Rail Road (nyrail)
-setLegendSymbol('nyrail', {'Long Island Rail Road': 'blue'}, 'line');
+// Set legend symbols for Long Island Rail Road (nyrail)
+setLegendSymbol('nyrail-longisland', 'blue', 'line');
 
-// Legend for Metro North Commuter Railroad Company (nyrail)
-setLegendSymbol('nyrail', {'Metro North Commuter Railroad Company': 'red'}, 'line')
+// Set legend symbols for Metro North Commuter Railroad Company (nyrail)
+setLegendSymbol('nyrail-metronorth', 'red', 'line');
+
 setLegendSymbol('powerplants', '#FFC0CB', 'circle');
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
 setLegendSymbol('wastetransferfacility', 'purple', 'circle');
