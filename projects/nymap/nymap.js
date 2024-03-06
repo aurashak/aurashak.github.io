@@ -37,6 +37,7 @@ function calculateMarkerSize(zoom) {
 }
 
 
+// Counties Layer
 var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson', {
     style: function (feature) {
         return {
@@ -47,21 +48,18 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
             fillOpacity: .3
         };
     },
-    pointToLayer: function (feature, latlng) {
-        // Get the county name from the 'NAME' property
-        var countyName = feature.properties.boro_name;
-
-        // Create a label marker with the county name as the label
-        return L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'leaflet-div-label',
-                html: countyName, // Use the 'NAME' property as the label
-                iconSize: [100, 40] // Adjust the size of the label marker
-            })
-        });
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createCountyPopupContent(feature.properties));
     }
 });
 
+// Function to create popup content for counties
+function createCountyPopupContent(properties) {
+    // Customize this function based on your county properties
+    return `<strong>COUNTY</strong><BR>
+            <strong></strong> ${properties.boro_name}`;
+}
 
 
 
@@ -200,7 +198,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 // Function to create popup content for major oil storage
 function createMajorOilStoragePopupContent(properties) {
     // Customize this function based on your GeoJSON properties
-    return `<strong>Site Name:</strong> ${properties.SITENAME}<br><strong>Site Type:</strong> ${properties.SITETYPE}`;
+    return `<strong>MAJOR OIL STORAGE:</strong><br><strong>Site Name:</strong> ${properties.SITENAME}<br><strong>Site Type:</strong> ${properties.SITETYPE}`;
 }
 
 // Power Plants Layer
@@ -226,7 +224,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 // Function to create popup content for power plants
 function createPowerPlantPopupContent(properties) {
     // Customize this function based on your power plant properties
-    return `<strong>POWER PLANTS</strong>
+    return `<strong>POWER PLANTS</strong><br>
             <strong>Name:</strong> ${properties.Name}<br>
             <strong>Capacity:</strong> ${properties.t_Output} MW<br>
             <strong>Fuel Type:</strong> ${properties.t_fuels}`;
@@ -290,7 +288,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 // Function to create popup content for gas pipelines
 function createGasPipelinePopupContent(properties) {
     // Customize this function based on your gas pipeline properties
-    return `<strong>GAS PIPELINE:</strong> 
+    return `<strong>GAS PIPELINE:</strong> <br>
     <strong>Operator:</strong> ${properties.Operator}`;
 }
 
@@ -315,7 +313,9 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
 // Function to create popup content for transmission lines
 function createTransmissionLinePopupContent(properties) {
     // Customize this function based on your transmission line properties
-    return `<strong>Owner:</strong> ${properties.OWNER}<br>
+    return `    <strong>ELECTRIC TRANSMISSION LINES:</strong><br>
+
+    <strong>Owner:</strong> ${properties.OWNER}<br>
             <strong>Type:</strong> ${properties.TYPE}<br>
             <strong>Voltage:</strong> ${properties.VOLTAGE}`;
 }
@@ -340,8 +340,21 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createWasteTransferFacilityPopupContent(feature.properties));
     }
 }).addTo(wasteLayerGroup);
+
+// Function to create popup content for waste transfer facilities
+function createWasteTransferFacilityPopupContent(properties) {
+    // Customize this function based on your waste transfer facility properties
+    return `<strong>WASTE TRANSFER</strong><BR>
+            <strong>Name:</strong> ${properties.FACILITY_NAME}<br>
+            <strong>Owner:</strong> ${properties.OWNER_NAME}`;
+}
+
 
 // NYC CSO Layer
 var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.geojson', {
@@ -358,6 +371,10 @@ var nycsoLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycso.ge
     }
 }).addTo(wasteLayerGroup);
 
+
+
+
+
 // Wastewater Treatment Layer
 var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/wastewatertreatment.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -370,8 +387,23 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createWastewaterTreatmentPopupContent(feature.properties));
     }
 }).addTo(wasteLayerGroup);
+
+// Function to create popup content for wastewater treatment facilities
+function createWastewaterTreatmentPopupContent(properties) {
+    // Customize this function based on your wastewater treatment facility properties
+    return `<strong>WASTEWATER TREATMENT PLANT</strong><BR>
+            <strong>District:</strong> ${properties['DISTRICT NAME']}`;
+}
+
+
+
+
 
 // Inactive Solid Waste Landfill Layer
 var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/inactivesolidwastelandfill.geojson', {
@@ -395,7 +427,7 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
 // Function to create popup content for inactive solid waste landfill
 function createSolidWasteLandfillPopupContent(properties) {
     // Customize this function based on your GeoJSON properties
-    return `<strong>LANDFILL</strong>
+    return `<strong>LANDFILL</strong><BR>
     <strong>Facility Name:</strong> ${properties.FACILITY_NAME}`;
 }
 
@@ -412,8 +444,20 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createRecyclingFacilityPopupContent(feature.properties));
     }
 }).addTo(wasteLayerGroup);
+
+// Function to create popup content for recycling facilities
+function createRecyclingFacilityPopupContent(properties) {
+    // Customize this function based on your recycling facility properties
+    return `<strong>RECYCLING FACILITY</strong><BR>
+            <strong>Name:</strong> ${properties.FACILITY_NAME}<br>
+            <strong>Owner:</strong> ${properties.OWNER_NAME}`;
+}
 
 
 
@@ -588,7 +632,7 @@ function createChemicalStoragePopupContent(properties) {
     // Customize this function based on your chemical storage properties
     return `<strong>CHEMICAL STORAGE</strong><br>
             <strong>Name:</strong> ${properties.SITENAME}<br>
-            <strong>Chemical Storage Type:</strong> ${properties.SITETYPE}`;
+            <strong>Type:</strong> ${properties.SITETYPE}`;
 }
 
 
