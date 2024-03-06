@@ -656,10 +656,12 @@ function getColorForDiscipline(discipline) {
 
 
 
+// Evacuation Zones Layer
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
+        var category = feature.properties.HURRICANE_;
         return {
-            fillColor: 'red',
+            fillColor: getEvacuationZoneColor(category),
             color: 'black',
             weight: 0.5,
             opacity: 0.5,
@@ -671,6 +673,27 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         layer.bindPopup("Evacuation Zone Name: " + feature.properties.NAME);
     }
 });
+
+// Function to get the evacuation zone color based on the category
+function getEvacuationZoneColor(category) {
+    switch (category) {
+        case '1':
+            return '#ffdbe5'; 
+        case '2':
+            return '#ffadc5'; 
+        case '3':
+            return '#f74a7b';
+        case '4':
+            return '#ff0d51'; 
+        case '5':
+            return '#94002a'; 
+        case '6':
+            return '#570019'; 
+        default:
+            return '#808080'; // Default color for unknown categories (Grey)
+    }
+}
+
 
 
 
@@ -1333,13 +1356,15 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
 
 // Legend symbol shapes, colors, and images for each layer
-setLegendSymbol('evacuationzones', 'red', 'polygon');
 setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 
 setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
+
+
+
 
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
@@ -1362,6 +1387,15 @@ setLegendSymbol('censusTractLayer', 'green', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
 setLegendSymbol('nycejsites', {'EJ Area': 'rgba(255, 0, 0, 0.7)', 'Not EJ Area': 'rgba(0, 255, 0, 0.7)', 'Potential EJ Area': 'rgba(0, 0, 255, 0.7)'}, 'polygon', { layout: 'vertical' });
+
+setLegendSymbol('evacuationzones', {
+    '1': '#ffdbe5', 
+    '2': '#ffadc5', 
+    '3': '#f74a7b', 
+    '4': '#ff0d51', 
+    '5': '#94002a', 
+    '6': '#570019' 
+}, 'polygon');
 
 
 // Legend for Population Layer (white to dark gray colors)
