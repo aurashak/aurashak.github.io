@@ -584,9 +584,9 @@ background-color: #ffe600ce;
 .nymapboxgroup {
   position: relative;
   padding: 10px 5px;
-  margin: 5px 2px;
+  margin: 5px 2px 0px 2px;
   font-weight: bold;
-  border-radius: 3px;
+  border-radius: 2px;
   border: solid .3px rgba(18, 18, 18, 0.68);
   background-color: #f3f3f3;
 
