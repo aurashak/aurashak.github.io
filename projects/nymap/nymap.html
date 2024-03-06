@@ -416,27 +416,33 @@ NY Environmental Infrastructure Map
 
 <!-- Evacution Zones -->
 <div class="nymapboxcontainer">
-    <div class="nymapbox">      
-    <div style="display: flex; align-items: center;" class="legend-item">
-        <label class="switch-label-b"><b>Evacuation Zones</b> </label>
-        <label class="switch" style="margin-left: auto;">
-            <input type="checkbox" class="switch-input" id="evacuationzones">
-            <div class="switch-track">
-                <div class="switch-thumb"></div>
-            </div>
-        </label>
-    </div>
-    </div>
-    
-    
     <div class="nymapbox">
-    <div style="align-items: center;" class="legend-item">
-    <div class="legend-symbol" style="margin-right: 10px;" id="legend-evacuationzones"></div>
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <label class="switch-label-b"><b>Evacuation Zones</b> </label>
+            <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="evacuationzones">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
     </div>
+
+    <div class="nymapbox">
+        <div style="align-items: center;" class="legend-item">
+            <label for="evacuationzonesDropdown">Select Color:</label>
+            <select id="evacuationzonesDropdown">
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="purple">Purple</option>
+            </select>
+        </div>
     </div>
-    </div>
-    
-    <br>
+</div>
+<br>
 
 
 
