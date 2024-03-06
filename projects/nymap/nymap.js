@@ -397,7 +397,7 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
 function createWastewaterTreatmentPopupContent(properties) {
     // Customize this function based on your wastewater treatment facility properties
     return `<strong>WASTEWATER TREATMENT PLANT</strong><BR>
-            <strong>District:</strong> ${properties['DISTRICT NAME']}`;
+            <strong>District:</strong> ${properties['DISTRICT_NAME']}`;
 }
 
 
@@ -427,7 +427,7 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
 function createSolidWasteLandfillPopupContent(properties) {
     // Customize this function based on your GeoJSON properties
     return `<strong>LANDFILL</strong><BR>
-    <strong>Facility Name:</strong> ${properties.FACILITY_NAME}`;
+    <strong>Name:</strong> ${properties.FACILITY_NAME}`;
 }
 
 
