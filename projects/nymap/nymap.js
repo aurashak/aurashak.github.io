@@ -951,6 +951,7 @@ allLayersCheckbox.addEventListener('change', function () {
 
     // Toggle visibility for individual layers
     toggleLayerVisibility(evacuationzonesLayer, isChecked); // Toggle evacuation zones visibility
+    toggleLayerVisibility(floodplainLayer, isChecked); // Toggle evacuation zones visibility
 
     toggleLayerVisibility(remediationsitesLayer, isChecked);
     toggleLayerVisibility(nycbusdepotsLayer, isChecked);
