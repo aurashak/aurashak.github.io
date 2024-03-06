@@ -714,7 +714,7 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
     },
     onEachFeature: function (feature, layer) {
         // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Evacuation Zone Name: " + feature.properties.NAME);
+        layer.bindPopup("Evacuation Zone: " + feature.properties.HURRICANE_X);
     }
 });
 
