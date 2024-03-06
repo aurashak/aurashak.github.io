@@ -1495,7 +1495,6 @@ setLegendSymbol('population', {
     '17000+': '#000'  // Black
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
-
 // Legend for Power Plants Layer (colors for each fuel type)
 setLegendSymbol('powerplants', {
     'Conventional Hydroelectric': 'green',
@@ -1508,11 +1507,12 @@ setLegendSymbol('powerplants', {
     'Natural Gas Fired Combustion Turbine': 'cyan',
     'Natural Gas Steam Turbine': 'pink',
     'Petroleum Liquids': 'olive',
-    'Nuclear': 'black',
+    'Nuclear': 'white',
     'Onshore Wind turbine': 'teal',
     'Solar Photovoltaic': 'lime',
-    'Wood/Wood Waste Biomass': 'grey'
-}, 'circle');
+    'Wood/Wood Waste Biomass': 'grey',
+    'default': 'black'
+}, 'circle', 'Combination'); // Add 'Combination' as the label for the default color
 
 
 // Set legend symbols for Cultural Institutions Layer
