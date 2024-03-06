@@ -773,14 +773,16 @@ border: 1px solid black;
 }
 
 
-
 .time-control {
+}
 
-  border-radius: 3px;
-  vertical-align: middle;
-  font-family: sans-serif;
-  font-size: 14px;
-  padding: 8px 12px;
+label {
+  margin-right: 5px; /* Adjust margin as needed */
+}
+
+input[type="range"] {
+  width: 80px; /* Adjust width as needed */
+  margin: 0 5px; /* Adjust margin as needed */
 }
 
 
