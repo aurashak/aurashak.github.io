@@ -209,8 +209,6 @@ function createMajorOilStoragePopupContent(properties) {
 
 
 
-
-
 // Power Plants Layer
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -242,10 +240,10 @@ function createPowerPlantPopupContent(properties) {
 
 // Function to get color based on fuel type
 function getColorForFuelType(t_Fuels) {
-    console.log(t_Fuels);  // Add this line to log the fuel type value
+    console.log('Fuel Type:', t_Fuels);  // Log the fuel type value
+
     switch (t_Fuels.trim()) {
-       
-            case 'Conventional Hydroelectric':
+        case 'Conventional Hydroelectric':
             return 'green';
         case 'Conventional Steam Coal':
             return 'brown';
@@ -277,6 +275,10 @@ function getColorForFuelType(t_Fuels) {
             return '#FFC0CB'; // Default color
     }
 }
+
+// Console log to verify if the layer group is added to the map
+console.log('Energy Layer Group:', energyLayerGroup);
+
 
 
 
