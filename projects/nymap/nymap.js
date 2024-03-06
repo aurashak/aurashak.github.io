@@ -953,6 +953,10 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(nycbusdepotsLayer, isChecked);
     toggleLayerVisibility(nycsubwayLayer, isChecked);
     toggleLayerVisibility(nyrailLayer, isChecked);
+    toggleLayerVisibility(majoroilstorageLayer, isChecked);
+    toggleLayerVisibility(wastewatertreatmentLayer, isChecked);
+    toggleLayerVisibility(recyclingfacilityLayer, isChecked);
+
     toggleLayerVisibility(chemicalstorageLayer, isChecked);
     toggleLayerVisibility(culturalinsLayer, isChecked);
     toggleLayerVisibility(electrictransmissionlinesLayer, isChecked);
