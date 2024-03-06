@@ -950,6 +950,8 @@ allLayersCheckbox.addEventListener('change', function () {
     var isChecked = allLayersCheckbox.checked;
 
     // Toggle visibility for individual layers
+    toggleLayerVisibility(evacuationzonesLayer, isChecked); // Toggle evacuation zones visibility
+
     toggleLayerVisibility(remediationsitesLayer, isChecked);
     toggleLayerVisibility(nycbusdepotsLayer, isChecked);
     toggleLayerVisibility(nycsubwayLayer, isChecked);
@@ -966,20 +968,6 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(nycsoLayer, isChecked);
     toggleLayerVisibility(inactivesolidwastelandfillLayer, isChecked);
     toggleLayerVisibility(aqisiteLayer, isChecked);
-
-    // Move evacuationzonesLayer to the bottom if checked
-    if (isChecked) {
-        // Get the current layer order
-        var layerIds = map.getStyle().layers;
-
-        // Find the index of evacuationzonesLayer
-        var evacuationIndex = layerIds.indexOf('evacuationzonesLayer');
-
-        // Move the layer to the bottom (index 0)
-        if (evacuationIndex > -1) {
-            map.moveLayer('evacuationzonesLayer', 0);
-        }
-    }
 });
 
 // Function to toggle visibility for an individual layer
@@ -990,6 +978,7 @@ function toggleLayerVisibility(layer, isVisible) {
         map.removeLayer(layer);
     }
 }
+
 
 
 
