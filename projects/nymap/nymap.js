@@ -314,9 +314,6 @@ function createGasPipelinePopupContent(properties) {
 
 
 
-
-
-
 // NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
@@ -361,6 +358,10 @@ function createTransmissionLinePopupContent(properties) {
         <strong>Type:</strong> ${properties.TYPE}<br>
         <strong>Voltage:</strong> ${properties.VOLTAGE}`;
 }
+
+// Add console logs for debugging
+console.log('Electric Transmission Lines Layer:', electrictransmissionlinesLayer);
+console.log('GeoJSON Data:', electrictransmissionlinesLayer.toGeoJSON());
 
 
 
