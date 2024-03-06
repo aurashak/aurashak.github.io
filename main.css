@@ -572,12 +572,24 @@ background-color: #ffe600ce;
 
 
 .nymapbox {
+    position: relative;
+    padding: 10px 5px;
+    margin: 5px 2px;
+    font-weight: bold;
+    border-radius: 3px;
+    border: solid .3px rgba(18, 18, 18, 0.68);
+    background-color: #f3f3f3;
+}
+
+.nymapboxgroup {
   position: relative;
-  padding: 5px;
+  padding: 10px 5px;
   margin: 5px 2px;
-  border-radius: 8px;
-  border: solid .3px rgb(18, 18, 18);
+  font-weight: bold;
+  border-radius: 3px;
+  border: solid .3px rgba(18, 18, 18, 0.68);
   background-color: #f3f3f3;
+
 }
 
 .nymapbox:hover .hover-image {
@@ -604,11 +616,13 @@ background-color: #ffe600ce;
 }
 
 .nymapboxcontainer {
-  padding: 3px;
-  margin: 0px;
-  border-radius: 8px;
-  border: solid .3px rgb(18, 18, 18);
-  background-color: #b4b4b4;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 2px;
+    background-color: #b4b4b4;
+    border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
+
 }
 
 
@@ -1560,12 +1574,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .legend-item {
   display: flex;
+    
 }
 
 .legend-symbol {
   margin-right: 10px;
   /* display: flex; */
   align-items: center;
+    
 }
 
 
