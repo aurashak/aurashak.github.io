@@ -1270,7 +1270,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 .leaflet-popup-content-wrapper {
-    padding: 10px 19px;
+    padding: 0;
     margin: 0px auto;
     border-radius: 1px;
     background: #eeeeee;
