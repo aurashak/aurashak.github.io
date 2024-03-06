@@ -306,42 +306,26 @@ function createGasPipelinePopupContent(properties) {
 }
 
 
-
-
-
-
-
-
-
-
 // NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
-        var TYPE = feature.properties.TYPE;
+        var size = calculateMarkerSize(map.getZoom());
+        var lineColor;
 
-        // Check if the railowner is Long Island Rail Road
-        if (TYPE === 'Underground') {
-            return {
-                color: 'blue',
-                weight: 3,
-                opacity: 0.6
-            };
+        // Grouping based on the TYPE property
+        if (feature.properties.TYPE.includes('Underground')) {
+            lineColor = 'blue'; // Color for Underground
+        } else if (feature.properties.TYPE.includes('Overhead')) {
+            lineColor = 'orange'; // Color for Overhead
+        } else {
+            lineColor = 'gray'; // Default color for other cases
         }
-        // Check if the railowner is Metro North Commuter Railroad Company
-        else if (TYPE === 'Overhead') {
-            return {
-                color: 'red',
-                weight: 3,
-                opacity: 0.6
-            };
-        }
-        // Default style for other rail lines (make them invisible)
-        else {
-            return {
-                opacity: 0,
-                fillOpacity: 0
-            };
-        }
+
+        return {
+            color: lineColor,
+            weight: 3,
+            opacity: 0.6
+        };
     },
     onEachFeature: function (feature, layer) {
         // Add a popup for each feature
@@ -358,11 +342,6 @@ function createTransmissionLinePopupContent(properties) {
         <strong>Type:</strong> ${properties.TYPE}<br>
         <strong>Voltage:</strong> ${properties.VOLTAGE}`;
 }
-
-// Add console logs for debugging
-console.log('Electric Transmission Lines Layer:', electrictransmissionlinesLayer);
-console.log('GeoJSON Data:', electrictransmissionlinesLayer.toGeoJSON());
-
 
 
 
@@ -1451,8 +1430,7 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
 
 // Legend symbol shapes, colors, and images for each layer
-setLegendSymbol('electrictransmissionlines-underground', 'blue', 'line');
-setLegendSymbol('electrictransmissionlines-overhead', 'orange', 'line');
+setLegendSymbol('electrictransmissionlines', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 
