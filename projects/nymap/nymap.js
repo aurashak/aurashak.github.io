@@ -213,7 +213,7 @@ function createMajorOilStoragePopupContent(properties) {
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
-        var fillColor = getColorForFuelType(feature.properties.t_fuels);
+        var fillColor = getColorForFuelType(feature.properties.t_Fuels);
         return L.circleMarker(latlng, {
             radius: size,
             fillColor: fillColor,
@@ -1430,7 +1430,8 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
 
 // Legend symbol shapes, colors, and images for each layer
-setLegendSymbol('electrictransmissionlines', 'orange', 'line');
+setLegendSymbol('electrictransmissionlines-underground', 'blue', 'line');
+setLegendSymbol('electrictransmissionlines-overhead', 'orange', 'line');
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 
