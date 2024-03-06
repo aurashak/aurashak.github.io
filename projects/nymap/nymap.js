@@ -214,8 +214,6 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         var fillColor = getColorForFuelType(feature.properties.t_fuels);
-        console.log('Fill Color:', fillColor); // Log the fill color value
-
         return L.circleMarker(latlng, {
             radius: size,
             fillColor: fillColor,
@@ -242,8 +240,7 @@ function createPowerPlantPopupContent(properties) {
 
 // Function to get color based on fuel type
 function getColorForFuelType(fueltype) {
-    fueltype = fueltype.trim(); // Trim spaces
-    console.log('Fuel Type:', fueltype);
+    console.log('Fuel Type:', fueltype);  // Log the fuel type value
 
     switch (fueltype) {
         case 'Conventional Hydroelectric':
@@ -309,13 +306,23 @@ function createGasPipelinePopupContent(properties) {
 }
 
 
-
 // NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
         var size = calculateMarkerSize(map.getZoom());
+        var lineColor;
+
+        // Grouping based on the TYPE property
+        if (feature.properties.TYPE.includes('Underground')) {
+            lineColor = 'blue'; // Color for Underground
+        } else if (feature.properties.TYPE.includes('Overhead')) {
+            lineColor = 'orange'; // Color for Overhead
+        } else {
+            lineColor = 'gray'; // Default color for other cases
+        }
+
         return {
-            color: 'orange',
+            color: lineColor,
             weight: 3,
             opacity: 0.6
         };
@@ -329,11 +336,11 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
 // Function to create popup content for transmission lines
 function createTransmissionLinePopupContent(properties) {
     // Customize this function based on your transmission line properties
-    return `    <strong>ELECTRIC TRANSMISSION LINES:</strong><br>
-
-    <strong>Owner:</strong> ${properties.OWNER}<br>
-            <strong>Type:</strong> ${properties.TYPE}<br>
-            <strong>Voltage:</strong> ${properties.VOLTAGE}`;
+    return `
+        <strong>ELECTRIC TRANSMISSION LINES:</strong><br>
+        <strong>Owner:</strong> ${properties.OWNER}<br>
+        <strong>Type:</strong> ${properties.TYPE}<br>
+        <strong>Voltage:</strong> ${properties.VOLTAGE}`;
 }
 
 
