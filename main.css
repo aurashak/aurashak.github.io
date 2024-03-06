@@ -3317,9 +3317,8 @@ line-height: 1.5;
 
 
 
-
-/* Add the following styles for larger tablets */
-@media screen and (min-width: 601px) and (max-width: 1024px) {
+/* Add the following styles for larger tablets (601px to 1124px) */
+@media screen and (min-width: 601px) and (max-width: 1124px) {
   h1 {
     font-size: 24px;
   }
@@ -3345,7 +3344,18 @@ line-height: 1.5;
     margin: 10px;
   }
 
-  /* Add other styles for larger tablets as needed */
+  .hidden-projects {
+    font-size: 18px;
+    margin-left: 15px;
+    margin: 0px 15px 15px 15px;
+    line-height: 1.6;
+  }
+
+  .hidden-projects a {
+    margin-right: 8px;
+  }
+
+  /* Add other styles for hidden projects or other elements as needed */
 }
 }
 
