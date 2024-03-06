@@ -124,24 +124,24 @@ var aqisiteLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/aqisit
 
 
 
-
 // floodplain layer
 var floodplainCheckbox = document.getElementById('floodplain');
 var opacitySlider = document.getElementById('opacity-slider');
 var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100yearfloodplain.geojson', {
     style: function (feature) {
-        var opacityValue = parseFloat(opacitySlider.value);
+        // var opacityValue = parseFloat(opacitySlider.value); // Blocked out opacity slider function
         return {
             fillColor: '#ADD8E6',
             color: 'black',
             weight: 0,
             opacity: 0,
-            fillOpacity: opacityValue 
+            fillOpacity: 0.6 // Set fixed transparency to 0.6
         };
     }
 });
 
-// Add an event listener to the opacity slider
+// Add an event listener to the opacity slider (blocked out)
+/*
 opacitySlider.addEventListener('input', function () {
     var opacityValue = parseFloat(opacitySlider.value);
 
@@ -152,6 +152,7 @@ opacitySlider.addEventListener('input', function () {
         });
     });
 });
+*/
 
 // Add an event listener to the floodplain checkbox
 floodplainCheckbox.addEventListener('change', function () {
@@ -161,6 +162,7 @@ floodplainCheckbox.addEventListener('change', function () {
         map.removeLayer(floodplainLayer);
     }
 });
+
 
 
 
@@ -963,7 +965,7 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(wastetransferfacilityLayer, isChecked);
     toggleLayerVisibility(nycsoLayer, isChecked);
     toggleLayerVisibility(inactivesolidwastelandfillLayer, isChecked);
-    toggleLayerVisibility(aqisitesLayer, isChecked);
+    toggleLayerVisibility(aqisiteLayer, isChecked);
 
     // Move evacuationzonesLayer to the bottom if checked
     if (isChecked) {
