@@ -714,7 +714,7 @@ function getColorForDiscipline(discipline) {
 // Evacuation Zones Layer
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
-        var category = feature.properties.HURRICANE_;
+        var category = feature.properties.HURRICANE_X;
         return {
             fillColor: getEvacuationZoneColor(category),
             color: 'black',
