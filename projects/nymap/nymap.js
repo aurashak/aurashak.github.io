@@ -272,7 +272,7 @@ function getColorForFuelType(fueltype) {
         case 'Wood/Wood Waste Biomass':
             return 'grey';
         default:
-            return '#FFC0CB'; // Default color
+            return '#000'; // Default color
     }
 }
 
