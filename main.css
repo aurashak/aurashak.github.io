@@ -1781,7 +1781,10 @@ margin-right: 5px;
   width: 60px;
   align-items: center;
   justify-content: center;
-
+background: rgb(151, 151, 151);
+  height: 7px;
+  border-radius: 20px;
+  border: .2px solid rgb(68, 68, 68);
 }
 
 #opacity-slider::-webkit-slider-thumb {
@@ -1794,12 +1797,13 @@ margin-right: 5px;
 }
 
 #opacity-slider::-moz-range-thumb {
-  width: 30px;
-  height: 15px;
-  background: #37a63b;
+  width: 20px;
+  height: 20px;
+  background: #257e28;
   cursor: pointer;
+  border-radius: 50%;
+  border: .2px solid rgb(63, 63, 63);
 }
-
 
 
 
