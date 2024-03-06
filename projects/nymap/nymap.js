@@ -201,6 +201,16 @@ function createMajorOilStoragePopupContent(properties) {
     return `<strong>MAJOR OIL STORAGE:</strong><br><strong>Site Name:</strong> ${properties.SITENAME}<br><strong>Site Type:</strong> ${properties.SITETYPE}`;
 }
 
+
+
+
+
+
+
+
+
+
+
 // Power Plants Layer
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -227,14 +237,15 @@ function createPowerPlantPopupContent(properties) {
     return `<strong>POWER PLANTS</strong><br>
             <strong>Name:</strong> ${properties.Name}<br>
             <strong>Capacity:</strong> ${properties.t_Output} MW<br>
-            <strong>Fuel Type:</strong> ${properties.t_fuels}`;
+            <strong>Fuel Type:</strong> ${properties.t_Fuels}`;
 }
 
 // Function to get color based on fuel type
-function getColorForFuelType(t_fuels) {
-    console.log(t_fuels);  // Add this line to log the fuel type value
-    switch (t_fuels) {
-        case 'Conventional Hydroelectric':
+function getColorForFuelType(t_Fuels) {
+    console.log(t_Fuels);  // Add this line to log the fuel type value
+    switch (t_Fuels.trim()) {
+       
+            case 'Conventional Hydroelectric':
             return 'green';
         case 'Conventional Steam Coal':
             return 'brown';
@@ -699,11 +710,10 @@ function getColorForDiscipline(discipline) {
 }
 
 
-
 // Evacuation Zones Layer
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
-        var category = feature.properties.HURRICANE_;
+        var category = feature.properties.HURRICANE_X;
         return {
             fillColor: getEvacuationZoneColor(category),
             color: 'black',
@@ -713,51 +723,16 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
         };
     },
     onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup(createEvacuationZonsPopupContent(feature.content));
-
+        // Corrected: Use feature.properties instead of feature.content
+        layer.bindPopup(createEvacuationZonsPopupContent(feature.properties));
     }
 });
 
 // Function to create popup content for evacuationzones
 function createEvacuationZonsPopupContent(properties) {
     return `<strong>EVACUATION ZONE</strong><br>
-            <strong>Name:</strong> ${properties.SITENAME}<br>
-            <strong>Type:</strong> ${properties.SITETYPE}`;
+            <strong>Category:</strong> ${properties.HURRICANE_X}`;
 }
-
-
-
-// Chemical Storage Layer
-var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/chemicalstorage.geojson', {
-    pointToLayer: function (feature, latlng) {
-        var size = calculateMarkerSize(map.getZoom());
-        return L.circleMarker(latlng, {
-            radius: size,
-            fillColor: 'blue',
-            color: 'black',
-            weight: 0,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        });
-    },
-    onEachFeature: function (feature, layer) {
-        // Add a popup for each feature
-        layer.bindPopup(createChemicalStoragePopupContent(feature.properties));
-    }
-});
-
-// Function to create popup content for chemical storage
-function createChemicalStoragePopupContent(properties) {
-    // Customize this function based on your chemical storage properties
-    return `<strong>CHEMICAL STORAGE</strong><br>
-            <strong>Name:</strong> ${properties.SITENAME}<br>
-            <strong>Type:</strong> ${properties.SITETYPE}`;
-}
-
-
-
-
 
 // Function to get the evacuation zone color based on the category
 function getEvacuationZoneColor(category) {
@@ -776,8 +751,10 @@ function getEvacuationZoneColor(category) {
             return '#ffdbe5'; // Pale Pink
         default:
             return 'rgba(128, 128, 128, 0.1)'; // Default color for unknown categories (Transparent Grey)
-        }
+    }
 }
+
+
 
 
 
