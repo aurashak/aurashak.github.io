@@ -310,31 +310,33 @@ function createGasPipelinePopupContent(properties) {
 // NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
-        var type = feature.properties.TYPE;
-        var color;
-
-        // Assign different colors based on the TYPE property
-        switch (TYPE) {
-            case 'Underground':
-                color = 'blue';
-                break;
-            case 'AC; Underground':
-                color = 'green';
-                break;
-            case 'AC; Overhead':
-                color = 'yellow';
-                break;
-            case 'Overhead':
-                color = 'red';
-                break;
-            default:
-                color = 'orange'; // Default color if TYPE is not matched
-        }
-
-        return {
-            color: color,
+        var size = calculateMarkerSize(map.getZoom());
+        // Set default style
+        var defaultStyle = {
             weight: 3,
             opacity: 0.6
+        };
+
+        // Customize style for "Overhead" type
+        if (feature.properties.TYPE === 'Overhead') {
+            return {
+                ...defaultStyle,
+                color: 'blue' // Set a unique color for "Overhead"
+            };
+        }
+
+        // Customize style for "Underground" type
+        if (feature.properties.TYPE === 'Underground') {
+            return {
+                ...defaultStyle,
+                color: 'green' // Set a unique color for "Underground"
+            };
+        }
+
+        // Default style for other types
+        return {
+            ...defaultStyle,
+            color: 'orange' // Set a default color
         };
     },
     onEachFeature: function (feature, layer) {
@@ -343,6 +345,14 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
     }
 }).addTo(energyLayerGroup);
 
+// Function to create popup content for transmission lines
+function createTransmissionLinePopupContent(properties) {
+    // Customize this function based on your transmission line properties
+    return `<strong>ELECTRIC TRANSMISSION LINES:</strong><br>
+            <strong>Owner:</strong> ${properties.OWNER}<br>
+            <strong>Type:</strong> ${properties.TYPE}<br>
+            <strong>Voltage:</strong> ${properties.VOLTAGE}`;
+}
 
 
 
