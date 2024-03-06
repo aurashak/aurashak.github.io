@@ -940,6 +940,46 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
+
+// Get the checkbox element
+var allLayersCheckbox = document.getElementById('allLayersCheckbox');
+
+// Add an event listener to the checkbox
+allLayersCheckbox.addEventListener('change', function () {
+    // Check if the checkbox is checked
+    var isChecked = allLayersCheckbox.checked;
+
+    // Toggle visibility for individual layers
+    toggleLayerVisibility(remediationsitesLayer, isChecked);
+    toggleLayerVisibility(nycbusdepotsLayer, isChecked);
+    toggleLayerVisibility(nycsubwayLayer, isChecked);
+    toggleLayerVisibility(nyrailLayer, isChecked);
+    toggleLayerVisibility(chemicalstorageLayer, isChecked);
+    toggleLayerVisibility(culturalinsLayer, isChecked);
+    toggleLayerVisibility(evacuationzonesLayer, isChecked);
+    toggleLayerVisibility(electrictransmissionlinesLayer, isChecked);
+    toggleLayerVisibility(nygaspipelinesLayer, isChecked);
+    toggleLayerVisibility(powerplantsLayer, isChecked);
+    toggleLayerVisibility(wastetransferfacilityLayer, isChecked);    
+    toggleLayerVisibility(nycsoLayer, isChecked);
+    toggleLayerVisibility(inactivesolidwastelandfillLayer, isChecked);
+    toggleLayerVisibility(aqisitesLayer, isChecked);
+ 
+});
+
+// Function to toggle visibility for an individual layer
+function toggleLayerVisibility(layer, isVisible) {
+    if (isVisible) {
+        map.addLayer(layer);
+    } else {
+        map.removeLayer(layer);
+    }
+}
+
+
+
+
+
 /* 
 
 // Census Tract Layer
