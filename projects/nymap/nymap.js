@@ -317,13 +317,13 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
             opacity: 0.6
         };
 
-        if (feature.properties.TYPE === 'AC; Overhead') {
+        if (feature.properties.TYPE === 'AC; OVERHEAD') {
             return {
                 color: 'blue' // 
             };
         }
 
-        if (feature.properties.TYPE === 'AC; Underground') {
+        if (feature.properties.TYPE === 'AC; UNDERGROUND') {
             return {
                 color: 'green' 
             };
