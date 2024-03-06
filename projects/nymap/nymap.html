@@ -54,7 +54,7 @@ NY Environmental Infrastructure Map
 
         <div class="nymapboxcontainer">
 
-<div class="nymapbox">
+<div class="nymapboxgrouptop">
     <div style="display: flex; align-items: center;" class="legend-item">
         <div class="legend-symbol" id="legend-floodplain"></div>
         <label class="switch-label-b" ><b>Coastal Flooding</b></label>
@@ -68,7 +68,7 @@ NY Environmental Infrastructure Map
 
 
 
-<div class="nymapbox">
+<div class="nymapboxgroupbottom">
 
 <div id="opacity-slider-container" style="margin-left: auto;">
 <label for="opacity-slider" id="opacity-slider-label">Opacity:</label>
@@ -223,7 +223,7 @@ NY Environmental Infrastructure Map
     </div>
 </div>
 
-<div class="nymapbox">
+<div class="nymapboxgroupbottom">
     <div style="align-items: center;" class="legend-item">
         <div class="legend-symbol" style="margin-right: 10px;" id="legend-electrictransmissionlines"></div>
     </div>
@@ -250,10 +250,12 @@ NY Environmental Infrastructure Map
             </div>
             </div>
         
-<div class="nymapbox">
-    <div class="time-control">Shadows
-        <input id="date" type="range" min="1" max="365" step="1"><label for="date"></label>
-        <input id="time" type="range" min="0" max="23" step="1"><label for="time"></label>
+<div class="nymapboxgrouptop">
+    <label class="switch-label">Shadows</label>  </div>  
+    <div class="nymapboxgroupbottom">
+        <div class="time-control">
+        <input id="date" type="range" min="1" max="365" step="1"><label for="date">Date:</label><br>
+        <input id="time" type="range" min="0" max="23" step="1"><label for="time">Time:</label>
         </div>
 
  </div>
@@ -408,7 +410,7 @@ NY Environmental Infrastructure Map
             </label>
         </div>
     </div>
-    <div class="nymapboxbottom">
+    <div class="nymapboxgroupbottom">
         Per census tract
         <div style="align-items: center;" class="legend-item">
             <div class="legend-symbol" style="margin-right: 10px;" id="legend-avgIncome"></div>
