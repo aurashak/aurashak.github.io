@@ -722,20 +722,20 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 function getEvacuationZoneColor(category) {
     switch (category) {
         case '1':
-            return '#ffdbe5'; 
+            return '#570019'; // Dark Red
         case '2':
-            return '#ffadc5'; 
+            return '#94002a'; // Deep Red
         case '3':
-            return '#f74a7b';
+            return '#ff0d51'; // Red
         case '4':
-            return '#ff0d51'; 
+            return '#f74a7b'; // Pink
         case '5':
-            return '#94002a'; 
+            return '#ffadc5'; // Light Pink
         case '6':
-            return '#570019'; 
+            return '#ffdbe5'; // Pale Pink
         default:
-            return '#808080'; // Default color for unknown categories (Grey)
-    }
+            return 'rgba(128, 128, 128, 0.5)'; // Default color for unknown categories (Transparent Grey)
+        }
 }
 
 
@@ -1438,8 +1438,10 @@ setLegendSymbol('evacuationzones', {
     '3': '#f74a7b', 
     '4': '#ff0d51', 
     '5': '#94002a', 
-    '6': '#570019' 
+    '6': '#570019',
+    'default': 'rgba(128, 128, 128, 0.5)' // Transparent Grey for unknown categories
 }, 'polygon');
+
 
 
 // Legend for Population Layer (white to dark gray colors)
