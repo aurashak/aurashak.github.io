@@ -57,7 +57,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 // Function to create popup content for counties
 function createCountyPopupContent(properties) {
     // Customize this function based on your county properties
-    return `<strong>COUNTY</strong><BR>
+    return `<strong style="background-color: #ffe600ce;">COUNTY</strong><br>
             <strong></strong> ${properties.boro_name}`;
 }
 
@@ -198,7 +198,7 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 // Function to create popup content for major oil storage
 function createMajorOilStoragePopupContent(properties) {
     // Customize this function based on your GeoJSON properties
-    return `<strong>MAJOR OIL STORAGE:</strong><br><strong>Site Name:</strong> ${properties.SITENAME}<br><strong>Site Type:</strong> ${properties.SITETYPE}`;
+    return `<strong style="background-color: #ffe600ce;">MAJOR OIL STORAGE:</strong><br><strong>Site Name:</strong> ${properties.SITENAME}<br><strong>Site Type:</strong> ${properties.SITETYPE}`;
 }
 
 
@@ -232,7 +232,7 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 // Function to create popup content for power plants
 function createPowerPlantPopupContent(properties) {
     // Customize this function based on your power plant properties
-    return `<strong>POWER PLANTS</strong><br>
+    return `<strong style="background-color: #ffe600ce;">POWER PLANTS</strong><br>
             <strong>Name:</strong> ${properties.Name}<br>
             <strong>Capacity:</strong> ${properties.t_Output} MW<br>
             <strong>Fuel Type:</strong> ${properties.t_Fuels}`;
@@ -301,7 +301,7 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 // Function to create popup content for gas pipelines
 function createGasPipelinePopupContent(properties) {
     // Customize this function based on your gas pipeline properties
-    return `<strong>GAS PIPELINE:</strong> <br>
+    return `<strong style="background-color: #ffe600ce;">GAS PIPELINE:</strong> <br>
     <strong>Operator:</strong> ${properties.Operator}`;
 }
 
@@ -320,7 +320,6 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
         // Customize style for "Overhead" type
         if (feature.properties.TYPE === 'Overhead') {
             return {
-                ...defaultStyle,
                 color: 'blue' // Set a unique color for "Overhead"
             };
         }
@@ -328,14 +327,12 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
         // Customize style for "Underground" type
         if (feature.properties.TYPE === 'Underground') {
             return {
-                ...defaultStyle,
                 color: 'green' // Set a unique color for "Underground"
             };
         }
 
         // Default style for other types
         return {
-            ...defaultStyle,
             color: 'orange' // Set a default color
         };
     },
@@ -348,7 +345,7 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
 // Function to create popup content for transmission lines
 function createTransmissionLinePopupContent(properties) {
     // Customize this function based on your transmission line properties
-    return `<strong>ELECTRIC TRANSMISSION LINES:</strong><br>
+    return `<strong style="background-color: #ffe600ce;">ELECTRIC TRANSMISSION LINES:</strong><br>
             <strong>Owner:</strong> ${properties.OWNER}<br>
             <strong>Type:</strong> ${properties.TYPE}<br>
             <strong>Voltage:</strong> ${properties.VOLTAGE}`;
@@ -384,7 +381,7 @@ var wastetransferfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geoj
 // Function to create popup content for waste transfer facilities
 function createWasteTransferFacilityPopupContent(properties) {
     // Customize this function based on your waste transfer facility properties
-    return `<strong>WASTE TRANSFER</strong><BR>
+    return `<strong style="background-color: #ffe600ce;">WASTE TRANSFER</strong><BR>
             <strong>Name:</strong> ${properties.FACILITY_NAME}<br>
             <strong>Owner:</strong> ${properties.OWNER_NAME}`;
 }
@@ -431,7 +428,7 @@ var wastewatertreatmentLayer = L.geoJSON.ajax('https://aurashak.github.io/geojso
 // Function to create popup content for wastewater treatment facilities
 function createWastewaterTreatmentPopupContent(properties) {
     // Customize this function based on your wastewater treatment facility properties
-    return `<strong>WASTEWATER TREATMENT PLANT</strong><BR>
+    return `<strong style="background-color: #ffe600ce;">WASTEWATER TREATMENT PLANT</strong><BR>
             <strong>District:</strong> ${properties['DISTRICT_NAME']}`;
 }
 
@@ -461,7 +458,7 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
 // Function to create popup content for inactive solid waste landfill
 function createSolidWasteLandfillPopupContent(properties) {
     // Customize this function based on your GeoJSON properties
-    return `<strong>LANDFILL</strong><BR>
+    return `<strong style="background-color: #ffe600ce;">LANDFILL</strong><BR>
     <strong>Name:</strong> ${properties.FACILITY_NAME}`;
 }
 
@@ -488,7 +485,7 @@ var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/
 // Function to create popup content for recycling facilities
 function createRecyclingFacilityPopupContent(properties) {
     // Customize this function based on your recycling facility properties
-    return `<strong>RECYCLING FACILITY</strong><BR>
+    return `<strong style="background-color: #ffe600ce;">RECYCLING FACILITY</strong><BR>
             <strong>Name:</strong> ${properties.FACILITY_NAME}<br>
             <strong>Owner:</strong> ${properties.OWNER_NAME}`;
 }
@@ -664,7 +661,7 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 // Function to create popup content for chemical storage
 function createChemicalStoragePopupContent(properties) {
     // Customize this function based on your chemical storage properties
-    return `<strong>CHEMICAL STORAGE</strong><br>
+    return `<strong style="background-color: #ffe600ce;">CHEMICAL STORAGE</strong><br>
             <strong>Name:</strong> ${properties.SITENAME}<br>
             <strong>Type:</strong> ${properties.SITETYPE}`;
 }
@@ -753,7 +750,7 @@ var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
 
 // Function to create popup content for evacuationzones
 function createEvacuationZonsPopupContent(properties) {
-    return `<strong>EVACUATION ZONE</strong><br>
+    return `<strong style="background-color: #ffe600ce;">EVACUATION ZONE</strong><br>
             <strong>Category:</strong> ${properties.HURRICANE_}`;
 }
 
@@ -1441,7 +1438,12 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
 
 // Legend symbol shapes, colors, and images for each layer
-setLegendSymbol('electrictransmissionlines', 'orange', 'line');
+setLegendSymbol('electrictransmissionlines', {
+    'Overhead': 'blue',        // Legend for "Overhead" type
+    'Underground': 'green',    // Legend for "Underground" type
+    'Other Types': 'orange'    // Legend for other types (default)
+}, 'line');
+
 setLegendSymbol('aqisite', 'green', 'circle');
 setLegendSymbol('chemicalstorage', 'blue', 'circle');
 
