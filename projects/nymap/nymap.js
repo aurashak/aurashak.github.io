@@ -232,6 +232,7 @@ function createPowerPlantPopupContent(properties) {
 
 // Function to get color based on fuel type
 function getColorForFuelType(t_fuels) {
+    console.log(t_fuels);  // Add this line to log the fuel type value
     switch (t_fuels) {
         case 'Conventional Hydroelectric':
             return 'green';
