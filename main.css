@@ -581,15 +581,24 @@ background-color: #ffe600ce;
     background-color: #f3f3f3;
 }
 
-.nymapboxgroup {
+.nymapboxgrouptop {
   position: relative;
   padding: 10px 5px;
-  margin: 5px 2px 0px 2px;
+  margin: 10px 0px 0px 0px;
   font-weight: bold;
   border-radius: 2px;
   border: solid .3px rgba(18, 18, 18, 0.68);
   background-color: #f3f3f3;
+}
 
+.nymapboxgroupbottom {
+  position: relative;
+  padding: 10px 5px;
+  margin: 0px 0px 10px 0px;
+  font-weight: bold;
+  border-radius: 2px;
+  border: solid .3px rgba(18, 18, 18, 0.68);
+  background-color: #f3f3f3;
 }
 
 .nymapbox:hover .hover-image {
