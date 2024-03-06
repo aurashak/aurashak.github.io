@@ -215,9 +215,9 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 // Function to create popup content for power plants
 function createPowerPlantPopupContent(properties) {
     // Customize this function based on your power plant properties
-    return `<strong>Power Plant:</strong> ${properties.name}<br>
-            <strong>Capacity:</strong> ${properties.capacity} MW<br>
-            <strong>Fuel Type:</strong> ${properties.fuel_type}`;
+    return `<strong>Power Plant:</strong> ${properties.Name}<br>
+            <strong>Capacity:</strong> ${properties.t_Output} MW<br>
+            <strong>Fuel Type:</strong> ${properties.t_fuels}`;
 }
 
 
