@@ -317,23 +317,21 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
             opacity: 0.6
         };
 
-        // Customize style for "Overhead" type
-        if (feature.properties.TYPE === 'Overhead') {
+        if (feature.properties.TYPE === 'AC; Overhead') {
             return {
-                color: 'blue' // Set a unique color for "Overhead"
+                color: 'blue' // 
             };
         }
 
-        // Customize style for "Underground" type
-        if (feature.properties.TYPE === 'Underground') {
+        if (feature.properties.TYPE === 'AC; Underground') {
             return {
-                color: 'green' // Set a unique color for "Underground"
+                color: 'green' 
             };
         }
 
         // Default style for other types
         return {
-            color: 'orange' // Set a default color
+            color: 'orange' // 
         };
     },
     onEachFeature: function (feature, layer) {
