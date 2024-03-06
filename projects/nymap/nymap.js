@@ -49,7 +49,7 @@ var nyccountiesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     },
     pointToLayer: function (feature, latlng) {
         // Get the county name from the 'NAME' property
-        var countyName = feature.properties.NAME;
+        var countyName = feature.properties.boro_name;
 
         // Create a label marker with the county name as the label
         return L.marker(latlng, {
@@ -190,16 +190,27 @@ var majoroilstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createMajorOilStoragePopupContent(feature.properties));
     }
 }).addTo(energyLayerGroup);
+
+// Function to create popup content for major oil storage
+function createMajorOilStoragePopupContent(properties) {
+    // Customize this function based on your GeoJSON properties
+    return `<strong>Site Name:</strong> ${properties.SITENAME}<br><strong>Site Type:</strong> ${properties.SITETYPE}`;
+}
 
 // Power Plants Layer
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
+        var fillColor = getColorForFuelType(feature.properties.t_fuels);
         return L.circleMarker(latlng, {
             radius: size,
-            fillColor: '#FFC0CB',
+            fillColor: fillColor,
             color: 'black',
             weight: 0.5,
             opacity: 0.7,
@@ -215,10 +226,49 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
 // Function to create popup content for power plants
 function createPowerPlantPopupContent(properties) {
     // Customize this function based on your power plant properties
-    return `<strong>Power Plant:</strong> ${properties.Name}<br>
+    return `<strong>POWER PLANTS</strong>
+            <strong>Name:</strong> ${properties.Name}<br>
             <strong>Capacity:</strong> ${properties.t_Output} MW<br>
             <strong>Fuel Type:</strong> ${properties.t_fuels}`;
 }
+
+// Function to get color based on fuel type
+function getColorForFuelType(fuelType) {
+    // Customize this function based on your fuel type categories and colors
+    switch (fuelType) {
+        case 'Conventional Hydroelectric':
+            return 'green';
+        case 'Conventional Steam Coal':
+            return 'brown';
+        case 'Flywheels':
+            return 'purple';
+        case 'Hydroelectric Pumped Storage':
+            return 'blue';
+        case 'Landfill Gas':
+            return 'orange';
+        case 'Municipal Solid Waste':
+            return 'red';
+        case 'Natural Gas Fired Combined Cycle':
+            return 'yellow';
+        case 'Natural Gas Fired Combustion Turbine':
+            return 'cyan';
+        case 'Natural Gas Steam Turbine':
+            return 'pink';
+        case 'Petroleum Liquids':
+            return 'olive';
+        case 'Nuclear':
+            return 'black';
+        case 'Onshore Wind turbine':
+            return 'teal';
+        case 'Solar Photovoltaic':
+            return 'lime';
+        case 'Wood/Wood Waste Biomass':
+            return 'grey';
+        default:
+            return '#FFC0CB'; // Default color
+    }
+}
+
 
 
 // NY Gas Pipelines Layer
@@ -230,8 +280,21 @@ var nygaspipelinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             weight: 3,
             opacity: 0.6
         };
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createGasPipelinePopupContent(feature.properties));
     }
 }).addTo(energyLayerGroup);
+
+// Function to create popup content for gas pipelines
+function createGasPipelinePopupContent(properties) {
+    // Customize this function based on your gas pipeline properties
+    return `<strong>GAS PIPELINE:</strong> 
+    <strong>Operator:</strong> ${properties.Operator}`;
+}
+
+
 
 // NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
@@ -242,8 +305,21 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
             weight: 3,
             opacity: 0.6
         };
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createTransmissionLinePopupContent(feature.properties));
     }
 }).addTo(energyLayerGroup);
+
+// Function to create popup content for transmission lines
+function createTransmissionLinePopupContent(properties) {
+    // Customize this function based on your transmission line properties
+    return `<strong>Owner:</strong> ${properties.OWNER}<br>
+            <strong>Type:</strong> ${properties.TYPE}<br>
+            <strong>Voltage:</strong> ${properties.VOLTAGE}`;
+}
+
 
 
 
@@ -309,8 +385,20 @@ var inactivesolidwastelandfillLayer = L.geoJSON.ajax('https://aurashak.github.io
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createSolidWasteLandfillPopupContent(feature.properties));
     }
 }).addTo(wasteLayerGroup);
+
+// Function to create popup content for inactive solid waste landfill
+function createSolidWasteLandfillPopupContent(properties) {
+    // Customize this function based on your GeoJSON properties
+    return `<strong>LANDFILL</strong>
+    <strong>Facility Name:</strong> ${properties.FACILITY_NAME}`;
+}
+
 
 // Recycling Facility Layer
 var recyclingfacilityLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/recyclingfacility.geojson', {
@@ -488,8 +576,21 @@ var chemicalstorageLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/ny
             opacity: 0.7,
             fillOpacity: 0.5
         });
+    },
+    onEachFeature: function (feature, layer) {
+        // Add a popup for each feature
+        layer.bindPopup(createChemicalStoragePopupContent(feature.properties));
     }
 });
+
+// Function to create popup content for chemical storage
+function createChemicalStoragePopupContent(properties) {
+    // Customize this function based on your chemical storage properties
+    return `<strong>CHEMICAL STORAGE</strong><br>
+            <strong>Name:</strong> ${properties.SITENAME}<br>
+            <strong>Chemical Storage Type:</strong> ${properties.SITETYPE}`;
+}
+
 
 
 
@@ -1251,7 +1352,6 @@ setLegendSymbol('nyrail-longisland', 'blue', 'line');
 // Set legend symbols for Metro North Commuter Railroad Company (nyrail)
 setLegendSymbol('nyrail-metronorth', 'red', 'line');
 
-setLegendSymbol('powerplants', '#FFC0CB', 'circle');
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
 setLegendSymbol('wastetransferfacility', 'purple', 'circle');
 setLegendSymbol('majoroilstorage', 'black', 'circle');
@@ -1276,6 +1376,23 @@ setLegendSymbol('population', {
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
 
 
+// Legend for Power Plants Layer (colors for each fuel type)
+setLegendSymbol('powerplants', {
+    'Conventional Hydroelectric': 'green',
+    'Conventional Steam Coal': 'brown',
+    'Flywheels': 'purple',
+    'Hydroelectric Pumped Storage': 'blue',
+    'Landfill Gas': 'orange',
+    'Municipal Solid Waste': 'red',
+    'Natural Gas Fired Combined Cycle': 'yellow',
+    'Natural Gas Fired Combustion Turbine': 'cyan',
+    'Natural Gas Steam Turbine': 'pink',
+    'Petroleum Liquids': 'olive',
+    'Nuclear': 'black',
+    'Onshore Wind turbine': 'teal',
+    'Solar Photovoltaic': 'lime',
+    'Wood/Wood Waste Biomass': 'grey'
+}, 'circle');
 
 
 // Set legend symbols for Cultural Institutions Layer
