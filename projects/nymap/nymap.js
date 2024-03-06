@@ -314,12 +314,15 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
         var color;
 
         // Assign different colors based on the TYPE property
-        switch (type) {
-            case 'Underground, Overhead, AC':
+        switch (TYPE) {
+            case 'Underground':
                 color = 'blue';
                 break;
-            case 'Underground, and AC':
+            case 'AC; Underground':
                 color = 'green';
+                break;
+            case 'AC; Overhead':
+                color = 'yellow';
                 break;
             case 'Overhead':
                 color = 'red';
@@ -328,7 +331,6 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
                 color = 'orange'; // Default color if TYPE is not matched
         }
 
-        var size = calculateMarkerSize(map.getZoom());
         return {
             color: color,
             weight: 3,
@@ -340,6 +342,7 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
         layer.bindPopup(createTransmissionLinePopupContent(feature.properties));
     }
 }).addTo(energyLayerGroup);
+
 
 
 
