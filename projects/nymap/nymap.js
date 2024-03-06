@@ -214,6 +214,8 @@ var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ny
     pointToLayer: function (feature, latlng) {
         var size = calculateMarkerSize(map.getZoom());
         var fillColor = getColorForFuelType(feature.properties.t_fuels);
+        console.log('Fill Color:', fillColor); // Log the fill color value
+
         return L.circleMarker(latlng, {
             radius: size,
             fillColor: fillColor,
