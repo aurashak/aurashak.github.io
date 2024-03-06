@@ -587,6 +587,19 @@ background-color: #ffe600ce;
   background-color: #b4b4b4;
 }
 
+.nymapbox:hover .hover-image {
+  display: block;
+}
+
+.hover-image {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px; /* Adjust the margin as needed */
+  z-index: 1;
+}
+
 .codebox {
 background: #e9e9e9;
 font: courier;
@@ -1161,7 +1174,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   */
 
-  
+
 .leaflet-touch .leaflet-control-layers-toggle {
 	width: 44px;
 	height: 44px;
