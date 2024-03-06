@@ -211,6 +211,62 @@ function createMajorOilStoragePopupContent(properties) {
 
 
 
+
+
+// Evacuation Zones Layer
+var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
+    style: function (feature) {
+        var category = feature.properties.HURRICANE_;
+        return {
+            fillColor: getEvacuationZoneColor(category),
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.5,
+            fillOpacity: 0.5
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // You can add any additional actions or pop-up content here if needed
+        layer.bindPopup(createEvacuationZonsPopupContent(feature.content));
+
+    }
+});
+
+// Function to create popup content for evacuationzones
+function createEvacuationZonsPopupContent(properties) {
+    return `<strong>EVACUATION ZONE</strong><br>
+            <strong>Category:</strong> ${properties.SITENAME}`;
+}
+
+
+// Function to get the evacuation zone color based on the category
+function getEvacuationZoneColor(category) {
+    switch (category) {
+        case '1':
+            return '#570019'; // Dark Red
+        case '2':
+            return '#94002a'; // Deep Red
+        case '3':
+            return '#ff0d51'; // Red
+        case '4':
+            return '#f74a7b'; // Pink
+        case '5':
+            return '#ffadc5'; // Light Pink
+        case '6':
+            return '#ffdbe5'; // Pale Pink
+        default:
+            return 'rgba(128, 128, 128, 0.1)'; // Default color for unknown categories (Transparent Grey)
+        }
+}
+
+
+
+
+
+
+
+
+
 // Power Plants Layer
 var powerplantsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycpowerplants.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -243,9 +299,8 @@ function createPowerPlantPopupContent(properties) {
 // Function to get color based on fuel type
 function getColorForFuelType(t_Fuels) {
     console.log(t_Fuels);  // Add this line to log the fuel type value
-    switch (t_Fuels.trim()) {
-       
-            case 'Conventional Hydroelectric':
+    switch (t_Fuels) {
+        case 'Conventional Hydroelectric':
             return 'green';
         case 'Conventional Steam Coal':
             return 'brown';
@@ -710,6 +765,7 @@ function getColorForDiscipline(discipline) {
 }
 
 
+
 // Evacuation Zones Layer
 var evacuationzonesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/evacuationzones.geojson', {
     style: function (feature) {
@@ -736,7 +792,6 @@ function createEvacuationZonsPopupContent(properties) {
 }
 
 
-
 // Function to get the evacuation zone color based on the category
 function getEvacuationZoneColor(category) {
     switch (category) {
@@ -756,7 +811,6 @@ function getEvacuationZoneColor(category) {
             return 'rgba(128, 128, 128, 0.1)'; // Default color for unknown categories (Transparent Grey)
         }
 }
-
 
 
 
