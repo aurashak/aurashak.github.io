@@ -135,7 +135,7 @@ var floodplainLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/100
             color: 'black',
             weight: 0,
             opacity: 0,
-            fillOpacity: 0.6 // Set fixed transparency to 0.6
+            fillOpacity: 0.5 
         };
     }
 });
