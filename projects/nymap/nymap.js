@@ -940,7 +940,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Get the checkbox element
 var allLayersCheckbox = document.getElementById('allLayersCheckbox');
 
@@ -956,7 +955,6 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(nyrailLayer, isChecked);
     toggleLayerVisibility(chemicalstorageLayer, isChecked);
     toggleLayerVisibility(culturalinsLayer, isChecked);
-    toggleLayerVisibility(evacuationzonesLayer, isChecked);
     toggleLayerVisibility(electrictransmissionlinesLayer, isChecked);
     toggleLayerVisibility(nygaspipelinesLayer, isChecked);
     toggleLayerVisibility(powerplantsLayer, isChecked);
@@ -964,7 +962,12 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(nycsoLayer, isChecked);
     toggleLayerVisibility(inactivesolidwastelandfillLayer, isChecked);
     toggleLayerVisibility(aqisitesLayer, isChecked);
- 
+
+    // Move evacuationzonesLayer to the bottom if checked
+    if (isChecked) {
+        map.removeLayer(evacuationzonesLayer);
+        map.addLayer(evacuationzonesLayer);
+    }
 });
 
 // Function to toggle visibility for an individual layer
