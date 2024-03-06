@@ -3311,17 +3311,48 @@ margin: 10px;
       text-decoration: none;
   }
 
+
+
+
+
+
+/* Add the following styles for larger tablets */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .navigation {
+    font-size: 20px;
+    margin: 15px;
+  }
+
+  .container {
+    margin: 10px;
+  }
+
+  /* Add other styles for larger tablets as needed */
 }
-
-
-
+}
 
 /* Add the following to address hover effects on touch devices */
 @media (hover: none) {
-  a:hover, a:active, a:focus,
-  h3:hover, h3:active, h3:focus,
-  .navigation:hover, .navigation:active, .navigation:focus,
-  .hidden-projects a:hover, .hidden-projects a:active, .hidden-projects a:focus {
-    text-decoration: underline; /* Add an underline for touch devices */
-  }
+a:hover, a:active, a:focus,
+h3:hover, h3:active, h3:focus,
+.navigation:hover, .navigation:active, .navigation:focus,
+.hidden-projects a:hover, .hidden-projects a:active, .hidden-projects a:focus {
+  text-decoration: underline; /* Add an underline for touch devices */
+}
 }
