@@ -939,7 +939,6 @@ populationCheckbox.addEventListener('change', function () {
 });
 
 
-
 // Get the checkbox element
 var allLayersCheckbox = document.getElementById('allLayersCheckbox');
 
@@ -956,21 +955,28 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(majoroilstorageLayer, isChecked);
     toggleLayerVisibility(wastewatertreatmentLayer, isChecked);
     toggleLayerVisibility(recyclingfacilityLayer, isChecked);
-
     toggleLayerVisibility(chemicalstorageLayer, isChecked);
     toggleLayerVisibility(culturalinsLayer, isChecked);
     toggleLayerVisibility(electrictransmissionlinesLayer, isChecked);
     toggleLayerVisibility(nygaspipelinesLayer, isChecked);
     toggleLayerVisibility(powerplantsLayer, isChecked);
-    toggleLayerVisibility(wastetransferfacilityLayer, isChecked);    
+    toggleLayerVisibility(wastetransferfacilityLayer, isChecked);
     toggleLayerVisibility(nycsoLayer, isChecked);
     toggleLayerVisibility(inactivesolidwastelandfillLayer, isChecked);
     toggleLayerVisibility(aqisitesLayer, isChecked);
 
     // Move evacuationzonesLayer to the bottom if checked
     if (isChecked) {
-        map.removeLayer(evacuationzonesLayer);
-        map.addLayer(evacuationzonesLayer);
+        // Get the current layer order
+        var layerIds = map.getStyle().layers;
+
+        // Find the index of evacuationzonesLayer
+        var evacuationIndex = layerIds.indexOf('evacuationzonesLayer');
+
+        // Move the layer to the bottom (index 0)
+        if (evacuationIndex > -1) {
+            map.moveLayer('evacuationzonesLayer', 0);
+        }
     }
 });
 
@@ -982,7 +988,6 @@ function toggleLayerVisibility(layer, isVisible) {
         map.removeLayer(layer);
     }
 }
-
 
 
 
