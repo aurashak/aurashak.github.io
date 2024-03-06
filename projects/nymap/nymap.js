@@ -239,10 +239,10 @@ function createPowerPlantPopupContent(properties) {
 }
 
 // Function to get color based on fuel type
-function getColorForFuelType(t_fuels) {
+function getColorForFuelType(category) {
     console.log('Fuel Type:', t_fuels);  // Log the fuel type value
 
-    switch (t_fuels) {
+    switch (category) {
         case 'Conventional Hydroelectric':
             return 'green';
         case 'Conventional Steam Coal':
