@@ -572,7 +572,7 @@ background-color: #ffe600ce;
 
 
 .nymapbox {
-  position: relative; /* Make the container relative to position the hover-image */
+  position: relative;
   padding: 5px;
   margin: 5px 2px;
   border-radius: 8px;
@@ -589,8 +589,13 @@ background-color: #ffe600ce;
   position: absolute;
   top: 100%;
   left: 0;
-  margin-top: 10px; /* Adjust the margin as needed */
+      width: 75%;
+  margin-top: 20px; 
   z-index: 1;
+      border-radius: 1px;
+    background: #eeeeee;
+    border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
 .hover-image img {
