@@ -306,23 +306,13 @@ function createGasPipelinePopupContent(properties) {
 }
 
 
+
 // NY Transmission Lines Layer
 var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/electrictransmissionlines.geojson', {
     style: function (feature) {
         var size = calculateMarkerSize(map.getZoom());
-        var lineColor;
-
-        // Grouping based on the TYPE property
-        if (feature.properties.TYPE.includes('Underground')) {
-            lineColor = 'blue'; // Color for Underground
-        } else if (feature.properties.TYPE.includes('Overhead')) {
-            lineColor = 'orange'; // Color for Overhead
-        } else {
-            lineColor = 'gray'; // Default color for other cases
-        }
-
         return {
-            color: lineColor,
+            color: 'orange',
             weight: 3,
             opacity: 0.6
         };
@@ -336,11 +326,11 @@ var electrictransmissionlinesLayer = L.geoJSON.ajax('https://aurashak.github.io/
 // Function to create popup content for transmission lines
 function createTransmissionLinePopupContent(properties) {
     // Customize this function based on your transmission line properties
-    return `
-        <strong>ELECTRIC TRANSMISSION LINES:</strong><br>
-        <strong>Owner:</strong> ${properties.OWNER}<br>
-        <strong>Type:</strong> ${properties.TYPE}<br>
-        <strong>Voltage:</strong> ${properties.VOLTAGE}`;
+    return `    <strong>ELECTRIC TRANSMISSION LINES:</strong><br>
+
+    <strong>Owner:</strong> ${properties.OWNER}<br>
+            <strong>Type:</strong> ${properties.TYPE}<br>
+            <strong>Voltage:</strong> ${properties.VOLTAGE}`;
 }
 
 
