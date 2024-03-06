@@ -734,7 +734,7 @@ function getEvacuationZoneColor(category) {
         case '6':
             return '#ffdbe5'; // Pale Pink
         default:
-            return 'rgba(128, 128, 128, 0.5)'; // Default color for unknown categories (Transparent Grey)
+            return 'rgba(128, 128, 128, 0.1)'; // Default color for unknown categories (Transparent Grey)
         }
 }
 
@@ -1438,8 +1438,7 @@ setLegendSymbol('evacuationzones', {
     '3': '#f74a7b', 
     '4': '#ff0d51', 
     '5': '#94002a', 
-    '6': '#570019',
-    'default': 'rgba(128, 128, 128, 0.5)' // Transparent Grey for unknown categories
+    '6': '#570019'  // Transparent Grey for unknown categories
 }, 'polygon');
 
 
