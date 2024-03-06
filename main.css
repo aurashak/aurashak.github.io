@@ -584,7 +584,7 @@ background-color: #ffe600ce;
 .nymapboxgrouptop {
   position: relative;
   padding: 10px 5px;
-  margin: 10px 0px 0px 0px;
+  margin: 10px 2px 0px 2px;
   font-weight: bold;
   border-radius: 2px;
   border: solid .3px rgba(18, 18, 18, 0.68);
@@ -594,7 +594,7 @@ background-color: #ffe600ce;
 .nymapboxgroupbottom {
   position: relative;
   padding: 10px 5px;
-  margin: 0px 0px 10px 0px;
+  margin: 0px 2px 10px 2px;
   font-weight: bold;
   border-radius: 2px;
   border: solid .3px rgba(18, 18, 18, 0.68);
@@ -776,7 +776,6 @@ border: 1px solid black;
 
 .time-control {
 
-  background: rgba(255, 255, 255, 0.8);
   border-radius: 3px;
   vertical-align: middle;
   font-family: sans-serif;
