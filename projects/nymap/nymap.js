@@ -260,7 +260,7 @@ function getColorForFuelType(fueltype) {
         case 'Natural Gas Fired Combustion Turbine':
             return 'cyan';
         case 'Natural Gas Steam Turbine':
-            return 'pink';
+            return 'yellow';
         case 'Petroleum Liquids':
             return 'olive';
         case 'Nuclear':
