@@ -1620,8 +1620,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .legend-symbol {
-  margin-right: 10px;
-  /* display: flex; */
   align-items: center;
     
 }
