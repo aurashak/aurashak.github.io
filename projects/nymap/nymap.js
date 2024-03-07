@@ -598,7 +598,6 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 
 
 // Amtrak Lines Layer
-console.log('Loading Amtrak Lines geoJSON data...');
 var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
     style: function (feature) {
         return {
@@ -608,23 +607,10 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
         };
     },
     onEachFeature: function (feature, layer) {
-        // Add a popup for each feature
-        layer.bindPopup(createAmtrakPopupContent(feature.properties));
-    },
-    success: function (data) {
-        console.log('Amtrak Lines geoJSON data loaded successfully.');
-    },
-    error: function (error) {
-        console.error('Error loading Amtrak Lines geoJSON data:', error);
+        // Remove label-related content
     }
-}).addTo(amtrakLayerGroup);
+}).addTo(map);
 
-// Function to create popup content for Amtrak lines
-function createAmtrakPopupContent(properties) {
-    // Customize this function based on your Amtrak line properties
-    return `<strong style="background-color: #ffe600ce;">AMTRAK LINE</strong><BR>
-            <strong>Line Name:</strong> ${properties['LINE_NAME']}`;
-}
 
 
 
