@@ -609,7 +609,7 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
     onEachFeature: function (feature, layer) {
         // Remove label-related content
     }
-}).addTo(map);
+});
 
 
 
@@ -663,7 +663,7 @@ var airportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyair
     onEachFeature: function (feature, layer) {
         // Remove label-related content
     }
-}).addTo(map);
+});
 
 
 
@@ -1559,7 +1559,7 @@ setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
 setLegendSymbol('amtrak', 'black', 'line');
-setLegendSymbol('nyairports', 'blue', 'point');
+setLegendSymbol('nyairports', 'blue', 'polygon');
 
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
