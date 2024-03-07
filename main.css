@@ -1629,7 +1629,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   border-top: 3px dashed black;  /* Adjust line thickness and color as needed */
   width: 20px;  /* Adjust symbol width as needed */
   height: 0;
-  margin-right: 5px;  /* Adjust spacing between symbol and label as needed */
+  margin-right: 10px;  /* Adjust spacing between symbol and label as needed */
 }
 
 
