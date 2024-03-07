@@ -1100,14 +1100,17 @@ if (censusTractCheckbox.checked) {
 
 // Add event listener to toggle Amtrak Lines layer
 document.getElementById('amtrakLines').addEventListener('change', function () {
-    if (map.hasLayer(amtrakLines)) {
+    if (map.hasLayer(amtrakLinesLayer)) {
         // If the switch is turned on, create the layer and add it to the map
         if (document.getElementById('amtrakLines').checked) {
+            amtrakLinesLayer = createAmtrakLinesLayer();
+            amtrakLinesLayer.addTo(map);
             return;
         }
-        map.removeLayer(amtrakLines);
+        map.removeLayer(amtrakLinesLayer);
     } else {
-        map.addLayer(amtrakLines);
+        amtrakLinesLayer = createAmtrakLinesLayer();
+        amtrakLinesLayer.addTo(map);
     }
 });
 
@@ -1347,12 +1350,13 @@ document.getElementById('nyrail').addEventListener('change', function() {
 document.getElementById('nyairports').addEventListener('change', function () {
     if (document.getElementById('nyairports').checked) {
         // If the switch is checked, add the layer
-        map.addLayer(nyairports);
+        nyairportsLayer.addTo(map);
     } else {
         // If the switch is unchecked, remove the layer
-        map.removeLayer(nyairports);
+        map.removeLayer(nyairportsLayer);
     }
 });
+
 
 
 
