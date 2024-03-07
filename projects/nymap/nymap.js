@@ -650,7 +650,7 @@ var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrain
 
 
 // Airports Layer
-var airportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyairports.geojson', {
+var nyairportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyairports.geojson', {
     style: function (feature) {
         return {
             fillColor: 'red',  // You can customize the fill color
@@ -664,6 +664,7 @@ var airportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyair
         // Remove label-related content
     }
 });
+
 
 
 
