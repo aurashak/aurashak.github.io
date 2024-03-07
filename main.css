@@ -482,7 +482,7 @@ background: none;
 
 
 .mapcolumnleft {
-    font-size: 19px;
+    font-size: 18px;
     margin: 0px;
     padding: 20px;
     line-height: 1.4;
@@ -1623,6 +1623,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .legend-symbol {
   align-items: center;
     
+}
+
+.legend-symboldashed {
+  border-top: 3px dashed black;  /* Adjust line thickness and color as needed */
+  width: 20px;  /* Adjust symbol width as needed */
+  height: 0;
+  margin-right: 5px;  /* Adjust spacing between symbol and label as needed */
 }
 
 
