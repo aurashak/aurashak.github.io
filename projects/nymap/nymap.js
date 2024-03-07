@@ -597,21 +597,6 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 });
 
 
-// Function to create Amtrak Lines layer
-function createAmtrakLinesLayer() {
-    return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
-        style: function (feature) {
-            return {
-                color: 'black',
-                weight: 3,
-                opacity: 0.7
-            };
-        },
-        onEachFeature: function (feature, layer) {
-            // Remove label-related content
-        }
-    });
-}
 
 // Amtrak Lines Layer (initially off)
 var amtrakLinesLayer = null;
