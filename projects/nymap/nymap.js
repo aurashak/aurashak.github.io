@@ -659,14 +659,14 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
         return {
             color: 'black',
             weight: 3,
-            opacity: 0.5
+            opacity: 0.5,
+            dashArray: '5, 4'  // Set the dash array to create a dashed line
         };
     },
     onEachFeature: function (feature, layer) {
         // Remove label-related content
     }
 });
-
 
 
 
@@ -1561,7 +1561,7 @@ setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
-setLegendSymbol('amtrak', 'black', 'line');
+setLegendSymbol('amtrak', 'black', 'line', [3, 5]);  // Provide a dash array [3, 5] for a dashed line
 setLegendSymbol('nyairports', 'red', 'polygon');
 
 
@@ -1569,10 +1569,9 @@ setLegendSymbol('recyclingfacility', 'orange', 'circle');
 setLegendSymbol('nycso', 'brown', 'circle');
 setLegendSymbol('nygaspipelines', 'purple', 'line');
 setLegendSymbol('nycsubway', 'blue', 'imageUrl', 'https://aurashak.github.io/images/mtalogo.png');
+
 // Set legend symbols for Long Island Rail Road (nyrail)
 setLegendSymbol('nyrail-longisland', 'blue', 'line');
-
-// Set legend symbols for Metro North Commuter Railroad Company (nyrail)
 setLegendSymbol('nyrail-metronorth', 'red', 'line');
 
 setLegendSymbol('wastewatertreatment', 'red', 'circle');
