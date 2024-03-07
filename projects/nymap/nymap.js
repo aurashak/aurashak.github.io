@@ -659,7 +659,7 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
         return {
             color: 'black',
             weight: 3,
-            opacity: 0.7
+            opacity: 0.5
         };
     },
     onEachFeature: function (feature, layer) {
