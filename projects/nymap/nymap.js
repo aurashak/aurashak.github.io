@@ -1110,18 +1110,14 @@ if (censusTractCheckbox.checked) {
 
 // Add event listener to toggle Amtrak Lines layer
 document.getElementById('amtrakLines').addEventListener('change', function () {
-    if (document.getElementById('amtrakLines').checked) {
+    if (map.hasLayer(amtrakLines)) {
         // If the switch is turned on, create the layer and add it to the map
-        if (!amtrakLinesLayer) {
-            amtrakLinesLayer = createAmtrakLinesLayer().addTo(map);
-            console.log('Amtrak Lines layer turned on.');
+        if (document.getElementById('amtrakLines').checked) {
+            return;
         }
+        map.removeLayer(amtrakLines);
     } else {
-        // If the switch is turned off, remove the layer from the map
-        if (map.hasLayer(amtrakLinesLayer)) {
-            map.removeLayer(amtrakLinesLayer);
-            console.log('Amtrak Lines layer turned off.');
-        }
+        map.addLayer(amtrakLines);
     }
 });
 
@@ -1360,20 +1356,13 @@ document.getElementById('nyrail').addEventListener('change', function() {
 // Add event listener to toggle Airports layer
 document.getElementById('nyairports').addEventListener('change', function () {
     if (document.getElementById('nyairports').checked) {
-        // If the switch is turned on, create the layer and add it to the map
-        if (!airportsLayer) {
-            airportsLayer = createAirportsLayer().addTo(map);
-            console.log('Airports layer turned on.');
-        }
+        // If the switch is checked, add the layer
+        map.addLayer(nyairports);
     } else {
-        // If the switch is turned off, remove the layer from the map
-        if (map.hasLayer(airportsLayer)) {
-            map.removeLayer(airportsLayer);
-            console.log('Airports layer turned off.');
-        }
+        // If the switch is unchecked, remove the layer
+        map.removeLayer(nyairports);
     }
 });
-
 
 
 
