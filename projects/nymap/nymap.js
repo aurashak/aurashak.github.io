@@ -1468,16 +1468,16 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
     switch (shape) {
         case 'circle':
-            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry" style="border: 1px solid rgba(110, 110, 110, 0.3); box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);"><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
             break;
         case 'line':
-            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry" style="border: 1px solid rgba(110, 110, 110, 0.3); box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);"><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
             break;
         case 'polygon':
-            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry" style="border: 1px solid rgba(110, 110, 110, 0.3); box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);"><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
             break;
         case 'imageUrl':
-            legendEntry = `<div class="legend-entry"><img src="${imageUrl}" alt="${label}" class="legend-image">${label}</div>`;
+            legendEntry = `<div class="legend-entry" style="border: 1px solid rgba(110, 110, 110, 0.3); box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);"><img src="${imageUrl}" alt="${label}" class="legend-image">${label}</div>`;
             break;
         default:
             break; // Handle other shapes if needed
