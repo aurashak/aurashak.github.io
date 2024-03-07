@@ -68,13 +68,14 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 }
 
 .navigation {
-  font-size: 20px;
-  text-align: left;
-  color: black;
-  margin: 0px 30px 0px 10px;
-  padding: 0px 2px;
-  cursor: pointer;
-  display: inline-block;
+    font-size: 20px;
+    text-align: left;
+    color: black;
+    margin: 0px 30px 0px 10px;
+    padding: 0px 2px;
+    cursor: pointer;
+    line-height: 1.5;
+    display: inline-block;
 
 }
 
@@ -114,7 +115,7 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 .hidden-projects {
   display: none; /* Initially hide the projects */
   font-size: 20px;
-  margin: 0px 10px 0px 0px;
+  margin: 0px 10px 0px 12px;
 
 }
 
@@ -3280,7 +3281,7 @@ margin: 10px;
 .hidden-projects {
   font-size: 16px;
   margin-left: 10px;
-  margin: 0px 10px 10px  10px;
+  margin: 0px 10px 10px  12px;
 line-height: 1.5;
 }
 
@@ -3350,7 +3351,7 @@ line-height: 1.5;
   .hidden-projects {
     font-size: 18px;
     margin-left: 15px;
-    margin: 0px 15px 15px 15px;
+    margin: 0px 10px 0px 12px;
     line-height: 1.6;
   }
 
