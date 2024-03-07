@@ -1001,7 +1001,6 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(wastewatertreatmentLayer, isChecked);
     toggleLayerVisibility(recyclingfacilityLayer, isChecked);
     toggleLayerVisibility(nyairportsLayer, isChecked);
-    toggleLayerVisibility(amtrakLinesLayer, isChecked);
 
     toggleLayerVisibility(chemicalstorageLayer, isChecked);
     toggleLayerVisibility(culturalinsLayer, isChecked);
