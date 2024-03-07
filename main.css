@@ -427,7 +427,15 @@ background: none;
 }
 
 
+.legend-entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Adjust as needed */
+}
 
+.legend-entry svg {
+  margin-right: 10px; /* Adjust as needed */
+}
 
 .legend-image {
   width: auto;  /* Set your preferred width */
