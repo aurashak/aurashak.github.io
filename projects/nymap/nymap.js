@@ -597,17 +597,38 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 });
 
 
-// Amtrak Lines Layer
-var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
-    style: function (feature) {
-        return {
-            color: 'black',
-            weight: 3,
-            opacity: 0.7
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        // Remove label-related content
+// Function to create Amtrak Lines layer
+function createAmtrakLinesLayer() {
+    return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
+        style: function (feature) {
+            return {
+                color: 'black',
+                weight: 3,
+                opacity: 0.7
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            // Remove label-related content
+        }
+    });
+}
+
+// Amtrak Lines Layer (initially off)
+var amtrakLinesLayer = null;
+
+// Add event listener to toggle Amtrak Lines layer
+document.getElementById('amtrakLines').addEventListener('change', function () {
+    if (map.hasLayer(amtrakLinesLayer)) {
+        // If the switch is turned on, create the layer and add it to the map
+        if (document.getElementById('amtrakLines').checked) {
+            amtrakLinesLayer = createAmtrakLinesLayer();
+            amtrakLinesLayer.addTo(map);
+            return;
+        }
+        map.removeLayer(amtrakLinesLayer);
+    } else {
+        amtrakLinesLayer = createAmtrakLinesLayer();
+        amtrakLinesLayer.addTo(map);
     }
 });
 
@@ -1113,7 +1134,6 @@ document.getElementById('amtrakLines').addEventListener('change', function () {
         amtrakLinesLayer.addTo(map);
     }
 });
-
 
 
 
