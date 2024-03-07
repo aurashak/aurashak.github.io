@@ -1122,22 +1122,19 @@ if (censusTractCheckbox.checked) {
 */
 
 
-// Add event listener to toggle Amtrak Lines layer
-document.getElementById('amtrakLines').addEventListener('change', function () {
+
+
+document.getElementById('amtrakLines').addEventListener('change', function() {
     if (map.hasLayer(amtrakLinesLayer)) {
-        // If the switch is turned on, create the layer and add it to the map
+        // If the layer is already on, do nothing when switching left to right
         if (document.getElementById('amtrakLines').checked) {
-            amtrakLinesLayer = createAmtrakLinesLayer();
-            amtrakLinesLayer.addTo(map);
             return;
         }
         map.removeLayer(amtrakLinesLayer);
     } else {
-        amtrakLinesLayer = createAmtrakLinesLayer();
-        amtrakLinesLayer.addTo(map);
+        map.addLayer(amtrakLinesLayer);
     }
 });
-
 
 
 
