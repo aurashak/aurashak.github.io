@@ -620,8 +620,6 @@ function createAmtrakLinesLayer() {
 
 
 
-
-
 // State rail Layer
 var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrains.geojson', {
     style: function (feature) {
@@ -1110,16 +1108,18 @@ if (censusTractCheckbox.checked) {
 
 // Add event listener to toggle Amtrak Lines layer
 document.getElementById('amtrakLines').addEventListener('change', function () {
-    if (map.hasLayer(amtrakLines)) {
+    if (map.hasLayer(amtrakLinesLayer)) {
         // If the switch is turned on, create the layer and add it to the map
         if (document.getElementById('amtrakLines').checked) {
-            return;
+            amtrakLinesLayer = createAmtrakLinesLayer().addTo(map);
+            console.log('Amtrak Lines layer turned on.');
+        } else {
+            map.removeLayer(amtrakLinesLayer);
+            console.log('Amtrak Lines layer turned off.');
         }
-        map.removeLayer(amtrakLines);
-    } else {
-        map.addLayer(amtrakLines);
     }
 });
+
 
 
 
