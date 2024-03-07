@@ -1561,7 +1561,6 @@ setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
-setLegendSymbol('amtrak', 'black', 'line', 0.1);
 setLegendSymbol('nyairports', 'red', 'polygon');
 
 
