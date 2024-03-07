@@ -597,19 +597,25 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 });
 
 
-// Amtrak Lines Layer
-var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
-    style: function (feature) {
-        return {
-            color: 'blue',
-            weight: 2,
-            opacity: 0.7
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        // Remove label-related content
-    }
-}).addTo(map);
+// Amtrak Lines Layer (initially off)
+var amtrakLinesLayer = null;
+
+// Function to create Amtrak Lines layer
+function createAmtrakLinesLayer() {
+    return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
+        style: function (feature) {
+            return {
+                color: 'blue',
+                weight: 2,
+                opacity: 0.7
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            // Remove label-related content
+        }
+    });
+}
+
 
 
 
@@ -1099,14 +1105,18 @@ if (censusTractCheckbox.checked) {
 
 // Add event listener to toggle Amtrak Lines layer
 document.getElementById('amtrakLines').addEventListener('change', function () {
-    if (map.hasLayer(amtrakLinesLayer)) {
-        // If the layer is already on, do nothing when switching left to right
-        if (document.getElementById('amtrakLines').checked) {
-            return;
+    if (document.getElementById('amtrakLines').checked) {
+        // If the switch is turned on, create the layer and add it to the map
+        if (!amtrakLinesLayer) {
+            amtrakLinesLayer = createAmtrakLinesLayer().addTo(map);
+            console.log('Amtrak Lines layer turned on.');
         }
-        map.removeLayer(amtrakLinesLayer);
     } else {
-        map.addLayer(amtrakLinesLayer);
+        // If the switch is turned off, remove the layer from the map
+        if (map.hasLayer(amtrakLinesLayer)) {
+            map.removeLayer(amtrakLinesLayer);
+            console.log('Amtrak Lines layer turned off.');
+        }
     }
 });
 
