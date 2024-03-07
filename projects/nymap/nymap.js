@@ -598,25 +598,6 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 
 
 
-// Amtrak Lines Layer (initially off)
-var amtrakLinesLayer = null;
-
-// Add event listener to toggle Amtrak Lines layer
-document.getElementById('amtrakLines').addEventListener('change', function () {
-    if (map.hasLayer(amtrakLinesLayer)) {
-        // If the switch is turned on, create the layer and add it to the map
-        if (document.getElementById('amtrakLines').checked) {
-            amtrakLinesLayer = createAmtrakLinesLayer();
-            amtrakLinesLayer.addTo(map);
-            return;
-        }
-        map.removeLayer(amtrakLinesLayer);
-    } else {
-        amtrakLinesLayer = createAmtrakLinesLayer();
-        amtrakLinesLayer.addTo(map);
-    }
-});
-
 
 
 
@@ -664,6 +645,21 @@ var nyairportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nya
             weight: 0.5,
             opacity: 0.7,
             fillOpacity: 0.5
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // Remove label-related content
+    }
+});
+
+
+// Amtrak Lines Layer
+var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
+    style: function (feature) {
+        return {
+            color: 'black',
+            weight: 3,
+            opacity: 0.7
         };
     },
     onEachFeature: function (feature, layer) {
@@ -1108,19 +1104,16 @@ if (censusTractCheckbox.checked) {
 
 
 
-document.getElementById('amtrakLines').addEventListener('change', function() {
-    if (map.hasLayer(amtrakLinesLayer)) {
-        // If the layer is already on, do nothing when switching left to right
-        if (document.getElementById('amtrakLines').checked) {
-            return;
-        }
-        map.removeLayer(amtrakLinesLayer);
+// Add event listener to toggle Amtrak Lines layer
+document.getElementById('amtrakLines').addEventListener('change', function () {
+    if (document.getElementById('amtrakLines').checked) {
+        // If the switch is checked, add the layer
+        amtrakLinesLayer.addTo(map);
     } else {
-        map.addLayer(amtrakLinesLayer);
+        // If the switch is unchecked, remove the layer
+        map.removeLayer(amtrakLinesLayer);
     }
 });
-
-
 
 document.getElementById('nycso').addEventListener('change', function() {
     if (map.hasLayer(nycsoLayer)) {
