@@ -597,24 +597,20 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
 });
 
 
-// Amtrak Lines Layer (initially off)
-var amtrakLinesLayer = null;
+// Amtrak Lines Layer
+var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
+    style: function (feature) {
+        return {
+            color: 'black',
+            weight: 3,
+            opacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // Remove label-related content
+    }
+}).addTo(map);
 
-// Function to create Amtrak Lines layer
-function createAmtrakLinesLayer() {
-    return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
-        style: function (feature) {
-            return {
-                color: 'black',
-                weight: 3,
-                opacity: 0.7
-            };
-        },
-        onEachFeature: function (feature, layer) {
-            // Remove label-related content
-        }
-    });
-}
 
 
 
@@ -653,26 +649,21 @@ var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrain
 
 
 
-// Airports Layer (initially off)
-var airportsLayer = null;
-
-// Function to create Airports layer
-function createAirportsLayer() {
-    return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyairports.geojson', {
-        style: function (feature) {
-            return {
-                fillColor: 'red',  // You can customize the fill color
-                color: 'black',
-                weight: 0.5,
-                opacity: 0.7,
-                fillOpacity: 0.5
-            };
-        },
-        onEachFeature: function (feature, layer) {
-            // Remove label-related content
-        }
-    });
-}
+// Airports Layer
+var airportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyairports.geojson', {
+    style: function (feature) {
+        return {
+            fillColor: 'red',  // You can customize the fill color
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.5
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        // Remove label-related content
+    }
+}).addTo(map);
 
 
 
@@ -1108,18 +1099,16 @@ if (censusTractCheckbox.checked) {
 
 // Add event listener to toggle Amtrak Lines layer
 document.getElementById('amtrakLines').addEventListener('change', function () {
-    if (map.hasLayer(amtrakLinesLayer)) {
+    if (map.hasLayer(amtrakLines)) {
         // If the switch is turned on, create the layer and add it to the map
         if (document.getElementById('amtrakLines').checked) {
-            amtrakLinesLayer = createAmtrakLinesLayer().addTo(map);
-            console.log('Amtrak Lines layer turned on.');
-        } else {
-            map.removeLayer(amtrakLinesLayer);
-            console.log('Amtrak Lines layer turned off.');
+            return;
         }
+        map.removeLayer(amtrakLines);
+    } else {
+        map.addLayer(amtrakLines);
     }
 });
-
 
 
 
@@ -1431,6 +1420,7 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
 
 
 
+
 // Water Layer Group
 /*  var waterLayerGroup = L.layerGroup();  */
 
@@ -1569,7 +1559,7 @@ setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
 setLegendSymbol('amtrak', 'black', 'line');
-setLegendSymbol('nyairports', 'red', 'polygon');
+setLegendSymbol('nyairports', 'blue', 'point');
 
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
