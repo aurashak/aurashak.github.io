@@ -660,7 +660,7 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
             color: 'black',
             weight: 3,
             opacity: 0.5,
-            dashArray: '5, 4'  // Set the dash array to create a dashed line
+            dashArray: '2, 4'  // Set the dash array to create a dashed line
         };
     },
     onEachFeature: function (feature, layer) {
@@ -1561,7 +1561,7 @@ setLegendSymbol('chemicalstorage', 'blue', 'circle');
 setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
-setLegendSymbol('amtrak', 'black', 'line', [3, 5]);  // Provide a dash array [3, 5] for a dashed line
+setLegendSymbol('amtrak', 'black', 'line', [2, 2]);  // Provide a dash array [3, 5] for a dashed line
 setLegendSymbol('nyairports', 'red', 'polygon');
 
 
