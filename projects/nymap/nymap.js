@@ -1464,18 +1464,26 @@ function setLegendSymbol(layerId, colors, shape, imageUrl, options) {
 
 // Function to create a legend entry based on shape, color, and image
 function createLegendEntry(label, color, shape, imageUrl) {
+    let legendEntry = '';
+
     switch (shape) {
         case 'circle':
-            return `<div><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
+            break;
         case 'line':
-            return `<div><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
+            break;
         case 'polygon':
-            return `<div><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
+            break;
         case 'imageUrl':
-            return `<div><img src="${imageUrl}" alt="${label}" class="legend-image">${label}</div>`;
+            legendEntry = `<div class="legend-entry"><img src="${imageUrl}" alt="${label}" class="legend-image">${label}</div>`;
+            break;
         default:
-            return ''; // Handle other shapes if needed
+            break; // Handle other shapes if needed
     }
+
+    return legendEntry;
 }
 
 
