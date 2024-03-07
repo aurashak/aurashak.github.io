@@ -658,9 +658,9 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
     style: function (feature) {
         return {
             color: 'black',
-            weight: 3,
+            weight: 4,
             opacity: 0.5,
-            dashArray: '2, 13'  // Set the dash array to create a dashed line
+            dashArray: '3, 13'  // Set the dash array to create a dashed line
         };
     },
     onEachFeature: function (feature, layer) {
