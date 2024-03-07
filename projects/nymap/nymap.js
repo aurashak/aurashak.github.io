@@ -605,8 +605,8 @@ function createAmtrakLinesLayer() {
     return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/amtrak.geojson', {
         style: function (feature) {
             return {
-                color: 'blue',
-                weight: 2,
+                color: 'black',
+                weight: 3,
                 opacity: 0.7
             };
         },
@@ -655,21 +655,26 @@ var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrain
 
 
 
-// Airports Layer
-var airportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyairports.geojson', {
-    style: function (feature) {
-        return {
-            fillColor: 'blue',  // You can customize the fill color
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.5
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        // Remove label-related content
-    }
-}).addTo(map);
+// Airports Layer (initially off)
+var airportsLayer = null;
+
+// Function to create Airports layer
+function createAirportsLayer() {
+    return L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyairports.geojson', {
+        style: function (feature) {
+            return {
+                fillColor: 'red',  // You can customize the fill color
+                color: 'black',
+                weight: 0.5,
+                opacity: 0.7,
+                fillOpacity: 0.5
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            // Remove label-related content
+        }
+    });
+}
 
 
 
@@ -1354,19 +1359,20 @@ document.getElementById('nyrail').addEventListener('change', function() {
 
 // Add event listener to toggle Airports layer
 document.getElementById('nyairports').addEventListener('change', function () {
-    if (map.hasLayer(airportsLayer)) {
-        // If the layer is already on, do nothing when switching left to right
-        if (document.getElementById('nyairports').checked) {
-            return;
+    if (document.getElementById('nyairports').checked) {
+        // If the switch is turned on, create the layer and add it to the map
+        if (!airportsLayer) {
+            airportsLayer = createAirportsLayer().addTo(map);
+            console.log('Airports layer turned on.');
         }
-        map.removeLayer(airportsLayer);
-        console.log('Airports layer turned off.');
     } else {
-        map.addLayer(airportsLayer);
-        console.log('Airports layer turned on.');
+        // If the switch is turned off, remove the layer from the map
+        if (map.hasLayer(airportsLayer)) {
+            map.removeLayer(airportsLayer);
+            console.log('Airports layer turned off.');
+        }
     }
 });
-
 
 
 
@@ -1574,7 +1580,7 @@ setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
 setLegendSymbol('amtrak', 'black', 'line');
-setLegendSymbol('nyairports', 'blue', 'point');
+setLegendSymbol('nyairports', 'red', 'polygon');
 
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
