@@ -1468,13 +1468,13 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
     switch (shape) {
         case 'circle':
-            legendEntry = `<div class="legend-entry"><svg class="legend-svg" width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><circle cx="12.5" cy="12.5" r="10" fill="${color}" /></svg>${label}</div>`;
             break;
         case 'line':
-            legendEntry = `<div class="legend-entry"><svg class="legend-svg" width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><line x1="2.5" y1="12.5" x2="22.5" y2="12.5" stroke="${color}" stroke-width="5" /></svg>${label}</div>`;
             break;
         case 'polygon':
-            legendEntry = `<div class="legend-entry"><svg class="legend-svg" width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
+            legendEntry = `<div class="legend-entry"><svg width="25" height="25"><polygon points="2.5,2.5 2.5,22.5 22.5,22.5 22.5,2.5" fill="${color}" /></svg>${label}</div>`;
             break;
         case 'imageUrl':
             legendEntry = `<div class="legend-entry"><img src="${imageUrl}" alt="${label}" class="legend-image">${label}</div>`;
@@ -1485,7 +1485,6 @@ function createLegendEntry(label, color, shape, imageUrl) {
 
     return legendEntry;
 }
-
 
 
 // Legend symbol shapes, colors, and images for each layer
