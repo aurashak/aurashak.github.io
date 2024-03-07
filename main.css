@@ -1666,7 +1666,7 @@ margin-right: 5px;
 }
 
 .switch-thumb {
-  background: linear-gradient(135deg, #0073e6, #0056b3);
+  background: linear-gradient(135deg, #55a9fd, #306fb3);
   border-radius: 50%;
   height: 20px;
   width: 20px;
@@ -1679,7 +1679,7 @@ margin-right: 5px;
 
 
 .switch-thumb-b {
-  background-color: #66B2FF; /* Light blue color */
+  background-color: #004182; /* Light blue color */
   border-radius: 50%;
   height: 20px;
   width: 20px;
