@@ -1015,6 +1015,9 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(majoroilstorageLayer, isChecked);
     toggleLayerVisibility(wastewatertreatmentLayer, isChecked);
     toggleLayerVisibility(recyclingfacilityLayer, isChecked);
+    toggleLayerVisibility(nyairportsLayer, isChecked);
+    toggleLayerVisibility(amtrakLinesLayer, isChecked);
+
     toggleLayerVisibility(chemicalstorageLayer, isChecked);
     toggleLayerVisibility(culturalinsLayer, isChecked);
     toggleLayerVisibility(electrictransmissionlinesLayer, isChecked);
@@ -1584,7 +1587,7 @@ setLegendSymbol('maxCountCensusTract', 'red', 'polygon');
 setLegendSymbol('nycbusdepots', 'black', 'circle');
 
 setLegendSymbol('amtrak', 'black', 'line');
-setLegendSymbol('nyairports', 'blue', 'polygon');
+setLegendSymbol('nyairports', 'red', 'polygon');
 
 
 setLegendSymbol('recyclingfacility', 'orange', 'circle');
