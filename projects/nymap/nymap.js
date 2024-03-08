@@ -1012,7 +1012,7 @@ function getRaceCategory(racepop) {
 }
 
 // NYC Race Population Layer
-var racePopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycracepop2020.geojson', {
+var racePopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
         var racepop = feature.properties.racepop;
 
