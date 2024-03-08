@@ -974,27 +974,26 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Function to get race category based on race population values
 function getRaceCategory(racepop) {
     // Define categories and assign colors
     var categories = [
-        'Hispanic or Latino',
-        'White alone',
-        'Black or African American alone',
-        'American Indian and Alaskan Native alone',
-        'Asian alone',
-        'Hawaiin and Other Pacific Islander alone',
+        'racepop_Hispanic or Latino',
+        'racepop_White alone',
+        'racepop_Black or African American alone',
+        'racepop_American Indian and Alaskan Native alone',
+        'racepop_Asian alone',
+        'racepop_Hawaiin and Other Pacific Islander alone',
         'Other'
     ];
 
     var categoryColors = {
-        'Hispanic or Latino': '#FF0000',
-        'White alone': '#00FF00',
-        'Black or African American alone': '#0000FF',
-        'American Indian and Alaskan Native alone': '#FFFF00',
-        'Asian alone': '#FF00FF',
-        'Hawaiin and Other Pacific Islander alone': '#00FFFF',
+        'racepop_Hispanic or Latino': '#FF0000',
+        'racepop_White alone': '#00FF00',
+        'racepop_Black or African American alone': '#0000FF',
+        'racepop_American Indian and Alaskan Native Alone': '#FFFF00',
+        'racepop_Asian alone': '#FF00FF',
+        'racepop_Hawaiin and Other Pacific Islander alone': '#00FFFF',
         'Other': '#808080' // Gray for 'Other'
     };
 
@@ -1011,62 +1010,57 @@ function getRaceCategory(racepop) {
     };
 }
 
+// Make a separate AJAX request for race population data
+fetch('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson')
+    .then(response => response.json())
+    .then(data => {
+        // Create a race population layer
+        var racePopulationLayer = L.geoJSON(data, {
+            style: function (feature) {
+                var racepop = feature.properties.racepop;
 
-// NYC Race Population Layer
-var racePopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
-    style: function (feature) {
-        var racepop = feature.properties.racepop;
+                // Get the race category with the majority population
+                var { category, color } = getRaceCategory(racepop);
 
-        // Get the race category with the majority population
-        var { category, color } = getRaceCategory(racepop);
+                console.log('Feature Race Population:', racepop);  // Log the race population of the current feature
+                console.log('Chosen Race Category:', category);  // Log the chosen race category
 
-        console.log('Feature Race Population:', racepop);  // Log the race population of the current feature
-        console.log('Chosen Race Category:', category);  // Log the chosen race category
+                return {
+                    fillColor: color,
+                    color: 'black',
+                    weight: 0.5,
+                    opacity: 0.7,
+                    fillOpacity: 0.7
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                var racepop = feature.properties.racepop;
 
-        return {
-            fillColor: color,
-            color: 'black',
-            weight: 0.5,
-            opacity: 0.7,
-            fillOpacity: 0.7
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        var racepop = feature.properties.racepop;
+                // Create popup content with race percentages
+                var popupContent = "Census Tract: " + feature.properties.TRACTCE10 + "<br>Total Population: " + racepop['racepop_Total'] + "<br>";
+                popupContent += "Race Category: " + getRaceCategory(racepop).category + "<br>";
 
-        // Calculate percentage of each race
-        var totalPopulation = racepop['racepop_Total'];
-        var percentage = {};
-        for (var race in racepop) {
-            percentage[race] = (racepop[race] / totalPopulation) * 100;
-        }
+                console.log('Popup Content:', popupContent);  // Log the popup content
 
-        console.log('Race Population Percentages:', percentage);  // Log the calculated race population percentages
+                layer.bindPopup(popupContent);
+            }
+        });
 
-        // Create popup content with race percentages
-        var popupContent = "Census Tract: " + feature.properties.TRACTCE10 + "<br>Total Population: " + totalPopulation + "<br>";
-        for (var race in percentage) {
-            popupContent += race + " Percentage: " + percentage[race].toFixed(2) + "%<br>";
-        }
+        var racePopulationCheckbox = document.getElementById('racePopulationLayer');
 
-        console.log('Popup Content:', popupContent);  // Log the popup content
+        // Add an event listener to the race population checkbox
+        racePopulationCheckbox.addEventListener('change', function () {
+            if (racePopulationCheckbox.checked) {
+                map.addLayer(racePopulationLayer);
+                console.log('Race Population Layer Added');  // Log when the layer is added
+            } else {
+                map.removeLayer(racePopulationLayer);
+                console.log('Race Population Layer Removed');  // Log when the layer is removed
+            }
+        });
+    })
+    .catch(error => console.error('Error fetching race population data:', error));
 
-        layer.bindPopup(popupContent);
-    }
-});
-
-var racePopulationCheckbox = document.getElementById('racePopulationLayer');
-
-// Add an event listener to the race population checkbox
-racePopulationCheckbox.addEventListener('change', function () {
-    if (racePopulationCheckbox.checked) {
-        map.addLayer(racePopulationLayer);
-        console.log('Race Population Layer Added');  // Log when the layer is added
-    } else {
-        map.removeLayer(racePopulationLayer);
-        console.log('Race Population Layer Removed');  // Log when the layer is removed
-    }
-});
 
 
 
