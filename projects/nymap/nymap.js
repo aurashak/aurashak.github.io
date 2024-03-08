@@ -722,7 +722,7 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
     },
     onEachFeature: function (feature, layer) {
         var organizationName = feature.properties["Organization Name"];
-        layer.bindPopup('<strong style="background-color: #ffe600ce;">CULTURAL INSTITUTION</strong><br><strong>Name:</strong> ' + organizationName);
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">CULTURAL ORG</strong><br><strong></strong> ' + organizationName);
     }
 });
 
