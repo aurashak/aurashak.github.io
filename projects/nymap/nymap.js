@@ -955,7 +955,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
         };
     },
     onEachFeature: function (feature, layer) {
-        var censusTract = feature.properties.TRACTCE10;
+        var censusTract = feature.properties.CTlabel;
         var population = feature.properties.population; // Update to lowercase 'population'
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
