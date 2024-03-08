@@ -367,6 +367,27 @@ background: none;
 
 
 
+#footnotes {
+  margin-top: 20px; /* Adjust as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+#footnotes p {
+  margin-bottom: 8px; /* Adjust as needed */
+}
+
+#footnotes a {
+  text-decoration: none;
+  color: #007bff; /* Link color, adjust as needed */
+}
+
+#footnotes a:hover {
+  text-decoration: underline;
+}
 
 
 
