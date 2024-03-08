@@ -981,7 +981,7 @@ function getRaceCategory(racepop) {
     // Ensure racepop is defined and has the expected structure
     if (!racepop || typeof racepop !== 'object') {
         console.error('Invalid racepop data:', racepop);
-        return { category: 'Other', color: '#808080' };
+        return { category: 'Other', color: '#808080', population: 0 };
     }
 
     // Extract populations from the desired categories
@@ -1000,6 +1000,13 @@ function getRaceCategory(racepop) {
         categoryPopulations[category] = racepop[category] || 0;
     });
 
+    // Find the category with the maximum race population
+    var maxCategory = categories.reduce(function (prev, curr) {
+        return categoryPopulations[curr] > categoryPopulations[prev] ? curr : prev;
+    });
+
+    console.log('Race Category:', maxCategory);  // Log the determined race category
+
     // Define colors for each category
     var categoryColors = {
         'racepop_Hispanic or Latino': '#FF0000',
@@ -1011,19 +1018,13 @@ function getRaceCategory(racepop) {
         'Other': '#808080' // Gray for 'Other'
     };
 
-    // Find the category with the maximum race population
-    var maxCategory = categories.reduce(function (prev, curr) {
-        return categoryPopulations[curr] > categoryPopulations[prev] ? curr : prev;
-    });
-
-    console.log('Race Category:', maxCategory);  // Log the determined race category
-
     return {
         category: maxCategory,
         color: categoryColors[maxCategory],
         population: categoryPopulations[maxCategory]
     };
 }
+
 
 
 
