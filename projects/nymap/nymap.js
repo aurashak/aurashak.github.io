@@ -955,7 +955,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
         };
     },
     onEachFeature: function (feature, layer) {
-        var censusTract = feature.properties.CTlabel;
+        var censusTract = feature.properties.CTLabel;
         var population = feature.properties.population; // Update to lowercase 'population'
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
@@ -975,108 +975,71 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-// Function to get race category based on race population values
-function getRaceCategory(racepop) {
-    // Ensure racepop is defined and has the expected structure
-    if (!racepop || typeof racepop !== 'object') {
-        console.error('Invalid racepop data:', racepop);
-        return { category: 'Other', color: '#808080', population: 0 };
-    }
 
-    // Extract populations from the desired categories
-    var categoryPopulations = {};
-    var categories = [
+// Function to get racial category based on majority population in a census tract
+function getRacialCategory(properties) {
+    var races = [
         'racepop2_Hispanic or Latino',
         'racepop2_White alone',
         'racepop2_Black or African American alone',
         'racepop2_American Indian and Alaskan Native alone',
         'racepop2_Asian alone',
-        'racepop2_Hawaiin and Other Pacific Islander alone',
+        'racepop2_Hawaiian and Other Pacific Islander alone',
         'Other'
     ];
 
-    categories.forEach(function (category) {
-        categoryPopulations[category] = racepop[category] || 0;
+    // Find the race with the maximum population in the census tract
+    var maxRace = races.reduce(function (prev, current) {
+        return properties[current] > properties[prev] ? current : prev;
     });
 
-    // Find the category with the maximum race population
-    var maxCategory = categories.reduce(function (prev, curr) {
-        return categoryPopulations[curr] > categoryPopulations[prev] ? curr : prev;
-    });
-
-    console.log('Race Category:', maxCategory);  // Log the determined race category
-
-    // Define colors for each category
-    var categoryColors = {
-        'racepop2_Hispanic or Latino': '#FF0000',
-        'racepop2_White alone': '#00FF00',
-        'racepop2_Black or African American alone': '#0000FF',
-        'racepop2_American Indian and Alaskan Native alone': '#FFFF00',
-        'racepop2_Asian alone': '#FF00FF',
-        'racepop2_Hawaiin and Other Pacific Islander alone': '#00FFFF',
-        'Other': '#808080' // Gray for 'Other'
-    };
-
-    return {
-        category: maxCategory,
-        color: categoryColors[maxCategory],
-        population: categoryPopulations[maxCategory]
-    };
+    return maxRace;
 }
 
-// Make a separate AJAX request for race population data
-fetch('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson')
-    .then(response => response.json())
-    .then(data => {
-        // Create a race population layer
-        var racePopulationLayer = L.geoJSON(data, {
-            style: function (feature) {
-                var racepop = feature.properties.racepop;
+// NYC Racial Population Layer
+var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
+    style: function (feature) {
+        // Adjust styling based on majority race in the census tract
+        var category = getRacialCategory(feature.properties);
 
-                // Get the race category with the majority population
-                var { color } = getRaceCategory(racepop);
+        // Define colors for each race
+        var raceColors = {
+            'racepop2_Hispanic or Latino': '#ff0000', // Red
+            'racepop2_White alone': '#ffffff', // White
+            'racepop2_Black or African American alone': '#000000', // Black
+            'racepop2_American Indian and Alaskan Native alone': '#964B00', // Brown
+            'racepop2_Asian alone': '#00ff00', // Green
+            'racepop2_Hawaiian and Other Pacific Islander alone': '#0000ff', // Blue
+            'Other': '#808080' // Gray
+        };
 
-                console.log('Feature Race Population:', racepop);  // Log the race population of the current feature
+        return {
+            fillColor: raceColors[category],
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        var censusTract = feature.properties.CTlabel;
+        var majorityRace = getRacialCategory(feature.properties);
+        var population = feature.properties[majorityRace];
 
-                return {
-                    fillColor: color,
-                    color: 'black',
-                    weight: 0.5,
-                    opacity: 0.7,
-                    fillOpacity: 0.7
-                };
-            },
-            onEachFeature: function (feature, layer) {
-                // Create popup content with race category and population
-                var popupContent = "Census Tract: " + feature.properties.TRACTCE10 + "<br>";
-                var racepop = feature.properties.racepop;
-                var { category, population } = getRaceCategory(racepop);
-                popupContent += "Race Category: " + category + "<br>";
-                popupContent += "Population: " + population + "<br>";
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC RACIAL POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Majority Race: ' + majorityRace + '<br>Population: ' + population);
+    }
+});
 
-                console.log('Popup Content:', popupContent);  // Log the popup content
+var racialPopulationCheckbox = document.getElementById('racialPopulationLayer');
 
-                layer.bindPopup(popupContent);
-            }
-        });
-
-        var racePopulationCheckbox = document.getElementById('racePopulationLayer');
-
-        // Add an event listener to the race population checkbox
-        racePopulationCheckbox.addEventListener('change', function () {
-            if (racePopulationCheckbox.checked) {
-                map.addLayer(racePopulationLayer);
-                console.log('Race Population Layer Added');  // Log when the layer is added
-            } else {
-                map.removeLayer(racePopulationLayer);
-                console.log('Race Population Layer Removed');  // Log when the layer is removed
-            }
-        });
-    })
-    .catch(error => console.error('Error fetching race population data:', error));
-
-
-
+// Add an event listener to the racial population checkbox
+racialPopulationCheckbox.addEventListener('change', function () {
+    if (racialPopulationCheckbox.checked) {
+        map.addLayer(racialPopulationLayer);
+    } else {
+        map.removeLayer(racialPopulationLayer);
+    }
+});
 
 
 
