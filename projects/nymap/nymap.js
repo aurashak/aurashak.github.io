@@ -704,7 +704,6 @@ function createChemicalStoragePopupContent(properties) {
 
 
 
-
 // Cultural Institutions Layer
 var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/culturalins.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -723,7 +722,7 @@ var culturalinsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cu
     },
     onEachFeature: function (feature, layer) {
         var organizationName = feature.properties["Organization Name"];
-        layer.bindPopup('<b>' + organizationName + '</b>');
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">CULTURAL INSTITUTION</strong><br><strong>Name:</strong> ' + organizationName);
     }
 });
 
@@ -764,6 +763,7 @@ function getColorForDiscipline(discipline) {
             return 'gray'; // Default color for unknown disciplines
     }
 }
+
 
 
 // Evacuation Zones Layer
@@ -860,7 +860,6 @@ function getIncomeCategory(income) {
         return '150000-250000';
     }
 }
-
 // NYC Average Income Layer
 var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycavgincome.geojson', {
     style: function (feature) {
@@ -868,14 +867,14 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         var income = feature.properties.MHI;
         var category = getIncomeCategory(income);
 
-    // Define colors for each category
-    var categoryColors = {
-        '0-30000': 'rgba(254, 224, 139, 0.7)',    // Adding alpha channel (0.7 for 70% opacity)
-        '30000-60000': 'rgba(253, 174, 97, 0.7)',
-        '60000-90000': 'rgba(215, 48, 39, 0.7)',
-        '90000-150000': 'rgba(69, 117, 180, 0.7)',
-        '150000-250000': 'rgba(49, 54, 149, 0.7)'
-    };
+        // Define colors for each category
+        var categoryColors = {
+            '0-30000': 'rgba(254, 224, 139, 0.7)',    // Adding alpha channel (0.7 for 70% opacity)
+            '30000-60000': 'rgba(253, 174, 97, 0.7)',
+            '60000-90000': 'rgba(215, 48, 39, 0.7)',
+            '90000-150000': 'rgba(69, 117, 180, 0.7)',
+            '150000-250000': 'rgba(49, 54, 149, 0.7)'
+        };
 
         return {
             fillColor: categoryColors[category],
@@ -886,10 +885,13 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         };
     },
     onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Income: $" + feature.properties.MHI);
+        var censusTract = feature.properties.TRACTCE10;
+        var income = feature.properties.MHI;
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC AVERAGE INCOME</strong><br>Census Tract: ' + censusTract + '<br>Income: $' + income);
     }
 });
+
+
 
 
 var avgIncomeCheckbox = document.getElementById('avgIncomeLayer');
@@ -933,17 +935,16 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
         var population = feature.properties.population; // Update to lowercase 'population'
         var category = getPopulationCategory(population);
 
- // Define colors for each category as a gradient with transparency
-var categoryColors = {
-    '0-1000': '#4575b4', // White
-    '1000-3000': '#e3e2e1', // Light Gray
-    '3000-6000': '#b8b8b8', // Dark Gray
-    '6000-10000': '#919190', // Gray
-    '10000-14000': '#5c5c5c', // Dim Gray
-    '14000-17000': '#2e2e2e', // Dark Slate Gray
-    '17000+': '#000' // Black
-    
-};
+        // Define colors for each category as a gradient with transparency
+        var categoryColors = {
+            '0-1000': '#4575b4', // White
+            '1000-3000': '#e3e2e1', // Light Gray
+            '3000-6000': '#b8b8b8', // Dark Gray
+            '6000-10000': '#919190', // Gray
+            '10000-14000': '#5c5c5c', // Dim Gray
+            '14000-17000': '#2e2e2e', // Dark Slate Gray
+            '17000+': '#000' // Black
+        };
 
         return {
             fillColor: categoryColors[category],
@@ -954,10 +955,12 @@ var categoryColors = {
         };
     },
     onEachFeature: function (feature, layer) {
-        // You can add any additional actions or pop-up content here if needed
-        layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>Population: " + feature.properties.population); // Update to lowercase 'population'
+        var censusTract = feature.properties.TRACTCE10;
+        var population = feature.properties.population; // Update to lowercase 'population'
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
 });
+
 
 var populationCheckbox = document.getElementById('populationLayer');
 
