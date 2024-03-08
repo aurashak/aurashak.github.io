@@ -980,14 +980,8 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
-// Function to get cleaner racial category label
-function getCleanRacialLabel(category) {
-    return category.replace('racepop2_', ''); // Removes the 'racepop2_' prefix
-}
-
-// Function to get racial category based on majority population in a census tract
-function getRacialCategory(properties) {
+// Function to get majority racial category based on population in a census tract
+function getMajorityRacialCategory(properties) {
     var races = [
         'racepop2_Hispanic or Latino',
         'racepop2_White alone',
@@ -1003,28 +997,28 @@ function getRacialCategory(properties) {
         return properties[current] > properties[prev] ? current : prev;
     });
 
-    return getCleanRacialLabel(maxRace);
+    return maxRace;
 }
 
 // NYC Racial Population Layer
 var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on majority race in the census tract
-        var category = getRacialCategory(feature.properties);
+        var majorityRace = getMajorityRacialCategory(feature.properties);
 
         // Define colors for each race
         var raceColors = {
-            'Hispanic or Latino': '#ff0000', // Red
-            'White alone': '#ffffff', // White
-            'Black or African American alone': '#000000', // Black
-            'American Indian and Alaskan Native alone': '#964B00', // Brown
-            'Asian alone': '#00ff00', // Green
-            'Hawaiian and Other Pacific Islander alone': '#0000ff', // Blue
+            'racepop2_Hispanic or Latino': '#ff0000', // Red
+            'racepop2_White alone': '#ffffff', // White
+            'racepop2_Black or African American alone': '#000000', // Black
+            'racepop2_American Indian and Alaskan Native alone': '#964B00', // Brown
+            'racepop2_Asian alone': '#00ff00', // Green
+            'racepop2_Hawaiian and Other Pacific Islander alone': '#0000ff', // Blue
             'Other': '#808080' // Gray
         };
 
         return {
-            fillColor: raceColors[category],
+            fillColor: raceColors[majorityRace],
             color: 'black',
             weight: 0.5,
             opacity: 0.7,
@@ -1032,11 +1026,11 @@ var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
         };
     },
     onEachFeature: function (feature, layer) {
-        var censusTract = feature.properties.CTLabel;
-        var majorityRace = getRacialCategory(feature.properties);
+        var censusTract = feature.properties.CTlabel;
+        var majorityRace = getMajorityRacialCategory(feature.properties);
         var population = feature.properties[majorityRace];
 
-        layer.bindPopup('<strong style="background-color: #ffe600ce;">RACE</strong><br>Census Tract: ' + censusTract + '<br>Majority group: ' + getCleanRacialLabel(majorityRace) + '<br>Total: ' + population);
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC RACIAL POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Majority Race: ' + majorityRace + '<br>Population: ' + population);
     }
 });
 
@@ -1050,6 +1044,7 @@ racialPopulationCheckbox.addEventListener('change', function () {
         map.removeLayer(racialPopulationLayer);
     }
 });
+
 
 
 
