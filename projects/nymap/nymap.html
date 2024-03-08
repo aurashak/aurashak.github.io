@@ -39,7 +39,8 @@ NYC Environmental Infrastructure Map
         <div class="nymapbox">
         <!-- All layers -->
         <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="switch-label" style="background-color: #ffe600ce;"><b>All Layers</b></label> &nbsp; ☣️☠️
+            <label class="switch-label" style="background-color: #ffe600ce;"><b>All Infrastructure Layers</b></label> &nbsp; ☣️☠️ 
+            <br>(Waste, Energy, Transportation)
         <label class="switch-b" style="margin-left: auto;">
         <input type="checkbox" class="switch-input" id="allLayersCheckbox">
         <div class="switch-track">
@@ -92,7 +93,7 @@ NYC Environmental Infrastructure Map
 <div class="nymapbox">
 <!-- Waste -->
 <div style="display: flex; align-items: center;" class="legend-item">
-    <label class="switch-label" style="background-color: #ffe600ce;"><b>Waste</b></label>&nbsp; 🗑️
+    <label class="switch-label" style="background-color: #ffe600ce;"><b>Waste</b></label>&nbsp; 🗑️ </i>All Layers</i>
 <label class="switch-b" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="wasteLayerGroup">
 <div class="switch-track">
@@ -171,7 +172,7 @@ NYC Environmental Infrastructure Map
 
 <!-- Energy -->
 <div style="display: flex; align-items: center;" class="legend-item">
-    <label class="switch-label" style="background-color: #ffe600ce;"><b>Energy</b></label> &nbsp;🔋🛢️☀️☢️🚰
+    <label class="switch-label" style="background-color: #ffe600ce;"><b>Energy</b></label> &nbsp;🔋🛢️☀️☢️🚰  </i>All Layers</i>
 <label class="switch-b" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="energyLayerGroup">
 <div class="switch-track">
@@ -270,28 +271,7 @@ NYC Environmental Infrastructure Map
 -->
 
 
-        <!-- EJ Sites -->
-        <div class="nymapboxcontainer">
-    <div class="nymapboxgrouptop">      
-         <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="switch-label" style="background-color: #ffe600ce;"><b>Environmental Justice Sites</b> </label>
-        <label class="switch" style="margin-left: auto;">
-            <input type="checkbox" class="switch-input" id="nycejsites">
-            <div class="switch-track">
-                <div class="switch-thumb"></div>
-            </div>
-        </label>
-    </div>
-    </div>
-    <div class="nymapboxgroupbottom">
-    <div style="align-items: center;" class="legend-item">
-        <div class="legend-symbol" style="margin-right: 10px;" id="legend-nycejsites"></div>
-    </div>
-    </div>
-    </div>
-    
-    <br>
-
+  
 
 
     <div class="nymapboxcontainer">
@@ -476,7 +456,29 @@ NYC Environmental Infrastructure Map
         <div class="legend-symbol" style="margin-right: 10px;" id="legend-racePopulation"></div>
     </div>
 </div>
+
+
+
+      <!-- EJ Sites -->
+        <div class="nymapboxgrouptop">      
+             <div style="display: flex; align-items: center;" class="legend-item">
+                <label class="switch-label"><b>Environmental Justice Sites</b> </label>
+            <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="nycejsites">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+        </div>
+        <div class="nymapboxgroupbottom">
+        <div style="align-items: center;" class="legend-item">
+            <div class="legend-symbol" style="margin-right: 10px;" id="legend-nycejsites"></div>
+        </div>
+        </div>
+
 </div>
+
 <br>
 
 
