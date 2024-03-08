@@ -991,12 +991,12 @@ fetch('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson')
             // Extract populations from the desired categories
             var categoryPopulations = {};
             var categories = [
-                'racepop_Hispanic or Latino',
-                'racepop_White alone',
-                'racepop_Black or African American alone',
-                'racepop_American Indian and Alaskan Native alone',
-                'racepop_Asian alone',
-                'racepop_Hawaiin and Other Pacific Islander alone',
+                'racepop2_Hispanic or Latino',
+                'racepop2_White alone',
+                'racepop2_Black or African American alone',
+                'racepop2_American Indian and Alaskan Native alone',
+                'racepop2_Asian alone',
+                'racepop2_Hawaiin and Other Pacific Islander alone',
                 'Other'
             ];
 
@@ -1013,12 +1013,12 @@ fetch('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson')
 
             // Define colors for each category
             var categoryColors = {
-                'racepop_Hispanic or Latino': '#FF0000',
-                'racepop_White alone': '#00FF00',
-                'racepop_Black or African American alone': '#0000FF',
-                'racepop_American Indian and Alaskan Native alone': '#FFFF00',
-                'racepop_Asian alone': '#FF00FF',
-                'racepop_Hawaiin and Other Pacific Islander alone': '#00FFFF',
+                'racepop2_Hispanic or Latino': '#FF0000',
+                'racepop2_White alone': '#00FF00',
+                'racepop2_Black or African American alone': '#0000FF',
+                'racepop2_American Indian and Alaskan Native alone': '#FFFF00',
+                'racepop2_Asian alone': '#FF00FF',
+                'racepop2_Hawaiin and Other Pacific Islander alone': '#00FFFF',
                 'Other': '#808080' // Gray for 'Other'
             };
 
