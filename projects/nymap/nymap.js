@@ -975,8 +975,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
-
 // Function to get race category based on race population values
 function getRaceCategory(racepop) {
     // Define categories and assign colors
@@ -984,7 +982,7 @@ function getRaceCategory(racepop) {
         'racepop_Hispanic or Latino',
         'racepop_White alone',
         'racepop_Black or African American alone',
-        'racepop_American Indian and Alaskan Native Alone',
+        'racepop_American Indian and Alaskan Native alone',
         'racepop_Asian alone',
         'racepop_Hawaiin and Other Pacific Islander alone',
         'Other'
@@ -1005,6 +1003,8 @@ function getRaceCategory(racepop) {
         return racepop[curr] > racepop[prev] ? curr : prev;
     });
 
+    console.log('Race Category:', maxCategory);  // Log the determined race category
+
     return {
         category: maxCategory,
         color: categoryColors[maxCategory]
@@ -1018,6 +1018,9 @@ var racePopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
 
         // Get the race category with the majority population
         var { category, color } = getRaceCategory(racepop);
+
+        console.log('Feature Race Population:', racepop);  // Log the race population of the current feature
+        console.log('Chosen Race Category:', category);  // Log the chosen race category
 
         return {
             fillColor: color,
@@ -1037,11 +1040,15 @@ var racePopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc
             percentage[race] = (racepop[race] / totalPopulation) * 100;
         }
 
+        console.log('Race Population Percentages:', percentage);  // Log the calculated race population percentages
+
         // Create popup content with race percentages
         var popupContent = "Census Tract: " + feature.properties.TRACTCE10 + "<br>Total Population: " + totalPopulation + "<br>";
         for (var race in percentage) {
             popupContent += race + " Percentage: " + percentage[race].toFixed(2) + "%<br>";
         }
+
+        console.log('Popup Content:', popupContent);  // Log the popup content
 
         layer.bindPopup(popupContent);
     }
@@ -1053,12 +1060,12 @@ var racePopulationCheckbox = document.getElementById('racePopulationLayer');
 racePopulationCheckbox.addEventListener('change', function () {
     if (racePopulationCheckbox.checked) {
         map.addLayer(racePopulationLayer);
+        console.log('Race Population Layer Added');  // Log when the layer is added
     } else {
         map.removeLayer(racePopulationLayer);
+        console.log('Race Population Layer Removed');  // Log when the layer is removed
     }
 });
-
-
 
 
 
