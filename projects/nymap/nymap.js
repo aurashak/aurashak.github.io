@@ -876,9 +876,6 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
         '90000-150000': 'rgba(69, 117, 180, 0.7)',
         '150000-250000': 'rgba(49, 54, 149, 0.7)'
     };
-    
-
-
 
         return {
             fillColor: categoryColors[category],
@@ -948,9 +945,6 @@ var categoryColors = {
     
 };
 
-
-
-
         return {
             fillColor: categoryColors[category],
             color: 'black',
@@ -975,6 +969,101 @@ populationCheckbox.addEventListener('change', function () {
         map.removeLayer(populationLayer);
     }
 });
+
+
+
+
+
+
+
+
+// Function to get race category based on race population values
+function getRaceCategory(racepop) {
+    // Define categories and assign colors
+    var categories = [
+        'racepop_Hispanic or Latino',
+        'racepop_White alone',
+        'racepop_Black or African American alone',
+        'racepop_American Indian and Alaskan Native Alone',
+        'racepop_Asian alone',
+        'racepop_Hawaiin and Other Pacific Islander alone',
+        'Other'
+    ];
+
+    var categoryColors = {
+        'racepop_Hispanic or Latino': '#FF0000',
+        'racepop_White alone': '#00FF00',
+        'racepop_Black or African American alone': '#0000FF',
+        'racepop_American Indian and Alaskan Native Alone': '#FFFF00',
+        'racepop_Asian alone': '#FF00FF',
+        'racepop_Hawaiin and Other Pacific Islander alone': '#00FFFF',
+        'Other': '#808080' // Gray for 'Other'
+    };
+
+    // Find the category with the maximum race population
+    var maxCategory = categories.reduce(function (prev, curr) {
+        return racepop[curr] > racepop[prev] ? curr : prev;
+    });
+
+    return {
+        category: maxCategory,
+        color: categoryColors[maxCategory]
+    };
+}
+
+// NYC Race Population Layer
+var racePopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycracepop2020.geojson', {
+    style: function (feature) {
+        var racepop = feature.properties.racepop;
+
+        // Get the race category with the majority population
+        var { category, color } = getRaceCategory(racepop);
+
+        return {
+            fillColor: color,
+            color: 'black',
+            weight: 0.5,
+            opacity: 0.7,
+            fillOpacity: 0.7
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        var racepop = feature.properties.racepop;
+
+        // Calculate percentage of each race
+        var totalPopulation = racepop['racepop_Total'];
+        var percentage = {};
+        for (var race in racepop) {
+            percentage[race] = (racepop[race] / totalPopulation) * 100;
+        }
+
+        // Create popup content with race percentages
+        var popupContent = "Census Tract: " + feature.properties.TRACTCE10 + "<br>Total Population: " + totalPopulation + "<br>";
+        for (var race in percentage) {
+            popupContent += race + " Percentage: " + percentage[race].toFixed(2) + "%<br>";
+        }
+
+        layer.bindPopup(popupContent);
+    }
+});
+
+var racePopulationCheckbox = document.getElementById('racePopulationLayer');
+
+// Add an event listener to the race population checkbox
+racePopulationCheckbox.addEventListener('change', function () {
+    if (racePopulationCheckbox.checked) {
+        map.addLayer(racePopulationLayer);
+    } else {
+        map.removeLayer(racePopulationLayer);
+    }
+});
+
+
+
+
+
+
+
 
 
 // Get the checkbox element
@@ -1605,6 +1694,20 @@ setLegendSymbol('population', {
     '14000-17000': '#2e2e2e', // 
     '17000+': '#000'  // Black
 }, 'polygon', { layout: 'vertical', id: 'legend-population' });
+
+
+// Legend for Race Population Layer (colors based on race categories)
+setLegendSymbol('racePopulation', {
+    'racepop_Hispanic or Latino': '#FF0000',
+    'racepop_White alone': '#00FF00',
+    'racepop_Black or African American alone': '#0000FF',
+    'racepop_American Indian and Alaskan Native Alone': '#FFFF00',
+    'racepop_Asian alone': '#FF00FF',
+    'racepop_Hawaiin and Other Pacific Islander alone': '#00FFFF',
+    'Other': '#808080' // Gray for 'Other'
+}, 'polygon', { layout: 'vertical', id: 'legend-racePopulation' });
+
+
 
 
 // Legend for Power Plants Layer (colors for each fuel type)
