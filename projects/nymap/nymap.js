@@ -979,6 +979,7 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
+
 // Function to get majority racial category based on population in a census tract
 function getMajorityRacialCategory(properties) {
     var races = [
@@ -992,17 +993,11 @@ function getMajorityRacialCategory(properties) {
     ];
 
     // Find the race with the maximum population in the census tract
-    var maxPopulation = 0;
-    var majorityRace = '';
-
-    races.forEach(function (race) {
-        if (properties[race] > maxPopulation) {
-            maxPopulation = properties[race];
-            majorityRace = race;
-        }
+    var maxRace = races.reduce(function (prev, current) {
+        return properties[current] > properties[prev] ? current : prev;
     });
 
-    return majorityRace;
+    return maxRace;
 }
 
 // NYC Racial Population Layer
@@ -1049,7 +1044,6 @@ racialPopulationCheckbox.addEventListener('change', function () {
         map.removeLayer(racialPopulationLayer);
     }
 });
-
 
 
 
