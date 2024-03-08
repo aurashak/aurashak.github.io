@@ -984,7 +984,8 @@ function getRaceCategory(racepop) {
         return { category: 'Other', color: '#808080' };
     }
 
-    // Define categories and assign colors
+    // Extract populations from the desired categories
+    var categoryPopulations = {};
     var categories = [
         'racepop_Hispanic or Latino',
         'racepop_White alone',
@@ -995,11 +996,16 @@ function getRaceCategory(racepop) {
         'Other'
     ];
 
+    categories.forEach(function (category) {
+        categoryPopulations[category] = racepop[category] || 0;
+    });
+
+    // Define colors for each category
     var categoryColors = {
         'racepop_Hispanic or Latino': '#FF0000',
         'racepop_White alone': '#00FF00',
         'racepop_Black or African American alone': '#0000FF',
-        'racepop_American Indian and Alaskan Native Alone': '#FFFF00',
+        'racepop_American Indian and Alaskan Native alone': '#FFFF00',
         'racepop_Asian alone': '#FF00FF',
         'racepop_Hawaiin and Other Pacific Islander alone': '#00FFFF',
         'Other': '#808080' // Gray for 'Other'
@@ -1007,16 +1013,18 @@ function getRaceCategory(racepop) {
 
     // Find the category with the maximum race population
     var maxCategory = categories.reduce(function (prev, curr) {
-        return racepop[curr] > racepop[prev] ? curr : prev;
+        return categoryPopulations[curr] > categoryPopulations[prev] ? curr : prev;
     });
 
     console.log('Race Category:', maxCategory);  // Log the determined race category
 
     return {
         category: maxCategory,
-        color: categoryColors[maxCategory]
+        color: categoryColors[maxCategory],
+        population: categoryPopulations[maxCategory]
     };
 }
+
 
 
 // Make a separate AJAX request for race population data
