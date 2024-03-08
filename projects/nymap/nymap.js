@@ -1074,7 +1074,6 @@ allLayersCheckbox.addEventListener('change', function () {
     toggleLayerVisibility(amtrakLinesLayer, isChecked);
 
     toggleLayerVisibility(chemicalstorageLayer, isChecked);
-    toggleLayerVisibility(culturalinsLayer, isChecked);
     toggleLayerVisibility(electrictransmissionlinesLayer, isChecked);
     toggleLayerVisibility(nygaspipelinesLayer, isChecked);
     toggleLayerVisibility(powerplantsLayer, isChecked);
