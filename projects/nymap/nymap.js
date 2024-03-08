@@ -1026,7 +1026,7 @@ var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
         };
     },
     onEachFeature: function (feature, layer) {
-        var censusTract = feature.properties.CTlabel;
+        var censusTract = feature.properties.CTLabel;
         var majorityRace = getMajorityRacialCategory(feature.properties);
         var population = feature.properties[majorityRace];
 
