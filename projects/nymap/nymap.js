@@ -1030,7 +1030,7 @@ var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
         var majorityRace = getMajorityRacialCategory(feature.properties);
         var population = feature.properties[majorityRace];
 
-        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC RACIAL POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Majority Race: ' + majorityRace + '<br>Population: ' + population);
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">RACE</strong><br>Census Tract: ' + censusTract + '<br>Majority group: ' + majorityRace + '<br>Total: ' + population);
     }
 });
 
