@@ -976,9 +976,14 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Function to get race category based on race population values
 function getRaceCategory(racepop) {
+    // Ensure racepop is defined and has the expected structure
+    if (!racepop || typeof racepop !== 'object') {
+        console.error('Invalid racepop data:', racepop);
+        return { category: 'Other', color: '#808080' };
+    }
+
     // Define categories and assign colors
     var categories = [
         'racepop_Hispanic or Latino',
@@ -1012,6 +1017,7 @@ function getRaceCategory(racepop) {
         color: categoryColors[maxCategory]
     };
 }
+
 
 // Make a separate AJAX request for race population data
 fetch('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson')
