@@ -1688,12 +1688,12 @@ setLegendSymbol('population', {
 
 // Legend for Race Population Layer (colors based on race categories)
 setLegendSymbol('racePopulation', {
-    'racepop2_Hispanic or Latino': '#FF0000',
-    'racepop2_White alone': '#ffffff',
-    'racepop2_Black or African American alone': '#0000FF',
-    'racepop2_American Indian and Alaskan Native Alone': '#964B00',
-    'racepop2_Asian alone': '#00ff00',
-    'racepop2_Hawaiin and Other Pacific Islander alone': '#0000ff',
+    'Hispanic or Latino': '#FF0000',
+    'White alone': '#ffffff',
+    'Black or African American alone': '#000000',
+    'American Indian and Alaskan Native Alone': '#964B00',
+    'Asian alone': '#00ff00',
+    'Hawaiin and Other Pacific Islander alone': '#0000ff',
     'Other': '#808080' // Gray for 'Other'
 }, 'polygon', { layout: 'vertical', id: 'legend-racePopulation' });
 
