@@ -3220,10 +3220,10 @@ span.cesium-projectionPicker-wrapper {
     padding: 5px 0;
 }
 
-  .aboutcontainer {
-      font-size: 16px;
-      margin: 10px;
-  }
+.aboutcontainer {
+  margin-top: 60px;
+  font-size: 16px;
+}
 
   .hometitle {
       font-size: 20px;
