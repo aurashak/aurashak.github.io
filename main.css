@@ -55,16 +55,16 @@ h3 a:link { color: black; background-color: #ffe600ce;}
 h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600ce;}
 
 .header {
-    display: flex;
-    justify-content: left;
-    margin: 0;
-    padding: 10px 10px;
-    border-bottom: .1px solid rgba(0, 0, 0, 0.44);
-    position: relative;
-    z-index: 1;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 30px;
+  padding: 10px 10px;
+  border-bottom: .1px solid rgba(0, 0, 0, 0.44);
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   box-shadow: 3px 3px 2px rgba(59, 59, 59, 0.46);
-    background: rgba(255, 255, 255, 0.6);
-
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .navigation {
@@ -221,14 +221,14 @@ overflow: auto;
 }
 
 .aboutcontainer {
-    font-size: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 5px 10px;
-    display: block;
-    text-align: center;
-    line-height: 1.6;
-
+  font-size: 20px;
+  margin: 80px auto 0; /* Add top margin equal to the height of the fixed header */
+  max-width: 800px;
+  padding: 5px 10px;
+  display: block;
+  position: relative; /* Change from absolute to relative */
+  text-align: center;
+  line-height: 1.6;
 }
 
 
