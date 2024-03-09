@@ -5,7 +5,7 @@ var bounds = L.latLngBounds(
 );
 
 // Create and configure the map with the specified bounds
-var map = L.map('nymap', {
+var map = L.map('testmap', {
   maxBounds: bounds,
   maxBoundsViscosity: 1.0,   // Elastic effect on exceeding bounds
   minZoom: 10,
