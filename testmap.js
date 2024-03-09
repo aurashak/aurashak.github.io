@@ -25,7 +25,7 @@ var airQualityMarker = L.marker([YOUR_LATITUDE, YOUR_LONGITUDE]).addTo(map);
 airQualityMarker.bindPopup("<b>Air Quality Information</b><br>Insert your data here.").openPopup();
 
 // Fetch air quality data from Google Maps API
-fetch('https://maps.googleapis.com/maps/api/js/third_party/air_quality?units=metric&lat=' + YOUR_LATITUDE + '&lng=' + YOUR_LONGITUDE + '&key=YOUR_GOOGLE_MAPS_API_KEY')
+fetch('https://maps.googleapis.com/maps/api/js/third_party/air_quality?units=metric&lat=' + YOUR_LATITUDE + '&lng=' + YOUR_LONGITUDE + '&key=AIzaSyCqS_XpeXz_1mapPnMseO2s0SHiHyal9t0')
   .then(response => response.json())
   .then(data => {
     // Process the air quality data and update the map as needed
