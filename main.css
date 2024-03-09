@@ -1,13 +1,18 @@
--html, body {
+html, body {
   color: #000;
   background: #fff;
   font-family: Arial, sans-serif;
   font-size: 15px;
-  overflow: auto; 
+  overflow: auto;
   height: 100%;
   margin: 0;
-    padding: 0;
+  padding: 0;
 }
+
+body {
+  padding-top: px; 
+}
+
 
 a:link {text-decoration: none; }
 a:visited { color: black;}
@@ -222,11 +227,11 @@ overflow: auto;
 
 .aboutcontainer {
   font-size: 20px;
-  margin: 80px auto 0; /* Add top margin equal to the height of the fixed header */
+  margin: 60px auto 0; 
   max-width: 800px;
   padding: 5px 10px;
   display: block;
-  position: relative; /* Change from absolute to relative */
+  position: relative;
   text-align: center;
   line-height: 1.6;
 }
@@ -635,17 +640,17 @@ background-color: #ffe600ce;
 }
 
 .hover-image {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-      width: 75%;
-  margin-top: 20px; 
-  z-index: 1;
-      border-radius: 1px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 75%;
+    margin-top: 20px; 
+    z-index: 1;
+    border-radius: 1px;
     background: #eeeeee;
     border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+    box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
 .hover-image img {
@@ -657,10 +662,9 @@ background-color: #ffe600ce;
     padding: 3px;
     margin: 0px;
     border-radius: 2px;
-    background-color: #b4b4b4;
+    background-color: #e6e6e6;
     border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
-
+    box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
 
 
@@ -683,12 +687,14 @@ display: inline-block;
 .nymapcontainer {
   display: grid;
   grid-template-columns: minmax(0, 450px) 1fr;
-  flex: 1; /* Expand to fill the available space */
+  flex: 1;
   margin: 20px;
+  position: fixed;
   border: 1px solid grey;
   border-radius: 2px;
-        box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
-
+  box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+  width: 97%;
+  height: 83vh;
 }
 
 
