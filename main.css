@@ -226,14 +226,13 @@ overflow: auto;
 }
 
 .aboutcontainer {
-  font-size: 0px;
-  margin: 60px auto 0; 
-  max-width: 800px;
-  padding: 5px 10px;
-  display: block;
-  position: relative;
-  text-align: center;
-  line-height: 1.6;
+    margin: 60px auto 0;
+    max-width: 800px;
+    padding: 5px 10px;
+    display: block;
+    position: relative;
+    text-align: center;
+
 }
 
 
@@ -590,8 +589,11 @@ li a:visited {
     border-radius: 1px;
     background: #eeeeee;
     text-align: left;
+    font-size: 18px;
     border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+        line-height: 1.6;
+
 }
 
 .textbox a:link {
