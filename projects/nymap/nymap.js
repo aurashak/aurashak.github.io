@@ -993,7 +993,7 @@ function getMajorityRacialCategory(properties) {
     ];
 
     // Calculate the percentage of population for each race
-    var totalPopulation = properties.totalpop;
+    var totalPopulation = properties.totalpop || 1; // Default to 1 to avoid division by zero
     var racePercentages = races.map(function (race) {
         return properties[race] / totalPopulation;
     });
@@ -1004,6 +1004,7 @@ function getMajorityRacialCategory(properties) {
 
     return maxRace;
 }
+
 
 
 
