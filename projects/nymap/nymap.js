@@ -993,8 +993,9 @@ function getMajorityRacialCategory(properties) {
     ];
 
     // Calculate the percentage of population for each race
+    var totalPopulation = properties.totalpop;
     var racePercentages = races.map(function (race) {
-        return properties[race] / properties.totalpop;
+        return properties[race] / totalPopulation;
     });
 
     // Find the race with the maximum percentage in the census tract
@@ -1003,6 +1004,7 @@ function getMajorityRacialCategory(properties) {
 
     return maxRace;
 }
+
 
 
 // NYC Racial Population Layer
