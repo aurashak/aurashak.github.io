@@ -529,7 +529,7 @@ var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyc
 
 
 
-// Energy Layer Group
+// Transport Layer Group
 var transportLayerGroup = L.layerGroup();
 
 
