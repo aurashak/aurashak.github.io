@@ -390,6 +390,17 @@ background: none;
   text-decoration: underline;
 }
 
+sup a {
+  text-decoration: none; /* Remove underline from the link */
+  color: #007BFF; /* Set the link color */
+}
+
+sup a:hover {
+  text-decoration: underline; /* Underline the link on hover */
+}
+
+
+
 
 
 
@@ -665,27 +676,6 @@ background-color: #ffe600ce;
 
 
 
-.nymapboxcontainerinstructions {
-  padding: 3px;
-  margin: 0px;
-  background-color: #e6e6e6;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
-}
-
-.nymapboxinstructions {
-  position: relative;
-  padding: 10px 5px;
-  color: rgb(0, 0, 0);
-  margin: 5px 2px;
-  font-size: 17px;
-  border-radius: 3px;
-  border: solid .3px rgba(18, 18, 18, 0.68);
-  background-color: #f5f5f5;
-}
-
-
-
 
 
 .codebox {
@@ -869,6 +859,9 @@ h3:hover, h3:active, h3:focus {
   background-color: #ffe600ce;
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
+
+
+
 
 
 
