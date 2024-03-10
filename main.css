@@ -368,7 +368,6 @@ background: none;
 
 
 
-
 #footnotes {
   margin-top: 20px; /* Adjust as needed */
   padding: 10px;
@@ -376,6 +375,8 @@ background: none;
   background-color: #f9f9f9;
   font-size: 14px;
   line-height: 1.4;
+    height: 200px;
+    overflow: auto;
 }
 
 #footnotes p {
@@ -384,14 +385,12 @@ background: none;
 
 #footnotes a {
   text-decoration: none;
-  color: #007bff; /* Link color, adjust as needed */
+  color: #000000; /* Link color, adjust as needed */
 }
 
 #footnotes a:hover {
   text-decoration: underline;
 }
-
-
 
 
 
