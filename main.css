@@ -20,6 +20,40 @@ a:hover {text-decoration: none; }
 a:active { color: black}
 
 
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0px 10px;
+}
+
+ul li {
+  position: relative;
+  margin-left: 10px; /* Adjust the margin for indentation */
+  line-height: 1.2;
+  text-indent: -10px; 
+}
+
+ul li::before {
+  content: "\2022";
+  color: #333;
+  font-size: 1.5em;
+  margin-right: 5px;
+  vertical-align: middle;
+  line-height: inherit; 
+}
+
+ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+ul li a:hover {
+  color: #007bff;
+}
+
+
 h1 {
     font-size: 25px;
     font-weight: bold;
