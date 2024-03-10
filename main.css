@@ -306,10 +306,18 @@ max-width: 800px;
 }
 
 
+
 .logos-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logos-container img {
+  height: 40px;
+  width: 10%;
+  object-fit: contain;
 }
 
 .logos-container a:link {
@@ -626,40 +634,39 @@ background-color: #ffe600ce;
     text-decoration: underline;
 }
 
-
 .nymapbox {
-    position: relative;
-    padding: 10px 5px;
-    margin: 5px 2px;
-    font-weight: bold;
-    border-radius: 3px;
-    border: solid .3px rgba(18, 18, 18, 0.68);
-    background-color: #f5f5f5;
+  position: relative;
+  padding: 10px 5px 10px 10px;
+  margin: 5px 2px;
+  font-weight: bold;
+  border-radius: 3px;
+  border: solid .3px rgba(18, 18, 18, 0.68);
+  background-color: #f5f5f5;
 }
 
 .nymapboxgrouptop {
-  position: relative;
-  padding: 10px 5px;
-  font-weight: bold;
-  margin: 10px 2px 0px 2px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-top: solid 0.3px rgba(18, 18, 18, 0.68);
-  border-left: solid 0.3px rgba(18, 18, 18, 0.68);
-  border-right: solid 0.3px rgba(18, 18, 18, 0.68);
-  background-color: #f3f3f3;
+position: relative;
+  padding: 10px 5px 10px 10px;
+font-weight: bold;
+margin: 10px 2px 0px 2px;
+border-top-left-radius: 2px;
+border-top-right-radius: 2px;
+border-top: solid 0.3px rgba(18, 18, 18, 0.68);
+border-left: solid 0.3px rgba(18, 18, 18, 0.68);
+border-right: solid 0.3px rgba(18, 18, 18, 0.68);
+background-color: #f3f3f3;
 }
 
 .nymapboxgroupbottom {
-  position: relative;
-  padding: 10px 5px;
-  margin: 0px 2px 10px 2px;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  border-bottom: solid 0.3px rgba(18, 18, 18, 0.68);
-  border-left: solid 0.3px rgba(18, 18, 18, 0.68);
-  border-right: solid 0.3px rgba(18, 18, 18, 0.68);
-  background-color: #f3f3f3;
+position: relative;
+  padding: 10px 5px 10px 10px;
+margin: 0px 2px 10px 2px;
+border-bottom-left-radius: 2px;
+border-bottom-right-radius: 2px;
+border-bottom: solid 0.3px rgba(18, 18, 18, 0.68);
+border-left: solid 0.3px rgba(18, 18, 18, 0.68);
+border-right: solid 0.3px rgba(18, 18, 18, 0.68);
+background-color: #f3f3f3;
 }
 
 
