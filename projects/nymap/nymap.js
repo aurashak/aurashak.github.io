@@ -928,9 +928,9 @@ function getPopulationCategory(population) {
         return '3000-6000';
     } else if (population <= 10000) {
         return '6000-10000';
-    } else if (population <= 14000) {  // Update upper limit for this category
+    } else if (population <= 15000) {
         return '10000-14000';
-    } else if (population <= 17000) {  // Update upper limit for this category
+    } else if (population <= 18000) {
         return '14000-17000';
     } else {
         return '17000+';
@@ -941,7 +941,7 @@ function getPopulationCategory(population) {
 var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cttotalpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on population level
-        var population = feature.properties.population; // Update to the correct property name
+        var population = feature.properties.population; // Update to lowercase 'population'
         var category = getPopulationCategory(population);
 
         // Define colors for each category as a gradient with transparency
@@ -965,10 +965,11 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctt
     },
     onEachFeature: function (feature, layer) {
         var censusTract = feature.properties.CTLabel;
-        var population = feature.properties.population; // Update to the correct property name
+        var population = feature.properties.population; // Update to lowercase 'population'
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
 });
+
 
 var populationCheckbox = document.getElementById('populationLayer');
 
@@ -980,6 +981,7 @@ populationCheckbox.addEventListener('change', function () {
         map.removeLayer(populationLayer);
     }
 });
+
 
 
 
