@@ -629,7 +629,7 @@ background-color: #ffe600ce;
 
 .nymapbox {
     position: relative;
-    padding: 10px;
+    padding: 10px 5px;
     margin: 5px 2px;
     font-weight: bold;
     border-radius: 3px;
@@ -639,7 +639,7 @@ background-color: #ffe600ce;
 
 .nymapboxgrouptop {
   position: relative;
-  padding: 10px;
+  padding: 10px 5px;
   font-weight: bold;
   margin: 10px 2px 0px 2px;
   border-top-left-radius: 2px;
@@ -652,7 +652,7 @@ background-color: #ffe600ce;
 
 .nymapboxgroupbottom {
   position: relative;
-  padding: 10px;
+  padding: 10px 5px;
   margin: 0px 2px 10px 2px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
