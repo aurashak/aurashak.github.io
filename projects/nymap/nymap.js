@@ -980,7 +980,7 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-// Function to get majority racial category based on population in a census tract
+// Function to get majority racial category based on population percentage in a census tract
 function getMajorityRacialCategory(properties) {
     var races = [
         'racepop2_Hispanic or Latino',
@@ -992,13 +992,18 @@ function getMajorityRacialCategory(properties) {
         'Other'
     ];
 
-    // Find the race with the maximum population in the census tract
-    var maxRace = races.reduce(function (prev, current) {
-        return properties[current] > properties[prev] ? current : prev;
+    // Calculate the percentage of population for each race
+    var racePercentages = races.map(function (race) {
+        return properties[race] / properties.totalpop;
     });
+
+    // Find the race with the maximum percentage in the census tract
+    var maxRaceIndex = racePercentages.indexOf(Math.max(...racePercentages));
+    var maxRace = races[maxRaceIndex];
 
     return maxRace;
 }
+
 
 // NYC Racial Population Layer
 var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
