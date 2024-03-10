@@ -640,8 +640,11 @@ background-color: #ffe600ce;
   position: relative;
   padding: 10px 5px;
   margin: 10px 2px 0px 2px;
-  border-radius: 2px;
-  border: solid .3px rgba(18, 18, 18, 0.68);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-top: solid 0.3px rgba(18, 18, 18, 0.68);
+  border-left: solid 0.3px rgba(18, 18, 18, 0.68);
+  border-right: solid 0.3px rgba(18, 18, 18, 0.68);
   background-color: #f3f3f3;
 }
 
@@ -649,10 +652,14 @@ background-color: #ffe600ce;
   position: relative;
   padding: 10px 5px;
   margin: 0px 2px 10px 2px;
-  border-radius: 2px;
-  border: solid .3px rgba(18, 18, 18, 0.68);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom: solid 0.3px rgba(18, 18, 18, 0.68);
+  border-left: solid 0.3px rgba(18, 18, 18, 0.68);
+  border-right: solid 0.3px rgba(18, 18, 18, 0.68);
   background-color: #f3f3f3;
 }
+
 
 .nymapbox:hover .hover-image {
   display: block;
