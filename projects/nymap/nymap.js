@@ -988,7 +988,6 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
-
 // Function to get majority racial category based on population in a census tract
 function getMajorityRacialCategory(properties) {
     var races = [
@@ -1002,11 +1001,17 @@ function getMajorityRacialCategory(properties) {
     ];
 
     // Find the race with the maximum population in the census tract
-    var maxRace = races.reduce(function (prev, current) {
-        return properties[current] > properties[prev] ? current : prev;
+    var maxPopulation = 0;
+    var majorityRace = 'Other';
+
+    races.forEach(function (race) {
+        if (properties[race] > maxPopulation) {
+            maxPopulation = properties[race];
+            majorityRace = race;
+        }
     });
 
-    return maxRace;
+    return majorityRace;
 }
 
 // NYC Racial Population Layer
@@ -1042,6 +1047,7 @@ var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
         layer.bindPopup('<strong style="background-color: #ffe600ce;">RACE</strong><br>Census Tract: ' + censusTract + '<br>Majority group: ' + majorityRace + '<br>Total: ' + population);
     }
 });
+
 
 var racialPopulationCheckbox = document.getElementById('racialPopulationLayer');
 
