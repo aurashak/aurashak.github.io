@@ -659,7 +659,6 @@ background-color: #ffe600ce;
 .nymapboxcontainer {
     padding: 3px;
     margin: 0px;
-    /* font-weight: 400; */
     background-color: #e6e6e6;
     border: 1px solid rgba(110, 110, 110, 0.3);
     box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
@@ -669,16 +668,13 @@ background-color: #ffe600ce;
 
 
 
-
 .nymapboxcontainerinstructions {
   padding: 3px;
   margin: 0px;
-  /* font-weight: 400; */
   background-color: #e6e6e6;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
-
 
 .nymapboxinstructions {
   position: relative;
@@ -689,8 +685,30 @@ background-color: #ffe600ce;
   font-size: 20px;
   border-radius: 3px;
   border: solid .3px rgba(18, 18, 18, 0.68);
-  background-color: #000000;
+  background-color: #656565;
+}
 
+
+
+
+.underline {
+  text-decoration: underline;
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  background-size: 100% 4px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  animation: glisten 2s infinite; /* Added animation for continuous glistening */
+}
+
+@keyframes glisten {
+  0% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 100%;
+  }
 }
 
 
