@@ -1008,6 +1008,7 @@ function getMajorityRacialCategory(properties) {
 
 
 
+
 // NYC Racial Population Layer
 var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
