@@ -529,6 +529,12 @@ var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyc
 
 
 
+// Energy Layer Group
+var transportLayerGroup = L.layerGroup();
+
+
+
+
 // Bus Depots Layer
 var nycbusdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycbusdepots.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -542,7 +548,10 @@ var nycbusdepotsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/n
             fillOpacity: 0.8
         });
     }
-});
+}).addTo(transportLayerGroup);
+
+
+
 
 
 // Subway Layer
@@ -594,7 +603,7 @@ var nycsubwayLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycs
             opacity: 0.6
         };
     }
-});
+}).addTo(transportLayerGroup);
 
 
 
@@ -632,7 +641,7 @@ var nyrailLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nytrain
             };
         }
     }
-});
+}).addTo(transportLayerGroup);
 
 
 
@@ -650,7 +659,7 @@ var nyairportsLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nya
     onEachFeature: function (feature, layer) {
         // Remove label-related content
     }
-});
+}).addTo(transportLayerGroup);
 
 
 // Amtrak Lines Layer
@@ -666,7 +675,7 @@ var amtrakLinesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/am
     onEachFeature: function (feature, layer) {
         // Remove label-related content
     }
-});
+}).addTo(transportLayerGroup);
 
 
 
@@ -1497,6 +1506,44 @@ document.getElementById('energyLayerGroup').addEventListener('click', function()
         }
     }
 });
+
+
+
+
+
+document.getElementById('transportLayerGroup').addEventListener('click', function() {
+    if (map.hasLayer(transportLayerGroup)) {
+        map.removeLayer(transportLayerGroup);
+        // If the group toggle is turned off, turn off individual layers as well
+        map.removeLayer(nycsubwayLayer);
+        map.removeLayer(amtrakLinesLayer);
+        map.removeLayer(nyrailLayer);
+        map.removeLayer(nycbusdepotsLayer);
+
+        // Reset the individual layer toggle buttons to off state
+        document.getElementById('nycbusdepotsLayer').checked = false;
+        document.getElementById('nyrailLayer').checked = false;
+        document.getElementById('amtrakLinesLayer').checked = false;
+        document.getElementById('nycsubwayLayer').checked = false;
+
+    } else {
+        map.addLayer(energyLayerGroup);
+        // If the group toggle is turned on, turn on individual layers if they were previously checked
+        if (document.getElementById('nycbusdepotsLayer').checked) {
+            map.addLayer(nycbusdepotsLayer);
+        }
+        if (document.getElementById('nyrailLayer').checked) {
+            map.addLayer(nyrailLayer);
+        }
+        if (document.getElementById('amtrakLinesLayer').checked) {
+            map.addLayer(amtrakLinesLayer);
+        }
+        if (document.getElementById('nycsubwayLayer').checked) {
+            map.addLayer(nycsubwayLayer);
+        }
+    }
+});
+
 
 
 
