@@ -896,7 +896,7 @@ var avgIncomeLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyca
     onEachFeature: function (feature, layer) {
         var censusTract = feature.properties.TRACTCE10;
         var income = feature.properties.MHI;
-        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC AVERAGE INCOME</strong><br>Census Tract: ' + censusTract + '<br>Income: $' + income);
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">AVERAGE INCOME</strong><br>Census Tract: ' + censusTract + '<br>Income: $' + income);
     }
 });
 
@@ -964,10 +964,12 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctt
         };
     },
     onEachFeature: function (feature, layer) {
+        console.log('Feature Properties:', feature.properties); // Add this line
         var censusTract = feature.properties.CTLabel;
-        var population = feature.properties.population; // Update to lowercase 'population'
+        var population = feature.properties.population; // Update to the correct property name
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
+    
 });
 
 
