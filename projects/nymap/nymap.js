@@ -941,7 +941,7 @@ function getPopulationCategory(population) {
 var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cttotalpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on population level
-        var population = feature.properties.totalpop2020_POP; // Update to lowercase 'population'
+        var population = feature.properties.cttotalpop2020_POP; // Update to lowercase 'population'
         var category = getPopulationCategory(population);
 
         // Define colors for each category as a gradient with transparency
@@ -966,7 +966,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctt
     onEachFeature: function (feature, layer) {
         console.log('Feature Properties:', feature.properties); // Add this line
         var censusTract = feature.properties.ctLabel;
-        var population = feature.properties.totalpop2020_POP; // Update to the correct property name
+        var population = feature.properties.cttotalpop2020_POP; // Update to the correct property name
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
     
