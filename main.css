@@ -678,13 +678,12 @@ background-color: #ffe600ce;
 .nymapboxinstructions {
   position: relative;
   padding: 10px 5px;
-  color: rgb(235, 235, 235);
+  color: rgb(0, 0, 0);
   margin: 5px 2px;
-  font-weight: bold;
-  font-size: 20px;
+  font-size: 17px;
   border-radius: 3px;
   border: solid .3px rgba(18, 18, 18, 0.68);
-  background-color: #656565;
+  background-color: #a9a9a9;
 }
 
 
