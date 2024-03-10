@@ -1518,7 +1518,7 @@ document.getElementById('transportLayerGroup').addEventListener('click', functio
         document.getElementById('nycsubwayLayer').checked = false;
 
     } else {
-        map.addLayer(energyLayerGroup);
+        map.addLayer(transportLayerGroup);
         // If the group toggle is turned on, turn on individual layers if they were previously checked
         if (document.getElementById('nycbusdepotsLayer').checked) {
             map.addLayer(nycbusdepotsLayer);
