@@ -401,11 +401,13 @@ sup a:hover {
 
 .legend-item sup a:link,
 .legend-item sup a:visited {
-    background-color: white;
-    text-decoration: underline; /* Remove underline from the link */
-    color: #000000; /* Set the link color */
-}
+    background-color: transparent;
+    text-decoration: underline;
+    color: #000000;
+    font-size: 10px;
+    vertical-align: top;
 
+}
 .legend-item sup a:hover {
     text-decoration: underline; /* Underline the link on hover */
 }
