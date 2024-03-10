@@ -938,10 +938,10 @@ function getPopulationCategory(population) {
 }
 
 // NYC Population Layer
-var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
+var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cttotalpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on population level
-        var population = feature.properties.racepop4_Total; // Update to the correct property name
+        var population = feature.properties.population; // Update to the correct property name
         var category = getPopulationCategory(population);
 
         // Define colors for each category as a gradient with transparency
@@ -965,7 +965,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
     },
     onEachFeature: function (feature, layer) {
         var censusTract = feature.properties.CTLabel;
-        var population = feature.properties.racepop4_Total; // Update to the correct property name
+        var population = feature.properties.population; // Update to the correct property name
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
 });
@@ -1015,7 +1015,7 @@ function getMajorityRacialCategory(properties) {
 }
 
 // NYC Racial Population Layer
-var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
+var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctracepop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on majority race in the census tract
         var majorityRace = getMajorityRacialCategory(feature.properties);
