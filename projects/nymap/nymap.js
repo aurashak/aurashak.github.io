@@ -1009,14 +1009,20 @@ function getMajorityRacialCategory(properties) {
     var majorityRace = 'Other';
 
     races.forEach(function (race) {
+        console.log("Race:", race);
+        console.log("Population for", race, ":", properties[race]);
         if (properties[race] > maxPopulation) {
             maxPopulation = properties[race];
             majorityRace = race;
         }
     });
 
+    console.log("Majority Race:", majorityRace);
+    console.log("----------------------------");
+
     return majorityRace;
 }
+
 
 // NYC Racial Population Layer
 var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctracepop2020.geojson', {
