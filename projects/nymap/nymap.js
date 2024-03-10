@@ -928,9 +928,9 @@ function getPopulationCategory(population) {
         return '3000-6000';
     } else if (population <= 10000) {
         return '6000-10000';
-    } else if (population <= 15000) {
+    } else if (population <= 14000) {  // Update upper limit for this category
         return '10000-14000';
-    } else if (population <= 18000) {
+    } else if (population <= 17000) {  // Update upper limit for this category
         return '14000-17000';
     } else {
         return '17000+';
@@ -941,7 +941,7 @@ function getPopulationCategory(population) {
 var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on population level
-        var population = feature.properties.population; // Update to lowercase 'population'
+        var population = feature.properties.racepop4_Total; // Update to the correct property name
         var category = getPopulationCategory(population);
 
         // Define colors for each category as a gradient with transparency
@@ -965,11 +965,10 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctp
     },
     onEachFeature: function (feature, layer) {
         var censusTract = feature.properties.CTLabel;
-        var population = feature.properties.population; // Update to lowercase 'population'
+        var population = feature.properties.racepop4_Total; // Update to the correct property name
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
 });
-
 
 var populationCheckbox = document.getElementById('populationLayer');
 
@@ -988,15 +987,16 @@ populationCheckbox.addEventListener('change', function () {
 
 
 
+
 // Function to get majority racial category based on population in a census tract
 function getMajorityRacialCategory(properties) {
     var races = [
-        'racepop2_Hispanic or Latino',
-        'racepop2_White alone',
-        'racepop2_Black or African American alone',
-        'racepop2_American Indian and Alaskan Native alone',
-        'racepop2_Asian alone',
-        'racepop2_Hawaiian and Other Pacific Islander alone',
+        'racepop4_Hispanic or Latino',
+        'racepop4_White alone',
+        'racepop4_Black or African American alone',
+        'racepop4_American Indian and Alaskan Native alone',
+        'racepop4_Asian alone',
+        'racepop4_Hawaiian and Other Pacific Islander alone',
         'Other'
     ];
 
@@ -1022,12 +1022,12 @@ var racialPopulationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/n
 
         // Define colors for each race
         var raceColors = {
-            'racepop2_Hispanic or Latino': '#ff0000', // Red
-            'racepop2_White alone': '#ffffff', // White
-            'racepop2_Black or African American alone': '#000000', // Black
-            'racepop2_American Indian and Alaskan Native alone': '#964B00', // Brown
-            'racepop2_Asian alone': '#00ff00', // Green
-            'racepop2_Hawaiian and Other Pacific Islander alone': '#0000ff', // Blue
+            'racepop4_Hispanic or Latino': '#ff0000', // Red
+            'racepop4_White alone': '#ffffff', // White
+            'racepop4_Black or African American alone': '#000000', // Black
+            'racepop4_American Indian and Alaskan Native alone': '#964B00', // Brown
+            'racepop4_Asian alone': '#00ff00', // Green
+            'racepop4_Hawaiian and Other Pacific Islander alone': '#0000ff', // Blue
             'Other': '#808080' // Gray
         };
 
