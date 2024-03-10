@@ -369,7 +369,7 @@ background: none;
 
 
 #footnotes {
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
   padding: 10px;
   border: 1px solid #ccc;
   background-color: #f9f9f9;
@@ -380,12 +380,12 @@ background: none;
 }
 
 #footnotes p {
-  margin-bottom: 8px; /* Adjust as needed */
+  margin-bottom: 8px; 
 }
 
 #footnotes a {
   text-decoration: none;
-  color: #000000; /* Link color, adjust as needed */
+  color: #000000; 
 }
 
 #footnotes a:hover {
