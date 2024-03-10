@@ -35,32 +35,40 @@ New York City Environmental Infrastructure Map
 
     <div class="nymapboxcontainer">
         <div class="nymapboxgrouptop" >
-            INSTRUCTIONS
+            <B>INSTRUCTIONS</B>
         </div>
             <div class="nymapboxgroupbottom">
 
-           Toggle the layers to see how infrastructure overlaps with the places and people of NYC. 
+           Toggle the layers to see how infrastructure overlaps with the places and people of NYC. <br><Br>
 
-           The red switches control an entire group of layers, while the blue switches control individual layes. For example, this red switch turns on/off the entire waste infrastructrue layer, while this blue switch shows the location of only the waste transfer stations in the waste group.
-           <br><Br>
-            View the documentation for how this map was created <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a>.
-       <br><Br>
-        View the footnotes <a href="#footnotes">here</a>.
-        <Br><br>
-            Please take a moment to complete the user survey <a href="">here</a>. 
-            <br><br>
-            Donate <a href="">here</a> to sustain and grow this mapping project.
-
+           The red switches control an entire group of layers, while the blue switches control individual layes. For example, this red switch <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input" id="wasteLayerGroup">
+            <div class="switch-track">
+            <div class="switch-thumb-b"></div>
+            </div>
+            </label>turns on/off the entire waste infrastructrue layer, while this blue switch <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="wastetransferfacility">
+                <div class="switch-track">
+                <div class="switch-thumb"></div>
+                </div>
+                </label>turns on/off the waste transfer stations layer only.
+ 
+            <ul><li>View the documentation for how this map was created <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a>.</li>
+  
+                <li>View the footnotes <a href="#footnotes">here</a>.</li>
+                    <li>Please take a moment to complete the user survey <a href="">here</a>. </li>
+                        <li>Donate <a href="">here</a> to sustain and grow this mapping project.</li>
+            </ul>
         </div>
     </div>
     <Br>
     
 
         <div class="nymapboxcontainer">
-        <div class="nymapbox" style="background-color: #ff4a4a89;">
+        <div class="nymapbox">
         <!-- All layers -->
         <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="switch-label" >All Infrastructure Layers</label> &nbsp; ☣️☠️ 
+            <label class="switch-label" ><B>All Infrastructure Layers</B></label> &nbsp; ☣️☠️ 
         <label class="switch" style="margin-left: auto;">
         <input type="checkbox" class="switch-input" id="allLayersCheckbox">
         <div class="switch-track">
