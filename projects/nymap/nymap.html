@@ -39,7 +39,9 @@ New York City Environmental Infrastructure Map
         </div>
             <div class="nymapboxgroupbottom">
 
-           Toggle the layers to see how infrastructure overlaps with the places and people of NYC.
+           Toggle the layers to see how infrastructure overlaps with the places and people of NYC. 
+
+           The red switches control an entire group of layers, while the blue switches control individual layes. For example, this red switch turns on/off the entire waste infrastructrue layer, while this blue switch shows the location of only the waste transfer stations in the waste group.
            <br><Br>
             View the documentation for how this map was created <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a>.
        <br><Br>
@@ -59,7 +61,7 @@ New York City Environmental Infrastructure Map
         <!-- All layers -->
         <div style="display: flex; align-items: center;" class="legend-item">
             <label class="switch-label" >All Infrastructure Layers</label> &nbsp; ☣️☠️ 
-        <label class="switch-b" style="margin-left: auto;">
+        <label class="switch" style="margin-left: auto;">
         <input type="checkbox" class="switch-input" id="allLayersCheckbox">
         <div class="switch-track">
         <div class="switch-thumb"></div>
@@ -119,7 +121,7 @@ New York City Environmental Infrastructure Map
 <!-- Waste -->
 <div style="display: flex; align-items: center;" class="legend-item">
     <label class="switch-label">Waste</label>&nbsp; 🗑️ 
-<label class="switch-b" style="margin-left: auto;">
+<label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="wasteLayerGroup">
 <div class="switch-track">
 <div class="switch-thumb"></div>
@@ -198,7 +200,7 @@ New York City Environmental Infrastructure Map
 <!-- Energy -->
 <div style="display: flex; align-items: center;" class="legend-item">
     <label class="switch-label">Energy</label> &nbsp;🔋🛢️☀️☢️🚰  
-<label class="switch-b" style="margin-left: auto;">
+<label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="energyLayerGroup">
 <div class="switch-track">
 <div class="switch-thumb"></div>
@@ -307,7 +309,7 @@ New York City Environmental Infrastructure Map
 <!-- Transportation -->
 <div style="display: flex; align-items: center;" class="legend-item">
     <label class="switch-label">Transportation</label> &nbsp;🚗 🛣️ 🚌 🚃  
-<label class="switch-b" style="margin-left: auto;">
+<label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="transportLayerGroup">
 <div class="switch-track">
 <div class="switch-thumb"></div>
@@ -421,7 +423,7 @@ New York City Environmental Infrastructure Map
         <div class="nymapbox" >
     
     <!-- Demographics -->
-    <div style="display: inline-block;  align-items: center;" >
+    <div style="display: inlinelock;  align-items: center;" >
         Demographics<sup style="font-size: smaller;"><a href="#footnote-6">12</a></sup> </div>&nbsp; 🏙️💵🌍    
     </div>
     
