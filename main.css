@@ -864,28 +864,30 @@ Padding: 3px 5px;
 
 
 
-
 .navigation-container {
   display: flex;
-  font-size: 13px;
+font-weight: normal;
+  margin: 30px;
 }
 
 .control-container {
-  text-align: center; /* Center text within the container */
+text-align: center; /* Center text within the container */
 }
 
 /* Style for the image container */
 .control-container img {
-  max-width: 100%; /* Ensure images do not exceed the width of their container */
-  height: auto;
-  margin: 10px;
+max-width: 100%; /* Ensure images do not exceed the width of their container */
+height: auto;
+margin: 10px;
 }
 
 /* Style for the titles */
 .control-container b {
-  margin-bottom: 10px;
-  display: block;
+margin-bottom: 10px;
+display: block;
 }
+
+
 
 
 
