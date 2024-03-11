@@ -842,16 +842,16 @@ Padding: 3px 5px;
 
 
 
+
    /* Two-column layout */
    .navigation-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 13px;
 }
 
 /* Style for the image container */
 .navigation-container img {
-    max-width: 100%;
+    max-width: 70%;
     height: auto;
     margin: 10px;
 }
@@ -861,6 +861,8 @@ Padding: 3px 5px;
     margin-bottom: 10px;
     display: block;
 }
+
+
 
 
 
