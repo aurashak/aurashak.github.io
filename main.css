@@ -731,6 +731,16 @@ background-color: #f3f3f3;
   height: auto;
 }
 
+
+
+.jump-link {
+  display: block;
+  scroll-margin-top: 50px; /* Adjust this value to control the space above the target */
+}
+
+
+
+
 .nymapboxcontainer {
     padding: 3px;
     background-color: #e6e6e6;
@@ -740,7 +750,7 @@ background-color: #f3f3f3;
 
 .nymapboxinscon {
   padding: 3px;
-  margin-top: 50px;
+  margin-top: 60px;
   background-color: #fff8c3ff;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
