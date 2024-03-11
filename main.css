@@ -568,7 +568,7 @@ sup a:hover {
 
 
 .mapcolumnleft {
-    margin-top: 50px;
+  margin: 0px;
     padding: 20px;
     overflow: auto;
     font-size: 18px;
@@ -733,7 +733,7 @@ background-color: #f3f3f3;
 
 .nymapboxcontainer {
     padding: 3px;
-    margin: 0px;
+    margin-top: 50px;
     background-color: #e6e6e6;
     border: 1px solid rgba(110, 110, 110, 0.3);
     box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
@@ -764,13 +764,15 @@ font-size: 16px;
   z-index: 999;
   font-weight: bold;
   font-size: 25px;
-    line-height: 1;
   text-align: center;
   justify-content: center;
   margin: 0 auto;
   background-color: #fff8c3ff;
   display: flex;
   max-width: 100%; /* Set the max-width if necessary */
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+        line-height: 1.6;
 }
 
 
