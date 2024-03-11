@@ -758,16 +758,18 @@ font-size: 16px;
 }
 
 .selectlayers {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px;
+  text-align: center;
   font-size: 25px;
   line-height: 2.1;
   background-color: rgba(255, 255, 255, 0.582);
-  z-index: 999; /* Set a higher z-index to keep it above other elements */
+  z-index: 999;
+  padding: 10px 0; /* Adjust padding as needed */
 }
+
 
 
 
