@@ -791,6 +791,29 @@ Padding: 3px 5px;
 
 
 
+/* Standalone Leaflet-style popup container */
+.popup-container {
+  padding: 0;
+  margin: 0px auto;
+  border-radius: 1px;
+  background: #eeeeee;
+  text-align: left;
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+}
+
+.popup-content {
+  margin: 10px;
+  line-height: 1.3;
+  font-size: 13px;
+  font-size: 1.08333em;
+  min-height: 1px;
+}
+
+
+
+
+
 
 #surveyContainer {
   margin: 20px;
