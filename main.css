@@ -949,19 +949,23 @@ h3:hover, h3:active, h3:focus {
 
 /* Button Style */
 .nymap-buttons {
-  border-radius: 8px;
+  border-radius: 2px;
   margin: 10px 0px;
   text-align: left;
-  border: solid .3px rgb(18, 18, 18);
+  padding: 3px 6px;
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  line-height: 1.6;
   background-color: #f3f3f3;
   font-size: 15px;
   cursor: pointer;
-    display: block;
+  display: block;
 }
 
-.nymap-buttons:hover {
-  background-color: #c7c7c7; 
-  color: #000000; 
+.nymap-buttons:active {
+  position: relative;
+  top: 1px;
+  box-shadow: 2px 2px 0px rgba(59, 59, 59, 0.61);
 }
 
 
