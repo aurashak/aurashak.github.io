@@ -790,7 +790,6 @@ Padding: 3px 5px;
 
 
 
-
 .popup-container {
   position: relative;
   display: inline-block;
@@ -834,7 +833,7 @@ Padding: 3px 5px;
   background-color: rgba(255, 62, 62, 0.67);
   border: .5 solid rgba(128, 128, 128, 0.72);
   border-radius: 50%;
-  z-index: 0;
+  z-index: 2; /* Increase z-index to make it appear above the ::after pseudo-element */
 }
 
 
