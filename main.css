@@ -581,8 +581,9 @@ sup a:hover {
   color: black;
     background-color: transparent;
   font-weight: normal;
+  text-decoration: underline;
 }
-  .mapcolumnleft a:hover { text-decoration: none; color: black;  background-color: #ffe600ce;
+  .mapcolumnleft a:hover {  color: black;  background-color: #ffe600ce;
  }
 
 .mapcolumnright {
