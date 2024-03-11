@@ -1069,7 +1069,7 @@ h3:hover, h3:active, h3:focus {
   width: 100%;
   text-align: center;
   border: solid .3px rgb(18, 18, 18);
-  background-color: #0471ff;
+  background-color: #6dacff;
     font-size: 15px;
     cursor: pointer;
   
@@ -1077,7 +1077,7 @@ h3:hover, h3:active, h3:focus {
 }
 
 #flyToNewYorkCity:hover {
-  background-color: #c7c7c7; 
+  background-color: #167ecd; 
   color: #000000; 
 }
 
