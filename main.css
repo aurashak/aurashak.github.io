@@ -747,6 +747,7 @@ background-color: #f3f3f3;
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
 
+
 .nymapboxins {
   position: relative;
   padding: 10px;
@@ -757,18 +758,17 @@ font-size: 16px;
   background-color: #f5f5f5;
 }
 
-.selectlayers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 25px;
-  line-height: 2.1;
-  background-color: rgba(255, 255, 255, 0.582);
-  z-index: 999;
-  padding: 10px 0; /* Adjust padding as needed */
+.nymapboxinsselect {
+  position: relative;
+  padding: 10px;
+  margin: 5px 2px;
+font-size: 16px;
+  border-radius: 3px;
+  border: solid .3px rgba(18, 18, 18, 0.68);
+  background-color: #f5f5f5;
 }
+
+
 
 
 
