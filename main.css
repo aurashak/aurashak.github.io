@@ -960,6 +960,17 @@ h3:hover, h3:active, h3:focus {
 
 
 
+.switch-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
 
 
 
@@ -973,13 +984,6 @@ h3:hover, h3:active, h3:focus {
     height: 0;
     width: 0;
 	}
-
-
-
-
-
-
-
 
 
 
