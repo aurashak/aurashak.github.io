@@ -799,7 +799,9 @@ Padding: 3px 5px;
   border-radius: 4px;
   background: #eeeeee;
   text-align: left;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  z-index: 1;
 }
 
 .popup-content {
@@ -829,9 +831,10 @@ Padding: 3px 5px;
   transform: translateX(-50%);
   width: 16px;
   height: 16px;
-  background-color: red;
+  background-color: rgba(255, 62, 62, 0.67);
+  border: .5 solid rgba(128, 128, 128, 0.72);
   border-radius: 50%;
-  z-index: 2;
+  z-index: 0;
 }
 
 
