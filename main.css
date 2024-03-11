@@ -841,12 +841,26 @@ Padding: 3px 5px;
 
 
 
-#surveyContainer {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+   /* Two-column layout */
+   .navigation-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+/* Style for the image container */
+.navigation-container img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px;
+}
+
+/* Style for the titles */
+.navigation-container b {
+    margin-bottom: 10px;
+    display: block;
+}
+
 
 
 
