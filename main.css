@@ -934,6 +934,7 @@ h3:hover, h3:active, h3:focus {
 /* Button Style */
 .nymap-buttons {
   border-radius: 8px;
+  margin: 10px 0px;
   text-align: left;
   border: solid .3px rgb(18, 18, 18);
   background-color: #f3f3f3;
