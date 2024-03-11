@@ -796,6 +796,8 @@ Padding: 3px 5px;
   padding: 10px;
   margin: 0;
   border-radius: 4px;
+  font-size: 13px;
+
   background: #eeeeee;
   text-align: left;
   border: 1px solid rgba(110, 110, 110, 0.3);
@@ -820,7 +822,6 @@ Padding: 3px 5px;
   border-style: solid;
   border-color: #eeeeee transparent;
   display: block;
-  z-index: 1;
 }
 
 .red-circle {
@@ -830,10 +831,10 @@ Padding: 3px 5px;
   transform: translateX(-50%);
   width: 16px;
   height: 16px;
-  background-color: rgba(255, 62, 62, 0.67);
+  background-color: rgba(255, 62, 62, 0.931);
   border: .5 solid rgba(128, 128, 128, 0.72);
   border-radius: 50%;
-  z-index: 2; /* Increase z-index to make it appear above the ::after pseudo-element */
+  z-index: 0; /* Increase z-index to make it appear above the ::after pseudo-element */
 }
 
 
