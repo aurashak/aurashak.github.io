@@ -991,7 +991,6 @@ h3:hover, h3:active, h3:focus {
 
 
 .switch-container {
-  display: flex;
   justify-content: space-between;
   margin: 20px;
   background-color: #f0f0f0;
