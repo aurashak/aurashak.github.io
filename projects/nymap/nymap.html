@@ -33,19 +33,41 @@ New York City Environmental Infrastructure Map
 
 
 
-    <div class="nymapboxgroupbottom">
+    <div class="nymapboxgrouptop">
         Toggle the layers to see how infrastructure overlaps with the places and people of NYC.
-      
-        <div class="switch-container">
-          <div class="switch-track">
+    </div>
+    <div class="nymapboxgroupbottom">
+
+            <div style="display: flex; align-items: center;" class="legend-item">
+                <label class="switch-label" >Group of layers</label>  
+            <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input-b" id="">
+            <div class="switch-track-b">
             <div class="switch-thumb-b"></div>
-            <span style="margin-top: 5px;">Group of Layers</span>
-          </div>
-          <div class="switch-track">
-            <div class="switch-thumb"></div>
-            <span style="margin-top: 5px;">Individual Layers</span>
-          </div>
+            </div>
+            </label>
+    
+            </div>
+            <span style="font-size: 16px; font-weight: normal;">this will turn on/off all layers in the group</span>
         </div>
+
+
+        <div class="nymapboxgroupbottom">
+            <div style="display: flex; align-items: center;" class="legend-item">
+                    <label class="switch-label" >Indivudal layers</label>  
+                <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="">
+                <div class="switch-track">
+                <div class="switch-thumb"></div>
+                </div>
+                </label>
+        
+                </div>
+                <span style="font-size: 16px; font-weight: normal;">this will turn on/off indivudal layers in group</span>
+
+
+        </div>
+       
       
         <button class="nymap-buttons" onclick="openDocumentation()">Map Documentation</button>
         <button class="nymap-buttons" onclick="openSurvey()">User Survey</button>
