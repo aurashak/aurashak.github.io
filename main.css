@@ -741,7 +741,7 @@ background-color: #f3f3f3;
     box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
 
-.nymapboxinstructions {
+.nymapboxinscon {
   padding: 3px;
   margin: 0px;
   background-color: #fff8c3ff;
@@ -749,7 +749,15 @@ background-color: #f3f3f3;
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
 
-
+.nymapboxins {
+  position: relative;
+  padding: 10px 5px 10px 10px;
+  margin: 5px 2px;
+  font-weight: bold;
+  border-radius: 3px;
+  border: solid .3px rgba(18, 18, 18, 0.68);
+  background-color: #f5f5f5;
+}
 
 
 
