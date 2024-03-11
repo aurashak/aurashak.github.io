@@ -579,10 +579,11 @@ sup a:hover {
 
 .mapcolumnleft a:link {
   color: black;
+    background-color: transparent;
   font-weight: normal;
 }
-  .mapcolumnleft a:hover { color: black; }
-    .mapcolumnleft a:active { color: black; }
+  .mapcolumnleft a:hover { text-decoration: none; color: black;  background-color: #ffe600ce;
+ }
 
 .mapcolumnright {
   flex: 1; /* Expand to fill the available space */
@@ -790,6 +791,13 @@ Padding: 3px 5px;
 
 
 
+
+#surveyContainer {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 
 
 
