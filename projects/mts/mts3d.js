@@ -36,6 +36,35 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
     },
   });
 
+
+   // Set up an event listener for mouse movement
+   viewer.scene.canvas.addEventListener('mousemove', function (e) {
+    // Get the mouse position
+    var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+
+    // Use scene.pick to get the entity under the mouse cursor
+    var pickedObject = viewer.scene.pick(mousePosition);
+
+    // Check if an object is picked
+    if (Cesium.defined(pickedObject)) {
+      // Get information about the picked object (entity, primitive, etc.)
+      var pickedEntity = pickedObject.id;
+
+      // Display the information (customize as needed)
+      if (Cesium.defined(pickedEntity)) {
+        console.log('Picked Entity:', pickedEntity);
+        // You can display information about the entity in a popup, tooltip, or any other UI element
+      }
+    } else {
+      // No object picked, clear or hide the displayed information
+      console.log('No object picked');
+      // Clear or hide the information in your UI
+    }
+  });
+
+
+  
+
   // Define the flyToNewYorkCity function
   function flyToNewYorkCity() {
     // Fly back to New York City
@@ -557,206 +586,8 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
-    // Set up an event listener for mouse movement
-    viewer.scene.canvas.addEventListener('mousemove', function (e) {
-      // Get the mouse position
-      var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
-
-      // Use scene.pick to get the entity under the mouse cursor
-      var pickedObject = viewer.scene.pick(mousePosition);
-
-      // Check if an object is picked
-      if (Cesium.defined(pickedObject)) {
-        // Get information about the picked object (entity, primitive, etc.)
-        var pickedEntity = pickedObject.id;
-
-        // Display the information (customize as needed)
-        if (Cesium.defined(pickedEntity)) {
-          console.log('Picked Entity:', pickedEntity);
-          // You can display information about the entity in a popup, tooltip, or any other UI element
-        }
-      } else {
-        // No object picked, clear or hide the displayed information
-        console.log('No object picked');
-        // Clear or hide the information in your UI
-      }
-    });
-
+   
 
 
 // Call the initializeCesium function
 initializeCesium();
-
-
-  /*
-
-  // Load nycboroughs GeoJsonDataSource
-  const nycboroughsResource = await Cesium.IonResource.fromAssetId(2483910);
-  const nycboroughsDataSource = await Cesium.GeoJsonDataSource.load(nycboroughsResource);
-
-  // Set a white fill style for the nycboroughs layer and lower the height
-  nycboroughsDataSource.entities.values.forEach((entity) => {
-    if (entity.polygon) {
-      entity.polygon.material = Cesium.Color.WHITE;
-      entity.polygon.outline = false;
-      entity.polygon.height = -50;
-    }
-  });
-
-  // Initial load of nycboroughs layer
-  viewer.dataSources.add(nycboroughsDataSource);
-
- */
-
-
-
-/*
-
-// Disable all input handling to prevent camera movement
-viewer.scene.screenSpaceCameraController.enableTranslate = true;
-viewer.scene.screenSpaceCameraController.enableRotate = true;
-viewer.scene.screenSpaceCameraController.enableZoom = true;
-viewer.scene.screenSpaceCameraController.enableTilt = true;
-viewer.scene.screenSpaceCameraController.enableLook = true;
-
-*/
-
-
-
-
-
-  /* 
-
-  // Set camera position
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-74.006, 40.712, 500), // Set the longitude, latitude, and altitude of the camera
-    orientation: {
-      heading: Cesium.Math.toRadians(0), // Heading in radians
-      pitch: Cesium.Math.toRadians(-90), // Pitch in radians
-      roll: 0, // Roll in radians
-    },
-  });
-
-
-  // Set fixed scene mode
-  viewer.scene.mode = Cesium.SceneMode.SCENE3D;
-
-  // Disable terrain exaggeration if needed
-  viewer.scene.terrainExaggeration = 1.0;
-
-
-
-*/ 
-
-
-/*
-
-  // Load 3D Tileset of mts area segment
-  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2475248);
-  viewer.scene.primitives.add(tileset);
-  await viewer.zoomTo(tileset);
-
-  // Apply default style to the tileset if available
-  const extras = tileset.asset.extras;
-  if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
-    tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-  }
-
-  // Remove the default satellite imagery layers
-  viewer.imageryLayers.removeAll();
-
-  // Create a switch event listener for the 3D Tileset
-  const tilesetSwitch = document.getElementById("3dTileSwitch");
-  tilesetSwitch.addEventListener("change", (event) => {
-    tileset.show = event.target.checked;
-  });
-
-  */
-
-
-
-
-
-
-/* 
-// Load GeoJSON borough boundaries
-const resource = await Cesium.IonResource.fromAssetId(2483910);
-const dataSource = await Cesium.GeoJsonDataSource.load(resource);
-
-// Modify the GeoJSON layer properties if needed
-dataSource.entities.values.forEach((entity) => {
-  if (entity.polygon) {
-    // Change the polygon color to white
-    entity.polygon.material = Cesium.Color.WHITE;
-
-    // Lower the height of the entity to your desired value
-    const currentHeight = entity.polygon.height.getValue();
-    const loweredHeight = currentHeight - 500; // Set the lowered height in meters
-    entity.polygon.height = loweredHeight;
-
-    // You can also adjust other properties like `extrudedHeight` if needed
-    // entity.polygon.extrudedHeight = loweredHeight;
-  }
-});
-
-// Add the GeoJSON layer to the viewer beneath other layers
-viewer.dataSources.add(dataSource);
-
-// Initially hide the GeoJSON layer
-dataSource.show = false;
-
-*/
-
-
-
-  
-  /*
-  
-  // Function to load and toggle GeoJSON layers
-  const loadGeoJSONLayer = async (assetId, labelText, switchId) => {
-    try {
-      // Load GeoJSON data
-      const resource = await Cesium.IonResource.fromAssetId(assetId);
-      const dataSource = await Cesium.GeoJsonDataSource.load(resource);
-      viewer.dataSources.add(dataSource);
-
-      // Create a switch for the GeoJSON layer
-      const layerSwitch = document.createElement('input');
-      layerSwitch.type = 'checkbox';
-      layerSwitch.checked = true;
-      layerSwitch.id = switchId;
-
-      // Create a label for the switch
-      const layerLabel = document.createElement('label');
-      layerLabel.appendChild(layerSwitch);
-      layerLabel.appendChild(document.createTextNode(labelText));
-
-      // Create a container for the switch and label
-      const layerSwitchContainer = document.createElement('div');
-      layerSwitchContainer.classList.add('switch-container');
-      layerSwitchContainer.appendChild(layerLabel);
-
-      // Add the switch container to the page
-      document.body.appendChild(layerSwitchContainer);
-
-      // Event listener for the GeoJSON switch
-      layerSwitch.addEventListener('change', async (event) => {
-        await dataSource.when();
-        dataSource.show = event.target.checked;
-        console.log(`${labelText} GeoJSON switch:`, event.target.checked);
-      });
-    } catch (error) {
-      console.error(`Error loading ${labelText} GeoJSON:`, error);
-    }
-  };
-
-  // Load existing GeoJSON layers without switches
-  loadGeoJSONLayer(2477557, 'mtsparks GeoJSON', 'mtsparksSwitch');
-  loadGeoJSONLayer(2477597, 'mtscso GeoJSON', 'mtscsoSwitch');
-  loadGeoJSONLayer(2477584, 'MTSGasPipelines GeoJSON', 'mtsgaspipelinesSwitch');
-  loadGeoJSONLayer(2477618, 'mtsrail GeoJSON', 'mtsrailSwitch');
-
-  // Load and toggle MTS Streets GeoJSON layer with switch
-  loadGeoJSONLayer(2477200, 'MTS Streets GeoJSON', 'mtsStreetsSwitch');
-
-  */
