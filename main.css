@@ -580,11 +580,9 @@ sup a:hover {
 .mapcolumnleft a:link {
   color: black;
   font-weight: normal;
-  background-color: #ffe600ce;
-
 }
-  .mapcolumnleft a:hover { text-decoration: underline; color: black; background-color: #ffe600ce;}
-    .mapcolumnleft a:active { color: black; background-color: #ffe600ce;}
+  .mapcolumnleft a:hover { color: black; }
+    .mapcolumnleft a:active { color: black; }
 
 .mapcolumnright {
   flex: 1; /* Expand to fill the available space */
@@ -947,28 +945,34 @@ h3:hover, h3:active, h3:focus {
 
 
 
+
 /* Button Style */
 .nymap-buttons {
   border-radius: 2px;
   margin: 10px 0px;
   text-align: left;
+  background-color: none;
   padding: 3px 6px;
   border: 1px solid rgba(82, 82, 82, 0.694);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   line-height: 1.6;
-  background-color: #f3f3f3;
   font-size: 15px;
   cursor: pointer;
   display: block;
+
 }
 
 .nymap-buttons:active {
-  position: relative;
-  top: 1px;
-  box-shadow: 2px 2px 0px rgba(59, 59, 59, 0.61);
+position: relative;
+top: 1px;
+box-shadow: 2px 2px 0px rgba(59, 59, 59, 0.61);
 }
 
-
+.nymap-buttons:link {
+position: relative;
+top: 1px;
+box-shadow: 2px 2px 0px rgba(59, 59, 59, 0.61);
+}
 
 
 
