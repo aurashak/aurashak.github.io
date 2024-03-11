@@ -1033,34 +1033,6 @@ h3:hover, h3:active, h3:focus {
 
 
 
-
-  /* Building Style */
-.building {
-  width: 50px;
-  height: 100px;
-  background-color: #808080; /* Gray color for the building */
-  border: 2px solid #000000; /* Black border for the building */
-  border-radius: 5px; /* Rounded corners for the building */
-  position: relative;
-}
-
-/* Door Style */
-.building::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 40px;
-  background-color: #5a3d28; /* Brown color for the door */
-  border: 2px solid #000000; /* Black border for the door */
-  border-radius: 3px; /* Rounded corners for the door */
-}
-
-
-
-
 /* Button Style */
 #flyToNewYorkCity {
   padding: 10px 5px;
