@@ -33,34 +33,26 @@ New York City Environmental Infrastructure Map
 
 
 
-    <div class="nymapboxcontainer">
-        <div class="nymapboxgrouptop" >
-            INSTRUCTIONS
+    <div class="nymapboxgroupbottom">
+        Toggle the layers to see how infrastructure overlaps with the places and people of NYC.
+      
+        <div class="switch-container">
+          <div class="switch-track">
+            <div class="switch-thumb-b"></div>
+            <span style="margin-top: 5px;">Group of Layers</span>
+          </div>
+          <div class="switch-track">
+            <div class="switch-thumb"></div>
+            <span style="margin-top: 5px;">Individual Layers</span>
+          </div>
         </div>
-            <div class="nymapboxgroupbottom">
-
-           Toggle the layers to see how infrastructure overlaps with the places and people of NYC. 
-           
-           <div class="switch-container">
-            <div class="switch-track">
-                <div class="switch-thumb-b"></div>
-                <span style="margin-top: 5px;">Group of Layers</span>
-            </div>
-            <div class="switch-track">
-                <div class="switch-thumb"></div>
-                <span style="margin-top: 5px;">Individual Layers</span>
-            </div>
-        </div>
-           
- 
-            <ul><li>View the documentation for how this map was created <a href="https://aurashak.github.io/projects/nymap/nymapdocumentation.html">here</a>.</li>
-  
-                <li>View the footnotes <a href="#footnotes">here</a>.</li>
-                    <li>Please take a moment to complete the user survey <a href="">here</a>. </li>
-                        <li>Donate <a href="">here</a> to sustain and grow this mapping project.</li>
-            </ul>
-        </div>
-    </div>
+      
+        <button class="nymap-buttons" onclick="openDocumentation()">Map Documentation</button>
+        <button class="nymap-buttons" onclick="openSurvey()">User Survey</button>
+        <button class="nymap-buttons" onclick="openFootnotes()">Footnotes</button>
+        <button class="nymap-buttons" onclick="openDonate()">Donate</button>
+      </div>
+      
     <Br>
     
 
