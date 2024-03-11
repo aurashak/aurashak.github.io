@@ -32,12 +32,12 @@ New York City Environmental Infrastructure Map
 <div class="mapcolumnleft">
 
 
-    <div class="nymapboxinstructions">
+    <div class="nymapboxinscon">
 
-    <div class="nymapbox">
+    <div class="nymapboxins">
         <u>Instructions:</u> Toggle the layers to see how infrastructure overlaps with the places and people of NYC.
     </div>
-    <div class="nymapboxgrouptop">
+    <div class="nymapboxins">
 
             <div style="display: flex; align-items: center;" class="legend-item">
                 <label class="switch-label" >Group of layers</label>  
@@ -53,7 +53,7 @@ New York City Environmental Infrastructure Map
         </div>
 
 
-        <div class="nymapboxgroupbottom">
+        <div class="nymapboxins">
             <div style="display: flex; align-items: center;" class="legend-item">
                     <label class="switch-label" ><b>Indivudal layers</b></label>  
                 <label class="switch" style="margin-left: auto;">
@@ -69,7 +69,7 @@ New York City Environmental Infrastructure Map
 
         </div>
        
-        <div class="nymapbox">
+        <div class="nymapboxins">
 
         <button class="nymap-buttons" onclick="openDocumentation()">Map Documentation</button>
         <button class="nymap-buttons" onclick="openSurvey()">User Survey</button>
@@ -103,24 +103,6 @@ New York City Environmental Infrastructure Map
 
 
 
-        <div class="nymapboxcontainer">
-            <div class="nymapbox">
-                <div style="display: flex; align-items: center;" class="legend-item">
-                    <div class="legend-symbol" id="legend-floodplain"></div>
-                    <label class="switch-label" >
-                        100-year Floodplain
-                    </label><sup style="font-size: smaller;"><a href="#footnote-1">1</a></sup>
-                    &nbsp; 🌊
-                                        <label class="switch" style="margin-left: auto;">
-                        <input type="checkbox" class="switch-input" id="floodplain">
-                        <div class="switch-track">
-                            <div class="switch-thumb"></div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-        </div>
-        
 
 <!-- 
 
@@ -567,8 +549,36 @@ New York City Environmental Infrastructure Map
 
 
 
-<!-- Evacution Zones -->
+
+
 <div class="nymapboxcontainer">
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;"  class="legend-item">
+            Other:
+    </div></div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <div class="legend-symbol" id="legend-floodplain"></div>
+            <label class="switch-label" >
+                100-year Floodplain
+            </label><sup style="font-size: smaller;"><a href="#footnote-1">1</a></sup>
+            &nbsp; 🌊
+                                <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="floodplain">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+
+<!-- Evacution Zones -->
     <div class="nymapboxgrouptop" >      
     <div style="display: flex; align-items: center;" class="legend-item">
         <label class="switch-label" >Evacuation Zones</label><sup style="font-size: smaller;"><a href="#footnote-69">17</a></sup> &nbsp; 🆘
