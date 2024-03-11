@@ -568,7 +568,7 @@ sup a:hover {
 
 
 .mapcolumnleft {
-    margin: 0px;
+    margin-top: 50px;
     padding: 20px;
     overflow: auto;
     font-size: 18px;
