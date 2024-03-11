@@ -776,13 +776,15 @@ font-size: 16px;
   text-align: center;
   justify-content: center;
   margin: 0 auto;
-  background-color: #fff8c3ff;
+  background-color: #fce53582;
   display: flex;
-  max-width: 100%; /* Set the max-width if necessary */
+  max-width: 100%;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-        line-height: 1.6;
+  line-height: 1;
+Padding: 3px 5px;
 }
+
 
 
 
