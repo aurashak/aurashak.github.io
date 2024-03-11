@@ -866,7 +866,7 @@ Padding: 3px 5px;
 .navigation-container {
   display: flex;
 font-weight: normal;
-  margin: 30px 20px 0px 10px;
+  margin: 0px 30px 0px 0px;
 }
 
 .control-container {
