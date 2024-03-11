@@ -35,12 +35,12 @@ New York City Environmental Infrastructure Map
     <div class="nymapboxinscon">
 
     <div class="nymapboxins">
-        <u>Instructions:</u> Toggle the layers to see how infrastructure overlaps with the places and people of NYC.
+        <u><b>Instructions:</b></u> Toggle the layers to see how infrastructure overlaps with the places and people of NYC.
     </div>
     <div class="nymapboxins">
 
             <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="switch-label" >Group of layers</label>  
+                <label class="switch-label" >Red switches are groups of layers</label>  
             <label class="switch" style="margin-left: auto;">
             <input type="checkbox" class="switch-input-b" id="">
             <div class="switch-track-b">
@@ -49,13 +49,12 @@ New York City Environmental Infrastructure Map
             </label>
     
             </div>
-            <span style="font-size: 16px; font-weight: normal;">the red switches will turn on/off all layers in the group</span>
         </div>
 
 
         <div class="nymapboxins">
             <div style="display: flex; align-items: center;" class="legend-item">
-                    <label class="switch-label" ><b>Indivudal layers</b></label>  
+                    <label class="switch-label" >Blue switches are indivudal layers</label>  
                 <label class="switch" style="margin-left: auto;">
                 <input type="checkbox" class="switch-input" id="">
                 <div class="switch-track">
@@ -64,13 +63,41 @@ New York City Environmental Infrastructure Map
                 </label>
         
                 </div>
-                <span style="font-size: 16px; font-weight: normal;">the blue switches will turn on/off indivudal layers in group</span>
 
 
+                <div class="nymapboxins">
+                    <div style="display: flex; align-items: center;" class="legend-item">
+                            <label class="switch-label" >Blue switches are indivudal layers</label>  
+                        <label class="switch" style="margin-left: auto;">
+                        <input type="checkbox" class="switch-input" id="">
+                        <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                        </div>
+                        </label>
+                
+                        </div>
         </div>
        
-        <div class="nymapboxins">
 
+        <div class="nymapboxins">
+            <b><u>Jump to a section:</u></b>
+            <ul>
+              <li><a href="#allLayersSection">1. All Infrastructure Layers</a></li>
+              <li><a href="#wasteSection">2. Waste</a></li>
+              <li><a href="#energySection">3. Energy</a></li>
+              <li><a href="#transportationSection">4. Transportation</a></li>
+              <li><a href="#demographicsSection">5. Demographics</a></li>
+              <li><a href="#emergenciesSection">6. Emergencies</a></li>
+              <li><a href="#otherSection">7. Other</a></li>
+            </ul>
+          </div>
+        </div>
+        
+
+
+
+        <div class="nymapboxins">
+            Supporting content: 
         <button class="nymap-buttons" onclick="openDocumentation()">Map Documentation</button>
         <button class="nymap-buttons" onclick="openSurvey()">User Survey</button>
         <button class="nymap-buttons" onclick="openFootnotes()">Footnotes</button>
@@ -83,10 +110,10 @@ New York City Environmental Infrastructure Map
     
 
         <div class="nymapboxcontainer">
-        <div class="nymapbox">
+        <div class="nymapbox" id="allLayersSection">
         <!-- All layers -->
         <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="switch-label" >All Infrastructure Layers</label> &nbsp; ☣️☠️ 
+            <label class="switch-label" >All Infrastructure Layers</label> &nbsp; 
         <label class="switch" style="margin-left: auto;">
         <input type="checkbox" class="switch-input-b" id="allLayersCheckbox">
         <div class="switch-track-b">
@@ -117,18 +144,13 @@ New York City Environmental Infrastructure Map
 -->
 
 
-<br>
-
-
-
-
 
 <div class="nymapboxcontainer">
 
-<div class="nymapbox" >
+<div class="nymapbox" id="wasteSection">
 <!-- Waste -->
 <div style="display: flex; align-items: center;" class="legend-item">
-    <label class="switch-label">Waste</label>&nbsp; 🗑️ 
+    <label class="switch-label">Waste</label>
 <label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input-b" id="wasteLayerGroup">
 <div class="switch-track-b">
@@ -203,11 +225,11 @@ New York City Environmental Infrastructure Map
 <br>
 <div class="nymapboxcontainer">
 
-<div class="nymapbox" >
+<div class="nymapbox" id="energySection" >
 
 <!-- Energy -->
 <div style="display: flex; align-items: center;" class="legend-item">
-    <label class="switch-label">Energy</label> &nbsp;🔋🛢️☀️☢️🚰  
+    <label class="switch-label">Energy</label> 
 <label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input-b" id="energyLayerGroup">
 <div class="switch-track-b">
@@ -311,12 +333,12 @@ New York City Environmental Infrastructure Map
 
     <div class="nymapboxcontainer">
 
-    <div class="nymapbox" >
+    <div class="nymapbox" id="transportationSection" >
 
 
 <!-- Transportation -->
 <div style="display: flex; align-items: center;" class="legend-item">
-    <label class="switch-label">Transportation</label> &nbsp;🚗 🛣️ 🚌 🚃  
+    <label class="switch-label">Transportation</label> 
 <label class="switch" style="margin-left: auto;">
 <input type="checkbox" class="switch-input" id="transportLayerGroup">
 <div class="switch-track">
@@ -428,11 +450,11 @@ New York City Environmental Infrastructure Map
 
     <div class="nymapboxcontainer">
 
-        <div class="nymapbox" >
+        <div class="nymapbox" id="demographicsSection" >
     
     <!-- Demographics -->
     <div style="display: inline-block;  align-items: center;" >
-        Demographics<sup style="font-size: smaller;"><a href="#footnote-223">12</a></sup> </div>&nbsp; 🏙️💵🌍    
+        Demographics<sup style="font-size: smaller;"><a href="#footnote-223">12</a></sup> </div>  
     </div>
     
     <!-- Population -->
@@ -530,7 +552,7 @@ New York City Environmental Infrastructure Map
 
 <div class="nymapboxcontainer">
 
-    <div class="nymapbox">
+    <div class="nymapbox" id="emergenciesSection" >
         <div style="display: flex; align-items: center;"  class="legend-item">
             Emergencies:
     </div></div>
@@ -558,7 +580,7 @@ New York City Environmental Infrastructure Map
 <!-- Evacution Zones -->
     <div class="nymapboxgrouptop" >      
     <div style="display: flex; align-items: center;" class="legend-item">
-        <label class="switch-label" >Evacuation Zones</label><sup style="font-size: smaller;"><a href="#footnote-69">17</a></sup> &nbsp; 🆘
+        <label class="switch-label" >Evacuation Zones</label><sup style="font-size: smaller;"><a href="#footnote-69">17</a></sup> 
         <label class="switch" style="margin-left: auto;">
             <input type="checkbox" class="switch-input" id="evacuationzones">
             <div class="switch-track">
@@ -580,7 +602,7 @@ New York City Environmental Infrastructure Map
 
 
 <div class="nymapboxcontainer">
-    <div class="nymapbox">
+    <div class="nymapbox" id="otherSection">
     <div style="display: flex; align-items: center;"  class="legend-item">
         Other:
 </div></div>
@@ -651,7 +673,7 @@ New York City Environmental Infrastructure Map
 <!-- Cultural Ins -->
 <div class="nymapboxgrouptop" >      
     <div style="display: flex; align-items: center;" class="legend-item">
-        <label class="switch-label">Cultural Institutions</label><sup style="font-size: smaller;"><a href="#footnote-68">16</a></sup> &nbsp; 🎨🪕📚📷
+        <label class="switch-label">Cultural Institutions</label><sup style="font-size: smaller;"><a href="#footnote-68">16</a></sup> 
         <label class="switch" style="margin-left: auto;">
             <input type="checkbox" class="switch-input" id="culturalins">
             <div class="switch-track">
