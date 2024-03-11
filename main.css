@@ -791,26 +791,48 @@ Padding: 3px 5px;
 
 
 
-
-/* Standalone Leaflet-style popup container */
 .popup-container {
-  padding: 0;
-  margin: 0px auto;
-  border-radius: 1px;
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
+  border-radius: 4px;
   background: #eeeeee;
   text-align: left;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .popup-content {
-  margin: 10px;
   line-height: 1.3;
   font-size: 13px;
   font-size: 1.08333em;
   min-height: 1px;
 }
 
+.popup-container::after {
+  content: "";
+  position: absolute;
+  bottom: -12px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 12px 12px 0;
+  border-style: solid;
+  border-color: #eeeeee transparent;
+  display: block;
+  z-index: 1;
+}
+
+.red-circle {
+  position: absolute;
+  bottom: -22px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 2;
+}
 
 
 
@@ -988,6 +1010,35 @@ h3:hover, h3:active, h3:focus {
     background-color: rgb(255, 222, 0);
   }
 
+
+
+
+
+
+
+  /* Building Style */
+.building {
+  width: 50px;
+  height: 100px;
+  background-color: #808080; /* Gray color for the building */
+  border: 2px solid #000000; /* Black border for the building */
+  border-radius: 5px; /* Rounded corners for the building */
+  position: relative;
+}
+
+/* Door Style */
+.building::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 40px;
+  background-color: #5a3d28; /* Brown color for the door */
+  border: 2px solid #000000; /* Black border for the door */
+  border-radius: 3px; /* Rounded corners for the door */
+}
 
 
 
