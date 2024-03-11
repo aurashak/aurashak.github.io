@@ -735,7 +735,7 @@ background-color: #f3f3f3;
 
 
 .jump-link {
-  display: block;
+  display: inline-block;
   scroll-margin-top: 50px; /* Adjust this value to control the space above the target */
 }
 
