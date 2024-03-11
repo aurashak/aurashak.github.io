@@ -823,55 +823,7 @@ display: inline-block;
 
 }
 
-#mtsmap .cesium-viewer {
-  max-height: 600px;
-      max-width: 1000px;
-      margin: 20px auto;
-      border: 1px solid #383838;
-      border-radius: 2px;
-  }
 
-.placeidcontainer {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  border: 1px solid black;
-  height: calc(100% - 200px);
-}
-
-
-.nmcacontainer {
-display: grid;
-grid-template-columns: 30% 70%;
-border: 1px solid black;
-}
-
-.nydisplacementmap {
-display: grid;
-grid-template-columns: 30% 70%;
-border: 1px solid black;
-}
-
-.coords-box {
-  flex-direction: row; /* Stack items vertically */
-  border-bottom: 1px solid black;
-  padding: 5px 10px;
-  font-size: 15px; 
-  background: gold;
-  font-weight: bold;
-  font-size: 20px;
-  height: 45px;
-}
-
-
-
-
-
-.nydismapiframe {
-  width: 100vh;
-  height: 100vh;
-  background-color: white;
-  border: none;
-}
 
 
 
@@ -3345,9 +3297,10 @@ span.cesium-projectionPicker-wrapper {
 }
 
   .aboutcontainer {
-      font-size: 16px;
-      margin: 10px;
-  }
+        font-size: 16px;
+        margin: 60px 10px 10px 10px;
+    
+    }
 
   .hometitle {
       font-size: 20px;
@@ -3381,7 +3334,8 @@ span.cesium-projectionPicker-wrapper {
 
   .mapcolumnleft { 
     font-size: 16px;
-    padding: 10px; }
+    padding: 10px;
+    }
   
   .mapcolumnright {
       font-size: 16px;
@@ -3412,14 +3366,24 @@ margin: 10px;
   font-size: 16px;
  }
     
-  .placeidcontainer, 
-  .nydisplacementmap, 
-  .nmcacontainer, 
-  .mapcontainer, 
-  .nymapcontainer {
-    grid-template-columns: 1fr; /* Change this to a single column for smaller screens */
-  }
+    
+    
+    
+    
+    .nymapcontainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        flex: 1;
+        margin: 10px;
+        border: 1px solid grey;
+        border-radius: 2px;
+        box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
+    
+    }
 
+
+    
+  
   .columnlefttitle {
       font-size: 14px;
       padding: 5px;
