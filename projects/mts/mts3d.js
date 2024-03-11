@@ -555,6 +555,35 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 };
 
+
+
+    // Set up an event listener for mouse movement
+    viewer.scene.canvas.addEventListener('mousemove', function (e) {
+      // Get the mouse position
+      var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+
+      // Use scene.pick to get the entity under the mouse cursor
+      var pickedObject = viewer.scene.pick(mousePosition);
+
+      // Check if an object is picked
+      if (Cesium.defined(pickedObject)) {
+        // Get information about the picked object (entity, primitive, etc.)
+        var pickedEntity = pickedObject.id;
+
+        // Display the information (customize as needed)
+        if (Cesium.defined(pickedEntity)) {
+          console.log('Picked Entity:', pickedEntity);
+          // You can display information about the entity in a popup, tooltip, or any other UI element
+        }
+      } else {
+        // No object picked, clear or hide the displayed information
+        console.log('No object picked');
+        // Clear or hide the information in your UI
+      }
+    });
+
+
+
 // Call the initializeCesium function
 initializeCesium();
 
