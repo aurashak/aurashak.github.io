@@ -945,32 +945,31 @@ h3:hover, h3:active, h3:focus {
 
 
 
-/* Button Style */
-.nymap-buttons {
-  border-radius: 2px;
-  margin: 10px 0px;
-  text-align: left;
-  background-color: rgb(247, 247, 247);
-  padding: 3px 6px;
-  border: 1px solid rgba(82, 82, 82, 0.694);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  line-height: 1.6;
-  font-size: 15px;
-  cursor: pointer;
-  display: block;
-}
+  /* Common Button Style */
+  .nymap-buttons {
+    border-radius: 2px;
+    margin: 10px 0px;
+    text-align: left;
+    background-color: rgb(247, 247, 247);
+    padding: 3px 6px;
+    border: 1px solid rgba(82, 82, 82, 0.694);
+    box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+    line-height: 1.6;
+    font-size: 15px;
+    cursor: pointer;
+    display: block;
+  }
 
-.nymap-buttons:active {
-  position: relative;
-  top: 1px;
-  box-shadow: 2px 2px 0px rgba(59, 59, 59, 0.61);
-}
+  .nymap-buttons:active {
+    position: relative;
+    top: 1px;
+    box-shadow: 2px 2px 0px rgba(59, 59, 59, 0.61);
+  }
 
-.nymap-buttons:hover {
-  position: relative;
-  background-color: rgb(255, 222, 0);
-}
-
+  .nymap-buttons:hover {
+    position: relative;
+    background-color: rgb(255, 222, 0);
+  }
 
 
 
