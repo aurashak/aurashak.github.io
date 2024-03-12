@@ -1082,7 +1082,6 @@ h3:hover, h3:active, h3:focus {
 }
 
 #flyToNewYorkCity:active {
-  margin-top: 20px; /* Add margin-top when clicked */
   background-color: #167ecd;
   color: #000000;
 }
