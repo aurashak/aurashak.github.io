@@ -1058,25 +1058,28 @@ h3:hover, h3:active, h3:focus {
 
 
 
-
 /* Button Style */
 #flyToNewYorkCity {
-  padding: 10px 5px;
+  padding: 5px;
   margin: 5px 2px;
-  border-radius: 8px;
+  border-radius: 2px;
   width: 100%;
   text-align: center;
-  border: solid .3px rgb(18, 18, 18);
   background-color: #6dacff;
-    font-size: 15px;
-    cursor: pointer;
-  
-
+  font-size: 18px;
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  cursor: pointer;
 }
 
+#flyToNewYorkCity:active {
+  margin-top: 20px; /* Add margin-top when clicked */
+  background-color: #167ecd;
+  color: #000000;
+}
+
+
 #flyToNewYorkCity:hover {
-  background-color: #167ecd; 
-  color: #000000; 
 }
 
 
