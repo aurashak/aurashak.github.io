@@ -793,13 +793,14 @@ font-size: 16px;
 
 
 
+
 .nymapboxinsselect {
   position: fixed;
   z-index: 999;
   font-weight: bold;
   font-size: 25px;
   margin: 0 auto;
-  background-color: rgba(255, 99, 99, 0.592);
+  background-color: rgba(255, 135, 64, 0.84);
     display: flex;
   max-width: 100%;
   border: 1px solid rgba(110, 110, 110, 0.3);
