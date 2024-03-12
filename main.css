@@ -753,7 +753,7 @@ background-color: #f3f3f3;
 .nymapboxinscon {
   padding: 3px;
   margin-top: 60px;
-  background-color: #fff8c3ff;
+  background-color: rgba(255, 99, 99, 0.592);
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
@@ -798,11 +798,9 @@ font-size: 16px;
   z-index: 999;
   font-weight: bold;
   font-size: 25px;
-  text-align: center;
-  justify-content: center;
   margin: 0 auto;
-  background-color: #fce53582;
-  display: flex;
+  background-color: rgba(255, 99, 99, 0.592);
+    display: flex;
   max-width: 100%;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
@@ -857,6 +855,7 @@ Padding: 3px 5px;
   background-color: rgba(240, 9, 202, 0.931);
   border: .5 solid rgba(128, 128, 128, 0.72);
   border-radius: 50%;
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   z-index: 0; /* Increase z-index to make it appear above the ::after pseudo-element */
 }
 
