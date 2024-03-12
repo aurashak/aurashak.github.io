@@ -795,8 +795,7 @@ font-size: 16px;
 .mtsmapboxnav{
   position: relative;
   padding: 10px;
-  margin: 5px 2px;
-  line-height: 1.7;
+  margin: 0px 2px;
 font-size: 16px;
   border-radius: 3px;
   border: solid .3px rgba(18, 18, 18, 0.68);
