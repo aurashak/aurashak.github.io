@@ -49,6 +49,11 @@ ul li a:hover {
   color: inherit;
 }
 
+.hometitles {
+  width: 100%;
+  z-index: 100;
+  margin-top: 40px;
+}
 
 .home1 {
   font-size: 25px;
@@ -371,9 +376,12 @@ background: none;
 
 
 .homecontainer {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  z-index: 100;
-  margin-top: 40px;
+  height: 100%;
+  z-index: 0; /* Send it to the back */
 }
 
 
