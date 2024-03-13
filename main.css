@@ -1883,13 +1883,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
-/* Styles for Switch Mechanism */
+
+
+/* Styles for Switch Mechanism for NY MAP */
 .switch-label {
-
-
+  /* Add any styles you want for the switch label */
 }
 
 .switch-label-b {
+  /* Add any styles you want for the switch label-b */
 }
 
 .switch-input {
@@ -1900,66 +1902,81 @@ svg.leaflet-image-layer.leaflet-interactive path {
   display: none;
 }
 
-.switch-track {
+.switch-track,
+.switch-track-b {
   background-color: #ccc;
   border-radius: 15px;
-  height: 12px;
-  width: 30px;
+  height: 16px;
+  width: 60px;
   position: relative;
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
-.switch-track-b {
-    background-color: #ccc;
-    border-radius: 15px;
-    height: 12px;
-    width: 30px;
-    position: relative;
-margin-right: 5px;
+.switch-track::before,
+.switch-track-b::before {
+  content: "OFF";
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translate(50%, -50%);
+  color: #000;
+  font-size: 12px;
+}
+
+.switch-track::after,
+.switch-track-b::after {
+  content: "ON";
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 12px;
+  opacity: 0;
+}
+
+.switch-thumb,
+.switch-thumb-b {
+  border-radius: 50%;
+  height: 24px; /* Increased thumb size */
+  width: 24px; /* Increased thumb size */
+  position: absolute;
+  top: -6px; /* Adjusted top position */
+  left: -6px; /* Adjusted left position */
+  transition: 0.2s;
 }
 
 .switch-thumb {
   background: linear-gradient(135deg, #1c84ed, #306fb3);
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  transition: 0.2s;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-
 .switch-thumb-b {
   background-color: #dd0404; /* Light blue color */
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  transition: 0.2s;
 }
 
-
-
-/* Add this style to change the track color to green when checked */
-.switch-input:checked + .switch-track {
-  background-color: #4caf50; /* Green color */
-}
-
+.switch-input:checked + .switch-track,
 .switch-input-b:checked + .switch-track-b {
   background-color: #4caf50; /* Green color */
 }
 
-.switch-input:checked + .switch-track .switch-thumb {
-  left: 16px;
+.switch-input:checked + .switch-track .switch-thumb,
+.switch-input-b:checked + .switch-track-b .switch-thumb-b {
+  left: 36px;
 }
 
-.switch-input-b:checked + .switch-track-b .switch-thumb-b {
-  left: 16px;
+.switch-input:checked + .switch-track::before,
+.switch-input:checked + .switch-track::after,
+.switch-input-b:checked + .switch-track-b::before,
+.switch-input-b:checked + .switch-track-b::after {
+  opacity: 1;
 }
+
+
+
+
+
+
 
 
 /* Styles for Switch Mechanism */
