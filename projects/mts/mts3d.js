@@ -164,6 +164,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     
     
    
+   /*
 // Set the switch to the off position initially
 const bingMapsSwitch = document.getElementById("bingMapsSwitch");
 bingMapsSwitch.checked = false;
@@ -188,7 +189,33 @@ bingMapsSwitch.addEventListener("change", (event) => {
   }
 });
 
+*/
     
+// Set the OSM Maps switch to the off position initially
+const osmMapsSwitch = document.getElementById("osmMapsSwitch");
+osmMapsSwitch.checked = false;
+
+// Initialize the Cesium OpenStreetMap layer but don't add it to the viewer yet
+const osmLayer = new Cesium.createOpenStreetMapImageryProvider({
+  url: 'https://a.tile.openstreetmap.org/',
+});
+osmLayer.name = "OpenStreetMap"; // Set the name of the layer
+osmLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("OpenStreetMap layer initialized, but not added to viewer");
+
+// Create a switch event listener for the OSM Maps layer
+osmMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the OpenStreetMap layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(osmLayer);
+    console.log("OpenStreetMap layer added to viewer");
+  } else {
+    // Remove the OpenStreetMap layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(osmLayer);
+    console.log("OpenStreetMap layer removed from viewer");
+  }
+});
 
 
 
