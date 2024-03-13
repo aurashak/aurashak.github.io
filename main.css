@@ -51,24 +51,27 @@ ul li a:hover {
 
 .hometitles {
   width: 100%;
-  z-index: 100;
-  margin-top: 40px;
+  z-index: 500;
+  margin: 100px 60px;
+  position: fixed;
 }
 
 .home1 {
   font-size: 25px;
   font-weight: bold;
   color: #333;
-  padding: 0px;
-  margin-top: 0px;
+  padding: 0px 5px;
+  margin: 10px;
   display: inline-block;
   background-color: #ffe600ce;
+    border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+        line-height: 1.6;
 }
 
-.home1 a:link {}
-.home1 a:hover {}
-.home1 a:active {}
-
+.home1 a:link {color: black;}
+.home1 a:hover {color: grey;}
+.home1 a:active {color: red;}
 
 h1 {
     font-size: 25px;
@@ -1939,6 +1942,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   width: 52px;
   position: relative;
   margin-right: 5px;
+  border: .5px solid #39393978;
 }
 
 .switch-track::before,
@@ -1947,7 +1951,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   position: absolute;
   top: 56%;
   font-weight: bold;
-  right: 18px;
+  right: 15px;
   transform: translate(50%, -50%);
   color: #615a5a;
   font-size: 12px;
@@ -1976,9 +1980,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
   height: 24px; /* Increased thumb size */
   width: 24px; /* Increased thumb size */
   position: absolute;
-  top: -5px; /* Adjusted top position */
+  top: -6px; /* Adjusted top position */
   left: -4px; /* Adjusted left position */
   transition: 0.2s;
+    border: .5px solid #39393978;
 }
 
 .switch-thumb {
@@ -2009,6 +2014,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .switch-input-b:checked + .switch-track-b .switch-thumb-b {
   left: 34px;
 }
+
 
 
 
