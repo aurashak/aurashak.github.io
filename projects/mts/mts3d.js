@@ -135,7 +135,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-    
+
 
     // Load OSM buildings 3D Tileset
     const osmBuildingsTileset = viewer.scene.primitives.add(
@@ -200,9 +200,6 @@ bingMapsSwitch.addEventListener("change", (event) => {
 
 
 
-
-
-
 // Set the OSM Maps switch to the off position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
 osmMapsSwitch.checked = false;
@@ -229,10 +226,14 @@ function toggleOSMMapLayer() {
 }
 
 // Create a switch event listener for the OSM Maps layer
-osmMapsSwitch.addEventListener("change", toggleOSMMapLayer);
+osmMapsSwitch.addEventListener("change", (event) => {
+  console.log("Switch state changed:", event.target.checked);
+  toggleOSMMapLayer();
+});
 
 // Call the function to set the initial state of the OpenStreetMap layer
 toggleOSMMapLayer();
+
 
 
 
