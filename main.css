@@ -1917,6 +1917,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
+
 /* Styles for Switch Mechanism for NY MAP */
 .switch-label {
   /* Add any styles you want for the switch label */
@@ -1942,7 +1943,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
   width: 52px;
   position: relative;
   margin-right: 5px;
-  border: .5px solid #39393978;
 }
 
 .switch-track::before,
@@ -1951,7 +1951,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   position: absolute;
   top: 56%;
   font-weight: bold;
-  right: 15px;
+  right: 18px;
   transform: translate(50%, -50%);
   color: #615a5a;
   font-size: 12px;
@@ -1980,10 +1980,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
   height: 24px; /* Increased thumb size */
   width: 24px; /* Increased thumb size */
   position: absolute;
-  top: -6px; /* Adjusted top position */
+  top: -5px; /* Adjusted top position */
   left: -4px; /* Adjusted left position */
   transition: 0.2s;
-    border: .5px solid #39393978;
 }
 
 .switch-thumb {
@@ -2023,7 +2022,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
-
 /* Styles for Switch Mechanism for NY MAP */
 .mts-switch-label {
   /* Add any styles you want for the switch label */
@@ -2044,8 +2042,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .mts-switch-track,
 .mts-switch-track-b {
   background-color: #ccc;
-  border-radius: 7px;
-  height: 16px;
+  border-radius: 2px;
+  height: 22px;
   width: 52px;
   position: relative;
   margin-right: 5px;
@@ -2057,7 +2055,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   position: absolute;
   top: 56%;
   font-weight: bold;
-  right: 18px;
+  right: 16px;
   transform: translate(50%, -50%);
   color: #615a5a;
   font-size: 12px;
@@ -2082,11 +2080,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .mts-switch-thumb,
 .mts-switch-thumb-b {
   border-radius: 4px; /* Changed to square border-radius */
-  height: 20px;
+  height: 22px;
   width: 20px;
   position: absolute;
-  top: -5px; /* Adjusted top position */
-  left: -4px; /* Adjusted left position */
+  top: 0px; /* Adjusted top position */
+  left: 0px; /* Adjusted left position */
   transition: 0.2s;
 }
 
@@ -2096,7 +2094,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .mts-switch-thumb-b {
-  background-color: #dd0404; /* Light blue color */
+  background-color: #3eaee6; 
 }
 
 .mts-switch-input:checked + .mts-switch-track,
