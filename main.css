@@ -50,6 +50,21 @@ ul li a:hover {
 }
 
 
+.hometitle {
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  padding: 0px;
+  margin-top: 0px;
+  display: inline-block;
+  background-color: #ffe600ce;
+}
+
+.hometitle a:link {}
+.hometitle a:hover {}
+.hometitle a:active {}
+
+
 h1 {
     font-size: 25px;
     font-weight: bold;
@@ -537,7 +552,7 @@ sup a:hover {
   padding: 0px 2px;
   max-width: 900px;
   color: black;
-    border-radius: 1px;
+  border-radius: 1px;
   display: inline-block;
   margin: 30px auto 0 auto;
   background-color: #ffe600ce;
