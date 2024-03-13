@@ -131,19 +131,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
     console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
-
-
-
-
-
-
-
-
-
-
-
-    
-   // Load OSM buildings 3D Tileset
+    // Load OSM buildings 3D Tileset
 const osmBuildingsTileset = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
 );
@@ -163,9 +151,6 @@ if (
 // Set the alpha component to make the layer transparent (0.5 for 50% transparency)
 osmBuildingsTileset.style.color = new Cesium.Color(1.0, 1.0, 1.0, 0.5);
 
-// Log the color for debugging
-console.log('Color:', osmBuildingsTileset.style.color);
-
 // Create a switch event listener for the OSM buildings Tileset
 const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
 
@@ -176,7 +161,7 @@ osmBuildingsSwitch.addEventListener("change", (event) => {
   osmBuildingsTileset.show = event.target.checked;
 });
 
-// Show the OSM buildings Tileset initially
+// Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = true;
 
     
