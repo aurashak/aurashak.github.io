@@ -190,14 +190,21 @@ bingMapsSwitch.addEventListener("change", (event) => {
 });
 
 */
-    
+
+
+
+
+
+
+
+
 // Set the OSM Maps switch to the off position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
 osmMapsSwitch.checked = false;
 
 // Initialize the Cesium OpenStreetMap layer but don't add it to the viewer yet
-const osmLayer = new Cesium.createOpenStreetMapImageryProvider({
-  url: 'https://a.tile.openstreetmap.org/',
+const osmLayer = new Cesium.UrlTemplateImageryProvider({
+  url: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
 });
 osmLayer.name = "OpenStreetMap"; // Set the name of the layer
 osmLayer.order = 1; // Set a higher order value to ensure it's above other layers
