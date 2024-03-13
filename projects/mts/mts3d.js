@@ -18,24 +18,55 @@ const initializeCesium = async () => {
     animation: false,
   });
 
-// Wait for the viewer to be ready
-viewer.scene.postRender.addEventListener(async function onPostRender() {
-  viewer.scene.postRender.removeEventListener(onPostRender);
-
-  // Fly to New York City initially
+  var boundingBox = new Cesium.Rectangle(
+    Cesium.Math.toRadians(-74.05), // West
+    Cesium.Math.toRadians(40.5),   // South
+    Cesium.Math.toRadians(-73.75), // East
+    Cesium.Math.toRadians(40.9)    // North
+  );
+  
+  // Set initial view
   viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(
-      -73.9666,
-      40.8200,
-      400 // Adjust the zoom level as needed
-    ),
+    destination: Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 400),
     orientation: {
-      heading: Cesium.Math.toRadians(65), // clockwise from north
-      pitch: Cesium.Math.toRadians(-40), // Look downward
+      heading: Cesium.Math.toRadians(65),
+      pitch: Cesium.Math.toRadians(-40),
       roll: 0,
     },
   });
+  
+  // Create ScreenSpaceEventHandler
+  var screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+  
+  // Store the initial camera position
+  var initialCameraPosition = viewer.scene.camera.position.clone();
+  
+  // Add an event handler to limit the camera movement within the bounding box
+  screenSpaceEventHandler.setInputAction(function (movement) {
+    var pickRay = viewer.scene.camera.getPickRay(movement.endPosition);
+    var pickPosition = viewer.scene.globe.pick(pickRay, viewer.scene);
+  
+    if (pickPosition) {
+      var cartographic = Cesium.Cartographic.fromCartesian(pickPosition);
+      var longitude = cartographic.longitude;
+      var latitude = cartographic.latitude;
+  
+      // Check if the new camera position is inside the bounding box
+      if (
+        longitude < boundingBox.west ||
+        longitude > boundingBox.east ||
+        latitude < boundingBox.south ||
+        latitude > boundingBox.north
+      ) {
+        // If outside the bounding box, reset the camera to the initial position
+        viewer.scene.camera.position = initialCameraPosition.clone();
+      }
+    }
+  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
+  
+
+  
 
 
 
@@ -638,7 +669,7 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
     // Add the event listener to the switch
     mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
-  });
+
 
 };
 
