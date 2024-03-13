@@ -60,6 +60,7 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
 
 
 
+
      // Set up an event listener for mouse movement
   viewer.scene.canvas.addEventListener('mousemove', function (e) {
     // Get the mouse position
