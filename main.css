@@ -70,7 +70,7 @@ ul li a:hover {
 
 .home1 a:link {color: black;}
 .home1 a:hover {color: rgb(0, 0, 0);}
-.home1 a:active {color: red; margin-top: 2px;}
+.home1 a:active {color: red; }
 
 h1 {
     font-size: 25px;
@@ -3602,6 +3602,11 @@ span.cesium-projectionPicker-wrapper {
       font-size: 16px;
       margin: 10px;
   }
+
+  .home1 {
+    font-size: 17px;
+  }
+
 
   .container {
       display: block;
