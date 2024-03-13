@@ -1060,6 +1060,32 @@ h3:hover, h3:active, h3:focus {
 
 
 
+/* Button Style */
+#mtsbutton {
+  padding: 5px;
+  margin: 5px 2px;
+  border-radius: 2px;
+  width: 100%;
+  text-align: center;
+  background-color: #6dacff;
+  font-size: 18px;
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  cursor: pointer;
+}
+
+#mtsbutton {
+  background-color: #167ecd;
+  color: #000000;
+}
+
+
+#mtsbutton {
+}
+
+
+
+
 
 /* Button Style */
 #flyToNewYorkCity {
@@ -1976,6 +2002,107 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 
+
+
+
+
+
+
+
+/* Styles for Switch Mechanism for NY MAP */
+.mts-switch-label {
+  /* Add any styles you want for the switch label */
+}
+
+.mts-switch-label-b {
+  /* Add any styles you want for the switch label-b */
+}
+
+.mts-switch-input {
+  display: none;
+}
+
+.mts-switch-input-b {
+  display: none;
+}
+
+.mts-switch-track,
+.mts-switch-track-b {
+  background-color: #ccc;
+  border-radius: 7px;
+  height: 16px;
+  width: 52px;
+  position: relative;
+  margin-right: 5px;
+}
+
+.mts-switch-track::before,
+.mts-switch-track-b::before {
+  content: "OFF";
+  position: absolute;
+  top: 56%;
+  font-weight: bold;
+  right: 18px;
+  transform: translate(50%, -50%);
+  color: #615a5a;
+  font-size: 12px;
+  opacity: 1; /* Set initial opacity to 1 */
+  transition: opacity 0.2s; /* Added opacity transition */
+}
+
+.mts-switch-track::after,
+.mts-switch-track-b::after {
+  content: "ON";
+  position: absolute;
+  font-weight: bold;
+  top: 56%;
+  left: 16px;
+  transform: translate(-50%, -50%);
+  color: #615a5a;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s; /* Added opacity transition */
+}
+
+.mts-switch-thumb,
+.mts-switch-thumb-b {
+  border-radius: 4px; /* Changed to square border-radius */
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: -5px; /* Adjusted top position */
+  left: -4px; /* Adjusted left position */
+  transition: 0.2s;
+}
+
+.mts-switch-thumb {
+  background: linear-gradient(135deg, #1c84ed, #306fb3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.mts-switch-thumb-b {
+  background-color: #dd0404; /* Light blue color */
+}
+
+.mts-switch-input:checked + .mts-switch-track,
+.mts-switch-input-b:checked + .mts-switch-track-b {
+  background-color: #4caf50; /* Green color when checked */
+}
+
+.mts-switch-input:checked + .mts-switch-track::before,
+.mts-switch-input-b:checked + .mts-switch-track-b::before {
+  opacity: 0; /* Set opacity to 0 when checked */
+}
+
+.mts-switch-input:checked + .mts-switch-track::after,
+.mts-switch-input-b:checked + .mts-switch-track-b::after {
+  opacity: 1; /* Set opacity to 1 when checked */
+}
+
+.mts-switch-input:checked + .mts-switch-track .mts-switch-thumb,
+.mts-switch-input-b:checked + .mts-switch-track-b .mts-switch-thumb-b {
+  left: 34px;
+}
 
 
 
