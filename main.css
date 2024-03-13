@@ -70,8 +70,8 @@ ul li a:hover {
 }
 
 .home1 a:link {color: black;}
-.home1 a:hover {color: grey;}
-.home1 a:active {color: red;}
+.home1 a:hover {color: rgb(0, 0, 0);}
+.home1 a:active {color: red; margin-top: 2px;}
 
 h1 {
     font-size: 25px;
