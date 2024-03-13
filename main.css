@@ -1099,7 +1099,7 @@ h3:hover, h3:active, h3:focus {
 
 
 /* Button Style */
-#flyToNewYorkCity {
+#flyToMTS {
   padding: 5px;
   margin: 5px 2px;
   border-radius: 2px;
@@ -1112,7 +1112,7 @@ h3:hover, h3:active, h3:focus {
   cursor: pointer;
 }
 
-#flyToNewYorkCity:active {
+#flyToMTS:active {
   background-color: #167ecd;
   color: #000000;
 }
