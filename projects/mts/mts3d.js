@@ -81,7 +81,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
   // Define the flyToNewYorkCity function
-  function flyToNewYorkCity() {
+  function flyToMTS() {
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
@@ -98,8 +98,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
   }
 
  // Add a click event listener to the flyToNewYorkCity button
-  const flyToNewYorkCityButton = document.getElementById('flyToNewYorkCity');
-  flyToNewYorkCityButton.addEventListener('click', flyToNewYorkCity);
+  const flyToMTSButton = document.getElementById('flyToMTS');
+  flyToMTSButton.addEventListener('click', flyToMTS);
 
 
 
