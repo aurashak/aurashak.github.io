@@ -2024,6 +2024,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
+
 /* Styles for Switch Mechanism for NY MAP */
 .mts-switch-label {
   /* Add any styles you want for the switch label */
@@ -2045,8 +2046,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .mts-switch-track-b {
   background-color: #ccc;
   border-radius: 2px;
-  height: 22px;
-      border: solid .3px rgba(18, 18, 18, 0.31);
+  height: 21px;
+      border: solid .3px rgba(18, 18, 18, 0.7);
   width: 52px;
   position: relative;
   margin-right: 5px;
@@ -2062,8 +2063,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   transform: translate(50%, -50%);
   color: #615a5a;
   font-size: 12px;
-  opacity: 1; /* Set initial opacity to 1 */
-  transition: opacity 0.2s; /* Added opacity transition */
+  opacity: 1;
+  transition: opacity 0.2s; 
 }
 
 .mts-switch-track::after,
@@ -2077,19 +2078,21 @@ svg.leaflet-image-layer.leaflet-interactive path {
   color: #615a5a;
   font-size: 12px;
   opacity: 0;
-  transition: opacity 0.2s; /* Added opacity transition */
+  transition: opacity 0.2s;
 }
 
 .mts-switch-thumb,
 .mts-switch-thumb-b {
-  border-radius: 4px; /* Changed to square border-radius */
-  height: 22px;
-  width: 20px;
-  border: solid .3px rgba(18, 18, 18, 0.31);
+  border-radius: 2px; 
+  height: 21px;
+  width: 21px;
+  border: solid .3px rgba(18, 18, 18, 0.6);
   position: absolute;
-  top: 0px; /* Adjusted top position */
-  left: 0px; /* Adjusted left position */
+  top: -1px;
+  left: -2px; 
   transition: 0.2s;
+   background-color: #ffdf0b; 
+
 }
 
 .mts-switch-thumb {
@@ -2097,30 +2100,26 @@ svg.leaflet-image-layer.leaflet-interactive path {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.mts-switch-thumb-b {
-  background-color: #3eaee6; 
-}
 
 .mts-switch-input:checked + .mts-switch-track,
 .mts-switch-input-b:checked + .mts-switch-track-b {
-  background-color: #4caf50; /* Green color when checked */
+  background-color: #4caf50; 
 }
 
 .mts-switch-input:checked + .mts-switch-track::before,
 .mts-switch-input-b:checked + .mts-switch-track-b::before {
-  opacity: 0; /* Set opacity to 0 when checked */
+  opacity: 0; 
 }
 
 .mts-switch-input:checked + .mts-switch-track::after,
 .mts-switch-input-b:checked + .mts-switch-track-b::after {
-  opacity: 1; /* Set opacity to 1 when checked */
+  opacity: 1; 
 }
 
 .mts-switch-input:checked + .mts-switch-track .mts-switch-thumb,
 .mts-switch-input-b:checked + .mts-switch-track-b .mts-switch-thumb-b {
   left: 34px;
 }
-
 
 
 
