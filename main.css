@@ -1943,7 +1943,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   height: 24px; /* Increased thumb size */
   width: 24px; /* Increased thumb size */
   position: absolute;
-  top: -4px; /* Adjusted top position */
+  top: -5px; /* Adjusted top position */
   left: -4px; /* Adjusted left position */
   transition: 0.2s;
 }
