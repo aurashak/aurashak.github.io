@@ -66,7 +66,6 @@ ul li a:hover {
   background-color: #ffe600ce;
     border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-        line-height: 1.6;
 }
 
 .home1 a:link {color: black;}
@@ -1920,6 +1919,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* Styles for Switch Mechanism for NY MAP */
 .switch-label {
+  /*
+/* Styles for Switch Mechanism for NY MAP */
+.switch-label {
   /* Add any styles you want for the switch label */
 }
 
@@ -1943,20 +1945,22 @@ svg.leaflet-image-layer.leaflet-interactive path {
   width: 52px;
   position: relative;
   margin-right: 5px;
+      border: solid .3px rgba(18, 18, 18, 0.31);
+
 }
 
 .switch-track::before,
 .switch-track-b::before {
   content: "OFF";
   position: absolute;
-  top: 56%;
+  top: 57%;
   font-weight: bold;
-  right: 18px;
+  right: 17px;
   transform: translate(50%, -50%);
   color: #615a5a;
   font-size: 12px;
-  opacity: 1; /* Set initial opacity to 1 */
-  transition: opacity 0.2s; /* Added opacity transition */
+  opacity: 1; 
+  transition: opacity 0.2s; 
 }
 
 .switch-track::after,
@@ -1970,19 +1974,20 @@ svg.leaflet-image-layer.leaflet-interactive path {
   color: #615a5a;
   font-size: 12px;
   opacity: 0;
-  transition: opacity 0.2s; /* Added opacity transition */
+  transition: opacity 0.2s; 
 }
 
 
 .switch-thumb,
 .switch-thumb-b {
   border-radius: 50%;
-  height: 24px; /* Increased thumb size */
-  width: 24px; /* Increased thumb size */
+  height: 24px; 
+  width: 24px; 
   position: absolute;
-  top: -5px; /* Adjusted top position */
-  left: -4px; /* Adjusted left position */
-  transition: 0.2s;
+  top: -5px; 
+  left: -4px; 
+  border: solid .3px rgba(18, 18, 18, 0.31);
+  transition: 0.1s;
 }
 
 .switch-thumb {
@@ -2044,6 +2049,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   background-color: #ccc;
   border-radius: 2px;
   height: 22px;
+      border: solid .3px rgba(18, 18, 18, 0.31);
   width: 52px;
   position: relative;
   margin-right: 5px;
@@ -2082,6 +2088,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   border-radius: 4px; /* Changed to square border-radius */
   height: 22px;
   width: 20px;
+  border: solid .3px rgba(18, 18, 18, 0.31);
   position: absolute;
   top: 0px; /* Adjusted top position */
   left: 0px; /* Adjusted left position */
@@ -2116,6 +2123,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .mts-switch-input-b:checked + .mts-switch-track-b .mts-switch-thumb-b {
   left: 34px;
 }
+
 
 
 
