@@ -226,8 +226,8 @@ function toggleOSMMapLayer() {
 }
 
 // Create a switch event listener for the OSM Maps layer
-osmMapsSwitch.addEventListener("change", (event) => {
-  console.log("Switch state changed:", event.target.checked);
+osmMapsSwitch.addEventListener("change", () => {
+  console.log("Switch state changed:", osmMapsSwitch.checked);
   toggleOSMMapLayer();
 });
 
