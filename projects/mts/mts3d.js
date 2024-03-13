@@ -58,42 +58,38 @@ const boundingBoxEntity = viewer.entities.add({
 
 
 
-   // Set up an event listener for mouse movement
-viewer.scene.canvas.addEventListener('mousemove', function (e) {
-  // Get the mouse position
-  var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+     // Set up an event listener for mouse movement
+  viewer.scene.canvas.addEventListener('mousemove', function (e) {
+    // Get the mouse position
+    var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
 
-  // Use scene.pick to get the entity under the mouse cursor
-  var pickedObject = viewer.scene.pick(mousePosition);
+    // Use scene.pick to get the entity under the mouse cursor
+    var pickedObject = viewer.scene.pick(mousePosition);
 
-  // Check if an object is picked
-  if (Cesium.defined(pickedObject)) {
-    // Get information about the picked object (entity, primitive, etc.)
-    var pickedEntity = pickedObject.id;
+    // Check if an object is picked
+    if (Cesium.defined(pickedObject)) {
+      // Get information about the picked object (entity, primitive, etc.)
+      var pickedEntity = pickedObject.id;
 
-    // Display the information (customize as needed)
-    if (Cesium.defined(pickedEntity)) {
-      console.log('Picked Entity:', pickedEntity);
+      // Display the information (customize as needed)
+      if (Cesium.defined(pickedEntity)) {
+        console.log('Picked Entity:', pickedEntity);
 
-      // Log the coordinates of the picked entity
-      var pickedEntityPosition = pickedEntity.position.getValue(viewer.clock.currentTime);
-      console.log('Coordinates:', Cesium.Cartographic.fromCartesian(pickedEntityPosition));
+        // Log the coordinates of the picked entity
+        var pickedEntityPosition = pickedEntity.position.getValue(viewer.clock.currentTime);
+        console.log('Coordinates:', Cesium.Cartographic.fromCartesian(pickedEntityPosition));
 
-      // Log additional properties of the picked entity
-      console.log('Other properties:', pickedEntity.properties);
+        // Log additional properties of the picked entity
+        console.log('Other properties:', pickedEntity.properties);
 
-      // You can display information about the entity in a popup, tooltip, or any other UI element
+        // You can display information about the entity in a popup, tooltip, or any other UI element
+      }
+    } else {
+      // No object picked, clear or hide the displayed information
+      console.log('No object picked');
+      // Clear or hide the information in your UI
     }
-  } else {
-    // No object picked, clear or hide the displayed information
-    console.log('No object picked');
-    // Clear or hide the information in your UI
-  }
-});
-
-
-
-
+  });
 
   // Define the flyToNewYorkCity function
   function flyToNewYorkCity() {
@@ -112,7 +108,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     });
   }
 
- // Add a click event listener to the flyToNewYorkCity button
+  // Add a click event listener to the flyToNewYorkCity button
   const flyToNewYorkCityButton = document.getElementById('flyToNewYorkCity');
   flyToNewYorkCityButton.addEventListener('click', flyToNewYorkCity);
 
