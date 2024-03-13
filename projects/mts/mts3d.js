@@ -1,28 +1,25 @@
-(async () => {
-    // Grant CesiumJS access to your ion assets
-    Cesium.Ion.defaultAccessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s";
-  
-    // Initialize Cesium
-    const initializeCesium = async () => {
-      // Create a Cesium viewer
-      const viewer = new Cesium.Viewer("cesiumContainer", {
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: true,
-        sceneModePicker: false,
-        selectionIndicator: false,
-        timeline: false,
-        navigationHelpButton: false,
-        fullscreenButton: false,
-        animation: false,
-      });
+// Grant CesiumJS access to your ion assets
+Cesium.Ion.defaultAccessToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s";
 
-      
-  // Wait for the viewer to be ready
-function onPostRender() {
-  // Remove the event listener after the first render
+// Initialize Cesium
+const initializeCesium = async () => {
+  // Create a Cesium viewer
+  const viewer = new Cesium.Viewer("cesiumContainer", {
+    baseLayerPicker: false,
+    geocoder: false,
+    homeButton: false,
+    infoBox: true,
+    sceneModePicker: false,
+    selectionIndicator: false,
+    timeline: false,
+    navigationHelpButton: false,
+    fullscreenButton: false,
+    animation: false,
+  });
+
+// Wait for the viewer to be ready
+viewer.scene.postRender.addEventListener(async function onPostRender() {
   viewer.scene.postRender.removeEventListener(onPostRender);
 
   // Fly to New York City initially
@@ -39,36 +36,15 @@ function onPostRender() {
     },
   });
 
-  // Define the bounding box coordinates for New York City
-  const nyBoundingBox = Cesium.Rectangle.fromDegrees(
-    -74.05,
-    40.65,
-    -73.85,
-    40.85
-  );
 
-  // Create a bounding box around New York City
-  const boundingBoxEntity = viewer.entities.add({
-    rectangle: {
-      coordinates: nyBoundingBox,
-      material: Cesium.Color.RED.withAlpha(0.3), // Red semi-transparent color
-      outline: true,
-      outlineColor: Cesium.Color.RED,
-      outlineWidth: 2,
-      height: 0, // Set the height to 0 for a flat rectangle
-    },
-  });
 
-  // Limit the camera to the bounding box
-  viewer.camera.viewBoundingRectangle = nyBoundingBox;
-  viewer.camera.viewRectangle = nyBoundingBox;
-}
 
-// Add a post-render event listener to execute the onPostRender function
-viewer.scene.postRender.addEventListener(onPostRender);
 
-// Set up an event listener for mouse movement
-viewer.scene.canvas.addEventListener("mousemove", function (e) {
+  
+
+
+   // Set up an event listener for mouse movement
+viewer.scene.canvas.addEventListener('mousemove', function (e) {
   // Get the mouse position
   var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
 
@@ -76,38 +52,36 @@ viewer.scene.canvas.addEventListener("mousemove", function (e) {
   var pickedObject = viewer.scene.pick(mousePosition);
 
   // Check if an object is picked
-  if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id)) {
-    // Get the picked entity
+  if (Cesium.defined(pickedObject)) {
+    // Get information about the picked object (entity, primitive, etc.)
     var pickedEntity = pickedObject.id;
 
     // Display the information (customize as needed)
-    console.log("Picked Entity:", pickedEntity);
+    if (Cesium.defined(pickedEntity)) {
+      console.log('Picked Entity:', pickedEntity);
 
-    // Log the coordinates of the picked entity
-    var pickedEntityPosition = pickedEntity.position?.getValue(
-      viewer.clock.currentTime
-    );
-    if (Cesium.defined(pickedEntityPosition)) {
-      console.log(
-        "Coordinates:",
-        Cesium.Cartographic.fromCartesian(pickedEntityPosition)
-      );
+      // Log the coordinates of the picked entity
+      var pickedEntityPosition = pickedEntity.position.getValue(viewer.clock.currentTime);
+      console.log('Coordinates:', Cesium.Cartographic.fromCartesian(pickedEntityPosition));
+
+      // Log additional properties of the picked entity
+      console.log('Other properties:', pickedEntity.properties);
+
+      // You can display information about the entity in a popup, tooltip, or any other UI element
     }
-
-    // Log additional properties of the picked entity
-    console.log("Other properties:", pickedEntity.properties);
-
-    // You can display information about the entity in a popup, tooltip, or any other UI element
   } else {
     // No object picked, clear or hide the displayed information
-    console.log("No object picked");
+    console.log('No object picked');
     // Clear or hide the information in your UI
   }
 });
 
 
-  // Define the flyToMTS function
-  function flyToMTS() {
+
+
+
+  // Define the flyToNewYorkCity function
+  function flyToNewYorkCity() {
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
@@ -123,58 +97,9 @@ viewer.scene.canvas.addEventListener("mousemove", function (e) {
     });
   }
 
-  
-
-  // Define the flyToWasteWater function
-  function flyToWasteWater() {
-    // Fly back to New York City
-    viewer.scene.camera.setView({
-      destination: Cesium.Cartesian3.fromDegrees(
-        -73.9625,
-        40.8217,
-        200 // Adjust the zoom level as needed
-      ),
-      orientation: {
-        heading: Cesium.Math.toRadians(65), // clockwise from north
-        pitch: Cesium.Math.toRadians(-40), // Look downward
-        roll: 0,
-      },
-    });
-  }
-
-
-
-  // Define the flyToWasteWater function
-  function flyToBusDepot() {
-    // Fly back to New York City
-    viewer.scene.camera.setView({
-      destination: Cesium.Cartesian3.fromDegrees(
-        -73.9625,
-        40.8217,
-        200 // Adjust the zoom level as needed
-      ),
-      orientation: {
-        heading: Cesium.Math.toRadians(65), // clockwise from north
-        pitch: Cesium.Math.toRadians(-40), // Look downward
-        roll: 0,
-      },
-    });
-  }
-
-
-
-
-  // Add a click event listener to the flyToMTS button
-  const flyToMTSButton = document.getElementById('flyToMTS>');
-  flyToMTSButton.addEventListener('click', flyToMTS);
-
-    // Add a click event listener to the flyToNewYorkCity button
-    const flyToWasteWaterButton = document.getElementById('flyToWasteWater>');
-    flyToWasteWaterSButton.addEventListener('click', flyToWasteWater);
-
-      // Add a click event listener to the flyToNewYorkCity button
-      const flyToBusDepotButton = document.getElementById('flyToBusDepot>');
-      flyToBusDepotButton.addEventListener('click', flyToBusDepot);
+ // Add a click event listener to the flyToNewYorkCity button
+  const flyToNewYorkCityButton = document.getElementById('flyToNewYorkCity');
+  flyToNewYorkCityButton.addEventListener('click', flyToNewYorkCity);
 
 
 
@@ -250,6 +175,36 @@ viewer.scene.canvas.addEventListener("mousemove", function (e) {
 
     
     
+   
+   /*
+// Set the switch to the off position initially
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
+});
+
+*/
+
+
+
 
 // Set the OSM Maps switch to the off position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
@@ -683,46 +638,14 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
     // Add the event listener to the switch
     mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
-  };
+  });
 
+};
 
-
-
-
-  // Call the initializeCesium function
-  await initializeCesium();
-
-  console.log("Initialization complete");
-})();
-// <- Add this closing parenthesis to execute the IIFE
 
 
    
-   /*
-// Set the switch to the off position initially
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.checked = false;
-
-// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
-const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("Bing Maps layer initialized, but not added to viewer");
-
-// Create a switch event listener for the Bing Maps layer
-bingMapsSwitch.addEventListener("change", (event) => {
-  // Check the switch state directly within the event listener
-  if (event.target.checked) {
-    // Add the layer to the viewer when the switch is turned on
-    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
-    console.log("Bing Maps layer added to viewer");
-  } else {
-    // Remove the layer from the viewer when the switch is turned off
-    viewer.imageryLayers.remove(bingMapsLayer);
-    console.log("Bing Maps layer removed from viewer");
-  }
-});
-
-*/
 
 
+// Call the initializeCesium function
+initializeCesium();
