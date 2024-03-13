@@ -36,25 +36,27 @@ viewer.scene.postRender.addEventListener(async function onPostRender() {
     },
   });
 
+  // Define the bounding box coordinates for New York City
+  const nyBoundingBox = Cesium.Rectangle.fromDegrees(
+    -74.05, 40.65, -73.85, 40.85
+  );
 
+  // Create a bounding box around New York City
+  const boundingBoxEntity = viewer.entities.add({
+    rectangle: {
+      coordinates: nyBoundingBox,
+      material: Cesium.Color.RED.withAlpha(0.3), // Red semi-transparent color
+      outline: true,
+      outlineColor: Cesium.Color.RED,
+      outlineWidth: 2,
+      height: 0, // Set the height to 0 for a flat rectangle
+    }
+  });
 
- // Define the bounding box coordinates for New York City
- const nyBoundingBox = Cesium.Rectangle.fromDegrees(
-  -74.05, 40.65, -73.85, 40.85
-);
-
-// Create a bounding box around New York City
-const boundingBoxEntity = viewer.entities.add({
-  rectangle: {
-    coordinates: nyBoundingBox,
-    material: Cesium.Color.RED.withAlpha(0.3), // Red semi-transparent color
-    outline: true,
-    outlineColor: Cesium.Color.RED,
-    outlineWidth: 2,
-    height: 0, // Set the height to 0 for a flat rectangle
-  }
+  // Limit the camera to the bounding box
+  viewer.camera.viewBoundingRectangle = nyBoundingBox;
+  viewer.camera.viewRectangle = nyBoundingBox;
 });
-
 
 
 
