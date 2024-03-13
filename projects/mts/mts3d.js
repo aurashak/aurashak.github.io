@@ -632,13 +632,11 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
     // Add the event listener to the switch
     mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
-  });
-
-
-
-
-    console.log("Initialization complete");
   };
+
+
+
+
 
   // Call the initializeCesium function
   await initializeCesium();
