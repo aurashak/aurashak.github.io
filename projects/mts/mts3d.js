@@ -131,6 +131,12 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
     console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
+
+
+
+
+    
+
     // Load OSM buildings 3D Tileset
     const osmBuildingsTileset = viewer.scene.primitives.add(
       await Cesium.Cesium3DTileset.fromIonAssetId(96188)
