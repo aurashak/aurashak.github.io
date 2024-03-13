@@ -1915,6 +1915,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   content: "OFF";
   position: absolute;
   top: 56%;
+  font-weight: bold;
   right: 18px;
   transform: translate(50%, -50%);
   color: #000;
@@ -1927,6 +1928,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .switch-track-b::after {
   content: "ON";
   position: absolute;
+    font-weight: bold;
   top: 56%;
   left: 16px;
   transform: translate(-50%, -50%);
