@@ -1914,7 +1914,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .switch-track-b::before {
   content: "OFF";
   position: absolute;
-  top: 50%;
+  top: 56%;
   right: 18px;
   transform: translate(50%, -50%);
   color: #000;
@@ -1927,7 +1927,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .switch-track-b::after {
   content: "ON";
   position: absolute;
-  top: 50%;
+  top: 56%;
   left: 16px;
   transform: translate(-50%, -50%);
   color: #000;
@@ -3495,10 +3495,22 @@ span.cesium-projectionPicker-wrapper {
     margin: 10px;
 }
 
-  .logoscontainer {
-    overflow: auto;
+.logos-container {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
+.logos-container img {
+  height: 40px;
+  object-fit: contain;
+}
+
+.logos-container a:link {
+background: none;
+}
+
+    
   .mapdescription {
       font-size: 16px;
       padding: 5px 10px;
