@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTS</title>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.115/Build/Cesium/Cesium.js"></script>
+<link rel="stylesheet" href="https://aurashak.github.io/main.css">
+</head>
+<body>
+
+
+    <div class="header"></div>
+
+
+ 
+<div class="aboutcontainer">
+    <div class="maptitle" style="background-color: #6dacffff;">
+West Harlem 3D Infrastructure Model</div>
+</div>
+
+
+<div class="nymapcontainer">
+<div class="mapcolumnleft">
+
+
+   
+    <div class="mtsmapboxinscon">
+        <div class="mtsmapboxins">
+          <b>OVERVIEW:</b><br>Navigate the infrastructure of the West Harlem waterfront
+        </div>
+
+        <div class="mtsmapboxins">
+        <div style="display: flex; align-items: center; margin: 10px 5px;" class="legend-item">
+            <label class="switch-label">Turn switches on and off</label>
+            <label class="switch" style="margin-left: auto;">
+              <input type="checkbox" class="switch-input-b" id="">
+              <div class="switch-track-b">
+                <div class="switch-thumb-b"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+     
+       <div class="mtsmapboxins">
+
+        <div style="display: flex; align-items: center;">
+            <button id="mtsbutton"><b>Navigation Controls   </b>     
+                <div class="image-container">
+                <img src="https://aurashak.github.io/images/navcontrol.png" style="width: 30px; height: 30px;" id="popOutImage"> </div>
+            </button>
+    </div>
+</div>
+
+
+
+
+        <div class="mtsmapboxins">
+               Click on objects for data <br>
+                <img src="https://aurashak.github.io/images/infobox.png" style="width:100%" alt="">
+          </div>
+
+        <div class="mtsmapboxins">
+            <div style="display: flex; align-items: center;">
+              <button id="flyToNewYorkCity"><b>FLY HOME<BR>40.8226, -73.9594</b></button>
+            </div>
+          </div>
+           
+      
+          <div class="mtsmapboxins">
+            <b>Supporting content: </b>
+            <ul>
+              <li><a href="https://aurashak.github.io/projects/mts/mtsdocumentation.html" target="_blank">Map Documentation</a></li>
+              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScuIhyGN6UQPFRBSoRKCdCEDC9iXuEHY0yNmu40Zsp_WMv9SQ/viewform?usp=sf_link">User Survey</a></li>
+              <li><a href="#">Donate</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+<br>
+
+<div class="nymapboxcontainer">
+    <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>3d Buildings:</B>
+        </div>
+    </div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/googlemapslogo.png" style="height: 25px; background: none; "></div>
+
+            <label class="mts-switch-label-b">Google photorealistic tileset</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="3dTileSwitch" checked>
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: grey; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">OSM buildings</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="osmBuildingsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+</div>
+
+<Br>
+
+
+<div class="nymapboxcontainer">
+    <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>Water:</B>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: red; border-radius: 50%; box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+            <label class="mts-switch-label-b" style="">Combined Sewer Overflow</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtscsoSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+</div>
+<Br>
+
+<div class="nymapboxcontainer">
+    <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>Transportation:</B>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/osmlogo.png" style="height: 25px; background: none; "></div>
+            <label class="mts-switch-label-b">Open Street Maps</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="osmMapsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 5px; background-color: rgb(86, 86, 86);   box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Streets (long loading time)</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsstreetsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: rgb(255, 0, 0); box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Rail</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsrailSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: blue; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+            <label class="mts-switch-label-b">Subway</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="nycsubwaySwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: blue; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+            <label class="mts-switch-label-b">Bus depots</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="busDepotsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+</div>
+<Br>
+
+<div class="nymapboxcontainer">
+
+    <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>Energy:</B>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 5px; background-color: gold; box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Electric Transmission Lines</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="electriclinesSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: rgb(0, 0, 0); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+            <label class="mts-switch-label-b">Natural Gas Pipelines</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsgasSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+
+
+<Br>
+
+
+<div class="nymapboxcontainer">
+
+    <div class="nymapbox">
+
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <B>Other:</B>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: rgb(10, 96, 33); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Parks</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsparksSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: rgb(255, 157, 0); border-radius: 50%; box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">WH EJ Sites</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="whejsites">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+    
+
+
+<div class="mapcolumnright">
+    <div id="cesiumContainer"></div>    
+</div>
+
+
+
+</div>
+
+
+<div id="fullScreen" style="visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 60%; height: 60%;   background-color: rgb(231, 231, 231); display: flex; justify-content: center; align-items: center; z-index: 999;">
+    <img src="" alt="Full Screen Image" style="box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);  border: 1px solid rgba(110, 110, 110, 0.3); max-width: 95%; max-height: 95%; object-fit: contain;">
+    <div class="arrow left-arrow">&lt;</div>
+    <div class="arrow right-arrow">&gt;</div>
+</div>
+
+
+
+<script src="https://aurashak.github.io/projects/mts/mts3d.js"></script>
+<script src="https://aurashak.github.io/navigation.js"></script>
+<script src="https://aurashak.github.io/images/imagepopout.js"></script>
+
+</body>
+</html>
