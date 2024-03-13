@@ -104,8 +104,8 @@
 
 
 
-  // Define the flyToNewYorkCity function
-  function flyToNewYorkCity() {
+  // Define the flyToMTS function
+  function flyToMTS() {
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
@@ -121,9 +121,58 @@
     });
   }
 
-  // Add a click event listener to the flyToNewYorkCity button
-  const flyToNewYorkCityButton = document.getElementById('flyToNewYorkCity');
-  flyToNewYorkCityButton.addEventListener('click', flyToNewYorkCity);
+  
+
+  // Define the flyToWasteWater function
+  function flyToWasteWater() {
+    // Fly back to New York City
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9625,
+        40.8217,
+        200 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(65), // clockwise from north
+        pitch: Cesium.Math.toRadians(-40), // Look downward
+        roll: 0,
+      },
+    });
+  }
+
+
+
+  // Define the flyToWasteWater function
+  function flyToBusDepot() {
+    // Fly back to New York City
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9625,
+        40.8217,
+        200 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(65), // clockwise from north
+        pitch: Cesium.Math.toRadians(-40), // Look downward
+        roll: 0,
+      },
+    });
+  }
+
+
+
+
+  // Add a click event listener to the flyToMTS button
+  const flyToMTSButton = document.getElementById('flyToMTS>');
+  flyToMTSButton.addEventListener('click', flyToMTS);
+
+    // Add a click event listener to the flyToNewYorkCity button
+    const flyToWasteWaterButton = document.getElementById('flyToWasteWater>');
+    flyToWasteWaterSButton.addEventListener('click', flyToWasteWater);
+
+      // Add a click event listener to the flyToNewYorkCity button
+  const flyToBusDepotButton = document.getElementById('flyToBusDepot>');
+  flyToBusDepotButton.addEventListener('click', flyToBusDepot);
 
 
 
