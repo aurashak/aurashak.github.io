@@ -18,90 +18,92 @@
         fullscreenButton: false,
         animation: false,
       });
-  
-        // Wait for the viewer to be ready
-        function onPostRender() {
-          viewer.scene.postRender.removeEventListener(onPostRender);
-    
-          // Fly to New York City initially
-          viewer.scene.camera.setView({
-            destination: Cesium.Cartesian3.fromDegrees(
-              -73.9666,
-              40.8200,
-              400 // Adjust the zoom level as needed
-            ),
-            orientation: {
-              heading: Cesium.Math.toRadians(65), // clockwise from north
-              pitch: Cesium.Math.toRadians(-40), // Look downward
-              roll: 0,
-            },
-          });
-    
-          // Define the bounding box coordinates for New York City
-          const nyBoundingBox = Cesium.Rectangle.fromDegrees(
-            -74.05,
-            40.65,
-            -73.85,
-            40.85
-          );
-    
-          // Create a bounding box around New York City
-          const boundingBoxEntity = viewer.entities.add({
-            rectangle: {
-              coordinates: nyBoundingBox,
-              material: Cesium.Color.RED.withAlpha(0.3), // Red semi-transparent color
-              outline: true,
-              outlineColor: Cesium.Color.RED,
-              outlineWidth: 2,
-              height: 0, // Set the height to 0 for a flat rectangle
-            },
-          });
-    
-          // Limit the camera to the bounding box
-          viewer.camera.viewBoundingRectangle = nyBoundingBox;
-          viewer.camera.viewRectangle = nyBoundingBox;
-        }
-    
-        viewer.scene.postRender.addEventListener(onPostRender);
-    
-        // Set up an event listener for mouse movement
-        viewer.scene.canvas.addEventListener("mousemove", function (e) {
-          // Get the mouse position
-          var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
-    
-          // Use scene.pick to get the entity under the mouse cursor
-          var pickedObject = viewer.scene.pick(mousePosition);
-    
-          // Check if an object is picked
-          if (Cesium.defined(pickedObject)) {
-            // Get information about the picked object (entity, primitive, etc.)
-            var pickedEntity = pickedObject.id;
-    
-            // Display the information (customize as needed)
-            if (Cesium.defined(pickedEntity)) {
-              console.log("Picked Entity:", pickedEntity);
-    
-              // Log the coordinates of the picked entity
-              var pickedEntityPosition = pickedEntity.position.getValue(
-                viewer.clock.currentTime
-              );
-              console.log(
-                "Coordinates:",
-                Cesium.Cartographic.fromCartesian(pickedEntityPosition)
-              );
-    
-              // Log additional properties of the picked entity
-              console.log("Other properties:", pickedEntity.properties);
-    
-              // You can display information about the entity in a popup, tooltip, or any other UI element
-            }
-          } else {
-            // No object picked, clear or hide the displayed information
-            console.log("No object picked");
-            // Clear or hide the information in your UI
-          }
-        });
 
+      
+  // Wait for the viewer to be ready
+function onPostRender() {
+  // Remove the event listener after the first render
+  viewer.scene.postRender.removeEventListener(onPostRender);
+
+  // Fly to New York City initially
+  viewer.scene.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.9666,
+      40.8200,
+      400 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(65), // clockwise from north
+      pitch: Cesium.Math.toRadians(-40), // Look downward
+      roll: 0,
+    },
+  });
+
+  // Define the bounding box coordinates for New York City
+  const nyBoundingBox = Cesium.Rectangle.fromDegrees(
+    -74.05,
+    40.65,
+    -73.85,
+    40.85
+  );
+
+  // Create a bounding box around New York City
+  const boundingBoxEntity = viewer.entities.add({
+    rectangle: {
+      coordinates: nyBoundingBox,
+      material: Cesium.Color.RED.withAlpha(0.3), // Red semi-transparent color
+      outline: true,
+      outlineColor: Cesium.Color.RED,
+      outlineWidth: 2,
+      height: 0, // Set the height to 0 for a flat rectangle
+    },
+  });
+
+  // Limit the camera to the bounding box
+  viewer.camera.viewBoundingRectangle = nyBoundingBox;
+  viewer.camera.viewRectangle = nyBoundingBox;
+}
+
+// Add a post-render event listener to execute the onPostRender function
+viewer.scene.postRender.addEventListener(onPostRender);
+
+// Set up an event listener for mouse movement
+viewer.scene.canvas.addEventListener("mousemove", function (e) {
+  // Get the mouse position
+  var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+
+  // Use scene.pick to get the entity under the mouse cursor
+  var pickedObject = viewer.scene.pick(mousePosition);
+
+  // Check if an object is picked
+  if (Cesium.defined(pickedObject) && Cesium.defined(pickedObject.id)) {
+    // Get the picked entity
+    var pickedEntity = pickedObject.id;
+
+    // Display the information (customize as needed)
+    console.log("Picked Entity:", pickedEntity);
+
+    // Log the coordinates of the picked entity
+    var pickedEntityPosition = pickedEntity.position?.getValue(
+      viewer.clock.currentTime
+    );
+    if (Cesium.defined(pickedEntityPosition)) {
+      console.log(
+        "Coordinates:",
+        Cesium.Cartographic.fromCartesian(pickedEntityPosition)
+      );
+    }
+
+    // Log additional properties of the picked entity
+    console.log("Other properties:", pickedEntity.properties);
+
+    // You can display information about the entity in a popup, tooltip, or any other UI element
+  } else {
+    // No object picked, clear or hide the displayed information
+    console.log("No object picked");
+    // Clear or hide the information in your UI
+  }
+});
 
 
   // Define the flyToMTS function
