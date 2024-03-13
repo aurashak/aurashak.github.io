@@ -678,7 +678,6 @@ background-color: #ffe600ce;
   position: relative;
   padding: 10px 5px 10px 10px;
   margin: 5px 2px;
-  font-weight: bold;
   border-radius: 3px;
   border: solid .3px rgba(18, 18, 18, 0.68);
   background-color: #f5f5f5;
@@ -1905,9 +1904,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .switch-track,
 .switch-track-b {
   background-color: #ccc;
-  border-radius: 15px;
+  border-radius: 7px;
   height: 16px;
-  width: 60px;
+  width: 52px;
   position: relative;
   margin-right: 5px;
 }
@@ -1917,10 +1916,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
   content: "OFF";
   position: absolute;
   top: 50%;
-  right: 4px;
+  right: 18px;
   transform: translate(50%, -50%);
   color: #000;
   font-size: 12px;
+  opacity: 1; /* Set initial opacity to 1 */
+  transition: opacity 0.2s; /* Added opacity transition */
 }
 
 .switch-track::after,
@@ -1928,11 +1929,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
   content: "ON";
   position: absolute;
   top: 50%;
-  left: 4px;
+  left: 16px;
   transform: translate(-50%, -50%);
   color: #000;
   font-size: 12px;
   opacity: 0;
+  transition: opacity 0.2s; /* Added opacity transition */
 }
 
 .switch-thumb,
@@ -1941,8 +1943,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   height: 24px; /* Increased thumb size */
   width: 24px; /* Increased thumb size */
   position: absolute;
-  top: -6px; /* Adjusted top position */
-  left: -6px; /* Adjusted left position */
+  top: -4px; /* Adjusted top position */
+  left: -4px; /* Adjusted left position */
   transition: 0.2s;
 }
 
@@ -1957,20 +1959,25 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .switch-input:checked + .switch-track,
 .switch-input-b:checked + .switch-track-b {
-  background-color: #4caf50; /* Green color */
+  background-color: #4caf50; /* Green color when checked */
+}
+
+.switch-input:checked + .switch-track::before,
+.switch-input-b:checked + .switch-track-b::before {
+  opacity: 0; /* Set opacity to 0 when checked */
+}
+
+.switch-input:checked + .switch-track::after,
+.switch-input-b:checked + .switch-track-b::after {
+  opacity: 1; /* Set opacity to 1 when checked */
 }
 
 .switch-input:checked + .switch-track .switch-thumb,
 .switch-input-b:checked + .switch-track-b .switch-thumb-b {
-  left: 36px;
+  left: 34px;
 }
 
-.switch-input:checked + .switch-track::before,
-.switch-input:checked + .switch-track::after,
-.switch-input-b:checked + .switch-track-b::before,
-.switch-input-b:checked + .switch-track-b::after {
-  opacity: 1;
-}
+
 
 
 
