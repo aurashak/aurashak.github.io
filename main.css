@@ -50,7 +50,7 @@ ul li a:hover {
 }
 
 
-.hometitle {
+.home1 {
   font-size: 25px;
   font-weight: bold;
   color: #333;
@@ -60,9 +60,9 @@ ul li a:hover {
   background-color: #ffe600ce;
 }
 
-.hometitle a:link {}
-.hometitle a:hover {}
-.hometitle a:active {}
+.home1 a:link {}
+.home1 a:hover {}
+.home1 a:active {}
 
 
 h1 {
@@ -380,23 +380,12 @@ background: none;
 }
 
 
-.hometitle,
+
 .homesubtitle {
   position: relative;
   z-index: 1; /* Bring them above the background */
 }
 
-
-.hometitle {
-  font-size: 35px;
-  margin-top: 30px;
-  margin-left: 50px;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.6);
-  display: inline-block;
-  padding: 0px 4px;
-
-}
 
 .homesubtitle {
     font-size: 18px;
@@ -3617,11 +3606,6 @@ span.cesium-projectionPicker-wrapper {
     
     }
 
-  .hometitle {
-      font-size: 20px;
-      margin-top: 10px;
-      margin-left: 20px;
-  }
 
   .homesubtitle {
       font-size: 18px;
