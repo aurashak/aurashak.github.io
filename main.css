@@ -1917,7 +1917,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
-
 /* Styles for Switch Mechanism for NY MAP */
 .switch-label {
   /* Add any styles you want for the switch label */
@@ -1940,7 +1939,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   background-color: #ccc;
   border-radius: 7px;
   height: 16px;
-  width: 52px;
+  width: 47px;
   position: relative;
   margin-right: 5px;
       border: solid .3px rgba(18, 18, 18, 0.31);
@@ -1953,7 +1952,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   position: absolute;
   top: 57%;
   font-weight: bold;
-  right: 17px;
+  right: 14px;
   transform: translate(50%, -50%);
   color: #615a5a;
   font-size: 12px;
@@ -1966,8 +1965,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   content: "ON";
   position: absolute;
     font-weight: bold;
-  top: 56%;
-  left: 16px;
+  top: 57%;
+  left: 13px;
   transform: translate(-50%, -50%);
   color: #615a5a;
   font-size: 12px;
@@ -1979,10 +1978,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .switch-thumb,
 .switch-thumb-b {
   border-radius: 50%;
-  height: 24px; 
-  width: 24px; 
+  height: 20px; 
+  width: 20px; 
   position: absolute;
-  top: -5px; 
+  top: -3px; 
   left: -4px; 
   border: solid .3px rgba(18, 18, 18, 0.31);
   transition: 0.1s;
