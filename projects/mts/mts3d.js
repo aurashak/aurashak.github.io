@@ -132,37 +132,34 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
     // Load OSM buildings 3D Tileset
-const osmBuildingsTileset = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-);
+    const osmBuildingsTileset = viewer.scene.primitives.add(
+      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+    );
 
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
-) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
-  );
-}
+    // Apply default style to the OSM buildings tileset if available
+    const osmExtras = osmBuildingsTileset.asset.extras;
+    if (
+      Cesium.defined(osmExtras) &&
+      Cesium.defined(osmExtras.ion) &&
+      Cesium.defined(osmExtras.ion.defaultStyle)
+    ) {
+      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+        osmExtras.ion.defaultStyle
+      );
+    }
 
-// Set the alpha component to make the layer transparent (0.5 for 50% transparency)
-osmBuildingsTileset.style.color = new Cesium.Color(1.0, 1.0, 1.0, 0.5);
+    // Create a switch event listener for the OSM buildings Tileset
+    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
 
-// Create a switch event listener for the OSM buildings Tileset
-const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+    // Set the switch to the off position initially
+    osmBuildingsSwitch.checked = false;
 
-// Set the switch to the off position initially
-osmBuildingsSwitch.checked = false;
+    osmBuildingsSwitch.addEventListener("change", (event) => {
+      osmBuildingsTileset.show = event.target.checked;
+    });
 
-osmBuildingsSwitch.addEventListener("change", (event) => {
-  osmBuildingsTileset.show = event.target.checked;
-});
-
-// Hide the OSM buildings Tileset initially
-osmBuildingsTileset.show = false;
+    // Hide the OSM buildings Tileset initially
+    osmBuildingsTileset.show = false;
 
     
     
