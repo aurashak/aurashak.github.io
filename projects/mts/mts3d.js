@@ -1,7 +1,7 @@
 (async () => {
     // Grant CesiumJS access to your ion assets
     Cesium.Ion.defaultAccessToken =
-    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyZWYwNWEzNi0zMThkLTQ5ZjgtODZmNC01ZWI0ODQ1OWVhYTYiLCJpZCI6MTg2OTM0LCJpYXQiOjE3MDY3MjIxNjN9.JZdCe1eGQfsow46cZGVVG1r8hL1L0E72AzUsFs1Rw8s";
   
     // Initialize Cesium
     const initializeCesium = async () => {
@@ -171,8 +171,8 @@
     flyToWasteWaterSButton.addEventListener('click', flyToWasteWater);
 
       // Add a click event listener to the flyToNewYorkCity button
-  const flyToBusDepotButton = document.getElementById('flyToBusDepot>');
-  flyToBusDepotButton.addEventListener('click', flyToBusDepot);
+      const flyToBusDepotButton = document.getElementById('flyToBusDepot>');
+      flyToBusDepotButton.addEventListener('click', flyToBusDepot);
 
 
 
@@ -691,7 +691,8 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
   await initializeCesium();
 
   console.log("Initialization complete");
-  })(); // <- Add this closing parenthesis to execute the IIFE
+})();
+// <- Add this closing parenthesis to execute the IIFE
 
 
    
