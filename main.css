@@ -27,7 +27,6 @@ ul {
 
 ul li {
   margin-left: 20px; /* Adjusted the margin for indentation */
-  line-height: 1.2;
 }
 
 ul li::before {
@@ -37,7 +36,7 @@ ul li::before {
 }
 
 ul li a {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 /* Remove link styles */
@@ -1915,7 +1914,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   font-weight: bold;
   right: 18px;
   transform: translate(50%, -50%);
-  color: #000;
+  color: #615a5a;
   font-size: 12px;
   opacity: 1; /* Set initial opacity to 1 */
   transition: opacity 0.2s; /* Added opacity transition */
@@ -1929,11 +1928,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
   top: 56%;
   left: 16px;
   transform: translate(-50%, -50%);
-  color: #000;
+  color: #615a5a;
   font-size: 12px;
   opacity: 0;
   transition: opacity 0.2s; /* Added opacity transition */
 }
+
 
 .switch-thumb,
 .switch-thumb-b {
