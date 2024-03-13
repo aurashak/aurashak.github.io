@@ -98,7 +98,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
     // minimum and maximum zoom limits
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 50;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
     // Load full google photorealistic tileset
