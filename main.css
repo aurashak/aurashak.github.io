@@ -57,16 +57,18 @@ ul li a:hover {
 }
 
 .home1 {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
+  margin-left: 40px;
+  margin-top: 20px;
   color: #333;
   padding: 0px 5px;
-  margin: 10px;
   display: inline-block;
   background-color: #ffe600ce;
     border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
+
 
 .home1 a:link {color: black;}
 .home1 a:hover {color: rgb(0, 0, 0);}
