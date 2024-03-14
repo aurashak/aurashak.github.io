@@ -3651,10 +3651,16 @@ span.cesium-projectionPicker-wrapper {
     }
 
 
-  .homesubtitle {
-      font-size: 18px;
-  }
-
+    .homesubtitle {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      z-index: 1000; 
+        border-radius: 6px;
+          pointer-events: auto;
+    }
+    
+    
   .maptitle {
     font-size: 16px;
     padding: 5px;
