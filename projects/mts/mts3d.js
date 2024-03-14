@@ -335,15 +335,29 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 // Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
+  const conditions = osmBuildingsTileset.style.color.conditions.slice(); // Copy the existing conditions
+
+  // Find the index of the condition corresponding to the buildingId
+  const buildingConditionIndex = conditions.findIndex(condition => {
+    return condition[0] === "${elementId} === " + elementId;
+  });
+
+  if (buildingConditionIndex !== -1) {
+    // Update the show/hide value for the specific building condition
+    conditions[buildingConditionIndex][1] = show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)";
+  } else {
+    // If the condition for the building doesn't exist, add it
+    conditions.push(["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"]);
+  }
+
+  // Apply the updated conditions to the style
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
-      conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
+      conditions: conditions
     }
   });
 }
+
 
 // Function to toggle switch and layer visibility
 function toggleSwitch(switchId, buildingId) {
