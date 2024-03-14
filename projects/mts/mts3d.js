@@ -210,6 +210,33 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+                // Define the flyToCSO function
+                function flyToCSO() {
+                  // Fly back to New York City
+                  viewer.scene.camera.setView({
+                    destination: Cesium.Cartesian3.fromDegrees(
+                      -73.9625,
+                      40.8217,
+                      200 // Adjust the zoom level as needed
+                    ),
+                    orientation: {
+                      heading: Cesium.Math.toRadians(65), // clockwise from north
+                      pitch: Cesium.Math.toRadians(-40), // Look downward
+                      roll: 0,
+                    },
+                  });
+                }
+              
+               // Add a click event listener to the flyToGasPipeline button
+                const flyToCSOButton = document.getElementById('flyToCSO');
+                flyToCSOButton.addEventListener('click', flyToCSO);
+        
+        
+
+                
+
+
+
 
     // minimum and maximum zoom limits
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
