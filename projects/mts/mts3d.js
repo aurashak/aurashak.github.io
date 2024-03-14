@@ -277,63 +277,57 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-
-    // Load OSM buildings 3D Tileset
-    const osmBuildingsTileset = viewer.scene.primitives.add(
-      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-    );
-
-    // Apply default style to the OSM buildings tileset if available
-    const osmExtras = osmBuildingsTileset.asset.extras;
-    if (
-      Cesium.defined(osmExtras) &&
-      Cesium.defined(osmExtras.ion) &&
-      Cesium.defined(osmExtras.ion.defaultStyle)
-    ) {
-      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-        osmExtras.ion.defaultStyle
-      );
-    }
-
-    // Create a switch event listener for the OSM buildings Tileset
-    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-
-    // Set the switch to the off position initially
-    osmBuildingsSwitch.checked = false;
-
-    osmBuildingsSwitch.addEventListener("change", (event) => {
-      osmBuildingsTileset.show = event.target.checked;
-    });
-
-    // Hide the OSM buildings Tileset initially
-    osmBuildingsTileset.show = false;
-
-    
-
-
-
-
-
-  // Load OSM buildings MTS Building
-const osmBuildingsTileset = viewer.scene.primitives.add(
+// Load OSM buildings 3D Tileset
+const osmBuildingsTileset1 = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
 );
 
 // Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
+const osmExtras1 = osmBuildingsTileset1.asset.extras;
 if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
+  Cesium.defined(osmExtras1) &&
+  Cesium.defined(osmExtras1.ion) &&
+  Cesium.defined(osmExtras1.ion.defaultStyle)
 ) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
+  osmBuildingsTileset1.style = new Cesium.Cesium3DTileStyle(
+    osmExtras1.ion.defaultStyle
+  );
+}
+
+// Create a switch event listener for the first OSM buildings Tileset
+const osmBuildingsSwitch1 = document.getElementById("osmBuildingsSwitch");
+
+// Set the switch to the off position initially
+osmBuildingsSwitch1.checked = false;
+
+osmBuildingsSwitch1.addEventListener("change", (event) => {
+  osmBuildingsTileset1.show = event.target.checked;
+});
+
+// Hide the first OSM buildings Tileset initially
+osmBuildingsTileset1.show = false;
+
+
+// Load OSM buildings MTS Building
+const osmBuildingsTileset2 = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+);
+
+// Apply default style to the OSM buildings tileset if available
+const osmExtras2 = osmBuildingsTileset2.asset.extras;
+if (
+  Cesium.defined(osmExtras2) &&
+  Cesium.defined(osmExtras2.ion) &&
+  Cesium.defined(osmExtras2.ion.defaultStyle)
+) {
+  osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle(
+    osmExtras2.ion.defaultStyle
   );
 }
 
 // Function to toggle building visibility by ID
 function toggleBuildingVisibility(buildingId) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+  osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
         ["${id} === " + buildingId, "rgba(255, 255, 255, 1)"], // Show the specific building with given ID
@@ -353,7 +347,7 @@ function toggleSwitch() {
   if (mtsBuildingsSwitch.checked) {
     toggleBuildingVisibility(buildingId);
   } else {
-    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(); // Reset style to show all buildings
+    osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle(); // Reset style to show all buildings
   }
 }
 
@@ -361,9 +355,8 @@ function toggleSwitch() {
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingsSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
-// Hide the OSM buildings Tileset initially
-osmBuildingsTileset.show = false;
-
+// Hide the second OSM buildings Tileset initially
+osmBuildingsTileset2.show = false;
 
     
    
