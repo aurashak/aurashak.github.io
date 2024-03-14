@@ -365,6 +365,17 @@ function toggleBuildingVisibility(elementId, show) {
 
 
 
+// Function to toggle building visibility
+function toggleBuildingVisibility(buildingId, show) {
+  console.log("Toggling building visibility for ID", buildingId);
+  const building = osmBuildingsTileset.getFeature(buildingId);
+  if (Cesium.defined(building)) {
+    building.show = show;
+  } else {
+    console.log("Building with ID", buildingId, "not found.");
+  }
+}
+
 // Function to toggle switch and layer visibility
 function toggleSwitch(switchId, buildingId) {
   console.log("Switch toggled.");
@@ -374,7 +385,6 @@ function toggleSwitch(switchId, buildingId) {
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the MTS building switch
@@ -389,25 +399,23 @@ busDepotSwitch.addEventListener("change", () => {
   toggleSwitch("BusDepotSwitch", 271923865);
 });
 
-// Add event listener to the Bus Depot switch
-const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
-WasteWaterSwitch.addEventListener("change", () => {
+// Add event listener to the WasteWater switch
+const wasteWaterSwitch = document.getElementById("WasteWaterSwitch");
+wasteWaterSwitch.addEventListener("change", () => {
   toggleSwitch("WasteWaterSwitch", 275080382);
 });
 
-// Add event listener to the Bus Depot switch
+// Add event listener to the gas pipeline switch
 const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
 gasPipelineSwitch.addEventListener("change", () => {
   toggleSwitch("gasPipelineSwitch", 275080377);
 });
 
-// Add event listener to the Bus Depot switch
-const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.addEventListener("change", () => {
+// Add event listener to the NYCHA switch
+const nychaSwitch = document.getElementById("NYCHASwitch");
+nychaSwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
 });
-
-
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
