@@ -53,8 +53,15 @@ ul li a:hover {
   width: 100%;
   z-index: 500;
   margin: 100px 60px;
+  display: inline;
   position: fixed;
+  pointer-events: none; /* Enable click-through pass for the container */
 }
+
+.hometitles a {
+  pointer-events: auto; /* Re-enable click events for links within the container */
+}
+
 
 .home1 {
   font-size: 20px;
