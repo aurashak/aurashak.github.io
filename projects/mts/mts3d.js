@@ -312,7 +312,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
@@ -331,12 +330,12 @@ if (
 }
 
 // Function to toggle building visibility by ID
-function toggleBuildingVisibility(buildingId) {
+function toggleBuildingVisibility(buildingId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${id} === " + buildingId, "rgba(255, 255, 255, 1)"], // Show the specific building with given ID
+        ["${id} === " + buildingId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given ID
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
@@ -348,16 +347,10 @@ function toggleSwitch() {
   console.log("Switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
   const buildingId = 275080379; // ID of the building you want to isolate
+  const show = mtsBuildingsSwitch.checked;
 
-  mtsBuildingsSwitch.checked = !mtsBuildingsSwitch.checked;
-
-  if (mtsBuildingsSwitch.checked) {
-    console.log("Showing building with ID", buildingId);
-    toggleBuildingVisibility(buildingId);
-  } else {
-    console.log("Hiding all buildings.");
-    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(); // Reset style to show all buildings
-  }
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
 }
 
 // Add event listener to the switch
