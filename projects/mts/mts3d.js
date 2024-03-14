@@ -168,8 +168,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9617,
-        40.8185,
+        -73.9612,
+        40.8190,
         300 // Adjust the zoom level as needed
       ),
       orientation: {
@@ -311,6 +311,9 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     
 */
 
+
+
+
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -330,12 +333,12 @@ if (
 viewer.scene.primitives.add(osmBuildingsTileset);
 
 // Function to toggle building visibility
-function toggleBuildingVisibility(buildingId, show) {
+function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + buildingId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
@@ -351,52 +354,50 @@ function toggleSwitch(switchId, buildingId) {
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.checked = false; // Start with the switch off
-toggleSwitch("mtsBuildingSwitch", 275080379); // Ensure initial visibility matches switch state
 mtsBuildingsSwitch.addEventListener("change", () => {
   toggleSwitch("mtsBuildingSwitch", 275080379);
 });
 
 // Add event listener to the Bus Depot switch
 const busDepotSwitch = document.getElementById("BusDepotSwitch");
-busDepotSwitch.checked = false; // Start with the switch off
-toggleSwitch("BusDepotSwitch", 271923865); // Ensure initial visibility matches switch state
 busDepotSwitch.addEventListener("change", () => {
   toggleSwitch("BusDepotSwitch", 271923865);
 });
 
-// Add event listener to the Waste Water switch
+// Add event listener to the Bus Depot switch
 const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
-WasteWaterSwitch.checked = false; // Start with the switch off
-toggleSwitch("WasteWaterSwitch", 275080382); // Ensure initial visibility matches switch state
 WasteWaterSwitch.addEventListener("change", () => {
   toggleSwitch("WasteWaterSwitch", 275080382);
 });
 
-// Add event listener to the Gas Pipeline switch
+// Add event listener to the Bus Depot switch
 const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
-gasPipelineSwitch.checked = false; // Start with the switch off
-toggleSwitch("gasPipelineSwitch", 275080377); // Ensure initial visibility matches switch state
 gasPipelineSwitch.addEventListener("change", () => {
   toggleSwitch("gasPipelineSwitch", 275080377);
 });
 
-// Add event listener to the NYCHA switch
+// Add event listener to the Bus Depot switch
 const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.checked = false; // Start with the switch off
-toggleSwitch("NYCHASwitch", 271911419); // Ensure initial visibility matches switch state
 NYCHASwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
 });
+
+
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
+
+
+
+
 
 
 
