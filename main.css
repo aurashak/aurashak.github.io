@@ -50,10 +50,8 @@ ul li a:hover {
 }
 
 .hometitles {
-  width: 100%;
   z-index: 500;
   margin: 100px 60px;
-  display: inline;
   position: fixed;
   pointer-events: none;
 }
@@ -85,7 +83,7 @@ ul li a:hover {
   padding: 3px 6px;
   display: inline-block;
   background-color: #d0d0d0ce;
-    border: 1px solirgba(194, 194, 194, 0.808)0, 110, 110, 0.3);
+  border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   pointer-events: none;
 
@@ -409,6 +407,7 @@ background: none;
   height: 100%;
   z-index: 0; /* Send it to the back */
 }
+
 
 
 .homesubtitle {
@@ -3699,9 +3698,18 @@ span.cesium-projectionPicker-wrapper {
 
   .home1 {
     font-size: 17px;
+    margin: 10px;
   }
 
 
+  .home2 {
+    font-size: 17px;
+    margin: 10px;
+
+  }
+
+
+  
   .container {
       display: block;
       margin: 0px;
