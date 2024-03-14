@@ -342,6 +342,19 @@ function toggleBuildingVisibility(elementId, show) {
   });
 }
 
+// Function to toggle switch and layer visibility for bus depot
+function toggleBusDepotSwitch() {
+  console.log("Bus depot switch toggled.");
+  const busDepotSwitch = document.getElementById("busDepotSwitch");
+  const show = busDepotSwitch.checked;
+
+  console.log("Bus depot switch state:", show);
+  toggleBuildingVisibility(271923865, show);
+}
+
+// Add event listener to the bus depot switch
+const busDepotSwitch = document.getElementById("busDepotSwitch");
+busDepotSwitch.addEventListener("change", toggleBusDepotSwitch);
 
 
 
@@ -597,6 +610,10 @@ function createCircleImage() {
       entity.show = false; // Make sure entities are hidden by default
     });
 
+
+
+    /*
+
     // Load GeoJsonDataSource with asset ID 2483827
     const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
     const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
@@ -644,6 +661,12 @@ function createCircleImage() {
       context.fillRect(0, 0, canvas.width, canvas.height);
       return canvas;
     }
+
+    */
+
+
+
+
 
    // Load nycsubway GeoJsonDataSource
 const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
