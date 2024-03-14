@@ -312,7 +312,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-// Load OSM buildings MTS Building
+/// Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Apply default style to the OSM buildings tileset if available
