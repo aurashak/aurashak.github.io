@@ -397,11 +397,11 @@ function toggleGasPipelineSwitch() {
 }
 
 // Function to toggle group of buildings switch and layer visibility
-function toggleGroupSwitch() {
+function toggleNYCHASwitch() {
   console.log("Group switch toggled.");
-  const groupSwitch = document.getElementById("manhattanvilleSwitch"); // Change the id to "manhattanvilleSwitch"
+  const NYCHASwitch = document.getElementById("NYCHASwitch"); // Change the id to "NYCHASwitch"
   const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"]; 
-  const show = groupSwitch.checked;
+  const show = NYCHASwitch.checked;
 
   console.log("Group switch state:", show);
   console.log("Showing buildings with IDs", buildingIds);
@@ -410,8 +410,8 @@ function toggleGroupSwitch() {
 }
 
 // Add event listener to the group switch
-const groupSwitch = document.getElementById("manhattanvilleSwitch"); // Change the id to "manhattanvilleSwitch"
-groupSwitch.addEventListener("change", toggleGroupSwitch);
+const NYCHASwitch = document.getElementById("NYCHASwitch"); // Change the id to "manhattanvilleSwitch"
+NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
