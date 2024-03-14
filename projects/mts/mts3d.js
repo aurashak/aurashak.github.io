@@ -227,7 +227,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
                   });
                 }
               
-               // Add a click event listener to the flyToGasPipeline button
+               // Add a click event listener to the flyToCSO button
                 const flyToCSOButton = document.getElementById('flyToCSO');
                 flyToCSOButton.addEventListener('click', flyToCSO);
         
