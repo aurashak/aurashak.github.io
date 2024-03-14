@@ -1085,14 +1085,20 @@ h3:hover, h3:active, h3:focus {
   cursor: pointer;
 }
 
-#mtsbutton {
-  background-color: #167ecd;
-  color: #000000;
+/* Button Style */
+#mtsnavbutton {
+  padding: 5px;
+  margin: 5px 2px;
+  border-radius: 2px;
+  width: 100%;
+  text-align: center;
+  background-color: #6dacff;
+  font-size: 18px;
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  cursor: pointer;
 }
 
-
-#mtsbutton {
-}
 
 
 
