@@ -311,7 +311,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     
 */
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -356,30 +355,40 @@ function toggleSwitch(switchId, buildingId) {
 
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+mtsBuildingsSwitch.checked = true; // Set initial state
+toggleSwitch("mtsBuildingSwitch", 275080379); // Ensure initial visibility matches switch state
 mtsBuildingsSwitch.addEventListener("change", () => {
   toggleSwitch("mtsBuildingSwitch", 275080379);
 });
 
 // Add event listener to the Bus Depot switch
 const busDepotSwitch = document.getElementById("BusDepotSwitch");
+busDepotSwitch.checked = true; // Set initial state
+toggleSwitch("BusDepotSwitch", 271923865); // Ensure initial visibility matches switch state
 busDepotSwitch.addEventListener("change", () => {
   toggleSwitch("BusDepotSwitch", 271923865);
 });
 
-// Add event listener to the Bus Depot switch
+// Add event listener to the Waste Water switch
 const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
+WasteWaterSwitch.checked = true; // Set initial state
+toggleSwitch("WasteWaterSwitch", 275080382); // Ensure initial visibility matches switch state
 WasteWaterSwitch.addEventListener("change", () => {
   toggleSwitch("WasteWaterSwitch", 275080382);
 });
 
-// Add event listener to the Bus Depot switch
+// Add event listener to the Gas Pipeline switch
 const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
+gasPipelineSwitch.checked = true; // Set initial state
+toggleSwitch("gasPipelineSwitch", 275080377); // Ensure initial visibility matches switch state
 gasPipelineSwitch.addEventListener("change", () => {
   toggleSwitch("gasPipelineSwitch", 275080377);
 });
 
-// Add event listener to the Bus Depot switch
+// Add event listener to the NYCHA switch
 const NYCHASwitch = document.getElementById("NYCHASwitch");
+NYCHASwitch.checked = true; // Set initial state
+toggleSwitch("NYCHASwitch", 271911419); // Ensure initial visibility matches switch state
 NYCHASwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
 });
@@ -388,7 +397,6 @@ NYCHASwitch.addEventListener("change", () => {
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
-
 
 
 
