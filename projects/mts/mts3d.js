@@ -330,6 +330,7 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
+// Function to toggle building visibility by elementId
 function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
@@ -342,49 +343,45 @@ function toggleBuildingVisibility(elementId, show) {
   });
 }
 
-
-
-
-// Function to toggle switch and layer visibility
-function toggleSwitch() {
-  console.log("Switch toggled.");
-  const busDepotSwitch = document.getElementById("busDepotSwitch");
-  const buildingId = 271923865; // ID of the building you want to isolate
-  const show = busDepotSwitch.checked;
-
-  console.log("Switch state:", show);
-  console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
-}
-
-// Add event listener to the switch
-const busDepotSwitch = document.getElementById("busDepotSwitch");
-busDepotSwitch.addEventListener("change", toggleSwitch);
-
-
-
-// Function to toggle switch and layer visibility
-function toggleSwitch() {
-  console.log("Switch toggled.");
+// Function to toggle MTS building switch and layer visibility
+function toggleMTSBuildingSwitch() {
+  console.log("MTS Building switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingId = 275080379; // ID of the building you want to isolate
+  const buildingId = 275080379; // ID of the MTS building
   const show = mtsBuildingsSwitch.checked;
 
-  console.log("Switch state:", show);
+  console.log("MTS Building switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
-// Add event listener to the switch
+// Function to toggle bus depot switch and layer visibility
+function toggleBusDepotSwitch() {
+  console.log("Bus Depot switch toggled.");
+  const busDepotSwitch = document.getElementById("busDepotSwitch");
+  const buildingId = 271923865; // ID of the bus depot building
+  const show = busDepotSwitch.checked;
+
+  console.log("Bus Depot switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+// Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
+mtsBuildingsSwitch.addEventListener("change", toggleMTSBuildingSwitch);
+
+// Add event listener to the bus depot switch
+const busDepotSwitch = document.getElementById("busDepotSwitch");
+busDepotSwitch.addEventListener("change", toggleBusDepotSwitch);
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
 
 
 
