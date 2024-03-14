@@ -55,11 +55,11 @@ ul li a:hover {
   margin: 100px 60px;
   display: inline;
   position: fixed;
-  pointer-events: none; /* Enable click-through pass for the container */
+  pointer-events: none;
 }
 
 .hometitles a {
-  pointer-events: auto; /* Re-enable click events for links within the container */
+  pointer-events: auto; 
 }
 
 
@@ -397,16 +397,16 @@ background: none;
 
 
 .homesubtitle {
-  font-weight: normal;
-  max-width: 600px;
   display: inline-block;
   background: rgba(255, 255, 255, 0.6);
-  padding: 0px 4px;
-  z-index: 1000; /* Bring them above the background */
+  padding: 10px;
+  z-index: 1000; 
   position: fixed;
   top: 9%;
   right: 5%;
+    border-radius: 6px;
 }
+
 
 
 
@@ -2125,7 +2125,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* Styles for Home Switch */
 .homeswitch-label {
-  margin-right: 14px;
+  margin-right: 0px;
 }
 
 .homeswitch-input {
@@ -2237,7 +2237,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
   font-weight: bold;
   letter-spacing: 2px;
   border: 0.25px solid rgb(23, 23, 96);
-  margin-left: 30px;
   position: relative;
   border-radius: 25px; /* Adjust border-radius to make the button rounded */
   cursor: pointer;
