@@ -355,7 +355,7 @@ function toggleSwitch(switchId, buildingId) {
 
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.checked = true; // Set initial state
+mtsBuildingsSwitch.checked = false; // Start with the switch off
 toggleSwitch("mtsBuildingSwitch", 275080379); // Ensure initial visibility matches switch state
 mtsBuildingsSwitch.addEventListener("change", () => {
   toggleSwitch("mtsBuildingSwitch", 275080379);
@@ -363,7 +363,7 @@ mtsBuildingsSwitch.addEventListener("change", () => {
 
 // Add event listener to the Bus Depot switch
 const busDepotSwitch = document.getElementById("BusDepotSwitch");
-busDepotSwitch.checked = true; // Set initial state
+busDepotSwitch.checked = false; // Start with the switch off
 toggleSwitch("BusDepotSwitch", 271923865); // Ensure initial visibility matches switch state
 busDepotSwitch.addEventListener("change", () => {
   toggleSwitch("BusDepotSwitch", 271923865);
@@ -371,7 +371,7 @@ busDepotSwitch.addEventListener("change", () => {
 
 // Add event listener to the Waste Water switch
 const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
-WasteWaterSwitch.checked = true; // Set initial state
+WasteWaterSwitch.checked = false; // Start with the switch off
 toggleSwitch("WasteWaterSwitch", 275080382); // Ensure initial visibility matches switch state
 WasteWaterSwitch.addEventListener("change", () => {
   toggleSwitch("WasteWaterSwitch", 275080382);
@@ -379,7 +379,7 @@ WasteWaterSwitch.addEventListener("change", () => {
 
 // Add event listener to the Gas Pipeline switch
 const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
-gasPipelineSwitch.checked = true; // Set initial state
+gasPipelineSwitch.checked = false; // Start with the switch off
 toggleSwitch("gasPipelineSwitch", 275080377); // Ensure initial visibility matches switch state
 gasPipelineSwitch.addEventListener("change", () => {
   toggleSwitch("gasPipelineSwitch", 275080377);
@@ -387,7 +387,7 @@ gasPipelineSwitch.addEventListener("change", () => {
 
 // Add event listener to the NYCHA switch
 const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.checked = true; // Set initial state
+NYCHASwitch.checked = false; // Start with the switch off
 toggleSwitch("NYCHASwitch", 271911419); // Ensure initial visibility matches switch state
 NYCHASwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
@@ -397,10 +397,6 @@ NYCHASwitch.addEventListener("change", () => {
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
-
-
-
-
 
 
 
