@@ -431,7 +431,6 @@ background: none;
 
 .homesubtitle {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.6);
   padding: 10px;
   z-index: 1000; 
   position: fixed;
@@ -439,7 +438,6 @@ background: none;
   right: 20%;
     border-radius: 6px;
     pointer-events: auto;
-
 }
 
 
@@ -2299,14 +2297,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 .spin-button {
-  width: 80px; 
-  height: 35px; 
   background-color: #ff3700;
   color: #fff;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   position: relative;
-  border-radius: 25px; 
+  border-radius: 50%; 
+  font-size: 22px;
+  height: 80px;
+  width: 80px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
     border: 1px solid rgba(139, 139, 139, 0.53);
@@ -3745,7 +3744,6 @@ span.cesium-projectionPicker-wrapper {
 
     .homesubtitle {
       display: inline-block;
-      background: rgba(255, 255, 255, 0.6);
       padding: 10px;
       z-index: 1000;
       border-radius: 6px;
