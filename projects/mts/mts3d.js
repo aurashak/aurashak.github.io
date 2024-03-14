@@ -168,8 +168,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9598,
-        40.8191,
+        -73.9620,
+        40.8154,
         300 // Adjust the zoom level as needed
       ),
       orientation: {
@@ -192,9 +192,9 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
           // Fly back to New York City
           viewer.scene.camera.setView({
             destination: Cesium.Cartesian3.fromDegrees(
-              -73.9616,
-              40.8203,
-              200 // Adjust the zoom level as needed
+              -73.9623,
+              40.8207,
+              70 // Adjust the zoom level as needed
             ),
             orientation: {
               heading: Cesium.Math.toRadians(65), // clockwise from north
