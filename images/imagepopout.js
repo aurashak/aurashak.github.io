@@ -63,14 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    fullScreen.addEventListener('click', function () {
-        hideFullScreen();
+    document.addEventListener('click', function (event) {
+        if (!fullScreen.contains(event.target)) {
+            hideFullScreen();
+        }
     });
 
     // Initial update
     updateFullScreenImage();
     updateArrows();
 });
-
-
-
