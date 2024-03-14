@@ -306,7 +306,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     });
 
     // Hide the OSM buildings Tileset initially
-    osmBuildingsTileset.show = false;
+    osmBuildingsTileset.show = true;
 
   };
 
