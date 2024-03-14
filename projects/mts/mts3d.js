@@ -340,10 +340,6 @@ function toggleBuildingVisibility(elementIds, show) {
   // Add a condition to hide other buildings if necessary
   conditions.push([true, show ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 0)"]);
 
-  osmBuildingsTileset.style.color.conditions = conditions;
-}
-
-
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
