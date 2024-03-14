@@ -22,11 +22,10 @@ a:active { color: black}
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0 10px;
 }
 
 ul li {
-  margin-left: 20px; /* Adjusted the margin for indentation */
+  margin-left: 0px; /* Adjusted the margin for indentation */
 }
 
 ul li::before {
@@ -37,15 +36,6 @@ ul li::before {
 
 ul li a {
   font-weight: normal;
-}
-
-/* Remove link styles */
-ul li a {
-  color: inherit;
-}
-
-/* Remove link hover styles */
-ul li a:hover {
   color: inherit;
 }
 
@@ -2181,7 +2171,7 @@ label {
 
 .mts-switch-input:checked + .mts-switch-track .mts-switch-thumb,
 .mts-switch-input-b:checked + .mts-switch-track-b .mts-switch-thumb-b {
-  left: 34px;
+  left: 30px;
 }
 
 
