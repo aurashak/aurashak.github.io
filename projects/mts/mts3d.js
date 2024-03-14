@@ -18,18 +18,6 @@ const initializeCesium = async () => {
     animation: false,
   });
 
-  // Add zoom controls
-  viewer.extend(Cesium.viewerCesiumNavigationMixin, {
-    zoomInButton: document.getElementById('zoomInButton'),
-    zoomOutButton: document.getElementById('zoomOutButton'),
-  });
-
-  // Add compass control
-  viewer.extend(Cesium.viewerCesiumNavigationMixin, {
-    compassVisible: true,
-    compassContainer: document.getElementById('compassContainer'),
-  });
-
   var boundingBox = new Cesium.Rectangle(
     Cesium.Math.toRadians(-74.05), // West
     Cesium.Math.toRadians(40.5),   // South
