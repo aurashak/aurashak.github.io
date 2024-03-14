@@ -432,8 +432,8 @@ background: none;
   padding: 10px;
   z-index: 1000; 
   position: fixed;
-  top: 9%;
-  right: 5%;
+  top: 10%;
+  right: 20%;
     border-radius: 6px;
     pointer-events: auto;
 
@@ -3736,14 +3736,14 @@ span.cesium-projectionPicker-wrapper {
       display: inline-block;
       background: rgba(255, 255, 255, 0.6);
       padding: 10px;
-      z-index: 1000; 
+      z-index: 1000;
       border-radius: 6px;
       pointer-events: auto;
       position: relative;
-      margin: 40px;
-    }
+      margin: 30px 20px;
+  }
     
-    
+
   .maptitle {
     font-size: 16px;
     max-width: 600px;
