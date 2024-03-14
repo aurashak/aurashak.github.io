@@ -339,7 +339,7 @@ function toggleBuildingVisibility(buildingId) {
 
 // Function to toggle switch and building visibility
 function toggleSwitch() {
-  const mtsBuildingsSwitch = document.getElementById("mtsBuildingsSwitch");
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
   const buildingId = 275080379; // ID of the building you want to isolate
 
   mtsBuildingsSwitch.checked = !mtsBuildingsSwitch.checked;
@@ -352,7 +352,7 @@ function toggleSwitch() {
 }
 
 // Add event listener to the switch
-const mtsBuildingsSwitch = document.getElementById("mtsBuildingsSwitch");
+const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
 // Hide the second OSM buildings Tileset initially
