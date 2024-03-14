@@ -313,9 +313,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 // Load OSM buildings MTS Building
-const osmBuildingsTileset = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-);
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+osmBuildingsTileset.show = false; // Initially hide the tileset
 
 // Apply default style to the OSM buildings tileset if available
 const osmExtras = osmBuildingsTileset.asset.extras;
@@ -328,6 +327,9 @@ if (
     osmExtras.ion.defaultStyle
   );
 }
+
+// Add the OSM buildings tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
 
 // Function to toggle building visibility by ID
 function toggleBuildingVisibility(buildingId, show) {
@@ -342,7 +344,7 @@ function toggleBuildingVisibility(buildingId, show) {
   });
 }
 
-// Function to toggle switch and building visibility
+// Function to toggle switch and layer visibility
 function toggleSwitch() {
   console.log("Switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
@@ -359,6 +361,7 @@ mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
 // Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = false;
+
 
 
     
