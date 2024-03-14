@@ -330,17 +330,19 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to toggle building visibility by elementId or array of elementIds
 function toggleBuildingVisibility(elementIds, show) {
   console.log("Toggling building visibility...");
-  let conditions = [];
-  if (Array.isArray(elementIds)) {
-    elementIds.forEach(id => {
-      conditions.push(["${elementId} === '" + id + "'", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"]);
-    });
-  } else {
-    conditions.push(["${elementId} === '" + elementIds + "'", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"]);
-  }
+  let conditions = elementIds.map(id => [
+    "${elementId} === '" + id + "'",
+    show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"
+  ]);
+
+  // Add a condition to hide other buildings if necessary
+  conditions.push([true, show ? "rgba(255, 255, 255, 0)" : "rgba(255, 255, 255, 0)"]);
+
+  osmBuildingsTileset.style.color.conditions = conditions;
+}
+
 
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
