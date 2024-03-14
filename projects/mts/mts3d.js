@@ -330,10 +330,14 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to toggle building visibility
-function toggleBuildingVisibility(show) {
+// Function to toggle building visibility based on element IDs
+function toggleBuildingVisibility(elementIds, show) {
     console.log("Toggling building visibility...");
-    osmBuildingsTileset.show = show;
+    elementIds.forEach(id => {
+        const condition = `\${elementId} === '${id}'`;
+        const color = show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)";
+        osmBuildingsTileset.style.setCondition(condition, color);
+    });
 }
 
 // Function to toggle MTS building switch and layer visibility
@@ -343,7 +347,9 @@ function toggleMTSBuildingSwitch() {
     const show = mtsBuildingsSwitch.checked;
 
     console.log("MTS Building switch state:", show);
-    toggleBuildingVisibility(show);
+    const buildingId = "275080379";
+    console.log("Showing building with ID", buildingId);
+    toggleBuildingVisibility([buildingId], show);
 }
 
 // Function to toggle bus depot switch and layer visibility
@@ -353,7 +359,9 @@ function toggleBusDepotSwitch() {
     const show = busDepotSwitch.checked;
 
     console.log("Bus Depot switch state:", show);
-    toggleBuildingVisibility(show);
+    const buildingId = "271923865";
+    console.log("Showing building with ID", buildingId);
+    toggleBuildingVisibility([buildingId], show);
 }
 
 // Function to toggle waste water treatment switch and layer visibility
@@ -363,7 +371,9 @@ function toggleWasteWaterTreatmentSwitch() {
     const show = wasteWaterTreatmentSwitch.checked;
 
     console.log("Waste Water Treatment switch state:", show);
-    toggleBuildingVisibility(show);
+    const buildingId = "275080382";
+    console.log("Showing building with ID", buildingId);
+    toggleBuildingVisibility([buildingId], show);
 }
 
 // Function to toggle gas pipeline switch and layer visibility
@@ -373,7 +383,9 @@ function toggleGasPipelineSwitch() {
     const show = gasPipelineSwitch.checked;
 
     console.log("Gas Pipeline switch state:", show);
-    toggleBuildingVisibility(show);
+    const buildingId = "275080377";
+    console.log("Showing building with ID", buildingId);
+    toggleBuildingVisibility([buildingId], show);
 }
 
 // Add event listeners to the switches
