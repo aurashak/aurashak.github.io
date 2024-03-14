@@ -309,6 +309,59 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     osmBuildingsTileset.show = false;
 
     
+
+
+
+    // Load OSM buildings 3D Tileset
+const osmBuildingsTileset = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+);
+
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (
+  Cesium.defined(osmExtras) &&
+  Cesium.defined(osmExtras.ion) &&
+  Cesium.defined(osmExtras.ion.defaultStyle)
+) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+    osmExtras.ion.defaultStyle
+  );
+}
+
+// Function to toggle building visibility by ID
+function toggleBuildingVisibility(buildingId) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${id} === " + buildingId, "rgba(255, 255, 255, 1)"], // Show the specific building with given ID
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+}
+
+// Function to toggle switch and building visibility
+function toggleSwitch() {
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingsSwitch");
+  const buildingId = 275080379; // ID of the building you want to isolate
+
+  mtsBuildingsSwitch.checked = !mtsBuildingsSwitch.checked;
+
+  if (mtsBuildingsSwitch.checked) {
+    toggleBuildingVisibility(buildingId);
+  } else {
+    osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(); // Reset style to show all buildings
+  }
+}
+
+// Add event listener to the switch
+const mtsBuildingsSwitch = document.getElementById("mtsBuildingsSwitch");
+mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
+
+// Hide the OSM buildings Tileset initially
+osmBuildingsTileset.show = false;
+
     
    
    /*
