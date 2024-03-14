@@ -63,11 +63,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    fullScreen.addEventListener('click', function () {
-        hideFullScreen();
-    });
-
     // Initial update
     updateFullScreenImage();
     updateArrows();
+
+    // Event listener for the button click
+    document.getElementById('mtsbutton').addEventListener('click', function () {
+        showFullScreen();
+    });
+
+    fullScreen.addEventListener('click', function () {
+        hideFullScreen();
+    });
 });
