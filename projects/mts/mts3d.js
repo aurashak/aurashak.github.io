@@ -342,20 +342,25 @@ function toggleBuildingVisibility(elementId, show) {
   });
 }
 
-// Function to toggle switch and layer visibility for bus depot
-function toggleBusDepotSwitch() {
-  console.log("Bus depot switch toggled.");
+
+
+
+// Function to toggle switch and layer visibility
+function toggleSwitch() {
+  console.log("Switch toggled.");
   const busDepotSwitch = document.getElementById("busDepotSwitch");
+  const buildingId = 271923865; // ID of the building you want to isolate
   const show = busDepotSwitch.checked;
 
-  console.log("Bus depot switch state:", show);
-  toggleBuildingVisibility(271923865, show);
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
-// Add event listener to the bus depot switch
+// Add event listener to the switch
 const busDepotSwitch = document.getElementById("busDepotSwitch");
-busDepotSwitch.addEventListener("change", toggleBusDepotSwitch);
-
+busDepotSwitch.addEventListener("change", toggleSwitch);
 
 
 
