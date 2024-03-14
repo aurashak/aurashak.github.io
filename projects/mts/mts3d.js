@@ -312,7 +312,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-/// Load OSM buildings MTS Building
+// Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Apply default style to the OSM buildings tileset if available
@@ -350,6 +350,7 @@ function toggleSwitch() {
   const buildingId = 275080379; // ID of the building you want to isolate
   const show = mtsBuildingsSwitch.checked;
 
+  console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
@@ -361,6 +362,9 @@ mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
+
+console.log("Script loaded.");
+
 
 
 
