@@ -389,32 +389,17 @@ background: none;
 }
 
 
-
 .homesubtitle {
-  position: relative;
-  z-index: 1; /* Bring them above the background */
+  font-weight: normal;
+  max-width: 600px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0px 4px;
+  z-index: 1000; /* Bring them above the background */
+  position: fixed;
+  top: 9%;
+  right: 5%;
 }
-
-
-.homesubtitle {
-    font-size: 18px;
-    margin-top: 20px;
-    margin-left: 50px;
-    font-weight: normal;
-    max-width: 600px;
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 0px 4px;
-
-}
-
-.homesubtitle a:link {color: black;}
-.homesubtitle a:hover { text-decoration: underline;    background-color: #ffe600ce;
-   }
-.homesubtitle a:active {   }
-.homesubtitle a:visited {   }
-
-
 
 
 
@@ -2133,52 +2118,73 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
-
-
-/* Styles for Switch Mechanism */
+/* Styles for Home Switch */
 .homeswitch-label {
- margin-right: 14px;
+  margin-right: 14px;
 }
 
-
 .homeswitch-input {
-    display: none;
+  display: none;
 }
 
 .homeswitch-track {
-    background-color: #7e92f2;
-    border-radius: 15px;
-    height: 12px;
-    width: 30px;
-    position: relative;
-
+  background-color: #ccc;
+  border-radius: 0; /* Remove border-radius to make the switch track have square edges */
+  height: 26px; /* Adjust height to make the switch track shorter */
+  width: 60px; /* Adjust width to make the switch track narrower */
+  position: relative;
+  margin-right: 10px; /* Increase margin for better spacing */
+  border: solid 1px rgba(18, 18, 18, 0.7); /* Added border */
+  display: flex; /* Use flexbox to align content */
+  justify-content: space-between; /* Space between the content */
 }
-
-
 
 .homeswitch-thumb {
-  background-color: #66B2FF; /* Light blue color */
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
+  border-radius: 3px; /* Remove border-radius to make the switch thumb have square edges */
+  height: 25px; /* Adjust height to make the switch thumb shorter */
+  width: 25px; /* Adjust width to make the switch thumb narrower */
   position: absolute;
-  border: 0.25px solid rgb(23, 23, 96);
-
-  top: -5px;
-  left: -3px;
-  transition: 0.2s;
+  top: 0px; /* Adjust top position to center the thumb vertically */
+  left: -1px; /* Adjust left position to center the thumb horizontally */
+  transition: 0.1s;
+  background-color: #ffdf0b;
+  border: solid 1px rgba(18, 18, 18, 0.6); /* Added border */
 }
 
-/* Add this style to change the track color to green when checked */
+/* Adjusted colors and sizes to match the mts switch */
 .homeswitch-input:checked + .homeswitch-track {
-    background-color: #17aabb;
-
+  background-color: #4caf50;
 }
 
+.homeswitch-input:checked + .homeswitch-track::before {
+  content: "OSM"; /* Display "OSM" when the switch is unchecked */
+  position: absolute;
+  top: 50%;
+  right: 34px; /* Adjust right position to center the text horizontally */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  color: #615a5a;
+  font-size: 10px; /* Decrease font size */
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.homeswitch-input:checked + .homeswitch-track::after {
+  content: "SAT"; /* Display "SAT" when the switch is checked */
+  position: absolute;
+  top: 50%;
+  left: 37px; /* Adjust left position to center the text horizontally */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  color: #615a5a;
+  font-size: 10px; /* Decrease font size */
+  opacity: 1;
+  transition: opacity 0.2s;
+}
 
 .homeswitch-input:checked + .homeswitch-track .homeswitch-thumb {
-    left: 16px;
+  left:  33px; /* Adjust left position to move the thumb to the "ON" position */
+  border: solid 1px rgba(18, 18, 18, 0.6); /* Added border */
 }
+
 
 
 
@@ -2221,18 +2227,27 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 .spin-button {
-  width: 20px;
-  height: 20px;
+  width: 90px; /* Adjust the width to make the button wider */
+  height: 40px; /* Adjust the height to make the button taller */
   background-color: #ff3700;
   color: #fff;
+  font-weight: bold;
+  letter-spacing: 2px;
   border: 0.25px solid rgb(23, 23, 96);
   margin-left: 30px;
   position: relative;
-  border-radius: 50%;
+  border-radius: 25px; /* Adjust border-radius to make the button rounded */
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex; /* Use flexbox to center text vertically and horizontally */
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+}
 
+.spin-button::before {
+  content: "SPIN"; /* Add the text "SPIN" before the button's content */
+  margin: 0;
 }
 
 .spin-button:hover {
@@ -2242,7 +2257,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
   transform: translateY(5px); /* Move the button down by 5 pixels when pressed */
   background-color: #003366; /* Darker shade when the button is pressed */
   box-shadow: 0 0 0 rgba(0, 0, 0, 0.3); /* Remove box shadow when pressed */
+
 }
+
 
 
 
@@ -3634,8 +3651,6 @@ span.cesium-projectionPicker-wrapper {
 
   .homesubtitle {
       font-size: 18px;
-      margin-top: 10px;
-      margin-left: 20px;
   }
 
   .maptitle {
