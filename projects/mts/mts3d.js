@@ -312,8 +312,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -333,12 +331,12 @@ if (
 viewer.scene.primitives.add(osmBuildingsTileset);
 
 // Function to toggle building visibility
-function toggleBuildingVisibility(elementId, show) {
+function toggleBuildingVisibility(buildingId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        ["${elementId} === " + buildingId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
@@ -354,7 +352,6 @@ function toggleSwitch(switchId, buildingId) {
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the MTS building switch
@@ -386,8 +383,6 @@ const NYCHASwitch = document.getElementById("NYCHASwitch");
 NYCHASwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
 });
-
-
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
