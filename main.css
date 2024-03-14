@@ -3746,10 +3746,11 @@ span.cesium-projectionPicker-wrapper {
       display: inline-block;
       padding: 10px;
       z-index: 1000;
+      position: relative;
       border-radius: 6px;
       pointer-events: auto;
       position: relative;
-      margin: 30px 20px;
+      margin: 30px 0px 0px 50px;
   }
     
 
