@@ -366,6 +366,62 @@ function toggleSwitch() {
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
+
+
+// Load OSM buildings MTS Building
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (
+  Cesium.defined(osmExtras) &&
+  Cesium.defined(osmExtras.ion) &&
+  Cesium.defined(osmExtras.ion.defaultStyle)
+) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+    osmExtras.ion.defaultStyle
+  );
+}
+
+// Add the OSM buildings tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
+
+function toggleBuildingVisibility(elementId, show) {
+  console.log("Toggling building visibility...");
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+}
+
+
+
+
+
+// Function to toggle switch and layer visibility
+function toggleSwitch() {
+  console.log("Switch toggled.");
+  const BusDepotSwitch = document.getElementById("BusDepotSwitch");
+  const buildingId = 275080379; 
+  const show = BusDepotSwitch.checked;
+
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; 
+}
+
+// Add event listener to the switch
+const BusDepotSwitch = document.getElementById("BusDepotSwitch");
+BusDepotSwitch.addEventListener("change", toggleSwitch);
+
+
+
+
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
