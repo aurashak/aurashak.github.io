@@ -104,11 +104,14 @@ ul li a:hover {
 }
 
 
-
-
 .home1 a:link {color: black;}
 .home1 a:hover {color: rgb(0, 0, 0);}
-.home1 a:active {color: red; }
+  .home1:active {
+    transform: translateY(2px);
+      color: rgb(237, 237, 237);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+  
+  }
 
 h1 {
     font-size: 25px;
@@ -2294,39 +2297,41 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 
+
 .spin-button {
-  width: 80px; /* Adjust the width to make the button wider */
-  height: 35px; /* Adjust the height to make the button taller */
+  width: 80px; 
+  height: 35px; 
   background-color: #ff3700;
   color: #fff;
   font-weight: bold;
   letter-spacing: 2px;
-  border: 0.25px solid rgb(23, 23, 96);
   position: relative;
-  border-radius: 25px; /* Adjust border-radius to make the button rounded */
+  border-radius: 25px; 
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  display: flex; /* Use flexbox to center text vertically and horizontally */
-  justify-content: center; /* Center text horizontally */
-  align-items: center; /* Center text vertically */
+    border: 1px solid rgba(139, 139, 139, 0.53);
+  box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 
 .spin-button::before {
-  content: "SPIN"; /* Add the text "SPIN" before the button's content */
+  content: "SPIN"; 
+  color: rgb(255, 255, 255);
   margin: 0;
 }
+
+
 
 .spin-button:hover {
 }
 
 .spin-button:active {
-  transform: translateY(5px); /* Move the button down by 5 pixels when pressed */
-  background-color: #003366; /* Darker shade when the button is pressed */
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3); /* Remove box shadow when pressed */
-
+  transform: translateY(2px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
 }
+
 
 
 
@@ -3703,6 +3708,12 @@ span.cesium-projectionPicker-wrapper {
     font-size: 17px;
     margin: 10px 0px;
   }
+
+  .home1:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+  }
+  
 
   .home2 {
     font-size: 17px;
