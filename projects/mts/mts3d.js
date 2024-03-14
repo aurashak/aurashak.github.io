@@ -335,7 +335,12 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 // Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
-  const conditions = osmBuildingsTileset.style.color.conditions.slice(); // Copy the existing conditions
+  let conditions = [];
+  
+  // Check if style is defined and has conditions
+  if (Cesium.defined(osmBuildingsTileset.style) && Cesium.defined(osmBuildingsTileset.style.color.conditions)) {
+    conditions = osmBuildingsTileset.style.color.conditions.slice(); // Copy the existing conditions
+  }
 
   // Find the index of the condition corresponding to the buildingId
   const buildingConditionIndex = conditions.findIndex(condition => {
@@ -357,6 +362,7 @@ function toggleBuildingVisibility(elementId, show) {
     }
   });
 }
+
 
 
 // Function to toggle switch and layer visibility
