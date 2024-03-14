@@ -363,6 +363,22 @@ function toggleMTSBuildingSwitch() {
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
+// Function to toggle bus depot switch and layer visibility
+function toggleBusDepotSwitch() {
+  console.log("Bus Depot switch toggled.");
+  const busDepotSwitch = document.getElementById("busDepotSwitch");
+  const buildingId = "271923865"; // ID of the bus depot building, it's better to keep it as a string since it's used in template literals
+
+  const show = busDepotSwitch.checked;
+
+  console.log("Bus Depot switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility([buildingId], show); // Pass the building ID as an array
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+
+
 // Function to toggle waste water treatment switch and layer visibility
 function toggleWasteWaterTreatmentSwitch() {
   console.log("Waste Water Treatment switch toggled.");
@@ -389,6 +405,37 @@ function toggleGasPipelineSwitch() {
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
+
+
+
+
+// Add event listeners to the switches
+const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+mtsBuildingsSwitch.addEventListener("change", toggleMTSBuildingSwitch);
+
+const wasteWaterTreatmentSwitch = document.getElementById("wasteWaterTreatmentSwitch");
+wasteWaterTreatmentSwitch.addEventListener("change", toggleWasteWaterTreatmentSwitch);
+
+const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
+gasPipelineSwitch.addEventListener("change", toggleGasPipelineSwitch);
+
+// Add event listener to the bus depot switch
+const busDepotSwitch = document.getElementById("busDepotSwitch");
+busDepotSwitch.addEventListener("change", toggleBusDepotSwitch);
+
+
+
+
+
+// Initially hide the OSM buildings Tileset
+osmBuildingsTileset.show = false;
+
+console.log("Script loaded.");
+
+
+
+/* 
+
 // Function to toggle NYCHA switch and layer visibility
 function toggleNYCHASwitch() {
   console.log("NYCHA switch toggled.");
@@ -402,26 +449,10 @@ function toggleNYCHASwitch() {
   osmBuildingsTileset.show = show;
 }
 
-// Add event listeners to the switches
-const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", toggleMTSBuildingSwitch);
-
-const wasteWaterTreatmentSwitch = document.getElementById("wasteWaterTreatmentSwitch");
-wasteWaterTreatmentSwitch.addEventListener("change", toggleWasteWaterTreatmentSwitch);
-
-const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
-gasPipelineSwitch.addEventListener("change", toggleGasPipelineSwitch);
-
 const NYCHASwitch = document.getElementById("NYCHASwitch");
 NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
-// Initially hide the OSM buildings Tileset
-osmBuildingsTileset.show = false;
-
-console.log("Script loaded.");
-
-
-
+*/
 
 
 
