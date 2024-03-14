@@ -365,15 +365,17 @@ function toggleBuildingVisibility(elementId, show) {
 
 
 
+
+
 // Function to toggle building visibility
 function toggleBuildingVisibility(buildingId, show) {
   console.log("Toggling building visibility for ID", buildingId);
-  const building = osmBuildingsTileset.getFeature(buildingId);
-  if (Cesium.defined(building)) {
-    building.show = show;
-  } else {
-    console.log("Building with ID", buildingId, "not found.");
-  }
+  // Loop through tileset's features to find the one with the matching ID
+  osmBuildingsTileset.features.forEach(function(feature) {
+    if (feature.getProperty('id') === buildingId) {
+      feature.show = show;
+    }
+  });
 }
 
 // Function to toggle switch and layer visibility
