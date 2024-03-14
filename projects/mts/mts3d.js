@@ -369,6 +369,26 @@ busDepotSwitch.addEventListener("change", () => {
   toggleSwitch("BusDepotSwitch", 271923865);
 });
 
+// Add event listener to the Bus Depot switch
+const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
+WasteWaterSwitch.addEventListener("change", () => {
+  toggleSwitch("WasteWaterSwitch", 275080382);
+});
+
+// Add event listener to the Bus Depot switch
+const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
+gasPipelineSwitch.addEventListener("change", () => {
+  toggleSwitch("gasPipelineSwitch", 275080377);
+});
+
+// Add event listener to the Bus Depot switch
+const NYCHASwitch = document.getElementById("NYCHASwitch");
+NYCHASwitch.addEventListener("change", () => {
+  toggleSwitch("NYCHASwitch", 271911419);
+});
+
+
+
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
