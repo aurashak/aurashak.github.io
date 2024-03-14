@@ -330,13 +330,13 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to toggle building visibility by elementId
-function toggleBuildingVisibility(elementId, show) {
+// Function to toggle building visibility by elementId and apply different colors for different groups
+function toggleBuildingVisibility(elementIds, color, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        [elementIds.map(id => `"${id}" === elementId`).join(' || '), show ? color : "rgba(255, 255, 255, 0)"], // Apply specified color for the group
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
@@ -347,25 +347,12 @@ function toggleBuildingVisibility(elementId, show) {
 function toggleMTSBuildingSwitch() {
   console.log("MTS Building switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingId = "275080379"; 
+  const buildingId = "275080379";
   const show = mtsBuildingsSwitch.checked;
 
   console.log("MTS Building switch state:", show);
   console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
-}
-
-// Function to toggle bus depot switch and layer visibility
-function toggleBusDepotSwitch() {
-  console.log("Bus Depot switch toggled.");
-  const busDepotSwitch = document.getElementById("busDepotSwitch");
-  const buildingId = 271923865; // ID of the bus depot building
-  const show = busDepotSwitch.checked;
-
-  console.log("Bus Depot switch state:", show);
-  console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
+  toggleBuildingVisibility([buildingId], "rgba(255, 255, 0, 1)", show); // Yellow color for MTS building
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
@@ -373,66 +360,59 @@ function toggleBusDepotSwitch() {
 function toggleWasteWaterTreatmentSwitch() {
   console.log("Waste Water Treatment switch toggled.");
   const wasteWaterTreatmentSwitch = document.getElementById("wasteWaterTreatmentSwitch");
-  const buildingId = "275080382"; 
+  const buildingId = "275080382";
   const show = wasteWaterTreatmentSwitch.checked;
 
   console.log("Waste Water Treatment switch state:", show);
   console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
+  toggleBuildingVisibility([buildingId], "rgba(255, 0, 0, 1)", show); // Red color for waste water treatment
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
-
 
 // Function to toggle gas pipeline switch and layer visibility
 function toggleGasPipelineSwitch() {
   console.log("Gas Pipeline switch toggled.");
   const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
-  const buildingId = "275080377"; 
+  const buildingId = "275080377";
   const show = gasPipelineSwitch.checked;
 
   console.log("Gas Pipeline switch state:", show);
   console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
+  toggleBuildingVisibility([buildingId], "rgba(255, 0, 0, 1)", show); // Red color for gas pipeline
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
-// Function to toggle group of buildings switch and layer visibility
+// Function to toggle NYCHA switch and layer visibility
 function toggleNYCHASwitch() {
-  console.log("Group switch toggled.");
-  const NYCHASwitch = document.getElementById("NYCHASwitch"); // Change the id to "NYCHASwitch"
-  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"]; 
+  console.log("NYCHA switch toggled.");
+  const NYCHASwitch = document.getElementById("NYCHASwitch");
+  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"];
   const show = NYCHASwitch.checked;
 
-  console.log("Group switch state:", show);
+  console.log("NYCHA switch state:", show);
   console.log("Showing buildings with IDs", buildingIds);
-  toggleBuildingVisibility(buildingIds, show);
-  osmBuildingsTileset.show = show; 
+  toggleBuildingVisibility(buildingIds, "rgba(0, 0, 255, 1)", show); // Blue color for NYCHA
+  osmBuildingsTileset.show = show;
 }
 
-// Add event listener to the group switch
-const NYCHASwitch = document.getElementById("NYCHASwitch"); // Change the id to "manhattanvilleSwitch"
-NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
-
-// Add event listener to the MTS building switch
+// Add event listeners to the switches
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleMTSBuildingSwitch);
 
-// Add event listener to the bus depot switch
-const busDepotSwitch = document.getElementById("busDepotSwitch");
-busDepotSwitch.addEventListener("change", toggleBusDepotSwitch);
-
-// Add event listener to the waste water treatment switch
 const wasteWaterTreatmentSwitch = document.getElementById("wasteWaterTreatmentSwitch");
 wasteWaterTreatmentSwitch.addEventListener("change", toggleWasteWaterTreatmentSwitch);
 
-// Add event listener to the gas pipeline switch
 const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
 gasPipelineSwitch.addEventListener("change", toggleGasPipelineSwitch);
+
+const NYCHASwitch = document.getElementById("NYCHASwitch");
+NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
 
 
 
