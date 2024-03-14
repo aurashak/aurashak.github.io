@@ -312,7 +312,9 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-    // Load OSM buildings 3D Tileset
+
+
+  // Load OSM buildings MTS Building
 const osmBuildingsTileset = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
 );
@@ -361,6 +363,7 @@ mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
 // Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = false;
+
 
     
    
