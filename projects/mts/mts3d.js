@@ -330,18 +330,28 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to toggle building visibility by elementId and apply different colors for different groups
-function toggleBuildingVisibility(elementIds, color, show) {
+// Function to toggle building visibility by elementId or array of elementIds
+function toggleBuildingVisibility(elementIds, show) {
   console.log("Toggling building visibility...");
+  let conditions = [];
+  if (Array.isArray(elementIds)) {
+    elementIds.forEach(id => {
+      conditions.push(["${elementId} === '" + id + "'", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"]);
+    });
+  } else {
+    conditions.push(["${elementId} === '" + elementIds + "'", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"]);
+  }
+
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        [elementIds.map(id => `"${id}" === elementId`).join(' || '), show ? color : "rgba(255, 255, 255, 0)"], // Apply specified color for the group
+        ...conditions,
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
+
 
 // Function to toggle MTS building switch and layer visibility
 function toggleMTSBuildingSwitch() {
