@@ -63,10 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.addEventListener('click', function (event) {
-        if (!fullScreen.contains(event.target)) {
-            hideFullScreen();
-        }
+    fullScreen.addEventListener('click', function () {
+        hideFullScreen();
     });
 
     // Initial update
