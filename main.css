@@ -576,7 +576,7 @@ sup a:hover {
   border-radius: 1px;
   display: inline-block;
   margin: 30px auto 0 auto;
-  padding: 0px 5px;
+  padding: 3px 5px;
   background-color: #ffe600ce;
     border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
@@ -3701,15 +3701,18 @@ span.cesium-projectionPicker-wrapper {
 
   .home1 {
     font-size: 17px;
-    margin: 10px;
+    margin: 10px 0px;
   }
-
 
   .home2 {
     font-size: 17px;
-    margin: 10px;
+    margin: 10px 0px;
   }
 
+.home0 {
+  font-size: 17px;
+    margin: 0px;
+}
 
   
   .container {
@@ -3746,9 +3749,6 @@ span.cesium-projectionPicker-wrapper {
     max-width: 600px;
 }
 
-.home0 {
-  font-size: 16px
-}
 
 
 .logos-container {
