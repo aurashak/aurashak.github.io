@@ -333,7 +333,7 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 function toggleBuildingVisibility(elementIds, show) {
   console.log("Toggling building visibility...");
   let conditions = elementIds.map(id => [
-    "${elementId} === '" + id + "'",
+    `\${elementId} === '${id}'`, // Use backticks (`) for template string
     show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"
   ]);
 
@@ -346,6 +346,7 @@ function toggleBuildingVisibility(elementIds, show) {
     }
   });
 }
+
 
 
 
