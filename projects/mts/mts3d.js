@@ -111,7 +111,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-  // Define the flyToNewYorkCity function
+  // Define the flyToMTSCity function
   function flyToMTS() {
     // Fly back to New York City
     viewer.scene.camera.setView({
@@ -128,9 +128,86 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     });
   }
 
- // Add a click event listener to the flyToNewYorkCity button
+
+ // Add a click event listener to the flyToMTS button
   const flyToMTSButton = document.getElementById('flyToMTS');
   flyToMTSButton.addEventListener('click', flyToMTS);
+
+
+
+
+
+
+    // Define the flyToWasteWater function
+    function flyToWasteWater() {
+      // Fly back to New York City
+      viewer.scene.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(
+          -73.9625,
+          40.8217,
+          200 // Adjust the zoom level as needed
+        ),
+        orientation: {
+          heading: Cesium.Math.toRadians(65), // clockwise from north
+          pitch: Cesium.Math.toRadians(-40), // Look downward
+          roll: 0,
+        },
+      });
+    }
+  
+   // Add a click event listener to the flyToNewYorkCity button
+    const flyToWasteWaterButton = document.getElementById('flyToWasteWater');
+    flyToWasteWaterButton.addEventListener('click', flyToWasteWater);
+
+
+
+
+    
+      // Define the flyToBusDepotCity function
+  function flyToBusDepot() {
+    // Fly back to New York City
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9625,
+        40.8217,
+        200 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(65), // clockwise from north
+        pitch: Cesium.Math.toRadians(-40), // Look downward
+        roll: 0,
+      },
+    });
+  }
+
+ // Add a click event listener to the flyToNewYorkCity button
+  const flyToBusDepotButton = document.getElementById('flyToBusDepot');
+  flyToBusDepotButton.addEventListener('click', flyToBusDepot);
+
+
+
+
+        // Define the flyToGasPipeline function
+        function flyToGasPipeline() {
+          // Fly back to New York City
+          viewer.scene.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(
+              -73.9625,
+              40.8217,
+              200 // Adjust the zoom level as needed
+            ),
+            orientation: {
+              heading: Cesium.Math.toRadians(65), // clockwise from north
+              pitch: Cesium.Math.toRadians(-40), // Look downward
+              roll: 0,
+            },
+          });
+        }
+      
+       // Add a click event listener to the flyToGasPipeline button
+        const flyToGasPipelineButton = document.getElementById('flyToGasPipeline');
+        flyToGasPipelineButton.addEventListener('click', flyToGasPipeline);
+
 
 
 
