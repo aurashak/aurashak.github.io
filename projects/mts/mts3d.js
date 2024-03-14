@@ -342,13 +342,11 @@ function toggleBuildingVisibility(elementIds, show) {
 
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
-      conditions: [
-        ...conditions,
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
+      conditions: conditions
     }
   });
 }
+
 
 
 // Function to toggle MTS building switch and layer visibility
