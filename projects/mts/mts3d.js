@@ -210,8 +210,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-                // Define the flyToCSO function
-                function flyToCSO() {
+                // Define the flyToOverview function
+                function flyToOverview() {
                   // Fly back to New York City
                   viewer.scene.camera.setView({
                     destination: Cesium.Cartesian3.fromDegrees(
@@ -227,9 +227,9 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
                   });
                 }
               
-               // Add a click event listener to the flyToCSO button
-                const flyToCSOButton = document.getElementById('flyToCSO');
-                flyToCSOButton.addEventListener('click', flyToCSO);
+               // Add a click event listener to the flyToOverview button
+                const flyToOverviewButton = document.getElementById('flyToOverview');
+                flyToOverviewButton.addEventListener('click', flyToOverview);
         
         
 
@@ -347,7 +347,7 @@ function toggleBuildingVisibility(elementId, show) {
 function toggleMTSBuildingSwitch() {
   console.log("MTS Building switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingId = 275080379; // ID of the MTS building
+  const buildingId = "275080379"; 
   const show = mtsBuildingsSwitch.checked;
 
   console.log("MTS Building switch state:", show);
@@ -369,6 +369,50 @@ function toggleBusDepotSwitch() {
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
+// Function to toggle waste water treatment switch and layer visibility
+function toggleWasteWaterTreatmentSwitch() {
+  console.log("Waste Water Treatment switch toggled.");
+  const wasteWaterTreatmentSwitch = document.getElementById("wasteWaterTreatmentSwitch");
+  const buildingId = "275080382"; 
+  const show = wasteWaterTreatmentSwitch.checked;
+
+  console.log("Waste Water Treatment switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+
+// Function to toggle gas pipeline switch and layer visibility
+function toggleGasPipelineSwitch() {
+  console.log("Gas Pipeline switch toggled.");
+  const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
+  const buildingId = "275080377"; 
+  const show = gasPipelineSwitch.checked;
+
+  console.log("Gas Pipeline switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+// Function to toggle group of buildings switch and layer visibility
+function toggleGroupSwitch() {
+  console.log("Group switch toggled.");
+  const groupSwitch = document.getElementById("manhattanvilleSwitch"); // Change the id to "manhattanvilleSwitch"
+  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"]; 
+  const show = groupSwitch.checked;
+
+  console.log("Group switch state:", show);
+  console.log("Showing buildings with IDs", buildingIds);
+  toggleBuildingVisibility(buildingIds, show);
+  osmBuildingsTileset.show = show; 
+}
+
+// Add event listener to the group switch
+const groupSwitch = document.getElementById("manhattanvilleSwitch"); // Change the id to "manhattanvilleSwitch"
+groupSwitch.addEventListener("change", toggleGroupSwitch);
+
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleMTSBuildingSwitch);
@@ -377,10 +421,19 @@ mtsBuildingsSwitch.addEventListener("change", toggleMTSBuildingSwitch);
 const busDepotSwitch = document.getElementById("busDepotSwitch");
 busDepotSwitch.addEventListener("change", toggleBusDepotSwitch);
 
+// Add event listener to the waste water treatment switch
+const wasteWaterTreatmentSwitch = document.getElementById("wasteWaterTreatmentSwitch");
+wasteWaterTreatmentSwitch.addEventListener("change", toggleWasteWaterTreatmentSwitch);
+
+// Add event listener to the gas pipeline switch
+const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
+gasPipelineSwitch.addEventListener("change", toggleGasPipelineSwitch);
+
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
 
 
 
