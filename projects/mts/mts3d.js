@@ -425,37 +425,36 @@ NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
 
 
-
 // Function to create buildings layer
 function createBuildingsLayer(buildingIds) {
-    var osmBuildings = viewer.scene.primitives.add(Cesium.createOsmBuildings({
-        style: Cesium.createOsmBuildingsStyle(),
-        url: 'https://assets.cesium.com/43978/3d-tiles/osm/tileset.json'
-    }));
+  var osmBuildings = viewer.scene.primitives.add(Cesium.createOsmBuildings({
+      style: Cesium.createOsmBuildingsStyle(),
+      url: 'https://assets.cesium.com/43978/3d-tiles/osm/tileset.json'
+  }));
 
-    // Apply filter to show buildings with specific IDs
-    osmBuildings.style = new Cesium.Cesium3DTileStyle({
-        show: {
-            conditions: [
-                ["in", "$id", buildingIds]
-            ]
-        }
-    });
+  // Apply filter to show buildings with specific IDs
+  osmBuildings.style = new Cesium.Cesium3DTileStyle({
+      show: {
+          conditions: [
+              ["in", "$id", buildingIds]
+          ]
+      }
+  });
 
-    return osmBuildings;
+  return osmBuildings;
 }
 
 // Function to update buildings layer based on IDs
 function updateBuildingsLayer() {
-    var buildingIds = document.getElementById('buildingIds').value.split(',').map(Number);
-    if (!isNaN(buildingIds[0])) { // Check if entered value is a number
-        // Remove existing buildings layer if any
-        viewer.scene.primitives.removeAll();
-        // Create buildings layer with filtered IDs
-        createBuildingsLayer(buildingIds);
-    } else {
-        alert("271911419, 271923865");
-    }
+  var buildingIds = document.getElementById('buildingIds').value.split(',').map(Number);
+  if (!isNaN(buildingIds[0])) { // Check if entered value is a number
+      // Remove existing buildings layer if any
+      viewer.scene.primitives.removeAll();
+      // Create buildings layer with filtered IDs
+      createBuildingsLayer(buildingIds);
+  } else {
+      alert("Please enter valid building IDs separated by commas.");
+  }
 }
 
 // Create switch control
@@ -464,18 +463,18 @@ switchControl.type = 'checkbox';
 switchControl.id = 'buildingSwitch';
 switchControl.checked = true;
 switchControl.addEventListener('change', function () {
-    if (this.checked) {
-        viewer.scene.primitives.get(0).show = true;
-    } else {
-        viewer.scene.primitives.get(0).show = false;
-    }
+  if (this.checked) {
+      viewer.scene.primitives.get(0).show = true;
+  } else {
+      viewer.scene.primitives.get(0).show = false;
+  }
 });
 
 // Create input field for building IDs
 var inputField = document.createElement('input');
 inputField.type = 'text';
 inputField.id = 'buildingIds';
-inputField.placeholder = '271911419, 271923865';
+inputField.placeholder = 'Enter building IDs separated by commas...';
 
 // Create button to update buildings layer
 var updateButton = document.createElement('button');
@@ -483,7 +482,9 @@ updateButton.textContent = 'Update Layer';
 updateButton.addEventListener('click', updateBuildingsLayer);
 
 // Add controls to the UI
-var controlsDiv = document.getElementById('controls');
+var controlsDiv = document.createElement('div');
+controlsDiv.id = 'controls';
+document.body.appendChild(controlsDiv); // Append controlsDiv to body or another existing container
 controlsDiv.appendChild(switchControl);
 controlsDiv.appendChild(document.createTextNode('Show Buildings'));
 controlsDiv.appendChild(document.createElement('br'));
