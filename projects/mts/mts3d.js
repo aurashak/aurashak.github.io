@@ -376,12 +376,10 @@ function toggleBuildingVisibility(buildingId, show) {
   }
 
   // Loop through tileset's features to find the one with the matching ID
-  osmBuildingsTileset.allTilesLoadedPromise.then(function() {
-    osmBuildingsTileset.features.forEach(function(feature) {
-      if (feature.getProperty('id') === buildingId) {
-        feature.show = show;
-      }
-    });
+  osmBuildingsTileset.features.forEach(function(feature) {
+    if (feature.getProperty('id') === buildingId) {
+      feature.show = show;
+    }
   });
 }
 
@@ -429,7 +427,13 @@ nychaSwitch.addEventListener("change", () => {
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
+// When the tileset is ready, show it
+osmBuildingsTileset.readyPromise.then(function(tileset) {
+  tileset.show = true;
+});
+
 console.log("Script loaded.");
+
 
 
 
