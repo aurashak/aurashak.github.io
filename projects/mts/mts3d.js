@@ -314,7 +314,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -333,6 +332,7 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
+// Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
@@ -344,63 +344,6 @@ function toggleBuildingVisibility(elementId, show) {
     }
   });
 }
-
-
-
-
-
-// Function to toggle switch and layer visibility
-function toggleSwitch() {
-  console.log("Switch toggled.");
-  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingId = 275080379; // ID of the building you want to isolate
-  const show = mtsBuildingsSwitch.checked;
-
-  console.log("Switch state:", show);
-  console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
-}
-
-// Add event listener to the switch
-const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
-
-
-
-// Load OSM buildings MTS Building
-const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
-) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
-  );
-}
-
-// Add the OSM buildings tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset);
-
-function toggleBuildingVisibility(elementId, show) {
-  console.log("Toggling building visibility...");
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
-
-
-
 
 // Function to toggle switch and layer visibility
 function toggleSwitch() {
@@ -423,13 +366,6 @@ mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
-
-
-// Initially hide the OSM buildings Tileset
-osmBuildingsTileset.show = false;
-
-console.log("Script loaded.");
-
 
 
 
