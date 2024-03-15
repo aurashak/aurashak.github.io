@@ -337,25 +337,29 @@ function toggleBuildingVisibility(elementId, show) {
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0)
+        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
 
+
 // Function to toggle switch and layer visibility
 function toggleSwitch() {
   console.log("Switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingId = 275080379; // ID of the building you want to isolate
+  const buildingId1 = 275080379; // First ID of the building
+  const buildingId2 = 271923865; // Second ID of the building
   const show = mtsBuildingsSwitch.checked;
 
   console.log("Switch state:", show);
-  console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
+  console.log("Showing building with ID", buildingId1, "and", buildingId2);
+  toggleBuildingVisibility(buildingId1, show);
+  toggleBuildingVisibility(buildingId2, show);
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
+
 
 // Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
