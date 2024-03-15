@@ -356,7 +356,6 @@ function toggleSwitch(switchId, buildingId) {
   toggleBuildingVisibility(buildingId, show); // This toggles the visibility of the specific building
 }
 
-
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", () => {
@@ -387,12 +386,11 @@ NYCHASwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
 });
 
-
-
-// Initially hide the OSM buildings Tileset
-osmBuildingsTileset.show = false;
+// Initially show the OSM buildings Tileset
+osmBuildingsTileset.show = true;
 
 console.log("Script loaded.");
+
 
 
 
