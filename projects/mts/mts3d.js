@@ -313,7 +313,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -352,7 +351,6 @@ function toggleMTSBuildingVisibility(show) {
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", () => {
   toggleMTSBuildingVisibility(mtsBuildingsSwitch.checked);
-  osmBuildingsTileset.show = mtsBuildingsSwitch.checked; // Show or hide the entire buildings tileset
 });
 
 // Function to toggle Bus Depot visibility
@@ -372,7 +370,6 @@ function toggleBusDepotVisibility(show) {
 const busDepotSwitch = document.getElementById("BusDepotSwitch");
 busDepotSwitch.addEventListener("change", () => {
   toggleBusDepotVisibility(busDepotSwitch.checked);
-  osmBuildingsTileset.show = busDepotSwitch.checked; // Show or hide the entire buildings tileset
 });
 
 // Function to toggle NYCHA Building visibility
@@ -392,7 +389,6 @@ function toggleNYCHABuildingVisibility(show) {
 const NYCHASwitch = document.getElementById("NYCHASwitch");
 NYCHASwitch.addEventListener("change", () => {
   toggleNYCHABuildingVisibility(NYCHASwitch.checked);
-  osmBuildingsTileset.show = NYCHASwitch.checked; // Show or hide the entire buildings tileset
 });
 
 // Function to toggle Waste Water Building visibility
@@ -412,15 +408,9 @@ function toggleWasteWaterBuildingVisibility(show) {
 const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
 WasteWaterSwitch.addEventListener("change", () => {
   toggleWasteWaterBuildingVisibility(WasteWaterSwitch.checked);
-  osmBuildingsTileset.show = WasteWaterSwitch.checked; // Show or hide the entire buildings tileset
 });
 
 console.log("Script loaded.");
-
-
-
-
-
 
 
 
