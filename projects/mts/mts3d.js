@@ -313,7 +313,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -338,7 +337,7 @@ function toggleBuildingVisibility(elementId, show) {
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0)
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
