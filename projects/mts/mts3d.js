@@ -312,7 +312,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -334,84 +333,44 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
-// Function to toggle MTS Building visibility
-function toggleMTSBuildingVisibility(show) {
-  console.log("Toggling MTS Building visibility...");
+// Function to toggle building visibility by ID
+function toggleBuildingVisibility(buildingId, show) {
+  console.log("Toggling building visibility for ID:", buildingId);
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${id} === 275080379", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the MTS Building
+        [`\${id} === ${buildingId}`, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the building based on its ID
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
 
-// Add event listener to the MTS building switch
+// Add event listener to toggle MTS Building visibility
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", () => {
-  toggleMTSBuildingVisibility(mtsBuildingsSwitch.checked);
+  toggleBuildingVisibility(275080379, mtsBuildingsSwitch.checked);
 });
 
-// Function to toggle Bus Depot visibility
-function toggleBusDepotVisibility(show) {
-  console.log("Toggling Bus Depot visibility...");
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${id} === 271923865", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the Bus Depot
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
-// Add event listener to the Bus Depot switch
+// Add event listener to toggle Bus Depot visibility
 const busDepotSwitch = document.getElementById("BusDepotSwitch");
 busDepotSwitch.addEventListener("change", () => {
-  toggleBusDepotVisibility(busDepotSwitch.checked);
+  toggleBuildingVisibility(271923865, busDepotSwitch.checked);
 });
 
-// Function to toggle NYCHA Building visibility
-function toggleNYCHABuildingVisibility(show) {
-  console.log("Toggling NYCHA Building visibility...");
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${id} === 271911419", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the NYCHA Building
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
-// Add event listener to the NYCHA building switch
+// Add event listener to toggle NYCHA Building visibility
 const NYCHASwitch = document.getElementById("NYCHASwitch");
 NYCHASwitch.addEventListener("change", () => {
-  toggleNYCHABuildingVisibility(NYCHASwitch.checked);
+  toggleBuildingVisibility(271911419, NYCHASwitch.checked);
 });
 
-// Function to toggle Waste Water Building visibility
-function toggleWasteWaterBuildingVisibility(show) {
-  console.log("Toggling Waste Water Building visibility...");
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${id} === 275080382", show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the Waste Water Building
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
-// Add event listener to the Waste Water building switch
+// Add event listener to toggle Waste Water Building visibility
 const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
 WasteWaterSwitch.addEventListener("change", () => {
-  toggleWasteWaterBuildingVisibility(WasteWaterSwitch.checked);
+  toggleBuildingVisibility(275080382, WasteWaterSwitch.checked);
 });
 
 console.log("Script loaded.");
-
 
 
 
