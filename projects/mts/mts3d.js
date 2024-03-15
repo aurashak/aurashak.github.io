@@ -346,31 +346,11 @@ function toggleBuildingVisibility(buildingId, show) {
   });
 }
 
-// Add event listener to toggle MTS Building visibility
-const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", () => {
-  toggleBuildingVisibility(275080379, mtsBuildingsSwitch.checked);
-});
-
-// Add event listener to toggle Bus Depot visibility
-const busDepotSwitch = document.getElementById("BusDepotSwitch");
-busDepotSwitch.addEventListener("change", () => {
-  toggleBuildingVisibility(271923865, busDepotSwitch.checked);
-});
-
-// Add event listener to toggle NYCHA Building visibility
-const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.addEventListener("change", () => {
-  toggleBuildingVisibility(271911419, NYCHASwitch.checked);
-});
-
-// Add event listener to toggle Waste Water Building visibility
-const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
-WasteWaterSwitch.addEventListener("change", () => {
-  toggleBuildingVisibility(275080382, WasteWaterSwitch.checked);
-});
+// Toggle visibility for MTS Building only
+toggleBuildingVisibility(275080379, true);
 
 console.log("Script loaded.");
+
 
 
 
