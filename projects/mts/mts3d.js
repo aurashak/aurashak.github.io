@@ -335,61 +335,14 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 // Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
-  let conditions = [];
-  
-  // Check if style is defined and has conditions
-  if (Cesium.defined(osmBuildingsTileset.style) && Cesium.defined(osmBuildingsTileset.style.color.conditions)) {
-    conditions = osmBuildingsTileset.style.color.conditions.slice(); // Copy the existing conditions
-  }
-
-  // Find the index of the condition corresponding to the buildingId
-  const buildingConditionIndex = conditions.findIndex(condition => {
-    return condition[0] === "${elementId} === " + elementId;
-  });
-
-  if (buildingConditionIndex !== -1) {
-    // Update the show/hide value for the specific building condition
-    conditions[buildingConditionIndex][1] = show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)";
-  } else {
-    // If the condition for the building doesn't exist, add it
-    conditions.push(["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"]);
-  }
-
-  // Apply the updated conditions to the style
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
-      conditions: conditions
+      conditions: [
+        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
     }
   });
-}
-
-
-
-
-
-// Function to toggle building visibility
-function toggleBuildingVisibility(buildingId, show) {
-  console.log("Toggling building visibility for ID", buildingId);
-
-  // Function to handle tile load event
-  function handleTileLoad() {
-    console.log("Tileset is ready.");
-    osmBuildingsTileset.tileLoad.removeEventListener(handleTileLoad); // Remove event listener
-    toggleBuildingVisibility(buildingId, show); // Toggle building visibility once tileset is ready
-  }
-
-  // Check if the tileset is ready
-  if (osmBuildingsTileset.ready) {
-    // Tileset is ready, toggle building visibility
-    osmBuildingsTileset.features.forEach(function(feature) {
-      if (feature.getProperty('id') === buildingId) {
-        feature.show = show;
-      }
-    });
-  } else {
-    // Tileset is not ready, wait for tile load event
-    osmBuildingsTileset.tileLoad.addEventListener(handleTileLoad);
-  }
 }
 
 // Function to toggle switch and layer visibility
@@ -401,6 +354,7 @@ function toggleSwitch(switchId, buildingId) {
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the MTS building switch
@@ -415,33 +369,30 @@ busDepotSwitch.addEventListener("change", () => {
   toggleSwitch("BusDepotSwitch", 271923865);
 });
 
-// Add event listener to the WasteWater switch
-const wasteWaterSwitch = document.getElementById("WasteWaterSwitch");
-wasteWaterSwitch.addEventListener("change", () => {
+// Add event listener to the Bus Depot switch
+const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
+WasteWaterSwitch.addEventListener("change", () => {
   toggleSwitch("WasteWaterSwitch", 275080382);
 });
 
-// Add event listener to the gas pipeline switch
+// Add event listener to the Bus Depot switch
 const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
 gasPipelineSwitch.addEventListener("change", () => {
   toggleSwitch("gasPipelineSwitch", 275080377);
 });
 
-// Add event listener to the NYCHA switch
-const nychaSwitch = document.getElementById("NYCHASwitch");
-nychaSwitch.addEventListener("change", () => {
+// Add event listener to the Bus Depot switch
+const NYCHASwitch = document.getElementById("NYCHASwitch");
+NYCHASwitch.addEventListener("change", () => {
   toggleSwitch("NYCHASwitch", 271911419);
 });
+
+
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
-
-
-
-
-
 
 
 
