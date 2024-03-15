@@ -332,10 +332,6 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Load Electric Lines DataSource (Assuming electriclinesDataSource is a Cesium.DataSource)
-const electriclinesDataSource = new Cesium.CustomDataSource('Electric Lines');
-viewer.dataSources.add(electriclinesDataSource);
-
 // Function to toggle MTS Building visibility
 function toggleMTSBuildingVisibility(show) {
   console.log("Toggling MTS Building visibility...");
@@ -416,6 +412,7 @@ WasteWaterSwitch.addEventListener("change", () => {
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
 
 
 
