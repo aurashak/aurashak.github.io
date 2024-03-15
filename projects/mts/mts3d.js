@@ -335,7 +335,7 @@ osmBuildingsTileset.show = false;
 
 // Function to toggle building visibility by ID
 function toggleBuildingVisibility(buildingId, show) {
-  console.log("Toggling building visibility for ID:", buildingId);
+  console.log(`Toggling building visibility for ID: ${buildingId}. Show: ${show}`);
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
