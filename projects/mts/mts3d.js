@@ -353,9 +353,9 @@ function toggleSwitch(switchId, buildingId) {
 
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+  toggleBuildingVisibility(buildingId, show); // This toggles the visibility of the specific building
 }
+
 
 // Add event listener to the MTS building switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
