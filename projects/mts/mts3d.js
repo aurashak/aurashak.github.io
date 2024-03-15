@@ -370,11 +370,18 @@ function toggleBuildingVisibility(elementId, show) {
 // Function to toggle building visibility
 function toggleBuildingVisibility(buildingId, show) {
   console.log("Toggling building visibility for ID", buildingId);
+  if (!osmBuildingsTileset.ready) {
+    console.log("Tileset is not yet ready.");
+    return;
+  }
+
   // Loop through tileset's features to find the one with the matching ID
-  osmBuildingsTileset.features.forEach(function(feature) {
-    if (feature.getProperty('id') === buildingId) {
-      feature.show = show;
-    }
+  osmBuildingsTileset.allTilesLoadedPromise.then(function() {
+    osmBuildingsTileset.features.forEach(function(feature) {
+      if (feature.getProperty('id') === buildingId) {
+        feature.show = show;
+      }
+    });
   });
 }
 
