@@ -332,6 +332,9 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
+// Initially hide the OSM buildings Tileset
+osmBuildingsTileset.show = false;
+
 // Function to toggle MTS Building visibility
 function toggleMTSBuildingVisibility(show) {
   console.log("Toggling MTS Building visibility...");
@@ -349,6 +352,7 @@ function toggleMTSBuildingVisibility(show) {
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", () => {
   toggleMTSBuildingVisibility(mtsBuildingsSwitch.checked);
+  osmBuildingsTileset.show = mtsBuildingsSwitch.checked; // Show or hide the entire buildings tileset
 });
 
 // Function to toggle Bus Depot visibility
@@ -368,6 +372,7 @@ function toggleBusDepotVisibility(show) {
 const busDepotSwitch = document.getElementById("BusDepotSwitch");
 busDepotSwitch.addEventListener("change", () => {
   toggleBusDepotVisibility(busDepotSwitch.checked);
+  osmBuildingsTileset.show = busDepotSwitch.checked; // Show or hide the entire buildings tileset
 });
 
 // Function to toggle NYCHA Building visibility
@@ -387,6 +392,7 @@ function toggleNYCHABuildingVisibility(show) {
 const NYCHASwitch = document.getElementById("NYCHASwitch");
 NYCHASwitch.addEventListener("change", () => {
   toggleNYCHABuildingVisibility(NYCHASwitch.checked);
+  osmBuildingsTileset.show = NYCHASwitch.checked; // Show or hide the entire buildings tileset
 });
 
 // Function to toggle Waste Water Building visibility
@@ -406,12 +412,11 @@ function toggleWasteWaterBuildingVisibility(show) {
 const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
 WasteWaterSwitch.addEventListener("change", () => {
   toggleWasteWaterBuildingVisibility(WasteWaterSwitch.checked);
+  osmBuildingsTileset.show = WasteWaterSwitch.checked; // Show or hide the entire buildings tileset
 });
 
-// Initially show the OSM buildings Tileset
-osmBuildingsTileset.show = true;
-
 console.log("Script loaded.");
+
 
 
 
