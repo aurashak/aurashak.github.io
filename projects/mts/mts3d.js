@@ -424,7 +424,6 @@ NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
 
 
-
 // Function to create buildings layer with specific IDs
 async function createBuildingsLayer(buildingIds) {
   // Load OSM Buildings GeoJSON data
@@ -433,11 +432,11 @@ async function createBuildingsLayer(buildingIds) {
 
   // Filter buildings based on provided IDs
   osmBuildingsDataSource.entities.values.forEach((entity) => {
-      if (buildingIds.includes(entity.id)) {
-          entity.show = true;
-      } else {
-          entity.show = false;
-      }
+    if (buildingIds.includes(entity.id)) {
+      entity.show = true;
+    } else {
+      entity.show = false;
+    }
   });
 
   // Add the filtered buildings to the viewer
@@ -447,17 +446,17 @@ async function createBuildingsLayer(buildingIds) {
 // Function to toggle buildings layer visibility based on switch state
 function toggleBuildingsLayer() {
   const switchControl = document.getElementById('osmBuildingsSwitch');
-  const buildingIds = [271911419];
+  const buildingIds = [271911419]; // Add more building IDs as needed
 
   if (switchControl.checked) {
-      createBuildingsLayer(buildingIds);
+    createBuildingsLayer(buildingIds);
   } else {
-      // Remove the buildings layer from the viewer
-      viewer.dataSources.removeAll();
+    // Remove the buildings layer from the viewer
+    viewer.dataSources.removeAll();
   }
 }
 
-// Create switch control
+// Create switch control for OSM Buildings layer
 const switchControl = document.createElement('input');
 switchControl.type = 'checkbox';
 switchControl.id = 'osmBuildingsSwitch';
@@ -476,6 +475,9 @@ containerDiv.appendChild(switchLabel);
 
 // Append container to the document body or a specific container element
 document.body.appendChild(containerDiv);
+
+// Log initial load
+console.log("Initial load of OSM Buildings switch.");
 
 
 
