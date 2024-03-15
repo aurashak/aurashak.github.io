@@ -484,6 +484,7 @@ console.log("Initial load of OSM Buildings switch.");
 
 
 
+
    
    /*
 // Set the switch to the off position initially
