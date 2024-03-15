@@ -323,12 +323,7 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 function toggleBuildingVisibility(buildingId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${id} === " + buildingId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given building ID
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
+    show: "${id} === " + buildingId
   });
 }
 
@@ -374,6 +369,7 @@ nychaSwitch.addEventListener("change", () => {
 });
 
 console.log("Script loaded.");
+
 
 
 
