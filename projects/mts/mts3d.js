@@ -312,7 +312,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-/*
+
+
 
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
@@ -332,7 +333,6 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
@@ -345,11 +345,16 @@ function toggleBuildingVisibility(elementId, show) {
   });
 }
 
+
+
+
+
 // Function to toggle switch and layer visibility
-function toggleSwitch(switchId, buildingId) {
+function toggleSwitch() {
   console.log("Switch toggled.");
-  const switchElement = document.getElementById(switchId);
-  const show = switchElement.checked;
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+  const buildingId = 275080379; // ID of the building you want to isolate
+  const show = mtsBuildingsSwitch.checked;
 
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
@@ -357,35 +362,67 @@ function toggleSwitch(switchId, buildingId) {
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
-// Add event listener to the MTS building switch
+// Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", () => {
-  toggleSwitch("mtsBuildingSwitch", 275080379);
-});
+mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
-// Add event listener to the Bus Depot switch
-const busDepotSwitch = document.getElementById("BusDepotSwitch");
-busDepotSwitch.addEventListener("change", () => {
-  toggleSwitch("BusDepotSwitch", 271923865);
-});
 
-// Add event listener to the Bus Depot switch
-const WasteWaterSwitch = document.getElementById("WasteWaterSwitch");
-WasteWaterSwitch.addEventListener("change", () => {
-  toggleSwitch("WasteWaterSwitch", 275080382);
-});
 
-// Add event listener to the Bus Depot switch
-const gasPipelineSwitch = document.getElementById("gasPipelineSwitch");
-gasPipelineSwitch.addEventListener("change", () => {
-  toggleSwitch("gasPipelineSwitch", 275080377);
-});
+// Load OSM buildings MTS Building
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
-// Add event listener to the Bus Depot switch
-const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.addEventListener("change", () => {
-  toggleSwitch("NYCHASwitch", 271911419);
-});
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (
+  Cesium.defined(osmExtras) &&
+  Cesium.defined(osmExtras.ion) &&
+  Cesium.defined(osmExtras.ion.defaultStyle)
+) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+    osmExtras.ion.defaultStyle
+  );
+}
+
+// Add the OSM buildings tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
+
+function toggleBuildingVisibility(elementId, show) {
+  console.log("Toggling building visibility...");
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, show ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+}
+
+
+
+
+
+// Function to toggle switch and layer visibility
+function toggleSwitch() {
+  console.log("Switch toggled.");
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+  const buildingId = 275080379; // ID of the building you want to isolate
+  const show = mtsBuildingsSwitch.checked;
+
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+// Add event listener to the switch
+const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
+
+// Initially hide the OSM buildings Tileset
+osmBuildingsTileset.show = false;
+
+console.log("Script loaded.");
 
 
 // Initially hide the OSM buildings Tileset
@@ -394,7 +431,8 @@ osmBuildingsTileset.show = false;
 console.log("Script loaded.");
 
 
-*/
+
+
 
 
 
@@ -424,67 +462,8 @@ NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
 
 
-// Function to create buildings layer with specific IDs
-async function createBuildingsLayer(buildingIds) {
-  // Load OSM Buildings GeoJSON data
-  const osmBuildingsResource = await Cesium.IonResource.fromAssetId(43978);
-  const osmBuildingsDataSource = await Cesium.GeoJsonDataSource.load(osmBuildingsResource);
 
-  // Filter buildings based on provided IDs
-  osmBuildingsDataSource.entities.values.forEach((entity) => {
-    if (buildingIds.includes(entity.id)) {
-      entity.show = true;
-    } else {
-      entity.show = false;
-    }
-  });
-
-  // Add the filtered buildings to the viewer
-  viewer.dataSources.add(osmBuildingsDataSource);
-}
-
-// Function to toggle buildings layer visibility based on switch state
-function toggleBuildingsLayer() {
-  const switchControl = document.getElementById('osmBuildingsSwitch');
-  const buildingIds = [271911419]; // Add more building IDs as needed
-
-  if (switchControl.checked) {
-    createBuildingsLayer(buildingIds);
-  } else {
-    // Remove the buildings layer from the viewer
-    viewer.dataSources.removeAll();
-  }
-}
-
-// Create switch control for OSM Buildings layer
-const switchControl = document.createElement('input');
-switchControl.type = 'checkbox';
-switchControl.id = 'osmBuildingsSwitch';
-switchControl.checked = false; // Initially off
-switchControl.addEventListener('change', toggleBuildingsLayer);
-
-// Label for the switch
-const switchLabel = document.createElement('label');
-switchLabel.htmlFor = 'osmBuildingsSwitch';
-switchLabel.textContent = 'Show OSM Buildings';
-
-// Append switch and label to a container div
-const containerDiv = document.createElement('div');
-containerDiv.appendChild(switchControl);
-containerDiv.appendChild(switchLabel);
-
-// Append container to the document body or a specific container element
-document.body.appendChild(containerDiv);
-
-// Log initial load
-console.log("Initial load of OSM Buildings switch.");
-
-
-
-
-
-
-
+    
    
    /*
 // Set the switch to the off position initially
@@ -512,8 +491,6 @@ bingMapsSwitch.addEventListener("change", (event) => {
 });
 
 */
-
-
 
 
 
