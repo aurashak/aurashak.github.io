@@ -464,9 +464,13 @@ switchControl.id = 'buildingSwitch';
 switchControl.checked = true;
 switchControl.addEventListener('change', function () {
   if (this.checked) {
-      viewer.scene.primitives.get(0).show = true;
+      if (viewer.scene.primitives.length > 0) {
+          viewer.scene.primitives.get(0).show = true;
+      }
   } else {
-      viewer.scene.primitives.get(0).show = false;
+      if (viewer.scene.primitives.length > 0) {
+          viewer.scene.primitives.get(0).show = false;
+      }
   }
 });
 
@@ -482,15 +486,16 @@ updateButton.textContent = 'Update Layer';
 updateButton.addEventListener('click', updateBuildingsLayer);
 
 // Add controls to the UI
-var controlsDiv = document.createElement('div');
-controlsDiv.id = 'controls';
-document.body.appendChild(controlsDiv); // Append controlsDiv to body or another existing container
+var controlsDiv = document.getElementById('controls');
 controlsDiv.appendChild(switchControl);
 controlsDiv.appendChild(document.createTextNode('Show Buildings'));
 controlsDiv.appendChild(document.createElement('br'));
 controlsDiv.appendChild(inputField);
 controlsDiv.appendChild(document.createElement('br'));
 controlsDiv.appendChild(updateButton);
+
+// Initially load buildings layer
+updateBuildingsLayer();
 
 
 
