@@ -371,12 +371,17 @@ function toggleBuildingVisibility(elementId, show) {
 function toggleBuildingVisibility(buildingId, show) {
   console.log("Toggling building visibility for ID", buildingId);
 
-  // Loop through tileset's features to find the one with the matching ID
-  osmBuildingsTileset.features.forEach(function(feature) {
-    if (feature.getProperty('id') === buildingId) {
-      feature.show = show;
-    }
-  });
+  // Check if tileset is ready and has features
+  if (osmBuildingsTileset.ready && osmBuildingsTileset.features) {
+    // Loop through tileset's features to find the one with the matching ID
+    osmBuildingsTileset.features.forEach(function(feature) {
+      if (feature.getProperty('id') === buildingId) {
+        feature.show = show;
+      }
+    });
+  } else {
+    console.log("Tileset is not yet ready or does not have features.");
+  }
 }
 
 // Function to toggle switch and layer visibility
@@ -423,14 +428,15 @@ nychaSwitch.addEventListener("change", () => {
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
-// Listen for tileLoad event to determine tileset readiness
-osmBuildingsTileset.tileLoad.addEventListener(function() {
+// Listen for tileset's ready event
+osmBuildingsTileset.readyPromise.then(function(tileset) {
   console.log("Tileset is ready.");
   // Show the tileset once it's ready
   osmBuildingsTileset.show = true;
 });
 
 console.log("Script loaded.");
+
 
 
 
