@@ -408,10 +408,11 @@ WasteWaterSwitch.addEventListener("change", () => {
   toggleWasteWaterBuildingVisibility(WasteWaterSwitch.checked);
 });
 
-// Initially hide the OSM buildings Tileset
-osmBuildingsTileset.show = false;
+// Initially show the OSM buildings Tileset
+osmBuildingsTileset.show = true;
 
 console.log("Script loaded.");
+
 
 
 
