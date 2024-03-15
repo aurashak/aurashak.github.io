@@ -425,77 +425,58 @@ NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
 
 
 
-// Function to create buildings layer
-function createBuildingsLayer(buildingIds) {
-  var osmBuildings = viewer.scene.primitives.add(Cesium.createOsmBuildings({
-      style: Cesium.createOsmBuildingsStyle(),
-      url: 'https://assets.cesium.com/43978/3d-tiles/osm/tileset.json'
-  }));
+// Function to create buildings layer with specific IDs
+async function createBuildingsLayer(buildingIds) {
+  // Load OSM Buildings GeoJSON data
+  const osmBuildingsResource = await Cesium.IonResource.fromAssetId(43978);
+  const osmBuildingsDataSource = await Cesium.GeoJsonDataSource.load(osmBuildingsResource);
 
-  // Apply filter to show buildings with specific IDs
-  osmBuildings.style = new Cesium.Cesium3DTileStyle({
-      show: {
-          conditions: [
-              ["in", "$id", buildingIds]
-          ]
+  // Filter buildings based on provided IDs
+  osmBuildingsDataSource.entities.values.forEach((entity) => {
+      if (buildingIds.includes(entity.id)) {
+          entity.show = true;
+      } else {
+          entity.show = false;
       }
   });
 
-  return osmBuildings;
+  // Add the filtered buildings to the viewer
+  viewer.dataSources.add(osmBuildingsDataSource);
 }
 
-// Function to update buildings layer based on IDs
-function updateBuildingsLayer() {
-  var buildingIds = document.getElementById('buildingIds').value.split(',').map(Number);
-  if (!isNaN(buildingIds[0])) { // Check if entered value is a number
-      // Remove existing buildings layer if any
-      viewer.scene.primitives.removeAll();
-      // Create buildings layer with filtered IDs
+// Function to toggle buildings layer visibility based on switch state
+function toggleBuildingsLayer() {
+  const switchControl = document.getElementById('osmBuildingsSwitch');
+  const buildingIds = [271911419];
+
+  if (switchControl.checked) {
       createBuildingsLayer(buildingIds);
   } else {
-      alert("Please enter valid building IDs separated by commas.");
+      // Remove the buildings layer from the viewer
+      viewer.dataSources.removeAll();
   }
 }
 
 // Create switch control
-var switchControl = document.createElement('input');
+const switchControl = document.createElement('input');
 switchControl.type = 'checkbox';
-switchControl.id = 'buildingSwitch';
-switchControl.checked = true;
-switchControl.addEventListener('change', function () {
-  if (this.checked) {
-      if (viewer.scene.primitives.length > 0) {
-          viewer.scene.primitives.get(0).show = true;
-      }
-  } else {
-      if (viewer.scene.primitives.length > 0) {
-          viewer.scene.primitives.get(0).show = false;
-      }
-  }
-});
+switchControl.id = 'osmBuildingsSwitch';
+switchControl.checked = false; // Initially off
+switchControl.addEventListener('change', toggleBuildingsLayer);
 
-// Create input field for building IDs
-var inputField = document.createElement('input');
-inputField.type = 'text';
-inputField.id = 'buildingIds';
-inputField.placeholder = 'Enter building IDs separated by commas...';
+// Label for the switch
+const switchLabel = document.createElement('label');
+switchLabel.htmlFor = 'osmBuildingsSwitch';
+switchLabel.textContent = 'Show OSM Buildings';
 
-// Create button to update buildings layer
-var updateButton = document.createElement('button');
-updateButton.textContent = 'Update Layer';
-updateButton.addEventListener('click', updateBuildingsLayer);
+// Append switch and label to a container div
+const containerDiv = document.createElement('div');
+containerDiv.appendChild(switchControl);
+containerDiv.appendChild(switchLabel);
 
-// Add controls to the UI
-var controlsDiv = document.getElementById('controls');
-controlsDiv.appendChild(switchControl);
-controlsDiv.appendChild(document.createTextNode('Show Buildings'));
-controlsDiv.appendChild(document.createElement('br'));
-controlsDiv.appendChild(inputField);
-controlsDiv.appendChild(document.createElement('br'));
-controlsDiv.appendChild(updateButton);
+// Append container to the document body or a specific container element
+document.body.appendChild(containerDiv);
 
-// Initially load buildings layer
-updateBuildingsLayer();
 
 
 
