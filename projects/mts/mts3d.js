@@ -312,7 +312,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -337,32 +336,30 @@ function toggleBuildingVisibility(elementId, show) {
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["(${elementId} === " + elementId + ") && (${BuildingID} === " + elementId + ")", show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
+        ["(${BuildingID} === " + elementId + ")", show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
 
-
 // Function to toggle switch and layer visibility
 function toggleSwitch() {
   console.log("Switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingId1 = 275080379; // First ID of the building
-  const buildingId2 = 271923865; 
-  const buildingId3 = 271923865; 
-  const buildingId4 = 271923865; 
-  const buildingId5 = 271923865; 
+  const buildingIds = [275080379, 271923865]; // Array of building IDs to be shown
   const show = mtsBuildingsSwitch.checked;
 
   console.log("Switch state:", show);
-  console.log("Showing building with ID", buildingId1, "and", buildingId2, "and", buildingId2, "and", buildingId2);
-  toggleBuildingVisibility(buildingId1, show);
-  toggleBuildingVisibility(buildingId2, show);
+  console.log("Showing buildings with IDs:", buildingIds.join(", "));
+  
+  // Toggle visibility for each building ID
+  buildingIds.forEach(buildingId => {
+    toggleBuildingVisibility(buildingId, show);
+  });
+  
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
-
 
 // Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
