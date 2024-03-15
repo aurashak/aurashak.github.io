@@ -330,9 +330,29 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
+// Function to toggle switch and layer visibility
+function toggleSwitch() {
+  console.log("Switch toggled.");
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+  const show = mtsBuildingsSwitch.checked;
+
+  console.log("Switch state:", show);
+  
+  // List of building IDs to be shown
+  const buildingIds = [275080379, 271923865]; // Add more IDs as needed
+
+  // Loop through building IDs and toggle visibility
+  for (const buildingId of buildingIds) {
+    toggleBuildingVisibility(buildingId, show);
+  }
+
+  // Update visibility of the tileset based on the switch state
+  osmBuildingsTileset.show = show;
+}
+
 // Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
-  console.log("Toggling building visibility...");
+  console.log("Toggling building visibility for ID:", elementId);
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
@@ -343,24 +363,6 @@ function toggleBuildingVisibility(elementId, show) {
   });
 }
 
-// Function to toggle switch and layer visibility
-function toggleSwitch() {
-  console.log("Switch toggled.");
-  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const buildingIds = [275080379, 271923865]; // Array of building IDs to be shown
-  const show = mtsBuildingsSwitch.checked;
-
-  console.log("Switch state:", show);
-  console.log("Showing buildings with IDs:", buildingIds.join(", "));
-  
-  // Toggle visibility for each building ID
-  buildingIds.forEach(buildingId => {
-    toggleBuildingVisibility(buildingId, show);
-  });
-  
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
-}
-
 // Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
@@ -369,6 +371,7 @@ mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
 
 
 
