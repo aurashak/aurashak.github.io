@@ -313,65 +313,19 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-// Load OSM buildings MTS Building
-const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
-) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
-  );
-}
-
-// Add the OSM buildings tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset);
-
-// Function to toggle building visibility
-function toggleBuildingVisibility(elementId, show) {
-  console.log("Toggling building visibility...");
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
-        ["true", "${color}"] // Keep other buildings unchanged
-      ]
-    }
-  });
-}
-
-
-// Function to toggle switch and layer visibility
-function toggleLayerVisibility(switchElement, buildingId) {
-  console.log("Switch toggled.");
-  const show = switchElement.checked;
-
-  console.log("Switch state:", show);
-  console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
-}
-
-
-// Add event listener to the switch
-const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", () => toggleLayerVisibility(mtsBuildingsSwitch, 275080379));
-
-// Add event listener to the switch
-const busDepotSwitch = document.getElementById("busDepotSwitch");
-busDepotSwitch.addEventListener("change", () => toggleLayerVisibility(busDepotSwitch, 271923865));
-
-// Initially hide the OSM buildings Tileset
-osmBuildingsTileset.show = false;
-
-console.log("Script loaded.");
+var osmBuildings = new OSMBuildings(viewer.scene);
 
 
 
-
+osmBuildings.sources.add(OSMBuildings.OverpassSource({
+  query: '(way["building"]["building:levels"] >= 2);out geom;',
+  afterFeature: function(feature) {
+      var id = parseInt(feature.properties.elementId);
+      if (elementIds.includes(id)) {
+          return feature;
+      }
+  }
+}));
 
 
 
