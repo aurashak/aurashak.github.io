@@ -357,9 +357,39 @@ function toggleSwitchAndLayerVisibility() {
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
+// Function to toggle switch and layer visibility
+function toggleSwitchAndLayerVisibility() {
+  console.log("Switch toggled.");
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+  const buildingId = 275080379; // ID of the building you want to isolate
+  const show = mtsBuildingsSwitch.checked;
+
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+// Function to toggle switch and layer visibility
+function toggleSwitchAndLayerVisibility() {
+  console.log("Switch toggled.");
+  const busDepotSwitch = document.getElementById("busDepotSwitch");
+  const buildingId = 271923865; // ID of the building you want to isolate
+  const show = busDepotSwitch.checked;
+
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
 // Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleSwitchAndLayerVisibility);
+
+// Add event listener to the switch
+const busDepotSwitch = document.getElementById("busDepotSwitch");
+busDepotSwitch.addEventListener("change", toggleSwitchAndLayerVisibility);
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
