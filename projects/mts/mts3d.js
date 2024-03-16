@@ -328,12 +328,12 @@ viewer.scene.primitives.add(osmBuildingsTileset1);
 
 // Show only the building with the given element ID for the first tileset
 const buildingId1 = 275080379; // ID of the first building to show
-showBuildingById(osmBuildingsTileset1, buildingId1, "red");
+showBuildingById1(osmBuildingsTileset1, buildingId1, "red");
 
 console.log("Script loaded.");
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
+function showBuildingById1(tileset, elementId, color) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -344,8 +344,6 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 }
-
-
 
 // Load OSM buildings MTS Building for the second building
 const osmBuildingsTileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
@@ -361,12 +359,12 @@ viewer.scene.primitives.add(osmBuildingsTileset2);
 
 // Show only the building with the given element ID for the second tileset
 const buildingId2 = 271923865; // ID of the second building to show
-showBuildingById(osmBuildingsTileset2, buildingId2, "green");
+showBuildingById2(osmBuildingsTileset2, buildingId2, "green");
 
 console.log("Script loaded.");
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
+function showBuildingById2(tileset, elementId, color) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -378,9 +376,7 @@ function showBuildingById(tileset, elementId, color) {
   });
 }
 
-
-
-// Load OSM buildings MTS Building for the second building
+// Load OSM buildings MTS Building for the third building
 const osmBuildingsTileset3 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Apply default style to the OSM buildings tileset if available
@@ -389,29 +385,29 @@ if (defaultStyle3) {
   osmBuildingsTileset3.style = new Cesium.Cesium3DTileStyle(defaultStyle3);
 }
 
-// Add the second OSM buildings tileset to the viewer's scene
+// Add the third OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset3);
 
-// Show only the building with the given element ID for the second tileset
-const buildingId3 = 275080382; // ID of the second building to show
-showBuildingById(osmBuildingsTileset3, buildingId3, "green");
+// Show only the building with the given element ID for the third tileset
+const buildingId3 = 275080382; // ID of the third building to show
+showBuildingById3(osmBuildingsTileset3, buildingId3, "blue");
 
 console.log("Script loaded.");
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
+function showBuildingById3(tileset, elementId, color) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
+        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : (color === "blue" ? "0, 0, 255" : "0, 255, 0")}, 0.7)`], // Show the specific building with the given ID, set color accordingly
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
 
-// Load OSM buildings MTS Building for the second building
+// Load OSM buildings MTS Building for the fourth building
 const osmBuildingsTileset4 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Apply default style to the OSM buildings tileset if available
@@ -420,17 +416,17 @@ if (defaultStyle4) {
   osmBuildingsTileset4.style = new Cesium.Cesium3DTileStyle(defaultStyle4);
 }
 
-// Add the second OSM buildings tileset to the viewer's scene
+// Add the fourth OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset4);
 
-// Show only the building with the given element ID for the second tileset
-const buildingId4 = 275080377; // ID of the second building to show
-showBuildingById(osmBuildingsTileset4, buildingId4, "green");
+// Show only the building with the given element ID for the fourth tileset
+const buildingId4 = 275080377; // ID of the fourth building to show
+showBuildingById4(osmBuildingsTileset4, buildingId4, "green");
 
 console.log("Script loaded.");
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
+function showBuildingById4(tileset, elementId, color) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -441,6 +437,7 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 }
+
 
 
 
