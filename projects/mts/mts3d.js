@@ -362,6 +362,25 @@ function toggleSwitch() {
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
 mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 
+
+// Function to toggle switch and layer visibility
+function toggleSwitch() {
+  console.log("Switch toggled.");
+  const busDepotSwitch = document.getElementById("busDepotSwitch");
+  const buildingId = 271923865; // ID of the building you want to isolate
+  const show = mtsBuildingsSwitch.checked;
+
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+}
+
+// Add event listener to the switch
+const busDepotSwitch = document.getElementById("busDepotSwitch");
+busDepotSwitch.addEventListener("change", toggleSwitch);
+
+
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
