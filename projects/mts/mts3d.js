@@ -313,40 +313,29 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+// Load OSM buildings MTS Building
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
-// Load OSM buildings MTS Building for the first building
-const osmBuildingsTileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+// Add the tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Load OSM buildings MTS Building for the second building
-const osmBuildingsTileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+// Show only the buildings with the given element IDs after the tileset is fully loaded
+osmBuildingsTileset.readyPromise.then(() => {
+  // Show building with ID 275080379 in red and add label
+  showBuildingById(osmBuildingsTileset, 275080379, "red", "MTS Building");
 
-// Load OSM buildings MTS Building for the third building
-const osmBuildingsTileset3 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+  // Show building with ID 271923865 in green
+  showBuildingById(osmBuildingsTileset, 271923865, "green");
 
-// Load OSM buildings MTS Building for the fourth building
-const osmBuildingsTileset4 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+  // Show building with ID 275080382 in blue
+  showBuildingById(osmBuildingsTileset, 275080382, "blue");
 
-// Add the tilesets to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset1);
-viewer.scene.primitives.add(osmBuildingsTileset2);
-viewer.scene.primitives.add(osmBuildingsTileset3);
-viewer.scene.primitives.add(osmBuildingsTileset4);
-
-// Show only the building with the given element ID for each tileset after they are fully loaded
-Promise.all([
-  osmBuildingsTileset1.readyPromise,
-  osmBuildingsTileset2.readyPromise,
-  osmBuildingsTileset3.readyPromise,
-  osmBuildingsTileset4.readyPromise
-]).then(() => {
-  showBuildingById(osmBuildingsTileset1, 275080379, "red"); // Show building with ID 275080379 in red and add label
-  showBuildingById(osmBuildingsTileset2, 271923865, "green"); // Show building with ID 271923865 in green
-  showBuildingById(osmBuildingsTileset3, 275080382, "blue"); // Show building with ID 275080382 in blue
-  showBuildingById(osmBuildingsTileset4, 275080377, "green"); // Show building with ID 275080377 in green
+  // Show building with ID 275080377 in green
+  showBuildingById(osmBuildingsTileset, 275080377, "green");
 });
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
+function showBuildingById(tileset, elementId, color, label = null) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -357,12 +346,12 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-  // Add label to building with ID 275080379 ("MTS Building")
-  if (elementId === 275080379) {
+  // Add label to the building if specified
+  if (label) {
     viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100),
+      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Adjust position as needed
       label: {
-        text: "MTS Building",
+        text: label,
         font: "14px Arial",
         fillColor: Cesium.Color.WHITE,
         outlineColor: Cesium.Color.BLACK,
@@ -374,7 +363,6 @@ function showBuildingById(tileset, elementId, color) {
     });
   }
 }
-
 
 
 
