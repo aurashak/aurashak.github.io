@@ -276,165 +276,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-/*
-
-    // Load OSM buildings 3D Tileset
-    const osmBuildingsTileset = viewer.scene.primitives.add(
-      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-    );
-
-    // Apply default style to the OSM buildings tileset if available
-    const osmExtras = osmBuildingsTileset.asset.extras;
-    if (
-      Cesium.defined(osmExtras) &&
-      Cesium.defined(osmExtras.ion) &&
-      Cesium.defined(osmExtras.ion.defaultStyle)
-    ) {
-      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-        osmExtras.ion.defaultStyle
-      );
-    }
-
-    // Create a switch event listener for the OSM buildings Tileset
-    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
-
-    // Set the switch to the off position initially
-    osmBuildingsSwitch.checked = false;
-
-    osmBuildingsSwitch.addEventListener("change", (event) => {
-      osmBuildingsTileset.show = event.target.checked;
-    });
-
-    // Hide the OSM buildings Tileset initially
-    osmBuildingsTileset.show = false;
-
-    
-*/
-
-
-// Load OSM buildings MTS Building
-const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-
-// Add the tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset);
-
-// Function to show only the buildings with the given element IDs after the tileset is fully loaded
-function showBuildings() {
-  // Show building with ID 275080379 in red and add label
-  showBuildingById(osmBuildingsTileset, 275080379, "red", "MTS Building");
-
-  // Show building with ID 271923865 in green
-  showBuildingById(osmBuildingsTileset, 271923865, "green");
-
-  // Show building with ID 275080382 in blue
-  showBuildingById(osmBuildingsTileset, 275080382, "blue");
-
-  // Show building with ID 275080377 in green
-  showBuildingById(osmBuildingsTileset, 275080377, "green");
-}
-
-// Listen for the tileLoad event to ensure all tiles are loaded
-osmBuildingsTileset.tileLoad.addEventListener(showBuildings);
-
-// Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color, label = null) {
-  console.log("Showing building with ID", elementId);
-  tileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : (color === "blue" ? "0, 0, 255" : "0, 255, 0")}, 0.7)`], // Show the specific building with the given ID, set color accordingly
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-
-  // Add label to the building if specified
-  if (label) {
-    viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Adjust position as needed
-      label: {
-        text: label,
-        font: "14px Arial",
-        fillColor: Cesium.Color.WHITE,
-        outlineColor: Cesium.Color.BLACK,
-        outlineWidth: 2,
-        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        pixelOffset: new Cesium.Cartesian2(0, -10)
-      }
-    });
-
-    // Add green box at the same location
-    viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Same position as the label
-      box: {
-        dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
-        material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
-      }
-    });
-  }
-}
-
-
-
-
-
-
-
-
-/* 
-
-// Function to toggle NYCHA switch and layer visibility
-function toggleNYCHASwitch() {
-  console.log("NYCHA switch toggled.");
-  const NYCHASwitch = document.getElementById("NYCHASwitch");
-  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"];
-  const show = NYCHASwitch.checked;
-
-  console.log("NYCHA switch state:", show);
-  console.log("Showing buildings with IDs", buildingIds);
-  toggleBuildingVisibility(buildingIds, "rgba(0, 0, 255, 1)", show); // Blue color for NYCHA
-  osmBuildingsTileset.show = show;
-}
-
-const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
-
-*/
-
-
-
-
-    
-   
-   /*
-// Set the switch to the off position initially
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.checked = false;
-
-// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
-const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("Bing Maps layer initialized, but not added to viewer");
-
-// Create a switch event listener for the Bing Maps layer
-bingMapsSwitch.addEventListener("change", (event) => {
-  // Check the switch state directly within the event listener
-  if (event.target.checked) {
-    // Add the layer to the viewer when the switch is turned on
-    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
-    console.log("Bing Maps layer added to viewer");
-  } else {
-    // Remove the layer from the viewer when the switch is turned off
-    viewer.imageryLayers.remove(bingMapsLayer);
-    console.log("Bing Maps layer removed from viewer");
-  }
-});
-
-*/
-
-
 
 
 // Set the OSM Maps switch to the off position initially
@@ -519,50 +360,6 @@ toggleOSMMapLayer();
     }
 
 
-// Load whejsites GeoJsonDataSource
-const whejsitesResource = await Cesium.IonResource.fromAssetId(2486537);
-const whejsitesDataSource = await Cesium.GeoJsonDataSource.load(whejsitesResource);
-
-// Modify the billboard color and style before adding the data source
-whejsitesDataSource.entities.values.forEach((entity) => {
-    if (entity.billboard) {
-        // Change the billboard color to orange
-        entity.billboard.color = Cesium.Color.ORANGE;
-
-        // Change the billboard style to Circle using the createCircleImage function
-        entity.billboard.image = createCircleImage();
-    }
-});
-
-// Create a switch event listener for whejsites
-const whejsitesSwitch = document.getElementById("whejsites");
-
-// Set the switch to the off position initially
-whejsitesSwitch.checked = false;
-
-whejsitesSwitch.addEventListener("change", (event) => {
-    if (event.target.checked) {
-        viewer.dataSources.add(whejsitesDataSource);
-        console.log("whejsites layer added to viewer");
-    } else {
-        viewer.dataSources.remove(whejsitesDataSource);
-        console.log("whejsites layer removed from viewer");
-    }
-});
-
-// Function to create an orange circle image
-function createCircleImage() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 15;
-    canvas.height = 15;
-    const context = canvas.getContext("2d");
-    context.beginPath();
-    context.arc(10, 10, 8, 0, 2 * Math.PI);
-    context.fillStyle = "orange";
-    context.fill();
-    return canvas;
-}
-
 
 
 
@@ -601,6 +398,9 @@ function createCircleImage() {
       entity.show = false; // Make sure entities are hidden by default
     });
 
+
+
+
     // Load mtsrail GeoJsonDataSource
     const mtsrailResource = await Cesium.IonResource.fromAssetId(2482267);
     const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
@@ -630,6 +430,51 @@ function createCircleImage() {
     mtsrailDataSource.entities.values.forEach((entity) => {
       entity.show = false; // Make sure entities are hidden by default
     });
+
+
+
+
+
+
+
+
+// Load westharlemejsites GeoJsonDataSource
+const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2482444);
+const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
+
+// Modify the polyline/polygon color and disable the outline before adding the data source
+westharlemejsitesDataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    // Change the polygon color to green
+    entity.polygon.material = Cesium.Color.RED;
+
+    // Disable the polygon outline
+    entity.polygon.outline = false;
+  }
+});
+
+// Create a switch event listener for mtsparks
+const westharlemejsitesSwitch = document.getElementById("westharlemejsitesSwitch");
+
+// Set the switch to the off position initially
+westharlemejsitesSwitch.checked = false;
+
+westharlemejsitesSwitch.addEventListener("change", (event) => {
+  westharlemejsitesDataSource.entities.values.forEach((entity) => {
+    entity.show = event.target.checked;
+  });
+});
+
+// Initial load of westharlemejsites with the green color and disabled outline
+viewer.dataSources.add(westharlemejsitesDataSource);
+westharlemejsitesDataSource.entities.values.forEach((entity) => {
+  entity.show = false; // Make sure entities are hidden by default
+});
+
+
+
+
+
 
 
 
@@ -885,8 +730,154 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
-   
-
 
 // Call the initializeCesium function
 initializeCesium();
+
+
+
+
+
+
+/*
+
+    // Load OSM buildings 3D Tileset
+    const osmBuildingsTileset = viewer.scene.primitives.add(
+      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+    );
+
+    // Apply default style to the OSM buildings tileset if available
+    const osmExtras = osmBuildingsTileset.asset.extras;
+    if (
+      Cesium.defined(osmExtras) &&
+      Cesium.defined(osmExtras.ion) &&
+      Cesium.defined(osmExtras.ion.defaultStyle)
+    ) {
+      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+        osmExtras.ion.defaultStyle
+      );
+    }
+
+    // Create a switch event listener for the OSM buildings Tileset
+    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+    // Set the switch to the off position initially
+    osmBuildingsSwitch.checked = false;
+
+    osmBuildingsSwitch.addEventListener("change", (event) => {
+      osmBuildingsTileset.show = event.target.checked;
+    });
+
+    // Hide the OSM buildings Tileset initially
+    osmBuildingsTileset.show = false;
+
+    
+*/
+
+
+
+/* 
+
+// Function to toggle NYCHA switch and layer visibility
+function toggleNYCHASwitch() {
+  console.log("NYCHA switch toggled.");
+  const NYCHASwitch = document.getElementById("NYCHASwitch");
+  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"];
+  const show = NYCHASwitch.checked;
+
+  console.log("NYCHA switch state:", show);
+  console.log("Showing buildings with IDs", buildingIds);
+  toggleBuildingVisibility(buildingIds, "rgba(0, 0, 255, 1)", show); // Blue color for NYCHA
+  osmBuildingsTileset.show = show;
+}
+
+const NYCHASwitch = document.getElementById("NYCHASwitch");
+NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
+
+*/
+
+
+
+
+    
+   
+   /*
+// Set the switch to the off position initially
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
+});
+
+*/
+
+
+
+
+
+
+
+/*
+
+// Load whejsites GeoJsonDataSource
+const whejsitesResource = await Cesium.IonResource.fromAssetId(2486537);
+const whejsitesDataSource = await Cesium.GeoJsonDataSource.load(whejsitesResource);
+
+// Modify the billboard color and style before adding the data source
+whejsitesDataSource.entities.values.forEach((entity) => {
+    if (entity.billboard) {
+        // Change the billboard color to orange
+        entity.billboard.color = Cesium.Color.ORANGE;
+
+        // Change the billboard style to Circle using the createCircleImage function
+        entity.billboard.image = createCircleImage();
+    }
+});
+
+// Create a switch event listener for whejsites
+const whejsitesSwitch = document.getElementById("whejsites");
+
+// Set the switch to the off position initially
+whejsitesSwitch.checked = false;
+
+whejsitesSwitch.addEventListener("change", (event) => {
+    if (event.target.checked) {
+        viewer.dataSources.add(whejsitesDataSource);
+        console.log("whejsites layer added to viewer");
+    } else {
+        viewer.dataSources.remove(whejsitesDataSource);
+        console.log("whejsites layer removed from viewer");
+    }
+});
+
+// Function to create an orange circle image
+function createCircleImage() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 15;
+    canvas.height = 15;
+    const context = canvas.getContext("2d");
+    context.beginPath();
+    context.arc(10, 10, 8, 0, 2 * Math.PI);
+    context.fillStyle = "orange";
+    context.fill();
+    return canvas;
+}
+
+*/
