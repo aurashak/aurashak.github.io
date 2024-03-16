@@ -317,85 +317,36 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 // Load OSM buildings MTS Building for the first building
 const osmBuildingsTileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
-// Apply default style to the OSM buildings tileset if available
-const defaultStyle1 = osmBuildingsTileset1.asset.extras?.ion?.defaultStyle;
-if (defaultStyle1) {
-  osmBuildingsTileset1.style = new Cesium.Cesium3DTileStyle(defaultStyle1);
-}
-
-// Add the first OSM buildings tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset1);
-
-// Show only the building with the given element ID for the first tileset
-const buildingId1 = 275080379; // ID of the first building to show
-showBuildingById1(osmBuildingsTileset1, buildingId1, "red");
-
-console.log("Script loaded.");
-
-// Function to show only the building with the given element ID for the tileset
-function showBuildingById1(tileset, elementId, color) {
-  console.log("Showing building with ID", elementId);
-  tileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
 // Load OSM buildings MTS Building for the second building
 const osmBuildingsTileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-
-// Apply default style to the OSM buildings tileset if available
-const defaultStyle2 = osmBuildingsTileset2.asset.extras?.ion?.defaultStyle;
-if (defaultStyle2) {
-  osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle(defaultStyle2);
-}
-
-// Add the second OSM buildings tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset2);
-
-// Show only the building with the given element ID for the second tileset
-const buildingId2 = 271923865; // ID of the second building to show
-showBuildingById2(osmBuildingsTileset2, buildingId2, "green");
-
-console.log("Script loaded.");
-
-// Function to show only the building with the given element ID for the tileset
-function showBuildingById2(tileset, elementId, color) {
-  console.log("Showing building with ID", elementId);
-  tileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
 
 // Load OSM buildings MTS Building for the third building
 const osmBuildingsTileset3 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
-// Apply default style to the OSM buildings tileset if available
-const defaultStyle3 = osmBuildingsTileset3.asset.extras?.ion?.defaultStyle;
-if (defaultStyle3) {
-  osmBuildingsTileset3.style = new Cesium.Cesium3DTileStyle(defaultStyle3);
-}
+// Load OSM buildings MTS Building for the fourth building
+const osmBuildingsTileset4 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
-// Add the third OSM buildings tileset to the viewer's scene
+// Add the tilesets to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset1);
+viewer.scene.primitives.add(osmBuildingsTileset2);
 viewer.scene.primitives.add(osmBuildingsTileset3);
+viewer.scene.primitives.add(osmBuildingsTileset4);
 
-// Show only the building with the given element ID for the third tileset
-const buildingId3 = 275080382; // ID of the third building to show
-showBuildingById3(osmBuildingsTileset3, buildingId3, "blue");
-
-console.log("Script loaded.");
+// Show only the building with the given element ID for each tileset after they are fully loaded
+Promise.all([
+  osmBuildingsTileset1.readyPromise,
+  osmBuildingsTileset2.readyPromise,
+  osmBuildingsTileset3.readyPromise,
+  osmBuildingsTileset4.readyPromise
+]).then(() => {
+  showBuildingById(osmBuildingsTileset1, 275080379, "red"); // Show building with ID 275080379 in red
+  showBuildingById(osmBuildingsTileset2, 271923865, "green"); // Show building with ID 271923865 in green
+  showBuildingById(osmBuildingsTileset3, 275080382, "blue"); // Show building with ID 275080382 in blue
+  showBuildingById(osmBuildingsTileset4, 275080377, "green"); // Show building with ID 275080377 in green
+});
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById3(tileset, elementId, color) {
+function showBuildingById(tileset, elementId, color) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -406,38 +357,6 @@ function showBuildingById3(tileset, elementId, color) {
     }
   });
 }
-
-// Load OSM buildings MTS Building for the fourth building
-const osmBuildingsTileset4 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-
-// Apply default style to the OSM buildings tileset if available
-const defaultStyle4 = osmBuildingsTileset4.asset.extras?.ion?.defaultStyle;
-if (defaultStyle4) {
-  osmBuildingsTileset4.style = new Cesium.Cesium3DTileStyle(defaultStyle4);
-}
-
-// Add the fourth OSM buildings tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset4);
-
-// Show only the building with the given element ID for the fourth tileset
-const buildingId4 = 275080377; // ID of the fourth building to show
-showBuildingById4(osmBuildingsTileset4, buildingId4, "green");
-
-console.log("Script loaded.");
-
-// Function to show only the building with the given element ID for the tileset
-function showBuildingById4(tileset, elementId, color) {
-  console.log("Showing building with ID", elementId);
-  tileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
 
 
 
