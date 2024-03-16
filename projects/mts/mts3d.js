@@ -326,10 +326,6 @@ if (defaultStyle1) {
 // Add the first OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset1);
 
-// Show the first building by its element ID
-const buildingId1 = 275080379; // ID of the first building to show
-showBuildingById1(buildingId1);
-
 // Load OSM buildings MTS Building for the second building
 const osmBuildingsTileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -342,38 +338,28 @@ if (defaultStyle2) {
 // Add the second OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset2);
 
-// Show the second building by its element ID
+// Show only the building with the given element ID for the first tileset
+const buildingId1 = 275080379; // ID of the first building to show
+showBuildingById(osmBuildingsTileset1, buildingId1, "red");
+
+// Show only the building with the given element ID for the second tileset
 const buildingId2 = 271923865; // ID of the second building to show
-showBuildingById2(buildingId2);
+showBuildingById(osmBuildingsTileset2, buildingId2, "green");
 
 console.log("Script loaded.");
 
-// Function to show only the building with the given element ID for the first tileset
-function showBuildingById1(elementId) {
-  console.log("Showing building with ID", elementId, "for the first tileset");
-  osmBuildingsTileset1.style = new Cesium.Cesium3DTileStyle({
+// Function to show only the building with the given element ID for the tileset
+function showBuildingById(tileset, elementId, color) {
+  console.log("Showing building with ID", elementId);
+  tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, "rgba(255, 0, 0, 0.7)"], // Show the specific building with the given ID, set color to red (255, 0, 0) with 70% opacity
+        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
-
-// Function to show only the building with the given element ID for the second tileset
-function showBuildingById2(elementId) {
-  console.log("Showing building with ID", elementId, "for the second tileset");
-  osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, "rgba(0, 255, 0, 0.7)"], // Show the specific building with the given ID, set color to green (0, 255, 0) with 70% opacity
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
 
 
 
