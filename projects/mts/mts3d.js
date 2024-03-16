@@ -328,7 +328,7 @@ if (
   );
 }
 
-// Keep the style outside of the toggle functions
+// Define a default style for the buildings
 const defaultBuildingStyle = new Cesium.Cesium3DTileStyle({
   color: {
     conditions: [
@@ -337,14 +337,31 @@ const defaultBuildingStyle = new Cesium.Cesium3DTileStyle({
   }
 });
 
-// Set the default style initially
-osmBuildingsTileset.style = defaultBuildingStyle;
+// Load OSM buildings MTS Building
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (
+  Cesium.defined(osmExtras) &&
+  Cesium.defined(osmExtras.ion) &&
+  Cesium.defined(osmExtras.ion.defaultStyle)
+) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+    osmExtras.ion.defaultStyle
+  );
+} else {
+  osmBuildingsTileset.style = defaultBuildingStyle.clone(); // Use default style if no custom style is provided
+}
+
+// Add the OSM buildings tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
 
 // Function to toggle building visibility for MTS building
 function togglemtsBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
   if (!osmBuildingsTileset.style) {
-    osmBuildingsTileset.style = defaultBuildingStyle.clone();
+    osmBuildingsTileset.style = defaultBuildingStyle.clone(); // Ensure style is initialized
   }
   osmBuildingsTileset.style.color.conditions[0][0] = `"${elementId}" === ${elementId}`; // Update condition
   osmBuildingsTileset.style.color.conditions[0][1] = show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"; // Update color
@@ -354,11 +371,12 @@ function togglemtsBuildingVisibility(elementId, show) {
 function togglebusDepotBuildingVisibility(elementId, show) {
   console.log("Toggling bus depot building visibility...");
   if (!osmBuildingsTileset.style) {
-    osmBuildingsTileset.style = defaultBuildingStyle.clone();
+    osmBuildingsTileset.style = defaultBuildingStyle.clone(); // Ensure style is initialized
   }
   osmBuildingsTileset.style.color.conditions[0][0] = `"${elementId}" === ${elementId}`; // Update condition
   osmBuildingsTileset.style.color.conditions[0][1] = show ? "rgba(0, 255, 0, 0.7)" : "rgba(255, 255, 255, 0)"; // Update color
 }
+
 
 // Function to toggle switch and layer visibility for MTS building
 function togglemtsLayerVisibility() {
