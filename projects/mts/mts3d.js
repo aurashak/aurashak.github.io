@@ -323,9 +323,12 @@ if (defaultStyle1) {
   osmBuildingsTileset1.style = new Cesium.Cesium3DTileStyle(defaultStyle1);
 }
 
-// Add the first OSM buildings tileset to the viewer's scene and initially hide it
+// Add the first OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset1);
-osmBuildingsTileset1.show = false;
+
+// Show the first building by its element ID
+const buildingId1 = 275080379; // ID of the first building to show
+showBuildingById1(buildingId1);
 
 // Load OSM buildings MTS Building for the second building
 const osmBuildingsTileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
@@ -336,9 +339,14 @@ if (defaultStyle2) {
   osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle(defaultStyle2);
 }
 
-// Add the second OSM buildings tileset to the viewer's scene and initially hide it
+// Add the second OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset2);
-osmBuildingsTileset2.show = false;
+
+// Show the second building by its element ID
+const buildingId2 = 271923865; // ID of the second building to show
+showBuildingById2(buildingId2);
+
+console.log("Script loaded.");
 
 // Function to show only the building with the given element ID for the first tileset
 function showBuildingById1(elementId) {
@@ -351,7 +359,6 @@ function showBuildingById1(elementId) {
       ]
     }
   });
-  osmBuildingsTileset1.show = true;
 }
 
 // Function to show only the building with the given element ID for the second tileset
@@ -365,19 +372,8 @@ function showBuildingById2(elementId) {
       ]
     }
   });
-  osmBuildingsTileset2.show = true;
 }
 
-// Add event listeners for each building's visibility control
-document.getElementById("building1Button").addEventListener("click", function() {
-  showBuildingById1(275080379); // ID of the first building to show
-});
-
-document.getElementById("building2Button").addEventListener("click", function() {
-  showBuildingById2(271923865); // ID of the second building to show
-});
-
-console.log("Script loaded.");
 
 
 
