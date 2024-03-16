@@ -312,6 +312,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
+
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -330,37 +331,31 @@ if (
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to toggle switch and layer visibility
-function toggleSwitch() {
-  console.log("Switch toggled.");
-  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-  const show = mtsBuildingsSwitch.checked;
-
-  console.log("Switch state:", show);
-  
-  // List of building IDs to be shown
-  const buildingIds = [275080379, 271923865]; // Add more IDs as needed
-
-  // Loop through building IDs and toggle visibility
-  for (const buildingId of buildingIds) {
-    toggleBuildingVisibility(buildingId, show);
-  }
-
-  // Update visibility of the tileset based on the switch state
-  osmBuildingsTileset.show = show;
-}
-
 // Function to toggle building visibility
 function toggleBuildingVisibility(elementId, show) {
-  console.log("Toggling building visibility for ID:", elementId);
+  console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["(${BuildingID} === " + elementId + ")", show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
+        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
+}
+
+
+// Function to toggle switch and layer visibility
+function toggleSwitch() {
+  console.log("Switch toggled.");
+  const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
+  const buildingId = 275080379; // ID of the building you want to isolate
+  const show = mtsBuildingsSwitch.checked;
+
+  console.log("Switch state:", show);
+  console.log("Showing building with ID", buildingId);
+  toggleBuildingVisibility(buildingId, show);
+  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the switch
@@ -371,7 +366,6 @@ mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
-
 
 
 
