@@ -360,7 +360,7 @@ function showBuildingById(tileset, elementId, color) {
   // Add label to building with ID 275080379 ("MTS Building")
   if (elementId === 275080379) {
     viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(/* longitude */, /* latitude */, /* height */),
+      position: Cesium.Cartesian3.fromDegrees(40.8217, -73.9625, 100),
       label: {
         text: "MTS Building",
         font: "14px Arial",
