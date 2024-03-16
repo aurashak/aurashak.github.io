@@ -319,8 +319,8 @@ const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 // Add the tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Show only the buildings with the given element IDs after the tileset is fully loaded
-osmBuildingsTileset.readyPromise.then(() => {
+// Function to show only the buildings with the given element IDs after the tileset is fully loaded
+function showBuildings() {
   // Show building with ID 275080379 in red and add label
   showBuildingById(osmBuildingsTileset, 275080379, "red", "MTS Building");
 
@@ -332,7 +332,10 @@ osmBuildingsTileset.readyPromise.then(() => {
 
   // Show building with ID 275080377 in green
   showBuildingById(osmBuildingsTileset, 275080377, "green");
-});
+}
+
+// Listen for the tileLoad event to ensure all tiles are loaded
+osmBuildingsTileset.tileLoad.addEventListener(showBuildings);
 
 // Function to show only the building with the given element ID for the tileset
 function showBuildingById(tileset, elementId, color, label = null) {
