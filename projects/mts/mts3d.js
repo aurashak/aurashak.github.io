@@ -337,12 +337,13 @@ function toggleBuildingVisibility(elementId, show) {
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID
+        ["true", "${color}"] // Keep other buildings unchanged
       ]
     }
   });
 }
+
 
 // Function to toggle switch and layer visibility
 function toggleLayerVisibility(switchElement, buildingId) {
