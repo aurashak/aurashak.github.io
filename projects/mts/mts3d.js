@@ -312,7 +312,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -362,6 +361,15 @@ function showBuildingById(tileset, elementId, color, label = null) {
         style: Cesium.LabelStyle.FILL_AND_OUTLINE,
         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
         pixelOffset: new Cesium.Cartesian2(0, -10)
+      }
+    });
+
+    // Add green box at the same location
+    viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Same position as the label
+      box: {
+        dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
+        material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
       }
     });
   }
