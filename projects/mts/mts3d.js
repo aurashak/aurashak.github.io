@@ -441,20 +441,21 @@ toggleOSMMapLayer();
 const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
 const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
 
-// Modify the box color and alpha value and disable the outline before adding the data source
+// Modify the polygon color, disable the outline, and extrude vertically before adding the data source
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
-  if (entity.box) {
-    // Change the box color to semi-transparent red
-    entity.box.material = new Cesium.ColorMaterialProperty(
-      Cesium.Color.RED.withAlpha(0.5)
-    );
+  if (entity.polygon) {
+    // Change the polygon color to red
+    entity.polygon.material = Cesium.Color.RED;
 
-    // Disable the box outline
-    entity.box.outline = false;
+    // Disable the polygon outline
+    entity.polygon.outline = false;
+
+    // Extrude the polygon vertically
+    entity.polygon.extrudedHeight = 1000; // Set the extruded height as needed
   }
 });
 
-// Create a switch event listener for mtsparks
+// Create a switch event listener for westharlemejsites
 const westharlemejsitesSwitch = document.getElementById("westharlemejsitesSwitch");
 
 // Set the switch to the off position initially
@@ -466,7 +467,7 @@ westharlemejsitesSwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of westharlemejsites with the red semi-transparent boxes and disabled outline
+// Initial load of westharlemejsites with red polygons, disabled outline, and vertical extrusion
 viewer.dataSources.add(westharlemejsitesDataSource);
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
