@@ -352,7 +352,7 @@ function toggleLayerVisibility(switchElement, buildingId) {
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
   toggleBuildingVisibility(buildingId, show);
-  osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
+  osmBuildingsTileset.show = false; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the switch
