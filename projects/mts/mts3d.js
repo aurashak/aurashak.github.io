@@ -312,47 +312,73 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-// Load OSM buildings MTS Building
-const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+
+
+// Load OSM buildings MTS Building for the first building
+const osmBuildingsTileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Apply default style to the OSM buildings tileset if available
-const defaultStyle = osmBuildingsTileset.asset.extras?.ion?.defaultStyle;
-if (defaultStyle) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(defaultStyle);
+const defaultStyle1 = osmBuildingsTileset1.asset.extras?.ion?.defaultStyle;
+if (defaultStyle1) {
+  osmBuildingsTileset1.style = new Cesium.Cesium3DTileStyle(defaultStyle1);
 }
 
-// Function to show only the buildings with the given element IDs
-function showBuildingsById(elementIds) {
-  console.log("Showing buildings with IDs", elementIds.join(', '));
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+// Add the first OSM buildings tileset to the viewer's scene and initially hide it
+viewer.scene.primitives.add(osmBuildingsTileset1);
+osmBuildingsTileset1.show = false;
+
+// Load OSM buildings MTS Building for the second building
+const osmBuildingsTileset2 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+
+// Apply default style to the OSM buildings tileset if available
+const defaultStyle2 = osmBuildingsTileset2.asset.extras?.ion?.defaultStyle;
+if (defaultStyle2) {
+  osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle(defaultStyle2);
+}
+
+// Add the second OSM buildings tileset to the viewer's scene and initially hide it
+viewer.scene.primitives.add(osmBuildingsTileset2);
+osmBuildingsTileset2.show = false;
+
+// Function to show only the building with the given element ID for the first tileset
+function showBuildingById1(elementId) {
+  console.log("Showing building with ID", elementId, "for the first tileset");
+  osmBuildingsTileset1.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        elementIds.map(id => ["${elementId} === " + id, "rgba(255, 0, 0, 0.7)"]).flat(), // Show the specified buildings with the given IDs, set color to red (255, 0, 0) with 70% opacity
+        ["${elementId} === " + elementId, "rgba(255, 0, 0, 0.7)"], // Show the specific building with the given ID, set color to red (255, 0, 0) with 70% opacity
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
+  osmBuildingsTileset1.show = true;
 }
 
-// Add the OSM buildings tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset);
+// Function to show only the building with the given element ID for the second tileset
+function showBuildingById2(elementId) {
+  console.log("Showing building with ID", elementId, "for the second tileset");
+  osmBuildingsTileset2.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, "rgba(0, 255, 0, 0.7)"], // Show the specific building with the given ID, set color to green (0, 255, 0) with 70% opacity
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+  osmBuildingsTileset2.show = true;
+}
 
-// Show only the buildings with the specified element IDs
-const buildingIds = [275080379, 271923865]; // IDs of the buildings to show
-showBuildingsById(buildingIds);
-
-// Check if the specified buildings are visible
-const visibleBuildings = buildingIds.filter(id => {
-  return osmBuildingsTileset.style.hasCondition("${elementId} === " + id);
+// Add event listeners for each building's visibility control
+document.getElementById("building1Button").addEventListener("click", function() {
+  showBuildingById1(275080379); // ID of the first building to show
 });
 
-if (visibleBuildings.length === buildingIds.length) {
-  console.log("Both buildings are visible.");
-} else {
-  console.log("Error: One or more buildings are not visible.");
-}
+document.getElementById("building2Button").addEventListener("click", function() {
+  showBuildingById2(271923865); // ID of the second building to show
+});
 
 console.log("Script loaded.");
+
 
 
 
