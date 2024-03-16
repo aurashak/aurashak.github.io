@@ -313,19 +313,41 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-var osmBuildings = new OSMBuildings(viewer.scene);
+// Load OSM buildings MTS Building
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+
+// Apply default style to the OSM buildings tileset if available
+const defaultStyle = osmBuildingsTileset.asset.extras?.ion?.defaultStyle;
+if (defaultStyle) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(defaultStyle);
+}
+
+// Function to show only the building with the given element ID
+function showBuildingById(elementId) {
+  console.log("Showing building with ID", elementId);
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, "rgba(255, 0, 0, 0.7)"], // Show the specific building with the given ID, set color to red (255, 0, 0) with 70% opacity
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+}
+
+// Add the OSM buildings tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
+
+// Show only the building with the specified element ID
+const buildingId = 275080379; // ID of the building to show
+showBuildingById(buildingId);
+
+console.log("Script loaded.");
 
 
 
-osmBuildings.sources.add(OSMBuildings.OverpassSource({
-  query: '(way["building"]["building:levels"] >= 2);out geom;',
-  afterFeature: function(feature) {
-      var id = parseInt(feature.properties.elementId);
-      if (elementIds.includes(id)) {
-          return feature;
-      }
-  }
-}));
+
+
 
 
 
