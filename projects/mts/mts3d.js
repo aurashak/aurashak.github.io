@@ -339,7 +339,7 @@ Promise.all([
   osmBuildingsTileset3.readyPromise,
   osmBuildingsTileset4.readyPromise
 ]).then(() => {
-  showBuildingById(osmBuildingsTileset1, 275080379, "red"); // Show building with ID 275080379 in red
+  showBuildingById(osmBuildingsTileset1, 275080379, "red"); // Show building with ID 275080379 in red and add label
   showBuildingById(osmBuildingsTileset2, 271923865, "green"); // Show building with ID 271923865 in green
   showBuildingById(osmBuildingsTileset3, 275080382, "blue"); // Show building with ID 275080382 in blue
   showBuildingById(osmBuildingsTileset4, 275080377, "green"); // Show building with ID 275080377 in green
@@ -356,8 +356,24 @@ function showBuildingById(tileset, elementId, color) {
       ]
     }
   });
-}
 
+  // Add label to building with ID 275080379 ("MTS Building")
+  if (elementId === 275080379) {
+    viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(/* longitude */, /* latitude */, /* height */),
+      label: {
+        text: "MTS Building",
+        font: "14px Arial",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        pixelOffset: new Cesium.Cartesian2(0, -10)
+      }
+    });
+  }
+}
 
 
 
