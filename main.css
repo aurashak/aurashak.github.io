@@ -215,6 +215,7 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
     display: inline-block;
     text-decoration: none;
     color: black;
+    font-weight: bold;
     margin-right: 20px;
 
 }
@@ -491,7 +492,7 @@ sup a:hover {
 }
 
 .image-container img {
-  width: 10%;
+  width: 100%;
   margin: 5px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
@@ -3723,6 +3724,21 @@ span.cesium-projectionPicker-wrapper {
       margin: 0px;
   }
 
+
+  .img-container {
+    display: flex;
+    align-items: flex-start; 
+    justify-content: center;
+  }
+  
+  .img-container img {
+   width: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: auto;
+  }
+  
 
   .mapheader {
     padding: 5px 0;
