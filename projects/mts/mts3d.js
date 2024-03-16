@@ -312,7 +312,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 */
 
 
-
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -341,6 +340,17 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 // Show only the buildings with the specified element IDs
 const buildingIds = [275080379, 271923865]; // IDs of the buildings to show
 showBuildingsById(buildingIds);
+
+// Check if the specified buildings are visible
+const visibleBuildings = buildingIds.filter(id => {
+  return osmBuildingsTileset.style.hasCondition("${elementId} === " + id);
+});
+
+if (visibleBuildings.length === buildingIds.length) {
+  console.log("Both buildings are visible.");
+} else {
+  console.log("Error: One or more buildings are not visible.");
+}
 
 console.log("Script loaded.");
 
