@@ -340,6 +340,13 @@ function togglemtsBuildingVisibility(elementId, show) {
   if (!osmBuildingsTileset.style) {
     osmBuildingsTileset.style = defaultBuildingStyle.clone(); // Ensure style is initialized
   }
+  if (!osmBuildingsTileset.style.color || !osmBuildingsTileset.style.color.conditions) {
+    osmBuildingsTileset.style.color = {
+      conditions: [
+        ["true", "rgba(255, 255, 255, 0)"] // Hide all buildings by default
+      ]
+    };
+  }
   osmBuildingsTileset.style.color.conditions[0][0] = `"${elementId}" === ${elementId}`; // Update condition
   osmBuildingsTileset.style.color.conditions[0][1] = show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"; // Update color
 }
@@ -350,9 +357,17 @@ function togglebusDepotBuildingVisibility(elementId, show) {
   if (!osmBuildingsTileset.style) {
     osmBuildingsTileset.style = defaultBuildingStyle.clone(); // Ensure style is initialized
   }
+  if (!osmBuildingsTileset.style.color || !osmBuildingsTileset.style.color.conditions) {
+    osmBuildingsTileset.style.color = {
+      conditions: [
+        ["true", "rgba(255, 255, 255, 0)"] // Hide all buildings by default
+      ]
+    };
+  }
   osmBuildingsTileset.style.color.conditions[0][0] = `"${elementId}" === ${elementId}`; // Update condition
   osmBuildingsTileset.style.color.conditions[0][1] = show ? "rgba(0, 255, 0, 0.7)" : "rgba(255, 255, 255, 0)"; // Update color
 }
+
 
 
 // Function to toggle switch and layer visibility for MTS building
