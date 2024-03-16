@@ -314,6 +314,20 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+// Function to show only the building with the given element ID for the tileset
+function showBuildingById(tileset, elementId, color, scale) {
+  console.log("Showing building with ID", elementId);
+  tileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    },
+    scaleByDistance: new Cesium.NearFarScalar(1.0, scale, 10000.0, 1.0) // Increase the size of the building based on distance
+  });
+}
+
 // Load OSM buildings MTS Building for the first building
 const osmBuildingsTileset1 = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -328,22 +342,11 @@ viewer.scene.primitives.add(osmBuildingsTileset1);
 
 // Show only the building with the given element ID for the first tileset
 const buildingId1 = 275080379; // ID of the first building to show
-showBuildingById(osmBuildingsTileset1, buildingId1, "red");
+const scale1 = 1.5; // Scale factor for increasing the size of the building
+showBuildingById(osmBuildingsTileset1, buildingId1, "red", scale1);
 
 console.log("Script loaded.");
 
-// Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
-  console.log("Showing building with ID", elementId);
-  tileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : "0, 255, 0"}, 0.7)`], // Show the specific building with the given ID, set color accordingly
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
 
 
 
