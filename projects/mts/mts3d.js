@@ -332,7 +332,20 @@ if (
 viewer.scene.primitives.add(osmBuildingsTileset);
 
 // Function to toggle building visibility
-function toggleBuildingVisibility(elementId, show) {
+function togglemtsBuildingVisibility(elementId, show) {
+  console.log("Toggling building visibility...");
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+}
+
+// Function to toggle building visibility
+function togglebusDepotVisibility(elementId, show) {
   console.log("Toggling building visibility...");
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -345,6 +358,7 @@ function toggleBuildingVisibility(elementId, show) {
 }
 
 
+
 // Function to toggle switch and layer visibility
 function toggleSwitch() {
   console.log("Switch toggled.");
@@ -354,7 +368,7 @@ function toggleSwitch() {
 
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
+  togglemtsBuildingVisibility(buildingId, show);
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
@@ -372,7 +386,7 @@ function toggleSwitch() {
 
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
-  toggleBuildingVisibility(buildingId, show);
+  togglebusDepotVisibility(buildingId, show);
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
