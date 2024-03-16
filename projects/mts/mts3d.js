@@ -360,7 +360,7 @@ function togglebusDepotVisibility(elementId, show) {
 
 
 // Function to toggle switch and layer visibility
-function toggleSwitch() {
+function togglemtsBuildingVisibility() {
   console.log("Switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
   const buildingId = 275080379; // ID of the building you want to isolate
@@ -374,11 +374,11 @@ function toggleSwitch() {
 
 // Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", toggleSwitch);
+mtsBuildingsSwitch.addEventListener("change", togglemtsBuildingVisibility);
 
 
 // Function to toggle switch and layer visibility
-function toggleSwitch() {
+function togglebusDepotVisibility() {
   console.log("Switch toggled.");
   const busDepotSwitch = document.getElementById("busDepotSwitch");
   const buildingId = 271923865; // ID of the building you want to isolate
@@ -392,7 +392,7 @@ function toggleSwitch() {
 
 // Add event listener to the switch
 const busDepotSwitch = document.getElementById("busDepotSwitch");
-busDepotSwitch.addEventListener("change", toggleSwitch);
+busDepotSwitch.addEventListener("change", togglebusDepotVisibility);
 
 
 // Initially hide the OSM buildings Tileset
