@@ -439,7 +439,7 @@ toggleOSMMapLayer();
 
 
 // Load westharlemejsites GeoJsonDataSource
-const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2482444);
+const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
 const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
 
 // Modify the polyline/polygon color and disable the outline before adding the data source
