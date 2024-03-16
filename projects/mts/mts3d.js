@@ -437,19 +437,20 @@ toggleOSMMapLayer();
 
 
 
-
 // Load westharlemejsites GeoJsonDataSource
 const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
 const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
 
-// Modify the polyline/polygon color and disable the outline before adding the data source
+// Modify the box color and alpha value and disable the outline before adding the data source
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
-  if (entity.polygon) {
-    // Change the polygon color to green
-    entity.polygon.material = Cesium.Color.RED;
+  if (entity.box) {
+    // Change the box color to semi-transparent red
+    entity.box.material = new Cesium.ColorMaterialProperty(
+      Cesium.Color.RED.withAlpha(0.5)
+    );
 
-    // Disable the polygon outline
-    entity.polygon.outline = false;
+    // Disable the box outline
+    entity.box.outline = false;
   }
 });
 
@@ -465,12 +466,11 @@ westharlemejsitesSwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of westharlemejsites with the green color and disabled outline
+// Initial load of westharlemejsites with the red semi-transparent boxes and disabled outline
 viewer.dataSources.add(westharlemejsitesDataSource);
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
 });
-
 
 
 
