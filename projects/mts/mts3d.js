@@ -337,30 +337,15 @@ function togglemtsBuildingVisibility(elementId, show) {
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
+        ["${BuildingID} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
   });
 }
-
-// Function to toggle building visibility
-function togglebusDepotVisibility(elementId, show) {
-  console.log("Toggling building visibility...");
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"], // Show or hide the specific building with given element ID, set color to red (255, 0, 0) with 70% opacity
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-}
-
-
 
 // Function to toggle switch and layer visibility
-function togglemtsBuildingVisibility() {
+function togglemtsBuildingVisibilityHandler() {
   console.log("Switch toggled.");
   const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
   const buildingId = 275080379; // ID of the building you want to isolate
@@ -374,31 +359,32 @@ function togglemtsBuildingVisibility() {
 
 // Add event listener to the switch
 const mtsBuildingsSwitch = document.getElementById("mtsBuildingSwitch");
-mtsBuildingsSwitch.addEventListener("change", togglemtsBuildingVisibility);
+mtsBuildingsSwitch.addEventListener("change", togglemtsBuildingVisibilityHandler);
 
 
 // Function to toggle switch and layer visibility
-function togglebusDepotVisibility() {
+function togglebusDepotVisibilityHandler() {
   console.log("Switch toggled.");
   const busDepotSwitch = document.getElementById("busDepotSwitch");
   const buildingId = 271923865; // ID of the building you want to isolate
-  const show = mtsBuildingsSwitch.checked;
+  const show = busDepotSwitch.checked;
 
   console.log("Switch state:", show);
   console.log("Showing building with ID", buildingId);
-  togglebusDepotVisibility(buildingId, show);
+  togglemtsBuildingVisibility(buildingId, show);
   osmBuildingsTileset.show = show; // Update the visibility of the tileset based on the switch state
 }
 
 // Add event listener to the switch
 const busDepotSwitch = document.getElementById("busDepotSwitch");
-busDepotSwitch.addEventListener("change", togglebusDepotVisibility);
+busDepotSwitch.addEventListener("change", togglebusDepotVisibilityHandler);
 
 
 // Initially hide the OSM buildings Tileset
 osmBuildingsTileset.show = false;
 
 console.log("Script loaded.");
+
 
 
 
