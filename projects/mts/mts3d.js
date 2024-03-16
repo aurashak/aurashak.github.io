@@ -340,9 +340,12 @@ const defaultBuildingStyle = new Cesium.Cesium3DTileStyle({
 // Set the default style initially
 osmBuildingsTileset.style = defaultBuildingStyle;
 
-// Function to toggle building visibility
+// Function to toggle building visibility for MTS building
 function togglemtsBuildingVisibility(elementId, show) {
   console.log("Toggling building visibility...");
+  if (!osmBuildingsTileset.style) {
+    osmBuildingsTileset.style = defaultBuildingStyle.clone();
+  }
   osmBuildingsTileset.style.color.conditions[0][0] = `"${elementId}" === ${elementId}`; // Update condition
   osmBuildingsTileset.style.color.conditions[0][1] = show ? "rgba(255, 0, 0, 0.7)" : "rgba(255, 255, 255, 0)"; // Update color
 }
@@ -350,6 +353,9 @@ function togglemtsBuildingVisibility(elementId, show) {
 // Function to toggle building visibility for bus depot
 function togglebusDepotBuildingVisibility(elementId, show) {
   console.log("Toggling bus depot building visibility...");
+  if (!osmBuildingsTileset.style) {
+    osmBuildingsTileset.style = defaultBuildingStyle.clone();
+  }
   osmBuildingsTileset.style.color.conditions[0][0] = `"${elementId}" === ${elementId}`; // Update condition
   osmBuildingsTileset.style.color.conditions[0][1] = show ? "rgba(0, 255, 0, 0.7)" : "rgba(255, 255, 255, 0)"; // Update color
 }
