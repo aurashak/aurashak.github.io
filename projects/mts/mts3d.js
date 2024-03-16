@@ -322,13 +322,13 @@ if (defaultStyle) {
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(defaultStyle);
 }
 
-// Function to show only the building with the given element ID
-function showBuildingById(elementId) {
-  console.log("Showing building with ID", elementId);
+// Function to show only the buildings with the given element IDs
+function showBuildingsById(elementIds) {
+  console.log("Showing buildings with IDs", elementIds.join(', '));
   osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle({
     color: {
       conditions: [
-        ["${elementId} === " + elementId, "rgba(255, 0, 0, 0.7)"], // Show the specific building with the given ID, set color to red (255, 0, 0) with 70% opacity
+        elementIds.map(id => ["${elementId} === " + id, "rgba(255, 0, 0, 0.7)"]).flat(), // Show the specified buildings with the given IDs, set color to red (255, 0, 0) with 70% opacity
         [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
       ]
     }
@@ -338,9 +338,9 @@ function showBuildingById(elementId) {
 // Add the OSM buildings tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Show only the building with the specified element ID
-const buildingId = 275080379; // ID of the building to show
-showBuildingById(buildingId);
+// Show only the buildings with the specified element IDs
+const buildingIds = [275080379, 271923865]; // IDs of the buildings to show
+showBuildingsById(buildingIds);
 
 console.log("Script loaded.");
 
