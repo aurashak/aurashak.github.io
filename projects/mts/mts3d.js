@@ -316,29 +316,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
-) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
-  );
-}
-
-// Define a default style for the buildings
-const defaultBuildingStyle = new Cesium.Cesium3DTileStyle({
-  color: {
-    conditions: [
-      ["true", "rgba(255, 255, 255, 0)"] // Hide all buildings by default
-    ]
-  }
-});
-
-// Load OSM buildings MTS Building
-const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Apply default style to the OSM buildings tileset if available
 const osmExtras = osmBuildingsTileset.asset.extras;
