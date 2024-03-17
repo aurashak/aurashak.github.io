@@ -111,6 +111,33 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 // Create a polygon surrounding Central Park
 var buDepotPolygon = viewer.entities.add({
+  name: 'NYC Bus Depot',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.9587, 40.8199, // Southwest
+      -73.9562, 40.8188, // Southeast
+      -73.9566, 40.8183, // Northeast
+      -73.9591, 40.8193  // Northwest
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    extrudedHeight: 100, // Extrude the polygon upward by 100 units
+    height: -10 // Position the polygon lower by setting the height to -10 units
+  },
+  label: {
+    text: 'NYC Bus Depot',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -20) // Offset the label upward to prevent overlap with polygon
+  }
+});
+
+
+// Create a polygon surrounding Central Park
+var MTSbuildingPolygon = viewer.entities.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
       -73.9587, 40.8199, // Southwest
@@ -122,6 +149,37 @@ var buDepotPolygon = viewer.entities.add({
     extrudedHeight: 100 // Extrude the polygon upward by 100 units
   }
 });
+
+
+// Create a polygon surrounding Central Park
+var WateTreatmentPlantPolygon = viewer.entities.add({
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.9587, 40.8199, // Southwest
+      -73.9562, 40.8188, // Southeast
+      -73.9566, 40.8183, // Northeast
+      -73.9591, 40.8193  // Northwest
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    extrudedHeight: 100 // Extrude the polygon upward by 100 units
+  }
+});
+
+
+// Create a polygon surrounding Central Park
+var GasPipelineBuildingPolygon = viewer.entities.add({
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.9587, 40.8199, // Southwest
+      -73.9562, 40.8188, // Southeast
+      -73.9566, 40.8183, // Northeast
+      -73.9591, 40.8193  // Northwest
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    extrudedHeight: 100 // Extrude the polygon upward by 100 units
+  }
+});
+
 
 
 
@@ -349,6 +407,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 */
 
 
+/*
+
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
@@ -465,7 +525,7 @@ console.log("Added NYC Bus Depot building");
 
 }
 
-
+*/
 
 
 
