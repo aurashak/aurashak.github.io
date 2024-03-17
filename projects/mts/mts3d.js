@@ -185,9 +185,9 @@ var marineTransferStationPolygon = viewer.entities.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
       -73.9599, 40.8225, // Southwest
-      -73.9591, 40.8222, // Northwest
+      -73.9591, 40.8225, // Northwest (same latitude as Southwest)
       -73.9588, 40.8227, // Northeast
-      -73.9596, 40.8231  // Southeast
+      -73.9596, 40.8227  // Southeast (same latitude as Northeast)
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
     extrudedHeight: 10, // Extrude the polygon upward by 20 units
