@@ -119,7 +119,7 @@ var busDepotPolygon = viewer.entities.add({
       -73.9591, 40.8193  // Northwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 20, // Extrude the polygon upward by 20 units
+    extrudedHeight: 10, // Extrude the polygon upward by 20 units
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
   label: {
@@ -135,6 +135,48 @@ var busDepotPolygon = viewer.entities.add({
 });
 
 
+
+// Create a polygon for the North River Sewage Treatment Plant
+var wasteWaterTreatmentPolygon = viewer.entities.add({
+  name: 'North River Sewage Treatment Plant',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.95969799948558, 40.82366630333311, // Southwest
+      -73.95666103594826, 40.8284532443468,  // Southeast
+      -73.95498357953169, 40.827814452446894, // Northeast
+      -73.95467659404369, 40.82821266110685, // Northwest
+      -73.9534925071614, 40.82773978805692, // Northwest (repeat to close polygon)
+      -73.95731886199398, 40.82272878575034, // Southwest (repeat to close polygon)
+      -73.95969799948558, 40.82366630333311  // Southwest (repeat to close polygon)
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    extrudedHeight: 10, // Extrude the polygon upward by 10 units
+    height: -20 // Position the polygon lower by setting the height to -20 units
+  },
+  label: {
+    text: 'North River Sewage Treatment Plant',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label upward to prevent overlap with polygon
+  }
+});
+
+// Debugging: Log text properties
+console.log('Label text:', wasteWaterTreatmentPolygon.label.text);
+console.log('Label font:', wasteWaterTreatmentPolygon.label.font);
+console.log('Label fillColor:', wasteWaterTreatmentPolygon.label.fillColor);
+console.log('Label outlineColor:', wasteWaterTreatmentPolygon.label.outlineColor);
+console.log('Label outlineWidth:', wasteWaterTreatmentPolygon.label.outlineWidth);
+console.log('Label style:', wasteWaterTreatmentPolygon.label.style);
+console.log('Label verticalOrigin:', wasteWaterTreatmentPolygon.label.verticalOrigin);
+console.log('Label pixelOffset:', wasteWaterTreatmentPolygon.label.pixelOffset);
+
+
+
 // Create a polygon for the Williams Gas Pipeline
 var gasPipelinePolygon = viewer.entities.add({
   name: 'Williams Gas Pipeline',
@@ -145,11 +187,12 @@ var gasPipelinePolygon = viewer.entities.add({
       -73.95895805252165, 40.82152563349923, // Northeast
       -73.95914012690719, 40.82131608560706, // Northwest
       -73.95901874398349, 40.82124719300478, // Northwest (repeat to close polygon)
-      -73.95951186211099, 40.82125580458398  // Southwest (repeat to close polygon)
+      -73.95951186211099, 40.82125580458398,  // Southwest (repeat to close polygon)
+      -73.9592140946263, 40.82111084285179
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 20, // Extrude the polygon upward by 20 units
-    height: -20 // Position the polygon lower by setting the height to -20 units
+    extrudedHeight: 10, // Extrude the polygon upward by 20 units
+    height: -40 // Position the polygon lower by setting the height to -20 units
   },
   label: {
     text: 'Williams Gas Pipeline',
