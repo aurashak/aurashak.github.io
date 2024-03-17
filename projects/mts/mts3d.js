@@ -109,8 +109,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 // Create a polygon surrounding Central Park
-var buDepotPolygon = viewer.entities.add({
-  name: 'NYC Bus Depot',
+var busDepotPolygon = viewer.entities.add({
+  name: 'MTA NYC Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
       -73.9587, 40.8199, // Southwest
@@ -123,7 +123,7 @@ var buDepotPolygon = viewer.entities.add({
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
   label: {
-    text: 'NYC Bus Depot',
+    text: 'Manhattanville Bus Depot',
     font: 'bold 16px Arial',
     fillColor: Cesium.Color.WHITE,
     outlineColor: Cesium.Color.BLACK,
@@ -135,14 +135,14 @@ var buDepotPolygon = viewer.entities.add({
 });
 
 // Debugging: Log text properties
-console.log('Label text:', buDepotPolygon.label.text);
-console.log('Label font:', buDepotPolygon.label.font);
-console.log('Label fillColor:', buDepotPolygon.label.fillColor);
-console.log('Label outlineColor:', buDepotPolygon.label.outlineColor);
-console.log('Label outlineWidth:', buDepotPolygon.label.outlineWidth);
-console.log('Label style:', buDepotPolygon.label.style);
-console.log('Label verticalOrigin:', buDepotPolygon.label.verticalOrigin);
-console.log('Label pixelOffset:', buDepotPolygon.label.pixelOffset);
+console.log('Label text:', busDepotPolygon.label.text);
+console.log('Label font:', busDepotPolygon.label.font);
+console.log('Label fillColor:', busDepotPolygon.label.fillColor);
+console.log('Label outlineColor:', busDepotPolygon.label.outlineColor);
+console.log('Label outlineWidth:', busDepotPolygon.label.outlineWidth);
+console.log('Label style:', busDepotPolygon.label.style);
+console.log('Label verticalOrigin:', busDepotPolygon.label.verticalOrigin);
+console.log('Label pixelOffset:', busDepotPolygon.label.pixelOffset);
 
 
 
