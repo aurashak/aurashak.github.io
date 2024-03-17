@@ -643,8 +643,8 @@ const redBox = viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(boxLongitude, boxLatitude),
   billboard: {
     image: createRedBoxImage(),
-    width: 10000, // Adjust the width as needed
-    height: 10000, // Adjust the height as needed
+    width: 100, // Adjust the width as needed
+    height: 100, // Adjust the height as needed
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e7, 0.1), // Adjust the scale for distance
     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Ensure box is clamped to ground
