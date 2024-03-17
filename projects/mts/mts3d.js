@@ -357,7 +357,7 @@ function showBuildingById(tileset, elementId, color, label = null) {
 
 // Add green box at the same location without rotation
 viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -5), // Same position as the label
+  position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
     material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
@@ -376,7 +376,7 @@ viewer.entities.add({
 
 // Add second green box next to the first one without rotation
 viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.9524, 40.8226, -5), // Adjusted position to be next to the first box
+  position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
     material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
