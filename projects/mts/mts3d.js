@@ -430,7 +430,7 @@ function showBuildingById(tileset, elementId, color) {
             -73.95790713393994 + 0.002, 40.81928006545158, -10
         ]),
         material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-        orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
+        orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(90)) // Rotate around the Y-axis by 30 degrees
     },
     label: {
         text: "NYC Bus Depot",
