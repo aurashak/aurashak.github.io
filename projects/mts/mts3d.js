@@ -345,7 +345,6 @@ function showBuildingById(tileset, elementId, color) {
     box: {
       dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
       material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(-45)) // Rotate around the Y-axis by -45 degrees
     },
     label: {
       text: "Marine Transfer Station",
@@ -365,7 +364,6 @@ function showBuildingById(tileset, elementId, color) {
     box: {
       dimensions: new Cesium.Cartesian3(400, 50, 50), // Adjust dimensions as needed (long rectangle)
       material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
     },
     label: {
       text: "North River Sewage Treatment Plant",
@@ -385,7 +383,6 @@ function showBuildingById(tileset, elementId, color) {
     box: {
       dimensions: new Cesium.Cartesian3(30, 50, 30), // Adjust dimensions as needed (long rectangle)
       material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
     },
     label: {
       text: "Williams Pipeline",
@@ -399,31 +396,24 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-// Check if the first entity exists and has the box property
-if (viewer.entities.values.length > 0 && viewer.entities.values[0].box) {
   // Add fourth green box next to the first one with rotation along the Y-axis
   viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
-      box: {
-          dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-          material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-          orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
-      },
-      label: {
-          text: "NYC Bus Depot",
-          font: "14px Arial",
-          fillColor: Cesium.Color.WHITE,
-          outlineColor: Cesium.Color.BLACK,
-          outlineWidth: 2,
-          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-          pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-      }
+    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
+    box: {
+      dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+    },
+    label: {
+      text: "NYC Bus Depot",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
   });
-} else {
-  console.error("First entity does not have the box property.");
-}
-
 
   console.log("Box 1 orientation:", Cesium.Math.toDegrees(viewer.entities.values[0].box.orientation.y));
   console.log("Box 2 orientation:", Cesium.Math.toDegrees(viewer.entities.values[1].box.orientation.y));
