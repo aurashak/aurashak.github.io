@@ -370,7 +370,7 @@ viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 50)
+    pixelOffset: new Cesium.Cartesian2(0, -50)
   }
 });
 
@@ -389,7 +389,7 @@ viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 50)
+    pixelOffset: new Cesium.Cartesian2(0, -50)
   }
 });
 
