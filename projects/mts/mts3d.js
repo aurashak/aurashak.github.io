@@ -109,7 +109,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-// Define the flyToMTSCity function
+// Define the flyToPlanView function
 function flyToPlanView() {
   viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
@@ -118,12 +118,17 @@ function flyToPlanView() {
       200 // Adjust the zoom level as needed
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(65), // clockwise from north
-      pitch: Cesium.Math.toRadians(-40), // Look downward
+      heading: Cesium.Math.toRadians(0), // Set heading to north
+      pitch: Cesium.Math.toRadians(-90), // Look straight down
       roll: 0,
     },
   });
 }
+
+// Add a click event listener to the flyToPlanView button
+const flyToPlanViewBtn = document.getElementById('flyToPlanView');
+flyToPlanViewBtn.addEventListener('click', flyToPlanView);
+
 
 
 // Add a click event listener to the flyToMTS button
