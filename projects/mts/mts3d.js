@@ -851,6 +851,37 @@ console.log("Initial load of nycsubwayDataSource");
 
 
 
+   // Load nycsubway GeoJsonDataSource
+   const nycsubwayLinesResource = await Cesium.IonResource.fromUrl('https://aurashak.github.io/geojson/nyc/nycsubway.geojson');
+   const nycsubwayLinesDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayLinesResource);
+  
+   
+  
+   // Create a switch event listener for nycsubway
+   const nycsubwayLinesSwitch = document.getElementById("nycsubwayLinesSwitch");
+   
+   // Function to toggle the visibility of the nycsubwayLinesDataSource
+   const toggleNycSubwayLinesLayer = () => {
+       const isChecked = nycsubwayLinesSwitch.checked;
+       nycsubwayLinesDataSource.entities.values.forEach((entity) => {
+           entity.show = isChecked;
+       });
+   };
+   
+   // Add an event listener to the switch
+   nycsubwayLinesSwitch.addEventListener("change", toggleNycSubwayLinesLayer);
+   
+   // Set the switch's initial state
+   nycsubwayLinesSwitch.checked = false;
+   
+   // Initial load of nycsubway with the specified color
+   // (No need to add it to viewer initially, as the switch is in the 'off' position)
+   console.log("Initial load of nycsubwayLinesDataSource");
+
+   
+
+
+
 
     // Load mtsgas GeoJsonDataSource
     const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
