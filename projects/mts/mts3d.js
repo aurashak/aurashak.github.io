@@ -632,11 +632,6 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
     mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
-};
-
-
-
-
 
 
 // Define the coordinates for the red semi-transparent box
@@ -675,8 +670,7 @@ function createRedBoxImage() {
 
 
 
-
-
+};
 
 
 // Call the initializeCesium function
