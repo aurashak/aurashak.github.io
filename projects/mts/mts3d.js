@@ -311,14 +311,34 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     
 */
 
+
 // Load OSM buildings MTS Building
 const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
 
 // Add the tileset to the viewer's scene
 viewer.scene.primitives.add(osmBuildingsTileset);
 
-// Function to add label and box to the building with the given element ID
-function addLabelAndBoxToBuilding(elementId, label = null, color) {
+// Function to show only the buildings with the given element IDs after the tileset is fully loaded
+function showBuildings() {
+  // Show building with ID 275080379 in red and add label
+  showBuildingById(osmBuildingsTileset, 275080379, "red", "MTS Building");
+}
+
+// Listen for the tileLoad event to ensure all tiles are loaded
+osmBuildingsTileset.tileLoad.addEventListener(showBuildings);
+
+// Function to show only the building with the given element ID for the tileset
+function showBuildingById(tileset, elementId, color, label = null) {
+  console.log("Showing building with ID", elementId);
+  tileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : (color === "blue" ? "0, 0, 255" : "0, 255, 0")}, 0.7)`], // Show the specific building with the given ID, set color accordingly
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
+
   // Add label to the building if specified
   if (label) {
     viewer.entities.add({
@@ -335,12 +355,12 @@ function addLabelAndBoxToBuilding(elementId, label = null, color) {
       }
     });
 
-    // Add box at the same location
+    // Add green box at the same location
     viewer.entities.add({
       position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Same position as the label
       box: {
         dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
-        material: Cesium.Color[color.toUpperCase()].withAlpha(0.5) // Use specified color with transparency
+        material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
       }
     });
   }
