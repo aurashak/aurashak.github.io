@@ -197,6 +197,24 @@ var marineTransferStationPolygon = viewer.entities.add({
 
 
 
+// Add a label for the Marine Placeholder
+var marineTransferLabel = viewer.entities.add({
+  name: 'Marine Placeholder Label',
+  position: Cesium.Cartesian3.fromDegrees(-73.95948442468283, 40.822656278896815), // Coordinates
+  label: {
+    text: 'Marine Placeholder',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label downward
+  }
+});
+
+
+
 // Define the flyToPlanView function
 function flyToPlanView() {
   viewer.scene.camera.setView({
