@@ -242,35 +242,38 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
+
+    
+
     // Load full google photorealistic tileset
-    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-    viewer.scene.primitives.add(newTileset);
-    newTileset.show = true; // Set the initial state to 'on'
+const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+viewer.scene.primitives.add(newTileset);
+newTileset.show = true; // Set the initial state to 'on'
 
-    // Apply default style to the tileset if available
-    const newExtras = newTileset.asset.extras;
-    if (
-      Cesium.defined(newExtras) &&
-      Cesium.defined(newExtras.ion) &&
-      Cesium.defined(newExtras.ion.defaultStyle)
-    ) {
-      newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
-    }
+// Wait for the tileset to be ready
+await newTileset.readyPromise;
 
-    // Remove the default satellite imagery layers
-    viewer.imageryLayers.removeAll();
+// Get the bounding volume of the tileset
+const boundingVolume = newTileset.boundingVolume;
 
-    // Create a switch event listener for the new 3D Tileset
-    const newTilesetSwitch = document.getElementById("3dTileSwitch");
-    newTilesetSwitch.checked = true; // Set the initial state to 'on'
+// Log the bounding volume for inspection
+console.log("Bounding Volume:", boundingVolume);
 
-    newTilesetSwitch.addEventListener("change", (event) => {
-      newTileset.show = event.target.checked;
-      const status = event.target.checked ? "shown" : "hidden";
-      console.log(`3D Tileset Layer ${status}`);
-    });
+// Remove the default satellite imagery layers
+viewer.imageryLayers.removeAll();
 
-    console.log("Initial load of 3D Tileset layer with the switch turned on.");
+// Create a switch event listener for the new 3D Tileset
+const newTilesetSwitch = document.getElementById("3dTileSwitch");
+newTilesetSwitch.checked = true; // Set the initial state to 'on'
+
+newTilesetSwitch.addEventListener("change", (event) => {
+  newTileset.show = event.target.checked;
+  const status = event.target.checked ? "shown" : "hidden";
+  console.log(`3D Tileset Layer ${status}`);
+});
+
+console.log("Initial load of 3D Tileset layer with the switch turned on.");
+
 
 
 
