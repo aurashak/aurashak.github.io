@@ -435,13 +435,11 @@ toggleOSMMapLayer();
 
 
 
-
-
 // Load westharlemejsites GeoJsonDataSource
 const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
 const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
 
-// Modify the polygon color, disable the outline, and extrude vertically before adding the data source
+// Modify the polygon color, disable the outline, and adjust position to bring layer down to surface level before adding the data source
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
   if (entity.polygon) {
     // Change the polygon color to red
@@ -450,8 +448,17 @@ westharlemejsitesDataSource.entities.values.forEach((entity) => {
     // Disable the polygon outline
     entity.polygon.outline = false;
 
-    // Extrude the polygon vertically
-    entity.polygon.extrudedHeight = 1000; // Set the extruded height as needed
+    // Calculate the height difference to bring the layer down to surface level
+    const heightDifference = entity.position.getValue().height - entity.polygon.extrudedHeight.getValue();
+
+    // Adjust the position of the entity to bring it down to the surface level
+    entity.position = new Cesium.ConstantPositionProperty(
+      Cesium.Cartesian3.fromRadians(
+        entity.position.getValue().longitude,
+        entity.position.getValue().latitude,
+        entity.position.getValue().height - heightDifference
+      )
+    );
   }
 });
 
@@ -467,7 +474,7 @@ westharlemejsitesSwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of westharlemejsites with red polygons, disabled outline, and vertical extrusion
+// Initial load of westharlemejsites with red polygons, disabled outline, and adjusted position to bring layer down to surface level
 viewer.dataSources.add(westharlemejsitesDataSource);
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
