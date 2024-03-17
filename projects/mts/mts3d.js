@@ -150,8 +150,8 @@ var wasteWaterTreatmentPolygon = viewer.entities.add({
       -73.95969799948558, 40.82366630333311  // Southwest (repeat to close polygon)
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 8, // Extrude the polygon upward by 10 units
-    height: -20 // Position the polygon lower by setting the height to -20 units
+    extrudedHeight: 12, // Extrude the polygon upward by 10 units
+    height: -40 // Position the polygon lower by setting the height to -20 units
   },
 });
 
@@ -190,7 +190,7 @@ var marineTransferStationPolygon = viewer.entities.add({
       -73.9591, 40.8222  // Northwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 20, // Extrude the polygon upward by 20 units
+    extrudedHeight: 10, // Extrude the polygon upward by 20 units
     height: -60 // Position the polygon lower by setting the height to -60 units
   },
 });
