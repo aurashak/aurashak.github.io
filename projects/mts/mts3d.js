@@ -420,28 +420,33 @@ function showBuildingById(tileset, elementId, color) {
 
 
 
-  // Add fourth green box next to the first one with rotation along the Y-axis
-viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
-  box: {
-    dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
-  },
-  label: {
-    text: "NYC Bus Depot",
-    font: "14px Arial",
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-    pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-  }
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
+    box: {
+        positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+            -73.95790713393994, 40.81928006545158, -10,
+            -73.95790713393994, 40.81928006545158 + 0.001, -10,
+            -73.95790713393994 + 0.002, 40.81928006545158 + 0.002, -10,
+            -73.95790713393994 + 0.002, 40.81928006545158, -10
+        ]),
+        material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+        orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
+    },
+    label: {
+        text: "NYC Bus Depot",
+        font: "14px Arial",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+        pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
 });
 
 // Log a message specifically for the NYC Bus Depot
 console.log("Added NYC Bus Depot building");
+
 }
 
 
@@ -702,59 +707,6 @@ function createCircleImage() {
 
 
 
-    /*
-
-    // Load GeoJsonDataSource with asset ID 2483827
-    const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
-    const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
-
-    // Modify the billboard color and style before adding the data source
-    busDepotsDataSource.entities.values.forEach((entity) => {
-      if (entity.billboard) {
-        // Change the billboard color to blue
-        entity.billboard.color = Cesium.Color.BLUE;
-        // Change the billboard style to your desired image
-        entity.billboard.image = createCustomImage(); // Function to create a custom image
-      }
-    });
-
-    // Create a switch event listener for the busdepots layer
-    const busDepotsSwitch = document.getElementById("busDepotsSwitch");
-
-    // Set the switch to the off position initially
-    busDepotsSwitch.checked = false;
-
-    busDepotsSwitch.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        viewer.dataSources.add(busDepotsDataSource);
-        console.log("busDepotsDataSource added to viewer");
-      } else {
-        viewer.dataSources.remove(busDepotsDataSource);
-        console.log("busDepotsDataSource removed from viewer");
-      }
-    });
-
-    // Initial load of the busdepots layer with modified billboards
-    if (busDepotsSwitch.checked) {
-      viewer.dataSources.add(busDepotsDataSource);
-      console.log("Initial load of busDepotsDataSource");
-    }
-
-    // Function to create a custom image
-    function createCustomImage() {
-      const canvas = document.createElement("canvas");
-      canvas.width = 20;
-      canvas.height = 20;
-      const context = canvas.getContext("2d");
-      // Customize the image as needed
-      context.fillStyle = "blue";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      return canvas;
-    }
-
-    */
-
-
 
 
 
@@ -1005,3 +957,60 @@ console.log("Initial load of nycsubwayDataSource");
 
 
 */
+
+
+
+
+
+    /*
+
+    // Load GeoJsonDataSource with asset ID 2483827
+    const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
+    const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
+
+    // Modify the billboard color and style before adding the data source
+    busDepotsDataSource.entities.values.forEach((entity) => {
+      if (entity.billboard) {
+        // Change the billboard color to blue
+        entity.billboard.color = Cesium.Color.BLUE;
+        // Change the billboard style to your desired image
+        entity.billboard.image = createCustomImage(); // Function to create a custom image
+      }
+    });
+
+    // Create a switch event listener for the busdepots layer
+    const busDepotsSwitch = document.getElementById("busDepotsSwitch");
+
+    // Set the switch to the off position initially
+    busDepotsSwitch.checked = false;
+
+    busDepotsSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(busDepotsDataSource);
+        console.log("busDepotsDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(busDepotsDataSource);
+        console.log("busDepotsDataSource removed from viewer");
+      }
+    });
+
+    // Initial load of the busdepots layer with modified billboards
+    if (busDepotsSwitch.checked) {
+      viewer.dataSources.add(busDepotsDataSource);
+      console.log("Initial load of busDepotsDataSource");
+    }
+
+    // Function to create a custom image
+    function createCustomImage() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 20;
+      canvas.height = 20;
+      const context = canvas.getContext("2d");
+      // Customize the image as needed
+      context.fillStyle = "blue";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      return canvas;
+    }
+
+    */
+
