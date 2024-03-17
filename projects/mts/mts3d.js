@@ -423,33 +423,36 @@ console.log("Added NYC Bus Depot building");
 
 
 
+// Calculate the orientation quaternion
+const rotationAngle = Cesium.Math.toRadians(30);
+const orientationQuaternion = Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle);
+
+// Log the orientation quaternion
+console.log('Orientation Quaternion:', orientationQuaternion);
+
 // Add fourth green box next to the first one with rotation along the Y-axis
 viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
-  box: {
-      dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      orientation: new Cesium.CallbackProperty(function(time, result) {
-          // Calculate the rotation angle based on time for animation or use a fixed angle
-          var rotationAngle = Cesium.Math.toRadians(30); // Rotate around the Y-axis by 30 degrees
-          // Calculate the orientation quaternion
-          return Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle, result);
-      }, false)
-  },
-  label: {
-      text: "NYC Bus Depot",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-  }
+    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
+    box: {
+        dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
+        material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+        orientation: orientationQuaternion // Use the calculated orientation quaternion
+    },
+    label: {
+        text: "NYC Bus Depot",
+        font: "14px Arial",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+        pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
 });
 
 // Log a message specifically for the NYC Bus Depot
 console.log("Added NYC Bus Depot building");
+
 
 
 
