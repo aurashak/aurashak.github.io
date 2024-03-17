@@ -355,12 +355,14 @@ function showBuildingById(tileset, elementId, color, label = null) {
       }
     });
 
-// Add green box at the same location without rotation
+
+// Add green box at the same location with rotation along the X-axis
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
-    material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
+    material: Cesium.Color.GREEN.withAlpha(0.5), // Green color with transparency
+    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(90)) // Rotate around the X-axis by 45 degrees
   },
   label: {
     text: "Marine Transfer Station",
@@ -374,13 +376,13 @@ viewer.entities.add({
   }
 });
 
-// Add second green box next to the first one without rotation
+// Add second green box next to the first one with rotation along the X-axis
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
   box: {
     dimensions: new Cesium.Cartesian3(100, 50, 50), // Adjust dimensions as needed (long rectangle)
-    material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
- 
+    material: Cesium.Color.GREEN.withAlpha(0.5), // Green color with transparency
+    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(40)) // Rotate around the X-axis by 30 degrees
   },
   label: {
     text: "North River Sewage Treatment Plant",
@@ -392,8 +394,8 @@ viewer.entities.add({
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
     pixelOffset: new Cesium.Cartesian2(0, -50) // Adjust as needed to set the label's height
   }
-  
 });
+
 
 
   }
