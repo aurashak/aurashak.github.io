@@ -108,30 +108,20 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 });
 
 
-// Create a polygon surrounding Central Park
+// Create a polygon for the MTA NYC Bus Depot
 var busDepotPolygon = viewer.entities.add({
   name: 'MTA NYC Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
-      -73.9587, 40.8199, // Southwest
-      -73.9562, 40.8188, // Southeast
-      -73.9566, 40.8183, // Northeast
-      -73.9591, 40.8193  // Northwest
+      -73.95879964635739, 40.81992411443654, // Southwest
+      -73.95667319346998, 40.81903869944404, // Southeast
+      -73.95709731406289, 40.818494163354465, // Northeast
+      -73.95919451724812, 40.81938401269745  // Northwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 10, // Extrude the polygon upward by 20 units
+    extrudedHeight: 10, // Extrude the polygon upward by 10 units
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
-  label: {
-    text: 'Manhattanville Bus Depot',
-    font: 'bold 16px Arial',
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label upward to prevent overlap with polygon
-  }
 });
 
 
@@ -184,13 +174,22 @@ var marineTransferStationPolygon = viewer.entities.add({
   name: 'Marine Transfer Station',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
-      -73.9599, 40.8225, // Southwest
-      -73.9591, 40.8225, // Northwest (same latitude as Southwest)
-      -73.9588, 40.8227, // Northeast
-      -73.9596, 40.8227  // Southeast (same latitude as Northeast)
+      -73.8225866219805, 40.9599774228501, // Southwest
+      -73.823053654876986, 40.95961472661843, // Northwest 
+      -73.822734921882166, 40.95888640918542, // Northeast
+      -73.82256670107292, 40.9589887831218,  // Southeast 
+      -73.82251579205972, 40.95884838458049, // Southeast (repeat to close polygon)
+      -73.821942816468486, 40.95861829823328, // Southwest (repeat to close polygon)
+      -73.821865345486735, 40.95849544950963, // Southwest (repeat to close polygon)
+      -73.821502337389006, 40.95878209652767, // Southeast (repeat to close polygon)
+      -73.82157538185968, 40.95896929458273, // Southeast (repeat to close polygon)
+      -73.82180558208959, 40.95877624658844, // Southwest (repeat to close polygon)
+      -73.82238329260957, 40.95899561930923, // Northeast (repeat to close polygon)
+      -73.82244748235672, 40.9591009182152,  // Northeast (repeat to close polygon)
+      -73.822248272593804, 40.95923546681728 // Southwest (repeat to close polygon)
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 10, // Extrude the polygon upward by 20 units
+    extrudedHeight: 10, // Extrude the polygon upward by 10 units
     height: -60 // Position the polygon lower by setting the height to -60 units
   },
 });
