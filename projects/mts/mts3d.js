@@ -448,7 +448,7 @@ console.log("Added NYC Bus Depot building");
 
 
 // Calculate the rotation angle
-const rotationAngle = Cesium.Math.toRadians(30);
+const rotationAngle = Cesium.Math.toRadians(90);
 console.log('Rotation Angle:', rotationAngle); // Log the rotation angle
 const orientationQuaternion = Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle);
 
@@ -461,9 +461,9 @@ viewer.entities.add({
         dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
         material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
         positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-            -73.95790713393994, 40.81928006545158, -10,
-            -73.95790713393994, 40.81928006545158 + 0.001, -10,
-            -73.95790713393994 + 0.001, 40.81928006545158 + 0.001, -10,
+            -73.95790713393994, 40.11928006545158, -10,
+            -73.95790713393994, 40.41928006545158 + 0.001, -10,
+            -73.35790713393994 + 0.001, 40.01928006545158 + 0.001, -10,
             -73.95790713393994 + 0.001, 40.81928006545158, -10
         ]),
         orientation: orientationQuaternion // Apply rotation along the Y-axis
