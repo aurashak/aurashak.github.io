@@ -160,7 +160,7 @@ var gasPipelinePolygon = viewer.entities.add({
       -73.9592140946263, 40.82111084285179
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 5, // Extrude the polygon upward by 20 units
+    extrudedHeight: 2, // Extrude the polygon upward by 20 units
     height: -40 // Position the polygon lower by setting the height to -20 units
   },
 });
@@ -223,7 +223,8 @@ var wasteWaterLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 10000) // Display label when distance from camera is between 0 and 10,000 meters
   }
 });
 
