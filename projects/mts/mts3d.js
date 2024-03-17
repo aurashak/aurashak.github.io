@@ -415,8 +415,7 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-  console.log("Box 1 orientation:", Cesium.Math.toDegrees(viewer.entities.values[0].box.orientation.y));
-  console.log("Box 2 orientation:", Cesium.Math.toDegrees(viewer.entities.values[1].box.orientation.y));
+
 }
 
 
