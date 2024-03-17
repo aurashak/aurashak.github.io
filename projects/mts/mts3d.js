@@ -113,9 +113,9 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 function flyToPlanView() {
   viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
-      -73.9625,
-      40.8217,
-      1000 // Adjust the zoom level as needed
+      -73.9579,
+      40.8207,
+      1700 // Adjust the zoom level as needed
     ),
     orientation: {
       heading: Cesium.Math.toRadians(15), // Slightly rotate to the right (adjust angle as needed)
