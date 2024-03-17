@@ -115,7 +115,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
       hierarchy: Cesium.Cartesian3.fromDegreesArray([
         -73.9587, 40.8199, // Southwest
         -73.9562, 40.8188, // Southeast
-        -73.9566, 40.8183 // Northeast
+        -73.9566, 40.8183, // Northeast
         -73.9597, 40.8187  // Northwest
       ]),
       material: Cesium.Color.RED.withAlpha(0.5) // Red with 50% opacity
