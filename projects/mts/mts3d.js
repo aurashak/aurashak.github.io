@@ -120,8 +120,8 @@ var buDepotPolygon = viewer.entities.add({
       -73.9591, 40.8193  // Northwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 100, // Extrude the polygon upward by 100 units
-    height: -10 // Position the polygon lower by setting the height to -10 units
+    extrudedHeight: 20, // Extrude the polygon upward by 100 units
+    height: -20 // Position the polygon lower by setting the height to -10 units
   },
   label: {
     text: 'NYC Bus Depot',
@@ -135,50 +135,6 @@ var buDepotPolygon = viewer.entities.add({
   }
 });
 
-
-// Create a polygon surrounding Central Park
-var MTSbuildingPolygon = viewer.entities.add({
-  polygon: {
-    hierarchy: Cesium.Cartesian3.fromDegreesArray([
-      -73.9587, 40.8199, // Southwest
-      -73.9562, 40.8188, // Southeast
-      -73.9566, 40.8183, // Northeast
-      -73.9591, 40.8193  // Northwest
-    ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 100 // Extrude the polygon upward by 100 units
-  }
-});
-
-
-// Create a polygon surrounding Central Park
-var WateTreatmentPlantPolygon = viewer.entities.add({
-  polygon: {
-    hierarchy: Cesium.Cartesian3.fromDegreesArray([
-      -73.9587, 40.8199, // Southwest
-      -73.9562, 40.8188, // Southeast
-      -73.9566, 40.8183, // Northeast
-      -73.9591, 40.8193  // Northwest
-    ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 100 // Extrude the polygon upward by 100 units
-  }
-});
-
-
-// Create a polygon surrounding Central Park
-var GasPipelineBuildingPolygon = viewer.entities.add({
-  polygon: {
-    hierarchy: Cesium.Cartesian3.fromDegreesArray([
-      -73.9587, 40.8199, // Southwest
-      -73.9562, 40.8188, // Southeast
-      -73.9566, 40.8183, // Northeast
-      -73.9591, 40.8193  // Northwest
-    ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 100 // Extrude the polygon upward by 100 units
-  }
-});
 
 
 
