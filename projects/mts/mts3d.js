@@ -362,7 +362,7 @@ viewer.entities.add({
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
     material: Cesium.Color.GREEN.withAlpha(0.5), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(90)) // Rotate around the X-axis by 45 degrees
+    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(140)) // Rotate around the X-axis by 45 degrees
   },
   label: {
     text: "Marine Transfer Station",
