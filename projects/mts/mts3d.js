@@ -150,30 +150,10 @@ var wasteWaterTreatmentPolygon = viewer.entities.add({
       -73.95969799948558, 40.82366630333311  // Southwest (repeat to close polygon)
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 10, // Extrude the polygon upward by 10 units
+    extrudedHeight: 8, // Extrude the polygon upward by 10 units
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
-  label: {
-    text: 'North River Sewage Treatment Plant',
-    font: 'bold 16px Arial',
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label upward to prevent overlap with polygon
-  }
 });
-
-// Debugging: Log text properties
-console.log('Label text:', wasteWaterTreatmentPolygon.label.text);
-console.log('Label font:', wasteWaterTreatmentPolygon.label.font);
-console.log('Label fillColor:', wasteWaterTreatmentPolygon.label.fillColor);
-console.log('Label outlineColor:', wasteWaterTreatmentPolygon.label.outlineColor);
-console.log('Label outlineWidth:', wasteWaterTreatmentPolygon.label.outlineWidth);
-console.log('Label style:', wasteWaterTreatmentPolygon.label.style);
-console.log('Label verticalOrigin:', wasteWaterTreatmentPolygon.label.verticalOrigin);
-console.log('Label pixelOffset:', wasteWaterTreatmentPolygon.label.pixelOffset);
 
 
 
@@ -187,34 +167,15 @@ var gasPipelinePolygon = viewer.entities.add({
       -73.95895805252165, 40.82152563349923, // Northeast
       -73.95914012690719, 40.82131608560706, // Northwest
       -73.95901874398349, 40.82124719300478, // Northwest (repeat to close polygon)
-      -73.95951186211099, 40.82125580458398,  // Southwest (repeat to close polygon)
       -73.9592140946263, 40.82111084285179
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 10, // Extrude the polygon upward by 20 units
+    extrudedHeight: 5, // Extrude the polygon upward by 20 units
     height: -40 // Position the polygon lower by setting the height to -20 units
   },
-  label: {
-    text: 'Williams Gas Pipeline',
-    font: 'bold 14px Arial',
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -100) // Offset the label upward to prevent overlap with polygon
-  }
 });
 
-// Debugging: Log text properties
-console.log('Label text:', gasPipelinePolygon.label.text);
-console.log('Label font:', gasPipelinePolygon.label.font);
-console.log('Label fillColor:', gasPipelinePolygon.label.fillColor);
-console.log('Label outlineColor:', gasPipelinePolygon.label.outlineColor);
-console.log('Label outlineWidth:', gasPipelinePolygon.label.outlineWidth);
-console.log('Label style:', gasPipelinePolygon.label.style);
-console.log('Label verticalOrigin:', gasPipelinePolygon.label.verticalOrigin);
-console.log('Label pixelOffset:', gasPipelinePolygon.label.pixelOffset);
+
 
 
 
@@ -232,16 +193,6 @@ var marineTransferStationPolygon = viewer.entities.add({
     extrudedHeight: 20, // Extrude the polygon upward by 20 units
     height: -60 // Position the polygon lower by setting the height to -60 units
   },
-  label: {
-    text: '135th St Marine Transfer Station',
-    font: 'bold 16px Arial',
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label upward to prevent overlap with polygon
-  }
 });
 
 
