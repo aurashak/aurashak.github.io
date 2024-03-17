@@ -339,20 +339,6 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-  // Add label to the building if specified
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, 100), // Adjust position as needed
-    label: {
-      text: "North River Sewage Treatment Plant",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-      pixelOffset: new Cesium.Cartesian2(0, -10)
-    }
-  });
 
   // Add green box at the same location with rotation along the Y-axis
   viewer.entities.add({
