@@ -339,14 +339,13 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-
   // Add green box at the same location with rotation along the Y-axis
   viewer.entities.add({
     position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
     box: {
       dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
       material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(-45)) // Rotate around the Y-axis by 45 degrees
+      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(-45)) // Rotate around the Y-axis by -45 degrees
     },
     label: {
       text: "Marine Transfer Station",
