@@ -209,7 +209,7 @@ var marineTransferLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
   }
 });
 
@@ -224,7 +224,7 @@ var wasteWaterLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
   }
 });
 
@@ -240,7 +240,7 @@ var gasPipelineLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 0) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
   }
 });
 
@@ -256,7 +256,7 @@ var busDepotLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 0) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
   }
 });
 
