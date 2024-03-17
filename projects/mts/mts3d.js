@@ -108,6 +108,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 });
 
 
+
 // Define the flyToPlanView function
 function flyToPlanView() {
   viewer.scene.camera.setView({
@@ -123,7 +124,6 @@ function flyToPlanView() {
     },
   });
 }
-
 
 // Add a click event listener to the flyToPlanView button
 const flyToPlanViewBtn = document.getElementById('flyToPlanView');
@@ -420,18 +420,13 @@ function showBuildingById(tileset, elementId, color) {
 
 
 
-// Add fourth green box next to the first one with rotation along the Y-axis
+  // Add fourth green box next to the first one with rotation along the Y-axis
 viewer.entities.add({
+  position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
   box: {
-      dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-          -73.95790713393994, 40.11928006545158, -10,
-          -73.95790713393994, 40.41928006545158 + 0.001, -10,
-          -73.35790713393994 + 0.001, 40.01928006545158 + 0.001, -10,
-          -73.95790713393994 + 0.001, 40.81928006545158, -10
-      ]),
-      orientation: orientationQuaternion // Apply rotation along the Y-axis
+    dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
+    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
   },
   label: {
     text: "NYC Bus Depot",
