@@ -109,6 +109,28 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+// Define the flyToMTSCity function
+function flyToPlanView() {
+  viewer.scene.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.9625,
+      40.8217,
+      200 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(65), // clockwise from north
+      pitch: Cesium.Math.toRadians(-40), // Look downward
+      roll: 0,
+    },
+  });
+}
+
+
+// Add a click event listener to the flyToMTS button
+const flyToPlanView = document.getElementById('flyToPlanView');
+flyToPlanView.addEventListener('click', flyToPlanView);
+
+
 
 
   // Define the flyToMTSCity function
@@ -436,11 +458,16 @@ console.log('Orientation Quaternion:', orientationQuaternion);
 
 // Add fourth green box next to the first one with rotation along the Y-axis
 viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
     box: {
         dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
         material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-        orientation: orientationQuaternion // Use the calculated orientation quaternion
+        positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+            -73.95790713393994, 40.81928006545158, -10,
+            -73.95790713393994, 40.81928006545158 + 0.001, -10,
+            -73.95790713393994 + 0.001, 40.81928006545158 + 0.001, -10,
+            -73.95790713393994 + 0.001, 40.81928006545158, -10
+        ]),
+        orientation: orientationQuaternion // Apply rotation along the Y-axis
     },
     label: {
         text: "NYC Bus Depot",
