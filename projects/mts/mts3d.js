@@ -159,16 +159,9 @@ var buDepotPolygon = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label upward to prevent overlap with polygon
+    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label upward to prevent overlap with polygon
   }
 });
-
-
-68970818345, 777332721
-0481695325, 4513934744
-6382445923, 404766265
-5233243099, 945282237
-
 
 
 // Define the flyToPlanView function
