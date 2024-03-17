@@ -396,7 +396,10 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-// Add fourth green box next to the first one with rotation along the Y-axis
+
+
+
+  // Add fourth green box next to the first one with rotation along the Y-axis
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
   box: {
@@ -423,8 +426,9 @@ console.log("Added NYC Bus Depot building");
 
 
 
-// Calculate the orientation quaternion
+// Calculate the rotation angle
 const rotationAngle = Cesium.Math.toRadians(30);
+console.log('Rotation Angle:', rotationAngle); // Log the rotation angle
 const orientationQuaternion = Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle);
 
 // Log the orientation quaternion
@@ -452,9 +456,6 @@ viewer.entities.add({
 
 // Log a message specifically for the NYC Bus Depot
 console.log("Added NYC Bus Depot building");
-
-
-
 
 
 
