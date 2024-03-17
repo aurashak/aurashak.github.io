@@ -321,14 +321,14 @@ viewer.scene.primitives.add(osmBuildingsTileset);
 // Function to show only the buildings with the given element IDs after the tileset is fully loaded
 function showBuildings() {
   // Show building with ID 275080379 in red and add label
-  showBuildingById(osmBuildingsTileset, 275080379, "red", "MTS Building");
+  showBuildingById(osmBuildingsTileset, 275080379, "red");
 }
 
 // Listen for the tileLoad event to ensure all tiles are loaded
 osmBuildingsTileset.tileLoad.addEventListener(showBuildings);
 
 // Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color, label = null) {
+function showBuildingById(tileset, elementId, color) {
   console.log("Showing building with ID", elementId);
   tileset.style = new Cesium.Cesium3DTileStyle({
     color: {
@@ -340,110 +340,104 @@ function showBuildingById(tileset, elementId, color, label = null) {
   });
 
   // Add label to the building if specified
-  if (label) {
-    viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, 100), // Adjust position as needed
-      label: {
-        text: label,
-        font: "14px Arial",
-        fillColor: Cesium.Color.WHITE,
-        outlineColor: Cesium.Color.BLACK,
-        outlineWidth: 2,
-        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        pixelOffset: new Cesium.Cartesian2(0, -10)
-      }
-    });
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, 100), // Adjust position as needed
+    label: {
+      text: "North River Sewage Treatment Plant",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      pixelOffset: new Cesium.Cartesian2(0, -10)
+    }
+  });
 
+  // Add green box at the same location with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
+    box: {
+      dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(-45)) // Rotate around the Y-axis by 45 degrees
+    },
+    label: {
+      text: "Marine Transfer Station",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      pixelOffset: new Cesium.Cartesian2(0, -50)
+    }
+  });
 
-// Add green box at the same location with rotation along the Y-axis
-viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
-  box: {
-    dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
-    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(-45)) // Rotate around the Y-axis by 45 degrees
-  },
-  label: {
-    text: "Marine Transfer Station",
-    font: "14px Arial",
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50)
-  }
-});
+  // Add second green box next to the first one with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
+    box: {
+      dimensions: new Cesium.Cartesian3(400, 50, 50), // Adjust dimensions as needed (long rectangle)
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
+    },
+    label: {
+      text: "North River Sewage Treatment Plant",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+      pixelOffset: new Cesium.Cartesian2(0, -50) // Adjust as needed to set the label's height
+    }
+  });
 
-// Add second green box next to the first one with rotation along the Y-axis
-viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
-  box: {
-    dimensions: new Cesium.Cartesian3(400, 50, 50), // Adjust dimensions as needed (long rectangle)
-    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
-  },
-  label: {
-    text: "North River Sewage Treatment Plant",
-    font: "14px Arial",
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-    pixelOffset: new Cesium.Cartesian2(0, -50) // Adjust as needed to set the label's height
-  }
-});
+  // Add third green box next to the first one with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.95924846693057, 40.82136519651025, -10), // Adjusted position to be next to the first box
+    box: {
+      dimensions: new Cesium.Cartesian3(30, 50, 30), // Adjust dimensions as needed (long rectangle)
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
+    },
+    label: {
+      text: "Williams Pipeline",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
+  });
 
+  // Add fourth green box next to the first one with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
+    box: {
+      dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+      orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
+    },
+    label: {
+      text: "NYC Bus Depot",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
+  });
 
-// Add second green box next to the first one with rotation along the Y-axis
-viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.95924846693057, 40.82136519651025, -10), // Adjusted position to be next to the first box
-  box: {
-    dimensions: new Cesium.Cartesian3(30, 50, 30), // Adjust dimensions as needed (long rectangle)
-    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
-  },
-  label: {
-    text: "Williams Pipeline",
-    font: "14px Arial",
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-    pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-  }
-});
-
-
-// Add second green box next to the first one with rotation along the Y-axis
-viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
-  box: {
-    dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
-  },
-  label: {
-    text: "NYC Bus Depot",
-    font: "14px Arial",
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-    pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-  }
-});
-
-console.log("Box 1 orientation:", Cesium.Math.toDegrees(viewer.entities.values[0].box.orientation.y));
-console.log("Box 2 orientation:", Cesium.Math.toDegrees(viewer.entities.values[1].box.orientation.y));
-
-
-  }
+  console.log("Box 1 orientation:", Cesium.Math.toDegrees(viewer.entities.values[0].box.orientation.y));
+  console.log("Box 2 orientation:", Cesium.Math.toDegrees(viewer.entities.values[1].box.orientation.y));
 }
+
 
 
 
