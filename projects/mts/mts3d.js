@@ -108,7 +108,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 });
 
 
-
 // Define the flyToPlanView function
 function flyToPlanView() {
   viewer.scene.camera.setView({
@@ -118,12 +117,13 @@ function flyToPlanView() {
       1000 // Adjust the zoom level as needed
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(0), // Set heading to north
+      heading: Cesium.Math.toRadians(5), // Slightly rotate to the right (adjust angle as needed)
       pitch: Cesium.Math.toRadians(-90), // Look straight down
       roll: 0,
     },
   });
 }
+
 
 // Add a click event listener to the flyToPlanView button
 const flyToPlanViewBtn = document.getElementById('flyToPlanView');
