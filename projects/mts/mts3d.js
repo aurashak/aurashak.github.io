@@ -194,6 +194,10 @@ var marineTransferStationPolygon = viewer.entities.add({
   },
 });
 
+// Debugging: Log if the polygon is successfully added
+console.log('Marine Transfer Station Polygon:', marineTransferStationPolygon);
+
+
 
 
 // Add a label for the Marine Placeholder
