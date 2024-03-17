@@ -131,12 +131,6 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
-// Add a click event listener to the flyToMTS button
-const flyToPlanView = document.getElementById('flyToPlanView');
-flyToPlanView.addEventListener('click', flyToPlanView);
-
-
-
 
   // Define the flyToMTSCity function
   function flyToMTS() {
