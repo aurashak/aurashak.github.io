@@ -149,7 +149,7 @@ var buDepotPolygon = viewer.entities.add({
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
     extrudedHeight: 20, // Extrude the polygon upward by 100 units
-    height: -20 // Position the polygon lower by setting the height to -10 units
+    height: -60 // Position the polygon lower by setting the height to -10 units
   },
   label: {
     text: 'Marine Transfer Station',
@@ -159,7 +159,7 @@ var buDepotPolygon = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label upward to prevent overlap with polygon
+    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label upward to prevent overlap with polygon
   }
 });
 
