@@ -108,9 +108,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 });
 
 
-
 // Create a polygon surrounding Central Park
-var buDepotPolygon = viewer.entities.add({
+var nycBusDepotPolygon = viewer.entities.add({
   name: 'NYC Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -120,8 +119,8 @@ var buDepotPolygon = viewer.entities.add({
       -73.9591, 40.8193  // Northwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 20, // Extrude the polygon upward by 100 units
-    height: -20 // Position the polygon lower by setting the height to -10 units
+    extrudedHeight: 20, // Extrude the polygon upward by 20 units
+    height: -20 // Position the polygon lower by setting the height to -20 units
   },
   label: {
     text: 'NYC Bus Depot',
@@ -135,10 +134,8 @@ var buDepotPolygon = viewer.entities.add({
   }
 });
 
-
-
-// Create a polygon surrounding Central Park
-var buDepotPolygon = viewer.entities.add({
+// Create a polygon for the Marine Transfer Station
+var marineTransferStationPolygon = viewer.entities.add({
   name: 'Marine Transfer Station',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -148,11 +145,11 @@ var buDepotPolygon = viewer.entities.add({
       -73.9591, 40.8222  // Northwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 20, // Extrude the polygon upward by 100 units
-    height: -60 // Position the polygon lower by setting the height to -10 units
+    extrudedHeight: 20, // Extrude the polygon upward by 20 units
+    height: -60 // Position the polygon lower by setting the height to -60 units
   },
   label: {
-    text: 'Marine Transfer Station',
+    text: '135th St Marine Transfer Station',
     font: 'bold 16px Arial',
     fillColor: Cesium.Color.WHITE,
     outlineColor: Cesium.Color.BLACK,
@@ -162,6 +159,7 @@ var buDepotPolygon = viewer.entities.add({
     pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label upward to prevent overlap with polygon
   }
 });
+
 
 
 // Define the flyToPlanView function
