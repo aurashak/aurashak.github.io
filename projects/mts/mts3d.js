@@ -110,7 +110,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 // Create a polygon surrounding Central Park
 var buDepotPolygon = viewer.entities.add({
-  name: 'Manhattanville Bus Depot',
+  name: 'NYC Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
       -73.9587, 40.8199, // Southwest
@@ -123,7 +123,7 @@ var buDepotPolygon = viewer.entities.add({
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
   label: {
-    text: 'Manhattanville Bus Depot',
+    text: 'NYC Bus Depot',
     font: 'bold 16px Arial',
     fillColor: Cesium.Color.WHITE,
     outlineColor: Cesium.Color.BLACK,
@@ -134,7 +134,16 @@ var buDepotPolygon = viewer.entities.add({
   }
 });
 
-console.log('buDepotPolygon:', buDepotPolygon);
+// Debugging: Log text properties
+console.log('Label text:', buDepotPolygon.label.text);
+console.log('Label font:', buDepotPolygon.label.font);
+console.log('Label fillColor:', buDepotPolygon.label.fillColor);
+console.log('Label outlineColor:', buDepotPolygon.label.outlineColor);
+console.log('Label outlineWidth:', buDepotPolygon.label.outlineWidth);
+console.log('Label style:', buDepotPolygon.label.style);
+console.log('Label verticalOrigin:', buDepotPolygon.label.verticalOrigin);
+console.log('Label pixelOffset:', buDepotPolygon.label.pixelOffset);
+
 
 
 // Create a polygon for the Marine Transfer Station
