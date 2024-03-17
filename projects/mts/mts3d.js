@@ -115,7 +115,7 @@ function flyToPlanView() {
     destination: Cesium.Cartesian3.fromDegrees(
       -73.9625,
       40.8217,
-      200 // Adjust the zoom level as needed
+      1000 // Adjust the zoom level as needed
     ),
     orientation: {
       heading: Cesium.Math.toRadians(0), // Set heading to north
