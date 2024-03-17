@@ -635,8 +635,8 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 // Define the coordinates for the red semi-transparent box
-const boxLongitude = -73.6625;
-const boxLatitude = 40.8356;
+const boxLongitude = -73.9594;
+const boxLatitude = 40.8226;
 
 // Add a red semi-transparent box
 const redBox = viewer.entities.add({
@@ -651,16 +651,35 @@ const redBox = viewer.entities.add({
   }
 });
 
-// Function to create a red semi-transparent box image
+// Function to create a red semi-transparent cube image
 function createRedBoxImage() {
   const canvas = document.createElement("canvas");
   canvas.width = 64;
   canvas.height = 64;
   const context = canvas.getContext("2d");
 
-  // Draw a red semi-transparent rectangle
+  // Draw six faces of the cube
+  const faceWidth = canvas.width / 3;
+  const faceHeight = canvas.height / 3;
+
+  // Draw front face
   context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillRect(faceWidth, faceHeight, faceWidth, faceHeight);
+
+  // Draw back face
+  context.fillRect(faceWidth, 0, faceWidth, faceHeight);
+
+  // Draw top face
+  context.fillRect(faceWidth, 0, faceWidth, faceHeight);
+
+  // Draw bottom face
+  context.fillRect(faceWidth, faceHeight * 2, faceWidth, faceHeight);
+
+  // Draw left face
+  context.fillRect(0, faceHeight, faceWidth, faceHeight);
+
+  // Draw right face
+  context.fillRect(faceWidth * 2, faceHeight, faceWidth, faceHeight);
 
   // Return the canvas as the box image
   return canvas;
