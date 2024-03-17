@@ -109,6 +109,21 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+  // Create a polygon surrounding Central Park
+  var centralParkPolygon = viewer.entities.add({
+    polygon: {
+      hierarchy: Cesium.Cartesian3.fromDegreesArray([
+        -73.9583, 40.8002, // Southwest
+        -73.9583, 40.8008, // Southeast
+        -73.9568, 40.8008, // Northeast
+        -73.9568, 40.8002  // Northwest
+      ]),
+      material: Cesium.Color.RED.withAlpha(0.5) // Red with 50% opacity
+    }
+  });
+
+
+
 // Define the flyToPlanView function
 function flyToPlanView() {
   viewer.scene.camera.setView({
