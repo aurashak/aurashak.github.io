@@ -378,8 +378,9 @@ viewer.entities.add({
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
   box: {
-    dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
+    dimensions: new Cesium.Cartesian3(100, 50, 50), // Adjust dimensions as needed (long rectangle)
     material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
+ 
   },
   label: {
     text: "North River Sewage Treatment Plant",
@@ -388,17 +389,15 @@ viewer.entities.add({
     outlineColor: Cesium.Color.BLACK,
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50)
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+    pixelOffset: new Cesium.Cartesian2(0, -50) // Adjust as needed to set the label's height
   }
+  
 });
 
 
   }
 }
-
-
-
 
 
 
