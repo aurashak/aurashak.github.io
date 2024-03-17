@@ -342,7 +342,7 @@ function showBuildingById(tileset, elementId, color, label = null) {
   // Add label to the building if specified
   if (label) {
     viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Adjust position as needed
+      position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, 100), // Adjust position as needed
       label: {
         text: label,
         font: "14px Arial",
@@ -357,7 +357,7 @@ function showBuildingById(tileset, elementId, color, label = null) {
 
     // Add green box at the same location
     viewer.entities.add({
-      position: Cesium.Cartesian3.fromDegrees(-73.9625, 40.8217, 100), // Same position as the label
+      position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, 0), // Same position as the label
       box: {
         dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
         material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
