@@ -358,7 +358,7 @@ function showBuildingById(tileset, elementId, color, label = null) {
  // Add green box at the same location with rotation
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -5), // Same position as the label
-  orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(45)), // Rotate around the Z-axis by 45 degrees
+  orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(45)), // Rotate around the Z-axis by 45 degrees
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
     material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
