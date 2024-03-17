@@ -134,15 +134,44 @@ var busDepotPolygon = viewer.entities.add({
   }
 });
 
+
+// Create a polygon for the Williams Gas Pipeline
+var gasPipelinePolygon = viewer.entities.add({
+  name: 'Williams Gas Pipeline',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.95951186211099, 40.82125580458398, // Southwest
+      -73.95918564550357, 40.82166628856237, // Southeast
+      -73.95895805252165, 40.82152563349923, // Northeast
+      -73.95914012690719, 40.82131608560706, // Northwest
+      -73.95901874398349, 40.82124719300478, // Northwest (repeat to close polygon)
+      -73.95951186211099, 40.82125580458398  // Southwest (repeat to close polygon)
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    extrudedHeight: 20, // Extrude the polygon upward by 20 units
+    height: -20 // Position the polygon lower by setting the height to -20 units
+  },
+  label: {
+    text: 'Williams Gas Pipeline',
+    font: 'bold 14px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -100) // Offset the label upward to prevent overlap with polygon
+  }
+});
+
 // Debugging: Log text properties
-console.log('Label text:', busDepotPolygon.label.text);
-console.log('Label font:', busDepotPolygon.label.font);
-console.log('Label fillColor:', busDepotPolygon.label.fillColor);
-console.log('Label outlineColor:', busDepotPolygon.label.outlineColor);
-console.log('Label outlineWidth:', busDepotPolygon.label.outlineWidth);
-console.log('Label style:', busDepotPolygon.label.style);
-console.log('Label verticalOrigin:', busDepotPolygon.label.verticalOrigin);
-console.log('Label pixelOffset:', busDepotPolygon.label.pixelOffset);
+console.log('Label text:', gasPipelinePolygon.label.text);
+console.log('Label font:', gasPipelinePolygon.label.font);
+console.log('Label fillColor:', gasPipelinePolygon.label.fillColor);
+console.log('Label outlineColor:', gasPipelinePolygon.label.outlineColor);
+console.log('Label outlineWidth:', gasPipelinePolygon.label.outlineWidth);
+console.log('Label style:', gasPipelinePolygon.label.style);
+console.log('Label verticalOrigin:', gasPipelinePolygon.label.verticalOrigin);
+console.log('Label pixelOffset:', gasPipelinePolygon.label.pixelOffset);
 
 
 
