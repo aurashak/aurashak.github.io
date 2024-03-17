@@ -199,19 +199,67 @@ var marineTransferStationPolygon = viewer.entities.add({
 
 // Add a label for the Marine Placeholder
 var marineTransferLabel = viewer.entities.add({
-  name: 'Marine Placeholder Label',
+  name: 'MTS',
   position: Cesium.Cartesian3.fromDegrees(-73.95948442468283, 40.822656278896815), // Coordinates
   label: {
-    text: 'Marine Placeholder',
+    text: 'Marine Transfer Station',
     font: 'bold 16px Arial',
     fillColor: Cesium.Color.WHITE,
     outlineColor: Cesium.Color.BLACK,
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label downward
   }
 });
+
+var wasteWaterLabel = viewer.entities.add({
+  name: 'Waste Water Treatment',
+  position: Cesium.Cartesian3.fromDegrees(-73.95668916390169, 40.826045064071984), // Coordinates
+  label: {
+    text: 'Waste Water Treatment Plant',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label downward
+  }
+});
+
+
+var gasPipelineLabel = viewer.entities.add({
+  name: 'Gas Pipeline',
+  position: Cesium.Cartesian3.fromDegrees(-73.95917709236481, 40.82138267116754), // Coordinates
+  label: {
+    text: 'Natural Gas Pipeline',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label downward
+  }
+});
+
+
+var busDepotLabel = viewer.entities.add({
+  name: 'Bus Depot',
+  position: Cesium.Cartesian3.fromDegrees(-73.95749408193386, 40.81903473878459), // Coordinates
+  label: {
+    text: 'Manhattanville Bus Depot',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 100) // Offset the label downward
+  }
+});
+
 
 
 
