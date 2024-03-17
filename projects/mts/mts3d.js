@@ -242,38 +242,35 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
 
-
-    
-
     // Load full google photorealistic tileset
-const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
-viewer.scene.primitives.add(newTileset);
-newTileset.show = true; // Set the initial state to 'on'
+    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+    viewer.scene.primitives.add(newTileset);
+    newTileset.show = true; // Set the initial state to 'on'
 
-// Wait for the tileset to be ready
-await newTileset.readyPromise;
+    // Apply default style to the tileset if available
+    const newExtras = newTileset.asset.extras;
+    if (
+      Cesium.defined(newExtras) &&
+      Cesium.defined(newExtras.ion) &&
+      Cesium.defined(newExtras.ion.defaultStyle)
+    ) {
+      newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+    }
 
-// Get the bounding volume of the tileset
-const boundingVolume = newTileset.boundingVolume;
+    // Remove the default satellite imagery layers
+    viewer.imageryLayers.removeAll();
 
-// Log the bounding volume for inspection
-console.log("Bounding Volume:", boundingVolume);
+    // Create a switch event listener for the new 3D Tileset
+    const newTilesetSwitch = document.getElementById("3dTileSwitch");
+    newTilesetSwitch.checked = true; // Set the initial state to 'on'
 
-// Remove the default satellite imagery layers
-viewer.imageryLayers.removeAll();
+    newTilesetSwitch.addEventListener("change", (event) => {
+      newTileset.show = event.target.checked;
+      const status = event.target.checked ? "shown" : "hidden";
+      console.log(`3D Tileset Layer ${status}`);
+    });
 
-// Create a switch event listener for the new 3D Tileset
-const newTilesetSwitch = document.getElementById("3dTileSwitch");
-newTilesetSwitch.checked = true; // Set the initial state to 'on'
-
-newTilesetSwitch.addEventListener("change", (event) => {
-  newTileset.show = event.target.checked;
-  const status = event.target.checked ? "shown" : "hidden";
-  console.log(`3D Tileset Layer ${status}`);
-});
-
-console.log("Initial load of 3D Tileset layer with the switch turned on.");
-
+    console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
 
 
@@ -438,100 +435,6 @@ toggleOSMMapLayer();
 
 
 
-
-
-
-// Load westharlemejsites GeoJsonDataSource
-const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
-const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
-
-// Modify the polyline/polygon color and disable the outline before adding the data source
-westharlemejsitesDataSource.entities.values.forEach((entity) => {
-  if (entity.polygon) {
-    // Change the polygon color to green
-    entity.polygon.material = Cesium.Color.RED;
-
-    // Disable the polygon outline
-    entity.polygon.outline = false;
-  }
-});
-
-// Create a switch event listener for mtsparks
-const westharlemejsitesSwitch = document.getElementById("westharlemejsitesSwitch");
-
-// Set the switch to the off position initially
-westharlemejsitesSwitch.checked = false;
-
-westharlemejsitesSwitch.addEventListener("change", (event) => {
-  westharlemejsitesDataSource.entities.values.forEach((entity) => {
-    entity.show = event.target.checked;
-  });
-});
-
-// Initial load of westharlemejsites with the green color and disabled outline
-viewer.dataSources.add(westharlemejsitesDataSource);
-westharlemejsitesDataSource.entities.values.forEach((entity) => {
-  entity.show = false; // Make sure entities are hidden by default
-});
-
-
-
-
-
-
-
-
-    /*
-
-    // Load GeoJsonDataSource with asset ID 2483827
-    const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
-    const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
-
-    // Modify the billboard color and style before adding the data source
-    busDepotsDataSource.entities.values.forEach((entity) => {
-      if (entity.billboard) {
-        // Change the billboard color to blue
-        entity.billboard.color = Cesium.Color.BLUE;
-        // Change the billboard style to your desired image
-        entity.billboard.image = createCustomImage(); // Function to create a custom image
-      }
-    });
-
-    // Create a switch event listener for the busdepots layer
-    const busDepotsSwitch = document.getElementById("busDepotsSwitch");
-
-    // Set the switch to the off position initially
-    busDepotsSwitch.checked = false;
-
-    busDepotsSwitch.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        viewer.dataSources.add(busDepotsDataSource);
-        console.log("busDepotsDataSource added to viewer");
-      } else {
-        viewer.dataSources.remove(busDepotsDataSource);
-        console.log("busDepotsDataSource removed from viewer");
-      }
-    });
-
-    // Initial load of the busdepots layer with modified billboards
-    if (busDepotsSwitch.checked) {
-      viewer.dataSources.add(busDepotsDataSource);
-      console.log("Initial load of busDepotsDataSource");
-    }
-
-    // Function to create a custom image
-    function createCustomImage() {
-      const canvas = document.createElement("canvas");
-      canvas.width = 20;
-      canvas.height = 20;
-      const context = canvas.getContext("2d");
-      // Customize the image as needed
-      context.fillStyle = "blue";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      return canvas;
-    }
-
-    */
 
 
 
@@ -734,6 +637,48 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
+
+
+// Define the coordinates for the red semi-transparent box
+const boxLongitude = -73.6625;
+const boxLatitude = 40.8356;
+
+// Add a red semi-transparent box
+const redBox = viewer.entities.add({
+  position: Cesium.Cartesian3.fromDegrees(boxLongitude, boxLatitude),
+  billboard: {
+    image: createRedBoxImage(),
+    width: 10000, // Adjust the width as needed
+    height: 10000, // Adjust the height as needed
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1.5e7, 0.1), // Adjust the scale for distance
+    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Ensure box is clamped to ground
+  }
+});
+
+// Function to create a red semi-transparent box image
+function createRedBoxImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 64;
+  canvas.height = 64;
+  const context = canvas.getContext("2d");
+
+  // Draw a red semi-transparent rectangle
+  context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Return the canvas as the box image
+  return canvas;
+}
+
+
+
+
+
+
+
+
+
 // Call the initializeCesium function
 initializeCesium();
 
@@ -884,3 +829,102 @@ function createCircleImage() {
 }
 
 */
+
+
+
+
+
+
+/*
+
+// Load westharlemejsites GeoJsonDataSource
+const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
+const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
+
+// Modify the polyline/polygon color and disable the outline before adding the data source
+westharlemejsitesDataSource.entities.values.forEach((entity) => {
+  if (entity.polygon) {
+    // Change the polygon color to green
+    entity.polygon.material = Cesium.Color.RED;
+
+    // Disable the polygon outline
+    entity.polygon.outline = false;
+  }
+});
+
+// Create a switch event listener for mtsparks
+const westharlemejsitesSwitch = document.getElementById("westharlemejsitesSwitch");
+
+// Set the switch to the off position initially
+westharlemejsitesSwitch.checked = false;
+
+westharlemejsitesSwitch.addEventListener("change", (event) => {
+  westharlemejsitesDataSource.entities.values.forEach((entity) => {
+    entity.show = event.target.checked;
+  });
+});
+
+// Initial load of westharlemejsites with the green color and disabled outline
+viewer.dataSources.add(westharlemejsitesDataSource);
+westharlemejsitesDataSource.entities.values.forEach((entity) => {
+  entity.show = false; // Make sure entities are hidden by default
+});
+
+*/
+
+
+
+
+
+
+    /*
+
+    // Load GeoJsonDataSource with asset ID 2483827
+    const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
+    const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
+
+    // Modify the billboard color and style before adding the data source
+    busDepotsDataSource.entities.values.forEach((entity) => {
+      if (entity.billboard) {
+        // Change the billboard color to blue
+        entity.billboard.color = Cesium.Color.BLUE;
+        // Change the billboard style to your desired image
+        entity.billboard.image = createCustomImage(); // Function to create a custom image
+      }
+    });
+
+    // Create a switch event listener for the busdepots layer
+    const busDepotsSwitch = document.getElementById("busDepotsSwitch");
+
+    // Set the switch to the off position initially
+    busDepotsSwitch.checked = false;
+
+    busDepotsSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(busDepotsDataSource);
+        console.log("busDepotsDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(busDepotsDataSource);
+        console.log("busDepotsDataSource removed from viewer");
+      }
+    });
+
+    // Initial load of the busdepots layer with modified billboards
+    if (busDepotsSwitch.checked) {
+      viewer.dataSources.add(busDepotsDataSource);
+      console.log("Initial load of busDepotsDataSource");
+    }
+
+    // Function to create a custom image
+    function createCustomImage() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 20;
+      canvas.height = 20;
+      const context = canvas.getContext("2d");
+      // Customize the image as needed
+      context.fillStyle = "blue";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      return canvas;
+    }
+
+    */
