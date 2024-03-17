@@ -173,7 +173,7 @@ function flyToPlanView() {
       1700 // Adjust the zoom level as needed
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(15), // Slightly rotate to the right (adjust angle as needed)
+      heading: Cesium.Math.toRadians(45), // Slightly rotate to the right (adjust angle as needed)
       pitch: Cesium.Math.toRadians(-90), // Look straight down
       roll: 0,
     },
