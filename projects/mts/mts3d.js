@@ -435,34 +435,25 @@ toggleOSMMapLayer();
 
 
 
+
+
+
 // Load westharlemejsites GeoJsonDataSource
 const westharlemejsitesResource = await Cesium.IonResource.fromAssetId(2504744);
 const westharlemejsitesDataSource = await Cesium.GeoJsonDataSource.load(westharlemejsitesResource);
 
-// Modify the polygon color, disable the outline, and adjust position to bring layer down to surface level before adding the data source
+// Modify the polyline/polygon color and disable the outline before adding the data source
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
   if (entity.polygon) {
-    // Change the polygon color to red
+    // Change the polygon color to green
     entity.polygon.material = Cesium.Color.RED;
 
     // Disable the polygon outline
     entity.polygon.outline = false;
-
-    // Calculate the height difference to bring the layer down to surface level
-    const heightDifference = entity.position.getValue().height - entity.polygon.extrudedHeight.getValue();
-
-    // Adjust the position of the entity to bring it down to the surface level
-    entity.position = new Cesium.ConstantPositionProperty(
-      Cesium.Cartesian3.fromRadians(
-        entity.position.getValue().longitude,
-        entity.position.getValue().latitude,
-        entity.position.getValue().height - heightDifference
-      )
-    );
   }
 });
 
-// Create a switch event listener for westharlemejsites
+// Create a switch event listener for mtsparks
 const westharlemejsitesSwitch = document.getElementById("westharlemejsitesSwitch");
 
 // Set the switch to the off position initially
@@ -474,11 +465,12 @@ westharlemejsitesSwitch.addEventListener("change", (event) => {
   });
 });
 
-// Initial load of westharlemejsites with red polygons, disabled outline, and adjusted position to bring layer down to surface level
+// Initial load of westharlemejsites with the green color and disabled outline
 viewer.dataSources.add(westharlemejsitesDataSource);
 westharlemejsitesDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
 });
+
 
 
 
