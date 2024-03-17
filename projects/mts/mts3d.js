@@ -109,8 +109,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 // Create a polygon surrounding Central Park
-var nycBusDepotPolygon = viewer.entities.add({
-  name: 'NYC Bus Depot',
+var buDepotPolygon = viewer.entities.add({
+  name: 'Manhattanville Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
       -73.9587, 40.8199, // Southwest
@@ -123,7 +123,7 @@ var nycBusDepotPolygon = viewer.entities.add({
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
   label: {
-    text: 'NYC Bus Depot',
+    text: 'Manhattanville Bus Depot',
     font: 'bold 16px Arial',
     fillColor: Cesium.Color.WHITE,
     outlineColor: Cesium.Color.BLACK,
@@ -133,6 +133,9 @@ var nycBusDepotPolygon = viewer.entities.add({
     pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label upward to prevent overlap with polygon
   }
 });
+
+console.log('buDepotPolygon:', buDepotPolygon);
+
 
 // Create a polygon for the Marine Transfer Station
 var marineTransferStationPolygon = viewer.entities.add({
