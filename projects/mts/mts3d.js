@@ -396,24 +396,34 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-  // Add fourth green box next to the first one with rotation along the Y-axis
-  viewer.entities.add({
+  // Define the rotation angle along the Y-axis
+const rotationAngle = Cesium.Math.toRadians(30);
+
+// Calculate the orientation quaternion
+const orientationQuaternion = Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle);
+
+// Log the orientation quaternion
+console.log('Orientation Quaternion:', orientationQuaternion);
+
+// Add fourth green box next to the first one with rotation along the Y-axis
+viewer.entities.add({
     position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
     box: {
-      dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+        dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
+        material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+        orientation: orientationQuaternion // Use the calculated orientation quaternion
     },
     label: {
-      text: "NYC Bus Depot",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+        text: "NYC Bus Depot",
+        font: "14px Arial",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+        pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
     }
-  });
+});
 
 
 }
