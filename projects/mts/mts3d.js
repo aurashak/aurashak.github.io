@@ -416,43 +416,47 @@ function showBuildingById(tileset, elementId, color) {
     }
   });
 
-  // Calculate the rotation angle
-  const rotationAngle = Cesium.Math.toRadians(40);
-  console.log('Rotation Angle:', rotationAngle); // Log the rotation angle
-  const orientationQuaternion = Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle);
+ 
+// Calculate the rotation angle (slightly adjusted)
+const rotationAngle = Cesium.Math.toRadians(95);
+console.log('Rotation Angle:', rotationAngle); // Log the rotation angle
+const orientationQuaternion = Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, rotationAngle);
 
-  // Log the orientation quaternion
-  console.log('Orientation Quaternion:', orientationQuaternion);
+// Log the orientation quaternion
+console.log('Orientation Quaternion:', orientationQuaternion);
 
-  // Add fourth green box next to the first one with rotation along the Y-axis
-  viewer.entities.add({
+// Define positions separately
+const positions = Cesium.Cartesian3.fromDegreesArrayHeights([
+    -73.95790713393994, 40.81928006545158, -10,
+    -73.95790713393994, 40.81928006545158 + 0.001, -10,
+    -73.95790713393994 + 0.002, 40.81928006545158 + 0.002, -10, // Adjusted latitude and longitude
+    -73.95790713393994 + 0.002, 40.81928006545158, -10 // Adjusted latitude and longitude
+]);
+
+// Add fourth green box next to the first one with rotation along the Y-axis (slightly adjusted)
+viewer.entities.add({
     box: {
-      dimensions: new Cesium.Cartesian3(100, 50, 80), // Adjust dimensions as needed (long rectangle)
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-      positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-        -73.95790713393994, 40.11928006545158, -10,
-        -73.95790713393994, 40.41928006545158 + 0.001, -10,
-        -73.35790713393994 + 0.001, 40.01928006545158 + 0.001, -10,
-        -73.95790713393994 + 0.001, 40.81928006545158, -10
-      ]),
-      orientation: orientationQuaternion // Apply rotation along the Y-axis
+        dimensions: new Cesium.Cartesian3(110, 60, 90), // Adjusted dimensions as needed
+        material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+        orientation: orientationQuaternion // Apply rotation along the Y-axis
     },
+    positions: positions, // Add positions here
     label: {
-      text: "NYC Bus Depot",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+        text: "NYC Bus Depot",
+        font: "14px Arial",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+        pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
     }
-  });
+});
 
-  // Log a message specifically for the NYC Bus Depot
-  console.log("Added NYC Bus Depot building");
+// Log a message specifically for the NYC Bus Depot
+console.log("Added NYC Bus Depot building");
+
 }
-
 
 
 
