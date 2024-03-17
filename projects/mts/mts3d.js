@@ -380,7 +380,7 @@ viewer.entities.add({
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
   box: {
-    dimensions: new Cesium.Cartesian3(1000, 50, 50), // Adjust dimensions as needed (long rectangle)
+    dimensions: new Cesium.Cartesian3(400, 50, 50), // Adjust dimensions as needed (long rectangle)
     material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
     orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(30)) // Rotate around the Y-axis by 30 degrees
   },
