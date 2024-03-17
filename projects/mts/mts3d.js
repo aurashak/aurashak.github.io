@@ -362,8 +362,12 @@ viewer.entities.add({
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
     material: Cesium.Color.GREEN.withAlpha(0.5) // Green color with transparency
+      }
+    });
   }
-});
+}
+
+
 
 
 
