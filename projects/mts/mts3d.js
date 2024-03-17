@@ -361,8 +361,8 @@ viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
   box: {
     dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
-    material: Cesium.Color.GREEN.withAlpha(0.5), // Green color with transparency
-    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(140)) // Rotate around the X-axis by 45 degrees
+    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+    orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(-140)) // Rotate around the X-axis by 45 degrees
   },
   label: {
     text: "Marine Transfer Station",
@@ -380,8 +380,8 @@ viewer.entities.add({
 viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
   box: {
-    dimensions: new Cesium.Cartesian3(100, 50, 50), // Adjust dimensions as needed (long rectangle)
-    material: Cesium.Color.GREEN.withAlpha(0.5), // Green color with transparency
+    dimensions: new Cesium.Cartesian3(1000, 50, 50), // Adjust dimensions as needed (long rectangle)
+    material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
     orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_X, Cesium.Math.toRadians(40)) // Rotate around the X-axis by 30 degrees
   },
   label: {
