@@ -137,6 +137,38 @@ var buDepotPolygon = viewer.entities.add({
 
 
 
+// Create a polygon surrounding Central Park
+var buDepotPolygon = viewer.entities.add({
+  name: 'Marine Transfer Station',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.9599, 40.8225, // Southwest
+      -73.9596, 40.8231, // Southeast
+      -73.9588, 40.8227, // Northeast
+      -73.9591, 40.8222  // Northwest
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    extrudedHeight: 20, // Extrude the polygon upward by 100 units
+    height: -20 // Position the polygon lower by setting the height to -10 units
+  },
+  label: {
+    text: 'Marine Transfer Station',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 50) // Offset the label upward to prevent overlap with polygon
+  }
+});
+
+
+68970818345, 777332721
+0481695325, 4513934744
+6382445923, 404766265
+5233243099, 945282237
+
 
 
 // Define the flyToPlanView function
