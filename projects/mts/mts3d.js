@@ -614,7 +614,6 @@ var marineTransferStationConfig = {
 
 
 
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -632,7 +631,7 @@ var scaleLineConfig = {
       outlineColor: Cesium.Color.BLACK // Black outline (optional)
     })
   },
-  show: true // Initially set to on
+  show: false // Initially set to off
 };
 
 // Define the configuration for the scale label
@@ -649,7 +648,7 @@ var scaleLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000), // Display label when distance from camera is between 0 and 5,000 meters
-    show: true // Initially show the label to match the initial state of the line
+    show: false // Initially set to off
   }
 };
 
@@ -667,34 +666,24 @@ function createLabel(labelConfig) {
 
 // Create a switch event listener for the scale line and label
 const scaleSwitch = document.getElementById("scaleSwitch");
-let scaleVisible = true; // Variable to track the visibility state
 
 scaleSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     // Toggle scale line and label visibility based on current state
-    if (!scaleVisible) {
-      viewer.entities.add(scaleLineConfig); // Show the scale line
-      scaleLabel.show = true; // Show the label
-      scaleVisible = true; // Update visibility state
-      console.log("Scale line and label added to viewer");
-    }
+    viewer.entities.add(scaleLineConfig); // Show the scale line
+    scaleLabel.show = true; // Show the label
+    console.log("Scale line and label added to viewer");
   } else {
     // Toggle scale line and label visibility based on current state
-    if (scaleVisible) {
-      viewer.entities.values.forEach(entity => {
-        if (entity.name === 'Scale') {
-          viewer.entities.remove(entity); // Hide the scale line
-          console.log("Scale line removed from viewer");
-        }
-      });
-      scaleLabel.show = false; // Hide the label
-      scaleVisible = false; // Update visibility state
-    }
+    viewer.entities.values.forEach(entity => {
+      if (entity.name === 'Scale') {
+        viewer.entities.remove(entity); // Hide the scale line
+        console.log("Scale line removed from viewer");
+      }
+    });
+    scaleLabel.show = false; // Hide the label
   }
 });
-
-// Set the initial state of the switch to 'on' to match the initial state of scaleLineConfig.show
-scaleSwitch.checked = true;
 
 // Manually trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
