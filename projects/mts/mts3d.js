@@ -16,6 +16,7 @@ const initializeCesium = async () => {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
+    navigationInstructionsInitiallyVisible: true, 
   });
 
   var boundingBox = new Cesium.Rectangle(
