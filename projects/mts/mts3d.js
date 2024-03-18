@@ -462,8 +462,6 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
-/*
-
     // Load OSM buildings 3D Tileset
     const osmBuildingsTileset = viewer.scene.primitives.add(
       await Cesium.Cesium3DTileset.fromIonAssetId(96188)
@@ -495,7 +493,6 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
     osmBuildingsTileset.show = false;
 
     
-*/
 
 
 /*
