@@ -20,8 +20,9 @@ const initializeCesium = async () => {
   });
 
 
-// Add Cesium navigation controls
-viewer.extend(Cesium.viewerCesiumNavigationMixin, {});
+  console.log('Before adding navigation controls:', viewer);
+  viewer.extend(Cesium.viewerCesiumNavigationMixin, {});
+  console.log('After adding navigation controls:', viewer);
 
   var boundingBox = new Cesium.Rectangle(
     Cesium.Math.toRadians(-74.05), // West
