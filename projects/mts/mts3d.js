@@ -697,6 +697,28 @@ var busDepotLabel = createLabel(busDepotLabelConfig);
 
 
 
+// Get the checkbox element
+var labelsSwitch = document.getElementById('labelsSwitch');
+
+// Function to toggle the visibility of labels
+function toggleLabelsVisibility() {
+    // Loop through each label and toggle its visibility
+    var labels = [distanceLabel, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel];
+    for (var i = 0; i < labels.length; i++) {
+        labels[i].label.show = labelsSwitch.checked;
+    }
+}
+
+// Add event listener to the checkbox
+labelsSwitch.addEventListener('change', toggleLabelsVisibility);
+
+// Initially, call the function to set the initial visibility state
+toggleLabelsVisibility();
+
+
+
+
+
 
 // Define the flyToPlanView function
 function flyToPlanView() {
