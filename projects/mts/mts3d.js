@@ -492,38 +492,55 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
+// Define the specific latitude and longitude point
+const centerLatitude = 40.820233493003926; // Latitude of the point
+const centerLongitude = -73.9579599385659; // Longitude of the point
 
-    // Load OSM buildings 3D Tileset
-    const osmBuildingsTileset = viewer.scene.primitives.add(
-      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-    );
+// Convert the radius from miles to meters
+const radiusInMeters = 0.5;
 
-    // Apply default style to the OSM buildings tileset if available
-    const osmExtras = osmBuildingsTileset.asset.extras;
-    if (
-      Cesium.defined(osmExtras) &&
-      Cesium.defined(osmExtras.ion) &&
-      Cesium.defined(osmExtras.ion.defaultStyle)
-    ) {
-      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-        osmExtras.ion.defaultStyle
-      );
-    }
+// Convert the radius from meters to degrees (approximation for small distances)
+const radiusInDegrees = radiusInMeters / 111320; // 1 degree = approximately 111320 meters
 
-    // Create a switch event listener for the OSM buildings Tileset
-    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+// Adjust the longitude degrees based on the latitude
+const degreesLongitudeCorrection = Math.cos(centerLatitude * Math.PI / 180);
 
-    // Set the switch to the off position initially
-    osmBuildingsSwitch.checked = false;
+// Define the bounding box for the area of interest
+const westLongitude = centerLongitude - (radiusInDegrees / degreesLongitudeCorrection);
+const eastLongitude = centerLongitude + (radiusInDegrees / degreesLongitudeCorrection);
+const southLatitude = centerLatitude - (radiusInDegrees);
+const northLatitude = centerLatitude + (radiusInDegrees);
 
-    osmBuildingsSwitch.addEventListener("change", (event) => {
-      osmBuildingsTileset.show = event.target.checked;
-    });
+// Load OSM buildings 3D Tileset
+const osmBuildingsTileset = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+);
 
-    // Hide the OSM buildings Tileset initially
-    osmBuildingsTileset.show = false;
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (
+  Cesium.defined(osmExtras) &&
+  Cesium.defined(osmExtras.ion) &&
+  Cesium.defined(osmExtras.ion.defaultStyle)
+) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+    osmExtras.ion.defaultStyle
+  );
+}
 
-    
+// Create a switch event listener for the OSM buildings Tileset
+const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+// Set the switch to the off position initially
+osmBuildingsSwitch.checked = false;
+
+osmBuildingsSwitch.addEventListener("change", (event) => {
+  osmBuildingsTileset.show = event.target.checked;
+});
+
+// Hide the OSM buildings Tileset initially
+osmBuildingsTileset.show = false;
+
 
 
 /*
