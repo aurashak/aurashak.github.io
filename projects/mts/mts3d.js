@@ -488,6 +488,355 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
+
+
+var busDepotConfig = {
+  name: 'MTA Manhattanville Bus Depot',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.95879964635739, 40.81992411443654, // Southwest
+      -73.95667319346998, 40.81903869944404, // Southeast
+      -73.95709731406289, 40.818494163354465, // Northeast
+      -73.95919451724812, 40.81938401269745  // Northwest
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
+    extrudedHeight: 10, // Extrude the polygon upward by 10 units
+    height: -20 // Position the polygon lower by setting the height to -20 units
+  }
+};
+
+
+
+// Define the configuration for the waste water treatment polygon
+var wasteWaterTreatmentConfig = {
+  name: 'North River Sewage Treatment Plant',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.95969799948558, 40.82366630333311, // Southwest
+      -73.95666103594826, 40.8284532443468,  // Southeast
+      -73.95498357953169, 40.827814452446894, // Northeast
+      -73.95467659404369, 40.82821266110685, // Northwest
+      -73.9534925071614, 40.82773978805692, // Northwest (repeat to close polygon)
+      -73.95731886199398, 40.82272878575034, // Southwest (repeat to close polygon)
+      -73.95969799948558, 40.82366630333311  // Southwest (repeat to close polygon)
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
+    extrudedHeight: 12, // Extrude the polygon upward by 10 units
+    height: -40 // Position the polygon lower by setting the height to -20 units
+  }
+};
+
+
+
+// Define the configuration for the gas pipeline polygon
+var gasPipelineConfig = {
+  name: 'Williams Gas Pipeline',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.95951186211099, 40.82125580458398, // Southwest
+      -73.95918564550357, 40.82166628856237, // Southeast
+      -73.95895805252165, 40.82152563349923, // Northeast
+      -73.95914012690719, 40.82131608560706, // Northwest
+      -73.95901874398349, 40.82124719300478, // Northwest (repeat to close polygon)
+      -73.9592140946263, 40.82111084285179
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
+    extrudedHeight: 1, // Extrude the polygon upward by 20 units
+    height: -60 // Position the polygon lower by setting the height to -20 units
+  }
+};
+
+
+
+// Define the configuration for the marine transfer station polygon
+var marineTransferStationConfig = {
+  name: 'Marine Transfer Station',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.9596203436524, 40.82306100053222, // Southwest
+      -73.95868601924464, 40.82271381199052, // Northwest 
+      -73.95849007397292, 40.82186391569169, // Northeast
+      -73.95877921272704, 40.82149863776738, // Southeast
+      -73.95896321011679, 40.82158182004503, // Southeast
+      -73.9587624856916, 40.82181147492217, // Southwest
+      -73.95923562183671, 40.822252699383846, // Northwest
+      -73.95999789673716, 40.82258180752193 // Southwest
+    ]),
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
+    extrudedHeight: 5, // Extrude the polygon upward by 10 units
+    height: -60 // Position the polygon lower by setting the height to -60 units
+  }
+};
+
+
+
+
+// Define the configuration for the white line
+var scaleLineConfig = {
+  name: 'Scale',
+  polyline: {
+    positions: Cesium.Cartesian3.fromDegreesArray([
+      -73.96312043113366, 40.81840372298463,
+      -73.96568263373722, 40.81955074889975,
+      -73.95474816347131, 40.834159938739,
+      -73.95218596086774, 40.83328620853362
+    ]),
+    width: 1, // Line width
+    material: Cesium.Color.WHITE // White color
+  }
+};
+
+
+// Define the configuration for the distance label
+var distanceLabelConfig = {
+  name: 'Distance Label',
+  position: Cesium.Cartesian3.fromDegrees(-73.96063040325132, 40.82733361509444), // Adjust the position as needed
+  label: {
+    text: '1.2 mi (1.93 km)',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // Set horizontal origin to center
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
+    show: false // Initially set to off
+  }
+};
+
+
+ 
+
+
+// Define the configuration for the marine transfer label
+var marineTransferLabelConfig = {
+  name: 'MTS',
+  position: Cesium.Cartesian3.fromDegrees(-73.95948442468283, 40.822656278896815), // Coordinates
+  label: {
+    text: 'Marine Transfer Station',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
+  }
+};
+
+
+// Define the configuration for the waste water label
+var wasteWaterLabelConfig = {
+  name: 'Waste Water Treatment',
+  position: Cesium.Cartesian3.fromDegrees(-73.95668916390169, 40.826045064071984), // Coordinates
+  label: {
+    text: 'Waste Water Treatment Plant',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
+  }
+};
+
+// Define the configuration for the gas pipeline label
+var gasPipelineLabelConfig = {
+  name: 'Gas Pipeline',
+  position: Cesium.Cartesian3.fromDegrees(-73.95917709236481, 40.82138267116754), // Coordinates
+  label: {
+    text: 'Natural Gas Pipeline',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, 0), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
+  }
+};
+
+
+
+// Define the configuration for the bus depot label
+var busDepotLabelConfig = {
+  name: 'Bus Depot',
+  position: Cesium.Cartesian3.fromDegrees(-73.95749408193386, 40.81903473878459), // Coordinates
+  label: {
+    text: 'Manhattanville Bus Depot',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
+  }
+};
+
+
+
+// Define the flyToPlanView function
+function flyToPlanView() {
+  viewer.scene.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.9579,
+      40.8207,
+      1700 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(45), // Slightly rotate to the right (adjust angle as needed)
+      pitch: Cesium.Math.toRadians(-90), // Look straight down
+      roll: 0,
+    },
+  });
+}
+
+// Add a click event listener to the flyToPlanView button
+const flyToPlanViewBtn = document.getElementById('flyToPlanView');
+flyToPlanViewBtn.addEventListener('click', flyToPlanView);
+
+
+
+
+  // Define the flyToMTSCity function
+  function flyToMTS() {
+    // Fly back to New York City
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9625,
+        40.8217,
+        200 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(65), // clockwise from north
+        pitch: Cesium.Math.toRadians(-40), // Look downward
+        roll: 0,
+      },
+    });
+  }
+
+
+ // Add a click event listener to the flyToMTS button
+  const flyToMTSButton = document.getElementById('flyToMTS');
+  flyToMTSButton.addEventListener('click', flyToMTS);
+
+
+
+
+
+
+    // Define the flyToWasteWater function
+    function flyToWasteWater() {
+      // Fly back to New York City
+      viewer.scene.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(
+          -73.9628,
+          40.8232,
+          200 // Adjust the zoom level as needed
+        ),
+        orientation: {
+          heading: Cesium.Math.toRadians(65), // clockwise from north
+          pitch: Cesium.Math.toRadians(-40), // Look downward
+          roll: 0,
+        },
+      });
+    }
+  
+   // Add a click event listener to the flyToNewYorkCity button
+    const flyToWasteWaterButton = document.getElementById('flyToWasteWater');
+    flyToWasteWaterButton.addEventListener('click', flyToWasteWater);
+
+
+
+
+    
+      // Define the flyToBusDepotCity function
+  function flyToBusDepot() {
+    // Fly back to New York City
+    viewer.scene.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(
+        -73.9620,
+        40.8154,
+        300 // Adjust the zoom level as needed
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(65), // clockwise from north
+        pitch: Cesium.Math.toRadians(-40), // Look downward
+        roll: 0,
+      },
+    });
+  }
+
+ // Add a click event listener to the flyToNewYorkCity button
+  const flyToBusDepotButton = document.getElementById('flyToBusDepot');
+  flyToBusDepotButton.addEventListener('click', flyToBusDepot);
+
+
+
+
+        // Define the flyToGasPipeline function
+        function flyToGasPipeline() {
+          // Fly back to New York City
+          viewer.scene.camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(
+              -73.9623,
+              40.8207,
+              70 // Adjust the zoom level as needed
+            ),
+            orientation: {
+              heading: Cesium.Math.toRadians(65), // clockwise from north
+              pitch: Cesium.Math.toRadians(-40), // Look downward
+              roll: 0,
+            },
+          });
+        }
+      
+       // Add a click event listener to the flyToGasPipeline button
+        const flyToGasPipelineButton = document.getElementById('flyToGasPipeline');
+        flyToGasPipelineButton.addEventListener('click', flyToGasPipeline);
+
+
+
+                // Define the flyToOverview function
+                function flyToOverview() {
+                  // Fly back to New York City
+                  viewer.scene.camera.setView({
+                    destination: Cesium.Cartesian3.fromDegrees(
+                      -73.9710,
+                      40.8192,
+                      500 // Adjust the zoom level as needed
+                    ),
+                    orientation: {
+                      heading: Cesium.Math.toRadians(65), // clockwise from north
+                      pitch: Cesium.Math.toRadians(-40), // Look downward
+                      roll: 0,
+                    },
+                  });
+                }
+              
+               // Add a click event listener to the flyToOverview button
+                const flyToOverviewButton = document.getElementById('flyToOverview');
+                flyToOverviewButton.addEventListener('click', flyToOverview);
+        
+
+
+
+
+
+
     
 };
 
