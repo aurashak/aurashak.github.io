@@ -677,6 +677,28 @@ var busDepotLabel = createLabel(busDepotLabelConfig);
 
 
 
+// Define the configuration for the bus depot label
+var HarlemLabelConfig = {
+  name: 'Harlem, NYC',
+  position: Cesium.Cartesian3.fromDegrees(-73.94686109095328, 40.81694713708221), // Coordinates
+  label: {
+    text: 'Harlem, NYC',
+    font: 'bold 20px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: true // Set to show initially
+  }
+};
+
+// Create the bus depot label
+var HarlemLabel = createLabel(HarlemLabelConfig);
+
+
 // Get the checkbox element
 var labelsSwitch = document.getElementById('labelsSwitch');
 
