@@ -833,8 +833,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
         
 
 
-// Function to create a layer
-function createLayer(config) {
+// Function to create a label layer
+function createLabel(config) {
   return viewer.entities.add(config);
 }
 
@@ -845,27 +845,24 @@ function toggleEJsites() {
   wasteWaterTreatmentPolygon.show = isChecked;
   gasPipelinePolygon.show = isChecked;
   marineTransferStationPolygon.show = isChecked;
-  marineTransferLabel.show = isChecked;
-  wasteWaterLabel.show = isChecked;
-  gasPipelineLabel.show = isChecked;
-  busDepotLabel.show = isChecked;
+  marineTransferLabel.show = isChecked; // Control marineTransferLabel visibility
+  wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
+  gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
+  busDepotLabel.show = isChecked; // Control busDepotLabel visibility
 }
 
-// Initialize layers for EJ Sites Group
-var busDepotPolygon = createLayer(busDepotConfig);
-var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
-var gasPipelinePolygon = createLayer(gasPipelineConfig);
-var marineTransferStationPolygon = createLayer(marineTransferStationConfig);
-var marineTransferLabel = createLayer(marineTransferLabelConfig);
-var wasteWaterLabel = createLayer(wasteWaterLabelConfig);
-var gasPipelineLabel = createLayer(gasPipelineLabelConfig);
-var busDepotLabel = createLayer(busDepotLabelConfig);
+// Initialize labels for EJ Sites Group
+var marineTransferLabel = createLabel(marineTransferLabelConfig);
+var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
+var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
+var busDepotLabel = createLabel(busDepotLabelConfig);
 
 // Add event listener for the EJsitesSwitch checkbox
 document.getElementById('EJsitesSwitch').addEventListener('change', toggleEJsites);
 
 // Initially hide the layers
 toggleEJsites();
+
 
 
 
