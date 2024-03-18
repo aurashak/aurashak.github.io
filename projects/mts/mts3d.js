@@ -739,13 +739,13 @@ toggleLabelsVisibility();
 function flyToHome() {
   viewer.scene.camera.setView({
     destination: Cesium.Cartesian3.fromDegrees(
-      -73.9579,
-      40.8207,
-      1700 // Adjust the zoom level as needed
+      -73.9666, 
+      40.8200,
+      600 // Adjust the zoom level as needed
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(45), // Slightly rotate to the right (adjust angle as needed)
-      pitch: Cesium.Math.toRadians(-90), // Look straight down
+      heading: Cesium.Math.toRadians(65), // Slightly rotate to the right (adjust angle as needed)
+      pitch: Cesium.Math.toRadians(-40), // Look straight down
       roll: 0,
     },
   });
