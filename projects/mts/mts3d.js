@@ -635,7 +635,7 @@ var scaleLineConfig = {
       outlineWidth: 0,
       outlineColor: Cesium.Color.BLACK // Black outline (optional)
     }),
-    show: false // Initially set to off
+    show: true // Initially set to on
   }
 };
 
@@ -656,7 +656,7 @@ var scaleLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000), // Display label when distance from camera is between 0 and 5,000 meters
-    show: false // Initially set to off
+    show: true // Initially set to on
   }
 };
 
@@ -688,10 +688,11 @@ scaleSwitch.addEventListener("change", (event) => {
 });
 
 // Set the initial state of the switch to match the initial state of the scale line and label
-scaleSwitch.checked = scaleLineConfig.polyline.show;
+scaleSwitch.checked = true;
 
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
+
 
 
 
