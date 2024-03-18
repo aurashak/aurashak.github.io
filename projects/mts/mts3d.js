@@ -626,13 +626,16 @@ var scaleLineConfig = {
     ]),
     width: 1, // Line width
     material: new Cesium.PolylineOutlineMaterialProperty({
-      color: Cesium.Color.WHITE.withAlpha(0.7), // White color with 50% transparency
+      color: Cesium.Color.WHITE.withAlpha(0.7), // White color with 70% transparency
       outlineWidth: 0,
       outlineColor: Cesium.Color.BLACK // Black outline (optional)
-    })
-  },
-  show: false // Initially set to off
+    }),
+    show: false // Initially set to off
+  }
 };
+
+// Create the scale line
+var scaleLine = viewer.entities.add(scaleLineConfig);
 
 // Define the configuration for the scale label
 var scaleLabelConfig = {
@@ -669,27 +672,22 @@ const scaleSwitch = document.getElementById("scaleSwitch");
 
 scaleSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
-    // Toggle scale line and label visibility based on current state
-    viewer.entities.add(scaleLineConfig); // Show the scale line
-    scaleLabel.show = true; // Show the label
-    console.log("Scale line and label added to viewer");
+    // Show scale line and label
+    scaleLine.show = true;
+    scaleLabel.show = true;
   } else {
-    // Toggle scale line and label visibility based on current state
-    viewer.entities.values.forEach(entity => {
-      if (entity.name === 'Scale') {
-        viewer.entities.remove(entity); // Hide the scale line
-        console.log("Scale line removed from viewer");
-      }
-    });
-    scaleLabel.show = false; // Hide the label
+    // Hide scale line and label
+    scaleLine.show = false;
+    scaleLabel.show = false;
   }
 });
 
-// Manually trigger the 'change' event to ensure the initial state is applied
+// Set the initial state of the switch to match the initial state of the scale line and label
+scaleSwitch.checked = scaleLineConfig.polyline.show;
+
+// Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
 
-// Add console log to check if the label is being created
-console.log("Scale label created:", scaleLabel);
 
 
 
