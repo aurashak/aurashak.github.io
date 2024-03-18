@@ -361,6 +361,132 @@ toggleOSMMapLayer();
 
 
 
+
+
+
+
+
+
+
+
+
+    // Load mtsgas GeoJsonDataSource
+    const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
+    const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
+
+    // Modify the polyline color and width before adding the data source
+    mtsgasDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to black
+        entity.polyline.material = Cesium.Color.BLACK;
+
+        // Change the polyline width
+        entity.polyline.width = 3; // Adjust the width as needed
+      }
+    });
+
+    // Create a switch event listener for mtsgas
+    const mtsgasSwitch = document.getElementById("mtsgasSwitch");
+    mtsgasSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(mtsgasDataSource);
+        console.log("mtsgasDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(mtsgasDataSource);
+        console.log("mtsgasDataSource removed from viewer");
+      }
+    });
+
+    // Set the initial state of the switch to 'off'
+    mtsgasSwitch.checked = false;
+
+    // Trigger the 'change' event to ensure the initial state is applied
+    const initialChangeEvent = new Event("change");
+    mtsgasSwitch.dispatchEvent(initialChangeEvent);
+
+
+
+    // Load electriclines GeoJsonDataSource
+const electriclinesResource = await Cesium.IonResource.fromAssetId(2485569);
+const electriclinesDataSource = await Cesium.GeoJsonDataSource.load(electriclinesResource);
+
+// Modify the polyline color and width before adding the data source
+electriclinesDataSource.entities.values.forEach((entity) => {
+  if (entity.polyline) {
+    // Change the polyline color to your desired color
+    entity.polyline.material = Cesium.Color.YELLOW; // Change to the color you want
+    // Change the polyline width
+    entity.polyline.width = 3; // Adjust the width as needed
+  }
+});
+
+// Create a switch event listener for electriclines
+const electriclinesSwitch = document.getElementById("electriclinesSwitch");
+electriclinesSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    viewer.dataSources.add(electriclinesDataSource);
+    console.log("electriclinesDataSource added to viewer");
+  } else {
+    viewer.dataSources.remove(electriclinesDataSource);
+    console.log("electriclinesDataSource removed from viewer");
+  }
+});
+
+// Set the initial state of the switch to 'off'
+electriclinesSwitch.checked = false;
+
+// Trigger the 'change' event to ensure the initial state is applied
+const initialChangeEventElectriclines = new Event("change");
+electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
+
+
+
+
+
+    // Create a switch event listener for mtsstreets
+    const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+
+    // Set the switch to the off position initially
+    mtsstreetsSwitch.checked = false;
+
+    // Function to handle loading or unloading mtsstreetsDataSource
+    const toggleMtsstreetsLayer = async () => {
+      if (mtsstreetsSwitch.checked) {
+        // Load mtsstreets GeoJsonDataSource
+        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+        const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
+
+        // Modify the polyline color before adding the data source
+        mtsstreetsDataSource.entities.values.forEach((entity) => {
+          if (entity.polyline) {
+            // Change the polyline color to red
+            entity.polyline.material = Cesium.Color.GREY;
+          }
+        });
+
+        // Add the loaded mtsstreetsDataSource to the viewer
+        viewer.dataSources.add(mtsstreetsDataSource);
+        console.log("mtsstreetsDataSource added to viewer");
+      } else {
+        // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
+        viewer.dataSources.remove(mtsstreetsDataSource);
+        console.log("mtsstreetsDataSource removed from viewer");
+      }
+    };
+
+    // Add the event listener to the switch
+    mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
+
+
+
+
+
+
+
+
+
+
+
     
 };
 
