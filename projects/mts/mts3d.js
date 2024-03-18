@@ -315,6 +315,7 @@ toggleOSMMapLayer();
 
 
 
+/*
 
     async function loadMTSRailDataSource(viewer) {
       // Load mtsrail GeoJsonDataSource
@@ -358,7 +359,7 @@ toggleOSMMapLayer();
   // Call the function to load the MTSRail data source
   loadMTSRailDataSource(viewer);
   
-
+*/
 
 
 
