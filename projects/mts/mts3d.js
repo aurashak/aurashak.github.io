@@ -610,8 +610,8 @@ scaleSwitch.addEventListener("change", (event) => {
 scaleSwitch.checked = false;
 
 // Trigger the 'change' event to ensure the initial state is applied
-const initialChangeEvent = new Event("change");
-scaleSwitch.dispatchEvent(initialChangeEvent);
+scaleSwitch.dispatchEvent(new Event("change"));
+
 
 
 
