@@ -664,23 +664,29 @@ function createLabel(labelConfig) {
 
 // Create a switch event listener for the scale line and label
 const scaleSwitch = document.getElementById("scaleSwitch");
+let scaleVisible = true; // Variable to track the visibility state
+
 scaleSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
-    // Show scale line
-    // Add the polyline to the viewer
-    viewer.entities.add(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
-    scaleLabel.show = true; // Show the label
-    console.log("Scale line added to viewer");
+    // Toggle scale line and label visibility based on current state
+    if (!scaleVisible) {
+      viewer.entities.add(scaleLineConfig); // Show the scale line
+      scaleLabel.show = true; // Show the label
+      scaleVisible = true; // Update visibility state
+      console.log("Scale line and label added to viewer");
+    }
   } else {
-    // Hide scale line
-    // Find and remove the polyline from the viewer
-    viewer.entities.values.forEach(entity => {
-      if (entity.name === 'Scale') {
-        viewer.entities.remove(entity);
-        console.log("Scale line removed from viewer");
-      }
-    });
-    scaleLabel.show = false; // Hide the label
+    // Toggle scale line and label visibility based on current state
+    if (scaleVisible) {
+      viewer.entities.values.forEach(entity => {
+        if (entity.name === 'Scale') {
+          viewer.entities.remove(entity); // Hide the scale line
+          console.log("Scale line removed from viewer");
+        }
+      });
+      scaleLabel.show = false; // Hide the label
+      scaleVisible = false; // Update visibility state
+    }
   }
 });
 
@@ -692,6 +698,7 @@ scaleSwitch.dispatchEvent(new Event("change"));
 
 // Add console log to check if the label is being created
 console.log("Scale label created:", scaleLabel);
+
 
 
 
