@@ -375,6 +375,40 @@ toggleOSMMapLayer();
 
 
 
+    // Load mtsgas GeoJsonDataSource
+    const mtsubwayResource = await Cesium.IonResource.fromAssetId( 2482445);
+    const mtssubwayDataSource = await Cesium.GeoJsonDataSource.load(mtsubwayResource);
+
+    // Modify the polyline color and width before adding the data source
+    mtssubwayDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to black
+        entity.polyline.material = Cesium.Color.BLACK;
+
+        // Change the polyline width
+        entity.polyline.width = 3; // Adjust the width as needed
+      }
+    });
+
+    // Create a switch event listener for mtsgas
+    const mtssubwaySwitch = document.getElementById("mtssubwaySwitch");
+    mtssubwaySwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(mtssubwayDataSource);
+        console.log("mtsgasDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(mtssubwayDataSource);
+        console.log("mtsgasDataSource removed from viewer");
+      }
+    });
+
+    // Set the initial state of the switch to 'off'
+    mtssubwaySwitch.checked = false;
+
+    // Trigger the 'change' event to ensure the initial state is applied
+    mtssubwaySwitch.dispatchEvent(initialChangeEvent);
+
+
 
 
 
