@@ -869,7 +869,7 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
 
 // Add event listener for the EJsitesSwitch checkbox
 document.getElementById('EJsitesSwitch').addEventListener('change', function() {
-  toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel, scaleLinePolyLine);
+  toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon);
 });
 
 // Initialize polygons for EJ Sites Group
