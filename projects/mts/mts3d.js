@@ -149,6 +149,10 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+
+
+
+
 // Define the bounding box coordinates
 var west = -73.9645;
 var south = 40.8175;
@@ -167,13 +171,14 @@ var clippingPlanes = new Cesium.ClippingPlaneCollection({
 });
 
 // Load OSM buildings 3D Tileset with bounding box and clipping planes
-const osmBuildingsTileset = viewer.scene.primitives.add(
-  new Cesium.Cesium3DTileset({
-    url: Cesium.IonResource.fromAssetId(96188),
-    clippingPlanes: clippingPlanes,
-    boundingVolume: new Cesium.BoundingSphere.fromRectangle3D(boundingBox, viewer.scene.globe.ellipsoid)
-  })
-);
+const osmBuildingsTileset = new Cesium.Cesium3DTileset({
+  url: Cesium.IonResource.fromAssetId(96188),
+  clippingPlanes: clippingPlanes,
+  boundingVolume: new Cesium.BoundingSphere.fromRectangle3D(boundingBox, viewer.scene.globe.ellipsoid)
+});
+
+// Add the tileset to the scene
+viewer.scene.primitives.add(osmBuildingsTileset);
 
 // Create a label for the bounding box title
 var boundingBoxTitle = viewer.entities.add({
@@ -206,6 +211,7 @@ osmBuildingsSwitch.addEventListener("change", (event) => {
 // Hide the OSM buildings Tileset and bounding box title initially
 osmBuildingsTileset.show = false;
 boundingBoxTitle.show = false;
+
 
 
 
@@ -467,39 +473,38 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
-    // Create a switch event listener for mtsstreets
-    const mtsstreetsSwitch = document.getElementById("mtsstreetsSwitch");
+    // Define mtsstreetsDataSource outside of the function scope
+let mtsstreetsDataSource;
 
-    // Set the switch to the off position initially
-    mtsstreetsSwitch.checked = false;
+// Function to handle loading or unloading mtsstreetsDataSource
+const toggleMtsstreetsLayer = async () => {
+  if (mtsstreetsSwitch.checked) {
+    // Load mtsstreets GeoJsonDataSource
+    const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+    mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
-    // Function to handle loading or unloading mtsstreetsDataSource
-    const toggleMtsstreetsLayer = async () => {
-      if (mtsstreetsSwitch.checked) {
-        // Load mtsstreets GeoJsonDataSource
-        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
-        const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
-
-        // Modify the polyline color before adding the data source
-        mtsstreetsDataSource.entities.values.forEach((entity) => {
-          if (entity.polyline) {
-            // Change the polyline color to red
-            entity.polyline.material = Cesium.Color.GREY;
-          }
-        });
-
-        // Add the loaded mtsstreetsDataSource to the viewer
-        viewer.dataSources.add(mtsstreetsDataSource);
-        console.log("mtsstreetsDataSource added to viewer");
-      } else {
-        // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
-        viewer.dataSources.remove(mtsstreetsDataSource);
-        console.log("mtsstreetsDataSource removed from viewer");
+    // Modify the polyline color before adding the data source
+    mtsstreetsDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to red
+        entity.polyline.material = Cesium.Color.GREY;
       }
-    };
+    });
 
-    // Add the event listener to the switch
-    mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
+    // Add the loaded mtsstreetsDataSource to the viewer
+    viewer.dataSources.add(mtsstreetsDataSource);
+    console.log("mtsstreetsDataSource added to viewer");
+  } else {
+    // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
+    if (mtsstreetsDataSource) {
+      viewer.dataSources.remove(mtsstreetsDataSource);
+      console.log("mtsstreetsDataSource removed from viewer");
+    }
+  }
+};
+
+// Add the event listener to the switch
+mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
@@ -594,7 +599,6 @@ var marineTransferStationConfig = {
 
 
 
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -617,10 +621,12 @@ scaleSwitch.addEventListener("change", (event) => {
   if (event.target.checked) {
     // Show scale line
     // Add the polyline to the viewer
+    viewer.entities.add(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
     console.log("Scale line added to viewer");
   } else {
     // Hide scale line
     // Remove the polyline from the viewer
+    viewer.entities.remove(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
     console.log("Scale line removed from viewer");
   }
 });
@@ -630,6 +636,7 @@ scaleSwitch.checked = true;
 
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
+
 
 
 
