@@ -697,7 +697,7 @@ var busDepotLabelConfig = {
 var busDepotLabel = createLabel(busDepotLabelConfig);
 
 
-
+/*
 // Get the checkbox element
 var labelsSwitch = document.getElementById('labelsSwitch');
 
@@ -715,7 +715,7 @@ labelsSwitch.addEventListener('change', toggleLabelsVisibility);
 
 // Initially, call the function to set the initial visibility state
 toggleLabelsVisibility();
-
+*/
 
 
 
