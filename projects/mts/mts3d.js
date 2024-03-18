@@ -1032,7 +1032,7 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
     const toggleMtsstreetsLayer = async () => {
       if (mtsstreetsSwitch.checked) {
         // Load mtsstreets GeoJsonDataSource
-        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
+        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
         const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
         // Modify the polyline color before adding the data source
