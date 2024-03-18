@@ -614,35 +614,7 @@ var scaleLineConfig = {
   show: true // Initially set to on
 };
 
-// Create a switch event listener for the scale line
-const scaleSwitch = document.getElementById("scaleSwitch");
-scaleSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    // Show scale line
-    // Add the polyline to the viewer
-    viewer.entities.add(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
-    console.log("Scale line added to viewer");
-  } else {
-    // Hide scale line
-    // Find and remove the polyline from the viewer
-    viewer.entities.values.forEach(entity => {
-      if (entity.name === 'Scale') {
-        viewer.entities.remove(entity);
-        console.log("Scale line removed from viewer");
-      }
-    });
-  }
-});
-
-// Set the initial state of the switch to 'on' to match the initial state of scaleLineConfig.show
-scaleSwitch.checked = true;
-
-// Trigger the 'change' event to ensure the initial state is applied
-scaleSwitch.dispatchEvent(new Event("change"));
-
-
-
-// Define the configuration for the marine transfer label
+// Define the configuration for the scale label
 var scaleLabelConfig = {
   name: 'Scale',
   position: Cesium.Cartesian3.fromDegrees(-73.96030214044536, 40.83124844611122), // Coordinates
@@ -655,13 +627,51 @@ var scaleLabelConfig = {
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: true // Set to show initially
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000), // Display label when distance from camera is between 0 and 5,000 meters
+    show: false // Initially hide the label
   }
 };
 
-// Create the marine transfer label
+// Function to create the label
+function createLabel(labelConfig) {
+  return viewer.entities.add({
+    name: labelConfig.name,
+    position: labelConfig.position,
+    label: labelConfig.label
+  });
+}
+
+// Create a switch event listener for the scale line and label
+const scaleSwitch = document.getElementById("scaleSwitch");
+scaleSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    // Show scale line
+    // Add the polyline to the viewer
+    viewer.entities.add(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
+    scaleLabel.show = true; // Show the label
+    console.log("Scale line added to viewer");
+  } else {
+    // Hide scale line
+    // Find and remove the polyline from the viewer
+    viewer.entities.values.forEach(entity => {
+      if (entity.name === 'Scale') {
+        viewer.entities.remove(entity);
+        console.log("Scale line removed from viewer");
+      }
+    });
+    scaleLabel.show = false; // Hide the label
+  }
+});
+
+// Set the initial state of the switch to 'on' to match the initial state of scaleLineConfig.show
+scaleSwitch.checked = true;
+
+// Trigger the 'change' event to ensure the initial state is applied
+scaleSwitch.dispatchEvent(new Event("change"));
+
+// Create the scale label
 var scaleLabel = createLabel(scaleLabelConfig);
+
 
 
 
