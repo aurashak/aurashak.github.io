@@ -784,32 +784,33 @@ font-size: 16px;
 
 .mtsmapboxinscon {
   padding: 3px;
-  background-color: #6dacffff;
+  background-color: #000000ff;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
+
 }
 
 
 .mtsmapboxins {
-  position: relative;
-  padding: 10px;
-  margin: 5px 2px;
-  line-height: 1.7;
+position: relative;
+padding: 10px;
+margin: 5px 2px;
+line-height: 1.7;
 font-size: 16px;
-  border-radius: 3px;
-  border: solid .3px rgba(18, 18, 18, 0.68);
-  background-color: #f5f5f5;
+border-radius: 3px;
+border: solid .3px rgba(18, 18, 18, 0.68);
+background-color: #f5f5f5;
 }
 
 
 .mtsmapboxnav{
-  position: relative;
-  padding: 10px;
-  margin: 0px 2px;
+position: relative;
+padding: 10px;
+margin: 0px 2px;
 font-size: 16px;
-  border-radius: 3px;
-  border: solid .3px rgba(18, 18, 18, 0.68);
-  background-color: #f5f5f5;
+border-radius: 3px;
+border: solid .3px rgba(18, 18, 18, 0.68);
+background-color: #f5f5f5;
 }
 
 
@@ -1103,6 +1104,8 @@ h3:hover, h3:active, h3:focus {
 
 
 
+
+
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -1110,10 +1113,11 @@ h3:hover, h3:active, h3:focus {
 #flyToMTS {
   padding: 5px;
   margin: 5px 2px;
-  border-radius: 2px;
-  width: 100%;
+  border-radius: 50%;
+  width: 35px;
+    height: 35px;
   text-align: center;
-  background-color: #5da0f9;
+  background-color: #f50000;
   font-size: 16px;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
@@ -1131,9 +1135,9 @@ h3:hover, h3:active, h3:focus {
 #flyToPlanView {
     padding: 5px;
     margin: 0px;
-    border-radius: 5%;
-    width: 170px;
-    height: 55px;
+    border-radius: 2px;
+    width: 35px;
+    height: 35px;
     text-align: center;
     background-color: #fce409;
     font-size: 18px;
@@ -1148,6 +1152,8 @@ h3:hover, h3:active, h3:focus {
 #flyToPlanView.active {
   box-shadow: none;
 }
+
+
 
 
 
