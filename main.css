@@ -1140,7 +1140,7 @@ h3:hover, h3:active, h3:focus {
 #flyToBusDepot::after, 
 #flyToWasteWater::after, 
 #flyToMTS::after {
-  content: "FLY";
+  content: "GO";
   bottom: 7px;
   left: 50%;
   transform: translateX(-50%);
@@ -1174,7 +1174,7 @@ h3:hover, h3:active, h3:focus {
 /* Added */
 #flyToOverview::after,
 #flyToPlanView::after {
-  content: "FLY";
+  content: "GO";
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
