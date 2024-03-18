@@ -33,7 +33,7 @@ const initializeCesium = async () => {
 
 
 
-  
+
   
 // Define the point around which to orbit
 const centerPoint = Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 0); // Adjust the height as needed
@@ -640,7 +640,6 @@ var marineTransferStationConfig = {
 
 
 
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -714,7 +713,6 @@ scaleSwitch.checked = scaleLineConfig.polyline.show;
 
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
-
 
 
 
