@@ -19,6 +19,13 @@ const initializeCesium = async () => {
     navigationInstructionsInitiallyVisible: true, 
   });
 
+
+// Add the default Cesium navigation controls to the specified div
+viewer.extend(Cesium.viewerCesiumNavigationMixin, {
+  controlDiv: document.getElementById('cesiumNavigationControls')
+});
+
+
   var boundingBox = new Cesium.Rectangle(
     Cesium.Math.toRadians(-74.05), // West
     Cesium.Math.toRadians(40.5),   // South
