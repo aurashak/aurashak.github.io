@@ -377,6 +377,38 @@ toggleOSMMapLayer();
 
 
 
+// Define mtssubwayDataSource outside of the function scope
+let mtssubwayDataSource;
+
+// Function to handle loading or unloading mtssubwayDataSource
+const toggleMtssubwayLayer = async () => {
+  if (mtssubwaySwitch.checked) {
+    // Load mtssubway GeoJsonDataSource
+    const mtssubwayResource = await Cesium.IonResource.fromAssetId(2477200);
+    mtssubwayDataSource = await Cesium.GeoJsonDataSource.load(mtssubwayResource);
+
+    // Modify the polyline color before adding the data source
+    mtssubwayDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to red
+        entity.polyline.material = Cesium.Color.GREY;
+      }
+    });
+
+    // Add the loaded mtssubwayDataSource to the viewer
+    viewer.dataSources.add(mtssubwayDataSource);
+    console.log("mtssubwayDataSource added to viewer");
+  } else {
+    // If the switch is turned off, remove the mtssubwayDataSource from the viewer
+    if (mtssubwayDataSource) {
+      viewer.dataSources.remove(mtssubwayDataSource);
+      console.log("mtssubwayDataSource removed from viewer");
+    }
+  }
+};
+
+// Add the event listener to the switch
+mtssubwaySwitch.addEventListener("change", toggleMtssubwayLayer);
 
 
 
