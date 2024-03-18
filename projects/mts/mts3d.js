@@ -589,7 +589,7 @@ var scaleLineConfig = {
     width: 1, // Line width
     material: Cesium.Color.WHITE // White color
   },
-  show: false // Initially set to off
+  show: true // Initially set to off
 };
 
 // Create a switch event listener for the scale line
