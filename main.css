@@ -1106,6 +1106,7 @@ h3:hover, h3:active, h3:focus {
 
 
 
+
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -1119,7 +1120,7 @@ h3:hover, h3:active, h3:focus {
   text-align: center;
   background-color: #f50000;
   font-size: 16px;
-  border: 1px solid rgba(110, 110, 110, 0.3);
+  border: 1.8px solid rgba(51, 51, 51, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
   position: relative; /* Added */
@@ -1146,7 +1147,7 @@ h3:hover, h3:active, h3:focus {
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
-  color: rgb(214, 214, 214);
+  color: rgb(255, 255, 255);
 }
 
 /* Styling for Overview and PlanView buttons */
@@ -1154,13 +1155,13 @@ h3:hover, h3:active, h3:focus {
 #flyToPlanView {
   padding: 5px;
   margin: 0px;
-  border-radius: 2px;
+  border-radius: 6px;
   width: 35px;
   height: 35px;
   text-align: center;
   background-color: #fce409;
   font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.81);
+  border: 1.8px solid rgba(51, 51, 51, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
   transition: background-color 0.1s;
@@ -1184,6 +1185,45 @@ h3:hover, h3:active, h3:focus {
   font-size: 14px;
   color: black;
 }
+
+
+/* Styling for Overview and PlanView buttons */
+#flyToHome,
+#flyToHome {
+  padding: 5px;
+  margin: 0px;
+  border-radius: 6px;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  background-color: #fce409;
+  font-size: 18px;
+  border: 1.8px solid rgba(51, 51, 51, 0.81);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+#flyToHome:active,
+#flyToHome:active 
+{
+  transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
+}
+
+/* Added */
+#flyToHome::after,
+#flyToHome::after {
+  content: "RESET";
+  bottom: 0px;
+  font-weight: bold;
+
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: black;
+}
+
+
 
 
 
