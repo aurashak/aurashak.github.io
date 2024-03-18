@@ -820,7 +820,7 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
                       700 // Adjust the zoom level as needed
                     ),
                     orientation: {
-                      heading: Cesium.Math.toRadians(70), // clockwise from north
+                      heading: Cesium.Math.toRadians(130), // clockwise from north
                       pitch: Cesium.Math.toRadians(-30), // Look downward
                       roll: 0,
                     },
