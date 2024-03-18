@@ -849,7 +849,7 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
-                
+
 
       // Function to create a label entity
 function createLabel(config) {
@@ -857,7 +857,7 @@ function createLabel(config) {
 }
 
 // Group switch handler
-function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel, scaleLinePolyline) {
+function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon) {
   console.log("Toggle function called");
   var isChecked = document.getElementById('EJsitesSwitch').checked;
   console.log("isChecked:", isChecked);
@@ -865,11 +865,6 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   wasteWaterTreatmentPolygon.show = isChecked;
   gasPipelinePolygon.show = isChecked;
   marineTransferStationPolygon.show = isChecked;
-  marineTransferLabel.show = isChecked; // Control marineTransferLabel visibility
-  wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
-  gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
-  busDepotLabel.show = isChecked; // Control busDepotLabel visibility
-  scaleLinePolyline.show = isChecked;
 }
 
 // Add event listener for the EJsitesSwitch checkbox
@@ -882,16 +877,10 @@ var busDepotPolygon = viewer.entities.add(busDepotConfig);
 var wasteWaterTreatmentPolygon = viewer.entities.add(wasteWaterTreatmentConfig);
 var gasPipelinePolygon = viewer.entities.add(gasPipelineConfig);
 var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConfig);
-var scaleLinePolyLine = viewer.entities.add(scaleLineConfig);
 
-// Initialize labels for EJ Sites Group
-var marineTransferLabel = createLabel(marineTransferLabelConfig);
-var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
-var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
-var busDepotLabel = createLabel(busDepotLabelConfig);
 
 // Initially hide the layers
-toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel, scaleLinePolyLine);
+toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon);
 
 
 
