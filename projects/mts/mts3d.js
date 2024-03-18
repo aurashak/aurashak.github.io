@@ -150,12 +150,30 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+// Define the bounding box coordinates
+var west = -73.9645;
+var south = 40.8175;
+var east = -73.9515;
+var north = 40.8275;
 
+// Create the bounding box geometry
+var boundingBox = new Cesium.BoundingRectangle.fromDegrees(west, south, east, north);
 
+// Create the clipping plane
+var clippingPlane = new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 0.0);
 
-// Load OSM buildings 3D Tileset
+// Set up the clipping plane collection
+var clippingPlanes = new Cesium.ClippingPlaneCollection({
+  planes: [clippingPlane]
+});
+
+// Load OSM buildings 3D Tileset with bounding box and clipping planes
 const osmBuildingsTileset = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+  new Cesium.Cesium3DTileset({
+    url: Cesium.IonResource.fromAssetId(96188),
+    clippingPlanes: clippingPlanes,
+    boundingVolume: new Cesium.BoundingSphere.fromRectangle3D(boundingBox, viewer.scene.globe.ellipsoid)
+  })
 );
 
 // Apply default style to the OSM buildings tileset if available
@@ -182,9 +200,6 @@ osmBuildingsSwitch.addEventListener("change", (event) => {
 
 // Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = false;
-
-
-
 
 
 
@@ -573,9 +588,6 @@ var marineTransferStationConfig = {
 
 
 
-
-
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -589,7 +601,7 @@ var scaleLineConfig = {
     width: 1, // Line width
     material: Cesium.Color.WHITE // White color
   },
-  show: true // Initially set to off
+  show: true // Initially set to on
 };
 
 // Create a switch event listener for the scale line
@@ -606,12 +618,11 @@ scaleSwitch.addEventListener("change", (event) => {
   }
 });
 
-// Set the initial state of the switch to 'off'
-scaleSwitch.checked = false;
+// Set the initial state of the switch to 'on' to match the initial state of scaleLineConfig.show
+scaleSwitch.checked = true;
 
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
-
 
 
 
