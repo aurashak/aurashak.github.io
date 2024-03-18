@@ -588,6 +588,24 @@ var scaleLineConfig = {
   show: false // Initially set to off
 };
 
+// Create a switch for the scale line
+var scaleSwitch = document.createElement('input');
+scaleSwitch.type = 'checkbox';
+scaleSwitch.id = 'scaleSwitch';
+scaleSwitch.checked = !scaleLineConfig.show; // Reverse the value because checkbox is initially unchecked if show is true
+scaleSwitch.addEventListener('change', function() {
+  scaleLineConfig.show = !this.checked; // Reverse the value because checkbox is initially unchecked if show is true
+});
+
+// Create a label for the switch
+var scaleLabel = document.createElement('label');
+scaleLabel.htmlFor = 'scaleSwitch';
+scaleLabel.appendChild(document.createTextNode('Scale Line'));
+
+// Append the switch and label to the HTML body
+document.body.appendChild(scaleSwitch);
+document.body.appendChild(scaleLabel);
+
 
 
 
@@ -845,37 +863,28 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
         
 
 
+
+
+
+
 // Function to create a label entity
 function createLabel(config) {
   return viewer.entities.add(config);
 }
 
-// Group switch handler
-function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
-  console.log("Toggle function called");
-  var isChecked = document.getElementById('EJsitesSwitch').checked;
-  console.log("isChecked:", isChecked);
-  busDepotPolygon.show = isChecked;
-  wasteWaterTreatmentPolygon.show = isChecked;
-  gasPipelinePolygon.show = isChecked;
-  marineTransferStationPolygon.show = isChecked;
-  marineTransferLabel.show = isChecked; // Control marineTransferLabel visibility
-  wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
-  gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
-  busDepotLabel.show = isChecked; // Control busDepotLabel visibility
+// Group switch handler for labels
+function toggleEJsitesLabels(marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
+  var isChecked = document.getElementById('labelsSwitch').checked;
+  marineTransferLabel.label.show = isChecked;
+  wasteWaterLabel.label.show = isChecked;
+  gasPipelineLabel.label.show = isChecked;
+  busDepotLabel.label.show = isChecked;
 }
 
-
-// Add event listener for the EJsitesSwitch checkbox
-document.getElementById('EJsitesSwitch').addEventListener('change', function() {
-  toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
+// Add event listener for the labelsSwitch checkbox
+document.getElementById('labelsSwitch').addEventListener('change', function() {
+  toggleEJsitesLabels(marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
 });
-
-// Initialize polygons for EJ Sites Group
-var busDepotPolygon = viewer.entities.add(busDepotConfig);
-var wasteWaterTreatmentPolygon = viewer.entities.add(wasteWaterTreatmentConfig);
-var gasPipelinePolygon = viewer.entities.add(gasPipelineConfig);
-var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConfig);
 
 // Initialize labels for EJ Sites Group
 var marineTransferLabel = createLabel(marineTransferLabelConfig);
@@ -883,15 +892,8 @@ var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 var busDepotLabel = createLabel(busDepotLabelConfig);
 
-// Initially hide the layers
-toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
-
-
-
-
-
-
-
+// Initially hide the label layers
+toggleEJsitesLabels(marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
 
 
 
