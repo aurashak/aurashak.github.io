@@ -108,12 +108,8 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 });
 
 
-
-
-
-
-
-var busDepotConfig = {
+// Create a polygon for the MTA NYC Bus Depot
+var busDepotPolygon = viewer.entities.add({
   name: 'MTA Manhattanville Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -125,13 +121,13 @@ var busDepotConfig = {
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 10, // Extrude the polygon upward by 10 units
     height: -20 // Position the polygon lower by setting the height to -20 units
-  }
-};
+  },
+});
 
 
 
-// Define the configuration for the waste water treatment polygon
-var wasteWaterTreatmentConfig = {
+// Create a polygon for the North River Sewage Treatment Plant
+var wasteWaterTreatmentPolygon = viewer.entities.add({
   name: 'North River Sewage Treatment Plant',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -146,13 +142,13 @@ var wasteWaterTreatmentConfig = {
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 12, // Extrude the polygon upward by 10 units
     height: -40 // Position the polygon lower by setting the height to -20 units
-  }
-};
+  },
+});
 
 
 
-// Define the configuration for the gas pipeline polygon
-var gasPipelineConfig = {
+// Create a polygon for the Williams Gas Pipeline
+var gasPipelinePolygon = viewer.entities.add({
   name: 'Williams Gas Pipeline',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -166,13 +162,14 @@ var gasPipelineConfig = {
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 1, // Extrude the polygon upward by 20 units
     height: -60 // Position the polygon lower by setting the height to -20 units
-  }
-};
+  },
+});
 
 
 
-// Define the configuration for the marine transfer station polygon
-var marineTransferStationConfig = {
+
+// Create a polygon for the Marine Transfer Station
+var marineTransferStationPolygon = viewer.entities.add({
   name: 'Marine Transfer Station',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -188,14 +185,13 @@ var marineTransferStationConfig = {
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 5, // Extrude the polygon upward by 10 units
     height: -60 // Position the polygon lower by setting the height to -60 units
-  }
-};
+  },
+});
 
 
 
-
-// Define the configuration for the white line
-var scaleLineConfig = {
+// Create a white line
+var scaleLine = viewer.entities.add({
   name: 'Scale',
   polyline: {
     positions: Cesium.Cartesian3.fromDegreesArray([
@@ -207,11 +203,12 @@ var scaleLineConfig = {
     width: 1, // Line width
     material: Cesium.Color.WHITE // White color
   }
-};
+});
 
 
-// Define the configuration for the distance label
-var distanceLabelConfig = {
+
+// Add a label for the distance parallel to the white line
+var distanceLabel = viewer.entities.add({
   name: 'Distance Label',
   position: Cesium.Cartesian3.fromDegrees(-73.96063040325132, 40.82733361509444), // Adjust the position as needed
   label: {
@@ -225,17 +222,16 @@ var distanceLabelConfig = {
     horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // Set horizontal origin to center
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
-    show: false // Initially set to off
+    rotation: Cesium.Math.toRadians(90) // Rotate the label by 90 degrees
   }
-};
+});
 
 
  
 
 
-// Define the configuration for the marine transfer label
-var marineTransferLabelConfig = {
+// Add a label for the Marine Placeholder
+var marineTransferLabel = viewer.entities.add({
   name: 'MTS',
   position: Cesium.Cartesian3.fromDegrees(-73.95948442468283, 40.822656278896815), // Coordinates
   label: {
@@ -247,14 +243,12 @@ var marineTransferLabelConfig = {
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
+
   }
-};
+});
 
-
-// Define the configuration for the waste water label
-var wasteWaterLabelConfig = {
+var wasteWaterLabel = viewer.entities.add({
   name: 'Waste Water Treatment',
   position: Cesium.Cartesian3.fromDegrees(-73.95668916390169, 40.826045064071984), // Coordinates
   label: {
@@ -266,13 +260,12 @@ var wasteWaterLabelConfig = {
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
   }
-};
+});
 
-// Define the configuration for the gas pipeline label
-var gasPipelineLabelConfig = {
+
+var gasPipelineLabel = viewer.entities.add({
   name: 'Gas Pipeline',
   position: Cesium.Cartesian3.fromDegrees(-73.95917709236481, 40.82138267116754), // Coordinates
   label: {
@@ -284,15 +277,13 @@ var gasPipelineLabelConfig = {
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, 0), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
+
   }
-};
+});
 
 
-
-// Define the configuration for the bus depot label
-var busDepotLabelConfig = {
+var busDepotLabel = viewer.entities.add({
   name: 'Bus Depot',
   position: Cesium.Cartesian3.fromDegrees(-73.95749408193386, 40.81903473878459), // Coordinates
   label: {
@@ -304,10 +295,11 @@ var busDepotLabelConfig = {
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
+
   }
-};
+});
+
 
 
 
@@ -497,38 +489,237 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
     console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
-// Load OSM buildings 3D Tileset
-const osmBuildingsTileset = viewer.scene.primitives.add(
-  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
-);
 
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
-) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
-  );
+
+
+
+    // Load OSM buildings 3D Tileset
+    const osmBuildingsTileset = viewer.scene.primitives.add(
+      await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+    );
+
+    // Apply default style to the OSM buildings tileset if available
+    const osmExtras = osmBuildingsTileset.asset.extras;
+    if (
+      Cesium.defined(osmExtras) &&
+      Cesium.defined(osmExtras.ion) &&
+      Cesium.defined(osmExtras.ion.defaultStyle)
+    ) {
+      osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+        osmExtras.ion.defaultStyle
+      );
+    }
+
+    // Create a switch event listener for the OSM buildings Tileset
+    const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+
+    // Set the switch to the off position initially
+    osmBuildingsSwitch.checked = false;
+
+    osmBuildingsSwitch.addEventListener("change", (event) => {
+      osmBuildingsTileset.show = event.target.checked;
+    });
+
+    // Hide the OSM buildings Tileset initially
+    osmBuildingsTileset.show = false;
+
+    
+// Define the specific latitude and longitude point
+const centerLatitude = 40.820233493003926; // Latitude of the point
+const centerLongitude = -73.9579599385659; // Longitude of the point
+
+// Convert the radius from miles to meters
+const radiusInMeters = 0.5;
+
+// Convert the radius from meters to degrees (approximation for small distances)
+const radiusInDegrees = radiusInMeters / 111320; // 1 degree = approximately 111320 meters
+
+// Adjust the longitude degrees based on the latitude
+const degreesLongitudeCorrection = Math.cos(centerLatitude * Math.PI / 180);
+
+// Define the bounding box for the area of interest
+const westLongitude = centerLongitude - (radiusInDegrees / degreesLongitudeCorrection);
+const eastLongitude = centerLongitude + (radiusInDegrees / degreesLongitudeCorrection);
+const southLatitude = centerLatitude - (radiusInDegrees);
+const northLatitude = centerLatitude + (radiusInDegrees);
+
+
+/*
+
+// Load OSM buildings MTS Building
+const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+
+// Add the tileset to the viewer's scene
+viewer.scene.primitives.add(osmBuildingsTileset);
+
+// Function to show only the buildings with the given element IDs after the tileset is fully loaded
+function showBuildings() {
+  // Show building with ID 275080379 in red and add label
+  showBuildingById(osmBuildingsTileset, 275080379, "red");
 }
 
-// Create a switch event listener for the OSM buildings Tileset
-const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
+// Listen for the tileLoad event to ensure all tiles are loaded
+osmBuildingsTileset.tileLoad.addEventListener(showBuildings);
 
-// Set the switch to the off position initially
-osmBuildingsSwitch.checked = false;
+// Function to show only the building with the given element ID for the tileset
+function showBuildingById(tileset, elementId, color) {
+  console.log("Showing building with ID", elementId);
+  tileset.style = new Cesium.Cesium3DTileStyle({
+    color: {
+      conditions: [
+        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : (color === "blue" ? "0, 0, 255" : "0, 255, 0")}, 0.7)`], // Show the specific building with the given ID, set color accordingly
+        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
+      ]
+    }
+  });
 
-osmBuildingsSwitch.addEventListener("change", (event) => {
-  osmBuildingsTileset.show = event.target.checked;
+  // Add green box at the same location with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
+    box: {
+      dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+    },
+    label: {
+      text: "Marine Transfer Station",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      pixelOffset: new Cesium.Cartesian2(0, -50)
+    }
+  });
+
+  // Add second green box next to the first one with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
+    box: {
+      dimensions: new Cesium.Cartesian3(400, 50, 50), // Adjust dimensions as needed (long rectangle)
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+    },
+    label: {
+      text: "North River Sewage Treatment Plant",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+      pixelOffset: new Cesium.Cartesian2(0, -50) // Adjust as needed to set the label's height
+    }
+  });
+
+  // Add third green box next to the first one with rotation along the Y-axis
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.95924846693057, 40.82136519651025, -10), // Adjusted position to be next to the first box
+    box: {
+      dimensions: new Cesium.Cartesian3(30, 50, 30), // Adjust dimensions as needed (long rectangle)
+      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+    },
+    label: {
+      text: "Williams Pipeline",
+      font: "14px Arial",
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 2,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
+  });
+
+
+
+
+  viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
+    box: {
+        positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+            -73.95790713393994, 40.81928006545158, -10,
+            -73.95790713393994, 40.81928006545158 + 0.001, -10,
+            -73.95790713393994 + 0.002, 40.81928006545158 + 0.002, -10,
+            -73.95790713393994 + 0.002, 40.81928006545158, -10
+        ]),
+        material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
+        orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(90)) // Rotate around the Y-axis by 30 degrees
+    },
+    label: {
+        text: "NYC Bus Depot",
+        font: "14px Arial",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
+        pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
+    }
 });
 
-// Hide the OSM buildings Tileset initially
-osmBuildingsTileset.show = false;
+// Log a message specifically for the NYC Bus Depot
+console.log("Added NYC Bus Depot building");
+
+}
+
+*/
 
 
 
+
+
+
+/* 
+
+// Function to toggle NYCHA switch and layer visibility
+function toggleNYCHASwitch() {
+  console.log("NYCHA switch toggled.");
+  const NYCHASwitch = document.getElementById("NYCHASwitch");
+  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"];
+  const show = NYCHASwitch.checked;
+
+  console.log("NYCHA switch state:", show);
+  console.log("Showing buildings with IDs", buildingIds);
+  toggleBuildingVisibility(buildingIds, "rgba(0, 0, 255, 1)", show); // Blue color for NYCHA
+  osmBuildingsTileset.show = show;
+}
+
+const NYCHASwitch = document.getElementById("NYCHASwitch");
+NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
+
+*/
+
+
+
+
+    
+   
+   /*
+// Set the switch to the off position initially
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
+});
+
+*/
 
 
 
@@ -748,6 +939,43 @@ function createCircleImage() {
 
 
 
+// Load nycsubway GeoJsonDataSource
+async function loadNycSubwayData() {
+    try {
+        const nycsubwayLinesResource = await Cesium.IonResource.fromUrl('https://aurashak.github.io/geojson/nyc/nycsubway.geojson');
+        const nycsubwayLinesDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayLinesResource);
+
+        // Create a switch event listener for nycsubway
+        const nycsubwayLinesSwitch = document.getElementById("nycsubwayLinesSwitch");
+
+        // Function to toggle the visibility of the nycsubwayLinesDataSource
+        const toggleNycSubwayLinesLayer = () => {
+            const isChecked = nycsubwayLinesSwitch.checked;
+            nycsubwayLinesDataSource.entities.values.forEach((entity) => {
+                entity.show = isChecked;
+            });
+        };
+
+        // Add an event listener to the switch
+        nycsubwayLinesSwitch.addEventListener("change", toggleNycSubwayLinesLayer);
+
+        // Set the switch's initial state
+        nycsubwayLinesSwitch.checked = false;
+
+        // Add nycsubwayLinesDataSource to the viewer initially with visibility off
+        viewer.dataSources.add(nycsubwayLinesDataSource);
+        toggleNycSubwayLinesLayer(); // Ensure visibility state matches the switch
+
+        console.log("GeoJSON data source loaded successfully");
+    } catch (error) {
+        console.error("Error loading GeoJSON data source:", error);
+    }
+}
+
+// Call the function to load NYC subway data
+loadNycSubwayData();
+
+
 
 
 
@@ -834,7 +1062,7 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
     const toggleMtsstreetsLayer = async () => {
       if (mtsstreetsSwitch.checked) {
         // Load mtsstreets GeoJsonDataSource
-        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+        const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2484939);
         const mtsstreetsDataSource = await Cesium.GeoJsonDataSource.load(mtsstreetsResource);
 
         // Modify the polyline color before adding the data source
@@ -862,87 +1090,94 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
+        // Create layers for EJ Sites Group
+        var busDepotPolygon = createBusDepotPolygon();
+        var wasteWaterTreatmentPolygon = createWasteWaterTreatmentPolygon();
+        var gasPipelinePolygon = createGasPipelinePolygon();
+        var marineTransferStationPolygon = createMarineTransferStationPolygon();
+        var scaleLine = createScaleLine();
+        var distanceLabel = createDistanceLabel();
+        var marineTransferLabel = createMarineTransferLabel();
+        var wasteWaterLabel = createWasteWaterLabel();
+        var gasPipelineLabel = createGasPipelineLabel();
+        var busDepotLabel = createBusDepotLabel();
 
+        // Group switch handler
+        function toggleEJsites() {
+            var isChecked = document.getElementById('EJsitesSwitch').checked;
+            busDepotPolygon.show = isChecked;
+            wasteWaterTreatmentPolygon.show = isChecked;
+            gasPipelinePolygon.show = isChecked;
+            marineTransferStationPolygon.show = isChecked;
+            scaleLine.show = isChecked;
+            distanceLabel.show = isChecked;
+            marineTransferLabel.show = isChecked;
+            wasteWaterLabel.show = isChecked;
+            gasPipelineLabel.show = isChecked;
+            busDepotLabel.show = isChecked;
+        }
 
-   // Load nycsubway GeoJsonDataSource
-   const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
-   const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
-   
-   
-   
-   // Function to get the color based on the subway line name
-   function getSubwayLineColor(name) {
-       return subwayLineColors[name] || 'white'; // Default color is white if not found in the mapping
-   }
-   
-   // Modify the polyline color before adding the data source
-   nycsubwayDataSource.entities.values.forEach((entity) => {
-       if (entity.polyline) {
-           // Get the subway line name from the "name" property
-           const subwayLineName = entity.properties.name;
-   
-           // Change the polyline color based on the subway line name
-           entity.polyline.material = Cesium.Color.fromCssColorString(getSubwayLineColor(subwayLineName));
-       }
-   });
-   
-   // Create a switch event listener for nycsubway
-   const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
-   
-   // Function to toggle the visibility of the nycsubwayDataSource
-   const toggleNycSubwayLayer = () => {
-       const isChecked = nycsubwaySwitch.checked;
-       nycsubwayDataSource.entities.values.forEach((entity) => {
-           entity.show = isChecked;
-       });
-   };
-   
-   // Add an event listener to the switch
-   nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
-   
-   // Set the switch's initial state
-   nycsubwaySwitch.checked = false;
-   
-   // Initial load of nycsubway with the specified color
-   // (No need to add it to viewer initially, as the switch is in the 'off' position)
-   console.log("Initial load of nycsubwayDataSource");
+        // Functions to create layers
+        function createBusDepotPolygon() {
+            return viewer.entities.add({
+                // Define the bus depot polygon properties
+            });
+        }
 
+        function createWasteWaterTreatmentPolygon() {
+            return viewer.entities.add({
+                // Define the waste water treatment polygon properties
+            });
+        }
 
+        function createGasPipelinePolygon() {
+            return viewer.entities.add({
+                // Define the gas pipeline polygon properties
+            });
+        }
 
+        function createMarineTransferStationPolygon() {
+            return viewer.entities.add({
+                // Define the marine transfer station polygon properties
+            });
+        }
 
+        function createScaleLine() {
+            return viewer.entities.add({
+                // Define the scale line properties
+            });
+        }
 
+        function createDistanceLabel() {
+            return viewer.entities.add({
+                // Define the distance label properties
+            });
+        }
 
-// Group switch handler
-function toggleEJsites() {
-  var isChecked = document.getElementById('EJsitesSwitch').checked;
-  busDepotPolygon.show = isChecked;
-  wasteWaterTreatmentPolygon.show = isChecked;
-  gasPipelinePolygon.show = isChecked;
-  marineTransferStationPolygon.show = isChecked;
-  scaleLine.show = isChecked;
-  distanceLabel.show = isChecked;
-  marineTransferLabel.show = isChecked;
-  wasteWaterLabel.show = isChecked;
-  gasPipelineLabel.show = isChecked;
-  busDepotLabel.show = isChecked;
-}
+        function createMarineTransferLabel() {
+            return viewer.entities.add({
+                // Define the marine transfer label properties
+            });
+        }
 
-// Create layers for EJ Sites Group
-var busDepotPolygon = createLayer(busDepotConfig);
-var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
-var gasPipelinePolygon = createLayer(gasPipelineConfig);
-var marineTransferStationPolygon = createLayer(marineTransferStationConfig);
-var scaleLine = createLayer(scaleLineConfig);
-var distanceLabel = createLayer(distanceLabelConfig);
-var marineTransferLabel = createLayer(marineTransferLabelConfig);
-var wasteWaterLabel = createLayer(wasteWaterLabelConfig);
-var gasPipelineLabel = createLayer(gasPipelineLabelConfig);
-var busDepotLabel = createLayer(busDepotLabelConfig);
+        function createWasteWaterLabel() {
+            return viewer.entities.add({
+                // Define the waste water label properties
+            });
+        }
 
-// Function to create a layer
-function createLayer(config) {
-  return viewer.entities.add(config);
-}
+        function createGasPipelineLabel() {
+            return viewer.entities.add({
+                // Define the gas pipeline label properties
+            });
+        }
+
+        function createBusDepotLabel() {
+            return viewer.entities.add({
+                // Define the bus depot label properties
+            });
+        }
+
 
 
 
@@ -957,37 +1192,89 @@ initializeCesium();
 
 
 
+/*
 
+   // Load nycsubway GeoJsonDataSource
+const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
+const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
 
-   
-   /*
-// Set the switch to the off position initially
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.checked = false;
+// Define colors for each subway line based on the "name" column
+const subwayLineColors = {
+    '1': 'red',
+    '1-2-3': 'red',
+    '2': 'red',
+    '3': 'red',
+    'A': 'blue',
+    'B': 'orange',
+    'C': 'blue',
+    'D': 'orange',
+    'Q': 'yellow',
+    'R': 'yellow',
+    '4': 'green',
+    '5': 'green',
+    '6': 'green',
+    '4-5-6': 'green',
+    '7': 'purple',
+    'A-C': 'blue',
+    'A-C-E': 'blue',
+    'B-D': 'orange',
+    'B-D-F-M': 'orange',
+    'F': 'orange',
+    'E': 'blue',
+    'F-M': 'orange',
+    'G': 'lime',
+    'J-Z': 'brown',
+    'L': 'gray',
+    'M': 'orange',
+    'N': 'yellow',
+    'N-Q-R': 'yellow',
+    'N-R': 'yellow',
+    'N-Q': 'yellow',
+    'N-R-W': 'yellow',
+    'N-W': 'yellow',
+    'R-W': 'yellow',
+    'S': 'gray'
+};
 
-// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
-const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("Bing Maps layer initialized, but not added to viewer");
+// Function to get the color based on the subway line name
+function getSubwayLineColor(name) {
+    return subwayLineColors[name] || 'white'; // Default color is white if not found in the mapping
+}
 
-// Create a switch event listener for the Bing Maps layer
-bingMapsSwitch.addEventListener("change", (event) => {
-  // Check the switch state directly within the event listener
-  if (event.target.checked) {
-    // Add the layer to the viewer when the switch is turned on
-    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
-    console.log("Bing Maps layer added to viewer");
-  } else {
-    // Remove the layer from the viewer when the switch is turned off
-    viewer.imageryLayers.remove(bingMapsLayer);
-    console.log("Bing Maps layer removed from viewer");
-  }
+// Modify the polyline color before adding the data source
+nycsubwayDataSource.entities.values.forEach((entity) => {
+    if (entity.polyline) {
+        // Get the subway line name from the "name" property
+        const subwayLineName = entity.properties.name;
+
+        // Change the polyline color based on the subway line name
+        entity.polyline.material = Cesium.Color.fromCssColorString(getSubwayLineColor(subwayLineName));
+    }
 });
 
+// Create a switch event listener for nycsubway
+const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
+
+// Function to toggle the visibility of the nycsubwayDataSource
+const toggleNycSubwayLayer = () => {
+    const isChecked = nycsubwaySwitch.checked;
+    nycsubwayDataSource.entities.values.forEach((entity) => {
+        entity.show = isChecked;
+    });
+};
+
+// Add an event listener to the switch
+nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
+
+// Set the switch's initial state
+nycsubwaySwitch.checked = false;
+
+// Initial load of nycsubway with the specified color
+// (No need to add it to viewer initially, as the switch is in the 'off' position)
+console.log("Initial load of nycsubwayDataSource");
+
+
 */
-
-
 
 
 
