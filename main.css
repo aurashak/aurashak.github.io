@@ -1122,6 +1122,45 @@ h3:hover, h3:active, h3:focus {
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
   position: relative; /* Added */
+  transition: transform 0.3s; /* Added */
+}
+
+#flyToGasPipeline:active,
+#flyToBusDepot:active, 
+#flyToWasteWater:active, 
+#flyToMTS:active {
+  transform: translateY(5px); /* Move down by 5px when clicked */
+}
+
+/* Added */
+#flyToGasPipeline::after,
+#flyToBusDepot::after, 
+#flyToWasteWater::after, 
+#flyToMTS::after {
+  content: "FLY";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: black;
+}
+
+/* Styling for Overview and PlanView buttons */
+#flyToOverview,
+#flyToPlanView {
+  padding: 5px;
+  margin: 0px;
+  border-radius: 2px;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  background-color: #fce409;
+  font-size: 18px;
+  border: 1px solid rgba(110, 110, 110, 0.81);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 #flyToOverview.active,
@@ -1130,10 +1169,8 @@ h3:hover, h3:active, h3:focus {
 }
 
 /* Added */
-#flyToGasPipeline::after,
-#flyToBusDepot::after, 
-#flyToWasteWater::after, 
-#flyToMTS::after {
+#flyToOverview::after,
+#flyToPlanView::after {
   content: "FLY";
   position: absolute;
   bottom: -20px;
