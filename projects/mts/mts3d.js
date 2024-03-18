@@ -588,6 +588,26 @@ var scaleLineConfig = {
   show: false // Initially set to off
 };
 
+// Create a switch for the scale line
+var scaleSwitch = document.createElement('input');
+scaleSwitch.type = 'checkbox';
+scaleSwitch.id = 'scaleSwitch';
+scaleSwitch.checked = !scaleLineConfig.show; // Reverse the value because checkbox is initially unchecked if show is true
+scaleSwitch.addEventListener('change', function() {
+  scaleLineConfig.show = this.checked; // Update the visibility based on the switch state
+  // Add or remove the polyline from the viewer based on its visibility
+  if (this.checked) {
+    // Add the polyline to the viewer
+    console.log("Scale line added to viewer");
+  } else {
+    // Remove the polyline from the viewer
+    console.log("Scale line removed from viewer");
+  }
+});
+
+// Append the switch to the HTML body
+document.body.appendChild(scaleSwitch);
+
 
 
 
