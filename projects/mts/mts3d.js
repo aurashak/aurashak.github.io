@@ -604,13 +604,12 @@ var distanceLabelConfig = {
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
     rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
-    show: false // Initially set to off
+    show: true // Set to show initially
   }
 };
 
-
- 
-
+// Create the distance label
+var distanceLabel = createLabel(distanceLabelConfig);
 
 // Define the configuration for the marine transfer label
 var marineTransferLabelConfig = {
@@ -626,10 +625,12 @@ var marineTransferLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    show: true // Set to show initially
   }
 };
 
+// Create the marine transfer label
+var marineTransferLabel = createLabel(marineTransferLabelConfig);
 
 // Define the configuration for the waste water label
 var wasteWaterLabelConfig = {
@@ -645,9 +646,12 @@ var wasteWaterLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    show: true // Set to show initially
   }
 };
+
+// Create the waste water label
+var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 
 // Define the configuration for the gas pipeline label
 var gasPipelineLabelConfig = {
@@ -663,11 +667,12 @@ var gasPipelineLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, 0), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    show: true // Set to show initially
   }
 };
 
-
+// Create the gas pipeline label
+var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 
 // Define the configuration for the bus depot label
 var busDepotLabelConfig = {
@@ -683,9 +688,13 @@ var busDepotLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Initially set to off
+    show: true // Set to show initially
   }
 };
+
+// Create the bus depot label
+var busDepotLabel = createLabel(busDepotLabelConfig);
+
 
 
 
