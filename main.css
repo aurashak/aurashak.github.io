@@ -1130,18 +1130,19 @@ h3:hover, h3:active, h3:focus {
 
 #flyToOverview,
 #flyToPlanView {
-  padding: 5px;
-  margin: 5px 2px;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  background-color: #fce409;
-  font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.81);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
-  transition: background-color 0.3s;
+    padding: 5px;
+    margin: 0px 20px;
+    border-radius: 5%;
+    width: 150px;
+    height: 75px;
+    text-align: center;
+    background-color: #fce409;
+    font-size: 18px;
+    border: 1px solid rgba(110, 110, 110, 0.81);
+    box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
 }
 
 #flyToOverview.active,
@@ -2049,6 +2050,84 @@ label {
   left: 34px;
 }
 
+
+
+
+
+
+
+
+/* Styles for EjsSites Switch */
+.ejssites-switch-label {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.ejssites-switch-input {
+  display: none;
+}
+
+.ejssites-switch-track {
+  background-color: #ccc;
+  border-radius: 2px;
+  height: 21px;
+  width: 52px;
+  position: relative;
+  margin-right: 5px;
+}
+
+.ejssites-switch-track::before {
+  content: "OFF";
+  position: absolute;
+  top: 50%;
+  font-weight: bold;
+  right: 16px;
+  transform: translate(50%, -50%);
+  color: #615a5a;
+  font-size: 12px;
+}
+
+.ejssites-switch-track::after {
+  content: "ON";
+  position: absolute;
+  font-weight: bold;
+  top: 50%;
+  left: 16px;
+  transform: translate(-50%, -50%);
+  color: #615a5a;
+  font-size: 12px;
+  opacity: 0;
+}
+
+.ejssites-switch-thumb {
+  border-radius: 2px; 
+  height: 21px;
+  width: 21px;
+  border: solid .3px rgba(18, 18, 18, 0.6);
+  position: absolute;
+  top: -1px;
+  left: -2px; 
+  transition: 0.2s;
+  background-color: #ffdf0b; 
+}
+
+.ejssites-switch-input:checked + .ejssites-switch-track {
+  background-color: #4caf50; 
+}
+
+.ejssites-switch-input:checked + .ejssites-switch-track::before {
+  opacity: 0; 
+}
+
+.ejssites-switch-input:checked + .ejssites-switch-track::after {
+  opacity: 1; 
+}
+
+.ejssites-switch-input:checked + .ejssites-switch-track .ejssites-switch-thumb {
+  left: 30px;
+}
 
 
 
