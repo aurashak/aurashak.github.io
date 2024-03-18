@@ -33,8 +33,6 @@ const initializeCesium = async () => {
 
 
 
-
-  
 // Define the point around which to orbit
 const centerPoint = Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 0); // Adjust the height as needed
 
@@ -51,13 +49,14 @@ viewer.scene.camera.setView({
 // Define orbit options
 const orbitOptions = {
   destination: centerPoint,
-  duration: 10, // Adjust duration as needed
+  duration: 20, // Adjust duration to slow down rotation
   maximumHeight: 1000, // Adjust maximum height as needed
-  offset: new Cesium.HeadingPitchRange(0, -Cesium.Math.toRadians(60), 2000), // Adjust pitch and range as needed
+  offset: new Cesium.HeadingPitchRange(0, -Cesium.Math.toRadians(40), 2000), // Adjust pitch and range as needed
 };
 
 // Orbit the camera around the point
 viewer.scene.camera.flyTo(orbitOptions);
+
 
 
 
