@@ -845,8 +845,6 @@ function toggleEJsites() {
   wasteWaterTreatmentPolygon.show = isChecked;
   gasPipelinePolygon.show = isChecked;
   marineTransferStationPolygon.show = isChecked;
-  scaleLine.show = isChecked;
-  distanceLabel.show = isChecked;
   marineTransferLabel.show = isChecked;
   wasteWaterLabel.show = isChecked;
   gasPipelineLabel.show = isChecked;
@@ -858,8 +856,6 @@ var busDepotPolygon = createLayer(busDepotConfig);
 var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
 var gasPipelinePolygon = createLayer(gasPipelineConfig);
 var marineTransferStationPolygon = createLayer(marineTransferStationConfig);
-var scaleLine = createLayer(scaleLineConfig);
-var distanceLabel = createLayer(distanceLabelConfig);
 var marineTransferLabel = createLayer(marineTransferLabelConfig);
 var wasteWaterLabel = createLayer(wasteWaterLabelConfig);
 var gasPipelineLabel = createLayer(gasPipelineLabelConfig);
@@ -871,6 +867,20 @@ document.getElementById('EJsitesSwitch').addEventListener('change', toggleEJsite
 // Initially hide the layers
 toggleEJsites();
 
+
+
+
+
+// Switch event listener for scaleSwitch
+const scaleSwitch = document.getElementById('scaleSwitch');
+scaleSwitch.addEventListener('change', toggleScaleAndDistance);
+
+// Function to toggle the visibility of the distance label and scale line
+function toggleScaleAndDistance() {
+    const isChecked = scaleSwitch.checked;
+    scaleLine.show = isChecked;
+    distanceLabel.show = isChecked;
+}
 
 
 
