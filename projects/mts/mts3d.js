@@ -375,38 +375,45 @@ toggleOSMMapLayer();
 
 
 
-    // Load mtsgas GeoJsonDataSource
-    const mtsubwayResource = await Cesium.IonResource.fromAssetId( 2482445);
-    const mtssubwayDataSource = await Cesium.GeoJsonDataSource.load(mtsubwayResource);
 
-    // Modify the polyline color and width before adding the data source
-    mtssubwayDataSource.entities.values.forEach((entity) => {
-      if (entity.polyline) {
-        // Change the polyline color to black
-        entity.polyline.material = Cesium.Color.BLACK;
 
-        // Change the polyline width
-        entity.polyline.width = 3; // Adjust the width as needed
-      }
-    });
 
-    // Create a switch event listener for mtsgas
-    const mtssubwaySwitch = document.getElementById("mtssubwaySwitch");
-    mtssubwaySwitch.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        viewer.dataSources.add(mtssubwayDataSource);
-        console.log("mtsgasDataSource added to viewer");
-      } else {
-        viewer.dataSources.remove(mtssubwayDataSource);
-        console.log("mtsgasDataSource removed from viewer");
-      }
-    });
 
-    // Set the initial state of the switch to 'off'
-    mtssubwaySwitch.checked = false;
 
-    // Trigger the 'change' event to ensure the initial state is applied
-    mtssubwaySwitch.dispatchEvent(initialChangeEvent);
+   // Define mtsstreetsDataSource outside of the function scope
+   let mtssubwayDataSource;
+
+   // Function to handle loading or unloading mtsstreetsDataSource
+   const toggleMtssubwayLayer = async () => {
+     if (mtssubwaySwitch.checked) {
+       // Load mtsstreets GeoJsonDataSource
+       const mtsstreetsResource = await Cesium.IonResource.fromAssetId(2477200);
+       mtssubwayDataSource = await Cesium.GeoJsonDataSource.load(mtssubwayResource);
+   
+       // Modify the polyline color before adding the data source
+       mtssubwayDataSource.entities.values.forEach((entity) => {
+         if (entity.polyline) {
+           // Change the polyline color to red
+           entity.polyline.material = Cesium.Color.GREY;
+         }
+       });
+   
+       // Add the loaded mtsstreetsDataSource to the viewer
+       viewer.dataSources.add(mtssubwayDataSource);
+       console.log("mtsstreetsDataSource added to viewer");
+     } else {
+       // If the switch is turned off, remove the mtsstreetsDataSource from the viewer
+       if (mtssubwayDataSource) {
+         viewer.dataSources.remove(mtssubwayDataSource);
+         console.log("mtssubwayDataSource removed from viewer");
+       }
+     }
+   };
+   
+   // Add the event listener to the switch
+   mtssubwaySwitch.addEventListener("change", toggleMtssubwayLayer);
+
+
 
 
 
