@@ -192,7 +192,7 @@ var marineTransferStationPolygon = viewer.entities.add({
 
 // Create a white line
 var scaleLine = viewer.entities.add({
-  name: 'White Line',
+  name: 'Scale',
   polyline: {
     positions: Cesium.Cartesian3.fromDegreesArray([
       -73.96312043113366, 40.81840372298463,
@@ -200,7 +200,7 @@ var scaleLine = viewer.entities.add({
       -73.95474816347131, 40.834159938739,
       -73.95218596086774, 40.83328620853362
     ]),
-    width: 5, // Line width
+    width: 1, // Line width
     material: Cesium.Color.WHITE // White color
   }
 });
