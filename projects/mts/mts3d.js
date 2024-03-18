@@ -870,6 +870,9 @@ toggleEJsites();
 
 
 
+// Create layers for scale line and distance label
+var scaleLine = createLayer(scaleLineConfig);
+var distanceLabel = createLayer(distanceLabelConfig);
 
 // Switch event listener for scaleSwitch
 const scaleSwitch = document.getElementById('scaleSwitch');
@@ -881,6 +884,7 @@ function toggleScaleAndDistance() {
     scaleLine.show = isChecked;
     distanceLabel.show = isChecked;
 }
+
 
 
 
