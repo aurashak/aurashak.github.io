@@ -849,6 +849,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
                 
+
+
 // Function to create a label entity
 function createLabel(config) {
   return viewer.entities.add(config);
@@ -867,6 +869,7 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
   gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
   busDepotLabel.show = isChecked; // Control busDepotLabel visibility
+  scaleLineConfig.show = isChcked;
 }
 
 
@@ -880,12 +883,15 @@ var busDepotPolygon = viewer.entities.add(busDepotConfig);
 var wasteWaterTreatmentPolygon = viewer.entities.add(wasteWaterTreatmentConfig);
 var gasPipelinePolygon = viewer.entities.add(gasPipelineConfig);
 var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConfig);
+var scaleLineConfig = viewer.entities.add(scaleLineConfig)
+
 
 // Initialize labels for EJ Sites Group
 var marineTransferLabel = createLabel(marineTransferLabelConfig);
 var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 var busDepotLabel = createLabel(busDepotLabelConfig);
+var scaleLineConfig = viewer.entities.add(scaleLineConfig)
 
 // Initially hide the layers
 toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
