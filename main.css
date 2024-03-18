@@ -1163,6 +1163,12 @@ h3:hover, h3:active, h3:focus {
 
 
 
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 
 
 
