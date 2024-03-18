@@ -1192,7 +1192,7 @@ h3:hover, h3:active, h3:focus {
 #flyToHome {
   padding: 5px;
   margin: 0px;
-  border-radius: 6px;
+  border-radius: 10px; /* Increased border-radius to create a pentagon */
   width: 65px;
   height: 35px;
   text-align: center;
@@ -1202,6 +1202,7 @@ h3:hover, h3:active, h3:focus {
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
   transition: background-color 0.1s;
+  position: relative; /* Added position relative */
 }
 
 #flyToHome:active,
@@ -1213,16 +1214,17 @@ h3:hover, h3:active, h3:focus {
 /* Added */
 #flyToHome::after,
 #flyToHome::after {
-  content: "RESET";
-  bottom: 2px;
-  font-weight: bold;
-
+  content: "";
+  position: absolute; /* Added position absolute */
+  width: 0;
+  height: 0;
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+  border-bottom: 40px solid #cbcbcb; /* Adjusted border-bottom to create pentagon */
+  bottom: -30px; /* Adjusted position */
   left: 50%;
   transform: translateX(-50%);
-  font-size: 14px;
-  color: black;
 }
-
 
 
 
