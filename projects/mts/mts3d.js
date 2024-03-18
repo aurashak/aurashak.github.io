@@ -418,6 +418,49 @@ mtssubwaySwitch.addEventListener("change", toggleMtssubwayLayer);
 
 
 
+// Define mtssubwayDataSource outside of the function scope
+let mtsrailDataSource;
+
+// Function to handle loading or unloading mtsrailDataSource
+const toggleMtsrailLayer = async () => {
+  if (mtsrailSwitch.checked) {
+    // Load mtssubway GeoJsonDataSource
+    const mtsrailResource = await Cesium.IonResource.fromAssetId(2506683);
+    mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
+
+    // Modify the polyline color before adding the data source
+    mtsrailDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to red
+        entity.polyline.material = Cesium.Color.RED;
+      }
+    });
+
+    // Add the loaded mtssubwayDataSource to the viewer
+    viewer.dataSources.add(mtsrailDataSource);
+    console.log("mtsrailDataSource added to viewer");
+  } else {
+    // If the switch is turned off, remove the mtsrailDataSource from the viewer
+    if (mtsrailDataSource) {
+      viewer.dataSources.remove(mtsrailDataSource);
+      console.log("mtsrailDataSource removed from viewer");
+    }
+  }
+};
+
+// Add the event listener to the switch
+mtsrailSwitch.addEventListener("change", toggleMtsrailLayer);
+
+
+
+
+
+
+
+
+
+
+
 
     // Load mtsgas GeoJsonDataSource
     const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
