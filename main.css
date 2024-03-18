@@ -1170,7 +1170,7 @@ h3:hover, h3:active, h3:focus {
   cursor: pointer;
 }
 
-#flyPlanView {
+#flyToPlanView {
   padding: 5px;
   margin: 5px 2px;
   border-radius: 2px;
