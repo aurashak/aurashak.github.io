@@ -524,24 +524,6 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
     osmBuildingsTileset.show = false;
 
     
-// Define the specific latitude and longitude point
-const centerLatitude = 40.820233493003926; // Latitude of the point
-const centerLongitude = -73.9579599385659; // Longitude of the point
-
-// Convert the radius from miles to meters
-const radiusInMeters = 0.5;
-
-// Convert the radius from meters to degrees (approximation for small distances)
-const radiusInDegrees = radiusInMeters / 111320; // 1 degree = approximately 111320 meters
-
-// Adjust the longitude degrees based on the latitude
-const degreesLongitudeCorrection = Math.cos(centerLatitude * Math.PI / 180);
-
-// Define the bounding box for the area of interest
-const westLongitude = centerLongitude - (radiusInDegrees / degreesLongitudeCorrection);
-const eastLongitude = centerLongitude + (radiusInDegrees / degreesLongitudeCorrection);
-const southLatitude = centerLatitude - (radiusInDegrees);
-const northLatitude = centerLatitude + (radiusInDegrees);
 
 
 /*
@@ -1090,98 +1072,12 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
-        // Create layers for EJ Sites Group
-        var busDepotPolygon = createBusDepotPolygon();
-        var wasteWaterTreatmentPolygon = createWasteWaterTreatmentPolygon();
-        var gasPipelinePolygon = createGasPipelinePolygon();
-        var marineTransferStationPolygon = createMarineTransferStationPolygon();
-        var scaleLine = createScaleLine();
-        var distanceLabel = createDistanceLabel();
-        var marineTransferLabel = createMarineTransferLabel();
-        var wasteWaterLabel = createWasteWaterLabel();
-        var gasPipelineLabel = createGasPipelineLabel();
-        var busDepotLabel = createBusDepotLabel();
-
-        // Group switch handler
-        function toggleEJsites() {
-            var isChecked = document.getElementById('EJsitesSwitch').checked;
-            busDepotPolygon.show = isChecked;
-            wasteWaterTreatmentPolygon.show = isChecked;
-            gasPipelinePolygon.show = isChecked;
-            marineTransferStationPolygon.show = isChecked;
-            scaleLine.show = isChecked;
-            distanceLabel.show = isChecked;
-            marineTransferLabel.show = isChecked;
-            wasteWaterLabel.show = isChecked;
-            gasPipelineLabel.show = isChecked;
-            busDepotLabel.show = isChecked;
-        }
-
-        // Functions to create layers
-        function createBusDepotPolygon() {
-            return viewer.entities.add({
-                // Define the bus depot polygon properties
-            });
-        }
-
-        function createWasteWaterTreatmentPolygon() {
-            return viewer.entities.add({
-                // Define the waste water treatment polygon properties
-            });
-        }
-
-        function createGasPipelinePolygon() {
-            return viewer.entities.add({
-                // Define the gas pipeline polygon properties
-            });
-        }
-
-        function createMarineTransferStationPolygon() {
-            return viewer.entities.add({
-                // Define the marine transfer station polygon properties
-            });
-        }
-
-        function createScaleLine() {
-            return viewer.entities.add({
-                // Define the scale line properties
-            });
-        }
-
-        function createDistanceLabel() {
-            return viewer.entities.add({
-                // Define the distance label properties
-            });
-        }
-
-        function createMarineTransferLabel() {
-            return viewer.entities.add({
-                // Define the marine transfer label properties
-            });
-        }
-
-        function createWasteWaterLabel() {
-            return viewer.entities.add({
-                // Define the waste water label properties
-            });
-        }
-
-        function createGasPipelineLabel() {
-            return viewer.entities.add({
-                // Define the gas pipeline label properties
-            });
-        }
-
-        function createBusDepotLabel() {
-            return viewer.entities.add({
-                // Define the bus depot label properties
-            });
-        }
 
 
 
 
 
+    
 };
 
 // Call the initializeCesium function
