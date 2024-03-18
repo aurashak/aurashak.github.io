@@ -207,6 +207,24 @@ var scaleLine = viewer.entities.add({
 
 
 
+// Add a label for the distance parallel to the white line
+var distanceLabel = viewer.entities.add({
+  name: 'Distance Label',
+  position: Cesium.Cartesian3.fromDegrees(-73.957934, 40.826928), // Adjust the position as needed
+  label: {
+    text: '1.2 mi (1.93 km)',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
+  }
+});
+
+
 
 
 // Add a label for the Marine Placeholder
