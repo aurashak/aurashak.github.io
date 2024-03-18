@@ -614,7 +614,7 @@ var scaleLineConfig = {
 };
 
 // Calculate midpoint of the line
-var positions = scaleLineConfig.polyline.positions.getValue();
+var positions = scaleLineConfig.polyline.positions;
 var midpointIndex = Math.floor(positions.length / 2);
 var midpoint = Cesium.Cartographic.fromCartesian(positions[midpointIndex]);
 var midpointLatitude = Cesium.Math.toDegrees(midpoint.latitude);
@@ -664,6 +664,7 @@ scaleSwitch.checked = true;
 
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
+
 
 
 
