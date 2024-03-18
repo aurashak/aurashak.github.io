@@ -605,7 +605,7 @@ var distanceLabelConfig = {
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
     rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
-    show: true // Set to show initially
+    show: false // Set to show initially
   }
 };
 
@@ -626,7 +626,7 @@ var marineTransferLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: true // Set to show initially
+    show: false // Set to show initially
   }
 };
 
@@ -647,7 +647,7 @@ var wasteWaterLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: true // Set to show initially
+    show: false // Set to show initially
   }
 };
 
