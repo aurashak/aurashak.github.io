@@ -938,43 +938,6 @@ function createCircleImage() {
 
 
 
-// Load nycsubway GeoJsonDataSource
-async function loadNycSubwayData() {
-    try {
-        const nycsubwayLinesResource = await Cesium.IonResource.fromUrl('https://aurashak.github.io/geojson/nyc/nycsubway.geojson');
-        const nycsubwayLinesDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayLinesResource);
-
-        // Create a switch event listener for nycsubway
-        const nycsubwayLinesSwitch = document.getElementById("nycsubwayLinesSwitch");
-
-        // Function to toggle the visibility of the nycsubwayLinesDataSource
-        const toggleNycSubwayLinesLayer = () => {
-            const isChecked = nycsubwayLinesSwitch.checked;
-            nycsubwayLinesDataSource.entities.values.forEach((entity) => {
-                entity.show = isChecked;
-            });
-        };
-
-        // Add an event listener to the switch
-        nycsubwayLinesSwitch.addEventListener("change", toggleNycSubwayLinesLayer);
-
-        // Set the switch's initial state
-        nycsubwayLinesSwitch.checked = false;
-
-        // Add nycsubwayLinesDataSource to the viewer initially with visibility off
-        viewer.dataSources.add(nycsubwayLinesDataSource);
-        toggleNycSubwayLinesLayer(); // Ensure visibility state matches the switch
-
-        console.log("GeoJSON data source loaded successfully");
-    } catch (error) {
-        console.error("Error loading GeoJSON data source:", error);
-    }
-}
-
-// Call the function to load NYC subway data
-loadNycSubwayData();
-
-
 
 
 
@@ -1089,6 +1052,93 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
+
+
+   // Load nycsubway GeoJsonDataSource
+   const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
+   const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
+   
+   // Define colors for each subway line based on the "name" column
+   const subwayLineColors = {
+       '1': 'red',
+       '1-2-3': 'red',
+       '2': 'red',
+       '3': 'red',
+       'A': 'blue',
+       'B': 'orange',
+       'C': 'blue',
+       'D': 'orange',
+       'Q': 'yellow',
+       'R': 'yellow',
+       '4': 'green',
+       '5': 'green',
+       '6': 'green',
+       '4-5-6': 'green',
+       '7': 'purple',
+       'A-C': 'blue',
+       'A-C-E': 'blue',
+       'B-D': 'orange',
+       'B-D-F-M': 'orange',
+       'F': 'orange',
+       'E': 'blue',
+       'F-M': 'orange',
+       'G': 'lime',
+       'J-Z': 'brown',
+       'L': 'gray',
+       'M': 'orange',
+       'N': 'yellow',
+       'N-Q-R': 'yellow',
+       'N-R': 'yellow',
+       'N-Q': 'yellow',
+       'N-R-W': 'yellow',
+       'N-W': 'yellow',
+       'R-W': 'yellow',
+       'S': 'gray'
+   };
+   
+   // Function to get the color based on the subway line name
+   function getSubwayLineColor(name) {
+       return subwayLineColors[name] || 'white'; // Default color is white if not found in the mapping
+   }
+   
+   // Modify the polyline color before adding the data source
+   nycsubwayDataSource.entities.values.forEach((entity) => {
+       if (entity.polyline) {
+           // Get the subway line name from the "name" property
+           const subwayLineName = entity.properties.name;
+   
+           // Change the polyline color based on the subway line name
+           entity.polyline.material = Cesium.Color.fromCssColorString(getSubwayLineColor(subwayLineName));
+       }
+   });
+   
+   // Create a switch event listener for nycsubway
+   const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
+   
+   // Function to toggle the visibility of the nycsubwayDataSource
+   const toggleNycSubwayLayer = () => {
+       const isChecked = nycsubwaySwitch.checked;
+       nycsubwayDataSource.entities.values.forEach((entity) => {
+           entity.show = isChecked;
+       });
+   };
+   
+   // Add an event listener to the switch
+   nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
+   
+   // Set the switch's initial state
+   nycsubwaySwitch.checked = false;
+   
+   // Initial load of nycsubway with the specified color
+   // (No need to add it to viewer initially, as the switch is in the 'off' position)
+   console.log("Initial load of nycsubwayDataSource");
+
+
+
+
+
+
+
         // Create layers for EJ Sites Group
         var busDepotPolygon = createBusDepotPolygon();
         var wasteWaterTreatmentPolygon = createWasteWaterTreatmentPolygon();
@@ -1191,89 +1241,10 @@ initializeCesium();
 
 
 
-/*
-
-   // Load nycsubway GeoJsonDataSource
-const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
-const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
-
-// Define colors for each subway line based on the "name" column
-const subwayLineColors = {
-    '1': 'red',
-    '1-2-3': 'red',
-    '2': 'red',
-    '3': 'red',
-    'A': 'blue',
-    'B': 'orange',
-    'C': 'blue',
-    'D': 'orange',
-    'Q': 'yellow',
-    'R': 'yellow',
-    '4': 'green',
-    '5': 'green',
-    '6': 'green',
-    '4-5-6': 'green',
-    '7': 'purple',
-    'A-C': 'blue',
-    'A-C-E': 'blue',
-    'B-D': 'orange',
-    'B-D-F-M': 'orange',
-    'F': 'orange',
-    'E': 'blue',
-    'F-M': 'orange',
-    'G': 'lime',
-    'J-Z': 'brown',
-    'L': 'gray',
-    'M': 'orange',
-    'N': 'yellow',
-    'N-Q-R': 'yellow',
-    'N-R': 'yellow',
-    'N-Q': 'yellow',
-    'N-R-W': 'yellow',
-    'N-W': 'yellow',
-    'R-W': 'yellow',
-    'S': 'gray'
-};
-
-// Function to get the color based on the subway line name
-function getSubwayLineColor(name) {
-    return subwayLineColors[name] || 'white'; // Default color is white if not found in the mapping
-}
-
-// Modify the polyline color before adding the data source
-nycsubwayDataSource.entities.values.forEach((entity) => {
-    if (entity.polyline) {
-        // Get the subway line name from the "name" property
-        const subwayLineName = entity.properties.name;
-
-        // Change the polyline color based on the subway line name
-        entity.polyline.material = Cesium.Color.fromCssColorString(getSubwayLineColor(subwayLineName));
-    }
-});
-
-// Create a switch event listener for nycsubway
-const nycsubwaySwitch = document.getElementById("nycsubwaySwitch");
-
-// Function to toggle the visibility of the nycsubwayDataSource
-const toggleNycSubwayLayer = () => {
-    const isChecked = nycsubwaySwitch.checked;
-    nycsubwayDataSource.entities.values.forEach((entity) => {
-        entity.show = isChecked;
-    });
-};
-
-// Add an event listener to the switch
-nycsubwaySwitch.addEventListener("change", toggleNycSubwayLayer);
-
-// Set the switch's initial state
-nycsubwaySwitch.checked = false;
-
-// Initial load of nycsubway with the specified color
-// (No need to add it to viewer initially, as the switch is in the 'off' position)
-console.log("Initial load of nycsubwayDataSource");
 
 
-*/
+
+
 
 
 
