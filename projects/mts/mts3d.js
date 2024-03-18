@@ -627,7 +627,11 @@ var scaleLineConfig = {
       -73.95218596086774, 40.83328620853362
     ]),
     width: 1, // Line width
-    material: Cesium.Color.WHITE // White color
+    material: new Cesium.PolylineOutlineMaterialProperty({
+      color: Cesium.Color.WHITE.withAlpha(0.7), // White color with 50% transparency
+      outlineWidth: 0,
+      outlineColor: Cesium.Color.BLACK // Black outline (optional)
+    })
   },
   show: true // Initially set to on
 };
@@ -635,10 +639,10 @@ var scaleLineConfig = {
 // Define the configuration for the scale label
 var scaleLabelConfig = {
   name: 'Scale',
-  position: Cesium.Cartesian3.fromDegrees(-73.96030214044536, 40.83124844611122), // Coordinates
+  position: Cesium.Cartesian3.fromDegrees(-73.9608, 40.8264), // Coordinates
   label: {
     text: '1.2m / 1.9km',
-    font: 'bold 13px Arial',
+    font: 'bold 12px Arial',
     fillColor: Cesium.Color.WHITE,
     outlineColor: Cesium.Color.BLACK,
     outlineWidth: 2,
