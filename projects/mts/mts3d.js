@@ -27,17 +27,44 @@ const initializeCesium = async () => {
     Cesium.Math.toRadians(-73.75), // East
     Cesium.Math.toRadians(40.9)    // North
   );
+
+
+
+
+
+
   
-  // Set initial view
-  viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 400),
-    orientation: {
-      heading: Cesium.Math.toRadians(65),
-      pitch: Cesium.Math.toRadians(-40),
-      roll: 0,
-    },
-  });
   
+// Define the point around which to orbit
+const centerPoint = Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 0); // Adjust the height as needed
+
+// Set the camera to the initial view
+viewer.scene.camera.setView({
+  destination: Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 400),
+  orientation: {
+    heading: Cesium.Math.toRadians(65),
+    pitch: Cesium.Math.toRadians(-40),
+    roll: 0,
+  },
+});
+
+// Define orbit options
+const orbitOptions = {
+  destination: centerPoint,
+  duration: 10, // Adjust duration as needed
+  maximumHeight: 1000, // Adjust maximum height as needed
+  offset: new Cesium.HeadingPitchRange(0, -Cesium.Math.toRadians(60), 2000), // Adjust pitch and range as needed
+};
+
+// Orbit the camera around the point
+viewer.scene.camera.flyTo(orbitOptions);
+
+
+
+
+
+
+
   // Create ScreenSpaceEventHandler
   var screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
   
