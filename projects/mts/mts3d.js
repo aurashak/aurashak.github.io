@@ -833,6 +833,11 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
         
 
 
+// Function to create a label entity
+function createLabel(config) {
+  return viewer.entities.add(config);
+}
+
 // Group switch handler
 function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
   var isChecked = document.getElementById('EJsitesSwitch').checked;
@@ -851,11 +856,13 @@ document.getElementById('EJsitesSwitch').addEventListener('change', function() {
   toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
 });
 
-// Initialize layers for EJ Sites Group
-var busDepotPolygon = createLayer(busDepotConfig);
-var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
-var gasPipelinePolygon = createLayer(gasPipelineConfig);
-var marineTransferStationPolygon = createLayer(marineTransferStationConfig);
+// Initialize polygons for EJ Sites Group
+var busDepotPolygon = viewer.entities.add(busDepotConfig);
+var wasteWaterTreatmentPolygon = viewer.entities.add(wasteWaterTreatmentConfig);
+var gasPipelinePolygon = viewer.entities.add(gasPipelineConfig);
+var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConfig);
+
+// Initialize labels for EJ Sites Group
 var marineTransferLabel = createLabel(marineTransferLabelConfig);
 var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
