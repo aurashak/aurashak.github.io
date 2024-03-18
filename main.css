@@ -1138,8 +1138,7 @@ h3:hover, h3:active, h3:focus {
 #flyToWasteWater::after, 
 #flyToMTS::after {
   content: "FLY";
-  position: absolute;
-  bottom: -20px;
+  bottom: 7px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -1172,13 +1171,15 @@ h3:hover, h3:active, h3:focus {
 #flyToOverview::after,
 #flyToPlanView::after {
   content: "FLY";
-  position: absolute;
-  bottom: -20px;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
   color: black;
 }
+
+
+
 
 
 
