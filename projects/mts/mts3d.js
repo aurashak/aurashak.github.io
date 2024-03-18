@@ -20,7 +20,8 @@ const initializeCesium = async () => {
   });
 
 
-
+// Add Cesium navigation controls
+viewer.extend(Cesium.viewerCesiumNavigationMixin, {});
 
   var boundingBox = new Cesium.Rectangle(
     Cesium.Math.toRadians(-74.05), // West
@@ -665,7 +666,6 @@ var marineTransferStationConfig = {
 
 
 
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -745,11 +745,9 @@ scaleSwitch.addEventListener("change", (event) => {
 });
 
 // Set the initial state of the switch to 'on' to match the initial state of scaleLineConfig.show
-// The following lines of code ensure that the scale line and label are initially shown
-scaleSwitch.checked = false; // Set to false first to ensure that the change event triggers properly
-scaleSwitch.checked = true; // Set to true to trigger the change event and show both scale line and label
+scaleSwitch.checked = true;
 
-// Trigger the 'change' event to ensure the initial state is applied
+// Manually trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
 
 // Add console log to check if the label is being created
