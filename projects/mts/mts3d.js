@@ -118,7 +118,7 @@ var busDepotPolygon = viewer.entities.add({
       -73.95709731406289, 40.818494163354465, // Northeast
       -73.95919451724812, 40.81938401269745  // Northwest
     ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 10, // Extrude the polygon upward by 10 units
     height: -20 // Position the polygon lower by setting the height to -20 units
   },
@@ -139,7 +139,7 @@ var wasteWaterTreatmentPolygon = viewer.entities.add({
       -73.95731886199398, 40.82272878575034, // Southwest (repeat to close polygon)
       -73.95969799948558, 40.82366630333311  // Southwest (repeat to close polygon)
     ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 12, // Extrude the polygon upward by 10 units
     height: -40 // Position the polygon lower by setting the height to -20 units
   },
@@ -159,7 +159,7 @@ var gasPipelinePolygon = viewer.entities.add({
       -73.95901874398349, 40.82124719300478, // Northwest (repeat to close polygon)
       -73.9592140946263, 40.82111084285179
     ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 1, // Extrude the polygon upward by 20 units
     height: -60 // Position the polygon lower by setting the height to -20 units
   },
@@ -182,7 +182,7 @@ var marineTransferStationPolygon = viewer.entities.add({
       -73.95923562183671, 40.822252699383846, // Northwest
       -73.95999789673716, 40.82258180752193 // Southwest
     ]),
-    material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 5, // Extrude the polygon upward by 10 units
     height: -60 // Position the polygon lower by setting the height to -60 units
   },
