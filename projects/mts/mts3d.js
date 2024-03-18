@@ -425,16 +425,18 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
                 const flyToOverviewButton = document.getElementById('flyToOverview');
                 flyToOverviewButton.addEventListener('click', flyToOverview);
         
-        
-
-                
-
 
 
 
     // minimum and maximum zoom limits
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 20;
     viewer.scene.screenSpaceCameraController.maximumZoomDistance = 70000;
+
+
+
+
+
+
 
     // Load full google photorealistic tileset
     const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
