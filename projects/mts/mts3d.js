@@ -149,7 +149,6 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-
 // Define the bounding box coordinates
 var west = -73.9645;
 var south = 40.8175;
@@ -175,18 +174,6 @@ const osmBuildingsTileset = viewer.scene.primitives.add(
     boundingVolume: new Cesium.BoundingSphere.fromRectangle3D(boundingBox, viewer.scene.globe.ellipsoid)
   })
 );
-
-// Apply default style to the OSM buildings tileset if available
-const osmExtras = osmBuildingsTileset.asset.extras;
-if (
-  Cesium.defined(osmExtras) &&
-  Cesium.defined(osmExtras.ion) &&
-  Cesium.defined(osmExtras.ion.defaultStyle)
-) {
-  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
-    osmExtras.ion.defaultStyle
-  );
-}
 
 // Create a label for the bounding box title
 var boundingBoxTitle = viewer.entities.add({
