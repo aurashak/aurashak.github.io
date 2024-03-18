@@ -160,7 +160,7 @@ var gasPipelinePolygon = viewer.entities.add({
       -73.9592140946263, 40.82111084285179
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 2, // Extrude the polygon upward by 20 units
+    extrudedHeight: 1, // Extrude the polygon upward by 20 units
     height: -40 // Position the polygon lower by setting the height to -20 units
   },
 });
@@ -178,14 +178,14 @@ var marineTransferStationPolygon = viewer.entities.add({
       -73.823053654876986, 40.95961472661843, // Northwest 
       -73.822734921882166, 40.95888640918542, // Northeast
       -73.82256670107292, 40.9589887831218,  // Southeast 
-      -73.82251579205972, 40.95884838458049, // Southeast (repeat to close polygon)
-      -73.821942816468486, 40.95861829823328, // Southwest (repeat to close polygon)
-      -73.821865345486735, 40.95849544950963, // Southwest (repeat to close polygon)
+      -73.82251579205972, 40.95884838458049, // Southwest (repeat to close polygon)
+      -73.821942816468486, 40.95861829823328, // Northwest (repeat to close polygon)
+      -73.821865345486735, 40.95849544950963, // Northeast (repeat to close polygon)
       -73.821502337389006, 40.95878209652767, // Southeast (repeat to close polygon)
-      -73.82157538185968, 40.95896929458273, // Southeast (repeat to close polygon)
-      -73.82180558208959, 40.95877624658844, // Southwest (repeat to close polygon)
+      -73.82157538185968, 40.95896929458273, // Southwest (repeat to close polygon)
+      -73.82180558208959, 40.95877624658844, // Northwest (repeat to close polygon)
       -73.82238329260957, 40.95899561930923, // Northeast (repeat to close polygon)
-      -73.82244748235672, 40.9591009182152,  // Northeast (repeat to close polygon)
+      -73.82244748235672, 40.9591009182152,  // Southeast (repeat to close polygon)
       -73.822248272593804, 40.95923546681728 // Southwest (repeat to close polygon)
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
@@ -193,6 +193,7 @@ var marineTransferStationPolygon = viewer.entities.add({
     height: -60 // Position the polygon lower by setting the height to -60 units
   },
 });
+
 
 // Debugging: Log if the polygon is successfully added
 console.log('Marine Transfer Station Polygon:', marineTransferStationPolygon);
@@ -212,7 +213,9 @@ var marineTransferLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+
   }
 });
 
@@ -228,7 +231,7 @@ var wasteWaterLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 10000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
   }
 });
 
@@ -244,7 +247,9 @@ var gasPipelineLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+
   }
 });
 
@@ -260,7 +265,9 @@ var busDepotLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -50) // Offset the label downward
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+
   }
 });
 
