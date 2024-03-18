@@ -1105,7 +1105,6 @@ h3:hover, h3:active, h3:focus {
 
 
 
-
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -1115,13 +1114,14 @@ h3:hover, h3:active, h3:focus {
   margin: 5px 2px;
   border-radius: 50%;
   width: 35px;
-    height: 35px;
+  height: 35px;
   text-align: center;
   background-color: #f50000;
   font-size: 16px;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
+  position: relative; /* Added */
 }
 
 #flyToOverview.active,
@@ -1129,28 +1129,18 @@ h3:hover, h3:active, h3:focus {
   box-shadow: none;
 }
 
-
-
-#flyToOverview,
-#flyToPlanView {
-    padding: 5px;
-    margin: 0px;
-    border-radius: 2px;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    background-color: #fce409;
-    font-size: 18px;
-    border: 1px solid rgba(110, 110, 110, 0.81);
-    box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-}
-
-#flyToOverview.active,
-#flyToPlanView.active {
-  box-shadow: none;
+/* Added */
+#flyToGasPipeline::after,
+#flyToBusDepot::after, 
+#flyToWasteWater::after, 
+#flyToMTS::after {
+  content: "FLY";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: black;
 }
 
 
