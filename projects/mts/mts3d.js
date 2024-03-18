@@ -110,7 +110,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 // Create a polygon for the MTA NYC Bus Depot
 var busDepotPolygon = viewer.entities.add({
-  name: 'MTA NYC Bus Depot',
+  name: 'MTA Manhattanville Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
       -73.95879964635739, 40.81992411443654, // Southwest
