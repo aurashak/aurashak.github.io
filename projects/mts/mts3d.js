@@ -316,7 +316,6 @@ toggleOSMMapLayer();
 
 
 
-
     async function loadMTSRailDataSource(viewer) {
       // Load mtsrail GeoJsonDataSource
       const mtsrailResource = await Cesium.IonResource.fromAssetId(2482267);
@@ -328,12 +327,11 @@ toggleOSMMapLayer();
               // Change the polyline color to pink
               entity.polyline.material = Cesium.Color.RED;
   
+              // Adjust the height of each position in the polyline
+              const positions = entity.polyline.positions.getValue(Cesium.JulianDate.now());
               const newPositions = positions.map(position => {
-                const cartographicPosition = Cesium.Cartographic.fromCartesian(position);
-                const originalHeight = cartographicPosition.height; // Get the original height
-                return Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, originalHeight + 20); // Adjust the height dynamically
-            });
-            
+                  return new Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 20); // Adjust the height here
+              });
               entity.polyline.positions = newPositions;
           }
       });
