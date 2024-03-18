@@ -108,6 +108,11 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 });
 
 
+
+
+
+
+
 // Create a polygon for the MTA NYC Bus Depot
 var busDepotPolygon = viewer.entities.add({
   name: 'MTA Manhattanville Bus Depot',
@@ -493,8 +498,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 // Define the specific latitude and longitude point
-const centerLatitude = 40.820233493003926; // Latitude of the point
-const centerLongitude = -73.9579599385659; // Longitude of the point
+const centerLatitude = -73.9579599385659; // Latitude of the point
+const centerLongitude = 40.820233493003926; // Longitude of the point
 
 // Convert the radius from miles to meters
 const radiusInMeters = 0.5;
