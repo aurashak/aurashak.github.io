@@ -1177,7 +1177,7 @@ h3:hover, h3:active, h3:focus {
 #flyToOverview::after,
 #flyToPlanView::after {
   content: "GO";
-  bottom: 0px;
+  bottom: 2px;
   font-weight: bold;
 
   left: 50%;
@@ -1214,7 +1214,7 @@ h3:hover, h3:active, h3:focus {
 #flyToHome::after,
 #flyToHome::after {
   content: "RESET";
-  bottom: 0px;
+  bottom: 2px;
   font-weight: bold;
 
   left: 50%;
