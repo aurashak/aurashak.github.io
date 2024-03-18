@@ -785,6 +785,27 @@ toggleLabelsVisibility();
 
 
 
+// Define the flyToPlanView function
+function flyToHome() {
+  viewer.scene.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+      -73.9579,
+      40.8207,
+      1700 // Adjust the zoom level as needed
+    ),
+    orientation: {
+      heading: Cesium.Math.toRadians(45), // Slightly rotate to the right (adjust angle as needed)
+      pitch: Cesium.Math.toRadians(-90), // Look straight down
+      roll: 0,
+    },
+  });
+}
+
+// Add a click event listener to the flyToPlanView button
+const flyToHomeBtn = document.getElementById('flyToHome');
+flyToHomeBtn.addEventListener('click', flyToHome);
+
+
 
 
 // Define the flyToPlanView function
