@@ -497,20 +497,6 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
     console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
-
-// Define the specific latitude and longitude point
-const centerLatitude = 40.820233493003926; // Latitude of the point
-const centerLongitude = -73.9579599385659; // Longitude of the point
-
-// Half-mile offset in degrees (approximation for small distances)
-const offsetDegrees = 0.0045; // Approximately 0.5 mile in degrees
-
-// Define the bounding box coordinates
-const westLongitude = centerLongitude - offsetDegrees;
-const eastLongitude = centerLongitude + offsetDegrees;
-const southLatitude = centerLatitude - offsetDegrees;
-const northLatitude = centerLatitude + offsetDegrees;
-
 // Load OSM buildings 3D Tileset
 const osmBuildingsTileset = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
@@ -540,8 +526,6 @@ osmBuildingsSwitch.addEventListener("change", (event) => {
 
 // Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = false;
-
-console.log("Bounding box:", westLongitude, eastLongitude, southLatitude, northLatitude);
 
 
 /*
