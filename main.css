@@ -1105,6 +1105,7 @@ h3:hover, h3:active, h3:focus {
 
 
 
+
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -1122,14 +1123,16 @@ h3:hover, h3:active, h3:focus {
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
   position: relative; /* Added */
-  transition: transform 0.3s; /* Added */
+  transition: transform 0.1s; /* Added */
 }
 
 #flyToGasPipeline:active,
 #flyToBusDepot:active, 
 #flyToWasteWater:active, 
 #flyToMTS:active {
-  transform: translateY(5px); /* Move down by 5px when clicked */
+  transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
+
+
 }
 
 /* Added */
@@ -1159,12 +1162,13 @@ h3:hover, h3:active, h3:focus {
   border: 1px solid rgba(110, 110, 110, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.1s;
 }
 
-#flyToOverview.active,
-#flyToPlanView.active {
-  box-shadow: none;
+#flyToOverview:active,
+#flyToPlanView:active 
+{
+  transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
 }
 
 /* Added */
@@ -1177,8 +1181,6 @@ h3:hover, h3:active, h3:focus {
   font-size: 14px;
   color: black;
 }
-
-
 
 
 
