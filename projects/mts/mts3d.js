@@ -498,26 +498,18 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
     console.log("Initial load of 3D Tileset layer with the switch turned on.");
 
 
-
-
 // Define the specific latitude and longitude point
 const centerLatitude = 40.820233493003926; // Latitude of the point
 const centerLongitude = -73.9579599385659; // Longitude of the point
 
-// Convert the radius from miles to meters
-const radiusInMeters = 0.5;
+// Half-mile offset in degrees (approximation for small distances)
+const offsetDegrees = 0.0045; // Approximately 0.5 mile in degrees
 
-// Convert the radius from meters to degrees (approximation for small distances)
-const radiusInDegrees = radiusInMeters / 111320; // 1 degree = approximately 111320 meters
-
-// Adjust the longitude degrees based on the latitude
-const degreesLongitudeCorrection = Math.cos(centerLatitude * Math.PI / 180);
-
-// Define the bounding box for the area of interest
-const westLongitude = centerLongitude - (radiusInDegrees / degreesLongitudeCorrection);
-const eastLongitude = centerLongitude + (radiusInDegrees / degreesLongitudeCorrection);
-const southLatitude = centerLatitude - (radiusInDegrees);
-const northLatitude = centerLatitude + (radiusInDegrees);
+// Define the bounding box coordinates
+const westLongitude = centerLongitude - offsetDegrees;
+const eastLongitude = centerLongitude + offsetDegrees;
+const southLatitude = centerLatitude - offsetDegrees;
+const northLatitude = centerLatitude + offsetDegrees;
 
 // Load OSM buildings 3D Tileset
 const osmBuildingsTileset = viewer.scene.primitives.add(
@@ -549,8 +541,6 @@ osmBuildingsSwitch.addEventListener("change", (event) => {
 // Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = false;
 
-console.log("Radius in degrees:", radiusInDegrees);
-console.log("Degrees longitude correction:", degreesLongitudeCorrection);
 console.log("Bounding box:", westLongitude, eastLongitude, southLatitude, northLatitude);
 
 
