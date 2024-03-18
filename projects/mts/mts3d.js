@@ -190,8 +190,21 @@ var marineTransferStationPolygon = viewer.entities.add({
 
 
 
-// Debugging: Log if the polygon is successfully added
-console.log('Marine Transfer Station Polygon:', marineTransferStationPolygon);
+// Create a white line
+var scaleLine = viewer.entities.add({
+  name: 'White Line',
+  polyline: {
+    positions: Cesium.Cartesian3.fromDegreesArray([
+      -73.96312043113366, 40.81840372298463,
+      -73.96568263373722, 40.81955074889975,
+      -73.95474816347131, 40.834159938739,
+      -73.95218596086774, 40.83328620853362
+    ]),
+    width: 5, // Line width
+    material: Cesium.Color.WHITE // White color
+  }
+});
+
 
 
 
