@@ -598,7 +598,6 @@ var marineTransferStationConfig = {
 
 
 
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -625,9 +624,13 @@ scaleSwitch.addEventListener("change", (event) => {
     console.log("Scale line added to viewer");
   } else {
     // Hide scale line
-    // Remove the polyline from the viewer
-    viewer.entities.remove(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
-    console.log("Scale line removed from viewer");
+    // Find and remove the polyline from the viewer
+    viewer.entities.values.forEach(entity => {
+      if (entity.name === 'Scale') {
+        viewer.entities.remove(entity);
+        console.log("Scale line removed from viewer");
+      }
+    });
   }
 });
 
@@ -636,6 +639,7 @@ scaleSwitch.checked = true;
 
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
+
 
 
 
