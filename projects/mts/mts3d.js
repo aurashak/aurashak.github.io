@@ -153,49 +153,22 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-// Define the bounding box coordinates
-var west = -73.9645;
-var south = 40.8175;
-var east = -73.9515;
-var north = 40.8275;
+// Load OSM buildings 3D Tileset
+const osmBuildingsTileset = viewer.scene.primitives.add(
+  await Cesium.Cesium3DTileset.fromIonAssetId(96188)
+);
 
-// Create the bounding box geometry
-var boundingBox = Cesium.Rectangle.fromDegrees(west, south, east, north);
-
-// Create the clipping plane
-var clippingPlane = new Cesium.ClippingPlane(new Cesium.Cartesian3(1.0, 0.0, 0.0), 0.0);
-
-// Set up the clipping plane collection
-var clippingPlanes = new Cesium.ClippingPlaneCollection({
-  planes: [clippingPlane]
-});
-
-// Load OSM buildings 3D Tileset with bounding box and clipping planes
-const osmBuildingsTileset = new Cesium.Cesium3DTileset({
-  url: Cesium.IonResource.fromAssetId(96188),
-  clippingPlanes: clippingPlanes,
-  boundingVolume: new Cesium.BoundingSphere.fromRectangle3D(boundingBox, viewer.scene.globe.ellipsoid)
-});
-
-// Add the tileset to the scene
-viewer.scene.primitives.add(osmBuildingsTileset);
-
-// Create a label for the bounding box title
-var boundingBoxTitle = viewer.entities.add({
-  name: 'Buildings Bounding Box',
-  position: Cesium.Rectangle.center(boundingBox),
-  label: {
-    text: 'Buildings Bounding Box',
-    font: 'bold 20px Arial',
-    fillColor: Cesium.Color.YELLOW,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    pixelOffset: new Cesium.Cartesian2(0, -10),
-    eyeOffset: new Cesium.Cartesian3(0, 0, -100) // Adjust the distance from the camera
-  }
-});
+// Apply default style to the OSM buildings tileset if available
+const osmExtras = osmBuildingsTileset.asset.extras;
+if (
+  Cesium.defined(osmExtras) &&
+  Cesium.defined(osmExtras.ion) &&
+  Cesium.defined(osmExtras.ion.defaultStyle)
+) {
+  osmBuildingsTileset.style = new Cesium.Cesium3DTileStyle(
+    osmExtras.ion.defaultStyle
+  );
+}
 
 // Create a switch event listener for the OSM buildings Tileset
 const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
@@ -205,12 +178,11 @@ osmBuildingsSwitch.checked = false;
 
 osmBuildingsSwitch.addEventListener("change", (event) => {
   osmBuildingsTileset.show = event.target.checked;
-  boundingBoxTitle.show = event.target.checked; // Show/hide the bounding box title along with the buildings
 });
 
-// Hide the OSM buildings Tileset and bounding box title initially
+// Hide the OSM buildings Tileset initially
 osmBuildingsTileset.show = false;
-boundingBoxTitle.show = false;
+
 
 
 
