@@ -936,8 +936,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9603,
-        40.8189,
+        -73.9614,
+        40.8187,
         200 // Adjust the zoom level as needed
       ),
       orientation: {
@@ -983,9 +983,9 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
                   // Fly back to New York City
                   viewer.scene.camera.setView({
                     destination: Cesium.Cartesian3.fromDegrees(
-                      -73.9689,
-                      40.8263,
-                      400 // Adjust the zoom level as needed
+                      -73.9693,
+                      40.8309,
+                      700 // Adjust the zoom level as needed
                     ),
                     orientation: {
                       heading: Cesium.Math.toRadians(130), // clockwise from north
