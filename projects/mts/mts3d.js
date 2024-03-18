@@ -112,6 +112,45 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
+
+
+
+
+    // Load full google photorealistic tileset
+    const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
+    viewer.scene.primitives.add(newTileset);
+    newTileset.show = true; // Set the initial state to 'on'
+
+    // Apply default style to the tileset if available
+    const newExtras = newTileset.asset.extras;
+    if (
+      Cesium.defined(newExtras) &&
+      Cesium.defined(newExtras.ion) &&
+      Cesium.defined(newExtras.ion.defaultStyle)
+    ) {
+      newTileset.style = new Cesium.Cesium3DTileStyle(newExtras.ion.defaultStyle);
+    }
+
+    // Remove the default satellite imagery layers
+    viewer.imageryLayers.removeAll();
+
+    // Create a switch event listener for the new 3D Tileset
+    const newTilesetSwitch = document.getElementById("3dTileSwitch");
+    newTilesetSwitch.checked = true; // Set the initial state to 'on'
+
+    newTilesetSwitch.addEventListener("change", (event) => {
+      newTileset.show = event.target.checked;
+      const status = event.target.checked ? "shown" : "hidden";
+      console.log(`3D Tileset Layer ${status}`);
+    });
+
+    console.log("Initial load of 3D Tileset layer with the switch turned on.");
+
+
+    
+
+
+
     
 };
 
