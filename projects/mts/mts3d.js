@@ -833,6 +833,10 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
         
 
 
+// Function to create a layer
+function createLayer(config) {
+  return viewer.entities.add(config);
+}
 
 // Group switch handler
 function toggleEJsites() {
@@ -849,7 +853,7 @@ function toggleEJsites() {
   busDepotLabel.show = isChecked;
 }
 
-// Create layers for EJ Sites Group
+// Initialize layers for EJ Sites Group
 var busDepotPolygon = createLayer(busDepotConfig);
 var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
 var gasPipelinePolygon = createLayer(gasPipelineConfig);
@@ -861,10 +865,12 @@ var wasteWaterLabel = createLayer(wasteWaterLabelConfig);
 var gasPipelineLabel = createLayer(gasPipelineLabelConfig);
 var busDepotLabel = createLayer(busDepotLabelConfig);
 
-// Function to create a layer
-function createLayer(config) {
-  return viewer.entities.add(config);
-}
+// Add event listener for the EJsitesSwitch checkbox
+document.getElementById('EJsitesSwitch').addEventListener('change', toggleEJsites);
+
+// Initially hide the layers
+toggleEJsites();
+
 
 
 
