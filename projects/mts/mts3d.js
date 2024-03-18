@@ -372,39 +372,38 @@ toggleOSMMapLayer();
 
 
 
-    // Load mtsgas GeoJsonDataSource
-    const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
-    const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
+// Define the configuration for the white line
+var scaleLineConfig = {
+  name: 'Scale',
+  polyline: {
+    positions: Cesium.Cartesian3.fromDegreesArray([
+      -73.96312043113366, 40.81840372298463,
+      -73.96568263373722, 40.81955074889975,
+      -73.95474816347131, 40.834159938739,
+      -73.95218596086774, 40.83328620853362
+    ]),
+    width: 1, // Line width
+    material: Cesium.Color.WHITE // White color
+  },
+  show: false // Initially set to off
+};
 
-    // Modify the polyline color and width before adding the data source
-    mtsgasDataSource.entities.values.forEach((entity) => {
-      if (entity.polyline) {
-        // Change the polyline color to black
-        entity.polyline.material = Cesium.Color.BLACK;
+// Create a switch event listener for the scale line
+const scaleSwitch = document.getElementById("scaleSwitch");
+scaleSwitch.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    console.log("Scale line added to viewer");
+  } else {
+    console.log("Scale line removed from viewer");
+  }
+});
 
-        // Change the polyline width
-        entity.polyline.width = 3; // Adjust the width as needed
-      }
-    });
+// Set the initial state of the switch to 'off'
+scaleSwitch.checked = false;
 
-    // Create a switch event listener for mtsgas
-    const mtsgasSwitch = document.getElementById("mtsgasSwitch");
-    mtsgasSwitch.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        viewer.dataSources.add(mtsgasDataSource);
-        console.log("mtsgasDataSource added to viewer");
-      } else {
-        viewer.dataSources.remove(mtsgasDataSource);
-        console.log("mtsgasDataSource removed from viewer");
-      }
-    });
-
-    // Set the initial state of the switch to 'off'
-    mtsgasSwitch.checked = false;
-
-    // Trigger the 'change' event to ensure the initial state is applied
-    const initialChangeEvent = new Event("change");
-    mtsgasSwitch.dispatchEvent(initialChangeEvent);
+// Trigger the 'change' event to ensure the initial state is applied
+const initialChangeEvent = new Event("change");
+scaleSwitch.dispatchEvent(initialChangeEvent);
 
 
 
