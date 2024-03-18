@@ -597,6 +597,7 @@ var marineTransferStationConfig = {
 };
 
 
+
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -613,30 +614,6 @@ var scaleLineConfig = {
   show: true // Initially set to on
 };
 
-// Calculate midpoint of the line
-var positions = scaleLineConfig.polyline.positions;
-var midpointIndex = Math.floor(positions.length / 2);
-var midpoint = Cesium.Cartographic.fromCartesian(positions[midpointIndex]);
-var midpointLatitude = Cesium.Math.toDegrees(midpoint.latitude);
-var midpointLongitude = Cesium.Math.toDegrees(midpoint.longitude);
-
-// Create a label for the scale line
-var label = viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(midpointLongitude, midpointLatitude),
-  label: {
-    text: '1.2m/1.9km',
-    font: '14px sans-serif',
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 3,
-    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-    verticalOrigin: Cesium.VerticalOrigin.CENTER,
-    pixelOffset: new Cesium.Cartesian2(0, -20), // Offset label slightly above midpoint
-    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-  }
-});
-
 // Create a switch event listener for the scale line
 const scaleSwitch = document.getElementById("scaleSwitch");
 scaleSwitch.addEventListener("change", (event) => {
@@ -644,7 +621,6 @@ scaleSwitch.addEventListener("change", (event) => {
     // Show scale line
     // Add the polyline to the viewer
     viewer.entities.add(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
-    label.show = true; // Show the label
     console.log("Scale line added to viewer");
   } else {
     // Hide scale line
@@ -652,7 +628,6 @@ scaleSwitch.addEventListener("change", (event) => {
     viewer.entities.values.forEach(entity => {
       if (entity.name === 'Scale') {
         viewer.entities.remove(entity);
-        label.show = false; // Hide the label
         console.log("Scale line removed from viewer");
       }
     });
@@ -667,8 +642,26 @@ scaleSwitch.dispatchEvent(new Event("change"));
 
 
 
+// Define the configuration for the marine transfer label
+var scaleLabelConfig = {
+  name: 'Scale',
+  position: Cesium.Cartesian3.fromDegrees(-73.96030214044536, 40.83124844611122), // Coordinates
+  label: {
+    text: '1.2m / 1.9km',
+    font: 'bold 13px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: true // Set to show initially
+  }
+};
 
-
+// Create the marine transfer label
+var scaleLabel = createLabel(scaleLabelConfig);
 
 
 
