@@ -649,7 +649,7 @@ var scaleLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000), // Display label when distance from camera is between 0 and 5,000 meters
-    show: false // Initially hide the label
+    show: true // Initially show the label to match the initial state of the line
   }
 };
 
@@ -695,6 +695,7 @@ scaleSwitch.dispatchEvent(new Event("change"));
 
 // Add console log to check if the label is being created
 console.log("Scale label created:", scaleLabel);
+
 
 
 
