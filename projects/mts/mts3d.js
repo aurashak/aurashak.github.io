@@ -191,6 +191,101 @@ osmBuildingsTileset.show = false;
 
 
 
+// Set the OSM Maps switch to the off position initially
+const osmMapsSwitch = document.getElementById("osmMapsSwitch");
+osmMapsSwitch.checked = false;
+
+// Initialize the Cesium OpenStreetMap layer but don't add it to the viewer yet
+const osmLayer = new Cesium.UrlTemplateImageryProvider({
+  url: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+});
+osmLayer.name = "OpenStreetMap"; // Set the name of the layer
+osmLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("OpenStreetMap layer initialized, but not added to viewer");
+
+// Function to add or remove the OpenStreetMap layer based on switch state
+function toggleOSMMapLayer() {
+  if (osmMapsSwitch.checked) {
+    // Add the OpenStreetMap layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(osmLayer);
+    console.log("OpenStreetMap layer added to viewer");
+  } else {
+    // Remove the OpenStreetMap layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(osmLayer);
+    console.log("OpenStreetMap layer removed from viewer");
+  }
+}
+
+// Create a switch event listener for the OSM Maps layer
+osmMapsSwitch.addEventListener("change", () => {
+  console.log("Switch state changed:", osmMapsSwitch.checked);
+  toggleOSMMapLayer();
+});
+
+// Call the function to set the initial state of the OpenStreetMap layer
+toggleOSMMapLayer();
+
+
+
+
+    // Load mtscso GeoJsonDataSource
+    const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
+    const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
+
+    // Modify the billboard color and style before adding the data source
+    mtscsoDataSource.entities.values.forEach((entity) => {
+      if (entity.billboard) {
+        // Change the billboard color to red
+        entity.billboard.color = Cesium.Color.RED;
+
+        // Change the billboard style to Circle using the createCircleImage function
+        entity.billboard.image = createCircleImage();
+      }
+    });
+
+    // Create a switch event listener for mtscso
+    const mtscsoSwitch = document.getElementById("mtscsoSwitch");
+
+    // Set the switch to the off position initially
+    mtscsoSwitch.checked = false;
+
+    mtscsoSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(mtscsoDataSource);
+        console.log("mtscsoDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(mtscsoDataSource);
+        console.log("mtscsoDataSource removed from viewer");
+      }
+    });
+
+    // Function to create a red circle image
+    function createCircleImage() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 15;
+      canvas.height = 15;
+      const context = canvas.getContext("2d");
+      context.beginPath();
+      context.arc(10, 10, 8, 0, 2 * Math.PI);
+      context.fillStyle = "red";
+      context.fill();
+      return canvas;
+    }
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
     
 };
 
