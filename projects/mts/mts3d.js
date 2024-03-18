@@ -209,7 +209,7 @@ var marineTransferLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
 
   }
 });
@@ -226,7 +226,7 @@ var wasteWaterLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
   }
 });
 
@@ -243,7 +243,7 @@ var gasPipelineLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
 
   }
 });
@@ -261,7 +261,7 @@ var busDepotLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 8000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
 
   }
 });
