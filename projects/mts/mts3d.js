@@ -885,6 +885,7 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
   busDepotLabel.show = isChecked; // Control busDepotLabel visibility
   scaleLine.show = isChecked; // Control scale line visibility
+  distanceLabel.show = isChecked;
 }
 
 
