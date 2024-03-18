@@ -528,182 +528,7 @@ osmBuildingsSwitch.addEventListener("change", (event) => {
 osmBuildingsTileset.show = false;
 
 
-/*
 
-// Load OSM buildings MTS Building
-const osmBuildingsTileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
-
-// Add the tileset to the viewer's scene
-viewer.scene.primitives.add(osmBuildingsTileset);
-
-// Function to show only the buildings with the given element IDs after the tileset is fully loaded
-function showBuildings() {
-  // Show building with ID 275080379 in red and add label
-  showBuildingById(osmBuildingsTileset, 275080379, "red");
-}
-
-// Listen for the tileLoad event to ensure all tiles are loaded
-osmBuildingsTileset.tileLoad.addEventListener(showBuildings);
-
-// Function to show only the building with the given element ID for the tileset
-function showBuildingById(tileset, elementId, color) {
-  console.log("Showing building with ID", elementId);
-  tileset.style = new Cesium.Cesium3DTileStyle({
-    color: {
-      conditions: [
-        ["${elementId} === " + elementId, `rgba(${color === "red" ? "255, 0, 0" : (color === "blue" ? "0, 0, 255" : "0, 255, 0")}, 0.7)`], // Show the specific building with the given ID, set color accordingly
-        [true, "rgba(255, 255, 255, 0)"] // Hide other buildings
-      ]
-    }
-  });
-
-  // Add green box at the same location with rotation along the Y-axis
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(-73.9593, 40.8226, -10), // Same position as the label
-    box: {
-      dimensions: new Cesium.Cartesian3(50, 50, 50), // Adjust dimensions as needed
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    },
-    label: {
-      text: "Marine Transfer Station",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-      pixelOffset: new Cesium.Cartesian2(0, -50)
-    }
-  });
-
-  // Add second green box next to the first one with rotation along the Y-axis
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(-73.957182, 40.825354, -10), // Adjusted position to be next to the first box
-    box: {
-      dimensions: new Cesium.Cartesian3(400, 50, 50), // Adjust dimensions as needed (long rectangle)
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    },
-    label: {
-      text: "North River Sewage Treatment Plant",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-      pixelOffset: new Cesium.Cartesian2(0, -50) // Adjust as needed to set the label's height
-    }
-  });
-
-  // Add third green box next to the first one with rotation along the Y-axis
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(-73.95924846693057, 40.82136519651025, -10), // Adjusted position to be next to the first box
-    box: {
-      dimensions: new Cesium.Cartesian3(30, 50, 30), // Adjust dimensions as needed (long rectangle)
-      material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-    },
-    label: {
-      text: "Williams Pipeline",
-      font: "14px Arial",
-      fillColor: Cesium.Color.WHITE,
-      outlineColor: Cesium.Color.BLACK,
-      outlineWidth: 2,
-      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-      verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-      pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-    }
-  });
-
-
-
-
-  viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(-73.95790713393994, 40.81928006545158, -10), // Adjusted position to be next to the first box
-    box: {
-        positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-            -73.95790713393994, 40.81928006545158, -10,
-            -73.95790713393994, 40.81928006545158 + 0.001, -10,
-            -73.95790713393994 + 0.002, 40.81928006545158 + 0.002, -10,
-            -73.95790713393994 + 0.002, 40.81928006545158, -10
-        ]),
-        material: Cesium.Color.GREEN.withAlpha(0.3), // Green color with transparency
-        orientation: Cesium.Quaternion.fromAxisAngle(Cesium.Cartesian3.UNIT_Y, Cesium.Math.toRadians(90)) // Rotate around the Y-axis by 30 degrees
-    },
-    label: {
-        text: "NYC Bus Depot",
-        font: "14px Arial",
-        fillColor: Cesium.Color.WHITE,
-        outlineColor: Cesium.Color.BLACK,
-        outlineWidth: 2,
-        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM, // Pin the label to a certain height
-        pixelOffset: new Cesium.Cartesian2(0, -30) // Adjust as needed to set the label's height
-    }
-});
-
-// Log a message specifically for the NYC Bus Depot
-console.log("Added NYC Bus Depot building");
-
-}
-
-*/
-
-
-
-
-
-
-/* 
-
-// Function to toggle NYCHA switch and layer visibility
-function toggleNYCHASwitch() {
-  console.log("NYCHA switch toggled.");
-  const NYCHASwitch = document.getElementById("NYCHASwitch");
-  const buildingIds = ["271893767", "271911034", "271911019", "271911412", "271911417", "271911419"];
-  const show = NYCHASwitch.checked;
-
-  console.log("NYCHA switch state:", show);
-  console.log("Showing buildings with IDs", buildingIds);
-  toggleBuildingVisibility(buildingIds, "rgba(0, 0, 255, 1)", show); // Blue color for NYCHA
-  osmBuildingsTileset.show = show;
-}
-
-const NYCHASwitch = document.getElementById("NYCHASwitch");
-NYCHASwitch.addEventListener("change", toggleNYCHASwitch);
-
-*/
-
-
-
-
-    
-   
-   /*
-// Set the switch to the off position initially
-const bingMapsSwitch = document.getElementById("bingMapsSwitch");
-bingMapsSwitch.checked = false;
-
-// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
-const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
-bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
-bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("Bing Maps layer initialized, but not added to viewer");
-
-// Create a switch event listener for the Bing Maps layer
-bingMapsSwitch.addEventListener("change", (event) => {
-  // Check the switch state directly within the event listener
-  if (event.target.checked) {
-    // Add the layer to the viewer when the switch is turned on
-    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
-    console.log("Bing Maps layer added to viewer");
-  } else {
-    // Remove the layer from the viewer when the switch is turned off
-    viewer.imageryLayers.remove(bingMapsLayer);
-    console.log("Bing Maps layer removed from viewer");
-  }
-});
-
-*/
 
 
 
@@ -1043,43 +868,7 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
    const nycsubwayResource = await Cesium.IonResource.fromAssetId(2482445);
    const nycsubwayDataSource = await Cesium.GeoJsonDataSource.load(nycsubwayResource);
    
-   // Define colors for each subway line based on the "name" column
-   const subwayLineColors = {
-       '1': 'red',
-       '1-2-3': 'red',
-       '2': 'red',
-       '3': 'red',
-       'A': 'blue',
-       'B': 'orange',
-       'C': 'blue',
-       'D': 'orange',
-       'Q': 'yellow',
-       'R': 'yellow',
-       '4': 'green',
-       '5': 'green',
-       '6': 'green',
-       '4-5-6': 'green',
-       '7': 'purple',
-       'A-C': 'blue',
-       'A-C-E': 'blue',
-       'B-D': 'orange',
-       'B-D-F-M': 'orange',
-       'F': 'orange',
-       'E': 'blue',
-       'F-M': 'orange',
-       'G': 'lime',
-       'J-Z': 'brown',
-       'L': 'gray',
-       'M': 'orange',
-       'N': 'yellow',
-       'N-Q-R': 'yellow',
-       'N-R': 'yellow',
-       'N-Q': 'yellow',
-       'N-R-W': 'yellow',
-       'N-W': 'yellow',
-       'R-W': 'yellow',
-       'S': 'gray'
-   };
+   
    
    // Function to get the color based on the subway line name
    function getSubwayLineColor(name) {
@@ -1170,6 +959,33 @@ initializeCesium();
 
 
 
+   
+   /*
+// Set the switch to the off position initially
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
+});
+
+*/
 
 
 
