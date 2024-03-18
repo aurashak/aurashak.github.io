@@ -834,6 +834,38 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
+// Group switch handler
+function toggleEJsites() {
+  var isChecked = document.getElementById('EJsitesSwitch').checked;
+  busDepotPolygon.show = isChecked;
+  wasteWaterTreatmentPolygon.show = isChecked;
+  gasPipelinePolygon.show = isChecked;
+  marineTransferStationPolygon.show = isChecked;
+  scaleLine.show = isChecked;
+  distanceLabel.show = isChecked;
+  marineTransferLabel.show = isChecked;
+  wasteWaterLabel.show = isChecked;
+  gasPipelineLabel.show = isChecked;
+  busDepotLabel.show = isChecked;
+}
+
+// Create layers for EJ Sites Group
+var busDepotPolygon = createLayer(busDepotConfig);
+var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
+var gasPipelinePolygon = createLayer(gasPipelineConfig);
+var marineTransferStationPolygon = createLayer(marineTransferStationConfig);
+var scaleLine = createLayer(scaleLineConfig);
+var distanceLabel = createLayer(distanceLabelConfig);
+var marineTransferLabel = createLayer(marineTransferLabelConfig);
+var wasteWaterLabel = createLayer(wasteWaterLabelConfig);
+var gasPipelineLabel = createLayer(gasPipelineLabelConfig);
+var busDepotLabel = createLayer(busDepotLabelConfig);
+
+// Function to create a layer
+function createLayer(config) {
+  return viewer.entities.add(config);
+}
+
 
 
 
