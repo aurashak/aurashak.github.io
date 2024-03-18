@@ -210,7 +210,7 @@ var scaleLine = viewer.entities.add({
 // Add a label for the distance parallel to the white line
 var distanceLabel = viewer.entities.add({
   name: 'Distance Label',
-  position: Cesium.Cartesian3.fromDegrees(-73.957934, 40.826928), // Adjust the position as needed
+  position: Cesium.Cartesian3.fromDegrees(-73.96063040325132, 40.82733361509444), // Adjust the position as needed
   label: {
     text: '1.2 mi (1.93 km)',
     font: 'bold 16px Arial',
@@ -224,7 +224,7 @@ var distanceLabel = viewer.entities.add({
   }
 });
 
-
+ 
 
 
 // Add a label for the Marine Placeholder
