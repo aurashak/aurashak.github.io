@@ -611,6 +611,9 @@ var scaleLabelConfig = {
   }
 };
 
+// Create the scale label
+var scaleLabel = createLabel(scaleLabelConfig);
+
 // Function to create the label
 function createLabel(labelConfig) {
   return viewer.entities.add({
@@ -648,8 +651,6 @@ scaleSwitch.checked = true;
 // Trigger the 'change' event to ensure the initial state is applied
 scaleSwitch.dispatchEvent(new Event("change"));
 
-// Create the scale label
-var scaleLabel = createLabel(scaleLabelConfig);
 
 
 
