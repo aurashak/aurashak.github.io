@@ -597,7 +597,6 @@ var marineTransferStationConfig = {
 };
 
 
-
 // Define the configuration for the white line
 var scaleLineConfig = {
   name: 'Scale',
@@ -614,6 +613,30 @@ var scaleLineConfig = {
   show: true // Initially set to on
 };
 
+// Calculate midpoint of the line
+var positions = scaleLineConfig.polyline.positions.getValue();
+var midpointIndex = Math.floor(positions.length / 2);
+var midpoint = Cesium.Cartographic.fromCartesian(positions[midpointIndex]);
+var midpointLatitude = Cesium.Math.toDegrees(midpoint.latitude);
+var midpointLongitude = Cesium.Math.toDegrees(midpoint.longitude);
+
+// Create a label for the scale line
+var label = viewer.entities.add({
+  position: Cesium.Cartesian3.fromDegrees(midpointLongitude, midpointLatitude),
+  label: {
+    text: '1.2m/1.9km',
+    font: '14px sans-serif',
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 3,
+    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+    verticalOrigin: Cesium.VerticalOrigin.CENTER,
+    pixelOffset: new Cesium.Cartesian2(0, -20), // Offset label slightly above midpoint
+    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+  }
+});
+
 // Create a switch event listener for the scale line
 const scaleSwitch = document.getElementById("scaleSwitch");
 scaleSwitch.addEventListener("change", (event) => {
@@ -621,6 +644,7 @@ scaleSwitch.addEventListener("change", (event) => {
     // Show scale line
     // Add the polyline to the viewer
     viewer.entities.add(scaleLineConfig); // Assuming `viewer` is your Cesium Viewer object
+    label.show = true; // Show the label
     console.log("Scale line added to viewer");
   } else {
     // Hide scale line
@@ -628,6 +652,7 @@ scaleSwitch.addEventListener("change", (event) => {
     viewer.entities.values.forEach(entity => {
       if (entity.name === 'Scale') {
         viewer.entities.remove(entity);
+        label.show = false; // Hide the label
         console.log("Scale line removed from viewer");
       }
     });
