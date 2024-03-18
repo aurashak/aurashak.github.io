@@ -161,7 +161,7 @@ var gasPipelinePolygon = viewer.entities.add({
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
     extrudedHeight: 1, // Extrude the polygon upward by 20 units
-    height: -40 // Position the polygon lower by setting the height to -20 units
+    height: -60 // Position the polygon lower by setting the height to -20 units
   },
 });
 
@@ -183,7 +183,7 @@ var marineTransferStationPolygon = viewer.entities.add({
       -73.95999789673716, 40.82258180752193 // Southwest
     ]),
     material: Cesium.Color.RED.withAlpha(0.5), // Red with 50% opacity
-    extrudedHeight: 10, // Extrude the polygon upward by 10 units
+    extrudedHeight: 5, // Extrude the polygon upward by 10 units
     height: -60 // Position the polygon lower by setting the height to -60 units
   },
 });
