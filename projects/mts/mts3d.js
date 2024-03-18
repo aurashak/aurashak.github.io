@@ -605,7 +605,7 @@ var distanceLabelConfig = {
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
     rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
-    show: false // Set to show initially
+    show: true // Set to show initially
   }
 };
 
@@ -626,7 +626,7 @@ var marineTransferLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Set to show initially
+    show: true // Set to show initially
   }
 };
 
@@ -647,7 +647,7 @@ var wasteWaterLabelConfig = {
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    show: false // Set to show initially
+    show: true // Set to show initially
   }
 };
 
@@ -704,7 +704,7 @@ var labelsSwitch = document.getElementById('labelsSwitch');
 // Function to toggle the visibility of labels
 function toggleLabelsVisibility() {
     // Loop through each label and toggle its visibility
-    var labels = [distanceLabel, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel];
+    var labels = [marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel];
     for (var i = 0; i < labels.length; i++) {
         labels[i].label.show = labelsSwitch.checked;
     }
@@ -911,20 +911,6 @@ toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, m
 
 
 
-// Create layers for scale line and distance label
-var scaleLine = createLabel(scaleLineConfig); // Change createLayer to createLabel
-var distanceLabel = createLabel(distanceLabelConfig); // Change createLayer to createLabel
-
-// Switch event listener for scaleSwitch
-const scaleSwitch = document.getElementById('scaleSwitch');
-scaleSwitch.addEventListener('change', toggleScaleAndDistance);
-
-// Function to toggle the visibility of the distance label and scale line
-function toggleScaleAndDistance() {
-  const isChecked = scaleSwitch.checked;
-  scaleLine.show = isChecked;
-  distanceLabel.show = isChecked;
-}
 
 
 
