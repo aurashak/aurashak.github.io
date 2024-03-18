@@ -583,7 +583,8 @@ var scaleLineConfig = {
     ]),
     width: 1, // Line width
     material: Cesium.Color.WHITE // White color
-  }
+  },
+  show: false // Initially set to off
 };
 
 
@@ -840,7 +841,9 @@ function createLabel(config) {
 
 // Group switch handler
 function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
+  console.log("Toggle function called");
   var isChecked = document.getElementById('EJsitesSwitch').checked;
+  console.log("isChecked:", isChecked);
   busDepotPolygon.show = isChecked;
   wasteWaterTreatmentPolygon.show = isChecked;
   gasPipelinePolygon.show = isChecked;
@@ -850,6 +853,7 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
   busDepotLabel.show = isChecked; // Control busDepotLabel visibility
 }
+
 
 // Add event listener for the EJsitesSwitch checkbox
 document.getElementById('EJsitesSwitch').addEventListener('change', function() {
@@ -885,9 +889,9 @@ scaleSwitch.addEventListener('change', toggleScaleAndDistance);
 
 // Function to toggle the visibility of the distance label and scale line
 function toggleScaleAndDistance() {
-    const isChecked = scaleSwitch.checked;
-    scaleLine.show = isChecked;
-    distanceLabel.show = isChecked;
+  const isChecked = scaleSwitch.checked;
+  scaleLine.show = isChecked;
+  distanceLabel.show = isChecked;
 }
 
 
