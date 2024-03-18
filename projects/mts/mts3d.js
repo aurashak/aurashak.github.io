@@ -743,8 +743,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
       // Fly back to New York City
       viewer.scene.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(
-          -73.9628,
-          40.8232,
+          -73.9649,
+          40.8236,
           200 // Adjust the zoom level as needed
         ),
         orientation: {
@@ -768,9 +768,9 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9620,
-        40.8154,
-        300 // Adjust the zoom level as needed
+        -73.9618,
+        40.8188,
+        200 // Adjust the zoom level as needed
       ),
       orientation: {
         heading: Cesium.Math.toRadians(65), // clockwise from north
@@ -794,7 +794,7 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
             destination: Cesium.Cartesian3.fromDegrees(
               -73.9623,
               40.8207,
-              70 // Adjust the zoom level as needed
+              50 // Adjust the zoom level as needed
             ),
             orientation: {
               heading: Cesium.Math.toRadians(65), // clockwise from north
@@ -815,13 +815,13 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
                   // Fly back to New York City
                   viewer.scene.camera.setView({
                     destination: Cesium.Cartesian3.fromDegrees(
-                      -73.9710,
-                      40.8192,
-                      500 // Adjust the zoom level as needed
+                      -73.9670,
+                      40.8286,
+                      700 // Adjust the zoom level as needed
                     ),
                     orientation: {
-                      heading: Cesium.Math.toRadians(65), // clockwise from north
-                      pitch: Cesium.Math.toRadians(-40), // Look downward
+                      heading: Cesium.Math.toRadians(50), // clockwise from north
+                      pitch: Cesium.Math.toRadians(-30), // Look downward
                       roll: 0,
                     },
                   });
@@ -894,4 +894,94 @@ initializeCesium();
 
 
 
+
+
+
+
+
+   
+   /*
+// Set the switch to the off position initially
+const bingMapsSwitch = document.getElementById("bingMapsSwitch");
+bingMapsSwitch.checked = false;
+
+// Initialize the Cesium Bing Maps layer but don't add it to the viewer yet
+const bingMapsLayer = await Cesium.IonImageryProvider.fromAssetId(4);
+bingMapsLayer.name = "Bing Maps"; // Set the name of the layer
+bingMapsLayer.order = 1; // Set a higher order value to ensure it's above other layers
+console.log("Bing Maps layer initialized, but not added to viewer");
+
+// Create a switch event listener for the Bing Maps layer
+bingMapsSwitch.addEventListener("change", (event) => {
+  // Check the switch state directly within the event listener
+  if (event.target.checked) {
+    // Add the layer to the viewer when the switch is turned on
+    viewer.imageryLayers.addImageryProvider(bingMapsLayer);
+    console.log("Bing Maps layer added to viewer");
+  } else {
+    // Remove the layer from the viewer when the switch is turned off
+    viewer.imageryLayers.remove(bingMapsLayer);
+    console.log("Bing Maps layer removed from viewer");
+  }
+});
+
+*/
+
+
+
+
+
+
+
+    /*
+
+    // Load GeoJsonDataSource with asset ID 2483827
+    const busDepotsResource = await Cesium.IonResource.fromAssetId(2483827);
+    const busDepotsDataSource = await Cesium.GeoJsonDataSource.load(busDepotsResource);
+
+    // Modify the billboard color and style before adding the data source
+    busDepotsDataSource.entities.values.forEach((entity) => {
+      if (entity.billboard) {
+        // Change the billboard color to blue
+        entity.billboard.color = Cesium.Color.BLUE;
+        // Change the billboard style to your desired image
+        entity.billboard.image = createCustomImage(); // Function to create a custom image
+      }
+    });
+
+    // Create a switch event listener for the busdepots layer
+    const busDepotsSwitch = document.getElementById("busDepotsSwitch");
+
+    // Set the switch to the off position initially
+    busDepotsSwitch.checked = false;
+
+    busDepotsSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(busDepotsDataSource);
+        console.log("busDepotsDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(busDepotsDataSource);
+        console.log("busDepotsDataSource removed from viewer");
+      }
+    });
+
+    // Initial load of the busdepots layer with modified billboards
+    if (busDepotsSwitch.checked) {
+      viewer.dataSources.add(busDepotsDataSource);
+      console.log("Initial load of busDepotsDataSource");
+    }
+
+    // Function to create a custom image
+    function createCustomImage() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 20;
+      canvas.height = 20;
+      const context = canvas.getContext("2d");
+      // Customize the image as needed
+      context.fillStyle = "blue";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      return canvas;
+    }
+
+    */
 
