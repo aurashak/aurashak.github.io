@@ -219,10 +219,13 @@ var distanceLabel = viewer.entities.add({
     outlineWidth: 2,
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // Set horizontal origin to center
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    rotation: Cesium.Math.toRadians(90) // Rotate the label by 90 degrees
   }
 });
+
 
  
 
