@@ -277,6 +277,41 @@ toggleOSMMapLayer();
 
 
     
+    
+
+    // Load mtsparks GeoJsonDataSource
+    const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
+    const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
+
+    // Modify the polyline/polygon color and disable the outline before adding the data source
+    mtsparksDataSource.entities.values.forEach((entity) => {
+      if (entity.polygon) {
+        // Change the polygon color to green
+        entity.polygon.material = Cesium.Color.GREEN;
+
+        // Disable the polygon outline
+        entity.polygon.outline = false;
+      }
+    });
+
+    // Create a switch event listener for mtsparks
+    const mtsparksSwitch = document.getElementById("mtsparksSwitch");
+
+    // Set the switch to the off position initially
+    mtsparksSwitch.checked = false;
+
+    mtsparksSwitch.addEventListener("change", (event) => {
+      mtsparksDataSource.entities.values.forEach((entity) => {
+        entity.show = event.target.checked;
+      });
+    });
+
+    // Initial load of mtsparks with the green color and disabled outline
+    viewer.dataSources.add(mtsparksDataSource);
+    mtsparksDataSource.entities.values.forEach((entity) => {
+      entity.show = false; // Make sure entities are hidden by default
+    });
+
 
 
 
