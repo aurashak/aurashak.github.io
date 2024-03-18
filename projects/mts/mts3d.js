@@ -113,8 +113,7 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
 
 
 
-// Create a polygon for the MTA NYC Bus Depot
-var busDepotPolygon = viewer.entities.add({
+var busDepotConfig = {
   name: 'MTA Manhattanville Bus Depot',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -126,13 +125,13 @@ var busDepotPolygon = viewer.entities.add({
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 10, // Extrude the polygon upward by 10 units
     height: -20 // Position the polygon lower by setting the height to -20 units
-  },
-});
+  }
+};
 
 
 
-// Create a polygon for the North River Sewage Treatment Plant
-var wasteWaterTreatmentPolygon = viewer.entities.add({
+// Define the configuration for the waste water treatment polygon
+var wasteWaterTreatmentConfig = {
   name: 'North River Sewage Treatment Plant',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -147,13 +146,13 @@ var wasteWaterTreatmentPolygon = viewer.entities.add({
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 12, // Extrude the polygon upward by 10 units
     height: -40 // Position the polygon lower by setting the height to -20 units
-  },
-});
+  }
+};
 
 
 
-// Create a polygon for the Williams Gas Pipeline
-var gasPipelinePolygon = viewer.entities.add({
+// Define the configuration for the gas pipeline polygon
+var gasPipelineConfig = {
   name: 'Williams Gas Pipeline',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -167,14 +166,13 @@ var gasPipelinePolygon = viewer.entities.add({
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 1, // Extrude the polygon upward by 20 units
     height: -60 // Position the polygon lower by setting the height to -20 units
-  },
-});
+  }
+};
 
 
 
-
-// Create a polygon for the Marine Transfer Station
-var marineTransferStationPolygon = viewer.entities.add({
+// Define the configuration for the marine transfer station polygon
+var marineTransferStationConfig = {
   name: 'Marine Transfer Station',
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -190,13 +188,14 @@ var marineTransferStationPolygon = viewer.entities.add({
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 5, // Extrude the polygon upward by 10 units
     height: -60 // Position the polygon lower by setting the height to -60 units
-  },
-});
+  }
+};
 
 
 
-// Create a white line
-var scaleLine = viewer.entities.add({
+
+// Define the configuration for the white line
+var scaleLineConfig = {
   name: 'Scale',
   polyline: {
     positions: Cesium.Cartesian3.fromDegreesArray([
@@ -208,12 +207,11 @@ var scaleLine = viewer.entities.add({
     width: 1, // Line width
     material: Cesium.Color.WHITE // White color
   }
-});
+};
 
 
-
-// Add a label for the distance parallel to the white line
-var distanceLabel = viewer.entities.add({
+// Define the configuration for the distance label
+var distanceLabelConfig = {
   name: 'Distance Label',
   position: Cesium.Cartesian3.fromDegrees(-73.96063040325132, 40.82733361509444), // Adjust the position as needed
   label: {
@@ -227,16 +225,17 @@ var distanceLabel = viewer.entities.add({
     horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // Set horizontal origin to center
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
     distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    rotation: Cesium.Math.toRadians(90) // Rotate the label by 90 degrees
+    rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
+    show: false // Initially set to off
   }
-});
+};
 
 
  
 
 
-// Add a label for the Marine Placeholder
-var marineTransferLabel = viewer.entities.add({
+// Define the configuration for the marine transfer label
+var marineTransferLabelConfig = {
   name: 'MTS',
   position: Cesium.Cartesian3.fromDegrees(-73.95948442468283, 40.822656278896815), // Coordinates
   label: {
@@ -248,12 +247,14 @@ var marineTransferLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
-
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
   }
-});
+};
 
-var wasteWaterLabel = viewer.entities.add({
+
+// Define the configuration for the waste water label
+var wasteWaterLabelConfig = {
   name: 'Waste Water Treatment',
   position: Cesium.Cartesian3.fromDegrees(-73.95668916390169, 40.826045064071984), // Coordinates
   label: {
@@ -265,12 +266,13 @@ var wasteWaterLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
   }
-});
+};
 
-
-var gasPipelineLabel = viewer.entities.add({
+// Define the configuration for the gas pipeline label
+var gasPipelineLabelConfig = {
   name: 'Gas Pipeline',
   position: Cesium.Cartesian3.fromDegrees(-73.95917709236481, 40.82138267116754), // Coordinates
   label: {
@@ -282,13 +284,15 @@ var gasPipelineLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, 0), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
-
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
   }
-});
+};
 
 
-var busDepotLabel = viewer.entities.add({
+
+// Define the configuration for the bus depot label
+var busDepotLabelConfig = {
   name: 'Bus Depot',
   position: Cesium.Cartesian3.fromDegrees(-73.95749408193386, 40.81903473878459), // Coordinates
   label: {
@@ -300,11 +304,10 @@ var busDepotLabel = viewer.entities.add({
     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000) // Display label when distance from camera is between 0 and 10,000 meters
-
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    show: false // Initially set to off
   }
-});
-
+};
 
 
 
@@ -1143,95 +1146,37 @@ electriclinesSwitch.dispatchEvent(initialChangeEventElectriclines);
 
 
 
+// Group switch handler
+function toggleEJsites() {
+  var isChecked = document.getElementById('EJsitesSwitch').checked;
+  busDepotPolygon.show = isChecked;
+  wasteWaterTreatmentPolygon.show = isChecked;
+  gasPipelinePolygon.show = isChecked;
+  marineTransferStationPolygon.show = isChecked;
+  scaleLine.show = isChecked;
+  distanceLabel.show = isChecked;
+  marineTransferLabel.show = isChecked;
+  wasteWaterLabel.show = isChecked;
+  gasPipelineLabel.show = isChecked;
+  busDepotLabel.show = isChecked;
+}
 
-        // Create layers for EJ Sites Group
-        var busDepotPolygon = createBusDepotPolygon();
-        var wasteWaterTreatmentPolygon = createWasteWaterTreatmentPolygon();
-        var gasPipelinePolygon = createGasPipelinePolygon();
-        var marineTransferStationPolygon = createMarineTransferStationPolygon();
-        var scaleLine = createScaleLine();
-        var distanceLabel = createDistanceLabel();
-        var marineTransferLabel = createMarineTransferLabel();
-        var wasteWaterLabel = createWasteWaterLabel();
-        var gasPipelineLabel = createGasPipelineLabel();
-        var busDepotLabel = createBusDepotLabel();
+// Create layers for EJ Sites Group
+var busDepotPolygon = createLayer(busDepotConfig);
+var wasteWaterTreatmentPolygon = createLayer(wasteWaterTreatmentConfig);
+var gasPipelinePolygon = createLayer(gasPipelineConfig);
+var marineTransferStationPolygon = createLayer(marineTransferStationConfig);
+var scaleLine = createLayer(scaleLineConfig);
+var distanceLabel = createLayer(distanceLabelConfig);
+var marineTransferLabel = createLayer(marineTransferLabelConfig);
+var wasteWaterLabel = createLayer(wasteWaterLabelConfig);
+var gasPipelineLabel = createLayer(gasPipelineLabelConfig);
+var busDepotLabel = createLayer(busDepotLabelConfig);
 
-        // Group switch handler
-        function toggleEJsites() {
-            var isChecked = document.getElementById('EJsitesSwitch').checked;
-            busDepotPolygon.show = isChecked;
-            wasteWaterTreatmentPolygon.show = isChecked;
-            gasPipelinePolygon.show = isChecked;
-            marineTransferStationPolygon.show = isChecked;
-            scaleLine.show = isChecked;
-            distanceLabel.show = isChecked;
-            marineTransferLabel.show = isChecked;
-            wasteWaterLabel.show = isChecked;
-            gasPipelineLabel.show = isChecked;
-            busDepotLabel.show = isChecked;
-        }
-
-        // Functions to create layers
-        function createBusDepotPolygon() {
-            return viewer.entities.add({
-                // Define the bus depot polygon properties
-            });
-        }
-
-        function createWasteWaterTreatmentPolygon() {
-            return viewer.entities.add({
-                // Define the waste water treatment polygon properties
-            });
-        }
-
-        function createGasPipelinePolygon() {
-            return viewer.entities.add({
-                // Define the gas pipeline polygon properties
-            });
-        }
-
-        function createMarineTransferStationPolygon() {
-            return viewer.entities.add({
-                // Define the marine transfer station polygon properties
-            });
-        }
-
-        function createScaleLine() {
-            return viewer.entities.add({
-                // Define the scale line properties
-            });
-        }
-
-        function createDistanceLabel() {
-            return viewer.entities.add({
-                // Define the distance label properties
-            });
-        }
-
-        function createMarineTransferLabel() {
-            return viewer.entities.add({
-                // Define the marine transfer label properties
-            });
-        }
-
-        function createWasteWaterLabel() {
-            return viewer.entities.add({
-                // Define the waste water label properties
-            });
-        }
-
-        function createGasPipelineLabel() {
-            return viewer.entities.add({
-                // Define the gas pipeline label properties
-            });
-        }
-
-        function createBusDepotLabel() {
-            return viewer.entities.add({
-                // Define the bus depot label properties
-            });
-        }
-
+// Function to create a layer
+function createLayer(config) {
+  return viewer.entities.add(config);
+}
 
 
 
