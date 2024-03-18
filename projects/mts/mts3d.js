@@ -589,28 +589,7 @@ var scaleLineConfig = {
 };
 
 
-// Define the configuration for the distance label
-var distanceLabelConfig = {
-  name: 'Distance Label',
-  position: Cesium.Cartesian3.fromDegrees(-73.96063040325132, 40.82733361509444), // Adjust the position as needed
-  label: {
-    text: '1.2 mi (1.93 km)',
-    font: 'bold 16px Arial',
-    fillColor: Cesium.Color.WHITE,
-    outlineColor: Cesium.Color.BLACK,
-    outlineWidth: 2,
-    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // Set horizontal origin to center
-    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
-    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
-    rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
-    show: true // Set to show initially
-  }
-};
 
-// Create the distance label
-var distanceLabel = createLabel(distanceLabelConfig);
 
 // Define the configuration for the marine transfer label
 var marineTransferLabelConfig = {
@@ -884,8 +863,6 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
   gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
   busDepotLabel.show = isChecked; // Control busDepotLabel visibility
-  scaleLine.show = isChecked; // Control scale line visibility
-  distanceLabel.show = isChecked;
 }
 
 
@@ -905,10 +882,9 @@ var marineTransferLabel = createLabel(marineTransferLabelConfig);
 var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 var busDepotLabel = createLabel(busDepotLabelConfig);
-var distanceLabel = createLabel(distanceLabelConfig);
 
 // Initially hide the layers
-toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, distanceLabel, busDepotLabel);
+toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
 
 
 
@@ -1018,3 +994,33 @@ bingMapsSwitch.addEventListener("change", (event) => {
 
     */
 
+
+/*
+
+    // Define the configuration for the distance label
+var distanceLabelConfig = {
+  name: 'Distance Label',
+  position: Cesium.Cartesian3.fromDegrees(-73.96063040325132, 40.82733361509444), // Adjust the position as needed
+  label: {
+    text: '1.2 mi (1.93 km)',
+    font: 'bold 16px Arial',
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 2,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // Set horizontal origin to center
+    pixelOffset: new Cesium.Cartesian2(0, -50), // Offset the label downward
+    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 7000), // Display label when distance from camera is between 0 and 10,000 meters
+    rotation: Cesium.Math.toRadians(90), // Rotate the label by 90 degrees
+    show: true // Set to show initially
+  }
+};
+
+
+// Create the distance label
+var distanceLabel = createLabel(distanceLabelConfig);
+
+
+
+*/
