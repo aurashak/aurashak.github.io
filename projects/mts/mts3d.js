@@ -884,6 +884,7 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
   gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
   busDepotLabel.show = isChecked; // Control busDepotLabel visibility
+  scaleLine.show = isChecked; // Control scale line visibility
 }
 
 
@@ -903,9 +904,10 @@ var marineTransferLabel = createLabel(marineTransferLabelConfig);
 var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 var busDepotLabel = createLabel(busDepotLabelConfig);
+var distanceLabel = createLabel(distanceLabelConfig);
 
 // Initially hide the layers
-toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
+toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, distanceLabel, busDepotLabel);
 
 
 
