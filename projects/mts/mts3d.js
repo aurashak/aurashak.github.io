@@ -372,38 +372,39 @@ toggleOSMMapLayer();
 
 
 
-// Define the configuration for the white line
-var scaleLineConfig = {
-  name: 'Scale',
-  polyline: {
-    positions: Cesium.Cartesian3.fromDegreesArray([
-      -73.96312043113366, 40.81840372298463,
-      -73.96568263373722, 40.81955074889975,
-      -73.95474816347131, 40.834159938739,
-      -73.95218596086774, 40.83328620853362
-    ]),
-    width: 1, // Line width
-    material: Cesium.Color.WHITE // White color
-  },
-  show: false // Initially set to off
-};
+    // Load mtsgas GeoJsonDataSource
+    const mtsgasResource = await Cesium.IonResource.fromAssetId(2482499);
+    const mtsgasDataSource = await Cesium.GeoJsonDataSource.load(mtsgasResource);
 
-// Create a switch event listener for the scale line
-const scaleSwitch = document.getElementById("scaleSwitch");
-scaleSwitch.addEventListener("change", (event) => {
-  if (event.target.checked) {
-    console.log("Scale line added to viewer");
-  } else {
-    console.log("Scale line removed from viewer");
-  }
-});
+    // Modify the polyline color and width before adding the data source
+    mtsgasDataSource.entities.values.forEach((entity) => {
+      if (entity.polyline) {
+        // Change the polyline color to black
+        entity.polyline.material = Cesium.Color.BLACK;
 
-// Set the initial state of the switch to 'off'
-scaleSwitch.checked = false;
+        // Change the polyline width
+        entity.polyline.width = 3; // Adjust the width as needed
+      }
+    });
 
-// Trigger the 'change' event to ensure the initial state is applied
-const initialChangeEvent = new Event("change");
-scaleSwitch.dispatchEvent(initialChangeEvent);
+    // Create a switch event listener for mtsgas
+    const mtsgasSwitch = document.getElementById("mtsgasSwitch");
+    mtsgasSwitch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        viewer.dataSources.add(mtsgasDataSource);
+        console.log("mtsgasDataSource added to viewer");
+      } else {
+        viewer.dataSources.remove(mtsgasDataSource);
+        console.log("mtsgasDataSource removed from viewer");
+      }
+    });
+
+    // Set the initial state of the switch to 'off'
+    mtsgasSwitch.checked = false;
+
+    // Trigger the 'change' event to ensure the initial state is applied
+    const initialChangeEvent = new Event("change");
+    mtsgasSwitch.dispatchEvent(initialChangeEvent);
 
 
 
@@ -586,24 +587,6 @@ var scaleLineConfig = {
   },
   show: false // Initially set to off
 };
-
-// Create a switch for the scale line
-var scaleSwitch = document.createElement('input');
-scaleSwitch.type = 'checkbox';
-scaleSwitch.id = 'scaleSwitch';
-scaleSwitch.checked = !scaleLineConfig.show; // Reverse the value because checkbox is initially unchecked if show is true
-scaleSwitch.addEventListener('change', function() {
-  scaleLineConfig.show = !this.checked; // Reverse the value because checkbox is initially unchecked if show is true
-});
-
-// Create a label for the switch
-var scaleLabel = document.createElement('label');
-scaleLabel.htmlFor = 'scaleSwitch';
-scaleLabel.appendChild(document.createTextNode('Scale Line'));
-
-// Append the switch and label to the HTML body
-document.body.appendChild(scaleSwitch);
-document.body.appendChild(scaleLabel);
 
 
 
@@ -865,25 +848,38 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
-
+                
 // Function to create a label entity
 function createLabel(config) {
   return viewer.entities.add(config);
 }
 
-// Group switch handler for labels
-function toggleEJsitesLabels(marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
-  var isChecked = document.getElementById('labelsSwitch').checked;
-  marineTransferLabel.label.show = isChecked;
-  wasteWaterLabel.label.show = isChecked;
-  gasPipelineLabel.label.show = isChecked;
-  busDepotLabel.label.show = isChecked;
+// Group switch handler
+function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
+  console.log("Toggle function called");
+  var isChecked = document.getElementById('EJsitesSwitch').checked;
+  console.log("isChecked:", isChecked);
+  busDepotPolygon.show = isChecked;
+  wasteWaterTreatmentPolygon.show = isChecked;
+  gasPipelinePolygon.show = isChecked;
+  marineTransferStationPolygon.show = isChecked;
+  marineTransferLabel.show = isChecked; // Control marineTransferLabel visibility
+  wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
+  gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
+  busDepotLabel.show = isChecked; // Control busDepotLabel visibility
 }
 
-// Add event listener for the labelsSwitch checkbox
-document.getElementById('labelsSwitch').addEventListener('change', function() {
-  toggleEJsitesLabels(marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
+
+// Add event listener for the EJsitesSwitch checkbox
+document.getElementById('EJsitesSwitch').addEventListener('change', function() {
+  toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
 });
+
+// Initialize polygons for EJ Sites Group
+var busDepotPolygon = viewer.entities.add(busDepotConfig);
+var wasteWaterTreatmentPolygon = viewer.entities.add(wasteWaterTreatmentConfig);
+var gasPipelinePolygon = viewer.entities.add(gasPipelineConfig);
+var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConfig);
 
 // Initialize labels for EJ Sites Group
 var marineTransferLabel = createLabel(marineTransferLabelConfig);
@@ -891,8 +887,15 @@ var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 var busDepotLabel = createLabel(busDepotLabelConfig);
 
-// Initially hide the label layers
-toggleEJsitesLabels(marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
+// Initially hide the layers
+toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
+
+
+
+
+
+
+
 
 
 
