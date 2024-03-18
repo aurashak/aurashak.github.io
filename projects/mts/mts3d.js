@@ -745,7 +745,7 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
         destination: Cesium.Cartesian3.fromDegrees(
           -73.96566879258368,
           40.822689778466355,
-          200 // Adjust the zoom level as needed
+          400 // Adjust the zoom level as needed
         ),
         orientation: {
           heading: Cesium.Math.toRadians(65), // clockwise from north
@@ -768,8 +768,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
     // Fly back to New York City
     viewer.scene.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(
-        -73.9633,
-        40.8188,
+        -73.9598,
+        40.8185,
         200 // Adjust the zoom level as needed
       ),
       orientation: {
@@ -792,8 +792,8 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
           // Fly back to New York City
           viewer.scene.camera.setView({
             destination: Cesium.Cartesian3.fromDegrees(
-              -73.9623,
-              40.8207,
+              -73.9604,
+              40.8213,
               50 // Adjust the zoom level as needed
             ),
             orientation: {
@@ -817,7 +817,7 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
                     destination: Cesium.Cartesian3.fromDegrees(
                       -73.9670,
                       40.8286,
-                      700 // Adjust the zoom level as needed
+                      400 // Adjust the zoom level as needed
                     ),
                     orientation: {
                       heading: Cesium.Math.toRadians(130), // clockwise from north
@@ -876,8 +876,8 @@ toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, m
 
 
 // Create layers for scale line and distance label
-var scaleLine = createLayer(scaleLineConfig);
-var distanceLabel = createLayer(distanceLabelConfig);
+var scaleLine = createLabel(scaleLineConfig); // Change createLayer to createLabel
+var distanceLabel = createLabel(distanceLabelConfig); // Change createLayer to createLabel
 
 // Switch event listener for scaleSwitch
 const scaleSwitch = document.getElementById('scaleSwitch');
