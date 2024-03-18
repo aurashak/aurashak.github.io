@@ -870,46 +870,48 @@ function createCircleImage() {
 
 
 
-async function loadMTSRailDataSource(viewer) {
-    // Load mtsrail GeoJsonDataSource
-    const mtsrailResource = await Cesium.IonResource.fromAssetId(2482267);
-    const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
-
-    // Modify the polyline color and height before adding the data source
-    mtsrailDataSource.entities.values.forEach((entity) => {
-        if (entity.polyline) {
-            // Change the polyline color to pink
-            entity.polyline.material = Cesium.Color.RED;
-
-            // Adjust the height to 20 units
-            entity.polyline.positions = entity.polyline.positions.map(position => {
-                return new Cesium.Cartesian3(position.x, position.y, 20);
-            });
-        }
-    });
-
-    // Create a switch event listener for mtsrail
-    const mtsrailSwitch = document.getElementById("mtsrailSwitch");
-
-    // Set the switch to the off position initially
-    mtsrailSwitch.checked = false;
-
-    mtsrailSwitch.addEventListener("change", (event) => {
-        mtsrailDataSource.entities.values.forEach((entity) => {
-            entity.show = event.target.checked;
-        });
-    });
-
-    // Initial load of mtsrail with the pink color and adjusted height
-    viewer.dataSources.add(mtsrailDataSource);
-    mtsrailDataSource.entities.values.forEach((entity) => {
-        entity.show = false; // Make sure entities are hidden by default
-    });
-}
-
-// Call the function to load the MTSRail data source
-loadMTSRailDataSource(viewer);
-
+    async function loadMTSRailDataSource(viewer) {
+      // Load mtsrail GeoJsonDataSource
+      const mtsrailResource = await Cesium.IonResource.fromAssetId(2482267);
+      const mtsrailDataSource = await Cesium.GeoJsonDataSource.load(mtsrailResource);
+  
+      // Modify the polyline color and height before adding the data source
+      mtsrailDataSource.entities.values.forEach((entity) => {
+          if (entity.polyline) {
+              // Change the polyline color to pink
+              entity.polyline.material = Cesium.Color.RED;
+  
+              // Adjust the height of each position in the polyline
+              const positions = entity.polyline.positions.getValue(Cesium.JulianDate.now());
+              const newPositions = positions.map(position => {
+                  return new Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude, 20); // Adjust the height here
+              });
+              entity.polyline.positions = newPositions;
+          }
+      });
+  
+      // Create a switch event listener for mtsrail
+      const mtsrailSwitch = document.getElementById("mtsrailSwitch");
+  
+      // Set the switch to the off position initially
+      mtsrailSwitch.checked = false;
+  
+      mtsrailSwitch.addEventListener("change", (event) => {
+          mtsrailDataSource.entities.values.forEach((entity) => {
+              entity.show = event.target.checked;
+          });
+      });
+  
+      // Initial load of mtsrail with the pink color and adjusted height
+      viewer.dataSources.add(mtsrailDataSource);
+      mtsrailDataSource.entities.values.forEach((entity) => {
+          entity.show = false; // Make sure entities are hidden by default
+      });
+  }
+  
+  // Call the function to load the MTSRail data source
+  loadMTSRailDataSource(viewer);
+  
 
 
 
