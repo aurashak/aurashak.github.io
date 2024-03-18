@@ -848,16 +848,16 @@ flyToPlanViewBtn.addEventListener('click', flyToPlanView);
 
 
 
+
                 
 
-
-// Function to create a label entity
+      // Function to create a label entity
 function createLabel(config) {
   return viewer.entities.add(config);
 }
 
 // Group switch handler
-function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel) {
+function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel, scaleLinePolyline) {
   console.log("Toggle function called");
   var isChecked = document.getElementById('EJsitesSwitch').checked;
   console.log("isChecked:", isChecked);
@@ -869,13 +869,12 @@ function toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelineP
   wasteWaterLabel.show = isChecked; // Control wasteWaterLabel visibility
   gasPipelineLabel.show = isChecked; // Control gasPipelineLabel visibility
   busDepotLabel.show = isChecked; // Control busDepotLabel visibility
-  scaleLineConfig.show = isChcked;
+  scaleLinePolyline.show = isChecked;
 }
-
 
 // Add event listener for the EJsitesSwitch checkbox
 document.getElementById('EJsitesSwitch').addEventListener('change', function() {
-  toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
+  toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel, scaleLinePolyLine);
 });
 
 // Initialize polygons for EJ Sites Group
@@ -883,20 +882,16 @@ var busDepotPolygon = viewer.entities.add(busDepotConfig);
 var wasteWaterTreatmentPolygon = viewer.entities.add(wasteWaterTreatmentConfig);
 var gasPipelinePolygon = viewer.entities.add(gasPipelineConfig);
 var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConfig);
-var scaleLineConfig = viewer.entities.add(scaleLineConfig)
-
+var scaleLinePolyLine = viewer.entities.add(scaleLineConfig);
 
 // Initialize labels for EJ Sites Group
 var marineTransferLabel = createLabel(marineTransferLabelConfig);
 var wasteWaterLabel = createLabel(wasteWaterLabelConfig);
 var gasPipelineLabel = createLabel(gasPipelineLabelConfig);
 var busDepotLabel = createLabel(busDepotLabelConfig);
-var scaleLineConfig = viewer.entities.add(scaleLineConfig)
 
 // Initially hide the layers
-toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel);
-
-
+toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon, marineTransferLabel, wasteWaterLabel, gasPipelineLabel, busDepotLabel, scaleLinePolyLine);
 
 
 
