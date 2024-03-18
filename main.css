@@ -1104,6 +1104,9 @@ h3:hover, h3:active, h3:focus {
 
 
 /* Button Style */
+#flyToGasPipeline,
+#flyToBusDepot, 
+#flyToWasteWater, 
 #flyToMTS {
   padding: 5px;
   margin: 5px 2px;
@@ -1117,70 +1120,33 @@ h3:hover, h3:active, h3:focus {
   cursor: pointer;
 }
 
-#flyToWasteWater {
-  padding: 5px;
-  margin: 5px 2px;
-  border-radius: 2px;
-  width: 100%;
-  text-align: center;
-  background-color: #6dacff;
-  font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
+#flyToOverview.active,
+#flyToPlanView.active {
+  box-shadow: none;
 }
 
 
-#flyToBusDepot {
-  padding: 5px;
-  margin: 5px 2px;
-  border-radius: 2px;
-  width: 100%;
-  text-align: center;
-  background-color: #6dacff;
-  font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
-}
 
-#flyToGasPipeline {
-  padding: 5px;
-  margin: 5px 2px;
-  border-radius: 2px;
-  width: 100%;
-  text-align: center;
-  background-color: #6dacff;
-  font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
-}
 
-#flyToOverview {
-  padding: 5px;
-  margin: 5px 2px;
-  border-radius: 2px;
-  width: 100%;
-  text-align: center;
-  background-color: #6dacff;
-  font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
-}
-
+#flyToOverview,
 #flyToPlanView {
   padding: 5px;
   margin: 5px 2px;
-  border-radius: 2px;
-  width: 100%;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
   text-align: center;
-  background-color: #6dacff;
+  background-color: #fce409;
   font-size: 18px;
-  border: 1px solid rgba(110, 110, 110, 0.3);
+  border: 1px solid rgba(110, 110, 110, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#flyToOverview.active,
+#flyToPlanView.active {
+  box-shadow: none;
 }
 
 
