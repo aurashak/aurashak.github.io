@@ -384,14 +384,14 @@ let mtssubwayDataSource;
 const toggleMtssubwayLayer = async () => {
   if (mtssubwaySwitch.checked) {
     // Load mtssubway GeoJsonDataSource
-    const mtssubwayResource = await Cesium.IonResource.fromAssetId(2477200);
+    const mtssubwayResource = await Cesium.IonResource.fromAssetId(2482445);
     mtssubwayDataSource = await Cesium.GeoJsonDataSource.load(mtssubwayResource);
 
     // Modify the polyline color before adding the data source
     mtssubwayDataSource.entities.values.forEach((entity) => {
       if (entity.polyline) {
         // Change the polyline color to red
-        entity.polyline.material = Cesium.Color.GREY;
+        entity.polyline.material = Cesium.Color.BLUE;
       }
     });
 
