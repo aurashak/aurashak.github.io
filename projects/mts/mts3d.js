@@ -1093,7 +1093,7 @@ initializeCesium();
 
 
 // Function to zoom in
-function zoomIn() {
+function zoomIn(viewer) {
   var camera = viewer.camera;
   var distance = camera.positionCartographic.height;
   var factor = 0.5; // Change this value to adjust zoom speed
@@ -1110,7 +1110,7 @@ function zoomIn() {
 }
 
 // Function to zoom out
-function zoomOut() {
+function zoomOut(viewer) {
   var camera = viewer.camera;
   var distance = camera.positionCartographic.height;
   var factor = 2; // Change this value to adjust zoom speed
@@ -1127,7 +1127,7 @@ function zoomOut() {
 }
 
 // Function to rotate the camera
-function rotateCamera() {
+function rotateCamera(viewer) {
   var camera = viewer.camera;
   var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
 
