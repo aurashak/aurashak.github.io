@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTS</title>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.115/Build/Cesium/Cesium.js"></script>
+<link rel="stylesheet" href="https://aurashak.github.io/main.css">
+</head>
+<body>
+
+
+    <div class="header"></div>
+
+
+ 
+<div class="aboutcontainer">
+    <div class="maptitle" style="background-color: rgb(0, 0, 0); color: #fff;">
+West Harlem 3D Infrastructure Model</div>
+</div>
+
+
+<div class="nymapcontainer">
+
+
+<div class="mapcolumnleft">
+
+
+   
+    <div class="mtsmapboxinscon">
+
+        <div class="mtsmapboxins">
+          Explore the concentration of public infrastructure sites along the West Harlem waterfront.
+        </div>
+
+      
+     <!-- 
+        <div class="mtsmapboxins">
+                <div class="image-container">
+                    <b>Navigation Controls</b>
+
+                      <img src="https://aurashak.github.io/images/navcontrol.png" style="height: 100px; width: auto;"> 
+                </div>
+            </div>
+      -->
+        
+
+        <div class="mtsmapboxins">
+                <div style="display: flex; align-items: center;">
+                    <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/redcube.png" style="height: 25px; background: none; "></div>
+                    <label class="mts-switch-label-b"><b>Key Infrastructure Sites</b></label>
+                    <label class="mts-switch-b" style="margin-left: auto; margin-right: 0px;">
+                        <input type="checkbox" class="mts-switch-input-b" id="EJsitesSwitch" checked>
+                        <div class="mts-switch-track-b">
+                            <div class="mts-switch-thumb-b"></div>
+                        </div>
+                    </label>
+                </div>
+          
+
+             
+            <div style="display: flex; align-items: center;">
+                <label class="mts-switch-label-b">Labels</label>
+                <label class="mts-switch-b" style="margin-left: auto; margin-right: 0px">
+                    <input type="checkbox" class="mts-switch-input-b" id="labelsSwitch" checked>
+                    <div class="mts-switch-track-b">
+                        <div class="mts-switch-thumb-b"></div>
+                    </div>
+                </label>
+            </div>
+  
+        
+
+        <div style="display: flex; align-items: center;">
+            <label class="mts-switch-label-b">Scale </label>
+            <label class="mts-switch-b" style="margin-left: auto; margin-right: 0px;">
+                <input type="checkbox" class="mts-switch-input-b" id="scaleSwitch" checked>
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+
+           
+
+    
+        <div style="display: flex; align-items: center;">
+            <label class="mts-switch-label-b">1/2 mile radius </label>
+            <label class="mts-switch-b" style="margin-left: auto; margin-right: 0px;">
+                <input type="checkbox" class="mts-switch-input-b" id="circleToggle">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+
+
+            
+
+            </div>
+
+
+            <div class="mtsmapboxins">
+
+                <div style="margin-right: 14px; display: flex;"><img src="https://aurashak.github.io/images/cameraicon.png" style="height: 21px; margin-right: 5px; background: none; ">
+                <label class="mts-switch-label-b"><b>Camera Position</b></label></div>
+
+               
+
+                <div class="button-container">
+                    Plan View<button id="flyToPlanView"></button>
+                </div>
+
+                <div class="button-container">
+                    Bird's Eye View<button id="flyToOverview"></button>
+                </div>
+
+                <div class="button-container">
+                    Reset position<button id="flyToHome"></button>
+                </div>
+
+
+                <div class="button-container">
+                  Marine Waste Transfer Station<button id="flyToMTS"></button>
+                </div>
+              
+                <div class="button-container">
+                    Sewage Treatment Plant<button id="flyToWasteWater"></button>
+                </div>
+              
+                <div class="button-container">
+                   Bus Depot<button id="flyToBusDepot"></button>
+                </div>
+              
+                <div class="button-container">
+                    Natural Gas Pipeline<button id="flyToGasPipeline"></button>
+                </div>
+              </div>
+              
+      
+          <div class="mtsmapboxins">
+            <b>Supporting Content</b>
+            <ul>
+              <li><a href="https://aurashak.github.io/projects/mts/wh3dmodeldocumentation.html" target="_blank">Map Documentation</a></li>
+            <li><a href="https://aurashak.github.io/images/navcontrol.png" target="_blank">Navigation Controls</a></li>
+              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScuIhyGN6UQPFRBSoRKCdCEDC9iXuEHY0yNmu40Zsp_WMv9SQ/viewform?usp=sf_link">Provide Feedback</a></li>
+            
+            </ul>
+        </div>
+
+    
+
+    </div>
+
+
+<br>
+
+<div class="nymapboxcontainer">
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/googlemapslogo.png" style="height: 25px; background: none; "></div>
+
+            <label class="mts-switch-label-b">Google photorealistic tileset</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="3dTileSwitch" checked>
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: grey; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">OSM buildings</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="osmBuildingsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+ 
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="margin-right: 10px;"><img src="https://aurashak.github.io/images/osmlogo.png" style="height: 25px; background: none; "></div>
+            <label class="mts-switch-label-b">Open Street Maps</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="osmMapsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 5px; background-color: rgb(86, 86, 86);   box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Streets</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsstreetsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: rgb(255, 0, 0); box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Rail</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsrailSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: blue; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+            <label class="mts-switch-label-b">Subway</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtssubwaySwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+    <!--  
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: blue; box-shadow: 2px 2px .5px rgba(59, 59, 59, 0.61);  margin-right: 10px;"></div>
+            <label class="mts-switch-label-b">Bus depots</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="busDepotsSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+-->
+
+
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 5px; background-color: gold; box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Electric Transmission Lines</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="electriclinesSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" >
+            <div style="width: 20px; height: 5px; background-color: rgb(0, 0, 0); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+            <label class="mts-switch-label-b">Natural Gas Pipelines</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsgasSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 20px; height: 20px; background-color: rgb(10, 96, 33); box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+
+            <label class="mts-switch-label-b">Parks</label>
+            <label class="mts-switch-b" style="margin-left: auto;">
+                <input type="checkbox" class="mts-switch-input-b" id="mtsparksSwitch">
+                <div class="mts-switch-track-b">
+                    <div class="mts-switch-thumb-b"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="nymapbox">
+    <div style="display: flex; align-items: center;">
+        <div style="width: 20px; height: 20px; background-color: red; border-radius: 50%; box-shadow: 2px 2px .5px rgba(0, 0, 0, 0.3); margin-right: 10px;"></div>
+        <label class="mts-switch-label-b" style="">Combined Sewer Overflow</label>
+        <label class="mts-switch-b" style="margin-left: auto;">
+            <input type="checkbox" class="mts-switch-input-b" id="mtscsoSwitch">
+            <div class="mts-switch-track-b">
+                <div class="mts-switch-thumb-b"></div>
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+<div class="nymapbox">
+
+
+    <U>FOOTNOTES UNDER CONSTRUCTION</U><Br><br>
+    
+
+    
+                These apps were used to create this map:     
+                    <div class="logos-container">
+                        <img src="https://aurashak.github.io/images/cesiumlogo.png"  title="Cesium" alt="Cesium">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/qgislogo.png"  title="QGIS" alt="QGIS">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/esrilogo.png"  title="ESRI" alt="ESRI">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/github.png"  title="GitHub" alt="GitHub">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/googlemapslogo.png"  title="Google" alt="Google">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/htmllogo.png"  title="HTML" alt="HTML">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/csslogo.png"  title="CSS" alt="CSS">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/osmlogo.png"  title="OpenStreetMap" alt="OpenStreetMap">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/jsonlogo.png"  title="GeoJSON" alt="GeoJSON">&nbsp;&nbsp;
+                        <img src="https://aurashak.github.io/images/blenderlogo.png"  title="Blender" alt="Blender">&nbsp;&nbsp;
+
+                        <img src="https://aurashak.github.io/images/jslogo.png"  title="JavaScript" alt="JavaScript">&nbsp;&nbsp;
+                </div>
+    
+    </div>
+
+
+
+</div>
+
+
+</div>
+    
+
+
+<div class="mapcolumnright">
+
+    <div id="cesiumContainer"></div>    
+    <div id="zoomButtons">
+        <button onclick="zoomIn()">Zoom In</button>
+        <button onclick="zoomOut()">Zoom Out</button>
+    </div>
+
+</div>
+
+
+
+</div>
+
+
+<script src="https://aurashak.github.io/projects/mts/mts3d.js"></script>
+<script src="https://aurashak.github.io/navigation.js"></script>
+
+</body>
+</html>
