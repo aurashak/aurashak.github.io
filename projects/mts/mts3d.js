@@ -547,7 +547,7 @@ const redCircle = viewer.entities.add({
   ellipse: {
       semiMinorAxis: 1000.0, // Adjust as needed
       semiMajorAxis: 1000.0, // Equal to semiMinorAxis for a circle
-      material: Cesium.Color.RED.withAlpha(0.5),
+      material: Cesium.Color.WHITE.withAlpha(0.5),
       outline: true,
       outlineColor: Cesium.Color.GRAY,
       outlineWidth: 1,
