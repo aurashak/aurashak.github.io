@@ -531,6 +531,8 @@ mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 // Function to create a bounding circle around a given center point
 function createBoundingCircle(centerPoint) {
+  console.log("Center Point:", centerPoint); // Log center point for debugging
+
   // Create a circle entity
   var circle = viewer.entities.add({
       position: centerPoint,
@@ -556,9 +558,11 @@ var busDepotCoordinates = [
 
 // Convert the coordinates to a Cartesian3 position
 var centerPoint = Cesium.Cartesian3.fromDegrees(busDepotCoordinates[0], busDepotCoordinates[1]);
+console.log("Center Point (Degrees):", busDepotCoordinates[0], busDepotCoordinates[1]); // Log coordinates for debugging
 
 // Create the bounding circle using the bus depot coordinates
 var boundingCircle = createBoundingCircle(centerPoint);
+console.log("Bounding Circle Entity:", boundingCircle); // Log bounding circle entity for debugging
 
 // Get the switch element
 var circleToggle = document.getElementById('circleToggle');
@@ -567,6 +571,7 @@ var circleToggle = document.getElementById('circleToggle');
 circleToggle.addEventListener('change', function() {
   boundingCircle.show = circleToggle.checked;
 });
+
 
 
 
