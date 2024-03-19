@@ -529,6 +529,44 @@ mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
+// Function to create a bounding circle around a given center point
+function createBoundingCircle(centerPoint) {
+  // Create a circle entity
+  var circle = viewer.entities.add({
+      position: centerPoint,
+      ellipse: {
+          semiMinorAxis: 804.67, // Radius of approximately half a mile in meters
+          semiMajorAxis: 804.67,
+          material: Cesium.Color.WHITE.withAlpha(0.5), // White with 50% opacity
+          outline: false, // Disable outline
+          show: false // Initially hide the circle
+      }
+  });
+
+  // Make the circle independent
+  circle.isBoundingCircle = true;
+
+  return circle;
+}
+
+// Coordinates of the bus depot
+var busDepotCoordinates = [
+  -73.95879964635739, 40.81992411443654 // Longitude, Latitude
+];
+
+// Convert the coordinates to a Cartesian3 position
+var centerPoint = Cesium.Cartesian3.fromDegrees(busDepotCoordinates[0], busDepotCoordinates[1]);
+
+// Create the bounding circle using the bus depot coordinates
+var boundingCircle = createBoundingCircle(centerPoint);
+
+// Get the switch element
+var circleToggle = document.getElementById('circleToggle');
+
+// Add event listener to toggle the visibility of the circle
+circleToggle.addEventListener('change', function() {
+  boundingCircle.show = circleToggle.checked;
+});
 
 
 
