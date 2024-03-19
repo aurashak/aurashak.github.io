@@ -42,7 +42,6 @@ const initializeCesium = async () => {
 
 
 
-
 // Function to zoom in
 function zoomIn() {
   var camera = viewer.camera;
