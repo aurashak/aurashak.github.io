@@ -1954,6 +1954,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
+#zoomButtons {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+}
+#zoomButtons button {
+    margin-bottom: 5px;
+}
 
 
 
