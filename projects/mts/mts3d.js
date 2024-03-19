@@ -569,6 +569,14 @@ circlePolygon.appearance.material = Cesium.Material.fromType('Color', {
     color: Cesium.Color.WHITE.withAlpha(0.5) // White with 50% opacity
 });
 
+// Get the circle toggle switch
+var circleToggle = document.getElementById('circleToggle');
+
+// Add event listener to toggle the visibility of the circle
+circleToggle.addEventListener('change', function() {
+    circlePolygon.show = circleToggle.checked;
+});
+
 
 
 
