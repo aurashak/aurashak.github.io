@@ -529,6 +529,15 @@ mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
+const redCircle = viewer.entities.add({
+  position: Cesium.Cartesian3.fromDegrees(-73.95918564550357, 40.82152563349923), // Location coordinates
+  name: "1/2 mile radius",
+  ellipse: {
+    semiMinorAxis: 250000.0, // Adjust as needed
+    semiMajorAxis: 250000.0, // Equal to semiMinorAxis for a circle
+    material: Cesium.Color.RED.withAlpha(0.5),
+  },
+});
 
 
 
