@@ -529,66 +529,6 @@ mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
-// Define the coordinates of the circle
-var coordinates = [
-  [-73.9561119349874, 40.834475772083316], // Furthest most east
-  [-73.95845814932524, 40.83430091085781], // Furthest most north
-  [-73.96813661440831, 40.81627748799409], // Furthest most west
-  [-73.94414531861395, 40.8244841399463]   // Furthest most south
-];
-
-// Calculate the center of the circle
-var centerLongitude = (coordinates[0][0] + coordinates[2][0]) / 2;
-var centerLatitude = (coordinates[1][1] + coordinates[3][1]) / 2;
-
-// Calculate the radius of the circle (approximately half the distance between furthest most east and west points)
-var radius = Cesium.Cartesian3.distance(
-  Cesium.Cartesian3.fromDegrees(coordinates[0][0], centerLatitude),
-  Cesium.Cartesian3.fromDegrees(coordinates[2][0], centerLatitude)
-) / 2;
-
-// Create a circular polygon
-var circlePolygon = viewer.scene.primitives.add(new Cesium.Primitive({
-  geometryInstances: new Cesium.GeometryInstance({
-      geometry: new Cesium.PolygonGeometry({
-          polygonHierarchy: {
-              positions: Cesium.Cartesian3.fromDegreesArray([
-                  centerLongitude, centerLatitude - Cesium.Math.toDegrees(radius),
-                  centerLongitude + Cesium.Math.toDegrees(radius), centerLatitude,
-                  centerLongitude, centerLatitude + Cesium.Math.toDegrees(radius),
-                  centerLongitude - Cesium.Math.toDegrees(radius), centerLatitude
-              ]),
-              holes: []
-          },
-          vertexFormat: Cesium.VertexFormat.POSITION_ONLY
-      }),
-      id: 'circle'
-  }),
-  appearance: new Cesium.PerInstanceColorAppearance({
-      closed: true,
-      translucent: true,
-      renderState: {
-          depthTest: {
-              enabled: true
-          },
-          lineWidth: Math.min(3.0, viewer.scene.maximumAliasedLineWidth)
-      }
-  })
-}));
-
-// Change the color of the circle
-circlePolygon.appearance.material = Cesium.Material.fromType('Color', {
-  color: Cesium.Color.WHITE.withAlpha(0.5) // White with 50% opacity
-});
-
-// Get the circle toggle switch
-var circleToggle = document.getElementById('circleToggle');
-
-// Add event listener to toggle the visibility of the circle
-circleToggle.addEventListener('change', function() {
-  circlePolygon.show = circleToggle.checked;
-});
-
 
 
 
