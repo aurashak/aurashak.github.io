@@ -2143,8 +2143,6 @@ label {
 
 
 
-
-
 /* Styles for Switch Mechanism for NY MAP */
 .mts-switch-label {
   /* Add any styles you want for the switch label */
@@ -2166,7 +2164,7 @@ label {
 .mts-switch-track-b {
   background-color: #ccc;
   border-radius: 2px;
-  height: 21px;
+  height: 22px;
       border: solid .3px rgba(18, 18, 18, 0.7);
   width: 52px;
   position: relative;
@@ -2204,12 +2202,12 @@ label {
 .mts-switch-thumb,
 .mts-switch-thumb-b {
   border-radius: 2px; 
-  height: 21px;
+  height: 21.5px;
   width: 21px;
-  border: solid .3px rgba(18, 18, 18, 0.6);
+  border: solid .6px rgba(18, 18, 18, 0.6);
   position: absolute;
-  top: -1px;
-  left: -2px; 
+  top: -0.5px;
+  left: -1px; 
   transition: 0.2s;
    background-color: #ffdf0b; 
 
@@ -2240,6 +2238,7 @@ label {
 .mts-switch-input-b:checked + .mts-switch-track-b .mts-switch-thumb-b {
   left: 30px;
 }
+
 
 
 
