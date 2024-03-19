@@ -529,17 +529,39 @@ mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
+// Function to add or remove the circle based on the toggle state
+function toggleCircle(checked) {
+  if (checked) {
+      // Add the circle
+      redCircle.show = true;
+  } else {
+      // Remove the circle
+      redCircle.show = false;
+  }
+}
+
+// Add the circle entity
 const redCircle = viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.95918564550357, 40.82152563349923), // Location coordinates
-  name: "1/2 mile radius",
+  name: "Red circle on surface",
   ellipse: {
-    semiMinorAxis: 250000.0, // Adjust as needed
-    semiMajorAxis: 250000.0, // Equal to semiMinorAxis for a circle
-    material: Cesium.Color.RED.withAlpha(0.5),
+      semiMinorAxis: 250000.0, // Adjust as needed
+      semiMajorAxis: 250000.0, // Equal to semiMinorAxis for a circle
+      material: Cesium.Color.RED.withAlpha(0.5),
   },
+  show: false, // Initially hide the circle
 });
 
+// Get the toggle switch element
+const circleToggle = document.getElementById('circleToggle');
 
+// Add event listener for change event
+circleToggle.addEventListener('change', function() {
+  toggleCircle(circleToggle.checked);
+});
+
+// Initially set the circle state based on the toggle switch
+toggleCircle(circleToggle.checked);
 
 
 
