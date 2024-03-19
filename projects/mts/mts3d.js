@@ -1081,25 +1081,37 @@ toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, m
 
 
         
-        function zoomIn() {
-            var camera = viewer.camera;
-            var distance = camera.positionCartographic.height;
-            var factor = 0.5; // Change this value to adjust zoom speed
-            var newHeight = distance * factor;
-            camera.setView({
-                destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-            });
-        }
-        
-        function zoomOut() {
-            var camera = viewer.camera;
-            var distance = camera.positionCartographic.height;
-            var factor = 2; // Change this value to adjust zoom speed
-            var newHeight = distance * factor;
-            camera.setView({
-                destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-            });
-        }
+function zoomIn() {
+  var camera = viewer.camera;
+  var distance = camera.positionCartographic.height;
+  var factor = 0.5; // Change this value to adjust zoom speed
+  var newHeight = distance * factor;
+  
+  console.log("Zooming in...");
+  console.log("Previous camera height:", distance);
+  console.log("Zoom factor:", factor);
+  console.log("New camera height:", newHeight);
+  
+  camera.setView({
+      destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
+  });
+}
+
+function zoomOut() {
+  var camera = viewer.camera;
+  var distance = camera.positionCartographic.height;
+  var factor = 2; // Change this value to adjust zoom speed
+  var newHeight = distance * factor;
+  
+  console.log("Zooming out...");
+  console.log("Previous camera height:", distance);
+  console.log("Zoom factor:", factor);
+  console.log("New camera height:", newHeight);
+  
+  camera.setView({
+      destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
+  });
+}
 
 
 
