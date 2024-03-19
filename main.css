@@ -1961,7 +1961,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 #zoomButtons button {
     margin-bottom: 0px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.75);
     border: none;
     width: 30px;
     height: 30px;
@@ -1973,7 +1973,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     align-items: center;
 }
 #zoomButtons button:hover {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.85);
 }
 #zoomButtons button.zoom-out {
     border-top-left-radius: 0px;
@@ -1993,7 +1993,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 #zoomButtons button.rotate {
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.75);
   border: 1px solid rgba(71, 71, 71, 0.67);
   width: 30px;
   height: 30px;
@@ -2006,8 +2006,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 #zoomButtons button.rotate:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.85);
 }
+
 
 
 
@@ -3960,6 +3961,7 @@ margin: 10px;
         margin: 10px;
         border: 1px solid grey;
         border-radius: 2px;
+        position: relative;
         box-shadow: 4px 4px 7px rgba(59, 59, 59, 0.61);
     
     }
