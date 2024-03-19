@@ -545,8 +545,8 @@ const redCircle = viewer.entities.add({
   position: Cesium.Cartesian3.fromDegrees(-73.95918564550357, 40.82152563349923), // Location coordinates
   name: "Red circle on surface",
   ellipse: {
-      semiMinorAxis: 250000.0, // Adjust as needed
-      semiMajorAxis: 250000.0, // Equal to semiMinorAxis for a circle
+      semiMinorAxis: 1000.0, // Adjust as needed
+      semiMajorAxis: 1000.0, // Equal to semiMinorAxis for a circle
       material: Cesium.Color.RED.withAlpha(0.5),
       outline: true,
       outlineColor: Cesium.Color.GRAY,
