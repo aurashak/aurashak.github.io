@@ -540,9 +540,12 @@ function toggleCircle(checked) {
   }
 }
 
+ 
+
+
 // Add the circle entity
 const redCircle = viewer.entities.add({
-  position: Cesium.Cartesian3.fromDegrees(-73.95918564550357, 40.82152563349923), // Location coordinates
+  position: Cesium.Cartesian3.fromDegrees(-73.9578910346863, 40.823067941896106), // Location coordinates
   name: "Red circle on surface",
   ellipse: {
       semiMinorAxis: 1000.0, // Adjust as needed
