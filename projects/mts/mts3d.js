@@ -529,47 +529,44 @@ mtsstreetsSwitch.addEventListener("change", toggleMtsstreetsLayer);
 
 
 
-// Function to create a bounding circle around a given center point
-function createBoundingCircle(centerPoint) {
-  console.log("Center Point:", centerPoint); // Log center point for debugging
+// Define the center of the circle in longitude and latitude
+var centerLongitude = -73.95879964635739;
+var centerLatitude = 40.81992411443654;
 
-  // Create a circle entity
-  var circle = viewer.entities.add({
-      position: centerPoint,
-      ellipse: {
-          semiMinorAxis: 804.67, // Radius of approximately half a mile in meters
-          semiMajorAxis: 804.67,
-          material: Cesium.Color.WHITE.withAlpha(0.5), // White with 50% opacity
-          outline: false, // Disable outline
-          show: false // Initially hide the circle
-      }
-  });
+// Define the radius of the circle in meters (approximately half a mile)
+var radius = 804.67;
 
-  // Make the circle independent
-  circle.isBoundingCircle = true;
+// Create a circular polygon
+var circlePolygon = viewer.scene.primitives.add(new Cesium.Primitive({
+    geometryInstances: new Cesium.GeometryInstance({
+        geometry: new Cesium.PolygonGeometry({
+            polygonHierarchy: {
+                positions: Cesium.Cartesian3.fromDegreesArray([
+                    centerLongitude - 0.001, centerLatitude, // Left point
+                    centerLongitude + 0.001, centerLatitude, // Right point
+                    centerLongitude, centerLatitude + 0.001 // Top point
+                ]),
+                holes: []
+            },
+            vertexFormat: Cesium.VertexFormat.POSITION_ONLY
+        }),
+        id: 'circle'
+    }),
+    appearance: new Cesium.PerInstanceColorAppearance({
+        closed: true,
+        translucent: true,
+        renderState: {
+            depthTest: {
+                enabled: true
+            },
+            lineWidth: Math.min(3.0, viewer.scene.maximumAliasedLineWidth)
+        }
+    })
+}));
 
-  return circle;
-}
-
-// Coordinates of the bus depot
-var busDepotCoordinates = [
-  -73.95879964635739, 40.81992411443654 // Longitude, Latitude
-];
-
-// Convert the coordinates to a Cartesian3 position
-var centerPoint = Cesium.Cartesian3.fromDegrees(busDepotCoordinates[0], busDepotCoordinates[1]);
-console.log("Center Point (Degrees):", busDepotCoordinates[0], busDepotCoordinates[1]); // Log coordinates for debugging
-
-// Create the bounding circle using the bus depot coordinates
-var boundingCircle = createBoundingCircle(centerPoint);
-console.log("Bounding Circle Entity:", boundingCircle); // Log bounding circle entity for debugging
-
-// Get the switch element
-var circleToggle = document.getElementById('circleToggle');
-
-// Add event listener to toggle the visibility of the circle
-circleToggle.addEventListener('change', function() {
-  boundingCircle.show = circleToggle.checked;
+// Change the color of the circle
+circlePolygon.appearance.material = Cesium.Material.fromType('Color', {
+    color: Cesium.Color.WHITE.withAlpha(0.5) // White with 50% opacity
 });
 
 
