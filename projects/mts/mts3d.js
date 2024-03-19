@@ -1077,7 +1077,7 @@ var marineTransferStationPolygon = viewer.entities.add(marineTransferStationConf
 toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, marineTransferStationPolygon);
 
 
-
+// Function to zoom in
 function zoomIn() {
   var camera = viewer.camera;
   var distance = camera.positionCartographic.height;
@@ -1094,6 +1094,7 @@ function zoomIn() {
   });
 }
 
+// Function to zoom out
 function zoomOut() {
   var camera = viewer.camera;
   var distance = camera.positionCartographic.height;
@@ -1108,6 +1109,17 @@ function zoomOut() {
   camera.setView({
       destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
   });
+}
+
+// Function to rotate the camera
+function rotateCamera() {
+  var camera = viewer.camera;
+  var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
+
+  console.log("Rotating camera...");
+  console.log("Rotation angle:", angle);
+
+  camera.rotateRight(angle);
 }
 
 
