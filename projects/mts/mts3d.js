@@ -632,7 +632,8 @@ var gasPipelineConfig = {
     ]),
     material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
     extrudedHeight: 1, // Extrude the polygon upward by 20 units
-    height: -60 // Position the polygon lower by setting the height to -20 units
+    height: -60, // Position the polygon lower by setting the height to -20 units
+    show: false // Initially hide the polygon
   }
 };
 
@@ -641,23 +642,36 @@ document.getElementById('gasPipeline').addEventListener('change', function() {
   // Check if the switch is checked
   var isChecked = this.checked;
 
+  console.log("Switch state changed. Checked:", isChecked);
+
   // Toggle the visibility of the gas pipeline polygon based on the switch state
   if (isChecked) {
     // Show the gas pipeline polygon
+    console.log("Showing gas pipeline");
     showGasPipeline();
   } else {
     // Hide the gas pipeline polygon
+    console.log("Hiding gas pipeline");
     hideGasPipeline();
   }
 });
 
 // Function to show the gas pipeline polygon
 function showGasPipeline() {
+  // Code to add the gas pipeline polygon to the Cesium viewer
+  // Replace this with your actual code to add the polygon
+  // For example, you might have something like:
+  // viewer.entities.add(gasPipelineConfig);
 }
 
 // Function to hide the gas pipeline polygon
 function hideGasPipeline() {
+  // Code to remove/hide the gas pipeline polygon from the Cesium viewer
+  // Replace this with your actual code to hide the polygon
+  // For example, you might have something like:
+  // viewer.entities.remove(gasPipelineConfig);
 }
+
 
 
 // Define the configuration for the marine transfer station polygon
