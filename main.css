@@ -2082,7 +2082,6 @@ label {
 
 /* Styles for Switch Mechanism for NY MAP */
 .mts-switch-label {
-  /* Add any styles you want for the switch label */
 }
 
 .mts-switch-label-b {
@@ -2101,8 +2100,8 @@ label {
 .mts-switch-track-b {
   background-color: #ccc;
   border-radius: 2px;
-  height: 22px;
-      border: solid .3px rgba(18, 18, 18, 0.7);
+  height: 23px;
+      border: solid .8px rgba(18, 18, 18, 0.8);
   width: 52px;
   position: relative;
   margin-right: 5px;
@@ -2114,9 +2113,9 @@ label {
   position: absolute;
   top: 56%;
   font-weight: bold;
-  right: 16px;
+  right: 14px;
   transform: translate(50%, -50%);
-  color: #615a5a;
+  color: #393939;
   font-size: 12px;
   opacity: 1;
   transition: opacity 0.2s; 
@@ -2128,9 +2127,9 @@ label {
   position: absolute;
   font-weight: bold;
   top: 56%;
-  left: 16px;
+  left: 13px;
   transform: translate(-50%, -50%);
-  color: #615a5a;
+  color: #393939;
   font-size: 12px;
   opacity: 0;
   transition: opacity 0.2s;
@@ -2139,14 +2138,14 @@ label {
 .mts-switch-thumb,
 .mts-switch-thumb-b {
   border-radius: 2px; 
-  height: 21.5px;
-  width: 21px;
+  height: 19px;
+  width: 19px;
   border: solid .6px rgba(18, 18, 18, 0.6);
   position: absolute;
-  top: -0.5px;
-  left: -1px; 
+  top: 1px;
+  left: 1px; 
   transition: 0.2s;
-   background-color: #ffdf0b; 
+   background-color: #0bbfff; 
 
 }
 
@@ -2175,7 +2174,6 @@ label {
 .mts-switch-input-b:checked + .mts-switch-track-b .mts-switch-thumb-b {
   left: 30px;
 }
-
 
 
 
@@ -3814,18 +3812,18 @@ span.cesium-projectionPicker-wrapper {
   }
 
 
-.logos-container {
-  display: inline-block;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.logos-container img {
-  height: 30px;
-  width: auto;
-  object-fit: contain;
-}
+  .logos-container {
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .logos-container img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
 
 .logos-container a:link {
 background: none;
