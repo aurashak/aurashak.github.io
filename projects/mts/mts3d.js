@@ -616,16 +616,27 @@ var riversideParkBuildingConfig = {
 
 // Function to toggle the visibility of Riverside Park Building
 function toggleRiversideParkBuilding(checked) {
+  console.log("Toggle Riverside Park Building:", checked);
   var entity = viewer.entities.getOrCreateEntity(riversideParkBuildingConfig.name);
-  entity.show = checked;
+  if (entity) {
+    console.log("Entity found:", entity);
+    entity.show = checked;
+  } else {
+    console.error("Entity not found:", riversideParkBuildingConfig.name);
+  }
 }
 
 // Add event listener to the switch for Riverside Park Building
 document.addEventListener('DOMContentLoaded', function() {
   var riversideParkToggle = document.getElementById('riversideParkToggle');
-  riversideParkToggle.addEventListener('change', function() {
-    toggleRiversideParkBuilding(riversideParkToggle.checked);
-  });
+  if (riversideParkToggle) {
+    console.log("Switch found:", riversideParkToggle);
+    riversideParkToggle.addEventListener('change', function() {
+      toggleRiversideParkBuilding(riversideParkToggle.checked);
+    });
+  } else {
+    console.error("Switch not found.");
+  }
 });
 
 
