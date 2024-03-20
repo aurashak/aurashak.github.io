@@ -390,9 +390,9 @@ background: none;
   padding: 8px;
   z-index: 1000; 
   position: fixed;
-  left: 126px;
   border-radius: 6px;
   pointer-events: auto;
+  margin-left: 70px;
 }
 
 
@@ -1021,8 +1021,6 @@ input[type="range"] {
 #flyToWasteWater:active, 
 #flyToMTS:active {
   transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
-
-
 }
 
 /* Added */
