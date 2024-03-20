@@ -360,12 +360,14 @@ text-decoration: underline;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: 20px 0px;
 }
 
 .logos-container img {
   height: 40px;
   width: 10%;
   object-fit: contain;
+  margin: 0px 3px;
 }
 
 .logos-container a:link {
