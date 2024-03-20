@@ -398,12 +398,7 @@ background: none;
 
 
 #footnotes {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
   font-size: 14px;
-  line-height: 1.4;
 }
 
 #footnotes p {
@@ -1954,9 +1949,9 @@ label {
   font-weight: bold;
   right: 15px;
   transform: translate(50%, -50%);
-  color: #302e2e;
+  color: #ffffff;
   font-size: 12px;
-  opacity: 1; 
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.03); 
   transition: opacity 0.2s; 
 }
 
@@ -1968,8 +1963,9 @@ label {
   top: 57%;
   left: 14px;
   transform: translate(-50%, -50%);
-  color: #302e2e;
+  color: #ffffff;
   font-size: 12px;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.03); 
   opacity: 0;
   transition: opacity 0.2s; 
 }
