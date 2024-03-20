@@ -995,20 +995,20 @@ input[type="range"] {
 #flyToOverview,
 #flyToPlanView,
 #flyToHome {
-    padding: 5px;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    background-color: #c8c8c8;
-    font-size: 16px;
-    border: 1.8px solid rgba(51, 51, 51, 0.81);
-    box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    position: relative;
-    transition: transform 0.1s;
-
+  padding: 0px;
+  margin: 5px 2px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  background-color: #c8c8c8;
+  font-size: 16px;
+  border: 1.8px solid rgba(51, 51, 51, 0.81);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  position: relative;
+  transition: transform 0.1s;
 }
 
 #flyToGasPipeline:active,
