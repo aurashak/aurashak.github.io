@@ -989,6 +989,9 @@ input[type="range"] {
 
 
 
+
+
+
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -997,16 +1000,16 @@ input[type="range"] {
 #flyToOverview,
 #flyToPlanView,
 #flyToHome {
-  padding: 5px; /* Adjusted padding */
+  padding: 5px;
   margin: 5px 2px;
-  width: auto; /* Changed */
-  height: 30px; /* Changed */
-  background-image: url('https://aurashak.github.io/images/cameraicon.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent; /* Added */
-  border: none; /* Added */
-  box-shadow: none; /* Added */
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  background-color: #c8c8c8;
+  font-size: 16px;
+  border: 1.8px solid rgba(51, 51, 51, 0.81);
+  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
   color: rgb(0, 0, 0);
   position: relative;
@@ -1021,6 +1024,7 @@ input[type="range"] {
 #flyToPlanView:active,
 #flyToHome:active {
   transform: translateY(4px);  
+  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
 }
 
 /* Added */
@@ -1031,7 +1035,26 @@ input[type="range"] {
 #flyToOverview::after,
 #flyToPlanView::after,
 #flyToHome::after {
-  display: none; /* Removed the "GO" content */
+  content: "GO";
+  bottom: 7px;
+  font-weight: bold;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+}
+
+/* Adjustments for Specific Buttons */
+#flyToOverview,
+#flyToPlanView,
+#flyToHome {
+  font-size: 18px;
+}
+
+#flyToOverview::after,
+#flyToPlanView::after,
+#flyToHome::after {
+  bottom: 2px;
+  color: black;
 }
 
 
