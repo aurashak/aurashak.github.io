@@ -34,17 +34,16 @@ New York City Environmental Infrastructure Map
 
     <div class="nymapboxins">
         Toggle the layers to see networks of infrastructure<br>
-        <div style="display: flex; align-items: center; margin: 10px 5px;" class="legend-item">
-            <label class="nymap-switch-label"><u><span style="color: red;">Red</span></u> switches control <u><span class="red-text">groups</span></u>
-                of layers</label>
+
+           <div style="display: flex; align-items: center; margin: 10px 5px;" class="legend-item">
+                <label class="switch-label" ><u><span class="color: red;">Red</span></u> switches control <u><span class="red-text">groups</span></u>
+                    of layers</label>  
             <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input-b" id="">
-                <div class="nymap-switch-track-b">
-                    <div class="nymap-switch-thumb-b"></div>
-                </div>
+            <input type="checkbox" class="switch-input-b" id="">
+            <div class="switch-track-b">
+            <div class="switch-thumb-b"></div>
+            </div>
             </label>
-        </div>
-        
     
             </div>
             <div style="display: flex; align-items: center; margin: 10px 5px;" class="legend-item">
@@ -59,17 +58,19 @@ New York City Environmental Infrastructure Map
                 
             </div>
 <br>
-<div style="display: flex; align-items: center; margin: 10px 5px;" class="legend-item">
-    <label class="nymap-switch-label"><u><span class="blue-text">Blue</span></u> switches control <u><span class="blue-text">individual</span></u>
-        layers</label>
-    <label class="switch" style="margin-left: auto;">
-        <input type="checkbox" class="nymap-switch-input" id="">
-        <div class="nymap-switch-track">
-            <div class="nymap-switch-thumb"></div>
-        </div>
-    </label>
-</div>
-
+            <div style="display: flex; align-items: center;">
+                <div style="margin-right: 0px; width: 220px; line-height: 1.2;">
+                    <p>Click on markers for more information</p>
+                </div>
+                <div class="popup-container">
+                    <div class="popup-content">
+                        <b><span style="background-color: #ffe600ce;">Layer category</span></b><br>
+                        Name:<br>
+                        Other:
+                    </div>
+                    <div class="red-circle"></div>
+                </div>
+            </div>
             <br>
 
           
@@ -108,21 +109,22 @@ New York City Environmental Infrastructure Map
     
 
         <div class="nymapboxcontainer">
-            <div class="nymapbox" id="allLayersSection">
-                <!-- All layers -->
-                <div style="display: flex; align-items: center;" class="legend-item">
-                    <label class="nymap-switch-label"><b>All Infrastructure Layers</b></label> &nbsp;
-                    <label class="switch" style="margin-left: auto;">
-                        <input type="checkbox" class="nymap-switch-input-b" id="allLayersCheckbox">
-                        <div class="nymap-switch-track-b">
-                            <div class="nymap-switch-thumb-b"></div>
-                        </div>
-                    </label>
-                </div>
-                <span style="font-size: 16px; font-weight: normal;">(energy, waste, transportation, flooding, and evacuation zones) <i>may take a moment to load</i></span>
-            </div>
+        <div class="nymapbox" id="allLayersSection">
+        <!-- All layers -->
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <label class="switch-label" ><b>All Infrastructure Layers</b></label> &nbsp; 
+        <label class="switch" style="margin-left: auto;">
+        <input type="checkbox" class="switch-input-b" id="allLayersCheckbox">
+        <div class="switch-track-b">
+        <div class="switch-thumb-b"></div>
         </div>
-        
+        </label>
+
+        </div>
+        <span style="font-size: 16px; font-weight: normal;">(energy, waste, transportation, flooding, and evacuation zones)  <i>may take a moment to load</i></span>
+
+    </div>
+    </div>
     <Br>
 
 
@@ -133,144 +135,137 @@ New York City Environmental Infrastructure Map
 
 <div class="nymapboxcontainer">
 
-    <div class="nymapbox" id="wasteSection">
-        <!-- Waste -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="nymap-switch-label"><b>Waste</b></label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input-b" id="wasteLayerGroup">
-                <div class="nymap-switch-track-b">
-                    <div class="nymap-switch-thumb-b"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-    
-    <div class="nymapbox">
-        <!-- Waste Water Treatment -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-wastewatertreatment"></div>
-            <label class="nymap-switch-label">Waste Water Treatment</label><sup style="font-size: smaller;"><a href="#footnote-2">2</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="wastewatertreatment">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-    
-    <div class="nymapbox">
-        <!-- Combined Sewer Overflow -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-nycso"></div>
-            <label class="nymap-switch-label">Combined Sewer Overflow</label><sup style="font-size: smaller;"><a href="#footnote-2">3</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="nycso">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-    
-    <div class="nymapbox">
-        <!-- Inactive Landfill -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-inactivesolidwastelandfill"></div>
-            <label class="nymap-switch-label">Inactive Landfill</label><sup style="font-size: smaller;"><a href="#footnote-2">4</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="inactivesolidwastelandfill">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-    
-    <div class="nymapbox">
-        <!-- Recycling Facility -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-recyclingfacility"></div>
-            <label class="nymap-switch-label">Recycling Facility</label><sup style="font-size: smaller;"><a href="#footnote-2">5</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="recyclingfacility">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-    
-    <div class="nymapbox">
-        <!-- Waste Transfer Station -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-wastetransferfacility"></div>
-            <label class="nymap-switch-label">Waste Transfer Station</label><sup style="font-size: smaller;"><a href="#footnote-2">5</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="wastetransferfacility">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
-    
-    <div class="nymapboxcontainer">
-        <div class="nymapbox" id="energySection">
-            <!-- Energy -->
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="nymap-switch-label"><b>Energy</b></label>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input-b" id="energyLayerGroup">
-                    <div class="nymap-switch-track-b">
-                        <div class="nymap-switch-thumb-b"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-    
-        <div class="nymapbox">
-            <!-- Major Oil Storage -->
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <div class="legend-symbol" id="legend-majoroilstorage"></div>
-                <label class="nymap-switch-label">Major Oil Storage</label><sup style="font-size: smaller;"><a href="#footnote-5">5</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="majoroilstorage">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-    
-        <!-- Gas Pipelines -->
-        <div class="nymapbox">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <div class="legend-symbol" id="legend-nygaspipelines"></div>
-                <label class="nymap-switch-label">Gas Pipelines</label><sup style="font-size: smaller;"><a href="#footnote-6">5</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="nygaspipelines">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-    </div>
-    
+<div class="nymapbox" id="wasteSection">
+<!-- Waste -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <label class="switch-label"><b>Waste</b></label>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input-b" id="wasteLayerGroup">
+<div class="switch-track-b">
+<div class="switch-thumb-b"></div>
+</div>
+</label>
+</div></div>
+
+<div class="nymapbox">
+<!-- Waste Water Treatment -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-wastewatertreatment"></div>
+<label class="switch-label">Waste Water Treatment</label><sup style="font-size: smaller;"><a href="#footnote-2">2</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="wastewatertreatment">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div>
+</div>
+<div class="nymapbox">
+<!-- Combined Sewer Overflow -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-nycso"></div>
+<label class="switch-label">Combined Sewer Overflow</label><sup style="font-size: smaller;"><a href="#footnote-2">3</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="nycso">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div>
+</div>
+<div class="nymapbox">
+<!-- Inactive Landfill -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-inactivesolidwastelandfill"></div>
+<label class="switch-label">Inactive Landfill</label><sup style="font-size: smaller;"><a href="#footnote-2">4</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="inactivesolidwastelandfill">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+<div class="nymapbox">
+<!-- Recycling Facility -->
+<div style="display: flex; align-items: center;" class="legend-item">
+<div class="legend-symbol" id="legend-recyclingfacility"></div>
+<label class="switch-label">Recycling Facility</label><sup style="font-size: smaller;"><a href="#footnote-2">5</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="recyclingfacility">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+<div class="nymapbox">
+<!-- Waste Transfer Station -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-wastetransferfacility"></div>
+<label class="switch-label">Waste Transfer Station</label><sup style="font-size: smaller;"><a href="#footnote-2">5</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="wastetransferfacility">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div>
+</div></div>
+<br>
+<div class="nymapboxcontainer">
+
+<div class="nymapbox" id="energySection" >
+
+<!-- Energy -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <label class="switch-label"><b>Energy</b></label> 
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input-b" id="energyLayerGroup">
+<div class="switch-track-b">
+<div class="switch-thumb-b"></div>
+</div>
+</label>
+</div>
+</div>
+
+<div class="nymapbox">
+
+<!-- Major Oil Storage -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-majoroilstorage"></div>
+<label class="switch-label">Major Oil Storage</label><sup style="font-size: smaller;"><a href="#footnote-5">5</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="majoroilstorage">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+
+<!-- Gas Pipelines -->
+<div class="nymapbox">
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-nygaspipelines"></div>
+<label class="switch-label">Gas Pipelines</label><sup style="font-size: smaller;"><a href="#footnote-6">5</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="nygaspipelines">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
 
 
 
 
 <!-- Transmission Lines -->
-<div class="nymapboxgrouptop">
+<div class="nymapboxgrouptop">      
     <div style="display: flex; align-items: center;" class="legend-item">
-        <label class="nymap-switch-label">Electric Transmission Lines</label><sup style="font-size: smaller;"><a href="#footnote-600">6</a></sup>
+        <label class="switch-label">Electric Transmission Lines</label><sup style="font-size: smaller;"><a href="#footnote-600">6</a></sup>
         <label class="switch" style="margin-left: auto;">
-            <input type="checkbox" class="nymap-switch-input" id="electrictransmissionlines">
-            <div class="nymap-switch-track">
-                <div class="nymap-switch-thumb"></div>
+            <input type="checkbox" class="switch-input" id="electrictransmissionlines">
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
             </div>
         </label>
     </div>
@@ -282,29 +277,30 @@ New York City Environmental Infrastructure Map
     </div>
 </div>
 
-<!-- Power Plants -->
-<div class="nymapboxgrouptop">
-    <div style="display: flex; align-items: center;" class="legend-item">
-        <label class="nymap-switch-label">Power Plants </label><sup style="font-size: smaller;"><a href="#footnote-633">7</a></sup>
-        <label class="switch" style="margin-left: auto;">
-            <input type="checkbox" class="nymap-switch-input" id="powerplants">
-            <div class="nymap-switch-track">
-                <div class="nymap-switch-thumb"></div>
+
+
+
+        <!-- Power Plants -->
+            <div class="nymapboxgrouptop">      
+                 <div style="display: flex; align-items: center;" class="legend-item">
+                <label class="switch-label">Power Plants </label><sup style="font-size: smaller;"><a href="#footnote-633">7</a></sup>
+                <label class="switch" style="margin-left: auto;">
+                    <input type="checkbox" class="switch-input" id="powerplants">
+                    <div class="switch-track">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </label>
             </div>
-        </label>
-    </div>
-</div>
-
-<div class="nymapboxgroupbottom">
-    <div style="align-items: center;" class="legend-item">
-        <div class="legend-symbol" style="margin-right: 10px;" id="legend-powerplants"></div>
-    </div>
-</div>
-
+            </div>
+            <div class="nymapboxgroupbottom">
+            <div style="align-items: center;" class="legend-item">
+                <div class="legend-symbol" style="margin-right: 10px;" id="legend-powerplants"></div>
+            </div>
+            </div>
+        
 <div class="nymapbox">
-    <label class="nymap-switch-label">Building Shadows (Pending)</label>
-</div>
-
+    <label class="switch-label">Building Shadows (Pending)</label>  </div>  
+</div>  
 
 <Br>
     <!--
@@ -323,277 +319,306 @@ New York City Environmental Infrastructure Map
   
 
 
-<div class="nymapboxcontainer">
+    <div class="nymapboxcontainer">
 
-    <div class="nymapbox" id="transportationSection">
+    <div class="nymapbox" id="transportationSection" >
 
 
-        <!-- Transportation -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="nymap-switch-label"><b>Transportation</b></label>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input-b" id="transportLayerGroup">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb-b"></div>
-                </div>
-            </label>
-        </div>
+<!-- Transportation -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <label class="switch-label"><b>Transportation</b></label> 
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input-b" id="transportLayerGroup">
+<div class="switch-track">
+<div class="switch-thumb-b"></div>
+</div>
+</label>
+</div>
+</div>
+
+
+
+
+<div class="nymapbox">
+    <!-- Bus Depots -->
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <div class="legend-symbol" id="legend-nycbusdepots"></div>
+        <label class="switch-label">MTA Bus Depots </label><sup style="font-size: smaller;"><a href="#footnote-644">8</a></sup>
+        <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input" id="nycbusdepots">
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
+            </div>
+        </label>
     </div>
+</div>
 
-    <div class="nymapbox">
-        <!-- Bus Depots -->
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-nycbusdepots"></div>
-            <label class="nymap-switch-label">MTA Bus Depots </label><sup style="font-size: smaller;"><a href="#footnote-644">8</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="nycbusdepots">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
-    </div>
 
-    <!-- NYC Subway -->
-    <div class="nymapbox">
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-nycsubway"></div>
-            <label class="nymap-switch-label"><!--Subway Map--></label><sup style="font-size: smaller;"><a href="#footnote-655">9</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="nycsubway">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
+<!-- NYC Subway -->
+<div class="nymapbox">
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <div class="legend-symbol" id="legend-nycsubway"></div>
+        <label class="switch-label"><!--Subway Map--></label><sup style="font-size: smaller;"><a href="#footnote-655">9</a></sup>
+        <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input" id="nycsubway">
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
+            </div>
+        </label>
     </div>
+</div>
 
-    <!-- Amtrak Lines -->
-    <div class="nymapbox">
-        <div style="display: flex; align-items: center;">
-            <div class="legend-symboldashed" id="legend-amtrak"></div>
-            <label class="nymap-switch-label">Amtrak Lines</label><sup style="font-size: smaller;"><a href="#footnote-22">10</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="amtrakLines">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
+
+<!-- Amtrak Lines -->
+<div class="nymapbox">
+    <div style="display: flex; align-items: center;" >
+        <div class="legend-symboldashed" id="legend-amtrak"></div>
+        <label class="switch-label">Amtrak Lines</label><sup style="font-size: smaller;"><a href="#footnote-22">10</a></sup>
+        <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input" id="amtrakLines">
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
+            </div>
+        </label>
     </div>
+</div>
+
+
+
 
     <!-- NY Rail -->
     <div class="nymapboxgrouptop">
         <div style="display: flex; align-items: center;" class="legend-item">
-            <label class="nymap-switch-label">MTA Rail Network</label><sup style="font-size: smaller;"><a href="#footnote-10">11</a></sup>
+            <label class="switch-label">MTA Rail Network</label><sup style="font-size: smaller;"><a href="#footnote-10">11</a></sup>
             <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="nyrail">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
+                <input type="checkbox" class="switch-input" id="nyrail">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
                 </div>
             </label>
         </div>
     </div>
-
+    
     <div class="nymapboxgroupbottom">
         <div class="legend-item">
             <div class="legend-symbol" id="legend-nyrail-longisland"></div>
             <span class="legend-text">Long Island Rail Road</span>
         </div>
-
+        
         <div class="legend-item">
             <div class="legend-symbol" id="legend-nyrail-metronorth"></div>
             <span class="legend-text">Metro North Rail Road</span>
         </div>
     </div>
+    
 
     <!-- Airports -->
-    <div class="nymapbox">
-        <div style="display: flex; align-items: center;" class="legend-item">
-            <div class="legend-symbol" id="legend-nyairports"></div>
-            <label class="nymap-switch-label">Airports</label><sup style="font-size: smaller;"><a href="#footnote-12">14</a></sup>
-            <label class="switch" style="margin-left: auto;">
-                <input type="checkbox" class="nymap-switch-input" id="nyairports">
-                <div class="nymap-switch-track">
-                    <div class="nymap-switch-thumb"></div>
-                </div>
-            </label>
-        </div>
+<div class="nymapbox">
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <div class="legend-symbol" id="legend-nyairports"></div>
+        <label class="switch-label">Airports</label><sup style="font-size: smaller;"><a href="#footnote-12">14</a></sup>
+        <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input" id="nyairports">
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
+            </div>
+        </label>
     </div>
-
 </div>
 
+
+</div>
 
     <br>
     
      
 
 
-    <div class="nymapboxcontainer">
-        <div class="nymapbox" id="demographicsSection">
-            <!-- Demographics -->
-            <div style="display: inline-block; align-items: center;">
-                <label class="nymap-switch-label"><b>Demographics</b></label><sup style="font-size: smaller;"><a href="#footnote-6644">14</a></sup>
-            </div>
-        </div>
-    
-        <!-- Population -->
-        <div class="nymapboxgrouptop">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="nymap-switch-label">Total Population</label>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="populationLayer">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-        <div class="nymapboxgroupbottom">
-            <div style="align-items: center;" class="legend-item">
-                <div class="legend-symbol" style="margin-right: 10px;" id="legend-population"></div>
-            </div>
-        </div>
-    
-        <!-- Average Income -->
-        <div class="nymapboxgrouptop">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="nymap-switch-label">Median Household Income</label>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="avgIncomeLayer">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-        <div class="nymapboxgroupbottom">
-            Per census tract
-            <div style="align-items: center;" class="legend-item">
-                <div class="legend-symbol" style="margin-right: 10px;" id="legend-avgIncome"></div>
-            </div>
-        </div>
-    
-        <!-- Race Population -->
-        <div class="nymapboxgrouptop">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="nymap-switch-label">Race UNDER CONSTRUCTION</label><sup style="font-size: smaller;"><a href="#footnote-6644">14</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="racialPopulationLayer">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-        <div class="nymapboxgroupbottom">
-            <!--Per census tract-->
-            <div style="align-items: center;" class="legend-item">
-                <div class="legend-symbol" style="margin-right: 10px;" id="legend-racePopulation"></div>
-            </div>
-        </div>
-    
-        <!-- EJ Sites -->
-        <div class="nymapboxgrouptop">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="nymap-switch-label">Environmental Justice Sites</label><sup style="font-size: smaller;"><a href="#footnote-67">15</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="nycejsites">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-        <div class="nymapboxgroupbottom">
-            <div style="align-items: center;" class="legend-item">
-                <div class="legend-symbol" style="margin-right: 10px;" id="legend-nycejsites"></div>
-            </div>
-        </div>
-    </div>
-    
-    <br>
-    
-    <div class="nymapboxcontainer">
-    
-        <div class="nymapbox" id="emergenciesSection">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                Emergencies:
-            </div>
-        </div>
-    
-        <div class="nymapbox">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <div class="legend-symbol" id="legend-floodplain"></div>
-                <label class="nymap-switch-label">
-                    100-year Floodplain
-                </label><sup style="font-size: smaller;"><a href="#footnote-1">1</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="floodplain">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-    
-        <!-- Evacuation Zones -->
-        <div class="nymapboxgrouptop">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <label class="nymap-switch-label">Evacuation Zones</label><sup style="font-size: smaller;"><a href="#footnote-69">17</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="evacuationzones">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
-    
-        <div class="nymapboxgroupbottom">
-            <div style="align-items: center;" class="legend-item">
-                <div class="legend-symbol" id="legend-evacuationzones"></div>
-            </div>
-        </div>
-    </div>
-    
-    <br>
-    
-    <div class="nymapboxcontainer">
-        <div class="nymapbox" id="otherSection">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                Other:
-            </div>
-        </div>
-    
-        <div class="nymapbox">
-            <div style="display: flex; align-items: center;" class="legend-item">
-                <div class="legend-symbol" id="legend-chemicalstorage"></div>
-                <label class="nymap-switch-label">Chemical Storage</label><sup style="font-size: smaller;"><a href="#footnote-62">18</a></sup>
-                <label class="switch" style="margin-left: auto;">
-                    <input type="checkbox" class="nymap-switch-input" id="chemicalstorage">
-                    <div class="nymap-switch-track">
-                        <div class="nymap-switch-thumb"></div>
-                    </div>
-                </label>
-            </div>
-        </div>
 
 
-<!-- Air Quality Monitoring Sites -->
-<div class="nymapbox">
+    <div class="nymapboxcontainer">
+        <div class="nymapbox" id="demographicsSection" >
+
+    <!-- Demographics -->
+    <div style="display: inline-block;  align-items: center;" >
+        <label class="switch-label"><b>Demographics</b></label><sup style="font-size: smaller;"><a href="#footnote-6644">14</a></sup> 
+    </div> </div>
+    <!-- Population -->
+<div class="nymapboxgrouptop">      
+     <div style="display: flex; align-items: center;" class="legend-item">
+
+        <label class="switch-label">Total Population</label>
+    <label class="switch" style="margin-left: auto;">
+        <input type="checkbox" class="switch-input" id="populationLayer">
+        <div class="switch-track">
+            <div class="switch-thumb"></div>
+        </div>
+    </label>
+</div>
+</div>
+<div class="nymapboxgroupbottom">
+<div style="align-items: center;" class="legend-item">
+    <div class="legend-symbol" style="margin-right: 10px;" id="legend-population"></div>
+
+</div>
+</div>
+
+
+
+
+            <!-- Average Income -->
+            <div class="nymapboxgrouptop">      
+             <div style="display: flex; align-items: center;" class="legend-item">
+
+                <label class="switch-label">Median Household Income</label>
+            <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="avgIncomeLayer">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="nymapboxgroupbottom">
+        Per census tract
+        <div style="align-items: center;" class="legend-item">
+            <div class="legend-symbol" style="margin-right: 10px;" id="legend-avgIncome"></div>
+        </div>
+    </div>
+
+
+<!-- Race Population -->
+<div class="nymapboxgrouptop">
     <div style="display: flex; align-items: center;" class="legend-item">
-        <div class="legend-symbol" id="legend-aqisite"></div>
-        <label class="nymap-switch-label">Air Quality Monitoring Sites</label><sup style="font-size: smaller;"><a href="#footnote-611">19</a></sup>
+        <label class="switch-label">Race UNDER CONSTRUCTION</label><sup style="font-size: smaller;"><a href="#footnote-6644">14</a></sup>
         <label class="switch" style="margin-left: auto;">
-            <input type="checkbox" class="nymap-switch-input" id="aqisite">
-            <div class="nymap-switch-track">
-                <div class="nymap-switch-thumb"></div>
+            <input type="checkbox" class="switch-input" id="racialPopulationLayer"> <!-- Updated ID here -->
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
             </div>
         </label>
     </div>
 </div>
+<div class="nymapboxgroupbottom">
+    <!--Per census tract-->
+    <div style="align-items: center;" class="legend-item">
+        <div class="legend-symbol" style="margin-right: 10px;" id="legend-racePopulation"></div>
+    </div>
+</div>
 
+
+
+      <!-- EJ Sites -->
+        <div class="nymapboxgrouptop">      
+             <div style="display: flex; align-items: center;" class="legend-item">
+                <label class="switch-label">Environmental Justice Sites </label><sup style="font-size: smaller;"><a href="#footnote-67">15</a></sup>
+            <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="nycejsites">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+        </div>
+        <div class="nymapboxgroupbottom">
+        <div style="align-items: center;" class="legend-item">
+            <div class="legend-symbol" style="margin-right: 10px;" id="legend-nycejsites"></div>
+        </div>
+        </div>
+
+</div>
+
+<br>
+
+
+
+
+
+
+
+
+<div class="nymapboxcontainer">
+
+    <div class="nymapbox" id="emergenciesSection" >
+        <div style="display: flex; align-items: center;"  class="legend-item">
+            Emergencies:
+    </div></div>
+
+
+    <div class="nymapbox">
+        <div style="display: flex; align-items: center;" class="legend-item">
+            <div class="legend-symbol" id="legend-floodplain"></div>
+            <label class="switch-label" >
+                100-year Floodplain
+            </label><sup style="font-size: smaller;"><a href="#footnote-1">1</a></sup>
+                                <label class="switch" style="margin-left: auto;">
+                <input type="checkbox" class="switch-input" id="floodplain">
+                <div class="switch-track">
+                    <div class="switch-thumb"></div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+
+
+
+<!-- Evacution Zones -->
+    <div class="nymapboxgrouptop" >      
+    <div style="display: flex; align-items: center;" class="legend-item">
+        <label class="switch-label" >Evacuation Zones</label><sup style="font-size: smaller;"><a href="#footnote-69">17</a></sup> 
+        <label class="switch" style="margin-left: auto;">
+            <input type="checkbox" class="switch-input" id="evacuationzones">
+            <div class="switch-track">
+                <div class="switch-thumb"></div>
+            </div>
+        </label>
+    </div>
+    </div>
+    
+    
+    <div class="nymapboxgroupbottom">
+    <div style="align-items: center;" class="legend-item">
+    <div class="legend-symbol"  id="legend-evacuationzones"></div>
+    </div>
+    </div>
+    </div>
+    
+    <br>
+
+
+<div class="nymapboxcontainer">
+    <div class="nymapbox" id="otherSection">
+    <div style="display: flex; align-items: center;"  class="legend-item">
+        Other:
+</div></div>
+
+<div class="nymapbox">
+
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-chemicalstorage"></div>
+<label class="switch-label">Chemical Storage</label><sup style="font-size: smaller;"><a href="#footnote-62">18</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="chemicalstorage">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
+
+<div class="nymapbox">
+
+<!-- Air Quality Monitoring Sites -->
+<div style="display: flex; align-items: center;" class="legend-item">
+    <div class="legend-symbol" id="legend-aqisite"></div>
+<label class="switch-label">Air Quality Monitoring Sites</label><sup style="font-size: smaller;"><a href="#footnote-611">19</a></sup>
+<label class="switch" style="margin-left: auto;">
+<input type="checkbox" class="switch-input" id="aqisite">
+<div class="switch-track">
+<div class="switch-thumb"></div>
+</div>
+</label>
+</div></div>
 
 
  <!-- Switch for showing the census tract with the maximum count in red 
@@ -615,24 +640,24 @@ New York City Environmental Infrastructure Map
 
 
 
-<!-- Remediation Sites -->
+
 <div class="nymapbox">
+
+    <!-- Remediation Sites -->
     <div style="display: flex; align-items: center;" class="legend-item">
         <div class="legend-symbol" id="legend-remediationsites"></div>
-        <label class="switch-label">Remediation Sites</label>
-        <label class="switch" style="margin-left: auto;">
-            <input type="checkbox" class="switch-input" id="remediationsites">
-            <div class="switch-track">
-                <div class="switch-thumb"></div>
-            </div>
-        </label>
+    <label class="switch-label">Remediation Sites</label>
+    <label class="switch" style="margin-left: auto;">
+    <input type="checkbox" class="switch-input" id="remediationsites">
+    <div class="switch-track">
+    <div class="switch-thumb"></div>
     </div>
-</div>
-
+    </label>
+    </div></div>
 
 
 <!-- Cultural Ins -->
-<div class="nymapboxgrouptop">
+<div class="nymapboxgrouptop" >      
     <div style="display: flex; align-items: center;" class="legend-item">
         <label class="switch-label">Cultural Institutions</label><sup style="font-size: smaller;"><a href="#footnote-68">16</a></sup> 
         <label class="switch" style="margin-left: auto;">
@@ -642,7 +667,8 @@ New York City Environmental Infrastructure Map
             </div>
         </label>
     </div>
-</div>
+    </div>
+    
     
     <div class="nymapboxgroupbottom">
     <div style="align-items: center;" class="legend-item">
@@ -650,13 +676,16 @@ New York City Environmental Infrastructure Map
     </div>
     </div>
 
+
 </div>
 
 
-<div class="nymapbox">
 
 <div id="footnotes">
+
+
 <U>FOOTNOTES UNDER CONSTRUCTION</U>
+
         <p>
             <sup id="footnote-1" style="font-size: smaller;">1</sup>
             FEMA's Preliminary Work Map data and the New York Panel on Climate Change's 90th Percentile Projects for Sea-Level Rise (11 inches).
@@ -698,7 +727,6 @@ New York City Environmental Infrastructure Map
                     <img src="https://aurashak.github.io/images/jslogo.png"  title="JavaScript" alt="JavaScript">&nbsp;&nbsp;
             </div>
 
-</div>
 </div>
 
 </div>
