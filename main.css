@@ -59,9 +59,7 @@ ul li a {
   border-radius: 1px;
   display: inline-block;
   padding: 0px 5px;
-  background-color: #ffe600ce;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  background-color: #ffffff9f;
 }
 
 
@@ -73,9 +71,7 @@ ul li a {
   color: #333;
   padding: 0px 5px;
   display: inline-block;
-  background-color: #ffe600ce;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  background-color: #ffffff9f;
 }
 
 .home2 {
@@ -87,8 +83,6 @@ ul li a {
   padding: 3px 6px;
   display: inline-block;
   background-color: #d0d0d0ce;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   pointer-events: none;
 }
 
@@ -108,7 +102,6 @@ h1 {
     padding: 0px;
     margin-top: 0px;
     display: inline-block;
-    background-color: #ffe600ce;
 }
 
 h2 {
@@ -137,8 +130,8 @@ h4 {
 }
 
 
-h3 a:link { color: black; background-color: #ffe600ce;}
-h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600ce;}
+h3 a:link { color: black; text-decoration: underline;}
+h3 a:hover { text-decoration: underline; color: black; }
 
 .header {
   display: flex;
@@ -185,8 +178,6 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 
 .navigation a.current-page,
 .navigation #projectsLink.current-page {
-  background-color: #ffe600ce;
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
 
@@ -203,8 +194,7 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 }
 
 .hidden-projects a.current-page {
-  background-color: #ffe600ce;
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  text-decoration: underline;
 }
 
 .hidden-projects a {
@@ -213,23 +203,19 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
     color: black;
     font-weight: bold;
     margin-right: 20px;
-
 }
 
 .hidden-projects a:hover {
-  background-color: #ffe600ce;
+  text-decoration: underline;
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-
 }
 
 .hidden-projects a:active {
-  background-color: #ffe600ce;
-
+  text-decoration: underline;
 }
 
 .hidden-projects a:selected {
-  background-color: #ffe600ce;
-
+  text-decoration: underline;
 }
 
 
@@ -253,24 +239,21 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 }
 
 .coursenavigation a:link {
-text-decoration: none;
+text-decoration: underline;
 
 } 
 
 .coursenavigation a:hover {
-  text-decoration: none;
-  background-color: #ffe600ce;
+  text-decoration: underline;
 }
 
 
 .coursenavigation a:active {
   text-decoration: underline;
-  background-color: #ffe600ce;
 }
 
 .coursenavigation a:visited {
   text-decoration: none;
-  background-color: #ffe600ce;
 }
 
 
@@ -552,9 +535,7 @@ sup a:hover {
   display: inline-block;
   margin: 30px auto 0 auto;
   padding: 3px 5px;
-  background-color: #ffe600ce;
-  border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  text-decoration: underline;
 }
 
 .maptitle a:link {
@@ -2096,6 +2077,109 @@ label {
 
 
 
+
+
+
+
+
+
+
+/* Styles for Switch Mechanism for NY MAP */
+.nymap-switch-label {
+  /* Add any styles you want for the switch label */
+}
+
+.nymap-switch-label-b {
+  /* Add any styles you want for the switch label-b */
+}
+
+.nymap-switch-input {
+  display: none;
+}
+
+.nymap-switch-input-b {
+  display: none;
+}
+
+.nymap-switch-track,
+.nymap-switch-track-b {
+  background-color: #ccc;
+  border-radius: 7px;
+  height: 16px;
+  width: 47px;
+  position: relative;
+  margin-right: 5px;
+  border: solid .3px rgba(18, 18, 18, 0.31);
+}
+
+.nymap-switch-track::before,
+.nymap-switch-track-b::before {
+  content: "OFF";
+  position: absolute;
+  top: 57%;
+  font-weight: bold;
+  right: 14px;
+  transform: translate(50%, -50%);
+  color: #615a5a;
+  font-size: 12px;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.nymap-switch-track::after,
+.nymap-switch-track-b::after {
+  content: "ON";
+  position: absolute;
+  font-weight: bold;
+  top: 57%;
+  left: 13px;
+  transform: translate(-50%, -50%);
+  color: #615a5a;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.nymap-switch-thumb,
+.nymap-switch-thumb-b {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: -3px;
+  left: -4px;
+  border: solid .3px rgba(18, 18, 18, 0.31);
+  transition: 0.1s;
+}
+
+.nymap-switch-thumb {
+  background: linear-gradient(135deg, #1c84ed, #306fb3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.nymap-switch-thumb-b {
+  background-color: #dd0404; /* Light blue color */
+}
+
+.nymap-switch-input:checked + .nymap-switch-track,
+.nymap-switch-input-b:checked + .nymap-switch-track-b {
+  background-color: #4caf50; /* Green color when checked */
+}
+
+.nymap-switch-input:checked + .nymap-switch-track::before,
+.nymap-switch-input-b:checked + .nymap-switch-track-b::before {
+  opacity: 0; /* Set opacity to 0 when checked */
+}
+
+.nymap-switch-input:checked + .nymap-switch-track::after,
+.nymap-switch-input-b:checked + .nymap-switch-track-b::after {
+  opacity: 1; /* Set opacity to 1 when checked */
+}
+
+.nymap-switch-input:checked + .nymap-switch-track .nymap-switch-thumb,
+.nymap-switch-input-b:checked + .nymap-switch-track-b .nymap-switch-thumb-b {
+  left: 34px;
+}
 
 
 
