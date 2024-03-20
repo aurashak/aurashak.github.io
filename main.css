@@ -989,8 +989,6 @@ input[type="range"] {
 
 
 
-
-
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -999,7 +997,7 @@ input[type="range"] {
 #flyToOverview,
 #flyToPlanView,
 #flyToHome {
-  padding: 0; /* Changed */
+  padding: 5px; /* Adjusted padding */
   margin: 5px 2px;
   width: auto; /* Changed */
   height: 30px; /* Changed */
