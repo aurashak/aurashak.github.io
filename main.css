@@ -3740,6 +3740,7 @@ span.cesium-projectionPicker-wrapper {
       z-index: 1000;
       border-radius: 6px;
       pointer-events: auto;
+      margin-left: 0px;
   }
     
 
