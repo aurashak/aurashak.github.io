@@ -597,8 +597,7 @@ var busDepotConfig = {
 
 
 
-
-
+// Define the configuration for Riverside Park Building
 var riversideParkBuildingConfig = {
   name: 'Riverside Park Building',
   polygon: {
@@ -615,26 +614,20 @@ var riversideParkBuildingConfig = {
   }
 };
 
-// Function to add or remove the circle based on the toggle state
-function toggleBuilding(checked) {
-  if (checked) {
-      // Add the circle
-      riversideParkToggle.show = true;
-  } else {
-      // Remove the circle
-      riversideParkToggle.show = false;
-  }
+// Function to toggle the visibility of Riverside Park Building
+function toggleRiversideParkBuilding(checked) {
+  var entity = viewer.entities.getOrCreateEntity(riversideParkBuildingConfig.name);
+  entity.show = checked;
 }
-// Get the toggle switch element
-const riversideParkToggle = document.getElementById('riversideParkBuildingConfig');
 
-// Add event listener for change event
-riversideParkToggle.addEventListener('change', function() {
-  toggleBuilding(riversideParkToggle.checked);
+// Add event listener to the switch for Riverside Park Building
+document.addEventListener('DOMContentLoaded', function() {
+  var riversideParkToggle = document.getElementById('riversideParkToggle');
+  riversideParkToggle.addEventListener('change', function() {
+    toggleRiversideParkBuilding(riversideParkToggle.checked);
+  });
 });
 
-// Initially set the circle state based on the toggle switch
-toggleBuilding(riversideParkToggle.checked);
 
 
 // Define the configuration for the waste water treatment polygon
