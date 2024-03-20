@@ -595,6 +595,10 @@ var busDepotConfig = {
 
 
 
+
+
+
+
 var riversideParkBuildingConfig = {
   name: 'Riverside Park Building',
   polygon: {
@@ -611,8 +615,26 @@ var riversideParkBuildingConfig = {
   }
 };
 
+// Function to add or remove the circle based on the toggle state
+function toggleBuilding(checked) {
+  if (checked) {
+      // Add the circle
+      riversideParkToggle.show = true;
+  } else {
+      // Remove the circle
+      riversideParkToggle.show = false;
+  }
+}
+// Get the toggle switch element
+const riversideParkToggle = document.getElementById('riversideParkBuildingConfig');
 
+// Add event listener for change event
+riversideParkToggle.addEventListener('change', function() {
+  toggleBuilding(riversideParkToggle.checked);
+});
 
+// Initially set the circle state based on the toggle switch
+toggleBuilding(riversideParkToggle.checked);
 
 
 // Define the configuration for the waste water treatment polygon
