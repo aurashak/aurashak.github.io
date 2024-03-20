@@ -364,9 +364,8 @@ text-decoration: underline;
 
 .logos-container img {
   height: 40px;
-  width: 10%;
   object-fit: contain;
-  margin: 0px 3px;
+  margin: 0px 5px;
 }
 
 .logos-container a:link {
