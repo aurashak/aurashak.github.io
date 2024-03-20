@@ -3870,9 +3870,8 @@ span.cesium-projectionPicker-wrapper {
     
 
   .maptitle {
-    font-size: 16px;
-    max-width: 600px;
-}
+    font-size: 18px;
+    max-width: 400px;
 
 
 
@@ -3905,7 +3904,7 @@ background: none;
         font-size: 16px;
         padding: 10px;
         border-bottom: .5px solid black;
-    
+        height: 20vh;
     }
   
   .mapcolumnright {
