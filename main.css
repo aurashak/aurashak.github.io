@@ -50,18 +50,17 @@ ul li a {
   pointer-events: auto; 
 }
 
-
 .home0 {
   font-size: 25px;
   position: relative;
-    line-height: 1;
+  line-height: 1;
   font-weight: bold;
   color: black;
   border-radius: 1px;
   display: inline-block;
   padding: 0px 5px;
   background-color: #ffe600ce;
-    border: 1px solid rgba(110, 110, 110, 0.3);
+  border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
@@ -75,7 +74,7 @@ ul li a {
   padding: 0px 5px;
   display: inline-block;
   background-color: #ffe600ce;
-    border: 1px solid rgba(110, 110, 110, 0.3);
+  border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
@@ -98,9 +97,8 @@ ul li a {
 .home1 a:hover {color: rgb(0, 0, 0);}
   .home1:active {
     transform: translateY(2px);
-      color: rgb(237, 237, 237);
+    color: rgb(237, 237, 237);
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
-  
   }
 
 h1 {
@@ -187,18 +185,18 @@ h3 a:hover { text-decoration: underline; color: black; background-color: #ffe600
 
 .navigation a.current-page,
 .navigation #projectsLink.current-page {
-    background-color: #ffe600ce;
+  background-color: #ffe600ce;
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
 
 .navigation:hover { 
-    color: black;
-text-decoration: underline;
+  color: black;
+  text-decoration: underline;
 }
 
 .hidden-projects {
-  display: none; /* Initially hide the projects */
+  display: none; 
   font-size: 20px;
   margin: 0px 10px 0px 12px;
 
@@ -236,25 +234,22 @@ text-decoration: underline;
 
 
 
-
 .courseheader {
   justify-content: left;
   position: relative;
-  
 }
 
 .coursenavigation {
   font-size: 20px;
   text-align: left;
-    display: inline-block;
+  display: inline-block;
   color: black;
   padding: 5px 10px;
-margin: 13px 15px 0px 0px;  
-    background: rgb(237, 237, 237);
+  margin: 13px 15px 0px 0px;  
+  background: rgb(237, 237, 237);
   border-radius: 2px;
   border: 1px solid black;
   justify-content: left;
-
 }
 
 .coursenavigation a:link {
@@ -271,28 +266,25 @@ text-decoration: none;
 .coursenavigation a:active {
   text-decoration: underline;
   background-color: #ffe600ce;
-
 }
 
 .coursenavigation a:visited {
   text-decoration: none;
   background-color: #ffe600ce;
-
 }
 
 
 .projectcontainer {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Set the height of the container to 100% of the viewport height */
-
+  height: 100vh; 
 }
 
 .coursecontainer {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Set the height of the container to 100% of the viewport height */
-overflow: auto;
+  height: 100vh; 
+  overflow: auto;
 }
 
 .container {
@@ -314,7 +306,6 @@ overflow: auto;
     display: block;
     position: relative;
     text-align: center;
-
 }
 
 
@@ -324,19 +315,16 @@ overflow: auto;
     padding: 5px 10px;
     display: block;
     text-align: left;
-max-width: 800px;
+    max-width: 800px;
 }
 
 
-.courseaboutcontainer a:link {   color: black;
-}
-
+.courseaboutcontainer a:link {color: black;}
 .courseaboutcontainer a:hover { text-decoration: underline; }
 
-.aboutcontainer a:link {   color: black; background-color: #ffe600ce;
-}
+.aboutcontainer a:link {color: black; background-color: #ffe600ce;}
 .aboutcontainer a:visited { color: black; }
-.aboutcontainer a:hover { text-decoration: underline; }
+.aboutcontainer a:hover {text-decoration: underline; }
 .aboutcontainer a:active { }
 
 .largecontainer {
@@ -382,11 +370,9 @@ max-width: 800px;
 }
 
 .medmisccontainer img {
-  max-width: 32%; /* Adjust width based on 4 items per row with 20px gap */
+  max-width: 32%; 
   border: 0.1px solid rgb(187, 187, 187); 
-
 }
-
 
 
 .logos-container {
@@ -413,7 +399,7 @@ background: none;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Send it to the back */
+  z-index: 0; 
 }
 
 
@@ -425,8 +411,8 @@ background: none;
   position: fixed;
   top: 10%;
   right: 20%;
-    border-radius: 6px;
-    pointer-events: auto;
+  border-radius: 6px;
+  pointer-events: auto;
 }
 
 
@@ -456,12 +442,12 @@ background: none;
 }
 
 sup a {
-  text-decoration: none; /* Remove underline from the link */
-  color: #007BFF; /* Set the link color */
+  text-decoration: none; 
+  color: #007BFF; 
 }
 
 sup a:hover {
-  text-decoration: underline; /* Underline the link on hover */
+  text-decoration: underline; 
 }
 
 .legend-item sup a:link,
@@ -474,7 +460,7 @@ sup a:hover {
 
 }
 .legend-item sup a:hover {
-    text-decoration: underline; /* Underline the link on hover */
+    text-decoration: underline; 
 }
 
 
@@ -540,17 +526,16 @@ sup a:hover {
     display: flex;
     align-items: center;
     line-height: 1.7;
-
 }
 
 .legend-entry svg {
-  margin-right: 10px; /* Adjust as needed */
+  margin-right: 10px; 
 }
 
 .legend-image {
-  width: auto;  /* Set your preferred width */
-  height: 33px; /* Set your preferred height */
-  margin-right: 0px; /* Adjust margin if needed */
+  width: auto;  
+  height: 33px; 
+  margin-right: 0px; 
 }
 
 
@@ -559,7 +544,7 @@ sup a:hover {
 .maptitle {
   font-size: 25px;
   position: relative;
-    line-height: 1;
+  line-height: 1;
   font-weight: bold;
   max-width: 900px;
   color: black;
@@ -568,7 +553,7 @@ sup a:hover {
   margin: 30px auto 0 auto;
   padding: 3px 5px;
   background-color: #ffe600ce;
-    border: 1px solid rgba(110, 110, 110, 0.3);
+  border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
@@ -579,17 +564,17 @@ sup a:hover {
 
 .mapcolumnleft {
   margin: 0px;
-    padding: 20px;
-    overflow: auto;
-    font-size: 18px;
-    line-height: 1.5;
-    max-height: 77vh;
+  padding: 20px;
+  overflow: auto;
+  font-size: 18px;
+  line-height: 1.5;
+  max-height: 77vh;
 }
 
 
 .mapcolumnleft a:link {
   color: black;
-    background-color: transparent;
+  background-color: transparent;
   font-weight: normal;
   text-decoration: underline;
 }
@@ -597,21 +582,20 @@ sup a:hover {
  }
 
 .mapcolumnright {
-  flex: 1; /* Expand to fill the available space */
+  flex: 1; 
   border-left: 1px solid black;
   margin: 0;
-  overflow: hidden; /* Hide overflow content */
+  overflow: hidden; 
 }
 
 
 .mapsectionleft {
-  flex-direction: row; /* Stack items vertically */
+  flex-direction: row; 
   padding: 10px 20px;
   font-size: 18px; 
   line-height: 1.3;
   align-items: center;
   justify-content: center;
-
 }
 
 .mapsectionleft a:link { color: black; text-decoration: underline;}
@@ -657,8 +641,8 @@ li a:visited {
     text-align: left;
     font-size: 18px;
     border: 1px solid rgba(110, 110, 110, 0.3);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-        line-height: 1.6;
+    box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+    line-height: 1.6;
 
 }
 
@@ -667,8 +651,8 @@ background-color: #ffe600ce;
 }
 
 .textbox a:hover {
-background-color: #ffe600ce;
-    text-decoration: underline;
+  background-color: #ffe600ce;
+  text-decoration: underline;
 }
 
 .nymapbox {
@@ -682,7 +666,7 @@ background-color: #ffe600ce;
 
 .nymapboxgrouptop {
 position: relative;
-  padding: 10px 5px 10px 10px;
+padding: 10px 5px 10px 10px;
 margin: 10px 2px 0px 2px;
 border-top-left-radius: 2px;
 border-top-right-radius: 2px;
@@ -694,7 +678,7 @@ background-color: #f3f3f3;
 
 .nymapboxgroupbottom {
 position: relative;
-  padding: 10px 5px 10px 10px;
+padding: 10px 5px 10px 10px;
 margin: 0px 2px 10px 2px;
 border-bottom-left-radius: 2px;
 border-bottom-right-radius: 2px;
@@ -732,17 +716,17 @@ background-color: #f3f3f3;
 
 .jump-link {
   display: inline-block;
-  scroll-margin-top: 50px; /* Adjust this value to control the space above the target */
+  scroll-margin-top: 50px; 
 }
 
 
 
 
 .nymapboxcontainer {
-    padding: 3px;
-    background-color: #e6e6e6;
-    border: 1px solid rgba(110, 110, 110, 0.3);
-    box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
+  padding: 3px;
+  background-color: #e6e6e6;
+  border: 1px solid rgba(110, 110, 110, 0.3);
+  box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
 }
 
 .nymapboxinscon {
@@ -759,7 +743,7 @@ background-color: #f3f3f3;
   padding: 10px;
   margin: 5px 2px;
   line-height: 1.7;
-font-size: 16px;
+  font-size: 16px;
   border-radius: 3px;
   border: solid .3px rgba(18, 18, 18, 0.68);
   background-color: #f5f5f5;
@@ -772,7 +756,6 @@ font-size: 16px;
   background-color: #000000ff;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(43, 43, 43, 0.61);
-
 }
 
 
@@ -806,12 +789,12 @@ background-color: #f5f5f5;
   font-size: 25px;
   margin: 0 auto;
   background-color: rgba(255, 135, 64, 0.84);
-    display: flex;
+  display: flex;
   max-width: 100%;
   border: 1px solid rgba(110, 110, 110, 0.3);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   line-height: 1;
-Padding: 3px 5px;
+  Padding: 3px 5px;
 }
 
 
@@ -824,7 +807,6 @@ Padding: 3px 5px;
   margin: 0;
   border-radius: 2px;
   font-size: 13px;
-
   background: #eeeeee;
   text-align: left;
   border: 1px solid rgba(110, 110, 110, 0.3);
@@ -842,7 +824,7 @@ Padding: 3px 5px;
 .popup-container::after {
   content: "";
   position: absolute;
-  bottom: -12px; /* Adjust as needed */
+  bottom: -12px; 
   left: 50%;
   transform: translateX(-50%);
   border-width: 12px 12px 0;
@@ -853,7 +835,7 @@ Padding: 3px 5px;
 
 .red-circle {
   position: absolute;
-  bottom: -22px; /* Adjust as needed */
+  bottom: -22px; 
   left: 50%;
   transform: translateX(-50%);
   width: 16px;
@@ -862,7 +844,7 @@ Padding: 3px 5px;
   border: .5 solid rgba(128, 128, 128, 0.72);
   border-radius: 50%;
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  z-index: 0; /* Increase z-index to make it appear above the ::after pseudo-element */
+  z-index: 0;
 }
 
 
@@ -870,21 +852,19 @@ Padding: 3px 5px;
 
 .navigation-container {
   display: flex;
-font-weight: normal;
+  font-weight: normal;
   margin: 0px 30px 0px 0px;
 }
 
 .control-container {
 }
 
-/* Style for the image container */
 .control-container img {
-max-width: 100%; /* Ensure images do not exceed the width of their container */
+max-width: 100%; 
 height: auto;
 margin: 10px;
 }
 
-/* Style for the titles */
 .control-container b {
 display: block;
 }
