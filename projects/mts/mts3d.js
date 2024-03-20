@@ -587,11 +587,31 @@ var busDepotConfig = {
       -73.95709731406289, 40.818494163354465, // Northeast
       -73.95919451724812, 40.81938401269745  // Northwest
     ]),
-    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
-    extrudedHeight: 10, // Extrude the polygon upward by 10 units
-    height: -20 // Position the polygon lower by setting the height to -20 units
+    material: Cesium.Color.RED.withAlpha(0.3), 
+    extrudedHeight: 10,
+    height: -20 
   }
 };
+
+
+
+var riversideParkBuildingConfig = {
+  name: 'Riverside Park Building',
+  polygon: {
+    hierarchy: Cesium.Cartesian3.fromDegreesArray([
+      -73.95824586931636, 40.81984965321277, // Southwest
+      -73.95770016639841, 40.82052506940359, // Southeast
+      -73.9571646635368, 40.82047489586689, // Northeast
+      -73.95561935527901, 40.8190044084355  // Northwest
+      -73.95621605846766, 40.8190044084355
+    ]),
+    material: Cesium.Color.BLUE.withAlpha(0.3), 
+    extrudedHeight: 50,
+    height: -20 
+  }
+};
+
+
 
 
 
@@ -831,6 +851,10 @@ var busDepotLabelConfig = {
 
 // Create the bus depot label
 var busDepotLabel = createLabel(busDepotLabelConfig);
+
+
+
+
 
 
 
