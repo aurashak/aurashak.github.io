@@ -1905,7 +1905,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 label {
-  margin-right: 5px;
+  margin-right: 0px;
 }
 
 
@@ -2120,7 +2120,7 @@ label {
 
 /* Styles for Home Switch */
 label {
-  margin-right: 5px;
+  margin-right: 0px;
 }
 
 .homeswitch-label {
