@@ -616,6 +616,8 @@ var wasteWaterTreatmentConfig = {
 
 
 
+
+
 // Define the configuration for the gas pipeline polygon
 var gasPipelineConfig = {
   name: 'Williams Gas Pipeline',
@@ -634,6 +636,28 @@ var gasPipelineConfig = {
   }
 };
 
+// Add an event listener to the switch
+document.getElementById('gasPipeline').addEventListener('change', function() {
+  // Check if the switch is checked
+  var isChecked = this.checked;
+
+  // Toggle the visibility of the gas pipeline polygon based on the switch state
+  if (isChecked) {
+    // Show the gas pipeline polygon
+    showGasPipeline();
+  } else {
+    // Hide the gas pipeline polygon
+    hideGasPipeline();
+  }
+});
+
+// Function to show the gas pipeline polygon
+function showGasPipeline() {
+}
+
+// Function to hide the gas pipeline polygon
+function hideGasPipeline() {
+}
 
 
 // Define the configuration for the marine transfer station polygon
