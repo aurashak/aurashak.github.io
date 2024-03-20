@@ -387,7 +387,6 @@ background: none;
 
 .homesubtitle {
   display: inline-block;
-  padding: 8px;
   z-index: 1000; 
   position: fixed;
   border-radius: 6px;
@@ -3793,7 +3792,6 @@ span.cesium-projectionPicker-wrapper {
 
     .homesubtitle {
       display: inline-block;
-      padding: 10px;
       z-index: 1000;
       border-radius: 6px;
       pointer-events: auto;
