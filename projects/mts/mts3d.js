@@ -1093,50 +1093,61 @@ initializeCesium();
 
 
 
-
-// Function to zoom in
+// Call zoomIn function with the 'viewer' object as an argument
 function zoomIn(viewer) {
-  var camera = viewer.camera;
-  var distance = camera.positionCartographic.height;
-  var factor = 0.5; // Change this value to adjust zoom speed
-  var newHeight = distance * factor;
+  if (viewer && viewer.camera) {
+    var camera = viewer.camera;
+    var distance = camera.positionCartographic.height;
+    var factor = 0.5; // Change this value to adjust zoom speed
+    var newHeight = distance * factor;
 
-  console.log("Zooming in...");
-  console.log("Previous camera height:", distance);
-  console.log("Zoom factor:", factor);
-  console.log("New camera height:", newHeight);
+    console.log("Zooming in...");
+    console.log("Previous camera height:", distance);
+    console.log("Zoom factor:", factor);
+    console.log("New camera height:", newHeight);
 
-  camera.setView({
-      destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-  });
+    camera.setView({
+        destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
+    });
+  } else {
+    console.error("Viewer or camera is undefined.");
+  }
 }
 
-// Function to zoom out
+// Call zoomOut function with the 'viewer' object as an argument
 function zoomOut(viewer) {
-  var camera = viewer.camera;
-  var distance = camera.positionCartographic.height;
-  var factor = 2; // Change this value to adjust zoom speed
-  var newHeight = distance * factor;
+  if (viewer && viewer.camera) {
+    var camera = viewer.camera;
+    var distance = camera.positionCartographic.height;
+    var factor = 2; // Change this value to adjust zoom speed
+    var newHeight = distance * factor;
 
-  console.log("Zooming out...");
-  console.log("Previous camera height:", distance);
-  console.log("Zoom factor:", factor);
-  console.log("New camera height:", newHeight);
+    console.log("Zooming out...");
+    console.log("Previous camera height:", distance);
+    console.log("Zoom factor:", factor);
+    console.log("New camera height:", newHeight);
 
-  camera.setView({
-      destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-  });
+    camera.setView({
+        destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
+    });
+  } else {
+    console.error("Viewer or camera is undefined.");
+  }
 }
 
-// Function to rotate the camera
+// Call rotateCamera function with the 'viewer' object as an argument
 function rotateCamera(viewer) {
-  var camera = viewer.camera;
-  var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
+  if (viewer && viewer.camera) {
+    var camera = viewer.camera;
+    var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
 
-  console.log("Rotating camera...");
-  console.log("Rotation angle:", angle);
+    console.log("Rotating camera...");
+    console.log("Rotation angle:", angle);
 
-  camera.rotateRight(angle);
+    camera.rotateRight(angle);
+  } else {
+    console.error("Viewer or camera is undefined.");
+  }
 }
 
 
