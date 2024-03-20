@@ -995,6 +995,7 @@ input[type="range"] {
 
 
 
+
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
@@ -1006,11 +1007,12 @@ input[type="range"] {
   width: 35px;
   height: 35px;
   text-align: center;
-  background-color: #f50000;
+  background-color: #c8c8c8;
   font-size: 16px;
   border: 1.8px solid rgba(51, 51, 51, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   cursor: pointer;
+  color: rgb(0, 0, 0);
   position: relative; /* Added */
   transition: transform 0.1s; /* Added */
 }
@@ -1035,7 +1037,6 @@ input[type="range"] {
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
-  color: rgb(255, 255, 255);
 }
 
 /* Styling for Overview and PlanView buttons */
@@ -1043,11 +1044,11 @@ input[type="range"] {
 #flyToPlanView {
   padding: 5px;
   margin: 0px;
-  border-radius: 6px;
+  border-radius: 50%;
   width: 35px;
   height: 35px;
   text-align: center;
-  background-color: #fce409;
+  background-color: #c8c8c8;
   font-size: 18px;
   border: 1.8px solid rgba(51, 51, 51, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
@@ -1067,7 +1068,6 @@ input[type="range"] {
   content: "GO";
   bottom: 2px;
   font-weight: bold;
-
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -1080,11 +1080,11 @@ input[type="range"] {
 #flyToHome {
   padding: 5px;
   margin: 0px;
-  border-radius: 15px;
+  border-radius: 50%;
   width: 35px;
   height: 35px;
   text-align: center;
-  background-color: #ff09ded8;
+  background-color: #c8c8c8;
   font-size: 18px;
   border: 1.8px solid rgba(51, 51, 51, 0.81);
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
