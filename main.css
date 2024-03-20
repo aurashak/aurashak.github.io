@@ -625,7 +625,7 @@ li a:visited {
 }
 
 .textbox a:link {
-background-color: #ffe600ce;
+text-decoration: underline;
 }
 
 .textbox a:hover {
@@ -3933,9 +3933,11 @@ margin: 0px;
   width: 100%;
 margin: 10px; 
 }
- .textbox {
+.textbox {
+  padding: 10px;
+  margin: 0px;
   font-size: 16px;
- }
+}
     
     
     
