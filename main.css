@@ -356,11 +356,10 @@ text-decoration: underline;
 
 
 .logos-container {
-  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 20px 0px;
+  margin: 5px 0px;
 }
 
 .logos-container img {
@@ -2139,16 +2138,15 @@ label {
 
 .mts-switch-thumb,
 .mts-switch-thumb-b {
-  border-radius: 2px; 
-  height: 19px;
-  width: 19px;
-  border: solid .6px rgba(18, 18, 18, 0.6);
-  position: absolute;
-  top: 1px;
-  left: 1px; 
-  transition: 0.2s;
-   background-color: #0bbfff; 
-
+    border-radius: 2px;
+    height: 19px;
+    width: 19px;
+    border: solid .6px rgba(18, 18, 18, 0.3);
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: 0.2s;
+    background-color: #3c83ff;
 }
 
 .mts-switch-thumb {
