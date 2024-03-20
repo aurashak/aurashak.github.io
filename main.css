@@ -88,11 +88,10 @@ ul li a {
 
 
 .home1 a:link {color: black;}
-.home1 a:hover {color: rgb(0, 0, 0);}
+.home1 a:hover {color: rgb(0, 0, 0); text-decoration: underline;}
   .home1:active {
     transform: translateY(2px);
     color: rgb(237, 237, 237);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
   }
 
 h1 {
@@ -207,7 +206,6 @@ h3 a:hover { text-decoration: underline; color: black; }
 
 .hidden-projects a:hover {
   text-decoration: underline;
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
 }
 
 .hidden-projects a:active {
