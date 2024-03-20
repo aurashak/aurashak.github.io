@@ -1993,7 +1993,7 @@ label {
 .switch-track-b {
   background-color: #bebebe;
   border-radius: 20px;
-  height: 26px;
+  height: 24px;
   width: 54px;
   position: relative;
   margin-right: 5px;
@@ -2033,8 +2033,8 @@ label {
 .switch-thumb,
 .switch-thumb-b {
   border-radius: 50%;
-  height: 20px; 
-  width: 20px; 
+  height: 18px; 
+  width: 18px; 
   position: absolute;
   top: 2px; 
   left: 2px; 
@@ -2068,9 +2068,8 @@ label {
 
 .switch-input:checked + .switch-track .switch-thumb,
 .switch-input-b:checked + .switch-track-b .switch-thumb-b {
-  left: 30px;
+  left: 31px;
 }
-
 
 
 
