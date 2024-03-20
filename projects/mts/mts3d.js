@@ -617,7 +617,6 @@ var wasteWaterTreatmentConfig = {
 
 
 
-
 // Define the configuration for the gas pipeline polygon
 var gasPipelineConfig = {
   name: 'Williams Gas Pipeline',
@@ -630,9 +629,9 @@ var gasPipelineConfig = {
       -73.95901874398349, 40.82124719300478, // Northwest (repeat to close polygon)
       -73.9592140946263, 40.82111084285179
     ]),
-    material: Cesium.Color.RED.withAlpha(0.3), // Red with 50% opacity
-    extrudedHeight: 1, // Extrude the polygon upward by 20 units
-    height: -60, // Position the polygon lower by setting the height to -20 units
+    material: Cesium.Color.RED.withAlpha(0.3), // Red with 30% opacity
+    extrudedHeight: 1, // Extrude the polygon upward by 1 unit
+    height: -60, // Position the polygon lower by setting the height to -60 units
     show: false // Initially hide the polygon
   }
 };
@@ -658,19 +657,16 @@ document.getElementById('gasPipeline').addEventListener('change', function() {
 
 // Function to show the gas pipeline polygon
 function showGasPipeline() {
-  // Code to add the gas pipeline polygon to the Cesium viewer
-  // Replace this with your actual code to add the polygon
-  // For example, you might have something like:
-  // viewer.entities.add(gasPipelineConfig);
+  // Add the gas pipeline polygon to the Cesium viewer
+  viewer.entities.add(gasPipelineConfig);
 }
 
 // Function to hide the gas pipeline polygon
 function hideGasPipeline() {
-  // Code to remove/hide the gas pipeline polygon from the Cesium viewer
-  // Replace this with your actual code to hide the polygon
-  // For example, you might have something like:
-  // viewer.entities.remove(gasPipelineConfig);
+  // Remove the gas pipeline polygon from the Cesium viewer
+  viewer.entities.remove(gasPipelineConfig);
 }
+
 
 
 
