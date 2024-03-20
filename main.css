@@ -1991,14 +1991,14 @@ label {
 
 .switch-track,
 .switch-track-b {
-  background-color: #ccc;
-  border-radius: 7px;
-  height: 16px;
-  width: 47px;
+  background-color: #bebebe;
+  border-radius: 20px;
+  height: 26px;
+  width: 54px;
   position: relative;
   margin-right: 5px;
-      border: solid .3px rgba(18, 18, 18, 0.31);
-
+  border: solid .3px rgba(18, 18, 18, 0.76);
+  box-shadow: inset 1 1 5px rgba(0, 0, 0, 0.76); 
 }
 
 .switch-track::before,
@@ -2007,9 +2007,9 @@ label {
   position: absolute;
   top: 57%;
   font-weight: bold;
-  right: 14px;
+  right: 15px;
   transform: translate(50%, -50%);
-  color: #615a5a;
+  color: #302e2e;
   font-size: 12px;
   opacity: 1; 
   transition: opacity 0.2s; 
@@ -2021,9 +2021,9 @@ label {
   position: absolute;
     font-weight: bold;
   top: 57%;
-  left: 13px;
+  left: 14px;
   transform: translate(-50%, -50%);
-  color: #615a5a;
+  color: #302e2e;
   font-size: 12px;
   opacity: 0;
   transition: opacity 0.2s; 
@@ -2036,8 +2036,8 @@ label {
   height: 20px; 
   width: 20px; 
   position: absolute;
-  top: -3px; 
-  left: -4px; 
+  top: 2px; 
+  left: 2px; 
   border: solid .3px rgba(18, 18, 18, 0.31);
   transition: 0.1s;
 }
@@ -2068,7 +2068,7 @@ label {
 
 .switch-input:checked + .switch-track .switch-thumb,
 .switch-input-b:checked + .switch-track-b .switch-thumb-b {
-  left: 34px;
+  left: 30px;
 }
 
 
@@ -2076,107 +2076,6 @@ label {
 
 
 
-
-
-
-
-
-/* Styles for Switch Mechanism for NY MAP */
-.nymap-switch-label {
-  /* Add any styles you want for the switch label */
-}
-
-.nymap-switch-label-b {
-  /* Add any styles you want for the switch label-b */
-}
-
-.nymap-switch-input {
-  display: none;
-}
-
-.nymap-switch-input-b {
-  display: none;
-}
-
-.nymap-switch-track,
-.nymap-switch-track-b {
-  background-color: #ccc;
-  border-radius: 7px;
-  height: 16px;
-  width: 47px;
-  position: relative;
-  margin-right: 5px;
-  border: solid .3px rgba(18, 18, 18, 0.31);
-}
-
-.nymap-switch-track::before,
-.nymap-switch-track-b::before {
-  content: "OFF";
-  position: absolute;
-  top: 57%;
-  font-weight: bold;
-  right: 14px;
-  transform: translate(50%, -50%);
-  color: #615a5a;
-  font-size: 12px;
-  opacity: 1;
-  transition: opacity 0.2s;
-}
-
-.nymap-switch-track::after,
-.nymap-switch-track-b::after {
-  content: "ON";
-  position: absolute;
-  font-weight: bold;
-  top: 57%;
-  left: 13px;
-  transform: translate(-50%, -50%);
-  color: #615a5a;
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.nymap-switch-thumb,
-.nymap-switch-thumb-b {
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  top: -3px;
-  left: -4px;
-  border: solid .3px rgba(18, 18, 18, 0.31);
-  transition: 0.1s;
-}
-
-.nymap-switch-thumb {
-  background: linear-gradient(135deg, #1c84ed, #306fb3);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.nymap-switch-thumb-b {
-  background-color: #dd0404; /* Light blue color */
-}
-
-.nymap-switch-input:checked + .nymap-switch-track,
-.nymap-switch-input-b:checked + .nymap-switch-track-b {
-  background-color: #4caf50; /* Green color when checked */
-}
-
-.nymap-switch-input:checked + .nymap-switch-track::before,
-.nymap-switch-input-b:checked + .nymap-switch-track-b::before {
-  opacity: 0; /* Set opacity to 0 when checked */
-}
-
-.nymap-switch-input:checked + .nymap-switch-track::after,
-.nymap-switch-input-b:checked + .nymap-switch-track-b::after {
-  opacity: 1; /* Set opacity to 1 when checked */
-}
-
-.nymap-switch-input:checked + .nymap-switch-track .nymap-switch-thumb,
-.nymap-switch-input-b:checked + .nymap-switch-track-b .nymap-switch-thumb-b {
-  left: 34px;
-}
 
 
 
