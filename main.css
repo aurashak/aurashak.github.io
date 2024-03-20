@@ -980,34 +980,6 @@ input[type="range"] {
 
 
 
-/* Hover and focus styles for link */
-a:hover, a:active, a:focus {
-  text-decoration: none;
-  color: black;
-  background-color: #ffe600ce;
-}
-
-/* Other elements with hover and focus styles */
-h3:hover, h3:active, h3:focus {
-  text-decoration: underline;
-  color: black;
-  background-color: #ffe600ce;
-}
-
-.navigation:hover, .navigation:active, .navigation:focus {
-  color: black;
-  background-color: #ffe600ce;
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-}
-
-.hidden-projects a:hover, .hidden-projects a:active, .hidden-projects a:focus {
-  background-color: #ffe600ce;
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-}
-
-
-
-
 
 
 /* Button Style */
