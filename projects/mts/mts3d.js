@@ -290,8 +290,7 @@ toggleOSMMapLayer();
 
 
     
-    
-// Load mtsparks GeoJsonDataSource
+    // Load mtsparks GeoJsonDataSource
 const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
 
@@ -304,7 +303,7 @@ mtsparksDataSource.entities.values.forEach((entity) => {
     // Disable the polygon outline
     entity.polygon.outline = false;
 
-    // Set the polygon height reference to clampToGround
+    // Set the height reference to clamp the polygon to the ground
     entity.polygon.heightReference = Cesium.HeightReference.CLAMP_TO_GROUND;
   }
 });
@@ -326,6 +325,7 @@ viewer.dataSources.add(mtsparksDataSource);
 mtsparksDataSource.entities.values.forEach((entity) => {
   entity.show = false; // Make sure entities are hidden by default
 });
+
 
 
 
