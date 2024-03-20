@@ -991,120 +991,49 @@ input[type="range"] {
 
 
 
-
-
-
 /* Button Style */
 #flyToGasPipeline,
 #flyToBusDepot, 
 #flyToWasteWater, 
-#flyToMTS {
-  padding: 5px;
+#flyToMTS,
+#flyToOverview,
+#flyToPlanView,
+#flyToHome {
+  padding: 0; /* Changed */
   margin: 5px 2px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  background-color: #c8c8c8;
-  font-size: 16px;
-  border: 1.8px solid rgba(51, 51, 51, 0.81);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
+  width: auto; /* Changed */
+  height: 30px; /* Changed */
+  background-image: url('https://aurashak.github.io/images/cameraicon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent; /* Added */
+  border: none; /* Added */
+  box-shadow: none; /* Added */
   cursor: pointer;
   color: rgb(0, 0, 0);
-  position: relative; /* Added */
-  transition: transform 0.1s; /* Added */
+  position: relative;
+  transition: transform 0.1s;
 }
 
 #flyToGasPipeline:active,
 #flyToBusDepot:active, 
 #flyToWasteWater:active, 
-#flyToMTS:active {
-  transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
+#flyToMTS:active,
+#flyToOverview:active,
+#flyToPlanView:active,
+#flyToHome:active {
+  transform: translateY(4px);  
 }
 
 /* Added */
 #flyToGasPipeline::after,
 #flyToBusDepot::after, 
 #flyToWasteWater::after, 
-#flyToMTS::after {
-  content: "GO";
-  bottom: 7px;
-  font-weight: bold;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-}
-
-/* Styling for Overview and PlanView buttons */
-#flyToOverview,
-#flyToPlanView {
-  padding: 5px;
-  margin: 0px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  background-color: #c8c8c8;
-  font-size: 18px;
-  border: 1.8px solid rgba(51, 51, 51, 0.81);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
-  transition: background-color 0.1s;
-}
-
-#flyToOverview:active,
-#flyToPlanView:active 
-{
-  transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
-}
-
-/* Added */
+#flyToMTS::after,
 #flyToOverview::after,
-#flyToPlanView::after {
-  content: "GO";
-  bottom: 2px;
-  font-weight: bold;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  color: black;
-}
-
-
-/* Styling for Overview and PlanView buttons */
-#flyToHome,
-#flyToHome {
-  padding: 5px;
-  margin: 0px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  background-color: #c8c8c8;
-  font-size: 18px;
-  border: 1.8px solid rgba(51, 51, 51, 0.81);
-  box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
-  cursor: pointer;
-  transition: background-color 0.1s;
-}
-
-#flyToHome:active,
-#flyToHome:active 
-{
-  transform: translateY(4px);  box-shadow: 1px 1px .1px rgba(59, 59, 59, 0.61);
-}
-
-/* Added */
-#flyToHome::after,
+#flyToPlanView::after,
 #flyToHome::after {
-  content: "GO";
-  bottom: 2px;
-  font-weight: bold;
-
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  color: black;
+  display: none; /* Removed the "GO" content */
 }
 
 
