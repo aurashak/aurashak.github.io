@@ -351,11 +351,9 @@ toggleOSMMapLayer();
 
 
 
-    
-
-
-// Function to get population category based on population value
+    // Function to get population category based on population value
 function getPopulationCategory(population) {
+  console.log("Calculating population category for population:", population); // Add this console log
   if (population <= 1000) {
       return '0-1000';
   } else if (population <= 3000) {
@@ -373,22 +371,12 @@ function getPopulationCategory(population) {
   }
 }
 
-// Define colors for each category as a gradient with transparency
-var categoryColors = {
-  '0-1000': Cesium.Color.WHITE.withAlpha(0.7),
-  '1000-3000': Cesium.Color.LIGHTGRAY.withAlpha(0.7),
-  '3000-6000': Cesium.Color.DARKGRAY.withAlpha(0.7),
-  '6000-10000': Cesium.Color.GRAY.withAlpha(0.7),
-  '10000-14000': Cesium.Color.DIMGRAY.withAlpha(0.7),
-  '14000-17000': Cesium.Color.DARKSLATEGRAY.withAlpha(0.7),
-  '17000+': Cesium.Color.BLACK.withAlpha(0.7)
-};
-
 // Load GeoJSON data source
 var dataSourcePromise = Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/cttotalpop2020.geojson');
 
 // When data source is loaded
 Cesium.when(dataSourcePromise, function(dataSource) {
+  console.log("Data source loaded successfully:", dataSource); // Add this console log
   // Add the data source to the Cesium viewer
   viewer.dataSources.add(dataSource);
 
@@ -399,7 +387,9 @@ Cesium.when(dataSourcePromise, function(dataSource) {
   for (var i = 0; i < entities.length; i++) {
       var entity = entities[i];
       var population = entity.properties.cttotalpop2020_POP.getValue(); // Get population value
+      console.log("Population for entity", i, ":", population); // Add this console log
       var category = getPopulationCategory(population); // Get population category
+      console.log("Population category for entity", i, ":", category); // Add this console log
 
       // Set the entity's polygon material based on population category
       entity.polygon.material = categoryColors[category];
@@ -420,8 +410,10 @@ Cesium.when(dataSourcePromise, function(dataSource) {
 var populationCheckbox = document.getElementById('populationLayer');
 populationCheckbox.addEventListener('change', function () {
   if (populationCheckbox.checked) {
+      console.log("Adding data source to viewer:", dataSourcePromise); // Add this console log
       viewer.dataSources.add(dataSourcePromise);
   } else {
+      console.log("Removing data source from viewer:", dataSourcePromise); // Add this console log
       viewer.dataSources.remove(dataSourcePromise);
   }
 });
