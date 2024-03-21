@@ -182,6 +182,15 @@ viewer.scene.canvas.addEventListener('mousemove', function (e) {
   }
 });
 
+if (Cesium.defined(pickedEntity) && Cesium.defined(pickedEntity.position)) {
+  var pickedEntityPosition = pickedEntity.position.getValue(viewer.clock.currentTime);
+  if (Cesium.defined(pickedEntityPosition)) {
+      console.log('Coordinates:', Cesium.Cartographic.fromCartesian(pickedEntityPosition));
+      // Proceed with your logic
+  }
+} else {
+  console.log('Picked entity does not have a defined position');
+}
 
 
 
