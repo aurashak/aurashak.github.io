@@ -329,8 +329,6 @@ mtsparksDataSource.entities.values.forEach((entity) => {
 
 
 
-
-
 // Load the GeoJSON data
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson').then(function(dataSource) {
     // Add the GeoJSON data source to the viewer
@@ -349,12 +347,16 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycborough
             entity.polygon.outline = true;
             entity.polygon.outlineColor = Cesium.Color.BLACK;
             entity.polygon.outlineWidth = 1;
+
+            // Set the height reference to clamp the polygon to the ground
+            entity.polygon.heightReference = Cesium.HeightReference.CLAMP_TO_GROUND;
         }
     }
 }).otherwise(function(error) {
     // If there's an error loading the GeoJSON data
     console.error('Error loading GeoJSON data:', error);
 });
+
 
 
 
