@@ -92,12 +92,12 @@ const initializeCesium = async () => {
 
 // Function to zoom in
 function zoomIn() {
-  viewer.camera.zoomIn(200000.0); // Zoom in by 200,000 meters; adjust as necessary
+  viewer.camera.zoomIn(1000.0); // Zoom in by 200,000 meters; adjust as necessary
 }
 
 // Function to zoom out
 function zoomOut() {
-  viewer.camera.zoomOut(200000.0); // Zoom out by 200,000 meters; adjust as necessary
+  viewer.camera.zoomOut(2000.0); // Zoom out by 200,000 meters; adjust as necessary
 }
 
 // Attach the functions to buttons
