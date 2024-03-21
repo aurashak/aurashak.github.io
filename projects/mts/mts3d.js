@@ -328,7 +328,6 @@ mtsparksDataSource.entities.values.forEach((entity) => {
 
 
 
-
 // Load the GeoJSON data
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson').then(function(dataSource) {
     // Add the GeoJSON data source to the viewer
@@ -348,8 +347,22 @@ Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycborough
             entity.polygon.outlineColor = Cesium.Color.BLACK;
             entity.polygon.outlineWidth = 1;
 
-            // Set the height reference to clamp the polygon to the ground
-            entity.polygon.heightReference = Cesium.HeightReference.CLAMP_TO_GROUND;
+            // Get the terrain height at the polygon's positions
+            var cartographicPositions = entity.polygon.hierarchy.getValue().positions;
+            var positions = [];
+            for (var j = 0; j < cartographicPositions.length; j++) {
+                var position = Cesium.Cartographic.fromCartesian(cartographicPositions[j]);
+                positions.push(position);
+            }
+            var promise = Cesium.sampleTerrainMostDetailed(viewer.terrainProvider, positions);
+            Cesium.when(promise, function(updatedPositions) {
+                // Adjust the height of the polygon to match the terrain surface
+                var minHeight = Number.MAX_VALUE;
+                for (var k = 0; k < updatedPositions.length; k++) {
+                    minHeight = Math.min(minHeight, updatedPositions[k].height);
+                }
+                entity.polygon.height = minHeight;
+            });
         }
     }
 }).catch(function(error) {
@@ -573,48 +586,32 @@ function toggleCircle(checked) {
 
  
 
-// Load the GeoJSON data
-Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson').then(function(dataSource) {
-    // Add the GeoJSON data source to the viewer
-    viewer.dataSources.add(dataSource);
 
-    // Get the entities from the data source
-    var entities = dataSource.entities.values;
-
-    // Loop through the entities and set properties as needed
-    for (var i = 0; i < entities.length; i++) {
-        var entity = entities[i];
-        
-        // Example: Set the material and other properties for polygons
-        if (entity.polygon) {
-            entity.polygon.material = Cesium.Color.fromCssColorString('rgba(255, 0, 0, 0.5)'); // Example: Red with 50% transparency
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.BLACK;
-            entity.polygon.outlineWidth = 1;
-
-            // Get the terrain height at the polygon's positions
-            var cartographicPositions = entity.polygon.hierarchy.getValue().positions;
-            var positions = [];
-            for (var j = 0; j < cartographicPositions.length; j++) {
-                var position = Cesium.Cartographic.fromCartesian(cartographicPositions[j]);
-                positions.push(position);
-            }
-            var promise = Cesium.sampleTerrainMostDetailed(viewer.terrainProvider, positions);
-            Cesium.when(promise, function(updatedPositions) {
-                // Adjust the height of the polygon to match the terrain surface
-                var minHeight = Number.MAX_VALUE;
-                for (var k = 0; k < updatedPositions.length; k++) {
-                    minHeight = Math.min(minHeight, updatedPositions[k].height);
-                }
-                entity.polygon.height = minHeight;
-            });
-        }
-    }
-}).catch(function(error) {
-    // If there's an error loading the GeoJSON data
-    console.error('Error loading GeoJSON data:', error);
+// Add the circle entity
+const redCircle = viewer.entities.add({
+  position: Cesium.Cartesian3.fromDegrees(-73.9578910346863, 40.823067941896106), // Location coordinates
+  name: "White circle on surface",
+  ellipse: {
+      semiMinorAxis: 1000.0, // Adjust as needed
+      semiMajorAxis: 1000.0, // Equal to semiMinorAxis for a circle
+      material: Cesium.Color.WHITE.withAlpha(0.5),
+      outline: true,
+      outlineColor: Cesium.Color.GRAY,
+      outlineWidth: 1,
+  },
+  show: false, // Initially hide the circle
 });
 
+// Get the toggle switch element
+const circleToggle = document.getElementById('circleToggle');
+
+// Add event listener for change event
+circleToggle.addEventListener('change', function() {
+  toggleCircle(circleToggle.checked);
+});
+
+// Initially set the circle state based on the toggle switch
+toggleCircle(circleToggle.checked);
 
 
 
