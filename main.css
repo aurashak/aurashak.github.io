@@ -1057,41 +1057,6 @@ input[type="range"] {
 
 
 
-/* Style for zoom buttons */
-.zoom-button {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  color: #333;
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  margin: 5px;
-  z-index: 10000;
-  position: fixed;
-  border-radius: 4px;
-}
-
-/* Style for zoom in button */
-#zoomIn {
-  background-color: #4CAF50;
-  color: white;
-  z-index: 10000;
-  position: fixed;
-
-  border-color: #4CAF50;
-}
-
-/* Style for zoom out button */
-#zoomOut {
-  background-color: #f44336;
-  color: white;
-  z-index: 10000;
-  position: fixed;
-
-  border-color: #f44336;
-}
-
-
 
 
 
@@ -1809,8 +1774,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
-
-
   #zoomButtons {
     position: absolute;
     top: 10px;
@@ -1820,6 +1783,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     flex-direction: column;
     align-items: center;
 }
+
 #zoomButtons button {
     margin-bottom: 0px;
     border-radius: 10px;
@@ -1834,9 +1798,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
     justify-content: center;
     align-items: center;
 }
+
 #zoomButtons button:hover {
     background-color: rgba(255, 255, 255, 0.85);
 }
+
 #zoomButtons button.zoom-out {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -1844,13 +1810,22 @@ svg.leaflet-image-layer.leaflet-interactive path {
     border-bottom-right-radius: 10px;
     border: 1px solid rgba(71, 71, 71, 0.67);
 }
+
 #zoomButtons button.zoom-in {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-        border: 1px solid rgba(71, 71, 71, 0.67);
+    border: 1px solid rgba(71, 71, 71, 0.67);
 }
+
+
+
+
+
+
+
+
 
 
 #zoomButtons button.rotate {
