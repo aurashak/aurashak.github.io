@@ -117,6 +117,9 @@ document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
 document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
 
+// Set minimum and maximum zoom distances (adjust as needed)
+viewer.scene.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
+viewer.scene.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
 
 
 
