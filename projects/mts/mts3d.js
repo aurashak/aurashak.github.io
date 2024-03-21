@@ -21,62 +21,6 @@ const initializeCesium = async () => {
 
 
 
- // Define the zoomIn function
-const zoomIn = (viewer) => {
-  if (viewer && viewer.camera) {
-      var camera = viewer.camera;
-      var distance = camera.positionCartographic.height;
-      var factor = 0.5; // Change this value to adjust zoom speed
-      var newHeight = distance * factor;
-
-      console.log("Zooming in...");
-      console.log("Previous camera height:", distance);
-      console.log("Zoom factor:", factor);
-      console.log("New camera height:", newHeight);
-
-      camera.setView({
-          destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-      });
-  } else {
-      console.error("Viewer or camera is undefined.");
-  }
-};
-
-// Define the zoomOut function
-const zoomOut = (viewer) => {
-  if (viewer && viewer.camera) {
-      var camera = viewer.camera;
-      var distance = camera.positionCartographic.height;
-      var factor = 2; // Change this value to adjust zoom speed
-      var newHeight = distance * factor;
-
-      console.log("Zooming out...");
-      console.log("Previous camera height:", distance);
-      console.log("Zoom factor:", factor);
-      console.log("New camera height:", newHeight);
-
-      camera.setView({
-          destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-      });
-  } else {
-      console.error("Viewer or camera is undefined.");
-  }
-};
-
-// Define the rotateCamera function
-const rotateCamera = (viewer) => {
-  if (viewer && viewer.camera) {
-      var camera = viewer.camera;
-      var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
-
-      console.log("Rotating camera...");
-      console.log("Rotation angle:", angle);
-
-      camera.rotateRight(angle);
-  } else {
-      console.error("Viewer or camera is undefined.");
-  }
-};
 
 
 
@@ -146,7 +90,20 @@ const rotateCamera = (viewer) => {
 
 
 
-  
+// Function to zoom in
+function zoomIn() {
+  viewer.camera.zoomIn(200000.0); // Zoom in by 200,000 meters; adjust as necessary
+}
+
+// Function to zoom out
+function zoomOut() {
+  viewer.camera.zoomOut(200000.0); // Zoom out by 200,000 meters; adjust as necessary
+}
+
+// Attach the functions to buttons
+document.getElementById('zoomIn').addEventListener('click', zoomIn);
+document.getElementById('zoomOut').addEventListener('click', zoomOut);
+
 
 
 
