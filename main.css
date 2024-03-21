@@ -1066,6 +1066,7 @@ input[type="range"] {
   font-size: 14px;
   cursor: pointer;
   margin: 5px;
+  z-index: 10000;
   border-radius: 4px;
 }
 
@@ -1073,6 +1074,8 @@ input[type="range"] {
 #zoomIn {
   background-color: #4CAF50;
   color: white;
+  z-index: 10000;
+
   border-color: #4CAF50;
 }
 
@@ -1080,6 +1083,8 @@ input[type="range"] {
 #zoomOut {
   background-color: #f44336;
   color: white;
+  z-index: 10000;
+
   border-color: #f44336;
 }
 
