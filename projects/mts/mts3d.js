@@ -328,46 +328,47 @@ mtsparksDataSource.entities.values.forEach((entity) => {
 
 
 
+// Function to add a polygon entity with similar properties to the red circle
+function addPolygonEntity(viewer, coordinates, material, outlineColor, outlineWidth) {
+  return viewer.entities.add({
+      polygon: {
+          hierarchy: Cesium.Cartesian3.fromDegreesArray(coordinates),
+          material: material,
+          outline: true,
+          outlineColor: outlineColor,
+          outlineWidth: outlineWidth,
+          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+      },
+      show: true
+  });
+}
+
 // Load the GeoJSON data
 Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson').then(function(dataSource) {
-    // Add the GeoJSON data source to the viewer
-    viewer.dataSources.add(dataSource);
+  // Add the GeoJSON data source to the viewer
+  viewer.dataSources.add(dataSource);
 
-    // Get the entities from the data source
-    var entities = dataSource.entities.values;
+  // Get the entities from the data source
+  var entities = dataSource.entities.values;
 
-    // Loop through the entities and set properties as needed
-    for (var i = 0; i < entities.length; i++) {
-        var entity = entities[i];
-        
-        // Example: Set the material and other properties for polygons
-        if (entity.polygon) {
-            entity.polygon.material = Cesium.Color.fromCssColorString('rgba(255, 0, 0, 0.5)'); // Example: Red with 50% transparency
-            entity.polygon.outline = true;
-            entity.polygon.outlineColor = Cesium.Color.BLACK;
-            entity.polygon.outlineWidth = 1;
-
-            // Get the terrain height at the polygon's positions
-            var cartographicPositions = entity.polygon.hierarchy.getValue().positions;
-            var positions = [];
-            for (var j = 0; j < cartographicPositions.length; j++) {
-                var position = Cesium.Cartographic.fromCartesian(cartographicPositions[j]);
-                positions.push(position);
-            }
-            var promise = Cesium.sampleTerrainMostDetailed(viewer.terrainProvider, positions);
-            Cesium.when(promise, function(updatedPositions) {
-                // Adjust the height of the polygon to match the terrain surface
-                var minHeight = Number.MAX_VALUE;
-                for (var k = 0; k < updatedPositions.length; k++) {
-                    minHeight = Math.min(minHeight, updatedPositions[k].height);
-                }
-                entity.polygon.height = minHeight;
-            });
-        }
-    }
+  // Loop through the entities and add similar polygon entities
+  for (var i = 0; i < entities.length; i++) {
+      var entity = entities[i];
+      
+      // Example: Set the material and other properties for polygons
+      if (entity.polygon) {
+          addPolygonEntity(
+              viewer,
+              entity.polygon.hierarchy.getValue().positions,
+              Cesium.Color.fromCssColorString('rgba(255, 0, 0, 0.5)'),
+              Cesium.Color.GRAY,
+              1
+          );
+      }
+  }
 }).catch(function(error) {
-    // If there's an error loading the GeoJSON data
-    console.error('Error loading GeoJSON data:', error);
+  // If there's an error loading the GeoJSON data
+  console.error('Error loading GeoJSON data:', error);
 });
 
 
