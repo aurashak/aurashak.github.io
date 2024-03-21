@@ -1117,7 +1117,6 @@ toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, m
 initializeCesium();
 
 
-
 // Call zoomIn function with the 'viewer' object as an argument
 function zoomIn(viewer) {
   if (viewer && viewer.camera) {
@@ -1174,6 +1173,7 @@ function rotateCamera(viewer) {
     console.error("Viewer or camera is undefined.");
   }
 }
+
 
 
 /*
