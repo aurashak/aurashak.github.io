@@ -351,6 +351,89 @@ toggleOSMMapLayer();
 
 
     
+
+
+// Function to get population category based on population value
+function getPopulationCategory(population) {
+  if (population <= 1000) {
+      return '0-1000';
+  } else if (population <= 3000) {
+      return '1000-3000';
+  } else if (population <= 6000) {
+      return '3000-6000';
+  } else if (population <= 10000) {
+      return '6000-10000';
+  } else if (population <= 15000) {
+      return '10000-14000';
+  } else if (population <= 18000) {
+      return '14000-17000';
+  } else {
+      return '17000+';
+  }
+}
+
+// Define colors for each category as a gradient with transparency
+var categoryColors = {
+  '0-1000': Cesium.Color.WHITE.withAlpha(0.7),
+  '1000-3000': Cesium.Color.LIGHTGRAY.withAlpha(0.7),
+  '3000-6000': Cesium.Color.DARKGRAY.withAlpha(0.7),
+  '6000-10000': Cesium.Color.GRAY.withAlpha(0.7),
+  '10000-14000': Cesium.Color.DIMGRAY.withAlpha(0.7),
+  '14000-17000': Cesium.Color.DARKSLATEGRAY.withAlpha(0.7),
+  '17000+': Cesium.Color.BLACK.withAlpha(0.7)
+};
+
+// Load GeoJSON data source
+var dataSourcePromise = Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/cttotalpop2020.geojson');
+
+// When data source is loaded
+Cesium.when(dataSourcePromise, function(dataSource) {
+  // Add the data source to the Cesium viewer
+  viewer.dataSources.add(dataSource);
+
+  // Get the entities from the data source
+  var entities = dataSource.entities.values;
+
+  // Iterate through each entity
+  for (var i = 0; i < entities.length; i++) {
+      var entity = entities[i];
+      var population = entity.properties.cttotalpop2020_POP.getValue(); // Get population value
+      var category = getPopulationCategory(population); // Get population category
+
+      // Set the entity's polygon material based on population category
+      entity.polygon.material = categoryColors[category];
+
+      // Set the entity's polygon outline
+      entity.polygon.outline = true;
+      entity.polygon.outlineColor = Cesium.Color.BLACK;
+      entity.polygon.outlineWidth = 1.0;
+
+      // Set the entity's description
+      entity.description = '<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>' +
+          'Census Tract: ' + entity.properties.ctLabel.getValue() + '<br>' +
+          'Population: ' + population;
+  }
+});
+
+// Add an event listener to the population checkbox
+var populationCheckbox = document.getElementById('populationLayer');
+populationCheckbox.addEventListener('change', function () {
+  if (populationCheckbox.checked) {
+      viewer.dataSources.add(dataSourcePromise);
+  } else {
+      viewer.dataSources.remove(dataSourcePromise);
+  }
+});
+
+
+
+
+
+
+
+
+
+
     // Load mtsparks GeoJsonDataSource
 const mtsparksResource = await Cesium.IonResource.fromAssetId(2482444);
 const mtsparksDataSource = await Cesium.GeoJsonDataSource.load(mtsparksResource);
