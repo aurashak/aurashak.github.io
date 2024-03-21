@@ -92,17 +92,29 @@ const initializeCesium = async () => {
 
 // Function to zoom in
 function zoomIn() {
-  viewer.camera.zoomIn(1000.0); // Zoom in by 200,000 meters; adjust as necessary
+  viewer.camera.zoomIn(400.0);
 }
 
 // Function to zoom out
 function zoomOut() {
-  viewer.camera.zoomOut(2000.0); // Zoom out by 200,000 meters; adjust as necessary
+  viewer.camera.zoomOut(400.0); 
+}
+
+// Function to rotate left
+function rotateLeft() {
+  viewer.scene.camera.rotateLeft(Cesium.Math.toRadians(5)); // Rotate left by 5 degrees; adjust as necessary
+}
+
+// Function to rotate right
+function rotateRight() {
+  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(5)); // Rotate right by 5 degrees; adjust as necessary
 }
 
 // Attach the functions to buttons
 document.getElementById('zoomIn').addEventListener('click', zoomIn);
 document.getElementById('zoomOut').addEventListener('click', zoomOut);
+document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
+document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
 
 
