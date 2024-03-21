@@ -21,6 +21,67 @@ const initializeCesium = async () => {
 
 
 
+  // Call zoomIn function with the 'viewer' object as an argument
+function zoomIn(viewer) {
+  if (viewer && viewer.camera) {
+    var camera = viewer.camera;
+    var distance = camera.positionCartographic.height;
+    var factor = 0.5; // Change this value to adjust zoom speed
+    var newHeight = distance * factor;
+
+    console.log("Zooming in...");
+    console.log("Previous camera height:", distance);
+    console.log("Zoom factor:", factor);
+    console.log("New camera height:", newHeight);
+
+    camera.setView({
+        destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
+    });
+  } else {
+    console.error("Viewer or camera is undefined.");
+  }
+}
+
+// Call zoomOut function with the 'viewer' object as an argument
+function zoomOut(viewer) {
+  if (viewer && viewer.camera) {
+    var camera = viewer.camera;
+    var distance = camera.positionCartographic.height;
+    var factor = 2; // Change this value to adjust zoom speed
+    var newHeight = distance * factor;
+
+    console.log("Zooming out...");
+    console.log("Previous camera height:", distance);
+    console.log("Zoom factor:", factor);
+    console.log("New camera height:", newHeight);
+
+    camera.setView({
+        destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
+    });
+  } else {
+    console.error("Viewer or camera is undefined.");
+  }
+}
+
+// Call rotateCamera function with the 'viewer' object as an argument
+function rotateCamera(viewer) {
+  if (viewer && viewer.camera) {
+    var camera = viewer.camera;
+    var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
+
+    console.log("Rotating camera...");
+    console.log("Rotation angle:", angle);
+
+    camera.rotateRight(angle);
+  } else {
+    console.error("Viewer or camera is undefined.");
+  }
+}
+
+
+
+
+
   var boundingBox = new Cesium.Rectangle(
     Cesium.Math.toRadians(-74.05), // West
     Cesium.Math.toRadians(40.5),   // South
@@ -1110,62 +1171,6 @@ toggleEJsites(busDepotPolygon, wasteWaterTreatmentPolygon, gasPipelinePolygon, m
 
 
 
-// Call zoomIn function with the 'viewer' object as an argument
-function zoomIn(viewer) {
-  if (viewer && viewer.camera) {
-    var camera = viewer.camera;
-    var distance = camera.positionCartographic.height;
-    var factor = 0.5; // Change this value to adjust zoom speed
-    var newHeight = distance * factor;
-
-    console.log("Zooming in...");
-    console.log("Previous camera height:", distance);
-    console.log("Zoom factor:", factor);
-    console.log("New camera height:", newHeight);
-
-    camera.setView({
-        destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-    });
-  } else {
-    console.error("Viewer or camera is undefined.");
-  }
-}
-
-// Call zoomOut function with the 'viewer' object as an argument
-function zoomOut(viewer) {
-  if (viewer && viewer.camera) {
-    var camera = viewer.camera;
-    var distance = camera.positionCartographic.height;
-    var factor = 2; // Change this value to adjust zoom speed
-    var newHeight = distance * factor;
-
-    console.log("Zooming out...");
-    console.log("Previous camera height:", distance);
-    console.log("Zoom factor:", factor);
-    console.log("New camera height:", newHeight);
-
-    camera.setView({
-        destination: Cesium.Cartesian3.fromRadians(camera.positionCartographic.longitude, camera.positionCartographic.latitude, newHeight)
-    });
-  } else {
-    console.error("Viewer or camera is undefined.");
-  }
-}
-
-// Call rotateCamera function with the 'viewer' object as an argument
-function rotateCamera(viewer) {
-  if (viewer && viewer.camera) {
-    var camera = viewer.camera;
-    var angle = Cesium.Math.toRadians(10); // Adjust rotation angle (10 degrees)
-
-    console.log("Rotating camera...");
-    console.log("Rotation angle:", angle);
-
-    camera.rotateRight(angle);
-  } else {
-    console.error("Viewer or camera is undefined.");
-  }
-}
 
     
 };
