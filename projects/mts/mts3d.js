@@ -331,6 +331,30 @@ mtsparksDataSource.entities.values.forEach((entity) => {
 
 
 
+// Load the GeoJSON data
+Cesium.GeoJsonDataSource.load('https://aurashak.github.io/geojson/nyc/nycboroughboundaries.geojson').then(function(dataSource) {
+    // Add the GeoJSON data source to the viewer
+    viewer.dataSources.add(dataSource);
+
+    // Get the entities from the data source
+    var entities = dataSource.entities.values;
+
+    // Loop through the entities and set properties as needed
+    for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+        
+        // Example: Set the material and other properties for polygons
+        if (entity.polygon) {
+            entity.polygon.material = Cesium.Color.fromCssColorString('rgba(255, 0, 0, 0.5)'); // Example: Red with 50% transparency
+            entity.polygon.outline = true;
+            entity.polygon.outlineColor = Cesium.Color.BLACK;
+            entity.polygon.outlineWidth = 1;
+        }
+    }
+}).otherwise(function(error) {
+    // If there's an error loading the GeoJSON data
+    console.error('Error loading GeoJSON data:', error);
+});
 
 
 
