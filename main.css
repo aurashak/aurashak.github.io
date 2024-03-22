@@ -533,12 +533,13 @@ sup a:hover {
 
 
 .mapcolumnleft {
-  margin: 0px;
-  padding: 20px;
-  overflow: auto;
-  font-size: 18px;
-  line-height: 1.5;
-  max-height: 77vh;
+    margin: 0px;
+    padding: 10px;
+    overflow: auto;
+    font-size: 18px;
+    line-height: 1.5;
+    max-height: 77vh;
+
 }
 
 
@@ -1875,17 +1876,19 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 #coordinatesDisplay {
   position: relative;
-  top: 43px;
+  top: 32px;
   left: 490px;
-  width: 165px;
+  width: 140px;
   color: rgb(56, 56, 56);
   font-family: Arial, sans-serif;
-  font-size: 15px;
+    font-weight: bold;
+    line-height: 1.5;
+  font-size: 13px;
   box-shadow: 3px 3px .5px rgba(59, 59, 59, 0.61);
   border: 1px solid rgba(110, 110, 110, 0.3);
-  background: #eeeeee;
+  background: rgba(238, 238, 238, 0.87);
   border-radius: 1px;
-  padding: 10px 19px;
+  padding: 4px 8px;
   text-align: left;
 }
 
