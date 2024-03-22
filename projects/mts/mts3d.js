@@ -23,7 +23,7 @@ const initializeCesium = async () => {
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
   Cesium.Math.toRadians(-74.10), // West
-  Cesium.Math.toRadians(40.78),  // South
+  Cesium.Math.toRadians(40.78),   // South
   Cesium.Math.toRadians(-73.93), // East
   Cesium.Math.toRadians(40.9)    // North
 );
@@ -53,8 +53,8 @@ console.log("Initial Camera Position:", initialCameraPosition);
 viewer.scene.postRender.addEventListener(function () {
   const cameraPosition = viewer.scene.camera.positionWC; // Get camera position in world coordinates
   const cartographic = Cesium.Cartographic.fromCartesian(cameraPosition);
-  let longitude = Cesium.Math.toDegrees(cartographic.longitude);
-  let latitude = Cesium.Math.toDegrees(cartographic.latitude);
+  const longitude = Cesium.Math.toDegrees(cartographic.longitude);
+  const latitude = Cesium.Math.toDegrees(cartographic.latitude);
 
   // Log current camera position
   console.log("Current Camera Position (Longitude, Latitude):", longitude, latitude);
@@ -79,21 +79,48 @@ viewer.scene.postRender.addEventListener(function () {
     console.log("Adjusted Camera Position (Longitude, Latitude):", clampedLongitude, clampedLatitude);
   }
 
-  // Clamp the camera height to the minimum and maximum zoom distances
-  const minHeight = 300.0; // Minimum zoom distance in meters
-  const maxHeight = 4000.0; // Maximum zoom distance in meters
-  const height = Cesium.Math.clamp(cartographic.height, minHeight, maxHeight);
-  viewer.scene.camera.position = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, height);
-
-  // Log the clamped camera height
-  console.log("Clamped Camera Height:", height);
+  // Check if the camera zoom distance exceeds the minimum and maximum zoom distances
+  const zoomDistance = viewer.scene.camera.positionCartographic.height;
+  if (zoomDistance < viewer.camera.minimumZoomDistance) {
+    // If zoom distance is less than minimum, set it to minimum
+    viewer.scene.camera.positionCartographic.height = viewer.camera.minimumZoomDistance;
+    console.log("Zoom distance reached minimum:", viewer.camera.minimumZoomDistance);
+  } else if (zoomDistance > viewer.camera.maximumZoomDistance) {
+    // If zoom distance is greater than maximum, set it to maximum
+    viewer.scene.camera.positionCartographic.height = viewer.camera.maximumZoomDistance;
+    console.log("Zoom distance reached maximum:", viewer.camera.maximumZoomDistance);
+  }
 });
 
+// Set minimum and maximum zoom distances
+viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
+viewer.camera.maximumZoomDistance = 1300.0; // Maximum zoom distance in meters
+
 // Log minimum and maximum zoom distances
-console.log("Minimum zoom distance:", minHeight);
-console.log("Maximum zoom distance:", maxHeight);
+console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
+console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
 
 
+
+
+// Create HTML element to display coordinates
+var coordinatesDisplay = document.createElement("div");
+coordinatesDisplay.id = "coordinatesDisplay"; // Assign the ID
+document.body.appendChild(coordinatesDisplay);
+
+// Add an event handler to capture mouse movement
+viewer.screenSpaceEventHandler.setInputAction(function(movement) {
+  var pickRay = viewer.camera.getPickRay(movement.endPosition);
+  var cartesian = viewer.scene.globe.pick(pickRay, viewer.scene);
+  if (cartesian) {
+    var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+    coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + '<br>Latitude: ' + latitudeString;
+  } else {
+    coordinatesDisplay.innerHTML = '';
+  }
+}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
 
@@ -126,29 +153,6 @@ document.getElementById('zoomIn').addEventListener('click', zoomIn);
 document.getElementById('zoomOut').addEventListener('click', zoomOut);
 document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
 document.getElementById('rotateRight').addEventListener('click', rotateRight);
-
-
-
-// Create HTML element to display coordinates
-var coordinatesDisplay = document.createElement("div");
-coordinatesDisplay.id = "coordinatesDisplay"; // Assign the ID
-document.body.appendChild(coordinatesDisplay);
-
-// Add an event handler to capture mouse movement
-viewer.screenSpaceEventHandler.setInputAction(function(movement) {
-  var pickRay = viewer.camera.getPickRay(movement.endPosition);
-  var cartesian = viewer.scene.globe.pick(pickRay, viewer.scene);
-  if (cartesian) {
-    var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
-    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
-    coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + '<br>Latitude: ' + latitudeString;
-  } else {
-    coordinatesDisplay.innerHTML = '';
-  }
-}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
 
 
     // Load full google photorealistic tileset
