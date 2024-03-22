@@ -22,10 +22,10 @@ const initializeCesium = async () => {
 
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
-  Cesium.Math.toRadians(-74.02), // West
+  Cesium.Math.toRadians(-74.0), // West
   Cesium.Math.toRadians(40.78),   // South
   Cesium.Math.toRadians(-73.93), // East
-  Cesium.Math.toRadians(40.9)    // North
+  Cesium.Math.toRadians(40.88)    // North
 );
 
 // Log bounding box coordinates
@@ -126,27 +126,48 @@ viewer.screenSpaceEventHandler.setInputAction(function(movement) {
 
 // Function to zoom in
 function zoomIn() {
-  viewer.camera.zoomIn(400.0);
+  const minHeight = 100.0; // Minimum zoom distance in meters
+  const maxHeight = 900.0; // Maximum zoom distance in meters
+  const cameraHeight = viewer.scene.camera.positionCartographic.height;
+  if (cameraHeight < maxHeight) {
+    viewer.camera.zoomIn(400.0);
+  }
 }
 
 // Function to zoom out
 function zoomOut() {
-  viewer.camera.zoomOut(400.0);
+  const minHeight = 100.0; // Minimum zoom distance in meters
+  const maxHeight = 900.0; // Maximum zoom distance in meters
+  const cameraHeight = viewer.scene.camera.positionCartographic.height;
+  if (cameraHeight > minHeight) {
+    viewer.camera.zoomOut(400.0);
+  }
 }
 
 // Function to rotate left around a point
 function rotateLeft() {
   const angle = Cesium.Math.toRadians(0.001); // Angle in radians
   const center = viewer.scene.camera.position; // Center around the current camera position
-  viewer.scene.camera.rotateLeft(angle, center);
+  const minHeight = 100.0; // Minimum zoom distance in meters
+  const maxHeight = 900.0; // Maximum zoom distance in meters
+  const cameraHeight = viewer.scene.camera.positionCartographic.height;
+  if (cameraHeight >= minHeight && cameraHeight <= maxHeight) {
+    viewer.scene.camera.rotateLeft(angle, center);
+  }
 }
 
 // Function to rotate right around a point
 function rotateRight() {
   const angle = Cesium.Math.toRadians(0.001); // Angle in radians
   const center = viewer.scene.camera.position; // Center around the current camera position
-  viewer.scene.camera.rotateRight(angle, center);
+  const minHeight = 100.0; // Minimum zoom distance in meters
+  const maxHeight = 900.0; // Maximum zoom distance in meters
+  const cameraHeight = viewer.scene.camera.positionCartographic.height;
+  if (cameraHeight >= minHeight && cameraHeight <= maxHeight) {
+    viewer.scene.camera.rotateRight(angle, center);
+  }
 }
+
 
 // Attach the functions to buttons
 document.getElementById('zoomIn').addEventListener('click', zoomIn);
