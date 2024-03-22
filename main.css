@@ -390,7 +390,7 @@ background: none;
   position: fixed;
   border-radius: 6px;
   pointer-events: auto;
-  margin-left: 70px;
+  margin-left: 75px;
 }
 
 
@@ -1877,7 +1877,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 #coordinatesDisplay {
   position: relative;
   top: 32px;
-  left: 490px;
+  left: 482px;
   width: 140px;
   height: 40px;
   color: rgb(56, 56, 56);
