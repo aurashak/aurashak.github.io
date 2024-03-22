@@ -19,15 +19,16 @@ const initializeCesium = async () => {
     navigationInstructionsInitiallyVisible: true,
   });
 
+  
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
-  Cesium.Math.toRadians(-73.97), // West
-  Cesium.Math.toRadians(40.78),   // South
+  Cesium.Math.toRadians(-74.10), // West
+  Cesium.Math.toRadians(40.78),  // South
   Cesium.Math.toRadians(-73.93), // East
   Cesium.Math.toRadians(40.9)    // North
 );
 
-// Log bounding box coordinates (check if these logs appear in the browser console)
+// Log bounding box coordinates
 console.log("Bounding Box Coordinates:");
 console.log("West:", Cesium.Math.toDegrees(boundingBox.west));
 console.log("South:", Cesium.Math.toDegrees(boundingBox.south));
@@ -61,8 +62,14 @@ viewer.scene.postRender.addEventListener(function () {
     latitude < Cesium.Math.toDegrees(boundingBox.south) ||
     latitude > Cesium.Math.toDegrees(boundingBox.north)
   ) {
-    // If outside the bounding box, reset the camera to the initial position
-    viewer.scene.camera.position = initialCameraPosition.clone();
+    // If outside the bounding box, adjust the camera position to stay at the edge of the bounding box
+
+    // Clamp latitude and longitude to the bounding box edges
+    const clampedLongitude = Cesium.Math.clamp(longitude, Cesium.Math.toDegrees(boundingBox.west), Cesium.Math.toDegrees(boundingBox.east));
+    const clampedLatitude = Cesium.Math.clamp(latitude, Cesium.Math.toDegrees(boundingBox.south), Cesium.Math.toDegrees(boundingBox.north));
+
+    // Set the new camera position
+    viewer.scene.camera.position = Cesium.Cartesian3.fromDegrees(clampedLongitude, clampedLatitude, cartographic.height);
   }
 });
 
