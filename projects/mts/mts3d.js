@@ -78,7 +78,7 @@ const initializeCesium = async () => {
   // Log minimum and maximum zoom distances
   console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
   console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
-};
+
 
 
   
