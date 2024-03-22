@@ -19,82 +19,68 @@ const initializeCesium = async () => {
     navigationInstructionsInitiallyVisible: true,
   });
 
-  // Define bounding box coordinates
-  const boundingBox = new Cesium.Rectangle(
-    Cesium.Math.toRadians(-74.05), // West
-    Cesium.Math.toRadians(40.5),   // South
-    Cesium.Math.toRadians(-73.75), // East
-    Cesium.Math.toRadians(40.9)    // North
-  );
+// Define bounding box coordinates
+const boundingBox = new Cesium.Rectangle(
+  Cesium.Math.toRadians(-74.05), // West
+  Cesium.Math.toRadians(40.5),   // South
+  Cesium.Math.toRadians(-73.75), // East
+  Cesium.Math.toRadians(40.9)    // North
+);
 
-  // Log bounding box coordinates
-  console.log("Bounding Box Coordinates:");
-  console.log("West:", Cesium.Math.toDegrees(boundingBox.west));
-  console.log("South:", Cesium.Math.toDegrees(boundingBox.south));
-  console.log("East:", Cesium.Math.toDegrees(boundingBox.east));
-  console.log("North:", Cesium.Math.toDegrees(boundingBox.north));
+// Log bounding box coordinates (check if these logs appear in the browser console)
+console.log("Bounding Box Coordinates:");
+console.log("West:", Cesium.Math.toDegrees(boundingBox.west));
+console.log("South:", Cesium.Math.toDegrees(boundingBox.south));
+console.log("East:", Cesium.Math.toDegrees(boundingBox.east));
+console.log("North:", Cesium.Math.toDegrees(boundingBox.north));
 
-  // Set initial view
-  viewer.scene.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 400),
-    orientation: {
-      heading: Cesium.Math.toRadians(65),
-      pitch: Cesium.Math.toRadians(-40),
-      roll: 0,
-    },
-  });
+// Set initial view
+viewer.scene.camera.setView({
+  destination: Cesium.Cartesian3.fromDegrees(-73.9666, 40.8200, 400),
+  orientation: {
+    heading: Cesium.Math.toRadians(65),
+    pitch: Cesium.Math.toRadians(-40),
+    roll: 0,
+  },
+});
 
-  // Store the initial camera position
-  const initialCameraPosition = viewer.scene.camera.position.clone();
+// Store the initial camera position
+const initialCameraPosition = viewer.scene.camera.position.clone();
 
-   // Create screenSpaceEventHandler within the context of the viewer
-   const screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
+// Add an event handler to limit the camera movement within the bounding box
+viewer.scene.postRender.addEventListener(function () {
+  const cameraPosition = viewer.scene.camera.positionWC; // Get camera position in world coordinates
+  const cartographic = Cesium.Cartographic.fromCartesian(cameraPosition);
+  const longitude = Cesium.Math.toDegrees(cartographic.longitude);
+  const latitude = Cesium.Math.toDegrees(cartographic.latitude);
 
+  // Check if the new camera position is inside the bounding box
+  if (
+    longitude < Cesium.Math.toDegrees(boundingBox.west) ||
+    longitude > Cesium.Math.toDegrees(boundingBox.east) ||
+    latitude < Cesium.Math.toDegrees(boundingBox.south) ||
+    latitude > Cesium.Math.toDegrees(boundingBox.north)
+  ) {
+    // If outside the bounding box, reset the camera to the initial position
+    viewer.scene.camera.position = initialCameraPosition.clone();
+  }
+});
 
-  // Add an event handler to limit the camera movement within the bounding box
-  viewer.scene.postRender.addEventListener(function () {
-    const pickPosition = viewer.scene.pickPosition(
-      viewer.canvas.clientWidth / 2,
-      viewer.canvas.clientHeight / 2
-    );
-    if (pickPosition) {
-      const cartographic = Cesium.Cartographic.fromCartesian(pickPosition);
-      const longitude = Cesium.Math.toDegrees(cartographic.longitude);
-      const latitude = Cesium.Math.toDegrees(cartographic.latitude);
+// Set minimum and maximum zoom distances
+viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
+viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
 
-      // Check if the new camera position is inside the bounding box
-      if (
-        longitude < Cesium.Math.toDegrees(boundingBox.west) ||
-        longitude > Cesium.Math.toDegrees(boundingBox.east) ||
-        latitude < Cesium.Math.toDegrees(boundingBox.south) ||
-        latitude > Cesium.Math.toDegrees(boundingBox.north)
-      ) {
-        // If outside the bounding box, reset the camera to the initial position
-        viewer.scene.camera.position = initialCameraPosition.clone();
-      }
-    }
-  });
+// Log minimum and maximum zoom distances
+console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
+console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
 
-  // Set minimum and maximum zoom distances
-  viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
-  viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
-
-  // Log minimum and maximum zoom distances
-  console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
-  console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
-
-
-
-  
-
-  
 // Create HTML element to display coordinates
 var coordinatesDisplay = document.createElement("div");
 coordinatesDisplay.id = "coordinatesDisplay"; // Assign the ID
 document.body.appendChild(coordinatesDisplay);
 
- // Add an event handler to capture mouse movement
- screenSpaceEventHandler.setInputAction(function(movement) {
+// Add an event handler to capture mouse movement
+viewer.screenSpaceEventHandler.setInputAction(function(movement) {
   var pickRay = viewer.camera.getPickRay(movement.endPosition);
   var cartesian = viewer.scene.globe.pick(pickRay, viewer.scene);
   if (cartesian) {
@@ -106,11 +92,6 @@ document.body.appendChild(coordinatesDisplay);
     coordinatesDisplay.innerHTML = '';
   }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
-
-
-
 
 // Function to zoom in
 function zoomIn() {
@@ -132,13 +113,11 @@ function rotateRight() {
   viewer.scene.camera.rotateRight(Cesium.Math.toRadians(-0.001)); // Rotate right by -0.1 degree
 }
 
-
 // Attach the functions to buttons
 document.getElementById('zoomIn').addEventListener('click', zoomIn);
 document.getElementById('zoomOut').addEventListener('click', zoomOut);
 document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
 document.getElementById('rotateRight').addEventListener('click', rotateRight);
-
 
 
 
