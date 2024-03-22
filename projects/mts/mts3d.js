@@ -78,7 +78,6 @@ viewer.scene.postRender.addEventListener(function () {
     // Log adjusted camera position
     console.log("Adjusted Camera Position (Longitude, Latitude):", clampedLongitude, clampedLatitude);
   }
-});
 
 
 // Set minimum and maximum zoom distances
@@ -88,6 +87,10 @@ viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
 // Log minimum and maximum zoom distances
 console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
 console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
+
+});
+
+
 
 // Create HTML element to display coordinates
 var coordinatesDisplay = document.createElement("div");
