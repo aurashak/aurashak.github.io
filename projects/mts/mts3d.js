@@ -80,8 +80,8 @@ viewer.scene.postRender.addEventListener(function () {
   }
 
   // Clamp the camera height to the minimum and maximum zoom distances
-  const minHeight = 200.0; // Minimum zoom distance in meters
-  const maxHeight = 1000.0; // Maximum zoom distance in meters
+  const minHeight = 300.0; // Minimum zoom distance in meters
+  const maxHeight = 4000.0; // Maximum zoom distance in meters
   const height = Cesium.Math.clamp(cartographic.height, minHeight, maxHeight);
   viewer.scene.camera.position = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, height);
 
@@ -92,6 +92,8 @@ viewer.scene.postRender.addEventListener(function () {
 // Log minimum and maximum zoom distances
 console.log("Minimum zoom distance:", minHeight);
 console.log("Maximum zoom distance:", maxHeight);
+
+
 
 
 
@@ -145,8 +147,6 @@ viewer.screenSpaceEventHandler.setInputAction(function(movement) {
     coordinatesDisplay.innerHTML = '';
   }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
 
 
 
