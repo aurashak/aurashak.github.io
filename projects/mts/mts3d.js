@@ -26,14 +26,21 @@ const initializeCesium = async () => {
 
 
 
-
   var boundingBox = new Cesium.Rectangle(
-    Cesium.Math.toRadians(-73.97), // West
-    Cesium.Math.toRadians(40.8),   // South
-    Cesium.Math.toRadians(-73.91), // East
-    Cesium.Math.toRadians(40.84)    // North
-  );
-  
+    Cesium.Math.toRadians(-74.05), // West
+    Cesium.Math.toRadians(40.5),   // South
+    Cesium.Math.toRadians(-73.75), // East
+    Cesium.Math.toRadians(40.9)    // North
+);
+
+// Log bounding box coordinates
+console.log("Bounding Box Coordinates:");
+console.log("West:", Cesium.Math.toDegrees(boundingBox.west));
+console.log("South:", Cesium.Math.toDegrees(boundingBox.south));
+console.log("East:", Cesium.Math.toDegrees(boundingBox.east));
+console.log("North:", Cesium.Math.toDegrees(boundingBox.north));
+
+
 
 
   // Set initial view
@@ -122,12 +129,12 @@ function zoomOut() {
 
 // Function to rotate left
 function rotateLeft() {
-  viewer.scene.camera.rotateLeft(Cesium.Math.toRadians(0.1)); // Rotate left by 0.1 degree
+  viewer.scene.camera.rotateLeft(Cesium.Math.toRadians(0.001)); // Rotate left by 0.1 degree
 }
 
 // Function to rotate right
 function rotateRight() {
-  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(-0.1)); // Rotate right by -0.1 degree
+  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(-0.001)); // Rotate right by -0.1 degree
 }
 
 
