@@ -21,9 +21,9 @@ const initializeCesium = async () => {
 
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
-  Cesium.Math.toRadians(-74.05), // West
-  Cesium.Math.toRadians(40.5),   // South
-  Cesium.Math.toRadians(-73.75), // East
+  Cesium.Math.toRadians(-74.97), // West
+  Cesium.Math.toRadians(40.78),   // South
+  Cesium.Math.toRadians(-73.93), // East
   Cesium.Math.toRadians(40.9)    // North
 );
 
