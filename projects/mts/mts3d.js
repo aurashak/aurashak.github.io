@@ -22,10 +22,10 @@ const initializeCesium = async () => {
 
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
-  Cesium.Math.toRadians(-74.0), // West
-  Cesium.Math.toRadians(40.78),  // South
+  Cesium.Math.toRadians(-74.10), // West
+  Cesium.Math.toRadians(40.78),   // South
   Cesium.Math.toRadians(-73.93), // East
-  Cesium.Math.toRadians(40.85)    // North
+  Cesium.Math.toRadians(40.9)    // North
 );
 
 // Log bounding box coordinates
@@ -79,6 +79,18 @@ viewer.scene.postRender.addEventListener(function () {
     console.log("Adjusted Camera Position (Longitude, Latitude):", clampedLongitude, clampedLatitude);
   }
 
+  // Check if the camera zoom distance exceeds the minimum and maximum zoom distances
+  const zoomDistance = viewer.scene.camera.positionCartographic.height;
+  if (zoomDistance < viewer.camera.minimumZoomDistance) {
+    // If zoom distance is less than minimum, set it to minimum
+    viewer.scene.camera.positionCartographic.height = viewer.camera.minimumZoomDistance;
+    console.log("Zoom distance reached minimum:", viewer.camera.minimumZoomDistance);
+  } else if (zoomDistance > viewer.camera.maximumZoomDistance) {
+    // If zoom distance is greater than maximum, set it to maximum
+    viewer.scene.camera.positionCartographic.height = viewer.camera.maximumZoomDistance;
+    console.log("Zoom distance reached maximum:", viewer.camera.maximumZoomDistance);
+  }
+});
 
 // Set minimum and maximum zoom distances
 viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
@@ -88,7 +100,6 @@ viewer.camera.maximumZoomDistance = 10000.0; // Maximum zoom distance in meters
 console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
 console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
 
-});
 
 
 
