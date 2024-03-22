@@ -93,8 +93,8 @@ viewer.scene.postRender.addEventListener(function () {
 });
 
 // Set minimum and maximum zoom distances
-viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
-viewer.camera.maximumZoomDistance = 1300.0; // Maximum zoom distance in meters
+viewer.camera.minimumZoomDistance = 300.0; // Minimum zoom distance in meters
+viewer.camera.maximumZoomDistance = 900.0; // Maximum zoom distance in meters
 
 // Log minimum and maximum zoom distances
 console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
