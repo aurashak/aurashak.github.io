@@ -47,6 +47,10 @@ const initializeCesium = async () => {
   // Store the initial camera position
   const initialCameraPosition = viewer.scene.camera.position.clone();
 
+   // Create screenSpaceEventHandler within the context of the viewer
+   const screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
+
+
   // Add an event handler to limit the camera movement within the bounding box
   viewer.scene.postRender.addEventListener(function () {
     const pickPosition = viewer.scene.pickPosition(
@@ -89,18 +93,18 @@ var coordinatesDisplay = document.createElement("div");
 coordinatesDisplay.id = "coordinatesDisplay"; // Assign the ID
 document.body.appendChild(coordinatesDisplay);
 
-// Add event listener to capture mouse movement
-screenSpaceEventHandler.setInputAction(function(movement) {
-    var pickRay = viewer.camera.getPickRay(movement.endPosition);
-    var cartesian = viewer.scene.globe.pick(pickRay, viewer.scene);
-    if (cartesian) {
-        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
-        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
-        coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + '<br>Latitude: ' + latitudeString;
-    } else {
-        coordinatesDisplay.innerHTML = '';
-    }
+ // Add an event handler to capture mouse movement
+ screenSpaceEventHandler.setInputAction(function(movement) {
+  var pickRay = viewer.camera.getPickRay(movement.endPosition);
+  var cartesian = viewer.scene.globe.pick(pickRay, viewer.scene);
+  if (cartesian) {
+    var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+    var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+    var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+    coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + '<br>Latitude: ' + latitudeString;
+  } else {
+    coordinatesDisplay.innerHTML = '';
+  }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 
