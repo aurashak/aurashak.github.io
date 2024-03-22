@@ -90,8 +90,7 @@ ul li a {
 .home1 a:link {color: black;}
 .home1 a:hover {color: rgb(0, 0, 0); text-decoration: underline;}
   .home1:active {
-    transform: translateY(2px);
-    color: rgb(237, 237, 237);
+    color: black;
   }
 
 h1 {
@@ -3726,8 +3725,6 @@ span.cesium-projectionPicker-wrapper {
   }
 
   .home1:active {
-    transform: translateY(2px);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
   }
   
 
