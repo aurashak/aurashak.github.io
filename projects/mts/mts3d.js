@@ -105,13 +105,14 @@ function zoomOut() {
 
 // Function to rotate left
 function rotateLeft() {
-  viewer.scene.camera.rotateLeft(Cesium.Math.toRadians(0.001)); // Rotate left by 0.1 degree
+  viewer.scene.camera.rotateLeft(Cesium.Math.toRadians(0.004)); // Rotate left by a small angle
 }
 
 // Function to rotate right
 function rotateRight() {
-  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(-0.001)); // Rotate right by -0.1 degree
+  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(0.004)); // Rotate right by a small angle
 }
+
 
 // Attach the functions to buttons
 document.getElementById('zoomIn').addEventListener('click', zoomIn);
