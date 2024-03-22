@@ -16,32 +16,23 @@ const initializeCesium = async () => {
     navigationHelpButton: false,
     fullscreenButton: false,
     animation: false,
-    navigationInstructionsInitiallyVisible: true, 
+    navigationInstructionsInitiallyVisible: true,
   });
 
-
-
-
-
-
-
-
-  var boundingBox = new Cesium.Rectangle(
+  // Define bounding box coordinates
+  const boundingBox = new Cesium.Rectangle(
     Cesium.Math.toRadians(-74.05), // West
     Cesium.Math.toRadians(40.5),   // South
     Cesium.Math.toRadians(-73.75), // East
     Cesium.Math.toRadians(40.9)    // North
-);
+  );
 
-// Log bounding box coordinates
-console.log("Bounding Box Coordinates:");
-console.log("West:", Cesium.Math.toDegrees(boundingBox.west));
-console.log("South:", Cesium.Math.toDegrees(boundingBox.south));
-console.log("East:", Cesium.Math.toDegrees(boundingBox.east));
-console.log("North:", Cesium.Math.toDegrees(boundingBox.north));
-
-
-
+  // Log bounding box coordinates
+  console.log("Bounding Box Coordinates:");
+  console.log("West:", Cesium.Math.toDegrees(boundingBox.west));
+  console.log("South:", Cesium.Math.toDegrees(boundingBox.south));
+  console.log("East:", Cesium.Math.toDegrees(boundingBox.east));
+  console.log("North:", Cesium.Math.toDegrees(boundingBox.north));
 
   // Set initial view
   viewer.scene.camera.setView({
@@ -53,42 +44,42 @@ console.log("North:", Cesium.Math.toDegrees(boundingBox.north));
     },
   });
 
-
-
-
-
-
-
-
-  
-  // Create ScreenSpaceEventHandler
-  var screenSpaceEventHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-  
   // Store the initial camera position
-  var initialCameraPosition = viewer.scene.camera.position.clone();
-  
+  const initialCameraPosition = viewer.scene.camera.position.clone();
+
   // Add an event handler to limit the camera movement within the bounding box
-  screenSpaceEventHandler.setInputAction(function (movement) {
-    var pickRay = viewer.scene.camera.getPickRay(movement.endPosition);
-    var pickPosition = viewer.scene.globe.pick(pickRay, viewer.scene);
-  
+  viewer.scene.postRender.addEventListener(function () {
+    const pickPosition = viewer.scene.pickPosition(
+      viewer.canvas.clientWidth / 2,
+      viewer.canvas.clientHeight / 2
+    );
     if (pickPosition) {
-      var cartographic = Cesium.Cartographic.fromCartesian(pickPosition);
-      var longitude = cartographic.longitude;
-      var latitude = cartographic.latitude;
-  
+      const cartographic = Cesium.Cartographic.fromCartesian(pickPosition);
+      const longitude = Cesium.Math.toDegrees(cartographic.longitude);
+      const latitude = Cesium.Math.toDegrees(cartographic.latitude);
+
       // Check if the new camera position is inside the bounding box
       if (
-        longitude < boundingBox.west ||
-        longitude > boundingBox.east ||
-        latitude < boundingBox.south ||
-        latitude > boundingBox.north
+        longitude < Cesium.Math.toDegrees(boundingBox.west) ||
+        longitude > Cesium.Math.toDegrees(boundingBox.east) ||
+        latitude < Cesium.Math.toDegrees(boundingBox.south) ||
+        latitude > Cesium.Math.toDegrees(boundingBox.north)
       ) {
         // If outside the bounding box, reset the camera to the initial position
         viewer.scene.camera.position = initialCameraPosition.clone();
       }
     }
-  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+  });
+
+  // Set minimum and maximum zoom distances
+  viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
+  viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
+
+  // Log minimum and maximum zoom distances
+  console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
+  console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
+};
+
 
   
 
@@ -144,14 +135,6 @@ document.getElementById('zoomOut').addEventListener('click', zoomOut);
 document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
 document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
-// Set minimum and maximum zoom distances (adjust as needed)
-viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
-viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
-
-
-// Log the minimum and maximum zoom distances to check if they are set correctly
-console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
-console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
 
 
 
