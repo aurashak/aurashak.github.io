@@ -1821,7 +1821,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 #rotateButtons {
   position: absolute;
-  top: 10px;
+  top: 90px;
   right: 10px;
   z-index: 9999;
   display: flex;
@@ -1870,6 +1870,18 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 
+
+
+#coordinatesDisplay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
 
 
 
