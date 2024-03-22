@@ -362,9 +362,9 @@ text-decoration: underline;
 }
 
 .logos-container img {
-  height: 40px;
+  height: 35px;
   object-fit: contain;
-  margin: 0px 5px;
+  margin: 3px 0px;
 }
 
 .logos-container a:link {
@@ -3993,7 +3993,7 @@ body {
   }
   
   .logos-container img {
-    height: 40px;
+    height: 25px;
     width: auto;
     object-fit: contain;
   }
