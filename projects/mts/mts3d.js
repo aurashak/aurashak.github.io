@@ -28,10 +28,10 @@ const initializeCesium = async () => {
 
 
   var boundingBox = new Cesium.Rectangle(
-    Cesium.Math.toRadians(-74.05), // West
-    Cesium.Math.toRadians(40.5),   // South
-    Cesium.Math.toRadians(-73.75), // East
-    Cesium.Math.toRadians(40.9)    // North
+    Cesium.Math.toRadians(-73.97), // West
+    Cesium.Math.toRadians(40.8),   // South
+    Cesium.Math.toRadians(-73.91), // East
+    Cesium.Math.toRadians(40.84)    // North
   );
   
 
@@ -88,14 +88,7 @@ const initializeCesium = async () => {
   
 // Create HTML element to display coordinates
 var coordinatesDisplay = document.createElement("div");
-coordinatesDisplay.style.position = "absolute";
-coordinatesDisplay.style.bottom = "10px";
-coordinatesDisplay.style.left = "10px";
-coordinatesDisplay.style.padding = "5px";
-coordinatesDisplay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-coordinatesDisplay.style.color = "white";
-coordinatesDisplay.style.fontFamily = "Arial, sans-serif";
-coordinatesDisplay.style.fontSize = "12px";
+coordinatesDisplay.id = "coordinatesDisplay"; // Assign the ID
 document.body.appendChild(coordinatesDisplay);
 
 // Add event listener to capture mouse movement
@@ -111,6 +104,7 @@ screenSpaceEventHandler.setInputAction(function(movement) {
         coordinatesDisplay.innerHTML = '';
     }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
 
 
 
@@ -143,8 +137,9 @@ document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
 document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
 // Set minimum and maximum zoom distances (adjust as needed)
-viewer.scene.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
-viewer.scene.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
+viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
+viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
+
 
 // Log the minimum and maximum zoom distances to check if they are set correctly
 console.log("Minimum zoom distance:", viewer.scene.camera.minimumZoomDistance);
