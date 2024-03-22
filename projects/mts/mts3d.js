@@ -143,8 +143,8 @@ viewer.camera.maximumZoomDistance = 100000.0; // Maximum zoom distance in meters
 
 
 // Log the minimum and maximum zoom distances to check if they are set correctly
-console.log("Minimum zoom distance:", viewer.scene.camera.minimumZoomDistance);
-console.log("Maximum zoom distance:", viewer.scene.camera.maximumZoomDistance);
+console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
+console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
 
 
 
