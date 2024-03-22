@@ -19,13 +19,13 @@ const initializeCesium = async () => {
     navigationInstructionsInitiallyVisible: true,
   });
 
-  
+
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
-  Cesium.Math.toRadians(-74.10), // West
+  Cesium.Math.toRadians(-74.0), // West
   Cesium.Math.toRadians(40.78),  // South
   Cesium.Math.toRadians(-73.93), // East
-  Cesium.Math.toRadians(40.9)    // North
+  Cesium.Math.toRadians(40.85)    // North
 );
 
 // Log bounding box coordinates
@@ -47,6 +47,7 @@ viewer.scene.camera.setView({
 
 // Store the initial camera position
 const initialCameraPosition = viewer.scene.camera.position.clone();
+console.log("Initial Camera Position:", initialCameraPosition);
 
 // Add an event handler to limit the camera movement within the bounding box
 viewer.scene.postRender.addEventListener(function () {
@@ -54,6 +55,9 @@ viewer.scene.postRender.addEventListener(function () {
   const cartographic = Cesium.Cartographic.fromCartesian(cameraPosition);
   const longitude = Cesium.Math.toDegrees(cartographic.longitude);
   const latitude = Cesium.Math.toDegrees(cartographic.latitude);
+
+  // Log current camera position
+  console.log("Current Camera Position (Longitude, Latitude):", longitude, latitude);
 
   // Check if the new camera position is inside the bounding box
   if (
@@ -70,8 +74,12 @@ viewer.scene.postRender.addEventListener(function () {
 
     // Set the new camera position
     viewer.scene.camera.position = Cesium.Cartesian3.fromDegrees(clampedLongitude, clampedLatitude, cartographic.height);
+
+    // Log adjusted camera position
+    console.log("Adjusted Camera Position (Longitude, Latitude):", clampedLongitude, clampedLatitude);
   }
 });
+
 
 // Set minimum and maximum zoom distances
 viewer.camera.minimumZoomDistance = 1000.0; // Minimum zoom distance in meters
