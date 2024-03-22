@@ -86,6 +86,33 @@ const initializeCesium = async () => {
   
 
   
+// Create HTML element to display coordinates
+var coordinatesDisplay = document.createElement("div");
+coordinatesDisplay.style.position = "absolute";
+coordinatesDisplay.style.bottom = "10px";
+coordinatesDisplay.style.left = "10px";
+coordinatesDisplay.style.padding = "5px";
+coordinatesDisplay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+coordinatesDisplay.style.color = "white";
+coordinatesDisplay.style.fontFamily = "Arial, sans-serif";
+coordinatesDisplay.style.fontSize = "12px";
+document.body.appendChild(coordinatesDisplay);
+
+// Add event listener to capture mouse movement
+screenSpaceEventHandler.setInputAction(function(movement) {
+    var pickRay = viewer.camera.getPickRay(movement.endPosition);
+    var cartesian = viewer.scene.globe.pick(pickRay, viewer.scene);
+    if (cartesian) {
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+        coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + ', Latitude: ' + latitudeString;
+    } else {
+        coordinatesDisplay.innerHTML = '';
+    }
+}, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+
 
 
 
@@ -106,7 +133,7 @@ function rotateLeft() {
 
 // Function to rotate right
 function rotateRight() {
-  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(5)); // Rotate right by 5 degrees; adjust as necessary
+  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(-5)); // Rotate right by 5 degrees; adjust as necessary
 }
 
 // Attach the functions to buttons
