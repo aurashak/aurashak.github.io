@@ -99,7 +99,7 @@ screenSpaceEventHandler.setInputAction(function(movement) {
         var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
         var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
         var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
-        coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + ', Latitude: ' + latitudeString;
+        coordinatesDisplay.innerHTML = 'Longitude: ' + longitudeString + 'Latitude: ' + latitudeString;
     } else {
         coordinatesDisplay.innerHTML = '';
     }
