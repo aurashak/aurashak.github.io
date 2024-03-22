@@ -93,6 +93,8 @@ viewer.screenSpaceEventHandler.setInputAction(function(movement) {
   }
 }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
+
+
 // Function to zoom in
 function zoomIn() {
   viewer.camera.zoomIn(400.0);
@@ -103,23 +105,25 @@ function zoomOut() {
   viewer.camera.zoomOut(400.0);
 }
 
-// Function to rotate left
+// Function to rotate left around a point
 function rotateLeft() {
-  viewer.scene.camera.rotateLeft(Cesium.Math.toRadians(0.004)); // Rotate left by a small angle
+  const angle = Cesium.Math.toRadians(0.001); // Angle in radians
+  const center = viewer.scene.camera.position; // Center around the current camera position
+  viewer.scene.camera.rotateLeft(angle, center);
 }
 
-// Function to rotate right
+// Function to rotate right around a point
 function rotateRight() {
-  viewer.scene.camera.rotateRight(Cesium.Math.toRadians(0.004)); // Rotate right by a small angle
+  const angle = Cesium.Math.toRadians(0.001); // Angle in radians
+  const center = viewer.scene.camera.position; // Center around the current camera position
+  viewer.scene.camera.rotateRight(angle, center);
 }
-
 
 // Attach the functions to buttons
 document.getElementById('zoomIn').addEventListener('click', zoomIn);
 document.getElementById('zoomOut').addEventListener('click', zoomOut);
 document.getElementById('rotateLeft').addEventListener('click', rotateLeft);
 document.getElementById('rotateRight').addEventListener('click', rotateRight);
-
 
 
     // Load full google photorealistic tileset
