@@ -258,7 +258,7 @@ document.getElementById('rotateRight').addEventListener('click', rotateRight);
     // Load full google photorealistic tileset
     const newTileset = await Cesium.Cesium3DTileset.fromIonAssetId(2275207);
     viewer.scene.primitives.add(newTileset);
-    newTileset.show = true; // Set the initial state to 'on'
+    newTileset.show = false; // Set the initial state to 'on'
 
     // Apply default style to the tileset if available
     const newExtras = newTileset.asset.extras;
@@ -295,6 +295,8 @@ document.getElementById('rotateRight').addEventListener('click', rotateRight);
 const osmBuildingsTileset = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
 );
+
+osmBuildingsTileset.show = true; // Show by default
 
 // Apply default style to the OSM buildings tileset if available
 const osmExtras = osmBuildingsTileset.asset.extras;
