@@ -270,13 +270,10 @@ document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
 
 
-
 // Load OSM buildings 3D Tileset
 const osmBuildingsTileset = viewer.scene.primitives.add(
   await Cesium.Cesium3DTileset.fromIonAssetId(96188)
 );
-
-osmBuildingsTileset.show = true; // Show by default
 
 // Apply default style to the OSM buildings tileset if available
 const osmExtras = osmBuildingsTileset.asset.extras;
@@ -293,16 +290,15 @@ if (
 // Create a switch event listener for the OSM buildings Tileset
 const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
 
-// Set the switch to the off position initially
+// Set the switch to the on position initially
 osmBuildingsSwitch.checked = true;
 
 osmBuildingsSwitch.addEventListener("change", (event) => {
   osmBuildingsTileset.show = event.target.checked;
 });
 
-// Hide the OSM buildings Tileset initially
-osmBuildingsTileset.show = false;
-
+// Show the OSM buildings Tileset initially
+osmBuildingsTileset.show = true;
 
 
 
