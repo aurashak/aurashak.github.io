@@ -333,17 +333,12 @@ function toggleOSMMapLayer() {
   }
 }
 
-// Set the switch to the off position initially
-osmMapsSwitch.checked = true;
-
 // Create a switch event listener for the OSM Maps layer
 osmMapsSwitch.addEventListener("change", () => {
   console.log("Switch state changed:", osmMapsSwitch.checked);
   toggleOSMMapLayer();
 });
 
-// Call the function to set the initial state of the OpenStreetMap layer
-toggleOSMMapLayer();
 
 
 
