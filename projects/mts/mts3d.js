@@ -20,6 +20,27 @@ const initializeCesium = async () => {
   });
 
 
+  
+
+   // JavaScript to update loading bar progress
+   document.onreadystatechange = function () {
+    if (document.readyState === "complete") {
+      // Page has finished loading
+      document.getElementById('progress').style.width = '100%';
+      // Hide the loading bar after a short delay
+      setTimeout(function () {
+        document.getElementById('loading-bar').style.display = 'none';
+      }, 500);
+    } else {
+      // Page is still loading, update progress
+      var progress = (document.readyState === "interactive" ? 50 : 0);
+      document.getElementById('progress').style.width = progress + '%';
+    }
+  };
+
+
+  
+
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
   Cesium.Math.toRadians(-74.0), // West
