@@ -20,17 +20,17 @@ const initializeCesium = async () => {
   });
 
 
-  
-// JavaScript to update loading bar progress
+  // JavaScript to update loading bar progress
 document.onreadystatechange = function () {
   if (document.readyState === "complete") {
     // Page has finished loading
     console.log("Page has finished loading.");
     document.getElementById('progress').style.width = '100%';
-    // Hide the loading bar after a short delay
+    // Instead of hiding the loading bar, we might want to do something else here
+    // Or simply do nothing and let the bar remain fully filled
     setTimeout(function () {
-      console.log("Hiding loading bar.");
-      document.getElementById('loading-bar').style.display = 'none';
+      console.log("Page load complete. Loading bar remains visible.");
+      // document.getElementById('loading-bar').style.display = 'none'; // This line was removed
     }, 500);
   } else {
     // Page is still loading, update progress
@@ -39,6 +39,7 @@ document.onreadystatechange = function () {
     document.getElementById('progress').style.width = progress + '%';
   }
 };
+
 
 
 // Define bounding box coordinates
