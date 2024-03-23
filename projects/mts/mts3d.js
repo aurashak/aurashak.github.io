@@ -334,7 +334,7 @@ osmBuildingsTileset.show = false;
 
 // Set the OSM Maps switch to the off position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
-osmMapsSwitch.checked = false;
+osmMapsSwitch.checked = true;
 
 // Initialize the Cesium OpenStreetMap layer but don't add it to the viewer yet
 const osmLayer = new Cesium.UrlTemplateImageryProvider({
@@ -356,6 +356,9 @@ function toggleOSMMapLayer() {
     console.log("OpenStreetMap layer removed from viewer");
   }
 }
+
+// Set the switch to the off position initially
+osmMapsSwitch.checked = true;
 
 // Create a switch event listener for the OSM Maps layer
 osmMapsSwitch.addEventListener("change", () => {
