@@ -275,7 +275,7 @@ document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
     // Create a switch event listener for the new 3D Tileset
     const newTilesetSwitch = document.getElementById("3dTileSwitch");
-    newTilesetSwitch.checked = true; // Set the initial state to 'on'
+    newTilesetSwitch.checked = false; // Set the initial state to 'on'
 
     newTilesetSwitch.addEventListener("change", (event) => {
       newTileset.show = event.target.checked;
