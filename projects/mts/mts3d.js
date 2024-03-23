@@ -101,6 +101,39 @@ console.log("Minimum zoom distance:", viewer.camera.minimumZoomDistance);
 console.log("Maximum zoom distance:", viewer.camera.maximumZoomDistance);
 
 
+
+// Check if the camera zoom distance exceeds the minimum and maximum zoom distances
+const zoomDistance = viewer.scene.camera.positionCartographic.height;
+if (zoomDistance < viewer.camera.minimumZoomDistance) {
+  // If zoom distance is less than minimum, adjust the camera height to minimum
+  viewer.scene.camera.setView({
+    destination: viewer.scene.camera.position.clone(),
+    orientation: {
+      heading: viewer.scene.camera.heading,
+      pitch: viewer.scene.camera.pitch,
+      roll: viewer.scene.camera.roll
+    },
+    height: viewer.camera.minimumZoomDistance
+  });
+  console.log("Zoom distance reached minimum:", viewer.camera.minimumZoomDistance);
+} else if (zoomDistance > viewer.camera.maximumZoomDistance) {
+  // If zoom distance is greater than maximum, adjust the camera height to maximum
+  viewer.scene.camera.setView({
+    destination: viewer.scene.camera.position.clone(),
+    orientation: {
+      heading: viewer.scene.camera.heading,
+      pitch: viewer.scene.camera.pitch,
+      roll: viewer.scene.camera.roll
+    },
+    height: viewer.camera.maximumZoomDistance
+  });
+  console.log("Zoom distance reached maximum:", viewer.camera.maximumZoomDistance);
+}
+
+
+
+
+
 viewer.scene.postRender.addEventListener(function () {
   const cameraHeight = viewer.scene.camera.positionCartographic.height;
 
