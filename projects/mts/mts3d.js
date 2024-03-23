@@ -4,8 +4,9 @@ Cesium.Ion.defaultAccessToken =
 
 // Initialize Cesium
 const initializeCesium = async () => {
-  // Create a Cesium viewer
+  // Create a Cesium viewer without default Bing Maps imagery
   const viewer = new Cesium.Viewer("cesiumContainer", {
+    imageryProvider: false, // This disables the default Bing Maps imagery
     baseLayerPicker: false,
     geocoder: false,
     homeButton: false,
@@ -18,7 +19,6 @@ const initializeCesium = async () => {
     animation: false,
     navigationInstructionsInitiallyVisible: true,
   });
-
 
     // JavaScript to update loading bar progress
 document.onreadystatechange = function () {
