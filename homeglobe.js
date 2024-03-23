@@ -13,8 +13,11 @@ var viewer = new Cesium.Viewer('cesiumContainer1', {
     animation: false,
     skyBox: false,
     skyAtmosphere: false,
-    backgroundColor: Cesium.Color.WHITE
-
+    backgroundColor: Cesium.Color.WHITE,
+    // Set the initial imagery provider to OpenStreetMap
+    imageryProvider: new Cesium.OpenStreetMapImageryProvider({
+        url: 'https://a.tile.openstreetmap.org/'
+    })
 });
 
 
