@@ -312,28 +312,30 @@ osmBuildingsTileset.show = true;
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
 osmMapsSwitch.checked = true;
 
-// Initialize the Cesium OpenStreetMap layer but don't add it to the viewer yet
+// Initialize the Cesium OpenStreetMap layer
 const osmLayer = new Cesium.UrlTemplateImageryProvider({
   url: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
 });
 osmLayer.name = "OpenStreetMap"; // Set the name of the layer
 osmLayer.order = 1; // Set a higher order value to ensure it's above other layers
-console.log("OpenStreetMap layer initialized, but not added to viewer");
 
 // Add the OpenStreetMap layer to the viewer initially
 viewer.imageryLayers.addImageryProvider(osmLayer);
-console.log("OpenStreetMap layer added to viewer");
 
 // Function to add or remove the OpenStreetMap layer based on switch state
 function toggleOSMMapLayer() {
   if (osmMapsSwitch.checked) {
     // Add the OpenStreetMap layer to the viewer when the switch is turned on
-    viewer.imageryLayers.addImageryProvider(osmLayer);
-    console.log("OpenStreetMap layer added to viewer");
+    if (!viewer.imageryLayers.contains(osmLayer)) {
+      viewer.imageryLayers.addImageryProvider(osmLayer);
+      console.log("OpenStreetMap layer added to viewer");
+    }
   } else {
     // Remove the OpenStreetMap layer from the viewer when the switch is turned off
-    viewer.imageryLayers.remove(osmLayer);
-    console.log("OpenStreetMap layer removed from viewer");
+    if (viewer.imageryLayers.contains(osmLayer)) {
+      viewer.imageryLayers.remove(osmLayer);
+      console.log("OpenStreetMap layer removed from viewer");
+    }
   }
 }
 
@@ -342,6 +344,7 @@ osmMapsSwitch.addEventListener("change", () => {
   console.log("Switch state changed:", osmMapsSwitch.checked);
   toggleOSMMapLayer();
 });
+
 
 
 
