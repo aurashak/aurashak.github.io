@@ -60,6 +60,34 @@ viewer.scene.postRender.addEventListener(function () {
   const longitude = Cesium.Math.toDegrees(cartographic.longitude);
   const latitude = Cesium.Math.toDegrees(cartographic.latitude);
 
+  // Check if the camera zoom distance exceeds the minimum and maximum zoom distances
+  const zoomDistance = cartographic.height;
+  if (zoomDistance < viewer.camera.minimumZoomDistance) {
+    // If zoom distance is less than minimum, adjust the camera height to minimum
+    viewer.scene.camera.setView({
+      destination: viewer.scene.camera.position.clone(),
+      orientation: {
+        heading: viewer.scene.camera.heading,
+        pitch: viewer.scene.camera.pitch,
+        roll: viewer.scene.camera.roll
+      },
+      height: viewer.camera.minimumZoomDistance
+    });
+    console.log("Zoom distance reached minimum:", viewer.camera.minimumZoomDistance);
+  } else if (zoomDistance > viewer.camera.maximumZoomDistance) {
+    // If zoom distance is greater than maximum, adjust the camera height to maximum
+    viewer.scene.camera.setView({
+      destination: viewer.scene.camera.position.clone(),
+      orientation: {
+        heading: viewer.scene.camera.heading,
+        pitch: viewer.scene.camera.pitch,
+        roll: viewer.scene.camera.roll
+      },
+      height: viewer.camera.maximumZoomDistance
+    });
+    console.log("Zoom distance reached maximum:", viewer.camera.maximumZoomDistance);
+  }
+
   // Log current camera position
   console.log("Current Camera Position (Longitude, Latitude):", longitude, latitude);
 
@@ -82,6 +110,8 @@ viewer.scene.postRender.addEventListener(function () {
     // Log adjusted camera position
     console.log("Adjusted Camera Position (Longitude, Latitude):", clampedLongitude, clampedLatitude);
   }
+});
+
 
   // Check if the camera zoom distance exceeds the minimum and maximum zoom distances
   const zoomDistance = viewer.scene.camera.positionCartographic.height;
