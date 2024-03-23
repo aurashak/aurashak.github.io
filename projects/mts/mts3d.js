@@ -312,7 +312,7 @@ if (
 const osmBuildingsSwitch = document.getElementById("osmBuildingsSwitch");
 
 // Set the switch to the off position initially
-osmBuildingsSwitch.checked = false;
+osmBuildingsSwitch.checked = true;
 
 osmBuildingsSwitch.addEventListener("change", (event) => {
   osmBuildingsTileset.show = event.target.checked;
