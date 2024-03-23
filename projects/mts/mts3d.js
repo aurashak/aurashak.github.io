@@ -21,24 +21,25 @@ const initializeCesium = async () => {
 
 
   
- // JavaScript to update loading bar progress
- document.onreadystatechange = function () {
+// JavaScript to update loading bar progress
+document.onreadystatechange = function () {
   if (document.readyState === "complete") {
     // Page has finished loading
+    console.log("Page has finished loading.");
     document.getElementById('progress').style.width = '100%';
     // Hide the loading bar after a short delay
     setTimeout(function () {
+      console.log("Hiding loading bar.");
       document.getElementById('loading-bar').style.display = 'none';
     }, 500);
   } else {
     // Page is still loading, update progress
     var progress = (document.readyState === "interactive" ? 50 : 0);
+    console.log("Page is still loading. Progress:", progress + "%");
     document.getElementById('progress').style.width = progress + '%';
   }
 };
 
-
-  
 
 // Define bounding box coordinates
 const boundingBox = new Cesium.Rectangle(
