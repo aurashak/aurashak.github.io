@@ -269,41 +269,7 @@ document.getElementById('rotateRight').addEventListener('click', rotateRight);
 
 
 
-    
-// Function to toggle the visibility of the OSM Maps layer based on switch state
-function toggleOSMMapLayer() {
-  try {
-    if (osmMapsSwitch.checked) {
-      // Show the OSM Maps layer
-      if (!viewer.imageryLayers.contains(osmLayer)) {
-        viewer.imageryLayers.addImageryProvider(osmLayer);
-        console.log("OpenStreetMap layer added to viewer");
-      }
-    } else {
-      // Hide the OSM Maps layer
-      if (viewer.imageryLayers.contains(osmLayer)) {
-        viewer.imageryLayers.remove(osmLayer);
-        console.log("OpenStreetMap layer removed from viewer");
-      }
-    }
-  } catch (error) {
-    console.error("Error toggling OSM Maps layer:", error);
-  }
-}
-
-// Create a switch event listener for the OSM Maps layer
-try {
-  osmMapsSwitch.addEventListener("change", toggleOSMMapLayer);
-} catch (error) {
-  console.error("Error attaching event listener to OSM Maps switch:", error);
-}
-
-
-
-
-
-
-// Set the OSM Maps switch to the on position initially
+ // Set the OSM Maps switch to the on position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
 osmMapsSwitch.checked = true;
 
@@ -317,24 +283,28 @@ osmLayer.order = 1; // Set a higher order value to ensure it's above other layer
 // Add the OpenStreetMap layer to the viewer initially
 viewer.imageryLayers.addImageryProvider(osmLayer);
 
-// Function to add or remove the OpenStreetMap layer based on switch state
+// Function to toggle the visibility of the OSM Maps layer based on switch state
 function toggleOSMMapLayer() {
-  if (osmMapsSwitch.checked) {
-    // Add the OpenStreetMap layer to the viewer when the switch is turned on
-    if (!viewer.imageryLayers.contains(osmLayer)) {
-      viewer.imageryLayers.addImageryProvider(osmLayer);
-      console.log("OpenStreetMap layer added to viewer");
-    }
-  } else {
-    // Remove the OpenStreetMap layer from the viewer when the switch is turned off
-    if (viewer.imageryLayers.contains(osmLayer)) {
-      console.log("Before removal, layers:", viewer.imageryLayers.length);
-      viewer.imageryLayers.remove(osmLayer);
-      console.log("OpenStreetMap layer removed from viewer");
-      console.log("After removal, layers:", viewer.imageryLayers.length);
+  try {
+    if (osmMapsSwitch.checked) {
+      // Show the OSM Maps layer
+      if (!viewer.imageryLayers.contains(osmLayer)) {
+        viewer.imageryLayers.addImageryProvider(osmLayer);
+        console.log("OpenStreetMap layer added to viewer");
+      }
     } else {
-      console.log("OpenStreetMap layer not found in viewer");
+      // Hide the OSM Maps layer
+      if (viewer.imageryLayers.contains(osmLayer)) {
+        console.log("Before removal, layers:", viewer.imageryLayers.length);
+        viewer.imageryLayers.remove(osmLayer);
+        console.log("OpenStreetMap layer removed from viewer");
+        console.log("After removal, layers:", viewer.imageryLayers.length);
+      } else {
+        console.log("OpenStreetMap layer not found in viewer");
+      }
     }
+  } catch (error) {
+    console.error("Error toggling OSM Maps layer:", error);
   }
 }
 
@@ -343,8 +313,6 @@ osmMapsSwitch.addEventListener("change", () => {
   console.log("Switch state changed:", osmMapsSwitch.checked);
   toggleOSMMapLayer();
 });
-
-
 
 
 
