@@ -354,6 +354,7 @@ osmMapsSwitch.addEventListener("change", () => {
 
 
 
+
     // Load mtscso GeoJsonDataSource
     const mtscsoResource = await Cesium.IonResource.fromAssetId(2460335);
     const mtscsoDataSource = await Cesium.GeoJsonDataSource.load(mtscsoResource);
