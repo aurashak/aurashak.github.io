@@ -306,8 +306,6 @@ osmBuildingsTileset.show = true;
 
 
 
-
-
 // Set the OSM Maps switch to the on position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
 osmMapsSwitch.checked = true;
@@ -333,8 +331,12 @@ function toggleOSMMapLayer() {
   } else {
     // Remove the OpenStreetMap layer from the viewer when the switch is turned off
     if (viewer.imageryLayers.contains(osmLayer)) {
+      console.log("Before removal, layers:", viewer.imageryLayers.length);
       viewer.imageryLayers.remove(osmLayer);
       console.log("OpenStreetMap layer removed from viewer");
+      console.log("After removal, layers:", viewer.imageryLayers.length);
+    } else {
+      console.log("OpenStreetMap layer not found in viewer");
     }
   }
 }
