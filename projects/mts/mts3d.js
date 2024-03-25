@@ -302,6 +302,7 @@ osmBuildingsTileset.show = true;
 
 
 
+/*
 
 // Set the OSM Maps switch to the on position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
@@ -348,6 +349,17 @@ osmMapsSwitch.addEventListener("change", () => {
   toggleOSMMapLayer();
 });
 
+*/ 
+// Initialize the Cesium OpenStreetMap layer
+const osmLayer = new Cesium.UrlTemplateImageryProvider({
+  url: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+});
+osmLayer.name = "OpenStreetMap"; // Set the name of the layer
+osmLayer.order = 1; // Set a higher order value to ensure it's above other layers
+
+// Add the OpenStreetMap layer to the viewer
+viewer.imageryLayers.addImageryProvider(osmLayer);
+console.log("OpenStreetMap layer added to viewer");
 
 
 
