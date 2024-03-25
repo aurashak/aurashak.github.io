@@ -964,7 +964,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctt
         };
     },
     onEachFeature: function (feature, layer) {
-        var censusTract = feature.properties.ct2010;
+        var censusTract = feature.properties.ctLabel; // Try using 'ctLabel' instead of 'ct2010'
         console.log('Census Tract:', censusTract); // Check if census tract number is retrieved correctly
         var population = feature.properties.cttotalpop2020_POP;
         var popupContent = '<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population;
@@ -983,6 +983,7 @@ populationCheckbox.addEventListener('change', function () {
         map.removeLayer(populationLayer);
     }
 });
+
 
 
 
