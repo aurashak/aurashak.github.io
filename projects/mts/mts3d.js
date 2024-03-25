@@ -302,6 +302,7 @@ osmBuildingsTileset.show = true;
 
 
 
+/*
 
 // Set the OSM Maps switch to the on position initially
 const osmMapsSwitch = document.getElementById("osmMapsSwitch");
@@ -348,7 +349,7 @@ osmMapsSwitch.addEventListener("change", () => {
   toggleOSMMapLayer();
 });
 
-
+*/ 
 
 
 
