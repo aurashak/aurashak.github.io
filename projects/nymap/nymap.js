@@ -965,7 +965,7 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctt
     },
     onEachFeature: function (feature, layer) {
         console.log('Feature Properties:', feature.properties); // Add this line
-        var censusTract = feature.properties.ctLabel;
+        var censusTract = feature.properties.ctlabel;
         var population = feature.properties.cttotalpop2020_POP; // Update to the correct property name
         layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
