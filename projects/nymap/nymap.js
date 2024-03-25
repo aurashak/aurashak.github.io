@@ -941,18 +941,18 @@ function getPopulationCategory(population) {
 var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/cttotalpop2020.geojson', {
     style: function (feature) {
         // Adjust styling based on population level
-        var population = feature.properties.cttotalpop2020_POP;
+        var population = feature.properties.cttotalpop2020_POP; // Update to lowercase 'population'
         var category = getPopulationCategory(population);
 
-        // Define colors for each category
+        // Define colors for each category as a gradient with transparency
         var categoryColors = {
-            '0-1000': '#4575b4',
-            '1000-3000': '#e3e2e1',
-            '3000-6000': '#b8b8b8',
-            '6000-10000': '#919190',
-            '10000-14000': '#5c5c5c',
-            '14000-17000': '#2e2e2e',
-            '17000+': '#000'
+            '0-1000': '#4575b4', // White
+            '1000-3000': '#e3e2e1', // Light Gray
+            '3000-6000': '#b8b8b8', // Dark Gray
+            '6000-10000': '#919190', // Gray
+            '10000-14000': '#5c5c5c', // Dim Gray
+            '14000-17000': '#2e2e2e', // Dark Slate Gray
+            '17000+': '#000' // Black
         };
 
         return {
@@ -964,17 +964,12 @@ var populationLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/ctt
         };
     },
     onEachFeature: function (feature, layer) {
-        // Check if the census tract number property exists
-        var censusTract = feature.properties.ctLabel; // Try using 'ctLabel' instead of 'ct2010'
-        if (censusTract) {
-            console.log('Census Tract:', censusTract); // Check if census tract number is retrieved correctly
-            var population = feature.properties.cttotalpop2020_POP;
-            var popupContent = '<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population;
-            layer.bindPopup(popupContent);
-        } else {
-            console.error('Census tract number not found for feature:', feature);
-        }
+        console.log('Feature Properties:', feature.properties); // Add this line
+        var censusTract = feature.properties.ctLabel;
+        var population = feature.properties.cttotalpop2020_POP; // Update to the correct property name
+        layer.bindPopup('<strong style="background-color: #ffe600ce;">NYC POPULATION</strong><br>Census Tract: ' + censusTract + '<br>Population: ' + population);
     }
+    
 });
 
 
@@ -988,9 +983,6 @@ populationCheckbox.addEventListener('change', function () {
         map.removeLayer(populationLayer);
     }
 });
-
-
-
 
 
 
