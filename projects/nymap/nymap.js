@@ -492,6 +492,8 @@ function createRecyclingFacilityPopupContent(properties) {
 
 
 
+
+/*
 // NYC EJ sites Layer
 var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nycejsites.geojson', {
     pointToLayer: function (feature, latlng) {
@@ -524,7 +526,7 @@ var nycejsitesLayer = L.geoJSON.ajax('https://aurashak.github.io/geojson/nyc/nyc
         layer.bindPopup("Census Tract: " + feature.properties.TRACTCE10 + "<br>EJ Area Type: " + feature.properties['ejdesignat']); // Update property name
     }
 });
-
+*/
 
 
 
@@ -1375,7 +1377,7 @@ document.getElementById('wastewatertreatment').addEventListener('change', functi
 
 
 
-
+/*
 // Event listener for the nycejsites layer toggle
 document.getElementById('nycejsites').addEventListener('change', function() {
     if (map.hasLayer(nycejsitesLayer)) {
@@ -1388,7 +1390,7 @@ document.getElementById('nycejsites').addEventListener('change', function() {
         map.addLayer(nycejsitesLayer);
     }
 });
-
+*/
 
 
 
@@ -1713,7 +1715,7 @@ setLegendSymbol('remediationsites', 'red', 'polygon');
 setLegendSymbol('censusTractLayer', 'green', 'polygon');
 setLegendSymbol('avgIncome', {'$0 - $30,000': '#fee08b', '$30,000 - $60,000': '#fdae61', '$60,000 - $90,000': '#d73027', '$90,000 - $150,000': '#4575b4', '$150,000 - $250,000': '#313695'}, 'polygon', { layout: 'vertical' });
 
-setLegendSymbol('nycejsites', {'EJ Area': 'rgba(255, 0, 0, 0.7)', 'Not EJ Area': 'rgba(0, 255, 0, 0.7)', 'Potential EJ Area': 'rgba(0, 0, 255, 0.7)'}, 'polygon', { layout: 'vertical' });
+/* setLegendSymbol('nycejsites', {'EJ Area': 'rgba(255, 0, 0, 0.7)', 'Not EJ Area': 'rgba(0, 255, 0, 0.7)', 'Potential EJ Area': 'rgba(0, 0, 255, 0.7)'}, 'polygon', { layout: 'vertical' }); */
 
 setLegendSymbol('evacuationzones', {
     '1': '#ffdbe5', 
