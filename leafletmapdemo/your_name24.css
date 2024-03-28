@@ -1,0 +1,47 @@
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Header styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Map container styles */
+#map {
+    height: 400px; /* Adjust height as needed */
+    width: 80%; /* Set map width */
+    margin: 20px auto; /* Center map horizontally */
+}
+
+/* Content container styles */
+.container {
+    max-width: 800px; /* Set maximum width for content */
+    margin: 20px auto; /* Center content horizontally */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+/* Paragraph styles */
+p {
+    line-height: 1.6;
+}
+
+/* Link styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
