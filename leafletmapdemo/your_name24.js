@@ -1,5 +1,5 @@
 // Initialize Leaflet map
-var map = L.map('map').setView([51.505, -0.09], 13); // Set initial center and zoom level
+var map = L.map('nymap').setView([51.505, -0.09], 13); // Set initial center and zoom level
 
 // Add a tile layer to the map (for example, OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
