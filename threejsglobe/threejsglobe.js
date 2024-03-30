@@ -21,6 +21,13 @@
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
     scene.add(globe);
 
+    // Add click, drag, and zoom functionality
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // Smoothly interpolate camera movement
+    controls.dampingFactor = 0.25; // How quickly the damping sets in
+    controls.enableZoom = true; // Enable zoom with mouse wheel
+    controls.enablePan = false; // Disable pan
+
     // Function to animate the globe rotation
     function animateGlobe() {
         globe.rotation.y += 0.001; // Adjust the rotation speed as needed
@@ -29,6 +36,7 @@
     function animate() {
         requestAnimationFrame(animate);
         animateGlobe(); // Call the function to animate the globe rotation
+        controls.update(); // Update controls
         renderer.render(scene, camera);
     }
 
