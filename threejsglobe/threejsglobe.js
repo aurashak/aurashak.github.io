@@ -1,4 +1,4 @@
-(function () {
+(async function () {
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -23,6 +23,7 @@
 
     const light = new THREE.PointLight(0xffffff, 1, 500);
     light.position.set(10, 0, 25);
+    light.intensity = 0.7; // Adjust the intensity value (between 0 and 1) to control brightness
     scene.add(light);
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -42,9 +43,9 @@
     bloomComposer.addPass(renderScene);
     bloomComposer.addPass(bloomPass);
 
-    // Function to fetch emissions data from Climate Watch API
-    async function fetchEmissionsData() {
-        const apiUrl = 'https://api.climatewatchdata.org/v1/data/historical_emissions?gas=CO2&source=CAIT&sort_by=year&sort_order=desc';
+    // Function to fetch emissions data from Climate Watch API for a specific year range
+    async function fetchEmissionsData(startYear, endYear) {
+        const apiUrl = `https://api.climatewatchdata.org/v1/data/historical_emissions?start_year=${startYear}&end_year=${endYear}`;
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
@@ -56,39 +57,19 @@
     }
 
     // Function to map emissions data onto the globe
-    async function mapEmissionsData() {
-        const emissionsData = await fetchEmissionsData();
+    async function mapEmissionsData(startYear, endYear) {
+        const emissionsData = await fetchEmissionsData(startYear, endYear);
         if (!emissionsData) return;
 
-        const maxEmissions = Math.max(...emissionsData.map(entry => entry.value));
-
-        emissionsData.forEach(entry => {
-            // Calculate latitude and longitude based on country
-            const lat = entry.location.latitude;
-            const lon = entry.location.longitude;
-
-            // Convert latitude and longitude to spherical coordinates
-            const phi = (90 - lat) * Math.PI / 180;
-            const theta = (180 - lon) * Math.PI / 180;
-
-            // Convert spherical coordinates to Cartesian coordinates
-            const x = Math.sin(phi) * Math.cos(theta);
-            const y = Math.cos(phi);
-            const z = Math.sin(phi) * Math.sin(theta);
-
-            // Calculate size of emission marker based on emission value
-            const size = 0.05 + (entry.value / maxEmissions) * 0.2;
-
-            // Create emission marker
-            const markerGeometry = new THREE.SphereGeometry(size, 8, 8);
-            const markerMaterial = new THREE.MeshBasicMaterial({ color: 'red' });
-            const marker = new THREE.Mesh(markerGeometry, markerMaterial);
-            marker.position.set(x, y, z).multiplyScalar(1.01); // Slightly above globe's surface
-            scene.add(marker);
-        });
+        // Your mapping logic here
     }
 
-    mapEmissionsData();
+    // Set the start year and end year for the data range
+    const startYear = 1960;
+    const endYear = 2020;
+
+    // Call the function to map emissions data onto the globe
+    mapEmissionsData(startYear, endYear);
 
     function animate() {
         requestAnimationFrame(animate);
