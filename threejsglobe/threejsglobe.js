@@ -21,12 +21,14 @@
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
     scene.add(globe);
 
-    // Add click, drag, and zoom functionality
+    // Add click, drag, and zoom functionality with limited zoom
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; // Smoothly interpolate camera movement
     controls.dampingFactor = 0.25; // How quickly the damping sets in
     controls.enableZoom = true; // Enable zoom with mouse wheel
     controls.enablePan = false; // Disable pan
+    controls.minDistance = 2; // Minimum distance (zoom in limit)
+    controls.maxDistance = 10; // Maximum distance (zoom out limit)
 
     // Function to animate the globe rotation
     function animateGlobe() {
