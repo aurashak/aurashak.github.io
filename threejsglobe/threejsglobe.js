@@ -62,6 +62,23 @@
         if (!emissionsData) return;
 
         // Your mapping logic here
+        emissionsData.forEach(emission => {
+            // Example: Add emission points to the globe based on coordinates
+            const latitude = emission.latitude;
+            const longitude = emission.longitude;
+            const emissionsValue = emission.value; // You may want to scale this value for visualization
+            // Create a sphere representing the emission point
+            const emissionGeometry = new THREE.SphereGeometry(0.05 * emissionsValue, 8, 8); // Scale based on emissions value
+            const emissionMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color for emissions
+            const emissionSphere = new THREE.Mesh(emissionGeometry, emissionMaterial);
+            // Convert latitude and longitude to 3D coordinates
+            const x = longitude * Math.PI / 180;
+            const y = (90 - latitude) * Math.PI / 180;
+            const z = 1; // You may need to adjust this value depending on the globe's size and position
+            emissionSphere.position.setFromSphericalCoords(1, y, x);
+            // Add emission point to the scene
+            scene.add(emissionSphere);
+        });
     }
 
     // Set the start year and end year for the data range
