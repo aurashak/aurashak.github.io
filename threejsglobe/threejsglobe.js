@@ -18,6 +18,10 @@
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
     scene.add(globe);
 
+    // Add grid helper
+    const gridHelper = new THREE.GridHelper(10, 10, 0x808080, 0x808080);
+    scene.add(gridHelper);
+
     const light = new THREE.PointLight(0xffffff, 1, 500);
     light.position.set(10, 0, 25);
     scene.add(light);
