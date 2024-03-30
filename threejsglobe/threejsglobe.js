@@ -21,78 +21,15 @@
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
     scene.add(globe);
 
-    const light = new THREE.PointLight(0xffffff, 1, 500);
-    light.position.set(10, 0, 25);
-    light.intensity = 0.7; // Adjust the intensity value (between 0 and 1) to control brightness
-    scene.add(light);
-
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0, 0);
-    controls.minDistance = 2;
-    controls.maxDistance = 10;
-    controls.maxPolarAngle = Math.PI / 2;
-
-    // Add glow effect
-    const renderScene = new THREE.RenderPass(scene, camera);
-    const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-    bloomPass.threshold = 0.1;
-    bloomPass.strength = 2;
-    bloomPass.radius = 1;
-    const bloomComposer = new THREE.EffectComposer(renderer);
-    bloomComposer.renderToScreen = true;
-    bloomComposer.addPass(renderScene);
-    bloomComposer.addPass(bloomPass);
-
-    // Function to fetch emissions data from Climate Watch API for a specific year range
-    async function fetchEmissionsData(startYear, endYear) {
-        const apiUrl = `https://api.climatewatchdata.org/v1/data/historical_emissions?start_year=${startYear}&end_year=${endYear}`;
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            return data.data;
-        } catch (error) {
-            console.error('Error fetching emissions data:', error);
-            return null;
-        }
+    // Function to animate the globe rotation
+    function animateGlobe() {
+        globe.rotation.y += 0.001; // Adjust the rotation speed as needed
     }
-
-    // Function to map emissions data onto the globe
-    async function mapEmissionsData(startYear, endYear) {
-        const emissionsData = await fetchEmissionsData(startYear, endYear);
-        if (!emissionsData) return;
-
-        // Your mapping logic here
-        emissionsData.forEach(emission => {
-            // Example: Add emission points to the globe based on coordinates
-            const latitude = emission.latitude;
-            const longitude = emission.longitude;
-            const emissionsValue = emission.value; // You may want to scale this value for visualization
-            // Create a sphere representing the emission point
-            const emissionGeometry = new THREE.SphereGeometry(0.05 * emissionsValue, 8, 8); // Scale based on emissions value
-            const emissionMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color for emissions
-            const emissionSphere = new THREE.Mesh(emissionGeometry, emissionMaterial);
-            // Convert latitude and longitude to 3D coordinates
-            const x = longitude * Math.PI / 180;
-            const y = (90 - latitude) * Math.PI / 180;
-            const z = 1; // You may need to adjust this value depending on the globe's size and position
-            emissionSphere.position.setFromSphericalCoords(1, y, x);
-            // Add emission point to the scene
-            scene.add(emissionSphere);
-        });
-    }
-
-    // Set the start year and end year for the data range
-    const startYear = 1960;
-    const endYear = 2020;
-
-    // Call the function to map emissions data onto the globe
-    mapEmissionsData(startYear, endYear);
 
     function animate() {
         requestAnimationFrame(animate);
-        controls.update();
+        animateGlobe(); // Call the function to animate the globe rotation
         renderer.render(scene, camera);
-        bloomComposer.render();
     }
 
     animate();
@@ -101,6 +38,5 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        bloomComposer.setSize(window.innerWidth, window.innerHeight);
     });
 })();
