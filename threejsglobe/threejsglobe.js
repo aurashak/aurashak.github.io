@@ -42,6 +42,54 @@
     bloomComposer.addPass(renderScene);
     bloomComposer.addPass(bloomPass);
 
+    // Function to fetch emissions data from Climate Watch API
+    async function fetchEmissionsData() {
+        const apiUrl = 'https://api.climatewatchdata.org/v1/data/historical_emissions?gas=CO2&source=CAIT&sort_by=year&sort_order=desc';
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            return data.data;
+        } catch (error) {
+            console.error('Error fetching emissions data:', error);
+            return null;
+        }
+    }
+
+    // Function to map emissions data onto the globe
+    async function mapEmissionsData() {
+        const emissionsData = await fetchEmissionsData();
+        if (!emissionsData) return;
+
+        const maxEmissions = Math.max(...emissionsData.map(entry => entry.value));
+
+        emissionsData.forEach(entry => {
+            // Calculate latitude and longitude based on country
+            const lat = entry.location.latitude;
+            const lon = entry.location.longitude;
+
+            // Convert latitude and longitude to spherical coordinates
+            const phi = (90 - lat) * Math.PI / 180;
+            const theta = (180 - lon) * Math.PI / 180;
+
+            // Convert spherical coordinates to Cartesian coordinates
+            const x = Math.sin(phi) * Math.cos(theta);
+            const y = Math.cos(phi);
+            const z = Math.sin(phi) * Math.sin(theta);
+
+            // Calculate size of emission marker based on emission value
+            const size = 0.05 + (entry.value / maxEmissions) * 0.2;
+
+            // Create emission marker
+            const markerGeometry = new THREE.SphereGeometry(size, 8, 8);
+            const markerMaterial = new THREE.MeshBasicMaterial({ color: 'red' });
+            const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+            marker.position.set(x, y, z).multiplyScalar(1.01); // Slightly above globe's surface
+            scene.add(marker);
+        });
+    }
+
+    mapEmissionsData();
+
     function animate() {
         requestAnimationFrame(animate);
         controls.update();
