@@ -30,7 +30,7 @@
 
     function animate() {
         requestAnimationFrame(animate);
-        globe.rotation.y += 0.005; // If you want the globe to keep spinning
+        globe.rotation.y += 0.002; // If you want the globe to keep spinning
         controls.update();
         renderer.render(scene, camera);
     }
