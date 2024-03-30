@@ -1,6 +1,4 @@
-// Define your JavaScript code as an anonymous function to avoid global scope pollution
 (function () {
-    // Start of your code
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -22,9 +20,8 @@
     const gridHelper = new THREE.GridHelper(10, 10);
     scene.add(gridHelper);
 
-    // Rotate grid to align with x, y, z axes
-    gridHelper.rotation.x = Math.PI / 2; // Rotate around x-axis
-    gridHelper.position.y = -5; // Move down to align with the bottom of the scene
+    // Position the grid behind the globe along the z-axis
+    gridHelper.position.z = -10; // Move the grid further away from the camera
 
     const light = new THREE.PointLight(0xffffff, 1, 500);
     light.position.set(10, 0, 25);
@@ -50,5 +47,4 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
     });
-    // End of your code
 })();
