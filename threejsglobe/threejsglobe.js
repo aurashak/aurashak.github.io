@@ -19,8 +19,12 @@
     scene.add(globe);
 
     // Add grid helper
-    const gridHelper = new THREE.GridHelper(10, 10, 0x808080, 0x808080);
+    const gridHelper = new THREE.GridHelper(10, 10);
     scene.add(gridHelper);
+
+    // Rotate grid to align with x, y, z axes
+    gridHelper.rotation.x = Math.PI / 2; // Rotate around x-axis
+    gridHelper.position.y = -5; // Move down to align with the bottom of the scene
 
     const light = new THREE.PointLight(0xffffff, 1, 500);
     light.position.set(10, 0, 25);
