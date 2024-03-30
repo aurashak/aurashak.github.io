@@ -8,26 +8,15 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Load a star texture
-    const textureLoader = new THREE.TextureLoader();
-    const starTexture = textureLoader.load('https://aurashak.github.io/threejsglobe/starmap_4k.jpg'); // Example star texture
-
-    // Create a cube geometry
+    // Create a black cube to act as the background
     const cubeGeometry = new THREE.BoxGeometry(1000, 1000, 1000); // Large cube to cover the entire scene
-    // Apply the star texture to the cube's faces
-    const cubeMaterials = [
-        new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide }), // Back side
-        new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide }), // Front side
-        new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide }), // Top side
-        new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide }), // Bottom side
-        new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide }), // Right side
-        new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide }) // Left side
-    ];
-    const starCube = new THREE.Mesh(cubeGeometry, cubeMaterials);
-    scene.add(starCube);
+    const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 }); // Black material
+    const backgroundCube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    scene.add(backgroundCube);
 
+    // Create the globe
     const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-    const globeTexture = textureLoader.load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
+    const globeTexture = new THREE.TextureLoader().load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
     const globeMaterial = new THREE.MeshBasicMaterial({ map: globeTexture });
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
     scene.add(globe);
