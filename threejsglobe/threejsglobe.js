@@ -20,11 +20,14 @@ directionalLight.position.set(5, 3, 5);
 scene.add(directionalLight);
 
 // Load data and render Earth and Moon
+console.log("Fetching data...");
 loadDataAndRender();
 
 function loadDataAndRender() {
     // Fetch data from the server (e.g., using fetch API)
     // For demonstration purposes, let's assume we have already fetched data
+    console.log("Data fetched successfully.");
+
     const earthData = {
         x: 0,
         y: 0,
@@ -38,6 +41,7 @@ function loadDataAndRender() {
     };
 
     // Render Earth
+    console.log("Rendering Earth...");
     const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
     const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
     const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
@@ -45,6 +49,7 @@ function loadDataAndRender() {
     scene.add(earthMesh);
 
     // Render Moon
+    console.log("Rendering Moon...");
     const moonGeometry = new THREE.SphereGeometry(moonRadius, 32, 32);
     const moonMaterial = new THREE.MeshPhongMaterial({ color: 0xaaaaaa });
     const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
@@ -55,6 +60,7 @@ function loadDataAndRender() {
     camera.position.z = 10;
 
     // Render loop
+    console.log("Starting render loop...");
     function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
