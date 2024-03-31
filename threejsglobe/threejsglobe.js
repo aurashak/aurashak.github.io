@@ -1,4 +1,4 @@
-// Add this line to load OrbitControls from the examples directory
+// Import OrbitControls from three.js modules
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 // Initialize Three.js scene
