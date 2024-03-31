@@ -1,76 +1,84 @@
 console.log("Script loaded");
 
-// Setup scene
-const scene = new THREE.Scene();
-console.log("Scene created");
+// Import OrbitControls
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-// Create cube
-// Define the size of the cube in miles
-const cubeSizeMiles = 300000; // Each unit represents a mile
-const cubeSize = cubeSizeMiles; // Size of the cube in scene units
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM Loaded");
 
-const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
-const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-scene.add(cube);
-console.log("Cube created");
+    // Setup scene
+    const scene = new THREE.Scene();
+    console.log("Scene created");
 
-// Convert sphere radius to scene units
-const sphereRadiusMiles = 7913.5;
-const sphereRadiusUnits = sphereRadiusMiles / cubeSize * 2; // Convert to scene units
+    // Create cube
+    // Define the size of the cube in miles
+    const cubeSizeMiles = 300000; // Each unit represents a mile
+    const cubeSize = cubeSizeMiles; // Size of the cube in scene units
 
-// Create sphere with adjusted radius
-const sphereGeometry = new THREE.SphereGeometry(sphereRadiusUnits, 32, 32);
-const textureLoader = new THREE.TextureLoader();
-const earthTexture = textureLoader.load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
-const sphereMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
-const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-scene.add(sphere);
-console.log("Sphere created");
+    const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+    const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    scene.add(cube);
+    console.log("Cube created");
 
-// Position sphere at the center
-sphere.position.set(0, 0, 0);
-console.log("Sphere positioned at the center");
+    // Convert sphere radius to scene units
+    const sphereRadiusMiles = 7913.5;
+    const sphereRadiusUnits = sphereRadiusMiles / cubeSize * 2; // Convert to scene units
 
-// Setup camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-camera.position.z = sphereRadiusUnits * 3; // Initial position
-camera.lookAt(sphere.position);
-console.log("Camera positioned to show the sphere");
+    // Create sphere with adjusted radius
+    const sphereGeometry = new THREE.SphereGeometry(sphereRadiusUnits, 32, 32);
+    const textureLoader = new THREE.TextureLoader();
+    const earthTexture = textureLoader.load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
+    const sphereMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    scene.add(sphere);
+    console.log("Sphere created");
 
-// Add zoom controls with min and max zoom
-const minZoom = sphereRadiusUnits * 3; // Minimum zoom distance
-const maxZoom = sphereRadiusUnits * 20; // Maximum zoom distance
+    // Position sphere at the center
+    sphere.position.set(0, 0, 0);
+    console.log("Sphere positioned at the center");
 
-function zoom(event) {
-    const delta = event.deltaY;
-    let newZoom = camera.position.z + delta * 0.1; // Adjust zoom speed
-    
-    // Apply zoom limits
-    newZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
+    // Setup camera
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+    camera.position.z = sphereRadiusUnits * 3; // Initial position
+    camera.lookAt(sphere.position);
+    console.log("Camera positioned to show the sphere");
 
-    camera.position.z = newZoom;
-}
+    // Add zoom controls with min and max zoom
+    const minZoom = sphereRadiusUnits * 3; // Minimum zoom distance
+    const maxZoom = sphereRadiusUnits * 20; // Maximum zoom distance
 
-// Add event listener for mouse wheel
-document.addEventListener('wheel', zoom);
+    function zoom(event) {
+        const delta = event.deltaY;
+        let newZoom = camera.position.z + delta * 0.1; // Adjust zoom speed
+        
+        // Apply zoom limits
+        newZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
 
-// Setup renderer
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-console.log("Renderer setup");
+        camera.position.z = newZoom;
+    }
 
-// Add orbit controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true; // Add damping for smoother rotation
-controls.dampingFactor = 0.25; // Adjust damping factor
+    // Add event listener for mouse wheel
+    document.addEventListener('wheel', zoom);
 
-// Render the scene
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-    controls.update(); // Update orbit controls
-}
-animate();
-console.log("Rendering scene");
+    // Add orbit controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // Add damping for smoother rotation
+    controls.dampingFactor = 0.25; // Adjust damping factor
+
+    // Setup renderer
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    console.log("Renderer setup");
+
+    // Render the scene
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        controls.update(); // Update orbit controls
+    }
+    animate();
+    console.log("Rendering scene");
+});
