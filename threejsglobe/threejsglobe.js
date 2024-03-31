@@ -22,7 +22,7 @@
     scene.add(globe);
 
     // Create the moon
-    const moonTexture = new THREE.TextureLoader().load('path_to_moon_texture_placeholder.jpg'); // Placeholder texture
+    const moonTexture = new THREE.TextureLoader().load('https://aurashak.github.io/threejsglobe/moontexture.jpg'); // Placeholder texture
     const moonMaterial = new THREE.MeshBasicMaterial({ map: moonTexture });
     const moon = new THREE.Mesh(sphereGeometry.clone(), moonMaterial); // Use cloned geometry to avoid modifying the original
     moon.position.set(2, 0, 0); // Position the moon to the right of the Earth
