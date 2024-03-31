@@ -2,7 +2,6 @@
 
 // Constants
 const earthRadius = 6371; // Earth radius in kilometers
-const moonRadius = 1737.1; // Moon radius in kilometers
 
 // Scene setup
 console.log("Setting up scene...");
@@ -11,6 +10,10 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+// Set camera position on the sphere
+camera.position.set(0, 0, earthRadius * 2); // Place the camera at a distance of twice the radius of the Earth
+camera.lookAt(scene.position); // Camera looks at the center of the scene
 
 // Add lights
 console.log("Adding lights...");
@@ -21,54 +24,24 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(5, 3, 5);
 scene.add(directionalLight);
 
-// Load data and render Earth and Moon
-console.log("Fetching data...");
-loadDataAndRender();
+// Render Earth
+console.log("Rendering Earth...");
+const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
+const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+scene.add(earthMesh);
+console.log("Earth rendered.");
 
-function loadDataAndRender() {
-    // Fetch data from the server (e.g., using fetch API)
-    // For demonstration purposes, let's assume we have already fetched data
-    console.log("Data fetched successfully.");
+// Enable click and rotate controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableRotate = true; // Allow rotation
+controls.enableZoom = false; // Disable zoom
 
-    const earthData = {
-        x: 0,
-        y: 0,
-        z: 0 // Earth is at the center (0, 0, 0)
-    };
-
-    const moonData = {
-        x: 3,
-        y: 0,
-        z: 0 // Moon is 3 units away from Earth along the x-axis
-    };
-
-    // Render Earth
-    console.log("Rendering Earth...");
-    const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
-    const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-    const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-    earthMesh.position.set(earthData.x, earthData.y, earthData.z);
-    scene.add(earthMesh);
-    console.log("Earth rendered.");
-
-    // Render Moon
-    console.log("Rendering Moon...");
-    const moonGeometry = new THREE.SphereGeometry(moonRadius, 32, 32);
-    const moonMaterial = new THREE.MeshPhongMaterial({ color: 0xaaaaaa });
-    const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
-    moonMesh.position.set(moonData.x, moonData.y, moonData.z);
-    scene.add(moonMesh);
-    console.log("Moon rendered.");
-
-    // Set camera position
-    console.log("Setting camera position...");
-    camera.position.z = 10;
-
-    // Render loop
-    console.log("Starting render loop...");
-    function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-    }
-    animate();
+// Render loop
+console.log("Starting render loop...");
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+    controls.update(); // Update controls
 }
+animate();
