@@ -2,7 +2,7 @@
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 50; // Adjust camera position
+    camera.position.z = 100; // Adjust camera position
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -18,7 +18,7 @@
     // Create the globe
     const earthDiameter = 7917.5; // Diameter of the Earth in miles
     const earthRadius = earthDiameter / 2; // Calculate the radius
-    const sphereGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
+    const sphereGeometry = new THREE.SphereGeometry(earthRadius * 10, 32, 32); // Increase the size of the Earth
     const globeTexture = new THREE.TextureLoader().load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
     const globeMaterial = new THREE.MeshBasicMaterial({ map: globeTexture });
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
@@ -30,7 +30,7 @@
     controls.dampingFactor = 0.25; // How quickly the damping sets in
     controls.enableZoom = true; // Enable zoom with mouse wheel
     controls.enablePan = false; // Disable pan
-    controls.minDistance = 2 * earthRadius; // Minimum distance (zoom in limit)
+    controls.minDistance = 0; // Set minimum distance to 0 for better visibility
     controls.maxDistance = 10 * earthRadius; // Maximum distance (zoom out limit)
 
     // Function to animate the globe rotation
