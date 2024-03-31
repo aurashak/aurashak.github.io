@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Scene created");
 
     // Create cube
-    const cubeSize = 300000;
+    // Define the size of the cube in miles
+    const cubeSizeMiles = 300000; // Each unit represents a mile
+    const cubeSize = cubeSizeMiles; // Size of the cube in scene units
+
     const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
     const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
     const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
