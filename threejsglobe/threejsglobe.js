@@ -42,7 +42,7 @@
     controls.enableZoom = true; // Enable zoom with mouse wheel
     controls.enablePan = false; // Disable pan
     controls.minDistance = 2; // Minimum distance (zoom in limit)
-    controls.maxDistance = 20; // Maximum distance (zoom out limit)
+    controls.maxDistance = 60; // Maximum distance (zoom out limit)
 
     // Function to animate the globe rotation and moon orbit
     function animateScene() {
