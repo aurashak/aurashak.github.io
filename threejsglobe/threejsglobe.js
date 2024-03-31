@@ -2,15 +2,22 @@
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 20); // Set camera position to view the scene
+    camera.position.set(0, 0, 100); // Set camera position to view the scene
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // Basic lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white ambient light
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // White directional light
+    directionalLight.position.set(0, 0, 1); // From camera's perspective
+    scene.add(directionalLight);
+
     // Create Earth geometry and texture
     const earthRadius = 6371; // Earth's radius in kilometers
     const earthTexture = new THREE.TextureLoader().load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
-    const earthMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
+    const earthMaterial = new THREE.MeshPhongMaterial({ map: earthTexture });
     const earth = new THREE.Mesh(new THREE.SphereGeometry(earthRadius, 32, 32), earthMaterial);
     scene.add(earth);
 
@@ -18,7 +25,7 @@
     const moonDistance = 384400; // Distance from Earth to Moon in kilometers
     const moonRadius = 1737.4; // Moon's radius in kilometers
     const moonTexture = new THREE.TextureLoader().load('https://aurashak.github.io/threejsglobe/moontexture.jpg');
-    const moonMaterial = new THREE.MeshBasicMaterial({ map: moonTexture });
+    const moonMaterial = new THREE.MeshPhongMaterial({ map: moonTexture });
     const moon = new THREE.Mesh(new THREE.SphereGeometry(moonRadius, 32, 32), moonMaterial);
     moon.position.set(moonDistance, 0, 0); // Position the Moon relative to the Earth
     scene.add(moon);
