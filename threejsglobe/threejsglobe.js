@@ -1,49 +1,63 @@
-// Import OrbitControls from three.js modules
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+// render_scene.js
 
-// Your Three.js and OrbitControls setup code here
-// Initialize Three.js scene
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-var renderer = new THREE.WebGLRenderer();
+// Constants
+const earthRadius = 6371; // Earth radius in kilometers
+const moonRadius = 1737.1; // Moon radius in kilometers
+
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Create Earth
-var earthGeometry = new THREE.SphereGeometry(0.5, 32, 32); // Earth radius is approximately 0.5 in arbitrary units
-var earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff }); // Blue color for Earth
-var earth = new THREE.Mesh(earthGeometry, earthMaterial);
-scene.add(earth);
-
-// Create Moon
-var moonGeometry = new THREE.SphereGeometry(0.1, 32, 32); // Moon radius is approximately 0.1 in arbitrary units
-var moonMaterial = new THREE.MeshPhongMaterial({ color: 0xaaaaaa }); // Gray color for Moon
-var moon = new THREE.Mesh(moonGeometry, moonMaterial);
-scene.add(moon);
-
-// Set positions
-earth.position.set(0, 0, 0); // Earth at the center of the scene
-moon.position.set(3, 0, 0); // Moon 3 units away from Earth along the x-axis (scaled distance)
-
-// Set camera position
-camera.position.z = 2;
-
-// Add controls
-var controls = new OrbitControls(camera, renderer.domElement);
-controls.update();
-
-// Add ambient light
-var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+// Add lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
-// Add directional light
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(5, 3, 5);
 scene.add(directionalLight);
 
-// Render loop
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+// Load data and render Earth and Moon
+loadDataAndRender();
+
+function loadDataAndRender() {
+    // Fetch data from the server (e.g., using fetch API)
+    // For demonstration purposes, let's assume we have already fetched data
+    const earthData = {
+        x: 0,
+        y: 0,
+        z: 0 // Earth is at the center (0, 0, 0)
+    };
+
+    const moonData = {
+        x: 3,
+        y: 0,
+        z: 0 // Moon is 3 units away from Earth along the x-axis
+    };
+
+    // Render Earth
+    const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
+    const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+    const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+    earthMesh.position.set(earthData.x, earthData.y, earthData.z);
+    scene.add(earthMesh);
+
+    // Render Moon
+    const moonGeometry = new THREE.SphereGeometry(moonRadius, 32, 32);
+    const moonMaterial = new THREE.MeshPhongMaterial({ color: 0xaaaaaa });
+    const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
+    moonMesh.position.set(moonData.x, moonData.y, moonData.z);
+    scene.add(moonMesh);
+
+    // Set camera position
+    camera.position.z = 10;
+
+    // Render loop
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
 }
-animate();
