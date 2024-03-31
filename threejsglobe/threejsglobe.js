@@ -41,8 +41,12 @@
     // Function to animate the globe rotation and moon orbit
     function animateScene() {
         globe.rotation.y += 0.001; // Rotate the Earth
-        moon.position.x = 2 * Math.cos(Date.now() * 0.001); // Update moon position along x-axis for orbit
-        moon.position.z = 2 * Math.sin(Date.now() * 0.001); // Update moon position along z-axis for orbit
+        // Simulate moon's orbit around the Earth
+        const time = Date.now() * 0.001;
+        const moonOrbitRadius = 2;
+        const moonOrbitSpeed = 0.1;
+        moon.position.x = moonOrbitRadius * Math.cos(time * moonOrbitSpeed);
+        moon.position.z = moonOrbitRadius * Math.sin(time * moonOrbitSpeed);
     }
 
     function animate() {
