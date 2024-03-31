@@ -1,6 +1,7 @@
 // Import OrbitControls from three.js modules
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
+// Your Three.js and OrbitControls setup code here
 // Initialize Three.js scene
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
