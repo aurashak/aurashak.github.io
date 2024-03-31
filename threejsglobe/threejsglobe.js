@@ -59,16 +59,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listener for mouse wheel
     document.addEventListener('wheel', zoom);
 
-    // Add orbit controls
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // Add damping for smoother rotation
-    controls.dampingFactor = 0.25; // Adjust damping factor
-
     // Setup renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     console.log("Renderer setup");
+
+    // Add orbit controls
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // Add damping for smoother rotation
+    controls.dampingFactor = 0.25; // Adjust damping factor
 
     // Render the scene
     function animate() {
