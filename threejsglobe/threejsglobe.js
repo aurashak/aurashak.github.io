@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create sphere with adjusted radius
     const sphereGeometry = new THREE.SphereGeometry(sphereRadiusUnits, 32, 32);
-    const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const textureLoader = new THREE.TextureLoader();
+    const earthTexture = textureLoader.load('https://aurashak.github.io/threejsglobe/earthtexture2.jpg');
+    const sphereMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     scene.add(sphere);
     console.log("Sphere created");
