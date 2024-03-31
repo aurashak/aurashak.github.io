@@ -21,6 +21,14 @@
     const globe = new THREE.Mesh(sphereGeometry, globeMaterial);
     scene.add(globe);
 
+    // Create the moon
+    const moonTexture = new THREE.TextureLoader().load('path_to_moon_texture_placeholder.jpg'); // Placeholder texture
+    const moonMaterial = new THREE.MeshBasicMaterial({ map: moonTexture });
+    const moon = new THREE.Mesh(sphereGeometry.clone(), moonMaterial); // Use cloned geometry to avoid modifying the original
+    moon.position.set(2, 0, 0); // Position the moon to the right of the Earth
+    moon.scale.setScalar(0.3); // Scale down the moon size
+    scene.add(moon);
+
     // Add click, drag, and zoom functionality with limited zoom
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; // Smoothly interpolate camera movement
@@ -30,14 +38,16 @@
     controls.minDistance = 2; // Minimum distance (zoom in limit)
     controls.maxDistance = 10; // Maximum distance (zoom out limit)
 
-    // Function to animate the globe rotation
-    function animateGlobe() {
-        globe.rotation.y += 0.001; // Adjust the rotation speed as needed
+    // Function to animate the globe rotation and moon orbit
+    function animateScene() {
+        globe.rotation.y += 0.001; // Rotate the Earth
+        moon.position.x = 2 * Math.cos(Date.now() * 0.001); // Update moon position along x-axis for orbit
+        moon.position.z = 2 * Math.sin(Date.now() * 0.001); // Update moon position along z-axis for orbit
     }
 
     function animate() {
         requestAnimationFrame(animate);
-        animateGlobe(); // Call the function to animate the globe rotation
+        animateScene(); // Call the function to animate the scene
         controls.update(); // Update controls
         renderer.render(scene, camera);
     }
