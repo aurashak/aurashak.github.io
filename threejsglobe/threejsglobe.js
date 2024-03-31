@@ -27,12 +27,9 @@
     const moon = new THREE.Mesh(sphereGeometry.clone(), moonMaterial); // Use cloned geometry to avoid modifying the original
     moon.scale.setScalar(0.3); // Scale down the moon size
 
-    // Set the distance of the moon from the Earth in miles
-    const moonOrbitRadiusMiles = 238900; // Distance from Earth to Moon in miles
-    // Convert miles to units appropriate for your scene
-    // For example, if 1 unit in your scene represents 1000 miles:
-    const moonOrbitRadius = moonOrbitRadiusMiles / 1000;
-    moon.position.set(moonOrbitRadius, 0, 0); // Position the moon at a distance from the Earth
+    // Calculate the distance of the moon from the Earth in the scene
+    const moonDistanceInScene = 238.9; // Distance from Earth to Moon in our scene (assuming 1 unit represents 1000 miles)
+    moon.position.set(moonDistanceInScene, 0, 0); // Position the moon at a distance from the Earth
     scene.add(moon);
 
     // Add click, drag, and zoom functionality with limited zoom
@@ -50,8 +47,8 @@
         // Simulate moon's orbit around the Earth
         const time = Date.now() * 0.001;
         const moonOrbitSpeed = 0.1;
-        moon.position.x = moonOrbitRadius * Math.cos(time * moonOrbitSpeed);
-        moon.position.z = moonOrbitRadius * Math.sin(time * moonOrbitSpeed);
+        moon.position.x = moonDistanceInScene * Math.cos(time * moonOrbitSpeed);
+        moon.position.z = moonDistanceInScene * Math.sin(time * moonOrbitSpeed);
     }
 
     function animate() {
