@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Camera positioned to show the sphere");
 
     // Add zoom controls with min and max zoom
-    const minZoom = sphereRadiusUnits * 1.5; // Minimum zoom distance
-    const maxZoom = sphereRadiusUnits * 10; // Maximum zoom distance
+    const minZoom = sphereRadiusUnits * 3; // Minimum zoom distance
+    const maxZoom = sphereRadiusUnits * 20; // Maximum zoom distance
 
     function zoom(event) {
         const delta = event.deltaY;
