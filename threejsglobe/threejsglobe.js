@@ -1,3 +1,6 @@
+// Add this line to load OrbitControls from the examples directory
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 // Initialize Three.js scene
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -23,6 +26,10 @@ moon.position.set(3, 0, 0); // Moon 3 units away from Earth along the x-axis (sc
 
 // Set camera position
 camera.position.z = 2;
+
+// Add controls
+var controls = new OrbitControls(camera, renderer.domElement);
+controls.update();
 
 // Add ambient light
 var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
