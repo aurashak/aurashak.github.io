@@ -25,8 +25,14 @@
     const moonTexture = new THREE.TextureLoader().load('https://aurashak.github.io/threejsglobe/moontexture.jpg'); // Placeholder texture
     const moonMaterial = new THREE.MeshBasicMaterial({ map: moonTexture });
     const moon = new THREE.Mesh(sphereGeometry.clone(), moonMaterial); // Use cloned geometry to avoid modifying the original
-    moon.position.set(2, 0, 0); // Position the moon to the right of the Earth
     moon.scale.setScalar(0.3); // Scale down the moon size
+
+    // Set the distance of the moon from the Earth in miles
+    const moonOrbitRadiusMiles = 238900; // Distance from Earth to Moon in miles
+    // Convert miles to units appropriate for your scene
+    // For example, if 1 unit in your scene represents 1000 miles:
+    const moonOrbitRadius = moonOrbitRadiusMiles / 1000;
+    moon.position.set(moonOrbitRadius, 0, 0); // Position the moon at a distance from the Earth
     scene.add(moon);
 
     // Add click, drag, and zoom functionality with limited zoom
@@ -43,7 +49,6 @@
         globe.rotation.y += 0.001; // Rotate the Earth
         // Simulate moon's orbit around the Earth
         const time = Date.now() * 0.001;
-        const moonOrbitRadius = 2;
         const moonOrbitSpeed = 0.1;
         moon.position.x = moonOrbitRadius * Math.cos(time * moonOrbitSpeed);
         moon.position.z = moonOrbitRadius * Math.sin(time * moonOrbitSpeed);
