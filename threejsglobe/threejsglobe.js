@@ -5,6 +5,7 @@ const earthRadius = 6371; // Earth radius in kilometers
 const moonRadius = 1737.1; // Moon radius in kilometers
 
 // Scene setup
+console.log("Setting up scene...");
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
@@ -12,6 +13,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Add lights
+console.log("Adding lights...");
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
@@ -47,6 +49,7 @@ function loadDataAndRender() {
     const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
     earthMesh.position.set(earthData.x, earthData.y, earthData.z);
     scene.add(earthMesh);
+    console.log("Earth rendered.");
 
     // Render Moon
     console.log("Rendering Moon...");
@@ -55,8 +58,10 @@ function loadDataAndRender() {
     const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
     moonMesh.position.set(moonData.x, moonData.y, moonData.z);
     scene.add(moonMesh);
+    console.log("Moon rendered.");
 
     // Set camera position
+    console.log("Setting camera position...");
     camera.position.z = 10;
 
     // Render loop
