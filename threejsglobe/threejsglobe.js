@@ -16,9 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
     scene.add(cube);
     console.log("Cube created");
 
-    // Create sphere
-    const sphereRadius = 7913.5;
-    const sphereGeometry = new THREE.SphereGeometry(sphereRadius, 32, 32);
+    // Convert sphere radius to scene units
+    const sphereRadiusMiles = 7913.5;
+    const sphereRadiusUnits = sphereRadiusMiles / cubeSize * 2; // Convert to scene units
+
+    // Create sphere with adjusted radius
+    const sphereGeometry = new THREE.SphereGeometry(sphereRadiusUnits, 32, 32);
     const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     scene.add(sphere);
@@ -29,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Sphere positioned at the center");
 
     // Position camera to show the sphere
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = sphereRadius * 2; // Adjust the distance to properly see the sphere
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+    camera.position.z = sphereRadiusUnits * 3; // Adjust the distance to properly see the sphere
     camera.lookAt(sphere.position);
     console.log("Camera positioned to show the sphere");
 
