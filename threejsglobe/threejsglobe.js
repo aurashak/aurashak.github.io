@@ -1,3 +1,5 @@
+import { OrbitControls } from 'https://aurashak.github.io/threejsglobe/OrbitControls.js';
+
 // Constants
 const earthRadius = 6371; // Earth radius in kilometers
 
