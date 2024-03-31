@@ -1,8 +1,5 @@
 console.log("Script loaded");
 
-// Import OrbitControls
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
 // Wait for the DOM to load
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM Loaded");
@@ -63,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('wheel', zoom);
 
     // Add orbit controls
-    const controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; // Add damping for smoother rotation
     controls.dampingFactor = 0.25; // Adjust damping factor
 
