@@ -17,7 +17,6 @@ camera.lookAt(scene.position); // Camera looks at the center of the scene
 console.log("Adding lights...");
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
-
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(5, 3, 5);
 scene.add(directionalLight);
