@@ -1,5 +1,3 @@
-# fetch_horizons_data.py
-
 import requests
 
 def fetch_horizons_data(target_body):
