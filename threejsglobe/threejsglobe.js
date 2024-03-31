@@ -31,11 +31,28 @@ document.addEventListener("DOMContentLoaded", function () {
     sphere.position.set(0, 0, 0);
     console.log("Sphere positioned at the center");
 
-    // Position camera to show the sphere
+    // Setup camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-    camera.position.z = sphereRadiusUnits * 3; // Adjust the distance to properly see the sphere
+    camera.position.z = sphereRadiusUnits * 3; // Initial position
     camera.lookAt(sphere.position);
     console.log("Camera positioned to show the sphere");
+
+    // Add zoom controls with min and max zoom
+    const minZoom = sphereRadiusUnits * 1.5; // Minimum zoom distance
+    const maxZoom = sphereRadiusUnits * 10; // Maximum zoom distance
+
+    function zoom(event) {
+        const delta = event.deltaY;
+        let newZoom = camera.position.z + delta * 0.1; // Adjust zoom speed
+        
+        // Apply zoom limits
+        newZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
+
+        camera.position.z = newZoom;
+    }
+
+    // Add event listener for mouse wheel
+    document.addEventListener('wheel', zoom);
 
     // Setup renderer
     const renderer = new THREE.WebGLRenderer();
