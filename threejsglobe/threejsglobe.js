@@ -1,7 +1,3 @@
-// render_scene.js
-
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
 // Constants
 const earthRadius = 6371; // Earth radius in kilometers
 
@@ -42,7 +38,7 @@ fetch('earth_data.csv')
     .catch(error => console.error("Failed to fetch data:", error));
 
 // Enable click and rotate controls
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableRotate = true; // Allow rotation
 controls.enableZoom = false; // Disable zoom
 
