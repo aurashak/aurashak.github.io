@@ -1,5 +1,7 @@
 // render_scene.js
 
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 // Constants
 const earthRadius = 6371; // Earth radius in kilometers
 
@@ -24,16 +26,23 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(5, 3, 5);
 scene.add(directionalLight);
 
-// Render Earth
-console.log("Rendering Earth...");
-const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
-const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-scene.add(earthMesh);
-console.log("Earth rendered.");
+// Fetch data and render Earth
+console.log("Fetching data...");
+fetch('earth_data.csv')
+    .then(response => response.text())
+    .then(data => {
+        // Parse CSV data and render Earth
+        console.log("Data fetched successfully:", data);
+        const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
+        const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+        const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+        scene.add(earthMesh);
+        console.log("Earth rendered.");
+    })
+    .catch(error => console.error("Failed to fetch data:", error));
 
 // Enable click and rotate controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableRotate = true; // Allow rotation
 controls.enableZoom = false; // Disable zoom
 
