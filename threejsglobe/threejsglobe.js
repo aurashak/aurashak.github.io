@@ -1,46 +1,7 @@
-// Constants
-const earthRadius = 6371; // Earth radius in kilometers
-
-// Scene setup
-console.log("Setting up scene...");
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-// Set camera position on the sphere
-camera.position.set(0, 0, earthRadius * 2); // Place the camera at a distance of twice the radius of the Earth
-camera.lookAt(scene.position); // Camera looks at the center of the scene
-
-// Add lights
-console.log("Adding lights...");
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight.position.set(5, 3, 5);
-scene.add(directionalLight);
-
-// Render Earth
-console.log("Rendering Earth...");
-const earthGeometry = new THREE.SphereGeometry(earthRadius, 32, 32);
-const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-scene.add(earthMesh);
-console.log("Earth rendered.");
-
-// Enable click and rotate controls
-import { OrbitControls } from 'https://aurashak.github.io/threejsglobe/OrbitControls.js';
-
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableRotate = true; // Allow rotation
-controls.enableZoom = false; // Disable zoom
-
-// Render loop
-console.log("Starting render loop...");
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-    controls.update(); // Update controls
-}
-animate();
+fetch('https://ssd.jpl.nasa.gov/horizons_batch.cgi?batch=1&COMMAND=%27499%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&START_TIME=%272024-03-31%27&STOP_TIME=%272024-04-01%27&STEP_SIZE=%27600%27&CAL_FORMAT=%27BOTH%27&CSV_FORMAT=%27YES%27')
+  .then(response => response.text())
+  .then(data => {
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerText = data;
+  })
+  .catch(error => console.error(error));
