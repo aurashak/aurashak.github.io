@@ -1,4 +1,3 @@
-
 // Constants
 const earthRadius = 6371; // Earth radius in kilometers
 
@@ -31,7 +30,9 @@ scene.add(earthMesh);
 console.log("Earth rendered.");
 
 // Enable click and rotate controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+import { OrbitControls } from 'https://aurashak.github.io/threejsglobe/OrbitControls.js';
+
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableRotate = true; // Allow rotation
 controls.enableZoom = false; // Disable zoom
 
