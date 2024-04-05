@@ -1,5 +1,5 @@
-// Initialize the map
-var map = L.map('cannamap', {
+   // Initialize the map
+   var map = L.map('cannamap', {
     // Set initial center and zoom level
     center: [37.0902, -95.7129], // United States center coordinates
     zoom: 4,
@@ -23,8 +23,8 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
     .then(response => response.json())
     .then(data => {
         console.log('Data for United States:', data);
-        if (data && data.length > 0) {
-            const countryBoundaries = data[0].geojson;
+        if (data && data.length > 0 && data[0].geojson) {
+            const countryBoundaries = JSON.parse(data[0].geojson);
             L.geoJSON(countryBoundaries, {
                 style: {
                     color: 'black',     // Border color
