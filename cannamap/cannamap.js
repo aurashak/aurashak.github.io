@@ -22,9 +22,10 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
             const countryBoundaries = JSON.parse(data[0].geojson);
             L.geoJSON(countryBoundaries, {
                 style: {
-                    fillColor: 'white', // Fill color (ocean)
-                    color: 'black',     // Border color (states)
-                    weight: 2            // Border weight (states)
+                    fillColor: 'red',    // Fill color (countries)
+                    fillOpacity: 1,       // Solid fill
+                    color: 'white',      // Border color (countries)
+                    weight: 2            // Border weight (countries)
                 }
             }).addTo(map);
 
