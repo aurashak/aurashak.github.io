@@ -13,6 +13,11 @@ var map = L.map('cannamap', {
     touchZoom: false
 });
 
+// Add the base layer (OpenStreetMap) before fetching data
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
 // Fetch US state boundaries and country outline from OpenStreetMap
 fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&limit=1')
     .then(response => response.json())
@@ -28,8 +33,6 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
                     weight: 2            // Border weight (countries)
                 }
             }).addTo(map);
-
-            console.log('Ocean color:', map.getContainer().style.backgroundColor);
 
             // Add state initials over each state
             countryBoundaries.features.forEach(feature => {
@@ -47,8 +50,3 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
     .catch(error => {
         console.error('Error fetching country boundaries:', error);
     });
-
-// Add the base layer (OpenStreetMap) after fetching data
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
