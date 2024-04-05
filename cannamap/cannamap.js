@@ -28,6 +28,8 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
                 }
             }).addTo(map);
 
+            console.log('Ocean color:', map.getContainer().style.backgroundColor);
+
             // Add state initials over each state
             countryBoundaries.features.forEach(feature => {
                 const stateCenter = feature.geometry.coordinates[0][0];
