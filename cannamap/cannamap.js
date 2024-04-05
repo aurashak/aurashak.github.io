@@ -18,10 +18,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Load US state boundaries and country outline from OpenStreetMap
+// Fetch US state boundaries and country outline from OpenStreetMap
 fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&limit=1')
     .then(response => response.json())
     .then(data => {
+        console.log('Data for United States:', data);
         if (data && data.length > 0) {
             const countryBoundaries = data[0].geojson;
             L.geoJSON(countryBoundaries, {
@@ -31,19 +32,7 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
                 }
             }).addTo(map);
         }
-    });
-
-fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&limit=1')
-    .then(response => response.json())
-    .then(data => {
-        if (data && data.length > 0) {
-            const countryBoundaries = data[0].geojson;
-            L.geoJSON(countryBoundaries, {
-                style: {
-                    fillColor: 'white', // Fill color
-                    color: 'black',     // Border color
-                    weight: 2            // Border weight
-                }
-            }).addTo(map);
-        }
+    })
+    .catch(error => {
+        console.error('Error fetching country boundaries:', error);
     });
