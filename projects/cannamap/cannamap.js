@@ -18,7 +18,17 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
     .then(response => response.json())
     .then(data => {
         console.log('GeoJSON data:', data); // Log GeoJSON data to console
-        L.geoJSON(data, {
+        
+        // Check if there are any features in the GeoJSON data
+        if (data.features && data.features.length > 0) {
+            console.log('Number of features:', data.features.length);
+        } else {
+            console.error('No features found in GeoJSON data');
+            return;
+        }
+        
+        // Create a GeoJSON layer
+        var geojsonLayer = L.geoJSON(data, {
             filter: function(feature) {
                 return feature.properties.category === 'adm0_a3';
             },
@@ -39,7 +49,10 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
                     })
                 }).addTo(map);
             }
-        }).addTo(map);
+        });
+        
+        // Add the GeoJSON layer to the map
+        geojsonLayer.addTo(map);
     })
     .catch(error => {
         console.error('Error fetching data:', error); // Log error to console
