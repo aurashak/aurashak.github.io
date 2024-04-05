@@ -912,6 +912,14 @@ display: inline-block;
 
 
 
+#cannamap {
+  height: 100vh;
+  width: 100%;
+}
+
+
+
+
 
 #nymap {
   height: 100%; /* Make the map take up 100% of the height */
