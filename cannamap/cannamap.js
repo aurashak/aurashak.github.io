@@ -13,40 +13,33 @@ var map = L.map('cannamap', {
     touchZoom: false
 });
 
-// Add the base layer (OpenStreetMap) before fetching data
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-// Fetch US state boundaries and country outline from OpenStreetMap
-fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&limit=1')
+// Fetch US state boundaries and country outline from provided GeoJSON URL
+fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geojson')
     .then(response => response.json())
     .then(data => {
-        console.log('Data for United States:', data);
-        if (data && data.length > 0 && data[0].geojson) {
-            const countryBoundaries = JSON.parse(data[0].geojson);
-            L.geoJSON(countryBoundaries, {
-                style: {
-                    fillColor: 'red',    // Fill color (countries)
-                    fillOpacity: 1,       // Solid fill
-                    color: 'white',      // Border color (countries)
-                    weight: 2            // Border weight (countries)
-                }
-            }).addTo(map);
-
-            // Add state initials over each state
-            countryBoundaries.features.forEach(feature => {
-                const stateCenter = feature.geometry.coordinates[0][0];
-                const stateName = feature.properties.name;
-                L.marker([stateCenter[1], stateCenter[0]], {
+        console.log('Data:', data);
+        L.geoJSON(data, {
+            filter: function(feature) {
+                return feature.properties.category === 'adm0_a3';
+            },
+            style: {
+                fillColor: 'white',    // Fill color (states)
+                fillOpacity: 1,       // Solid fill
+                color: 'black',      // Border color (states)
+                weight: 2            // Border weight (states)
+            },
+            onEachFeature: function(feature, layer) {
+                // Add state initials over each state
+                const stateName = feature.properties.names;
+                L.marker(layer.getBounds().getCenter(), {
                     icon: L.divIcon({
                         className: 'state-initials',
                         html: stateName.substring(0, 2) // Display first two letters of state name
                     })
                 }).addTo(map);
-            });
-        }
+            }
+        }).addTo(map);
     })
     .catch(error => {
-        console.error('Error fetching country boundaries:', error);
+        console.error('Error fetching data:', error);
     });
