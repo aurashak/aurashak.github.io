@@ -918,6 +918,14 @@ display: inline-block;
 }
 
 
+#cannamap .leaflet-container {
+  background-color: white; /* Set ocean color to white */
+}
+
+.state-initials {
+  font-weight: bold;
+  font-size: 12px;
+}
 
 
 
