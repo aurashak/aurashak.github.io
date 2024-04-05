@@ -17,7 +17,7 @@ var map = L.map('cannamap', {
 fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geojson')
     .then(response => response.json())
     .then(data => {
-        console.log('GeoJSON data:', data);
+        console.log('GeoJSON data:', data); // Log GeoJSON data to console
         L.geoJSON(data, {
             filter: function(feature) {
                 return feature.properties.category === 'adm0_a3';
@@ -31,7 +31,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
             onEachFeature: function(feature, layer) {
                 // Add state initials over each state
                 const stateName = feature.properties.names;
-                console.log('State name:', stateName);
+                console.log('State name:', stateName); // Log state name to console
                 L.marker(layer.getBounds().getCenter(), {
                     icon: L.divIcon({
                         className: 'state-initials',
@@ -42,5 +42,5 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         }).addTo(map);
     })
     .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error); // Log error to console
     });
