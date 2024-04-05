@@ -1,5 +1,5 @@
-   // Initialize the map
-   var map = L.map('cannamap', {
+// Initialize the map
+var map = L.map('cannamap', {
     // Set initial center and zoom level
     center: [37.0902, -95.7129], // United States center coordinates
     zoom: 4,
@@ -15,7 +15,8 @@
 
 // Add the base layer (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    pane: 'background' // Add this line to place the layer below other layers
 }).addTo(map);
 
 // Fetch US state boundaries and country outline from OpenStreetMap
@@ -27,10 +28,23 @@ fetch('https://nominatim.openstreetmap.org/search?format=json&q=United States&li
             const countryBoundaries = JSON.parse(data[0].geojson);
             L.geoJSON(countryBoundaries, {
                 style: {
-                    color: 'black',     // Border color
-                    weight: 2            // Border weight
+                    fillColor: 'white', // Fill color (ocean)
+                    color: 'black',     // Border color (states)
+                    weight: 2            // Border weight (states)
                 }
             }).addTo(map);
+
+            // Add state initials over each state
+            countryBoundaries.features.forEach(feature => {
+                const stateCenter = feature.geometry.coordinates[0][0];
+                const stateName = feature.properties.name;
+                L.marker([stateCenter[1], stateCenter[0]], {
+                    icon: L.divIcon({
+                        className: 'state-initials',
+                        html: stateName.substring(0, 2) // Display first two letters of state name
+                    })
+                }).addTo(map);
+            });
         }
     })
     .catch(error => {
