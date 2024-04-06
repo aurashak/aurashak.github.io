@@ -925,6 +925,17 @@ display: inline-block;
 }
 
 
+/* Customize tooltip appearance */
+.leaflet-tooltip {
+  background-color: rgba(255, 255, 255, 0.9); /* Background color with transparency */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Border radius for rounded corners */
+  padding: 6px 10px; /* Padding inside the tooltip */
+  font-family: Arial, sans-serif; /* Font family */
+  font-size: 12px; /* Font size */
+  color: black; /* Text color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for tooltip */
+}
 
 
 
