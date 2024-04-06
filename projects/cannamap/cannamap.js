@@ -50,17 +50,21 @@ L.geoJSON(filteredGeoJSON, {
         // Extract data from the GeoJSON feature
         var label = feature.properties.postal; // Assuming the category property holds the label information
 
-        // Create and bind a popup with the label information
-        layer.bindPopup(label);
+        // Get the centroid of the state polygon
+        var centroid = layer.getBounds().getCenter();
 
         // Add label to the feature as a marker with custom icon
         var labelIcon = L.divIcon({
             className: 'label-icon',
-            html: '<div>' + label + '</div>'
+            html: '<div>' + label + '</div>',
+            iconAnchor: [10, 10] // Adjust the icon anchor to center the label
         });
-        L.marker(layer.getBounds().getCenter(), { icon: labelIcon }).addTo(map);
+
+        // Add marker with label icon at the centroid of the state
+        L.marker(centroid, { icon: labelIcon }).addTo(map);
     }
 }).addTo(map);
+
 
     })
     .catch(error => {
