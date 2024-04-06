@@ -1,4 +1,4 @@
-// Initialize the main map
+// Initialize the map
 var map = L.map('cannamap', {
     // Set initial center and zoom level
     center: [37.0902, -95.7129], // United States center coordinates
@@ -19,17 +19,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.5 // Set opacity to 50%
 }).addTo(map);
 
-// Create a MiniMap instance
-var miniMap = new L.Control.MiniMap(
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), // Pass a base map layer
-    {
-        toggleDisplay: true // Allow the user to toggle the minimap's visibility
-    }
-);
-
-// Add the MiniMap control to the main map
-map.addControl(miniMap);
-
 // Fetch GeoJSON data and add filtered features to the map as a layer
 fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geojson')
     .then(response => response.json())
@@ -37,7 +26,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         console.log('Original GeoJSON data:', data); // Log original GeoJSON data
 
         // Filter GeoJSON features to only include those labeled "United States of America" in the "geounit" category
-        var filteredData = data.features.filter(feature => feature.properties.geoununit === "United States of America");
+        var filteredData = data.features.filter(feature => feature.properties.geonunit === "United States of America");
         console.log('Filtered GeoJSON data:', filteredData); // Log filtered GeoJSON data
 
         // Create a new GeoJSON object with the filtered features
