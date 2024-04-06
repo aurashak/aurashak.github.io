@@ -26,15 +26,18 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         console.log('Original GeoJSON data:', data); // Log original GeoJSON data
 
         // Filter GeoJSON features to only include those labeled "United States of America" in the "geounit" category
-        var usaData = data.features.filter(feature => feature.properties.geounit === "United States of America");
-        console.log('Filtered USA GeoJSON data:', usaData); // Log filtered GeoJSON data for USA
+        var filteredData = data.features.filter(feature => feature.properties.geonunit === "United States of America");
+        console.log('Filtered GeoJSON data:', filteredData); // Log filtered GeoJSON data
 
-        // Filter GeoJSON features to only include those labeled "Alaska" or "Hawaii"
-        var filteredData = data.features.filter(feature => feature.properties.geoununit === "Alaska" || feature.properties.geoununit === "Hawaii");
-        console.log('Filtered Alaska and Hawaii GeoJSON data:', filteredData); // Log filtered GeoJSON data for Alaska and Hawaii
+        // Create a new GeoJSON object with the filtered features
+        var filteredGeoJSON = {
+            type: 'FeatureCollection',
+            features: filteredData
+        };
+        console.log('Filtered GeoJSON:', filteredGeoJSON); // Log filtered GeoJSON object
 
-        // Add filtered GeoJSON layers to the map with custom styles
-        L.geoJSON(usaData, {
+        // Add filtered GeoJSON layer to the map with custom styles
+        L.geoJSON(filteredGeoJSON, {
             style: function(feature) {
                 return {
                     fillColor: 'white',    // Fill color (change to your desired color)
@@ -42,28 +45,8 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
                     color: 'black',          // Border color (change to your desired color)
                     weight: .5               // Border weight
                 };
-            },
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup('<b>' + feature.properties.geounit + '</b><br>This is ' + feature.properties.geounit);
             }
         }).addTo(map);
-
-        L.geoJSON(filteredData, {
-            style: function(feature) {
-                return {
-                    fillColor: 'white',    // Fill color (change to your desired color)
-                    fillOpacity: 0.9,       // Fill opacity
-                    color: 'black',          // Border color (change to your desired color)
-                    weight: .5               // Border weight
-                };
-            },
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup('<b>' + feature.properties.geoununit + '</b><br>This is ' + feature.properties.geoununit);
-            }
-        }).addTo(map);
-
-        // Fit the map bounds to the GeoJSON layers
-        map.fitBounds(L.geoJSON(usaData).getBounds().extend(L.geoJSON(filteredData).getBounds()));
     })
     .catch(error => {
         console.error('Error fetching GeoJSON data:', error);
