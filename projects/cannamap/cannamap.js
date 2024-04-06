@@ -36,36 +36,24 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         };
         console.log('Filtered GeoJSON:', filteredGeoJSON); // Log filtered GeoJSON object
 
-// Add filtered GeoJSON layer to the map with custom styles and labels
-L.geoJSON(filteredGeoJSON, {
-    style: function(feature) {
-        return {
-            fillColor: 'white',    // Fill color (change to your desired color)
-            fillOpacity: 0.9,       // Fill opacity
-            color: 'black',          // Border color (change to your desired color)
-            weight: .5               // Border weight
-        };
-    },
-    onEachFeature: function(feature, layer) {
-        // Extract data from the GeoJSON feature
-        var label = feature.properties.postal; // Assuming the category property holds the label information
+        // Add filtered GeoJSON layer to the map with custom styles and tooltips
+        L.geoJSON(filteredGeoJSON, {
+            style: function(feature) {
+                return {
+                    fillColor: 'white',    // Fill color (change to your desired color)
+                    fillOpacity: 0.9,       // Fill opacity
+                    color: 'black',          // Border color (change to your desired color)
+                    weight: .5               // Border weight
+                };
+            },
+            onEachFeature: function(feature, layer) {
+                // Extract data from the GeoJSON feature
+                var tooltipText = feature.properties.postal; // Assuming the category property holds the label information
 
-        // Get the centroid of the state polygon
-        var centroid = layer.getBounds().getCenter();
-
-        // Add label to the feature as a marker with custom icon
-        var labelIcon = L.divIcon({
-            className: 'label-icon',
-            html: '<div>' + label + '</div>',
-            iconAnchor: [10, 10] // Adjust the icon anchor to center the label
-        });
-
-        // Add marker with label icon at the centroid of the state
-        L.marker(centroid, { icon: labelIcon }).addTo(map);
-    }
-}).addTo(map);
-
-
+                // Add tooltip to the layer
+                layer.bindTooltip(tooltipText, { permanent: false, direction: 'center' });
+            }
+        }).addTo(map);
     })
     .catch(error => {
         console.error('Error fetching GeoJSON data:', error);
