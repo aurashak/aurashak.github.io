@@ -1,8 +1,8 @@
 // Initialize the map
 var map = L.map('cannamap', {
-    // Set initial center and zoom level
-    center: [37.0902, -95.7129], // United States center coordinates
-    zoom: 4,
+    // Set initial center and zoom level for focusing on the world
+    center: [0, 0], // Center coordinates to focus on the world
+    zoom: 2, // Zoom level adjusted to show the world
     // Disable zooming and scrolling
     zoomControl: false,
     scrollWheelZoom: false,
@@ -12,6 +12,7 @@ var map = L.map('cannamap', {
     keyboard: false,
     touchZoom: false
 });
+
 
 // Add base map tiles with opacity set
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
