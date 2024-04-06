@@ -36,17 +36,32 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         };
         console.log('Filtered GeoJSON:', filteredGeoJSON); // Log filtered GeoJSON object
 
-        // Add filtered GeoJSON layer to the map with custom styles
-        L.geoJSON(filteredGeoJSON, {
-            style: function(feature) {
-                return {
-                    fillColor: 'white',    // Fill color (change to your desired color)
-                    fillOpacity: 0.9,       // Fill opacity
-                    color: 'black',          // Border color (change to your desired color)
-                    weight: .5               // Border weight
-                };
-            }
-        }).addTo(map);
+// Add filtered GeoJSON layer to the map with custom styles and labels
+L.geoJSON(filteredGeoJSON, {
+    style: function(feature) {
+        return {
+            fillColor: 'white',    // Fill color (change to your desired color)
+            fillOpacity: 0.9,       // Fill opacity
+            color: 'black',          // Border color (change to your desired color)
+            weight: .5               // Border weight
+        };
+    },
+    onEachFeature: function(feature, layer) {
+        // Extract data from the GeoJSON feature
+        var label = feature.properties.category; // Assuming the category property holds the label information
+
+        // Create and bind a popup with the label information
+        layer.bindPopup(label);
+
+        // Add label to the feature as a marker with custom icon
+        var labelIcon = L.divIcon({
+            className: 'label-icon',
+            html: '<div>' + label + '</div>'
+        });
+        L.marker(layer.getBounds().getCenter(), { icon: labelIcon }).addTo(map);
+    }
+}).addTo(map);
+
     })
     .catch(error => {
         console.error('Error fetching GeoJSON data:', error);
