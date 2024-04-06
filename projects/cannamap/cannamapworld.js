@@ -45,7 +45,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/countries.geojson')
             },
             onEachFeature: function(feature, layer) {
                 // Extract data from the GeoJSON feature
-                var tooltipText = feature.properties.admin; // Assuming the "admin" category holds the label information
+                var tooltipText = feature.properties.ADMIN; // Assuming the "admin" category holds the label information
 
                 // Add tooltip to the layer
                 layer.bindTooltip(tooltipText, { permanent: false, direction: 'center' });
