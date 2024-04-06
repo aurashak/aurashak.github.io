@@ -26,7 +26,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         console.log('Original GeoJSON data:', data); // Log original GeoJSON data
 
         // Filter GeoJSON features to only include those labeled "United States of America" in the "geounit" category
-        var filteredData = data.features.filter(feature => feature.properties.geoununit === "United States of America");
+        var filteredData = data.features.filter(feature => feature.properties.geonunit === "United States of America");
         console.log('Filtered GeoJSON data:', filteredData); // Log filtered GeoJSON data
 
         // Create a new GeoJSON object with the filtered features
@@ -37,7 +37,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         console.log('Filtered GeoJSON:', filteredGeoJSON); // Log filtered GeoJSON object
 
         // Add filtered GeoJSON layer to the map with custom styles
-        var geojsonLayer = L.geoJSON(filteredGeoJSON, {
+        L.geoJSON(filteredGeoJSON, {
             style: function(feature) {
                 return {
                     fillColor: 'white',    // Fill color (change to your desired color)
@@ -61,9 +61,6 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
                 }
             }
         }).addTo(map);
-        
-        // Fit the map bounds to the GeoJSON layer
-        map.fitBounds(geojsonLayer.getBounds());
     })
     .catch(error => {
         console.error('Error fetching GeoJSON data:', error);
