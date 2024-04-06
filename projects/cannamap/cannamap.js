@@ -48,7 +48,7 @@ L.geoJSON(filteredGeoJSON, {
     },
     onEachFeature: function(feature, layer) {
         // Extract data from the GeoJSON feature
-        var label = feature.properties.category; // Assuming the category property holds the label information
+        var label = feature.properties.postal; // Assuming the category property holds the label information
 
         // Create and bind a popup with the label information
         layer.bindPopup(label);
