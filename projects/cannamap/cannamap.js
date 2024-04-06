@@ -34,6 +34,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
             type: 'FeatureCollection',
             features: filteredData
         };
+        console.log('Filtered GeoJSON:', filteredGeoJSON); // Log filtered GeoJSON object
 
         // Add filtered GeoJSON layer to the map with custom styles
         L.geoJSON(filteredGeoJSON, {
