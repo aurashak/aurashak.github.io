@@ -29,8 +29,14 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         var filteredData = data.features.filter(feature => feature.properties.geounit === "United States of America");
         console.log('Filtered GeoJSON data:', filteredData); // Log filtered GeoJSON data
 
+        // Create a new GeoJSON object with the filtered features
+        var filteredGeoJSON = {
+            type: 'FeatureCollection',
+            features: filteredData
+        };
+
         // Add filtered GeoJSON layer to the map with custom styles
-        L.geoJSON(filteredData, {
+        L.geoJSON(filteredGeoJSON, {
             style: function(feature) {
                 return {
                     fillColor: 'white',    // Fill color (change to your desired color)
