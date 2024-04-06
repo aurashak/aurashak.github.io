@@ -13,13 +13,11 @@ var map = L.map('cannamap', {
     touchZoom: false
 });
 
-// Add base map tiles
+// Add base map tiles with opacity set
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    opacity: 0.5 // Set opacity to 50%
 }).addTo(map);
-
-// Set opacity of the OpenStreetMap layer
-osmLayer.setOpacity(0.5); // Set opacity to 50%
 
 // Fetch GeoJSON data and add it to the map as a layer
 fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geojson')
