@@ -19,12 +19,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.5 // Set opacity to 50%
 }).addTo(map);
 
-// Fetch GeoJSON data and add it to the map as a layer
+// Fetch GeoJSON data and add filtered features to the map as a layer
 fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geojson')
     .then(response => response.json())
     .then(data => {
-        // Add GeoJSON layer to the map with custom styles
-        L.geoJSON(data, {
+        // Filter GeoJSON features to only include those labeled "United States of America" in the "geounit" category
+        var filteredData = data.features.filter(feature => feature.properties.geounit === "United States of America");
+
+        // Add filtered GeoJSON layer to the map with custom styles
+        L.geoJSON(filteredData, {
             style: function(feature) {
                 return {
                     fillColor: 'white',    // Fill color (change to your desired color)
