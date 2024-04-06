@@ -37,7 +37,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         console.log('Filtered GeoJSON:', filteredGeoJSON); // Log filtered GeoJSON object
 
         // Add filtered GeoJSON layer to the map with custom styles
-        L.geoJSON(filteredGeoJSON, {
+        var geojsonLayer = L.geoJSON(filteredGeoJSON, {
             style: function(feature) {
                 return {
                     fillColor: 'white',    // Fill color (change to your desired color)
@@ -45,8 +45,16 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
                     color: 'black',          // Border color (change to your desired color)
                     weight: .5               // Border weight
                 };
+            },
+            onEachFeature: function (feature, layer) {
+                if (feature.properties.gn_name === "Alaska" || feature.properties.geounit === "Hawaii") {
+                    layer.bindPopup('<b>' + feature.properties.geounit + '</b><br>This is ' + feature.properties.geounit);
+                }
             }
         }).addTo(map);
+
+        // Fit the map bounds to the GeoJSON layer
+        map.fitBounds(geojsonLayer.getBounds());
     })
     .catch(error => {
         console.error('Error fetching GeoJSON data:', error);
