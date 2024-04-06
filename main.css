@@ -919,14 +919,11 @@ display: inline-block;
 
 
 .label-icon {
-  font-family: Arial, sans-serif; /* Specify your preferred font family */
-  font-size: 12px; /* Specify the font size */
-  color: black; /* Specify the text color */
-  background-color: rgba(255, 255, 255, 0.8); /* Specify the background color with transparency */
-  padding: 6px 10px; /* Specify padding for the label */
-  border-radius: 4px; /* Specify border radius for rounded corners */
-  border: 1px solid black; /* Specify border properties */
+  font-family: Arial, sans-serif; 
+  font-size: 12px; 
+  color: black; 
 }
+
 
 
 
