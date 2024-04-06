@@ -26,7 +26,7 @@ fetch('https://aurashak.github.io/projects/cannamap/maps/statesandprovinces.geoj
         console.log('Original GeoJSON data:', data); // Log original GeoJSON data
 
         // Filter GeoJSON features to only include those labeled "United States of America" in the "geounit" category
-        var filteredData = data.features.filter(feature => feature.properties.geounit === "United States of America");
+        var filteredData = data.features.filter(feature => feature.properties.geonunit === "United States of America");
         console.log('Filtered GeoJSON data:', filteredData); // Log filtered GeoJSON data
 
         // Create a new GeoJSON object with the filtered features
