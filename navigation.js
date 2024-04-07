@@ -2,19 +2,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create navigation elements
     const navigation = document.createElement("nav");
     navigation.innerHTML = `
-        <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
-        <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
-        <div class="navigation" id="projectsLink">Projects</div>
-        <div class="hidden-projects" id="projectsList">
-            <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
-            <a href="https://aurashak.github.io/projects/mts/mts.html">WH 3D Model</a>
-
-            <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
-            <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
-            <a href="https://aurashak.github.io/misc/misc.html">Misc</a>
-
-        </div>
-    `;
+    <div class="navigation"><a href="https://aurashak.github.io">Home</a></div>
+    <div class="navigation"><a href="https://aurashak.github.io/about/about.html">About</a></div>
+    <div class="navigation" id="projectsLink">Projects</div>
+    <div class="hidden-projects" id="projectsList">
+        <a href="https://aurashak.github.io/projects/nymap/nymap.html">NY Map</a>
+        <a href="https://aurashak.github.io/projects/mts/mts.html">WH 3D Model</a>
+        <a href="https://aurashak.github.io/projects/nmca/nmca.html">NMCA</a>
+        <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
+        <a href="https://aurashak.github.io/misc/misc.html">Misc</a>
+        <a href="https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html">Displacement Map</a>
+        <!-- Remove the line below to hide Emissions Map from the navigation -->
+        <!-- <a href="https://aurashak.github.io/projects/emissionsmap/emissionsmap.html">Emisions Map</a> -->
+    </div>
+`;
 
     // Find the element with the class "header" and append the navigation
     const headerElement = document.querySelector(".header");
@@ -40,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         "https://aurashak.github.io/projects/nmca/nmca.html",
         "https://aurashak.github.io/projects/nydisplacementmap/nydisplacementmap.html",
-        "https://aurashak.github.io/misc/misc.html"
+        "https://aurashak.github.io/misc/misc.html",
+        "https://aurashak.github.io/projects/emissionsmap/emissionsmap.html"
 
     ];
 
