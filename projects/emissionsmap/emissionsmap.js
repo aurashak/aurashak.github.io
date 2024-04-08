@@ -22,7 +22,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
-fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
+fetch("https://aurashak.github.io/geojson/emissionsmap/data/countriestotalco2.geojson")
   .then(response => response.json())
   .then(geojsonData => {
     console.log("GeoJSON data loaded successfully:", geojsonData);
