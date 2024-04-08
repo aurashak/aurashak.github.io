@@ -1,5 +1,3 @@
-console.log("Custom script loading...");
-console.log("Starting emissionsmap.js...");
 
 // Initialize the map
 var map = L.map('emissionsmap', {
@@ -44,7 +42,6 @@ geojsonLayer.addTo(map);
 // Zoom the map to the extent of the GeoJSON layer
 console.log("Fitting map bounds...");
 map.fitBounds(geojsonLayer.getBounds());
-
 
 
 
