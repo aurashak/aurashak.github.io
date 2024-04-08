@@ -2,7 +2,7 @@
 var map = L.map('emissionsmap', {
     // Set initial center and zoom level for focusing on the world
     center: [0, 0], // Center coordinates to focus on the world
-    zoom: 5, // Adjusted to a higher zoom level
+    zoom: 15, // Adjusted to a higher zoom level
     // Disable zooming and scrolling
     zoomControl: false,
     scrollWheelZoom: false,
