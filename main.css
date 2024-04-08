@@ -961,8 +961,35 @@ display: inline-block;
 input[type="range"] {
   width: 100%;
   height: 25px;
+  margin-bottom: 10px; /* Add some space below the slider */
+  -webkit-appearance: none; /* Remove default styles */
+  appearance: none;
 }
 
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styles for thumb */
+  appearance: none;
+  width: 15px; /* Width of the thumb */
+  height: 25px; /* Height of the thumb */
+  background: #007bff; /* Thumb color */
+  cursor: pointer;
+}
+
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px; /* Adjust padding for proper alignment */
+  font-size: 12px; /* Font size of the ticks */
+}
+
+.slider-ticks::before, .slider-ticks::after {
+  content: ''; /* Clearfix */
+}
+
+.slider-ticks span {
+  position: relative;
+  top: -15px; /* Adjust position to align ticks with the slider */
+}
 
 
 
@@ -1005,6 +1032,28 @@ input[type="range"] {
 
 
 
+.emissionsmaplegend {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.emissionsmaplegend-item {
+  margin-bottom: 5px;
+}
+
+.emissionsmaplegend-color {
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #ccc;
+}
+
+.emissionsmaplegend-label {
+  display: inline-block;
+  margin-left: 5px;
+}
 
 
 
