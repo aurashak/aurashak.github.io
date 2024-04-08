@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXVyYXNoayIsImEiOiJjbHBwd2dvZXYxNGQ0MnFwanZqeXV6OHV0In0.1ypymm-PTaV5y0Igl5fKzQ';
 
 const map = new mapboxgl.Map({
-    container: 'map',
+    container: 'emissionsmap',
     style: 'mapbox://styles/mapbox/light-v10',
     center: [0, 0], // Center coordinates to focus on the world
     zoom: 2, // Adjusted to a higher zoom level
