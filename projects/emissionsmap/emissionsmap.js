@@ -1,9 +1,8 @@
-
 // Initialize the map
 var map = L.map('emissionsmap', {
     // Set initial center and zoom level for focusing on the world
     center: [0, 0], // Center coordinates to focus on the world
-    zoom: 2, // Zoom level adjusted to show the world
+    zoom: 5, // Adjusted to a higher zoom level
     // Disable zooming and scrolling
     zoomControl: false,
     scrollWheelZoom: false,
@@ -38,11 +37,6 @@ var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/
 // Add the GeoJSON layer to the map
 console.log("Adding GeoJSON layer...");
 geojsonLayer.addTo(map);
-
-// Zoom the map to the extent of the GeoJSON layer
-console.log("Fitting map bounds...");
-map.fitBounds(geojsonLayer.getBounds());
-
 
 
 /*
