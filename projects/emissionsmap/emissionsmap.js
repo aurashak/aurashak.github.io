@@ -1,25 +1,3 @@
-// Initialize the map
-var map = L.map('emissionsmap', {
-    // Set initial center and zoom level for focusing on the world
-    center: [0, 0], // Center coordinates to focus on the world
-    zoom: 2, // Adjusted to a higher zoom level
-    // Disable zooming and scrolling
-    zoomControl: false,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
-    dragging: false,
-    boxZoom: false,
-    keyboard: false,
-    touchZoom: false
-});
-
-// Add tile layer from OpenStreetMap with only labels
-console.log("Adding tile layer...");
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    opacity: 0.5 // Adjust opacity for better visibility
-}).addTo(map);
-
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
 fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
@@ -30,18 +8,18 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
     // Now you can proceed to create the choropleth map using geojsonData
     // Example code to create choropleth map goes here
     // Define the color scale and map the values to colors
-    const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(geojsonData.features.length); // Adjust color scale according to the number of features
+    const colorScale = chroma.scale(['#ffffff', '#ff0000']).mode('lab').colors(6); // Adjust color scale according to the number of stages
     const geojsonLayer = L.geoJSON(geojsonData, {
         style: function(feature) {
             // Here, you can access each feature's properties and set its style
             // Example:
             const value = feature.properties.worldcountriestotalco2_field_89; // Assuming 'worldcountriestotalco2_field_89' is the property in GeoJSON representing emissions data
             return {
-                fillColor: getColor(value, colorScale),
+                fillColor: getColor(value),
                 weight: 1,
                 opacity: 1,
                 color: 'white',
-                fillOpacity: 0.8 // Adjusted opacity
+                fillOpacity: 0.8 // Adjust opacity
             };
         },
         onEachFeature: function(feature, layer) {
@@ -55,18 +33,15 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
 
     legend.onAdd = () => {
         const div = L.DomUtil.create('div', 'legend');
-        const labels = [];
-        const grades = []; // You can define grades based on the range of values in 'worldcountriestotalco2_field_89' if needed
+        const labels = ['0-100', '100-3000', '3000-6000', '6000-9000', '9000-12000', '12000-17000'];
+        const colors = colorScale;
 
-        // Loop through colors and add legend items
-        for (let i = 0; i < colorScale.length; i++) {
-            const from = i * 1000; // Assuming a step of 1000
-            const to = (i + 1) * 1000; // Assuming a step of 1000
-
+        // Add legend items
+        for (let i = 0; i < labels.length; i++) {
             div.innerHTML += `
                 <div class="legend-item">
-                    <div class="legend-color" style="background: ${colorScale[i]};"></div>
-                    <div class="legend-label">${from}${to ? '&ndash;' + to : '+'}</div>
+                    <div class="legend-color" style="background: ${colors[i]};"></div>
+                    <div class="legend-label">${labels[i]}</div>
                 </div>
             `;
         }
@@ -81,11 +56,22 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
   });
 
 // Function to get color based on value
-const getColor = (value, colorScale) => {
-    // You can customize this function based on the range of values and the color scale you want
-    // Example:
-    const index = Math.floor(value); // Adjust index according to the range of values
-    return colorScale[index];
+const getColor = (value) => {
+    if (value >= 0 && value < 100) {
+        return colorScale[0];
+    } else if (value >= 100 && value < 3000) {
+        return colorScale[1];
+    } else if (value >= 3000 && value < 6000) {
+        return colorScale[2];
+    } else if (value >= 6000 && value < 9000) {
+        return colorScale[3];
+    } else if (value >= 9000 && value < 12000) {
+        return colorScale[4];
+    } else if (value >= 12000 && value <= 17000) {
+        return colorScale[5];
+    } else {
+        return '#cccccc'; // Default color for values outside specified ranges
+    }
 };
 
 
