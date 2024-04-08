@@ -30,7 +30,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
     // Now you can proceed to create the choropleth map using geojsonData
     // Example code to create choropleth map goes here
     // Define the color scale and map the values to colors
-    const colorScale = chroma.scale('YlGnBu').mode('lab').colors(geojsonData.features.length); // Adjust color scale according to the number of features
+    const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(geojsonData.features.length); // Adjust color scale according to the number of features
     const geojsonLayer = L.geoJSON(geojsonData, {
         style: function(feature) {
             // Here, you can access each feature's properties and set its style
@@ -41,7 +41,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
                 weight: 1,
                 opacity: 1,
                 color: 'white',
-                fillOpacity: 0.7
+                fillOpacity: 0.8 // Adjusted opacity
             };
         },
         onEachFeature: function(feature, layer) {
@@ -59,9 +59,9 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
         const grades = []; // You can define grades based on the range of values in 'worldcountriestotalco2_field_89' if needed
 
         // Loop through colors and add legend items
-        for (let i = 0; i < grades.length; i++) {
-            const from = grades[i];
-            const to = grades[i + 1];
+        for (let i = 0; i < colorScale.length; i++) {
+            const from = i * 1000; // Assuming a step of 1000
+            const to = (i + 1) * 1000; // Assuming a step of 1000
 
             div.innerHTML += `
                 <div class="legend-item">
@@ -87,7 +87,6 @@ const getColor = (value, colorScale) => {
     const index = Math.floor(value); // Adjust index according to the range of values
     return colorScale[index];
 };
-
 
 
 /*
