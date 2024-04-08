@@ -22,121 +22,66 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
-fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
+fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
   .then(response => response.json())
   .then(geojsonData => {
     console.log("GeoJSON data loaded successfully:", geojsonData);
-    
-    // Fetch the CSV file
-    console.log("Fetching CSV file...");
-    fetch("https://aurashak.github.io/projects/emissionsmap/data/EDGARv8_c02/GHG_totals_by_country-Table%201.csv")
-      .then(response => response.text())
-      .then(csvData => {
-        console.log("CSV data loaded successfully:", csvData);
         
-        // Parse the CSV data
-        console.log("Parsing CSV data...");
-        const csvRows = csvData.split('\n');
-        const headers = csvRows[0].split(',');
-        const countryIndex = headers.indexOf('Country');
-        const data2022Index = headers.indexOf('2022');
+    // Now you can proceed to create the chloropleth map using geojsonData
+    // Example code to create chloropleth map goes here
+    // Define the color scale and map the values to colors
+    const colorScale = chroma.scale('YlGnBu').mode('lab').colors(geojsonData.features.length); // Adjust color scale according to the number of features
+    const geojsonLayer = L.geoJSON(geojsonData, {
+        style: function(feature) {
+            // Here, you can access each feature's properties and set its style
+            // Example:
+            const value = feature.properties.worldcountriestotalco2_field_89; // Assuming 'worldcountriestotalco2_field_89' is the property in GeoJSON representing emissions data
+            return {
+                fillColor: getColor(value, colorScale),
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.7
+            };
+        }
+    }).addTo(map);
 
-        // Extract country names and corresponding data from CSV
-        const csvDataArray = csvRows.slice(1).map(row => row.split(','));
-        const csvCountries = csvDataArray.map(row => row[countryIndex]);
-        const csvDataColumn = csvDataArray.map(row => parseFloat(row[data2022Index]));
+    // Create legend
+    const legend = L.control({ position: 'bottomright' });
 
-        // Filter GeoJSON data based on matching country names
-        console.log("Filtering GeoJSON data based on CSV countries...");
-        const filteredFeatures = geojsonData.features.filter(feature => {
-          return csvCountries.includes(feature.properties.NAME);
-        });
-        
-        // Create a new GeoJSON object with filtered features
-        const filteredGeoJSON = {
-          type: "FeatureCollection",
-          features: filteredFeatures
-        };
-        
-        console.log("Filtered GeoJSON data:", filteredGeoJSON);
-        
-        // Now you can proceed to create the chloropleth map using filteredGeoJSON and csvDataColumn
-        // Example code to create chloropleth map goes here
-        // Define the color scale and map the values to colors
-        const colorScale = chroma.scale(['#f7fbff', '#08519c']).mode('lab').colors(10);
-        const geojsonLayer = L.geoJSON(filteredGeoJSON, {
-            style: function(feature) {
-                const countryName = feature.properties.NAME;
-                const index = csvCountries.indexOf(countryName);
-                if (index !== -1) {
-                    const value = csvDataColumn[index];
-                    const colorIndex = Math.floor((value / 16000) * 9);
-                    return {
-                        fillColor: colorScale[colorIndex],
-                        weight: 1,
-                        opacity: 1,
-                        color: 'white',
-                        fillOpacity: 0.7
-                    };
-                } else {
-                    console.log("No data found for country:", countryName);
-                    return {
-                        fillColor: '#cccccc',
-                        weight: 1,
-                        opacity: 1,
-                        color: 'white',
-                        fillOpacity: 0.7
-                    };
-                }
-            }
-        }).addTo(map);
+    legend.onAdd = () => {
+        const div = L.DomUtil.create('div', 'legend');
+        const labels = [];
+        const grades = []; // You can define grades based on the range of values in 'worldcountriestotalco2_field_89' if needed
 
-        // Create legend
-        const legend = L.control({ position: 'bottomright' });
+        // Loop through colors and add legend items
+        for (let i = 0; i < grades.length; i++) {
+            const from = grades[i];
+            const to = grades[i + 1];
 
-        legend.onAdd = () => {
-            const div = L.DomUtil.create('div', 'legend');
-            const labels = [];
-            const grades = [0, 1600, 3200, 4800, 6400, 8000, 9600, 11200, 12800, 14400];
+            div.innerHTML += `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${colorScale[i]};"></div>
+                    <div class="legend-label">${from}${to ? '&ndash;' + to : '+'}</div>
+                </div>
+            `;
+        }
 
-            // Loop through colors and add legend items
-            for (let i = 0; i < grades.length; i++) {
-                const from = grades[i];
-                const to = grades[i + 1];
+        return div;
+    };
 
-                div.innerHTML += `
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: ${getColor(from + 1)};"></div>
-                        <div class="legend-label">${from}${to ? '&ndash;' + to : '+'}</div>
-                    </div>
-                `;
-            }
-
-            return div;
-        };
-
-        legend.addTo(map);
-    })
-      .catch(error => {
-        console.error("Error loading CSV data:", error);
-      });
+    legend.addTo(map);
   })
   .catch(error => {
     console.error("Error loading GeoJSON data:", error);
   });
 
 // Function to get color based on value
-const getColor = (d) => {
-    return d > 14400 ? '#08519c' :
-           d > 12800 ? '#3182bd' :
-           d > 11200 ? '#6baed6' :
-           d > 9600  ? '#9ecae1' :
-           d > 8000  ? '#c6dbef' :
-           d > 6400  ? '#deebf7' :
-           d > 4800  ? '#f7fbff' :
-           d > 3200  ? '#fee0d2' :
-           d > 1600  ? '#fcbba1' :
-                       '#fc9272';
+const getColor = (value, colorScale) => {
+    // You can customize this function based on the range of values and the color scale you want
+    // Example:
+    const index = Math.floor(value); // Adjust index according to the range of values
+    return colorScale[index];
 };
 
 
