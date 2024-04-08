@@ -1,3 +1,27 @@
+// Initialize the map
+var map = L.map('emissionsmap', {
+    // Set initial center and zoom level for focusing on the world
+    center: [0, 0], // Center coordinates to focus on the world
+    zoom: 2, // Adjusted to a higher zoom level
+    minZoom: 2, // Minimum zoom level
+    maxZoom: 10, // Maximum zoom level
+    zoomControl: true,
+    scrollWheelZoom: true,
+    doubleClickZoom: true,
+    dragging: true,
+    boxZoom: false,
+    keyboard: false,
+
+    touchZoom: true
+});
+
+// Add tile layer from OpenStreetMap with only labels
+console.log("Adding tile layer...");
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    opacity: 0.5 // Adjust opacity for better visibility
+}).addTo(map);
+
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
 fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
@@ -73,6 +97,7 @@ const getColor = (value) => {
         return '#cccccc'; // Default color for values outside specified ranges
     }
 };
+
 
 
 /*
