@@ -22,6 +22,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
 
+// Define the color scale globally
+const colorScale = chroma.scale(['#ffffff', '#ff0000']).mode('lab').colors(6); // Adjust color scale according to the number of stages
+
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
 fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
@@ -32,7 +35,6 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
     // Now you can proceed to create the choropleth map using geojsonData
     // Example code to create choropleth map goes here
     // Define the color scale and map the values to colors
-    const colorScale = chroma.scale(['#ffffff', '#ff0000']).mode('lab').colors(6); // Adjust color scale according to the number of stages
     const geojsonLayer = L.geoJSON(geojsonData, {
         style: function(feature) {
             // Here, you can access each feature's properties and set its style
@@ -97,6 +99,7 @@ const getColor = (value) => {
         return '#cccccc'; // Default color for values outside specified ranges
     }
 };
+
 
 
 
