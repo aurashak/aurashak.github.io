@@ -27,7 +27,7 @@ const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(6); // Adju
 
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
-fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
+fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojson")
     .then(response => response.json())
     .then(geojsonData => {
         console.log("GeoJSON data loaded successfully:", geojsonData);
@@ -36,7 +36,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
         // Example code to create choropleth map goes here
         const geojsonLayer = L.geoJSON(geojsonData, {
             style: function(feature) {
-                const value = feature.properties.worldcountriestotalco2_field_89; // Assuming 'worldcountriestotalco2_field_89' is the property in GeoJSON representing emissions data
+                const value = feature.properties['2022']; // Assuming 'worldcountriestotalco2_field_89' is the property in GeoJSON representing emissions data
                 return {
                     fillColor: getColor(value),
                     weight: 1,
@@ -46,7 +46,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
                 };
             },
             onEachFeature: function(feature, layer) {
-                layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>Emissions: ${feature.properties.worldcountriestotalco2_field_89}`);
+                layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>Emissions: ${feature.properties['2022']}`);
             }
         }).addTo(map);
 
