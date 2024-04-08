@@ -1,11 +1,39 @@
 // Initialize the map
-var map = L.map('emissionsmap').setView([0, 0], 2);
+var map = L.map('emissionsmap', {
+    // Set initial center and zoom level for focusing on the world
+    center: [0, 0], // Center coordinates to focus on the world
+    zoom: 2, // Zoom level adjusted to show the world
+    // Disable zooming and scrolling
+    zoomControl: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    dragging: false,
+    boxZoom: false,
+    keyboard: false,
+    touchZoom: false
+});
+
 
 // Add tile layer from OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+// Load GeoJSON file for the world map
+var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/worldcountries.geojson");
+
+// Add the GeoJSON layer to the map
+geojsonLayer.addTo(map);
+
+// Zoom the map to the extent of the GeoJSON layer
+map.fitBounds(geojsonLayer.getBounds());
+
+
+
+
+
+/*
+ 
 // Load GeoJSON file for the world map
 var geojsonLayer = new L.GeoJSON.AJAX("countries.geojson");
 
@@ -79,3 +107,6 @@ slider.oninput = function () {
     });
     createChoroplethMap(parseInt(this.value));
 };
+
+
+*/
