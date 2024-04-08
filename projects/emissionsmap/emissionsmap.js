@@ -70,7 +70,7 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
                 const index = csvCountries.indexOf(countryName);
                 if (index !== -1) {
                     const value = csvDataColumn[index];
-                    const colorIndex = Math.floor((value / 15685) * 9);
+                    const colorIndex = Math.floor((value / 16000) * 9);
                     return {
                         fillColor: colorScale[colorIndex],
                         weight: 1,
@@ -90,6 +90,32 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
                 }
             }
         }).addTo(map);
+
+        // Create legend
+        const legend = L.control({ position: 'bottomright' });
+
+        legend.onAdd = () => {
+            const div = L.DomUtil.create('div', 'legend');
+            const labels = [];
+            const grades = [0, 1600, 3200, 4800, 6400, 8000, 9600, 11200, 12800, 14400];
+
+            // Loop through colors and add legend items
+            for (let i = 0; i < grades.length; i++) {
+                const from = grades[i];
+                const to = grades[i + 1];
+
+                div.innerHTML += `
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: ${getColor(from + 1)};"></div>
+                        <div class="legend-label">${from}${to ? '&ndash;' + to : '+'}</div>
+                    </div>
+                `;
+            }
+
+            return div;
+        };
+
+        legend.addTo(map);
     })
       .catch(error => {
         console.error("Error loading CSV data:", error);
@@ -98,6 +124,22 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
   .catch(error => {
     console.error("Error loading GeoJSON data:", error);
   });
+
+// Function to get color based on value
+const getColor = (d) => {
+    return d > 14400 ? '#08519c' :
+           d > 12800 ? '#3182bd' :
+           d > 11200 ? '#6baed6' :
+           d > 9600  ? '#9ecae1' :
+           d > 8000  ? '#c6dbef' :
+           d > 6400  ? '#deebf7' :
+           d > 4800  ? '#f7fbff' :
+           d > 3200  ? '#fee0d2' :
+           d > 1600  ? '#fcbba1' :
+                       '#fc9272';
+};
+
+
 
 /*
  
