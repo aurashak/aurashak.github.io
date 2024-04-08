@@ -20,23 +20,51 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
 
-// Load GeoJSON file for the world map
-console.log("Loading GeoJSON file...");
-var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/worldcountries.geojson", {
-    style: function(feature) {
-        return {
-            fillColor: 'green', // Fill color of the polygons
-            weight: 1, // Stroke width
-            opacity: 1, // Stroke opacity
-            color: 'white', // Stroke color
-            fillOpacity: 0.7 // Fill opacity
+// Fetch the GeoJSON file
+fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
+  .then(response => response.json())
+  .then(geojsonData => {
+    console.log("GeoJSON data loaded successfully:", geojsonData);
+    
+    // Fetch the CSV file
+    fetch("https://aurashak.github.io/projects/emissionsmap/data/EDGARv8_c02/GHG_totals_by_country-Table%201.csv")
+      .then(response => response.text())
+      .then(csvData => {
+        console.log("CSV data loaded successfully:", csvData);
+        
+        // Parse the CSV data
+        const csvRows = csvData.split('\n').slice(1); // Skip the header row
+        const csvDataArray = csvRows.map(row => row.split(','));
+        
+        // Extract country names and corresponding data from CSV
+        const csvCountries = csvDataArray.map(row => row[0]);
+        const csvDataColumn = csvDataArray.map(row => parseFloat(row[1])); // Assuming 2022 data is in the second column
+        
+        // Filter GeoJSON data based on matching country names
+        const filteredFeatures = geojsonData.features.filter(feature => {
+          return csvCountries.includes(feature.properties.NAME);
+        });
+        
+        // Create a new GeoJSON object with filtered features
+        const filteredGeoJSON = {
+          type: "FeatureCollection",
+          features: filteredFeatures
         };
-    }
-});
+        
+        console.log("Filtered GeoJSON data:", filteredGeoJSON);
+        console.log("Country names not found in CSV:", geojsonData.features.map(feature => feature.properties.NAME).filter(name => !csvCountries.includes(name)));
+        
+        // Now you can proceed to create the chloropleth map using filteredGeoJSON and csvDataColumn
+        // Example code to create chloropleth map goes here
+      })
+      .catch(error => {
+        console.error("Error loading CSV data:", error);
+      });
+  })
+  .catch(error => {
+    console.error("Error loading GeoJSON data:", error);
+  });
 
-// Add the GeoJSON layer to the map
-console.log("Adding GeoJSON layer...");
-geojsonLayer.addTo(map);
 
 
 /*
