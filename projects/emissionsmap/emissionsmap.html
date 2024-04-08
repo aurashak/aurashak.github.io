@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Emissions Country Totals</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-slider@2.0.0/dist/leaflet-slider.css" />
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
 </head>
 <body>
     <div class="aboutcontainer">
         <div class="maptitle">World Emissions Map Total by Country</div>
         <div id="emissionsmap"></div>
-        <div id="emissionsslider-container">
-            <input type="range" min="1970" max="2022" step="1" value="2022" id="slider">
-            <div class="slider-ticks"></div> <!-- Container for slider ticks -->
-        </div>
     </div>
 
     <!-- Load Leaflet and proj4 libraries -->
@@ -25,6 +20,5 @@
 
     <!-- Load your custom JavaScript code -->
     <script src="https://aurashak.github.io/projects/emissionsmap/emissionsmap.js"></script>
-    <script src="https://aurashak.github.io/navigation.js"></script>
 </body>
 </html>
