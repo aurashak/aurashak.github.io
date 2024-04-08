@@ -2,7 +2,7 @@
 var map = L.map('emissionsmap', {
     // Set initial center and zoom level for focusing on the world
     center: [0, 0], // Center coordinates to focus on the world
-    zoom: 1, // Adjusted to a higher zoom level
+    zoom: 2, // Adjusted to a higher zoom level
     // Disable zooming and scrolling
     zoomControl: false,
     scrollWheelZoom: false,
@@ -21,18 +21,21 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Fetch the GeoJSON file
+console.log("Fetching GeoJSON file...");
 fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
   .then(response => response.json())
   .then(geojsonData => {
     console.log("GeoJSON data loaded successfully:", geojsonData);
     
     // Fetch the CSV file
+    console.log("Fetching CSV file...");
     fetch("https://aurashak.github.io/projects/emissionsmap/data/EDGARv8_c02/GHG_totals_by_country-Table%201.csv")
       .then(response => response.text())
       .then(csvData => {
         console.log("CSV data loaded successfully:", csvData);
         
         // Parse the CSV data
+        console.log("Parsing CSV data...");
         const csvRows = csvData.split('\n').slice(1); // Skip the header row
         const csvDataArray = csvRows.map(row => row.split(','));
         
@@ -41,6 +44,7 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
         const csvDataColumn = csvDataArray.map(row => parseFloat(row[1])); // Assuming 2022 data is in the second column
         
         // Filter GeoJSON data based on matching country names
+        console.log("Filtering GeoJSON data based on CSV countries...");
         const filteredFeatures = geojsonData.features.filter(feature => {
           return csvCountries.includes(feature.properties.NAME);
         });
@@ -52,7 +56,12 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
         };
         
         console.log("Filtered GeoJSON data:", filteredGeoJSON);
-        console.log("Country names not found in CSV:", geojsonData.features.map(feature => feature.properties.NAME).filter(name => !csvCountries.includes(name)));
+        
+        // Find country names in GeoJSON not found in CSV
+        const namesNotFound = geojsonData.features
+          .map(feature => feature.properties.NAME)
+          .filter(name => !csvCountries.includes(name));
+        console.log("Country names not found in CSV:", namesNotFound);
         
         // Now you can proceed to create the chloropleth map using filteredGeoJSON and csvDataColumn
         // Example code to create chloropleth map goes here
