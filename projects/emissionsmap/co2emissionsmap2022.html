@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon Emissions Country Totals</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <title>Choropleth Map with Robinson Projection</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link rel="stylesheet" href="https://aurashak.github.io/main.css">
+
 </head>
 <body>
+
     <div class="aboutcontainer">
         <div class="maptitle">World Emissions Map Total by Country</div>
         <div id="emissionsmap"></div>
@@ -27,10 +30,6 @@
     </div>
     
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"></script>
-
-    <script src="https://aurashak.github.io/projects/emissionsmap/emissionsmap.js"></script>
+    <script src="https://aurashak.github.io/projects/emissionsmap/co2emissionsmap.js"></script>
 </body>
 </html>
