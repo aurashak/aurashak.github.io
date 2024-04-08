@@ -36,13 +36,16 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
         
         // Parse the CSV data
         console.log("Parsing CSV data...");
-        const csvRows = csvData.split('\n').slice(1); // Skip the header row
-        const csvDataArray = csvRows.map(row => row.split(','));
-        
+        const csvRows = csvData.split('\n');
+        const headers = csvRows[0].split(',');
+        const countryIndex = headers.indexOf('Country');
+        const data2022Index = headers.indexOf('2022');
+
         // Extract country names and corresponding data from CSV
-        const csvCountries = csvDataArray.map(row => row[0]);
-        const csvDataColumn = csvDataArray.map(row => parseFloat(row[1])); // Assuming 2022 data is in the second column
-        
+        const csvDataArray = csvRows.slice(1).map(row => row.split(','));
+        const csvCountries = csvDataArray.map(row => row[countryIndex]);
+        const csvDataColumn = csvDataArray.map(row => parseFloat(row[data2022Index]));
+
         // Filter GeoJSON data based on matching country names
         console.log("Filtering GeoJSON data based on CSV countries...");
         const filteredFeatures = geojsonData.features.filter(feature => {
@@ -57,15 +60,37 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
         
         console.log("Filtered GeoJSON data:", filteredGeoJSON);
         
-        // Find country names in GeoJSON not found in CSV
-        const namesNotFound = geojsonData.features
-          .map(feature => feature.properties.NAME)
-          .filter(name => !csvCountries.includes(name));
-        console.log("Country names not found in CSV:", namesNotFound);
-        
         // Now you can proceed to create the chloropleth map using filteredGeoJSON and csvDataColumn
         // Example code to create chloropleth map goes here
-      })
+        // Define the color scale and map the values to colors
+        const colorScale = chroma.scale(['#f7fbff', '#08519c']).mode('lab').colors(10);
+        const geojsonLayer = L.geoJSON(filteredGeoJSON, {
+            style: function(feature) {
+                const countryName = feature.properties.NAME;
+                const index = csvCountries.indexOf(countryName);
+                if (index !== -1) {
+                    const value = csvDataColumn[index];
+                    const colorIndex = Math.floor((value / 15685) * 9);
+                    return {
+                        fillColor: colorScale[colorIndex],
+                        weight: 1,
+                        opacity: 1,
+                        color: 'white',
+                        fillOpacity: 0.7
+                    };
+                } else {
+                    console.log("No data found for country:", countryName);
+                    return {
+                        fillColor: '#cccccc',
+                        weight: 1,
+                        opacity: 1,
+                        color: 'white',
+                        fillOpacity: 0.7
+                    };
+                }
+            }
+        }).addTo(map);
+    })
       .catch(error => {
         console.error("Error loading CSV data:", error);
       });
@@ -73,8 +98,6 @@ fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
   .catch(error => {
     console.error("Error loading GeoJSON data:", error);
   });
-
-
 
 /*
  
