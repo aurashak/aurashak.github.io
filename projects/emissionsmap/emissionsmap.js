@@ -22,13 +22,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
-fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
+fetch("https://aurashak.github.io/geojson/world/worldcountries.geojson")
   .then(response => response.json())
   .then(geojsonData => {
     console.log("GeoJSON data loaded successfully:", geojsonData);
         
-    // Now you can proceed to create the chloropleth map using geojsonData
-    // Example code to create chloropleth map goes here
+    // Now you can proceed to create the choropleth map using geojsonData
+    // Example code to create choropleth map goes here
     // Define the color scale and map the values to colors
     const colorScale = chroma.scale('YlGnBu').mode('lab').colors(geojsonData.features.length); // Adjust color scale according to the number of features
     const geojsonLayer = L.geoJSON(geojsonData, {
@@ -43,6 +43,10 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
                 color: 'white',
                 fillOpacity: 0.7
             };
+        },
+        onEachFeature: function(feature, layer) {
+            // Add tooltips
+            layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>Emissions: ${feature.properties.worldcountriestotalco2_field_89}`);
         }
     }).addTo(map);
 
