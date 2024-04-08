@@ -1,9 +1,16 @@
-// Define the Robinson projection
-proj4.defs('EPSG:54030', '+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
+console.log("Leaflet and proj4 must be loaded first.");
+console.log("Loading Leaflet...");
+console.log("Loading proj4...");
+console.log("Loading proj4leaflet...");
+
+console.log("Custom script loading...");
+
+// Custom script
+console.log("Starting emissionsmap.js...");
 
 // Initialize the map
 var map = L.map('emissionsmap', {
-    crs: L.Proj.CRS('EPSG:54030'), // Use the custom CRS
+    // Set initial center and zoom level for focusing on the world
     center: [0, 0], // Center coordinates to focus on the world
     zoom: 2, // Zoom level adjusted to show the world
     // Disable zooming and scrolling
@@ -16,13 +23,15 @@ var map = L.map('emissionsmap', {
     touchZoom: false
 });
 
-// Add tile layer from OpenStreetMap
+// Add tile layer from OpenStreetMap with only labels
+console.log("Adding tile layer...");
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
 
 // Load GeoJSON file for the world map
+console.log("Loading GeoJSON file...");
 var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/worldcountries.geojson", {
     style: function(feature) {
         return {
@@ -36,7 +45,9 @@ var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/
 });
 
 // Add the GeoJSON layer to the map
+console.log("Adding GeoJSON layer...");
 geojsonLayer.addTo(map);
 
 // Zoom the map to the extent of the GeoJSON layer
+console.log("Fitting map bounds...");
 map.fitBounds(geojsonLayer.getBounds());
