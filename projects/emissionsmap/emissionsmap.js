@@ -22,6 +22,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
 
+// Define the color scale
+const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(6); // Adjust color scale
+
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
 fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.geojson")
@@ -31,12 +34,8 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
         
         // Now you can proceed to create the choropleth map using geojsonData
         // Example code to create choropleth map goes here
-        // Define the color scale and map the values to colors
-        const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(6); // Adjust color scale
         const geojsonLayer = L.geoJSON(geojsonData, {
             style: function(feature) {
-                // Here, you can access each feature's properties and set its style
-                // Example:
                 const value = feature.properties.worldcountriestotalco2_field_89; // Assuming 'worldcountriestotalco2_field_89' is the property in GeoJSON representing emissions data
                 return {
                     fillColor: getColor(value),
@@ -47,19 +46,17 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/countriestotalco2.g
                 };
             },
             onEachFeature: function(feature, layer) {
-                // Add tooltips
                 layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>Emissions: ${feature.properties.worldcountriestotalco2_field_89}`);
             }
         }).addTo(map);
 
-        // Create legend
+        // Create legend after the colorScale is defined
         const legend = L.control({ position: 'bottomright' });
 
         legend.onAdd = () => {
             const div = L.DomUtil.create('div', 'emissionsmaplegend');
             const labels = ['0-100', '100-3000', '3000-6000', '6000-9000', '9000-12000', '12000-17000'];
 
-            // Loop through colors and add legend items
             for (let i = 0; i < labels.length; i++) {
                 div.innerHTML += `
                     <div class="emissionsmaplegend-item">
