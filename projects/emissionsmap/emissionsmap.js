@@ -13,18 +13,11 @@ var map = L.map('emissionsmap', {
     touchZoom: false
 });
 
-// Add tile layer from OpenStreetMap with only labels
+// Add tile layer from OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    pane: 'labels', // Add labels to a separate pane
-    minZoom: 2, // Set minimum zoom level
-    maxZoom: 19, // Set maximum zoom level
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
-
-// Create a pane for the GeoJSON layer
-map.createPane('geojsonPane');
-map.getPane('geojsonPane').style.zIndex = 400; // Set z-index to appear above the tile layer
 
 // Load GeoJSON file for the world map
 var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/worldcountries.geojson", {
@@ -36,8 +29,7 @@ var geojsonLayer = new L.GeoJSON.AJAX("https://aurashak.github.io/geojson/world/
             color: 'white', // Stroke color
             fillOpacity: 0.7 // Fill opacity
         };
-    },
-    pane: 'geojsonPane' // Add GeoJSON layer to the custom pane
+    }
 });
 
 // Add the GeoJSON layer to the map
