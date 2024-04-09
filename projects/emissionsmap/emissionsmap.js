@@ -37,22 +37,8 @@ const colorScale2 = chroma.scale(['#FF9999', '#8B0000']).mode('lab').colors(5);
 // Combine the color scales into one array
 const colorScale = colorScale1.concat(colorScale2);
 
-// Create emissions info box
-const infoBox = L.control({ position: 'topright' });
-infoBox.onAdd = function() {
-    this._div = L.DomUtil.create('div', 'emissionsinfo-box');
-    return this._div;
-};
-infoBox.update = function(name, value, year) {
-    this._div.innerHTML = `<b>${name}</b><br>MtCO2e Emissions (${year}): ${value}`;
-};
-infoBox.remove = function() {
-    if (this._div) {
-        this._div.innerHTML = '';
-    }
-};
 
-infoBox.addTo(map);
+
 
 // Select the dropdown menu element
 const yearSelector = document.getElementById('year-selector');
@@ -81,7 +67,7 @@ const createChoroplethMap = (year) => {
                 map.removeLayer(geojsonLayer);
             }
 
-            // Create new choropleth map layer
+            // Create new choropleth map layer with onEachFeature function
             geojsonLayer = L.geoJSON(geojsonData, {
                 style: function(feature) {
                     const value = feature.properties[year]; // Get emissions value for the selected year
@@ -96,14 +82,14 @@ const createChoroplethMap = (year) => {
                 onEachFeature: function(feature, layer) {
                     const emissionValue = parseFloat(feature.properties[year]).toFixed(2); // Convert to float and limit to 2 decimal places
 
-                    // Mouseover event to show info box
+                    // Mouseover event to show actual info and hide placeholder text
                     layer.on('mouseover', function(e) {
                         infoBox.update(feature.properties.NAME, emissionValue, year);
                     });
 
-                    // Mouseout event to hide info box
+                    // Mouseout event to restore placeholder text
                     layer.on('mouseout', function(e) {
-                        infoBox.remove();
+                        infoBox.updatePlaceholder();
                     });
                 }
             }).addTo(map);
@@ -112,6 +98,27 @@ const createChoroplethMap = (year) => {
             console.error("Error loading GeoJSON data:", error);
         });
 };
+
+// Create emissions info box
+const infoBox = L.control({ position: 'topright' });
+infoBox.onAdd = function() {
+    this._div = L.DomUtil.create('div', 'emissionsinfo-box');
+    this.updatePlaceholder(); // Add placeholder text initially
+    return this._div;
+};
+infoBox.update = function(name, value, year) {
+    this._div.innerHTML = `<b>${name}</b><br>MtCO2e Emissions (${year}): ${value}`;
+};
+infoBox.updatePlaceholder = function() {
+    this._div.innerHTML = "<b>Country</b><br>Metric Tons of Emissions Per Year";
+};
+infoBox.remove = function() {
+    if (this._div) {
+        this._div.innerHTML = '';
+    }
+};
+infoBox.addTo(map);
+
 
 // Add event listener to the dropdown menu
 yearSelector.addEventListener('change', function() {
