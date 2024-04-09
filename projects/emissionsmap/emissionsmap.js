@@ -30,7 +30,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 // Define the color scale
-const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(6); // Adjust color scale
+const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(10); // Adjust color scale
+
 
 // Fetch the GeoJSON file
 console.log("Fetching GeoJSON file...");
@@ -49,7 +50,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
                     weight: 1,
                     opacity: 1,
                     color: 'white',
-                    fillOpacity: 0.8
+                    fillOpacity: 0.6
                 };
             },
             onEachFeature: function(feature, layer) {
