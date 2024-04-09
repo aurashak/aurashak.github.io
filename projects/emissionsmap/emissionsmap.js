@@ -47,8 +47,11 @@ infoBox.update = function(name, value, year) {
     this._div.innerHTML = `<b>${name}</b><br>MtCO2e Emissions (${year}): ${value}`;
 };
 infoBox.remove = function() {
-    this._div.innerHTML = '';
+    if (this._div) {
+        this._div.innerHTML = '';
+    }
 };
+
 infoBox.addTo(map);
 
 // Select the dropdown menu element
