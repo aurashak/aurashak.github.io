@@ -120,6 +120,7 @@ const getColor = (value) => {
     }
 };
 
+
 /*
  
 // Load GeoJSON file for the world map
