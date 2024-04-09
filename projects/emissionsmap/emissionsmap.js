@@ -14,12 +14,15 @@ var map = L.map('emissionsmap', {
     touchZoom: true
 });
 
-// Add bounds to limit panning to the world extent without elasticity
+// Define the bounds to limit panning to the world extent without elasticity
 var bounds = [
     [-90, -180], // Southwest coordinates
     [90, 180]    // Northeast coordinates
 ];
 map.setMaxBounds(bounds);
+map.setMinZoom(2); // Optionally set the minimum zoom level to prevent zooming out beyond the world extent
+map.setMaxZoom(10); // Optionally set the maximum zoom level
+
 
 // Add tile layer from OpenStreetMap with only labels
 console.log("Adding tile layer...");
@@ -31,10 +34,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Define the color scales for values 1-5 (white to blue) and 6-10 (light red to dark red)
 const colorScale1 = chroma.scale(['white', 'blue']).mode('lab').colors(5);
-const colorScale2 = chroma.scale(['lightred', 'darkred']).mode('lab').colors(5);
+const colorScale2 = chroma.scale(['#FF9999', '#8B0000']).mode('lab').colors(5);
 
 // Combine the color scales into one array
 const colorScale = colorScale1.concat(colorScale2);
+
+
 
 
 
