@@ -99,6 +99,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
 
         legend.onAdd = () => {
             const div = L.DomUtil.create('div', 'emissionsmaplegend');
+            div.innerHTML += '<div class="legend-title">Metric tons of carbon dioxide per year (MtCO2) </div>'; // Add title
             const labels = ['0-1', '1-100', '100-1000', '1000-2000', '2000-4000', '4000-6000', '6000-8000', '8000-12000', '12000-17000'];
         
             for (let i = 0; i < labels.length; i++) {
@@ -158,7 +159,6 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
     .catch(error => {
         console.error("Error loading GeoJSON data:", error);
     });
-
 
 
 /*
