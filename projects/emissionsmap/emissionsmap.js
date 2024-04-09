@@ -107,10 +107,10 @@ infoBox.onAdd = function() {
     return this._div;
 };
 infoBox.update = function(name, value, year) {
-    this._div.innerHTML = `<b>${name}</b><br>MtCO2e Emissions (${year}): ${value}`;
+    this._div.innerHTML = `<b>${name}</b><br>MtCO2e(${year}): ${value}`;
 };
 infoBox.updatePlaceholder = function() {
-    this._div.innerHTML = "<b>Country</b><br>Metric Tons of Emissions Per Year";
+    this._div.innerHTML = "<b>Country</b><br>Amount";
 };
 infoBox.remove = function() {
     if (this._div) {
