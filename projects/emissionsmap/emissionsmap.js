@@ -77,7 +77,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
         };
 
         // Create legend after the colorScale is defined
-        const legend = L.control({ position: 'bottomright' });
+        const legend = L.control({ position: 'bottomleft' });
 
         legend.onAdd = () => {
             const div = L.DomUtil.create('div', 'emissionsmaplegend');
