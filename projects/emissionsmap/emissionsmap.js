@@ -4,7 +4,7 @@ var map = L.map('emissionsmap', {
     center: [0, 0], // Center coordinates to focus on the world
     zoom: 2, // Adjusted to a higher zoom level
     minZoom: 2, // Minimum zoom level
-    maxZoom: 10, // Maximum zoom level
+    maxZoom: 5, // Maximum zoom level
     zoomControl: true,
     scrollWheelZoom: true,
     doubleClickZoom: true,
