@@ -37,11 +37,6 @@ const colorScale2 = chroma.scale(['#FF9999', '#8B0000']).mode('lab').colors(5);
 // Combine the color scales into one array
 const colorScale = colorScale1.concat(colorScale2);
 
-
-
-
-
-
 // Select the dropdown menu element
 const yearSelector = document.getElementById('year-selector');
 
@@ -121,7 +116,6 @@ infoBox.remove = function() {
 };
 infoBox.addTo(map);
 
-
 // Add event listener to the dropdown menu
 yearSelector.addEventListener('change', function() {
     const selectedYear = this.value;
@@ -157,10 +151,6 @@ const getColor = (value) => {
 let geojsonLayer; // Variable to hold the GeoJSON layer
 createChoroplethMap('2022');
 
-
-
-
-
 // Define play button and year display elements
 const playButton = document.getElementById('play-button');
 const yearDisplay = document.getElementById('year-display');
@@ -180,6 +170,3 @@ const animateYears = () => {
 
 // Event listener for the play button
 playButton.addEventListener('click', animateYears);
-
-
-
