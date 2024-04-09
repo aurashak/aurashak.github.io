@@ -1020,7 +1020,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   top: 0px;
   text-align: right;
   width: 240px;
-  height: 43px;
+  height: 63px;
   right: 0px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 5px 10px;
@@ -1031,11 +1031,12 @@ input[type="range"]::-webkit-slider-runnable-track {
   font-size: 14px;
 }
 
-.emissionsinfo-box::after {
+.emissionsinfo-box::before {
   content: "Metric Tons of Emissions Per Year"; /* Added text */
   display: block; /* Ensure it's on a new line */
   font-style: italic; /* Optionally italicize the text */
 }
+
 
 .emissionsinfo-content {
   /* Content styles */
