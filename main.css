@@ -305,10 +305,6 @@ text-decoration: underline;
 .courseaboutcontainer a:link {color: black;}
 .courseaboutcontainer a:hover { text-decoration: underline; }
 
-.aboutcontainer a:link {color: black; background-color: #ffe600ce;}
-.aboutcontainer a:visited { color: black; }
-.aboutcontainer a:hover {text-decoration: underline; }
-.aboutcontainer a:active { }
 
 .largecontainer {
   margin: 20px auto;
