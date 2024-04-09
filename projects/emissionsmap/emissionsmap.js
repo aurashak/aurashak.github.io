@@ -40,6 +40,8 @@ const colorScale = colorScale1.concat(colorScale2);
 
 
 
+
+
 // Select the dropdown menu element
 const yearSelector = document.getElementById('year-selector');
 
@@ -154,3 +156,30 @@ const getColor = (value) => {
 // Initialize the choropleth map with default year (2022)
 let geojsonLayer; // Variable to hold the GeoJSON layer
 createChoroplethMap('2022');
+
+
+
+
+
+// Define play button and year display elements
+const playButton = document.getElementById('play-button');
+const yearDisplay = document.getElementById('year-display');
+
+// Function to animate through the years
+const animateYears = () => {
+    let year = 1970; // Start from 1970
+    const interval = setInterval(() => {
+        createChoroplethMap(year); // Update map with current year
+        yearDisplay.textContent = year; // Update year display
+        year++; // Move to the next year
+        if (year > 2022) {
+            clearInterval(interval); // Stop animation when reaching 2022
+        }
+    }, 250); // Interval between each year (250 milliseconds)
+};
+
+// Event listener for the play button
+playButton.addEventListener('click', animateYears);
+
+
+
