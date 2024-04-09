@@ -40,7 +40,7 @@ const colorScale = colorScale1.concat(colorScale2);
 // Create emissions info box
 const infoBox = L.control({ position: 'topright' });
 infoBox.onAdd = function() {
-    this._div = L.DomUtil.create('div', 'info-box');
+    this._div = L.DomUtil.create('div', 'emissionsinfo-box');
     return this._div;
 };
 infoBox.update = function(name, value, year) {
