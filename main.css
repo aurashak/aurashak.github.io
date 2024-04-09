@@ -1049,7 +1049,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 
 .emissionsmaplegend {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.72);
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -1057,6 +1057,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .emissionsmaplegend-item {
   margin-bottom: 5px;
+  text-align: left;
 }
 
 .emissionsmaplegend-color {
