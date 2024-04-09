@@ -23,14 +23,12 @@ map.setMaxBounds(bounds);
 map.setMinZoom(2); // Optionally set the minimum zoom level to prevent zooming out beyond the world extent
 map.setMaxZoom(10); // Optionally set the maximum zoom level
 
-
 // Add tile layer from OpenStreetMap with only labels
 console.log("Adding tile layer...");
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
-
 
 // Define the color scales for values 1-5 (white to blue) and 6-10 (light red to dark red)
 const colorScale1 = chroma.scale(['white', 'blue']).mode('lab').colors(5);
@@ -39,6 +37,19 @@ const colorScale2 = chroma.scale(['#FF9999', '#8B0000']).mode('lab').colors(5);
 // Combine the color scales into one array
 const colorScale = colorScale1.concat(colorScale2);
 
+// Create emissions info box
+const infoBox = L.control({ position: 'topright' });
+infoBox.onAdd = function() {
+    this._div = L.DomUtil.create('div', 'info-box');
+    return this._div;
+};
+infoBox.update = function(name, value, year) {
+    this._div.innerHTML = `<b>${name}</b><br>MtCO2e Emissions (${year}): ${value}`;
+};
+infoBox.remove = function() {
+    this._div.innerHTML = '';
+};
+infoBox.addTo(map);
 
 // Select the dropdown menu element
 const yearSelector = document.getElementById('year-selector');
@@ -53,23 +64,15 @@ for (let year = 1970; year <= 2022; year++) {
     yearSelector.appendChild(option);
 }
 
-// Add event listener to the dropdown menu
-yearSelector.addEventListener('change', function() {
-    const selectedYear = this.value;
-    createChoroplethMap(selectedYear);
-});
+// Function to create choropleth map based on selected year
+const createChoroplethMap = (year) => {
+    // Fetch the GeoJSON file
+    console.log("Fetching GeoJSON file...");
+    fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojson")
+        .then(response => response.json())
+        .then(geojsonData => {
+            console.log("GeoJSON data loaded successfully:", geojsonData);
 
-
-
-// Fetch the GeoJSON file
-console.log("Fetching GeoJSON file...");
-fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojson")
-    .then(response => response.json())
-    .then(geojsonData => {
-        console.log("GeoJSON data loaded successfully:", geojsonData);
-        
-        // Function to create choropleth map based on selected year
-        const createChoroplethMap = (year) => {
             // Clear existing layers if any
             if (geojsonLayer) {
                 map.removeLayer(geojsonLayer);
@@ -89,7 +92,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
                 },
                 onEachFeature: function(feature, layer) {
                     const emissionValue = parseFloat(feature.properties[year]).toFixed(2); // Convert to float and limit to 2 decimal places
-                    
+
                     // Mouseover event to show info box
                     layer.on('mouseover', function(e) {
                         infoBox.update(feature.properties.NAME, emissionValue, year);
@@ -101,143 +104,46 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
                     });
                 }
             }).addTo(map);
-        };
-
-        // Create legend after the colorScale is defined
-        const legend = L.control({ position: 'bottomleft' });
-
-        legend.onAdd = () => {
-            const div = L.DomUtil.create('div', 'emissionsmaplegend');
-            div.innerHTML += '<div class="legend-title">Metric tons of carbon dioxide per year (MtCO2) </div>'; // Add title
-            const labels = ['0-1', '1-100', '100-1000', '1000-2000', '2000-4000', '4000-6000', '6000-8000', '8000-12000', '12000-17000'];
-        
-            for (let i = 0; i < labels.length; i++) {
-                div.innerHTML += `
-                    <div class="emissionsmaplegend-item">
-                        <div class="emissionsmaplegend-color" style="background-color: ${colorScale[i]};"></div>
-                        <div class="emissionsmaplegend-label">${labels[i]}</div>
-                    </div>
-                `;
-            }
-        
-            return div;
-        };
-        
-        legend.addTo(map);
-
-        // Function to get color based on value
-        const getColor = (value) => {
-            if (value >= 0 && value <= 1) {
-                return colorScale[0];
-            } else if (value > 1 && value <= 100) {
-                return colorScale[1];
-            } else if (value > 100 && value <= 1000) {
-                return colorScale[2];
-            } else if (value > 1000 && value <= 2000) {
-                return colorScale[3];
-            } else if (value > 2000 && value <= 4000) {
-                return colorScale[4];
-            } else if (value > 4000 && value <= 6000) {
-                return colorScale[5];
-            } else if (value > 6000 && value <= 8000) {
-                return colorScale[6];
-            } else if (value > 8000 && value <= 12000) {
-                return colorScale[7];
-            } else if (value > 12000 && value <= 17000) {
-                return colorScale[8];
-            } else {
-                return 'white'; // Default color
-            }
-        };
-
-        // Initialize the choropleth map with default year (2022)
-        let geojsonLayer; // Variable to hold the GeoJSON layer
-        createChoroplethMap('2022');
-    })
-    .catch(error => {
-        console.error("Error loading GeoJSON data:", error);
-    });
-
-// Create emissions info box
-const infoBox = L.control({ position: 'topright' });
-infoBox.onAdd = function() {
-    this._div = L.DomUtil.create('div', 'info-box');
-    return this._div;
-};
-infoBox.update = function(name, value, year) {
-    this._div.innerHTML = `<b>${name}</b><br>MtCO2e Emissions (${year}): ${value}`;
-};
-infoBox.remove = function() {
-    this._div.innerHTML = '';
-};
-infoBox.addTo(map);
-
-
-        // Create legend after the colorScale is defined
-        const legend = L.control({ position: 'bottomleft' });
-
-        legend.onAdd = () => {
-            const div = L.DomUtil.create('div', 'emissionsmaplegend');
-            div.innerHTML += '<div class="legend-title">Metric tons of carbon dioxide per year (MtCO2) </div>'; // Add title
-            const labels = ['0-1', '1-100', '100-1000', '1000-2000', '2000-4000', '4000-6000', '6000-8000', '8000-12000', '12000-17000'];
-        
-            for (let i = 0; i < labels.length; i++) {
-                div.innerHTML += `
-                    <div class="emissionsmaplegend-item">
-                        <div class="emissionsmaplegend-color" style="background-color: ${colorScale[i]};"></div>
-                        <div class="emissionsmaplegend-label">${labels[i]}</div>
-                    </div>
-                `;
-            }
-        
-            return div;
-        };
-        
-        legend.addTo(map);
-
-        // Function to get color based on value
-        const getColor = (value) => {
-            if (value >= 0 && value <= 1) {
-                return colorScale[0];
-            } else if (value > 1 && value <= 100) {
-                return colorScale[1];
-            } else if (value > 100 && value <= 1000) {
-                return colorScale[2];
-            } else if (value > 1000 && value <= 2000) {
-                return colorScale[3];
-            } else if (value > 2000 && value <= 4000) {
-                return colorScale[4];
-            } else if (value > 4000 && value <= 6000) {
-                return colorScale[5];
-            } else if (value > 6000 && value <= 8000) {
-                return colorScale[6];
-            } else if (value > 8000 && value <= 12000) {
-                return colorScale[7];
-            } else if (value > 12000 && value <= 17000) {
-                return colorScale[8];
-            } else {
-                return 'white'; // Default color
-            }
-        };
-
-        // Initialize the choropleth map with default year (2022)
-        let geojsonLayer; // Variable to hold the GeoJSON layer
-        createChoroplethMap('2022');
-
-        // Create slider for years between 1970 and 2022
-        const slider = document.getElementById('emissionsslider');
-        slider.min = 1970;
-        slider.max = 2022;
-        slider.value = 2022; // Default value
-
-        slider.addEventListener('input', function() {
-            const selectedYear = this.value;
-            createChoroplethMap(selectedYear);
+        })
+        .catch(error => {
+            console.error("Error loading GeoJSON data:", error);
         });
-    })
-    .catch(error => {
-        console.error("Error loading GeoJSON data:", error);
-    });
+};
+
+// Add event listener to the dropdown menu
+yearSelector.addEventListener('change', function() {
+    const selectedYear = this.value;
+    createChoroplethMap(selectedYear);
+});
+
+// Function to get color based on value
+const getColor = (value) => {
+    if (value >= 0 && value <= 1) {
+        return colorScale[0];
+    } else if (value > 1 && value <= 100) {
+        return colorScale[1];
+    } else if (value > 100 && value <= 1000) {
+        return colorScale[2];
+    } else if (value > 1000 && value <= 2000) {
+        return colorScale[3];
+    } else if (value > 2000 && value <= 4000) {
+        return colorScale[4];
+    } else if (value > 4000 && value <= 6000) {
+        return colorScale[5];
+    } else if (value > 6000 && value <= 8000) {
+        return colorScale[6];
+    } else if (value > 8000 && value <= 12000) {
+        return colorScale[7];
+    } else if (value > 12000 && value <= 17000) {
+        return colorScale[8];
+    } else {
+        return 'white'; // Default color
+    }
+};
+
+// Initialize the choropleth map with default year (2022)
+let geojsonLayer; // Variable to hold the GeoJSON layer
+createChoroplethMap('2022');
 
 
 /*
