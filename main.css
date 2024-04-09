@@ -1015,6 +1015,41 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 
 
+.year-selector-container {
+  margin-bottom: 10px;
+}
+
+#year-selector {
+  width: 150px; /* Adjust width as needed */
+  height: 30px; /* Adjust height as needed */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  padding: 5px;
+  background-color: #fff;
+}
+
+#year-selector:focus {
+  outline: none; /* Remove focus outline */
+}
+
+/* Style the dropdown arrow */
+#year-selector::-ms-expand {
+  display: none; /* Remove default arrow in IE */
+}
+
+#year-selector:after {
+  content: "\25BC"; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure arrow does not interfere with clicking on select */
+}
+
+
+
+
 
 
 #nymap {
