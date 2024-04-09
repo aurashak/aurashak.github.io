@@ -40,6 +40,24 @@ const colorScale2 = chroma.scale(['#FF9999', '#8B0000']).mode('lab').colors(5);
 const colorScale = colorScale1.concat(colorScale2);
 
 
+// Select the dropdown menu element
+const yearSelector = document.getElementById('year-selector');
+
+// Loop through the years from 1970 to 2022
+for (let year = 1970; year <= 2022; year++) {
+    // Create an option element for each year
+    const option = document.createElement('option');
+    option.value = year; // Set the value attribute to the year
+    option.textContent = year; // Set the text content to the year
+    // Append the option to the dropdown menu
+    yearSelector.appendChild(option);
+}
+
+// Add event listener to the dropdown menu
+yearSelector.addEventListener('change', function() {
+    const selectedYear = this.value;
+    createChoroplethMap(selectedYear);
+});
 
 
 
