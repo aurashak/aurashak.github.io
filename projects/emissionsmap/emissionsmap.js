@@ -5,7 +5,6 @@ var map = L.map('emissionsmap', {
     zoom: 2, // Adjusted to a higher zoom level
     minZoom: 2, // Minimum zoom level
     maxZoom: 10, // Maximum zoom level
-    // Disable zooming and scrolling
     zoomControl: true,
     scrollWheelZoom: true,
     doubleClickZoom: true,
@@ -15,12 +14,20 @@ var map = L.map('emissionsmap', {
     touchZoom: true
 });
 
+// Add bounds to limit panning to the world extent
+var bounds = [
+    [-90, -180], // Southwest coordinates
+    [90, 180]    // Northeast coordinates
+];
+map.setMaxBounds(bounds);
+
 // Add tile layer from OpenStreetMap with only labels
 console.log("Adding tile layer...");
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
+
 
 // Define the color scale
 const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(6); // Adjust color scale
