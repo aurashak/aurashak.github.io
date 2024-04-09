@@ -956,6 +956,7 @@ display: inline-block;
 #emissionsslider-container {
   width: 80%;
   margin: 20px auto;
+  position: relative; /* Add relative positioning to contain the notches */
 }
 
 input[type="range"] {
@@ -965,11 +966,8 @@ input[type="range"] {
   -webkit-appearance: none; /* Remove default styles */
   appearance: none;
   margin: 0 5px; /* Adjust margin as needed */
-
+  position: relative; /* Add relative positioning to contain the notches */
 }
-
-
-
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; /* Remove default styles for thumb */
@@ -978,6 +976,15 @@ input[type="range"]::-webkit-slider-thumb {
   height: 25px; /* Height of the thumb */
   background: #007bff; /* Thumb color */
   cursor: pointer;
+  position: relative; /* Add relative positioning to contain the notches */
+}
+
+/* Track styles */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px; /* Adjust track height */
+  cursor: pointer;
+  background: #ccc; /* Track color */
 }
 
 .slider-ticks {
@@ -985,15 +992,23 @@ input[type="range"]::-webkit-slider-thumb {
   justify-content: space-between;
   padding: 0 10px; /* Adjust padding for proper alignment */
   font-size: 12px; /* Font size of the ticks */
-}
-
-.slider-ticks::before, .slider-ticks::after {
-  content: ''; /* Clearfix */
+  position: absolute; /* Position the notches absolutely */
+  bottom: 20px; /* Adjust the bottom position */
+  width: calc(100% - 20px); /* Adjust width to fit within slider container */
 }
 
 .slider-ticks span {
   position: relative;
-  top: -15px; /* Adjust position to align ticks with the slider */
+}
+
+/* Notch styles */
+.slider-ticks span::before {
+  content: "";
+  position: absolute;
+  bottom: -6px; /* Adjust position of the notches */
+  width: 2px; /* Width of the notches */
+  height: 6px; /* Height of the notches */
+  background-color: #000; /* Color of the notches */
 }
 
 
