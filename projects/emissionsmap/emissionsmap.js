@@ -23,7 +23,6 @@ map.setMaxBounds(bounds);
 map.setMinZoom(2); // Optionally set the minimum zoom level to prevent zooming out beyond the world extent
 map.setMaxZoom(10); // Optionally set the maximum zoom level
 
-
 // Add tile layer from OpenStreetMap with only labels
 console.log("Adding tile layer...");
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,94 +30,46 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     opacity: 0.5 // Adjust opacity for better visibility
 }).addTo(map);
 
-
-// Define the color scales for values 1-5 (white to blue) and 6-10 (light red to dark red)
-const colorScale1 = chroma.scale(['white', 'blue']).mode('lab').colors(5);
-const colorScale2 = chroma.scale(['#FF9999', '#8B0000']).mode('lab').colors(5);
-
-// Combine the color scales into one array
-const colorScale = colorScale1.concat(colorScale2);
-
-
-
-
-
-// Fetch the GeoJSON file
-console.log("Fetching GeoJSON file...");
-fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojson")
-    .then(response => response.json())
-    .then(geojsonData => {
-        console.log("GeoJSON data loaded successfully:", geojsonData);
-        
-        // Now you can proceed to create the choropleth map using geojsonData
-        // Example code to create choropleth map goes here
-        const geojsonLayer = L.geoJSON(geojsonData, {
-            style: function(feature) {
-                const value = feature.properties['2022']; // Assuming 'worldcountriestotalco2_field_89' is the property in GeoJSON representing emissions data
-                return {
-                    fillColor: getColor(value),
-                    weight: 1,
-                    opacity: 1,
-                    color: 'white',
-                    fillOpacity: 0.6
-                };
-            },
-            onEachFeature: function(feature, layer) {
-                const emissionValue = parseFloat(feature.properties['2022']).toFixed(2); // Convert to float and limit to 2 decimal places
-                layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>MtCO2e Emissions: ${emissionValue}`);
-            }
-        }).addTo(map);
-
-        // Create legend after the colorScale is defined
-        const legend = L.control({ position: 'bottomright' });
-
-        legend.onAdd = () => {
-            const div = L.DomUtil.create('div', 'emissionsmaplegend');
-            const labels = ['0-1', '1-100', '100-1000', '1000-2000', '2000-4000', '4000-6000', '6000-8000', '8000-12000', '12000-17000'];
-        
-            for (let i = 0; i < labels.length; i++) {
-                div.innerHTML += `
-                    <div class="emissionsmaplegend-item">
-                        <div class="emissionsmaplegend-color" style="background-color: ${colorScale[i]};"></div>
-                        <div class="emissionsmaplegend-label">${labels[i]}</div>
-                    </div>
-                `;
-            }
-        
-            return div;
-        };
-        
-
-        legend.addTo(map);
-    })
-    .catch(error => {
-        console.error("Error loading GeoJSON data:", error);
-    });
-
-// Function to get color based on value
-const getColor = (value) => {
-    if (value >= 0 && value <= 1) {
-        return colorScale[0];
-    } else if (value > 1 && value <= 100) {
-        return colorScale[1];
-    } else if (value > 100 && value <= 1000) {
-        return colorScale[2];
-    } else if (value > 1000 && value <= 2000) {
-        return colorScale[3];
-    } else if (value > 2000 && value <= 4000) {
-        return colorScale[4];
-    } else if (value > 4000 && value <= 6000) {
-        return colorScale[5];
-    } else if (value > 6000 && value <= 8000) {
-        return colorScale[6];
-    } else if (value > 8000 && value <= 12000) {
-        return colorScale[7];
-    } else if (value > 12000 && value <= 17000) {
-        return colorScale[8];
-    } else {
-        return 'white'; // Default color
-    }
+// Function to create choropleth map based on selected year
+const createChoroplethMap = (year) => {
+    // Fetch the GeoJSON file for the selected year
+    fetch(`https://aurashak.github.io/projects/emissionsmap/data/worldco2total_${year}.geojson`)
+        .then(response => response.json())
+        .then(geojsonData => {
+            console.log(`GeoJSON data loaded successfully for year ${year}:`, geojsonData);
+            
+            // Now you can proceed to create the choropleth map using geojsonData
+            // Example code to create choropleth map goes here
+            const geojsonLayer = L.geoJSON(geojsonData, {
+                style: function(feature) {
+                    const value = feature.properties[year]; // Access properties based on the selected year
+                    return {
+                        fillColor: getColor(value),
+                        weight: 1,
+                        opacity: 1,
+                        color: 'white',
+                        fillOpacity: 0.6
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>MtCO2e Emissions: ${feature.properties[year].toFixed(2)}`); // Limit decimals to two digits
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error(`Error loading GeoJSON data for year ${year}:`, error);
+        });
 };
+
+// Event listener for slider input change
+document.getElementById('emissionsslider').addEventListener('input', function() {
+    const selectedYear = parseInt(this.value);
+    createChoroplethMap(selectedYear);
+});
+
+// Initial map creation for the default year (2022)
+createChoroplethMap(2022);
+
 
 
 /*
