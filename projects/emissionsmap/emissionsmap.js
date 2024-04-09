@@ -34,7 +34,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const createChoroplethMap = (year) => {
     // Fetch the GeoJSON file for the selected year
     fetch(`https://aurashak.github.io/projects/emissionsmap/data/worldco2total_${year}.geojson`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to load GeoJSON data for year ${year}: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(geojsonData => {
             console.log(`GeoJSON data loaded successfully for year ${year}:`, geojsonData);
             
@@ -57,9 +62,10 @@ const createChoroplethMap = (year) => {
             }).addTo(map);
         })
         .catch(error => {
-            console.error(`Error loading GeoJSON data for year ${year}:`, error);
+            console.error(`Error loading GeoJSON data for year ${year}:`, error.message);
         });
 };
+
 
 // Event listener for slider input change
 document.getElementById('emissionsslider').addEventListener('input', function() {
