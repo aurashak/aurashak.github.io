@@ -14,7 +14,7 @@ var map = L.map('emissionsmap', {
     touchZoom: true
 });
 
-// Add bounds to limit panning to the world extent
+// Add bounds to limit panning to the world extent without elasticity
 var bounds = [
     [-90, -180], // Southwest coordinates
     [90, 180]    // Northeast coordinates
@@ -29,8 +29,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-// Define the color scale
-const colorScale = chroma.scale(['white', 'red']).mode('lab').colors(10); // Adjust color scale
+// Define the color scales for values 1-5 (white to blue) and 6-10 (light red to dark red)
+const colorScale1 = chroma.scale(['white', 'blue']).mode('lab').colors(5);
+const colorScale2 = chroma.scale(['lightred', 'darkred']).mode('lab').colors(5);
+
+// Combine the color scales into one array
+const colorScale = colorScale1.concat(colorScale2);
+
 
 
 // Fetch the GeoJSON file
