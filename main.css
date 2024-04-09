@@ -1014,6 +1014,26 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 
 
+.emissionsinfo-box {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it's on top of other elements */
+  max-width: 200px; /* Adjust as needed */
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.emissionsinfo-content {
+  /* Content styles */
+}
+
+
+
 
 .year-selector-container {
   margin-bottom: 10px;
