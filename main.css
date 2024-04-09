@@ -964,7 +964,12 @@ input[type="range"] {
   margin-bottom: 10px; /* Add some space below the slider */
   -webkit-appearance: none; /* Remove default styles */
   appearance: none;
+  margin: 0 5px; /* Adjust margin as needed */
+
 }
+
+
+
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; /* Remove default styles for thumb */
@@ -1026,10 +1031,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
-input[type="range"] {
-  width: 80px; /* Adjust width as needed */
-  margin: 0 5px; /* Adjust margin as needed */
-}
 
 
 .emissionsmaplegend {
