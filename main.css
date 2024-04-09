@@ -1017,12 +1017,13 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .emissionsinfo-box {
   position: absolute;
-  top: 5px;
-    width: 270px;
+  top:0px;
+    text-align: right;
+    width: 240px;
     height: 43px;
-  right: 5px;
+  right: 0px;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* Ensure it's on top of other elements */
