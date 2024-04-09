@@ -53,7 +53,7 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
                 };
             },
             onEachFeature: function(feature, layer) {
-                layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>Emissions: ${feature.properties['2022']}`);
+                layer.bindTooltip(`<b>${feature.properties.NAME}</b><br>MtCO2e Emissions: ${feature.properties['2022']}`);
             }
         }).addTo(map);
 
@@ -62,8 +62,8 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
 
         legend.onAdd = () => {
             const div = L.DomUtil.create('div', 'emissionsmaplegend');
-            const labels = ['0-100', '100-3000', '3000-6000', '6000-9000', '9000-12000', '12000-17000'];
-
+            const labels = ['0-100', '100-1000', '1000-3000', '3000-5000', '5000-7000', '7000-9000', '9000-11000', '11000-13000', '13000-15000', '15000-17000'];
+        
             for (let i = 0; i < labels.length; i++) {
                 div.innerHTML += `
                     <div class="emissionsmaplegend-item">
@@ -72,9 +72,10 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
                     </div>
                 `;
             }
-
+        
             return div;
         };
+        
 
         legend.addTo(map);
     })
@@ -86,23 +87,28 @@ fetch("https://aurashak.github.io/projects/emissionsmap/data/worldco2total.geojs
 const getColor = (value) => {
     if (value >= 0 && value <= 100) {
         return colorScale[0];
-    } else if (value > 100 && value <= 3000) {
+    } else if (value > 100 && value <= 1000) {
         return colorScale[1];
-    } else if (value > 3000 && value <= 6000) {
+    } else if (value > 1000 && value <= 3000) {
         return colorScale[2];
-    } else if (value > 6000 && value <= 9000) {
+    } else if (value > 3000 && value <= 5000) {
         return colorScale[3];
-    } else if (value > 9000 && value <= 12000) {
+    } else if (value > 5000 && value <= 7000) {
         return colorScale[4];
-    } else if (value > 12000 && value <= 17000) {
+    } else if (value > 7000 && value <= 9000) {
         return colorScale[5];
+    } else if (value > 9000 && value <= 11000) {
+        return colorScale[6];
+    } else if (value > 11000 && value <= 13000) {
+        return colorScale[7];
+    } else if (value > 13000 && value <= 15000) {
+        return colorScale[8];
+    } else if (value > 15000 && value <= 17000) {
+        return colorScale[9];
     } else {
         return 'white'; // Default color
     }
 };
-
-
-
 
 /*
  
